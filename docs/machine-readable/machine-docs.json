@@ -378,7 +378,7 @@
       "kind": "compatibility",
       "url": "/release-center.json",
       "updatedAt": "2026-10-09",
-      "sha256": "aad2ba511c7f5c3090d56c3d1a331b27e891d9e24824188dc32c403010148f42"
+      "sha256": "fd6373f301186414f05ba4a5b90eec3f3928dbd839bbd90864f784abf5953f10"
     },
     {
       "kind": "compatibility",
@@ -391,14 +391,14 @@
       "url": "/changes.json?lang=en",
       "locale": "en",
       "updatedAt": "2026-10-09",
-      "sha256": "202e1d60570783bf38891f315022c1a337e23be2f30a30371dc0757986dea939"
+      "sha256": "071537886ab5f030623515d821e1f33ad46b8b434e9030803f17b2175af22240"
     },
     {
       "kind": "changelog",
       "url": "/changes.json?lang=ar",
       "locale": "ar",
       "updatedAt": "2026-10-09",
-      "sha256": "c06ce8fb5a511dda0ac24ff22bba6c2fd9d6a2bc757ac5753492d98139302f15"
+      "sha256": "bfc42c9b69aec0ef9220fcc7be286c3c006032c4a9cce96240abe752e00f8e22"
     },
     {
       "kind": "operations",

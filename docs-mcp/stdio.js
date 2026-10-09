@@ -11,7 +11,7 @@ var corpus_generated_default = {
   generatedAt: "2026-10-09",
   manifest: {
     canonical: "https://docs.authle.ss/machine-docs.json",
-    digest: "e0c716b8bce40055d3619375ca52a7e43b271b92838fea6bcca128c7306843e1",
+    digest: "f3d3cf4d6c170edb8de1b627ccb6e0d33b483cca2f3ffc338d4ad6ebb39e6304",
     authority: "read-only-public-documentation",
     exclusions: [
       "authenticated-content",
@@ -17038,7 +17038,7 @@ The following checked projection is shared with the human-rendered guide and pre
 \`\`\`json
 {
   "schema": "authless.release-center/v1",
-  "updatedAt": "2026-09-07",
+  "updatedAt": "2026-10-09",
   "compatibility": [
     {
       "component": "REST API",
@@ -17113,6 +17113,55 @@ The following checked projection is shared with the human-rendered guide and pre
     }
   ],
   "changes": [
+    {
+      "id": "2026-10-09-developer-docs-boundaries",
+      "publishedAt": "2026-10-09",
+      "title": {
+        "en": "Developer guides and public examples",
+        "ar": "أدلة المطورين والأمثلة العامة"
+      },
+      "summary": {
+        "en": "Guides and API reference have separate navigation, highlighted code, and icon copy controls. Examples, SDK sources, and a read-only Docs MCP are public under labdotsa/authless.",
+        "ar": "للأدلة ومرجع API تنقّل منفصل، مع تمييز الكود وأزرار نسخ بأيقونات. تتوفر الأمثلة ومصادر SDK وخادم Docs MCP للقراءة فقط في labdotsa/authless."
+      },
+      "categories": [
+        "docs",
+        "sdk"
+      ],
+      "audiences": [
+        "integrator",
+        "reference",
+        "evaluator"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "No API migration is required. Install @authless/api-client from the public repository until npm publication. Management-agent OAuth remains preview-only; follow the readiness report before connecting a live deployment.",
+        "ar": "لا يلزم ترحيل لواجهة API. ثبّت @authless/api-client من المستودع العام حتى نشره على npm. يبقى OAuth لوكلاء الإدارة في المعاينة؛ راجع تقرير الجاهزية قبل الاتصال بنشر حي."
+      },
+      "announcement": {
+        "en": "Use the public examples and read-only agent documentation. Package publication and live OAuth availability remain unchanged.",
+        "ar": "استخدم الأمثلة العامة ووثائق الوكلاء للقراءة فقط. تبقى حالة نشر الحزم وإتاحة OAuth الحي دون تغيير."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "apps/docs/src/lib/AgentGuideBody.svelte",
+        "apps/docs/src/lib/DocsCodeBlock.svelte",
+        "apps/docs/src/lib/DocsFrame.svelte",
+        "apps/docs/src/lib/docs-body-registry.ts",
+        "apps/docs/src/lib/release-docs-mcp-projection.ts",
+        "apps/docs/static/developer-documentation.json",
+        "packages/docs-mcp/src/corpus.generated.json",
+        "packages/api-client/README.md",
+        "packages/api-client/package.json",
+        "tests/docs-mcp.test.ts",
+        "tests/ui/developer-documentation.ui.ts"
+      ],
+      "permalink": "/changes#2026-10-09-developer-docs-boundaries"
+    },
     {
       "id": "2026-09-07-sdk-callback-query",
       "publishedAt": "2026-09-07",
@@ -19675,7 +19724,7 @@ Source attribution: Developer documentation (https://docs.authle.ss/changes).
       title: "Changes and migration",
       updatedAt: "2026-08-21",
       contentType: "text/markdown",
-      contentDigest: "cfdefb2b415fe80b2ddf4e9f6c4230dba1afd8db82e2fe3dca04cb67bfaa1102"
+      contentDigest: "70583776df8901b10d5c0c3e994cdaafb74b29e3309553bee74138408d969caa"
     },
     {
       canonical: "https://docs.authle.ss/changes?lang=ar",
@@ -19730,7 +19779,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
 \`\`\`json
 {
   "schema": "authless.release-center/v1",
-  "updatedAt": "2026-09-07",
+  "updatedAt": "2026-10-09",
   "compatibility": [
     {
       "component": "REST API",
@@ -19805,6 +19854,55 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
     }
   ],
   "changes": [
+    {
+      "id": "2026-10-09-developer-docs-boundaries",
+      "publishedAt": "2026-10-09",
+      "title": {
+        "en": "Developer guides and public examples",
+        "ar": "أدلة المطورين والأمثلة العامة"
+      },
+      "summary": {
+        "en": "Guides and API reference have separate navigation, highlighted code, and icon copy controls. Examples, SDK sources, and a read-only Docs MCP are public under labdotsa/authless.",
+        "ar": "للأدلة ومرجع API تنقّل منفصل، مع تمييز الكود وأزرار نسخ بأيقونات. تتوفر الأمثلة ومصادر SDK وخادم Docs MCP للقراءة فقط في labdotsa/authless."
+      },
+      "categories": [
+        "docs",
+        "sdk"
+      ],
+      "audiences": [
+        "integrator",
+        "reference",
+        "evaluator"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "No API migration is required. Install @authless/api-client from the public repository until npm publication. Management-agent OAuth remains preview-only; follow the readiness report before connecting a live deployment.",
+        "ar": "لا يلزم ترحيل لواجهة API. ثبّت @authless/api-client من المستودع العام حتى نشره على npm. يبقى OAuth لوكلاء الإدارة في المعاينة؛ راجع تقرير الجاهزية قبل الاتصال بنشر حي."
+      },
+      "announcement": {
+        "en": "Use the public examples and read-only agent documentation. Package publication and live OAuth availability remain unchanged.",
+        "ar": "استخدم الأمثلة العامة ووثائق الوكلاء للقراءة فقط. تبقى حالة نشر الحزم وإتاحة OAuth الحي دون تغيير."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "apps/docs/src/lib/AgentGuideBody.svelte",
+        "apps/docs/src/lib/DocsCodeBlock.svelte",
+        "apps/docs/src/lib/DocsFrame.svelte",
+        "apps/docs/src/lib/docs-body-registry.ts",
+        "apps/docs/src/lib/release-docs-mcp-projection.ts",
+        "apps/docs/static/developer-documentation.json",
+        "packages/docs-mcp/src/corpus.generated.json",
+        "packages/api-client/README.md",
+        "packages/api-client/package.json",
+        "tests/docs-mcp.test.ts",
+        "tests/ui/developer-documentation.ui.ts"
+      ],
+      "permalink": "/changes#2026-10-09-developer-docs-boundaries"
+    },
     {
       "id": "2026-09-07-sdk-callback-query",
       "publishedAt": "2026-09-07",
@@ -22367,7 +22465,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       title: "التغييرات والترحيل",
       updatedAt: "2026-08-21",
       contentType: "text/markdown",
-      contentDigest: "93084b07d0c53afb95fc5c3a1aa1e90f8ee2b9ed4c0d9ab15bf8a75856b10423"
+      contentDigest: "748a2ae9527f33e75f1a8e7f9e710fb3e301e367d18de060a812f394dd4ee3b8"
     },
     {
       canonical: "https://docs.authle.ss/agents",
@@ -32334,6 +32432,31 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
     ],
     changes: [
       {
+        id: "2026-10-09-developer-docs-boundaries",
+        publishedAt: "2026-10-09",
+        title: {
+          en: "Developer guides and public examples",
+          ar: "أدلة المطورين والأمثلة العامة"
+        },
+        summary: {
+          en: "Guides and API reference have separate navigation, highlighted code, and icon copy controls. Examples, SDK sources, and a read-only Docs MCP are public under labdotsa/authless.",
+          ar: "للأدلة ومرجع API تنقّل منفصل، مع تمييز الكود وأزرار نسخ بأيقونات. تتوفر الأمثلة ومصادر SDK وخادم Docs MCP للقراءة فقط في labdotsa/authless."
+        },
+        categories: [
+          "docs",
+          "sdk"
+        ],
+        impact: "additive",
+        migration: {
+          en: "No API migration is required. Install @authless/api-client from the public repository until npm publication. Management-agent OAuth remains preview-only; follow the readiness report before connecting a live deployment.",
+          ar: "لا يلزم ترحيل لواجهة API. ثبّت @authless/api-client من المستودع العام حتى نشره على npm. يبقى OAuth لوكلاء الإدارة في المعاينة؛ راجع تقرير الجاهزية قبل الاتصال بنشر حي."
+        },
+        supportWindow: null,
+        sunsetAt: null,
+        status: "available",
+        permalink: "/changes#2026-10-09-developer-docs-boundaries"
+      },
+      {
         id: "2026-09-07-sdk-callback-query",
         publishedAt: "2026-09-07",
         title: {
@@ -33845,7 +33968,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       kind: "compatibility",
       url: "/release-center.json",
       updatedAt: "2026-10-09",
-      sha256: "aad2ba511c7f5c3090d56c3d1a331b27e891d9e24824188dc32c403010148f42"
+      sha256: "fd6373f301186414f05ba4a5b90eec3f3928dbd839bbd90864f784abf5953f10"
     },
     {
       kind: "compatibility",
@@ -33858,14 +33981,14 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       url: "/changes.json?lang=en",
       locale: "en",
       updatedAt: "2026-10-09",
-      sha256: "202e1d60570783bf38891f315022c1a337e23be2f30a30371dc0757986dea939"
+      sha256: "071537886ab5f030623515d821e1f33ad46b8b434e9030803f17b2175af22240"
     },
     {
       kind: "changelog",
       url: "/changes.json?lang=ar",
       locale: "ar",
       updatedAt: "2026-10-09",
-      sha256: "c06ce8fb5a511dda0ac24ff22bba6c2fd9d6a2bc757ac5753492d98139302f15"
+      sha256: "bfc42c9b69aec0ef9220fcc7be286c3c006032c4a9cce96240abe752e00f8e22"
     },
     {
       kind: "operations",

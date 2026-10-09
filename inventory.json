@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "kind": "authless-public-developer-repo-export",
-  "sourceRevision": "0ab9e340db1e36ea0aaf19987b782b7206fbe163",
+  "sourceRevision": "bc0ca2b7723b660e8306d230d8873309edfb1f8d",
   "publicRepositoryUrl": "https://github.com/labdotsa/authless/tree/master",
   "licensePolicy": "Preserve existing package metadata: UNLICENSED; no new license granted.",
   "excluded": [
@@ -289,7 +289,7 @@
     },
     {
       "path": "docs/machine-readable/llms-full.txt",
-      "bytes": 501133
+      "bytes": 503726
     },
     {
       "path": "docs/machine-readable/rest-management-guide.json",
@@ -301,7 +301,7 @@
     },
     {
       "path": "docs/machine-readable/llms-full.ar.txt",
-      "bytes": 511185
+      "bytes": 513778
     },
     {
       "path": "docs/machine-readable/webhook-catalog.json",
@@ -337,7 +337,7 @@
     },
     {
       "path": "docs/markdown/en/changes.md",
-      "bytes": 136859
+      "bytes": 139452
     },
     {
       "path": "docs/markdown/en/agents.md",
@@ -385,7 +385,7 @@
     },
     {
       "path": "docs/markdown/ar/changes.md",
-      "bytes": 137312
+      "bytes": 139905
     },
     {
       "path": "docs/markdown/ar/agents.md",
@@ -449,7 +449,7 @@
     },
     {
       "path": "docs-mcp/corpus.generated.json",
-      "bytes": 1451047
+      "bytes": 1458108
     },
     {
       "path": "docs-mcp/docs-mcp.config.json",
@@ -461,7 +461,7 @@
     },
     {
       "path": "docs-mcp/stdio.js",
-      "bytes": 1391753
+      "bytes": 1398466
     }
   ]
 }

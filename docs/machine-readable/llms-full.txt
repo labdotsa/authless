@@ -8399,7 +8399,7 @@ The following checked projection is shared with the human-rendered guide and pre
 ```json
 {
   "schema": "authless.release-center/v1",
-  "updatedAt": "2026-09-07",
+  "updatedAt": "2026-10-09",
   "compatibility": [
     {
       "component": "REST API",
@@ -8474,6 +8474,55 @@ The following checked projection is shared with the human-rendered guide and pre
     }
   ],
   "changes": [
+    {
+      "id": "2026-10-09-developer-docs-boundaries",
+      "publishedAt": "2026-10-09",
+      "title": {
+        "en": "Developer guides and public examples",
+        "ar": "أدلة المطورين والأمثلة العامة"
+      },
+      "summary": {
+        "en": "Guides and API reference have separate navigation, highlighted code, and icon copy controls. Examples, SDK sources, and a read-only Docs MCP are public under labdotsa/authless.",
+        "ar": "للأدلة ومرجع API تنقّل منفصل، مع تمييز الكود وأزرار نسخ بأيقونات. تتوفر الأمثلة ومصادر SDK وخادم Docs MCP للقراءة فقط في labdotsa/authless."
+      },
+      "categories": [
+        "docs",
+        "sdk"
+      ],
+      "audiences": [
+        "integrator",
+        "reference",
+        "evaluator"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "No API migration is required. Install @authless/api-client from the public repository until npm publication. Management-agent OAuth remains preview-only; follow the readiness report before connecting a live deployment.",
+        "ar": "لا يلزم ترحيل لواجهة API. ثبّت @authless/api-client من المستودع العام حتى نشره على npm. يبقى OAuth لوكلاء الإدارة في المعاينة؛ راجع تقرير الجاهزية قبل الاتصال بنشر حي."
+      },
+      "announcement": {
+        "en": "Use the public examples and read-only agent documentation. Package publication and live OAuth availability remain unchanged.",
+        "ar": "استخدم الأمثلة العامة ووثائق الوكلاء للقراءة فقط. تبقى حالة نشر الحزم وإتاحة OAuth الحي دون تغيير."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "apps/docs/src/lib/AgentGuideBody.svelte",
+        "apps/docs/src/lib/DocsCodeBlock.svelte",
+        "apps/docs/src/lib/DocsFrame.svelte",
+        "apps/docs/src/lib/docs-body-registry.ts",
+        "apps/docs/src/lib/release-docs-mcp-projection.ts",
+        "apps/docs/static/developer-documentation.json",
+        "packages/docs-mcp/src/corpus.generated.json",
+        "packages/api-client/README.md",
+        "packages/api-client/package.json",
+        "tests/docs-mcp.test.ts",
+        "tests/ui/developer-documentation.ui.ts"
+      ],
+      "permalink": "/changes#2026-10-09-developer-docs-boundaries"
+    },
     {
       "id": "2026-09-07-sdk-callback-query",
       "publishedAt": "2026-09-07",
