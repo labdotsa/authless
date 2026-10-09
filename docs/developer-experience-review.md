@@ -35,7 +35,7 @@ The management-agent example generates a key once, writes a mode-0600 private ke
 
 The Docs MCP server is read-only. The public export runs `node docs-mcp/stdio.js`; the source workspace runs its corpus check before rebuilding. It has no authentication, tenant discovery, mutation, or network listener.
 
-All public code links in this review target `https://github.com/labdotsa/authless`. Private workspace references under `labdotsa/authle.ss` are not public installation instructions.
+All public code links in this review target `https://github.com/labdotsa/authless`. The application repository remains private and is excluded from public installation instructions.
 
 ## Verification limits
 

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "kind": "authless-public-developer-repo-export",
-  "sourceRevision": "3775d0dea1965278988f0db86daf256a42688f40",
+  "sourceRevision": "5c2fc0e1b0059097edbc30944579c9fe5138fd32",
   "publicRepositoryUrl": "https://github.com/labdotsa/authless/tree/master",
   "licensePolicy": "Preserve existing package metadata: UNLICENSED; no new license granted.",
   "excluded": [
