@@ -1,0 +1,7 @@
+{
+  "name": "@authless/browser",
+  "version": "0.0.0-evaluation",
+  "type": "module",
+  "exports": "./index.ts",
+  "sideEffects": false
+}

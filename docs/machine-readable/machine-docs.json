@@ -1,0 +1,434 @@
+{
+  "schema": "authless.machine-documentation/v1",
+  "generatedAt": "2026-10-09",
+  "canonical": "https://docs.authle.ss/machine-docs.json",
+  "authority": "read-only-public-documentation",
+  "sourceAttribution": "Authless Developer Documentation",
+  "licenseNotice": "Use is subject to the published Authless legal terms and crawler policy.",
+  "exclusions": [
+    "authenticated-content",
+    "tenant-data",
+    "secrets",
+    "preview-material",
+    "internal-fixtures",
+    "private-measurement-evidence"
+  ],
+  "pages": [
+    {
+      "canonical": "https://docs.authle.ss/",
+      "locale": "en",
+      "markdown": "https://docs.authle.ss/markdown/index.md?lang=en",
+      "path": "/",
+      "sha256": "5e09ed6cda3a06261af8fb73e73d8c9536165b173e5c57e4a7e250348c98e52c",
+      "stage": "available",
+      "title": "Documentation",
+      "updatedAt": "2026-08-14"
+    },
+    {
+      "canonical": "https://docs.authle.ss/?lang=ar",
+      "locale": "ar",
+      "markdown": "https://docs.authle.ss/markdown/index.md?lang=ar",
+      "path": "/",
+      "sha256": "2251dc8c0b43a1bd804579b2513d843de7f124a09caa3d39713f7d9aea61b807",
+      "stage": "available",
+      "title": "وثائق Authless",
+      "updatedAt": "2026-08-14"
+    },
+    {
+      "canonical": "https://docs.authle.ss/start",
+      "locale": "en",
+      "markdown": "https://docs.authle.ss/markdown/start.md?lang=en",
+      "path": "/start",
+      "sha256": "58c7be0f947110e43a4886607c91efbefe5934fa67891bf3bbdb7ec954fe9a54",
+      "stage": "available",
+      "title": "Start building",
+      "updatedAt": "2026-08-14"
+    },
+    {
+      "canonical": "https://docs.authle.ss/start?lang=ar",
+      "locale": "ar",
+      "markdown": "https://docs.authle.ss/markdown/start.md?lang=ar",
+      "path": "/start",
+      "sha256": "77ba971d9863700880be24c4a2bb493b12a2c8d14295dcc614e01f050d64db7e",
+      "stage": "available",
+      "title": "ابدأ البناء",
+      "updatedAt": "2026-08-14"
+    },
+    {
+      "canonical": "https://docs.authle.ss/understand",
+      "locale": "en",
+      "markdown": "https://docs.authle.ss/markdown/understand.md?lang=en",
+      "path": "/understand",
+      "sha256": "fd360db275b48e2e080a6ccadb4f89878de46b3a0292e3527f217ca71a212e7d",
+      "stage": "available",
+      "title": "Understand Authless",
+      "updatedAt": "2026-08-14"
+    },
+    {
+      "canonical": "https://docs.authle.ss/understand?lang=ar",
+      "locale": "ar",
+      "markdown": "https://docs.authle.ss/markdown/understand.md?lang=ar",
+      "path": "/understand",
+      "sha256": "aa5d62b801beed176ebd32c3fe63b4bdbe21cb83c26f9eb23c3a9f850119fcb4",
+      "stage": "available",
+      "title": "افهم Authless",
+      "updatedAt": "2026-08-14"
+    },
+    {
+      "canonical": "https://docs.authle.ss/build",
+      "locale": "en",
+      "markdown": "https://docs.authle.ss/markdown/build.md?lang=en",
+      "path": "/build",
+      "sha256": "b6b03d8a18ca58eff19e6efc7c2676990efbb1bfbb4a4b6704dd2468e3944a7d",
+      "stage": "available",
+      "title": "Build an integration",
+      "updatedAt": "2026-08-14"
+    },
+    {
+      "canonical": "https://docs.authle.ss/build?lang=ar",
+      "locale": "ar",
+      "markdown": "https://docs.authle.ss/markdown/build.md?lang=ar",
+      "path": "/build",
+      "sha256": "1b5da176186a3076d97c5de79b657301d852b54cf615607545c0b28e9d8efd3a",
+      "stage": "available",
+      "title": "ابنِ تكاملاً",
+      "updatedAt": "2026-08-14"
+    },
+    {
+      "canonical": "https://docs.authle.ss/build/sveltekit",
+      "locale": "en",
+      "markdown": "https://docs.authle.ss/markdown/build/sveltekit.md?lang=en",
+      "path": "/build/sveltekit",
+      "sha256": "6e581c996832644ec936339d94fe3e4a318f30622f08f2ced406eae50cfe75eb",
+      "stage": "available",
+      "title": "Hosted sign-in with SvelteKit",
+      "updatedAt": "2026-08-14"
+    },
+    {
+      "canonical": "https://docs.authle.ss/build/sveltekit?lang=ar",
+      "locale": "ar",
+      "markdown": "https://docs.authle.ss/markdown/build/sveltekit.md?lang=ar",
+      "path": "/build/sveltekit",
+      "sha256": "4b3ba882f1680c22d23f61d7dc5a7136ee555d7c316d9b6ba428e15955ac4307",
+      "stage": "available",
+      "title": "تسجيل الدخول المستضاف باستخدام SvelteKit",
+      "updatedAt": "2026-08-14"
+    },
+    {
+      "canonical": "https://docs.authle.ss/build/oidc",
+      "locale": "en",
+      "markdown": "https://docs.authle.ss/markdown/build/oidc.md?lang=en",
+      "path": "/build/oidc",
+      "sha256": "23c441dadddd6b6722832c1bbd3d2080b50df0a90ea19770d0cd2222dc9da044",
+      "stage": "available",
+      "title": "Direct OIDC integration",
+      "updatedAt": "2026-08-14"
+    },
+    {
+      "canonical": "https://docs.authle.ss/build/oidc?lang=ar",
+      "locale": "ar",
+      "markdown": "https://docs.authle.ss/markdown/build/oidc.md?lang=ar",
+      "path": "/build/oidc",
+      "sha256": "1be72530d3c193007adbbb66688e9bd1c818b149ffb271d31d4d3d0ce0967d0f",
+      "stage": "available",
+      "title": "تكامل OIDC المباشر",
+      "updatedAt": "2026-08-14"
+    },
+    {
+      "canonical": "https://docs.authle.ss/build/rest",
+      "locale": "en",
+      "markdown": "https://docs.authle.ss/markdown/build/rest.md?lang=en",
+      "path": "/build/rest",
+      "sha256": "da2ad4698f7e915dca7fea6c29ba3d2a2291dc63e756c7a60e007a58f2b508da",
+      "stage": "available",
+      "title": "Manage app access with the REST API",
+      "updatedAt": "2026-08-14"
+    },
+    {
+      "canonical": "https://docs.authle.ss/build/rest?lang=ar",
+      "locale": "ar",
+      "markdown": "https://docs.authle.ss/markdown/build/rest.md?lang=ar",
+      "path": "/build/rest",
+      "sha256": "ed44accc3ca8335dfadf9e60d142bebe92bcfd35617c67ca1d1655eed9b07300",
+      "stage": "available",
+      "title": "إدارة وصول التطبيق عبر واجهة REST",
+      "updatedAt": "2026-08-14"
+    },
+    {
+      "canonical": "https://docs.authle.ss/build/webhooks",
+      "locale": "en",
+      "markdown": "https://docs.authle.ss/markdown/build/webhooks.md?lang=en",
+      "path": "/build/webhooks",
+      "sha256": "8b68e045a5848f19fa9dae899ff00f49e967e2869df2bfb32948acec069dc4eb",
+      "stage": "available",
+      "title": "Receive signed webhooks",
+      "updatedAt": "2026-08-14"
+    },
+    {
+      "canonical": "https://docs.authle.ss/build/webhooks?lang=ar",
+      "locale": "ar",
+      "markdown": "https://docs.authle.ss/markdown/build/webhooks.md?lang=ar",
+      "path": "/build/webhooks",
+      "sha256": "25ab94b7a77a0e51fadfebc85ab634103cd035f4e936a09cc007f2cb7d35cbd4",
+      "stage": "available",
+      "title": "استقبل Webhooks موقّعة",
+      "updatedAt": "2026-08-14"
+    },
+    {
+      "canonical": "https://docs.authle.ss/test",
+      "locale": "en",
+      "markdown": "https://docs.authle.ss/markdown/test.md?lang=en",
+      "path": "/test",
+      "sha256": "1ee87099add899af1878c8f4bd54cd84b66f5452a9ba3dea0f5b40bae099330c",
+      "stage": "available",
+      "title": "Test safely",
+      "updatedAt": "2026-08-14"
+    },
+    {
+      "canonical": "https://docs.authle.ss/test?lang=ar",
+      "locale": "ar",
+      "markdown": "https://docs.authle.ss/markdown/test.md?lang=ar",
+      "path": "/test",
+      "sha256": "ec8e00876bf84a7beccc941d2e09cb89972e4d97a35f93e9b7477decde49f0b8",
+      "stage": "available",
+      "title": "اختبر بأمان",
+      "updatedAt": "2026-08-14"
+    },
+    {
+      "canonical": "https://docs.authle.ss/secure",
+      "locale": "en",
+      "markdown": "https://docs.authle.ss/markdown/secure.md?lang=en",
+      "path": "/secure",
+      "sha256": "dabf13379095fd8f618d9b3bc43cf73861c3a07b25ae402b3ecca9efcaa94e8b",
+      "stage": "available",
+      "title": "Secure the integration",
+      "updatedAt": "2026-08-14"
+    },
+    {
+      "canonical": "https://docs.authle.ss/secure?lang=ar",
+      "locale": "ar",
+      "markdown": "https://docs.authle.ss/markdown/secure.md?lang=ar",
+      "path": "/secure",
+      "sha256": "357d949339ca735fe007ffecd8d62bc4b46f476720784958cbdb8034ca7c7585",
+      "stage": "available",
+      "title": "أمّن التكامل",
+      "updatedAt": "2026-08-14"
+    },
+    {
+      "canonical": "https://docs.authle.ss/operate",
+      "locale": "en",
+      "markdown": "https://docs.authle.ss/markdown/operate.md?lang=en",
+      "path": "/operate",
+      "sha256": "bb8dc2cd2a6e8888931e0d88953734ca606e089bf8e0c9bb3bb6faf254bd0694",
+      "stage": "available",
+      "title": "Operate Authless",
+      "updatedAt": "2026-08-14"
+    },
+    {
+      "canonical": "https://docs.authle.ss/operate?lang=ar",
+      "locale": "ar",
+      "markdown": "https://docs.authle.ss/markdown/operate.md?lang=ar",
+      "path": "/operate",
+      "sha256": "f5ce41ececf9cfd011cfe4d61c8e33d27481a322cfc109092b2b3bd0820c6a2c",
+      "stage": "available",
+      "title": "شغّل Authless",
+      "updatedAt": "2026-08-14"
+    },
+    {
+      "canonical": "https://docs.authle.ss/trust",
+      "locale": "en",
+      "markdown": "https://docs.authle.ss/markdown/trust.md?lang=en",
+      "path": "/trust",
+      "sha256": "c1ea82baceb7f459969031ff8d1e3b9f1c046b6ddb28e6c3a86e73a829c975bc",
+      "stage": "available",
+      "title": "Security, privacy, and trust evidence",
+      "updatedAt": "2026-08-14"
+    },
+    {
+      "canonical": "https://docs.authle.ss/trust?lang=ar",
+      "locale": "ar",
+      "markdown": "https://docs.authle.ss/markdown/trust.md?lang=ar",
+      "path": "/trust",
+      "sha256": "5eb54ac81a3dd7a39abe4ceaa1a5367ff9668603a0a6fa0ed1244b9179cd2f5a",
+      "stage": "available",
+      "title": "أدلة الأمان والخصوصية والثقة",
+      "updatedAt": "2026-08-14"
+    },
+    {
+      "canonical": "https://docs.authle.ss/reference",
+      "locale": "en",
+      "markdown": "https://docs.authle.ss/markdown/reference.md?lang=en",
+      "path": "/reference",
+      "sha256": "28ab9293aba027bbe2857c3490804c95c0f760df8df8f5736bdc0e965a0c901c",
+      "stage": "available",
+      "title": "Technical reference",
+      "updatedAt": "2026-08-14"
+    },
+    {
+      "canonical": "https://docs.authle.ss/reference?lang=ar",
+      "locale": "ar",
+      "markdown": "https://docs.authle.ss/markdown/reference.md?lang=ar",
+      "path": "/reference",
+      "sha256": "369fff37b5d5c2e939279aae6650d64da204cd52c833f54414af2f7104e1c5f7",
+      "stage": "available",
+      "title": "المرجع التقني",
+      "updatedAt": "2026-08-14"
+    },
+    {
+      "canonical": "https://docs.authle.ss/reference/rest",
+      "locale": "en",
+      "markdown": "https://docs.authle.ss/markdown/reference/rest.md?lang=en",
+      "path": "/reference/rest",
+      "sha256": "f056df938f16f7890676309369c54cb3099016f4a9165b58325856606adb6f6c",
+      "stage": "available",
+      "title": "REST API reference",
+      "updatedAt": "2026-08-14"
+    },
+    {
+      "canonical": "https://docs.authle.ss/reference/rest?lang=ar",
+      "locale": "ar",
+      "markdown": "https://docs.authle.ss/markdown/reference/rest.md?lang=ar",
+      "path": "/reference/rest",
+      "sha256": "813222d285ef80c2fd0078ebb7e08ab2983515e8d2887abca0757deaf0eee7fc",
+      "stage": "available",
+      "title": "مرجع واجهة REST",
+      "updatedAt": "2026-08-14"
+    },
+    {
+      "canonical": "https://docs.authle.ss/changes",
+      "locale": "en",
+      "markdown": "https://docs.authle.ss/markdown/changes.md?lang=en",
+      "path": "/changes",
+      "sha256": "3eea7712054b7e19e80f8bbba6b0aa8be4a66f482db13c9c5a4d0191bcb2d934",
+      "stage": "available",
+      "title": "Changes and migration",
+      "updatedAt": "2026-08-21"
+    },
+    {
+      "canonical": "https://docs.authle.ss/changes?lang=ar",
+      "locale": "ar",
+      "markdown": "https://docs.authle.ss/markdown/changes.md?lang=ar",
+      "path": "/changes",
+      "sha256": "7b8893b5dfa875af5a495ca8c84da6bc14bf9dfd4fe8967ab00da88029909a3d",
+      "stage": "available",
+      "title": "التغييرات والترحيل",
+      "updatedAt": "2026-08-21"
+    },
+    {
+      "canonical": "https://docs.authle.ss/agents",
+      "locale": "en",
+      "markdown": "https://docs.authle.ss/markdown/agents.md?lang=en",
+      "path": "/agents",
+      "sha256": "a0db3e664c98a45c1b87ebf7cdbd64ae56df6bf10172e62215f21487edf22bb0",
+      "stage": "available",
+      "title": "Agent access",
+      "updatedAt": "2026-10-09"
+    },
+    {
+      "canonical": "https://docs.authle.ss/agents?lang=ar",
+      "locale": "ar",
+      "markdown": "https://docs.authle.ss/markdown/agents.md?lang=ar",
+      "path": "/agents",
+      "sha256": "c9f21a444980ebbb6d4ddd536e8cbea41efb5c487daa0c48ef007850ae413f96",
+      "stage": "available",
+      "title": "وصول الوكلاء",
+      "updatedAt": "2026-10-09"
+    }
+  ],
+  "sources": [
+    {
+      "kind": "documentation-index",
+      "url": "/content-index.json?lang=en",
+      "locale": "en",
+      "updatedAt": "2026-10-09",
+      "sha256": "44c6dfa8170d934c20cec06bce0cf368d0b4a97cba13bac72245d74afe681085"
+    },
+    {
+      "kind": "documentation-index",
+      "url": "/content-index.json?lang=ar",
+      "locale": "ar",
+      "updatedAt": "2026-10-09",
+      "sha256": "6cc4fde96b55188ad89d64322e7db1c90fea548c7e1400d89845ce946015f4fa"
+    },
+    {
+      "kind": "openapi",
+      "url": "/openapi.json",
+      "updatedAt": "2026-10-09",
+      "sha256": "87b370d03196f526b688d4d6f896666ef05ab54ddfbffa4b891cff0f112aa743"
+    },
+    {
+      "kind": "openapi",
+      "url": "/rest-reference.json",
+      "updatedAt": "2026-10-09",
+      "sha256": "30e83279d650a57dd9ac199da55ba16257b22301c65388384957585afd42aec3"
+    },
+    {
+      "kind": "discovery",
+      "url": "https://sign.authle.ss/.well-known/openid-configuration",
+      "updatedAt": "2026-10-09",
+      "sha256": "ffc383391d58f10ffc9df3d4d5976e82f3fe7ad3675a0860cab286bb1ee2c570"
+    },
+    {
+      "kind": "event-schema",
+      "url": "/webhook-catalog.json",
+      "updatedAt": "2026-10-09",
+      "sha256": "31337d6103c196589c8aa8ae075cdb7a70ba4b6705f7294cfacfb684bfba0303"
+    },
+    {
+      "kind": "compatibility",
+      "url": "/release-center.json",
+      "updatedAt": "2026-10-09",
+      "sha256": "aad2ba511c7f5c3090d56c3d1a331b27e891d9e24824188dc32c403010148f42"
+    },
+    {
+      "kind": "compatibility",
+      "url": "/compatibility.json",
+      "updatedAt": "2026-10-09",
+      "sha256": "14768fdc938282e9d273f13baec28b2a988081c0d86346e66a750def78d5ee55"
+    },
+    {
+      "kind": "changelog",
+      "url": "/changes.json?lang=en",
+      "locale": "en",
+      "updatedAt": "2026-10-09",
+      "sha256": "202e1d60570783bf38891f315022c1a337e23be2f30a30371dc0757986dea939"
+    },
+    {
+      "kind": "changelog",
+      "url": "/changes.json?lang=ar",
+      "locale": "ar",
+      "updatedAt": "2026-10-09",
+      "sha256": "c06ce8fb5a511dda0ac24ff22bba6c2fd9d6a2bc757ac5753492d98139302f15"
+    },
+    {
+      "kind": "operations",
+      "url": "/production-operations.json",
+      "updatedAt": "2026-10-09",
+      "sha256": "71a0e914eb6b7db70c54749f9cd606dc24e6a2cf3756413616f02de964a2c9ce"
+    },
+    {
+      "kind": "documentation-index",
+      "url": "/rest-management-guide.json",
+      "updatedAt": "2026-10-09",
+      "sha256": "3918cdbb7905dbb0d765bdd23ac985a56b0bc7e0545780c9787e0d5fe0c155df"
+    },
+    {
+      "kind": "documentation-index",
+      "url": "/developer-documentation.json",
+      "updatedAt": "2026-10-09",
+      "sha256": "f0726cf92a9877bdc3da6642a188b8a88f16528fdd7eb3e1263705cfc3067c39"
+    },
+    {
+      "kind": "sitemap",
+      "url": "/sitemap.xml",
+      "updatedAt": "2026-10-09",
+      "sha256": "640308d2fdb3c10361adba8d900c20f4302b1ab3321fbe2ee3d082a952b7fc3e"
+    },
+    {
+      "kind": "security-contact",
+      "url": "https://authle.ss/.well-known/security.txt",
+      "updatedAt": "2026-10-09",
+      "sha256": "fca7c8c458628e3e3cb6e76822721da7ddd56bc465314f132e9992dfa6d152a2"
+    }
+  ]
+}

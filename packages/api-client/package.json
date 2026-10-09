@@ -1,0 +1,49 @@
+{
+  "name": "@authless/api-client",
+  "version": "0.2.0",
+  "private": false,
+  "browser": false,
+  "type": "module",
+  "description": "Server-only TypeScript REST client for Authless management APIs.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/labdotsa/authless.git",
+    "directory": "packages/api-client"
+  },
+  "homepage": "https://github.com/labdotsa/authless/tree/master/packages/api-client",
+  "bugs": {
+    "url": "https://github.com/labdotsa/authless/issues"
+  },
+  "license": "UNLICENSED",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "keywords": [
+    "authless",
+    "authentication",
+    "authorization",
+    "rest",
+    "typescript"
+  ],
+  "sideEffects": false,
+  "engines": {
+    "node": ">=24"
+  },
+  "authless": {
+    "additiveCompatibilityEvidence": "2026-08-25-personal-session-contracts",
+    "compatibilityEvidence": "2026-08-22-sensitive-mutation-readiness",
+    "owner": "REST client"
+  }
+}

@@ -1,0 +1,1 @@
+Keep this tree limited to reviewed public SDK distributions, schemas, documentation, and standalone examples. Do not add private application code, tenant data, environment values, secrets, databases, or private build output. Only documented .env.example templates may be included. Preserve UNLICENSED metadata.

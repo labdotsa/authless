@@ -1,0 +1,161 @@
+{
+  "schema": "authless.webhook-catalog/v1",
+  "envelope": {
+    "required": [
+      "eventId",
+      "eventType",
+      "version",
+      "occurredAt",
+      "workspaceId",
+      "appId",
+      "environment",
+      "resourceVersion",
+      "payload"
+    ],
+    "identifiers": "eventId is globally stable; workspaceId, appId, and environment identify the tenant scope; payload resource IDs are opaque and stable.",
+    "timestamps": "occurredAt is the authoritative RFC 3339 event time. Webhook-Timestamp is the signed Unix delivery-attempt time."
+  },
+  "events": [
+    {
+      "name": "app.suspended",
+      "schemaVersion": "1.0",
+      "resource": "app",
+      "payloadBoundary": "App ID, suspension state, and resource version only."
+    },
+    {
+      "name": "app_membership.activated",
+      "schemaVersion": "1.0",
+      "resource": "app membership",
+      "payloadBoundary": "Opaque membership and person IDs plus status; no email or profile claims."
+    },
+    {
+      "name": "app_membership.deleted",
+      "schemaVersion": "1.0",
+      "resource": "app membership",
+      "payloadBoundary": "Opaque membership ID and tombstone status; no deleted personal data."
+    },
+    {
+      "name": "app_membership.invited",
+      "schemaVersion": "1.0",
+      "resource": "app membership",
+      "payloadBoundary": "Opaque membership ID and status; no invitation challenge or recipient address."
+    },
+    {
+      "name": "app_membership.revoked",
+      "schemaVersion": "1.0",
+      "resource": "app membership",
+      "payloadBoundary": "Opaque membership ID and revoked status; no session or credential material."
+    },
+    {
+      "name": "app_membership.suspended",
+      "schemaVersion": "1.0",
+      "resource": "app membership",
+      "payloadBoundary": "Opaque membership ID and suspended status."
+    },
+    {
+      "name": "app_role.assigned",
+      "schemaVersion": "1.0",
+      "resource": "app role assignment",
+      "payloadBoundary": "Opaque membership and role IDs; no entitlement-private metadata."
+    },
+    {
+      "name": "app_role.revoked",
+      "schemaVersion": "1.0",
+      "resource": "app role assignment",
+      "payloadBoundary": "Opaque membership and role IDs plus revoked state."
+    },
+    {
+      "name": "connection.created",
+      "schemaVersion": "1.0",
+      "resource": "connection",
+      "payloadBoundary": "Opaque connection ID and lifecycle state; no provider token or secret."
+    },
+    {
+      "name": "connection.revoked",
+      "schemaVersion": "1.0",
+      "resource": "connection",
+      "payloadBoundary": "Opaque connection ID and revoked state; no provider token or secret."
+    },
+    {
+      "name": "consent.updated",
+      "schemaVersion": "1.0",
+      "resource": "consent",
+      "payloadBoundary": "Opaque consent/connection IDs and granted scope names; no authentication material."
+    },
+    {
+      "name": "credential.rotated",
+      "schemaVersion": "1.0",
+      "resource": "app credential",
+      "payloadBoundary": "Opaque credential ID, status, and version; never the secret or verifier."
+    },
+    {
+      "name": "entitlement.expiring",
+      "schemaVersion": "1.0",
+      "resource": "entitlement",
+      "payloadBoundary": "Opaque entitlement ID, kind, state, and expiry time."
+    },
+    {
+      "name": "entitlement.granted",
+      "schemaVersion": "1.0",
+      "resource": "entitlement",
+      "payloadBoundary": "Opaque entitlement ID, kind, and state."
+    },
+    {
+      "name": "entitlement.revoked",
+      "schemaVersion": "1.0",
+      "resource": "entitlement",
+      "payloadBoundary": "Opaque entitlement ID, kind, and revoked state."
+    },
+    {
+      "name": "identity.claim_changed",
+      "schemaVersion": "1.0",
+      "resource": "identity claim",
+      "payloadBoundary": "Opaque person/claim references and resource version; sensitive claim values are omitted."
+    }
+  ],
+  "ordering": {
+    "guarantee": "none",
+    "rule": "Delivery is at least once and may be duplicated or reordered. Compare resourceVersion per resource; ignore a lower version and reconcile gaps from the source of truth."
+  },
+  "sensitiveData": {
+    "payloadContainsSecrets": false,
+    "rule": "Payloads never contain signing secrets, credentials, challenges, tokens, raw provider data, recipient identifiers, or ungranted claim values. Treat every payload field as tenant data and authorize its use in your application."
+  },
+  "signing": {
+    "headers": [
+      "Webhook-Id",
+      "Webhook-Timestamp",
+      "Webhook-Signature"
+    ],
+    "input": "Webhook-Timestamp + '.' + Webhook-Id + '.' + rawBody",
+    "algorithm": "HMAC-SHA-256 with base64url output",
+    "rotation": "Accept v1 with the current secret and v1-previous with the previous secret only during the configured overlap; reject malformed or repeated signature labels."
+  },
+  "delivery": {
+    "acknowledgementDeadlineSeconds": 10,
+    "maxAttempts": 5,
+    "replayWindowSeconds": 300,
+    "retentionDays": 30,
+    "retryDelaysSeconds": [
+      30,
+      60,
+      120,
+      240
+    ],
+    "retryable": "Network failures, HTTP 408, 429, and 5xx responses retry. Other non-2xx responses are terminal.",
+    "disablement": "Disabling an endpoint terminalizes its pending or leased deliveries and prevents new delivery or redelivery until a different active endpoint is configured.",
+    "observability": "Delivery views expose status, attempts, safe error code, last HTTP status, next attempt, and opaque event/delivery correlation IDs; response bodies and payload claims are not exposed.",
+    "redelivery": "An authorized, recently authenticated administrator explicitly confirms redelivery. It creates a new idempotent delivery linked to the original within the 30-day window.",
+    "reconciliation": "Scheduled and confirmed reconciliation create missing deliveries for active matching subscriptions from retained events. The management API remains the source of truth for current resource state."
+  },
+  "failures": [
+    "invalid-signature",
+    "expired-timestamp",
+    "duplicate",
+    "out-of-order",
+    "endpoint-timeout",
+    "schema-evolution",
+    "credential-rotation",
+    "delivery-gap-reconciliation"
+  ]
+}

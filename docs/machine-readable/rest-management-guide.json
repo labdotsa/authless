@@ -1,0 +1,148 @@
+{
+  "schema": "authless.rest-management-guide/v1",
+  "authority": {
+    "kind": "app-service-credential",
+    "minimumScope": "one test app in one isolated test workspace",
+    "rules": [
+      "Create a server-only app credential restricted to the single test app; a platform session is broader and is not required.",
+      "Load it from an approved secret store into AUTHLESS_APP_CREDENTIAL; never expose it to browser code, source, logs, screenshots, tickets, or chat.",
+      "Rotate it before expiry or immediately after suspected exposure, revoke it after the exercise, and redact Authorization, Cookie, and environment values."
+    ]
+  },
+  "operationIds": [
+    "inviteAppMembership",
+    "getAppMembership",
+    "listAppMemberships",
+    "changeAppMembershipStatus"
+  ],
+  "typescript": {
+    "filename": "manage-access.ts",
+    "source": "import {\n  AuthlessApiError,\n  createAuthlessApiClient,\n} from \"@authless/api-client\";\n\nconst client = createAuthlessApiClient({\n  appCredentialToken: process.env.AUTHLESS_APP_CREDENTIAL!,\n  baseUrl: \"https://api.authle.ss\",\n  retry: { maxAttempts: 2 },\n});\nconst scope = {\n  workspaceId: process.env.AUTHLESS_TEST_WORKSPACE_ID!,\n  appId: process.env.AUTHLESS_TEST_APP_ID!,\n};\nconst correlationId = crypto.randomUUID();\nconst customerReference = `rest-guide-${crypto.randomUUID()}`;\n\ntry {\n  // Durable idempotency: reuse this key only for this exact invitation claim.\n  await client.appMemberships.invite({\n    ...scope,\n    correlationId,\n    idempotencyKey: crypto.randomUUID(),\n    confirmed: true,\n    customerReference,\n    email: \"rest-guide-user@example.test\",\n  });\n\n  // Invitations are enumeration-safe, so locate the created test record by\n  // its caller-owned reference, then preserve the opaque continuation cursor.\n  const first = await client.appMemberships.list({\n    ...scope, correlationId, query: customerReference, limit: 1,\n  });\n  const membership = first.memberships[0];\n  if (!membership) throw new Error(\"created_test_membership_not_visible\");\n  if (first.nextCursor) {\n    await client.appMemberships.list({\n      ...scope, correlationId, cursor: first.nextCursor, limit: 1,\n    });\n  }\n\n  const current = await client.appMemberships.get({\n    ...scope, correlationId, membershipId: membership.id,\n  });\n\n  // The client sends If-Match: \"<version>\" and keeps this mutation's\n  // idempotency key unchanged across only its classified-safe retries.\n  await client.appMemberships.changeStatus({\n    ...scope,\n    correlationId,\n    membershipId: current.id,\n    expectedVersion: current.version,\n    idempotencyKey: crypto.randomUUID(),\n    action: \"revoke\",\n    confirmed: true,\n    reason: \"access_ended\",\n  });\n  console.info(\"REST_GUIDE_COMPLETE cleanup_ok\", { correlationId });\n} catch (error) {\n  if (error instanceof AuthlessApiError) {\n    console.error(\"AUTHLESS_REQUEST_FAILED\", {\n      status: error.status,\n      code: error.code,\n      correlationId: error.correlationId,\n      retrySafety: error.retrySafety,\n    });\n  }\n  throw error;\n}"
+  },
+  "rawHttp": {
+    "filename": "manage-access.sh",
+    "source": "# AUTHLESS_APP_CREDENTIAL is server-only. Never paste it into browser code,\n# a shell history on a shared machine, logs, tickets, or chat.\nBASE=https://api.authle.ss\nCORRELATION=rest-guide-request-001\nINVITE_KEY=one-claim-one-key-001\n\ncurl --fail-with-body --request POST   \"$BASE/v1/workspaces/$AUTHLESS_TEST_WORKSPACE_ID/apps/$AUTHLESS_TEST_APP_ID/memberships\"   --header \"Authorization: Bearer $AUTHLESS_APP_CREDENTIAL\"   --header \"Content-Type: application/json\"   --header \"X-Correlation-ID: $CORRELATION\"   --header \"Idempotency-Key: $INVITE_KEY\"   --data '{\"confirmed\":true,\"customerReference\":\"rest-guide-001\",\"email\":\"rest-guide-user@example.test\"}'\n\ncurl --fail-with-body   \"$BASE/v1/workspaces/$AUTHLESS_TEST_WORKSPACE_ID/apps/$AUTHLESS_TEST_APP_ID/memberships?query=rest-guide-001&limit=1\"   --header \"Authorization: Bearer $AUTHLESS_APP_CREDENTIAL\"   --header \"X-Correlation-ID: $CORRELATION\"\n\n# Read the exact membership, retain its ETag/version, and use an opaque\n# nextCursor unchanged on a subsequent list request when one is returned.\ncurl --fail-with-body   \"$BASE/v1/workspaces/$AUTHLESS_TEST_WORKSPACE_ID/apps/$AUTHLESS_TEST_APP_ID/memberships/$MEMBERSHIP_ID\"   --header \"Authorization: Bearer $AUTHLESS_APP_CREDENTIAL\"   --header \"X-Correlation-ID: $CORRELATION\"\n\ncurl --fail-with-body --request POST   \"$BASE/v1/workspaces/$AUTHLESS_TEST_WORKSPACE_ID/apps/$AUTHLESS_TEST_APP_ID/memberships/$MEMBERSHIP_ID/lifecycle\"   --header \"Authorization: Bearer $AUTHLESS_APP_CREDENTIAL\"   --header \"Content-Type: application/json\"   --header \"X-Correlation-ID: $CORRELATION\"   --header \"Idempotency-Key: one-claim-one-key-cleanup-001\"   --header 'If-Match: \"4\"'   --data '{\"action\":\"revoke\",\"confirmed\":true,\"reason\":\"access_ended\"}'"
+  },
+  "equivalence": [
+    "Both variants send the same contract paths, body claims, correlation ID, idempotency key, cursor, and quoted version precondition.",
+    "Both observe enumeration-safe invitation acceptance, a versioned membership projection, an opaque nextCursor, and the same RFC 9457-compatible error code/status pair.",
+    "The generated client alone applies bounded retries to operations classified safe by OpenAPI; raw HTTP callers must implement that classification explicitly."
+  ],
+  "diagnostics": {
+    "allowed": [
+      "status",
+      "code",
+      "correlationId",
+      "retrySafety"
+    ],
+    "forbidden": [
+      "credentials",
+      "tokens",
+      "tenant payloads",
+      "internal traces"
+    ],
+    "note": "Support may use the opaque correlation reference to locate server evidence. Do not print response bodies or request headers by default."
+  },
+  "failures": [
+    {
+      "id": "insufficient_scope",
+      "status": 404,
+      "retry": "never",
+      "action": "Verify the credential is bound to this test app; do not widen authority merely to reveal hidden resources."
+    },
+    {
+      "id": "invalid_input",
+      "status": 400,
+      "retry": "never",
+      "action": "Correct the request using the OpenAPI constraints and issue a new idempotency key if the claim changes."
+    },
+    {
+      "id": "stale_version",
+      "status": 412,
+      "retry": "never",
+      "action": "Read current state, review the change, then send its new version with a new idempotency key."
+    },
+    {
+      "id": "rate_limited",
+      "status": 429,
+      "retry": "never",
+      "action": "Honor Retry-After when present; the generated client intentionally does not guess or retry 429 automatically."
+    },
+    {
+      "id": "retryable_server_failure",
+      "status": 503,
+      "retry": "contract-safe-only",
+      "action": "Retry only when the operation metadata says safe, preserving correlation and idempotency identity."
+    },
+    {
+      "id": "timeout_or_unknown",
+      "status": "network",
+      "retry": "after-reconciliation",
+      "action": "For a mutation, reconcile by reading/listing before retrying; an unknown outcome is not proof of failure."
+    },
+    {
+      "id": "partial_page",
+      "status": 200,
+      "retry": "never",
+      "action": "Process the received page once and continue only with its exact opaque nextCursor; never synthesize a cursor."
+    },
+    {
+      "id": "duplicate_idempotency",
+      "status": 409,
+      "retry": "never",
+      "action": "Reuse a key only for the same claim; a different claim requires a new key and operator review."
+    }
+  ],
+  "cleanup": [
+    "Revoke the created membership with its current version; deletion is a separate retention-controlled transition.",
+    "Confirm the membership no longer grants access, record only its opaque reference and correlation ID, then revoke the temporary app credential.",
+    "If cleanup fails or the mutation outcome is unknown, label the test record by customerReference and hand it to the test-workspace owner for reconciliation."
+  ],
+  "arabic": {
+    "authorityRules": [
+      "أنشئ بيانات اعتماد خادم للتطبيق مقيّدة بتطبيق الاختبار الواحد؛ لا تحتاج إلى جلسة منصة أوسع.",
+      "حمّلها من مخزن أسرار معتمد إلى AUTHLESS_APP_CREDENTIAL ولا تعرضها في المتصفح أو المصدر أو السجلات أو الصور أو التذاكر أو المحادثات.",
+      "دوّرها قبل انتهاء الصلاحية أو فور الاشتباه في كشفها، وألغها بعد التمرين، واحجب ترويسات الصلاحية وقيم البيئة."
+    ],
+    "equivalence": [
+      "يرسل المساران مسارات العقد والحقول ومعرف الارتباط ومفتاح idempotency والمؤشر وشرط الإصدار المقتبس نفسها.",
+      "يرصد المساران قبول الدعوة الآمن من كشف الحساب، وعضوية ذات إصدار، وnextCursor معتماً، ورمز الخطأ وحالته المتوافقين مع RFC 9457.",
+      "يطبق العميل المولّد وحده إعادة محاولات محدودة للعمليات المصنفة آمنة في OpenAPI؛ وعلى مستخدم HTTP الخام تطبيق التصنيف صراحةً."
+    ],
+    "diagnosticNote": "يمكن للمساندة استخدام معرف الارتباط المعتم للعثور على دليل الخادم. لا تطبع أجسام الاستجابة أو ترويسات الطلب افتراضياً.",
+    "failureActions": {
+      "insufficient_scope": "تحقق من تقييد بيانات الاعتماد بتطبيق الاختبار؛ لا توسّع الصلاحية لكشف الموارد المخفية.",
+      "invalid_input": "صحح الطلب وفق قيود OpenAPI واستخدم مفتاح idempotency جديداً إذا تغير الادعاء.",
+      "stale_version": "اقرأ الحالة الحالية وراجع التغيير ثم أرسل الإصدار الجديد مع مفتاح جديد.",
+      "rate_limited": "التزم بـ Retry-After إن وُجد؛ لا يخمّن العميل المولّد توقيت إعادة 429.",
+      "retryable_server_failure": "أعد المحاولة فقط عندما تصنف بيانات العملية ذلك آمناً، مع حفظ هوية الارتباط وidempotency.",
+      "timeout_or_unknown": "طابق الطفرة بالقراءة أو القائمة قبل تكرارها؛ النتيجة المجهولة ليست دليلاً على الإخفاق.",
+      "partial_page": "عالج الصفحة المستلمة مرة واحدة وتابع فقط بـ nextCursor المعتم نفسه؛ لا تنشئ مؤشراً.",
+      "duplicate_idempotency": "أعد استخدام المفتاح للادعاء نفسه فقط؛ الادعاء المختلف يحتاج مفتاحاً جديداً ومراجعة."
+    },
+    "cleanup": [
+      "ألغِ العضوية المنشأة بإصدارها الحالي؛ الحذف انتقال مستقل تحكمه سياسة الاحتفاظ.",
+      "أكد أن العضوية لم تعد تمنح الوصول وسجل مرجعها المعتم ومعرف الارتباط فقط ثم ألغِ بيانات اعتماد الاختبار.",
+      "إذا فشل التنظيف أو جُهل ناتج الطفرة، علّم السجل بـ customerReference وسلمه إلى مالك مساحة الاختبار للمطابقة."
+    ],
+    "productionChecklist": [
+      "استخدم بيانات اعتماد إنتاج مخصصة من سلطة أسرار معتمدة ولا ترقّ بيانات الاختبار.",
+      "ثبّت نسخة API والعميل المدعومة وشغّل فحص توافق العقد قبل الترقية.",
+      "ولّد معرف ارتباط فريداً لكل طلب منطقي ومفتاح idempotency واحداً لكل ادعاء طفرة مطابق.",
+      "عامل إخفاق If-Match كقرار صلاحية ونية جديد لا كإعادة تلقائية.",
+      "قيّد المهلات والإعادات الآمنة وطابق نواتج الطفرات المجهولة قبل تكرارها.",
+      "احجب ترويسات الصلاحية وبيانات المستأجر واحتفظ بمراجع الارتباط ونبّه عند تكرار حالات الإخفاق.",
+      "أثبت التنظيف وتدوير بيانات الاعتماد وإلغاءها وترقيم الصفحات وحد المعدل والنتائج الجزئية وانقطاع الخدمة في البيئة المعزولة."
+    ]
+  },
+  "productionChecklist": [
+    "Use a dedicated production app credential from an approved secret authority; never promote the test credential.",
+    "Pin the supported API/client version and run contract compatibility checks before upgrading.",
+    "Generate a unique correlation ID per logical request and one idempotency key per exact mutation claim.",
+    "Treat If-Match failures as a fresh authorization and intent decision, not an automatic retry.",
+    "Bound timeouts and safe retries; reconcile unknown mutation outcomes before repeating them.",
+    "Redact authority headers and tenant payloads, retain correlation references, and alert on repeated 401/403/409/412/429/5xx outcomes.",
+    "Prove cleanup, credential rotation/revocation, paging, rate-limit, partial-result, and outage drills in the isolated environment."
+  ],
+  "successSignal": "REST_GUIDE_COMPLETE cleanup_ok"
+}

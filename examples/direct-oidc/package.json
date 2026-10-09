@@ -1,0 +1,17 @@
+{
+  "name": "authless-direct-oidc-example",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "tsc --noEmit",
+    "verify": "bun test ./test/flow.test.ts && bun run ./verify.ts"
+  },
+  "dependencies": {
+    "jose": "6.1.3"
+  },
+  "devDependencies": {
+    "@types/bun": "1.3.14",
+    "@types/node": "24.3.0",
+    "typescript": "5.9.3"
+  }
+}

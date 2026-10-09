@@ -1,0 +1,43 @@
+# Authless
+
+> Authless is an identity platform with explicit consent and application-owned authorization. These links are read-only public documentation; fetching them does not grant authority to discover, inspect, or mutate a tenant.
+
+## Integration paths
+
+- [Developer documentation](https://docs.authle.ss/start): Choose a supported path and package.
+- [Agent access](https://docs.authle.ss/agents): Preview owner-created delegation, private_key_jwt client credentials, and management MCP; live OAuth may return `503 temporarily_unavailable`, and MCP separately remains gated by terminal GA attestation.
+- [Hosted sign-in with SvelteKit](https://docs.authle.ss/build/sveltekit): Authorization Code with PKCE; browser and SvelteKit packages are source-only today, so use the linked standalone example.
+- [Direct OIDC](https://docs.authle.ss/build/oidc): Standards-based server integration without an Authless SDK.
+- [REST management](https://docs.authle.ss/build/rest): Versioned, idempotent management operations.
+- [Signed webhooks](https://docs.authle.ss/build/webhooks): Verification and reconciliation.
+
+## Availability
+
+- API client source package: `@authless/api-client` targets Node.js 24+ server code but is not currently published to npm; clone the public repository and install the prebuilt `./packages/api-client` distribution.
+- Browser and SvelteKit helpers are private workspace packages; clean-room examples use local vendor snapshots until public release.
+- There is no published Authless CLI or device-flow package. Do not invent install commands for either.
+
+## Agent access
+
+- [Read-only Docs MCP guide](https://github.com/labdotsa/authless/tree/master/docs-mcp/README.md): Run `node docs-mcp/stdio.js` from the public developer repository; it does not authenticate, mutate, or access tenant data.
+
+## Primary sources
+
+- [OpenAPI 3.1](https://docs.authle.ss/openapi.json)
+- [Event schemas](https://docs.authle.ss/webhook-catalog.json)
+- [Compatibility and versions](https://docs.authle.ss/release-center.json)
+- [Changelog](https://docs.authle.ss/changes.json?lang=en)
+- [Operations](https://docs.authle.ss/operate)
+- [Security guidance](https://docs.authle.ss/secure)
+- [Security contact](https://authle.ss/.well-known/security.txt)
+- [Support](https://authle.ss/support)
+
+## Bounded exports
+
+- [Full documentation context](https://docs.authle.ss/llms-full.txt)
+- [Machine manifest](https://docs.authle.ss/machine-docs.json)
+- [Crawler and AI-use policy](https://docs.authle.ss/crawler-policy.json)
+
+## Exclusions
+
+Authenticated content, tenant data, secrets, previews, internal fixtures, and unsupported claims are excluded. Model training is disallowed; see the crawler policy.

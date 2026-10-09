@@ -1,0 +1,1 @@
+Keep this directory limited to checked public documentation projections. Preserve both locales, canonical links, freshness metadata, and the public-only authority boundary. Do not add private application source, tenant data, fixtures, secrets, or generated framework output.

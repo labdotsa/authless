@@ -1,0 +1,11 @@
+{
+  "name": "authless-rest-management-guide",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "verify": "bun verify.ts"
+  },
+  "dependencies": {
+    "@authless/api-client": "file:../../packages/api-client"
+  }
+}

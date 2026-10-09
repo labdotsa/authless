@@ -1,0 +1,41 @@
+{
+  "schema": "authless.docs-mcp-runtime/v1",
+  "transport": "stdio",
+  "authentication": "none-public-read-only",
+  "networkAccess": "none",
+  "filesystemAccess": "none-at-runtime",
+  "input": {
+    "maxFrameCharacters": 32768,
+    "maxQueryCharacters": 120,
+    "locales": ["en", "ar"]
+  },
+  "output": {
+    "defaultMaxCharacters": 12000,
+    "absoluteMaxCharacters": 20000,
+    "pageContentMaxCharacters": 8000,
+    "searchPageMaxItems": 10
+  },
+  "execution": {
+    "maxToolDurationMs": 250,
+    "maxCallsPerWindow": 240,
+    "rateWindowMs": 60000,
+    "externalIo": false
+  },
+  "cache": {
+    "kind": "bounded-process-local-lru",
+    "maxEntries": 128,
+    "sourceIsImmutable": true
+  },
+  "telemetry": {
+    "argumentLogging": false,
+    "fields": ["tool", "outcome", "durationMs", "resultCount", "errorCode"]
+  },
+  "freshness": {
+    "maximumAgeDays": 7,
+    "digestAlgorithm": "sha256"
+  },
+  "rollback": {
+    "unit": "versioned server artifact plus embedded corpus digest",
+    "procedure": "Redeploy the previous verified artifact; never fetch or patch corpus content at runtime."
+  }
+}

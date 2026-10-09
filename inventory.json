@@ -1,0 +1,467 @@
+{
+  "schemaVersion": 1,
+  "kind": "authless-public-developer-repo-export",
+  "sourceRevision": "0ab9e340db1e36ea0aaf19987b782b7206fbe163",
+  "publicRepositoryUrl": "https://github.com/labdotsa/authless/tree/master",
+  "licensePolicy": "Preserve existing package metadata: UNLICENSED; no new license granted.",
+  "excluded": [
+    "private application code",
+    "contracts/core/config source",
+    "tenant data",
+    "databases",
+    "secrets",
+    "private application fixtures",
+    "private build output",
+    "node_modules"
+  ],
+  "files": [
+    {
+      "path": "VALIDATION.md",
+      "bytes": 993
+    },
+    {
+      "path": "bun.lock",
+      "bytes": 23279
+    },
+    {
+      "path": "README.md",
+      "bytes": 1353
+    },
+    {
+      "path": "package.json",
+      "bytes": 254
+    },
+    {
+      "path": "AGENTS.md",
+      "bytes": 311
+    },
+    {
+      "path": "packages/api-client/README.md",
+      "bytes": 6579
+    },
+    {
+      "path": "packages/api-client/package.json",
+      "bytes": 1155
+    },
+    {
+      "path": "packages/api-client/dist/audit.d.ts",
+      "bytes": 640
+    },
+    {
+      "path": "packages/api-client/dist/generated.d.ts",
+      "bytes": 49537
+    },
+    {
+      "path": "packages/api-client/dist/bulk-access.d.ts",
+      "bytes": 2311
+    },
+    {
+      "path": "packages/api-client/dist/index.js",
+      "bytes": 30553
+    },
+    {
+      "path": "packages/api-client/dist/memberships.d.ts",
+      "bytes": 3328
+    },
+    {
+      "path": "packages/api-client/dist/workspaces.d.ts",
+      "bytes": 792
+    },
+    {
+      "path": "packages/api-client/dist/transport.d.ts",
+      "bytes": 2482
+    },
+    {
+      "path": "packages/api-client/dist/index.d.ts",
+      "bytes": 3386
+    },
+    {
+      "path": "packages/api-client/dist/apps.d.ts",
+      "bytes": 866
+    },
+    {
+      "path": "examples/rest-management-api/verify.ts",
+      "bytes": 4571
+    },
+    {
+      "path": "examples/rest-management-api/README.md",
+      "bytes": 648
+    },
+    {
+      "path": "examples/rest-management-api/package.json",
+      "bytes": 222
+    },
+    {
+      "path": "examples/direct-oidc/verify.ts",
+      "bytes": 63
+    },
+    {
+      "path": "examples/direct-oidc/bun.lock",
+      "bytes": 1416
+    },
+    {
+      "path": "examples/direct-oidc/README.md",
+      "bytes": 639
+    },
+    {
+      "path": "examples/direct-oidc/package.json",
+      "bytes": 357
+    },
+    {
+      "path": "examples/direct-oidc/tsconfig.json",
+      "bytes": 268
+    },
+    {
+      "path": "examples/direct-oidc/src/oidc.ts",
+      "bytes": 10807
+    },
+    {
+      "path": "examples/direct-oidc/test/flow.test.ts",
+      "bytes": 9944
+    },
+    {
+      "path": "examples/signed-webhook/bun.lock",
+      "bytes": 1190
+    },
+    {
+      "path": "examples/signed-webhook/README.md",
+      "bytes": 803
+    },
+    {
+      "path": "examples/signed-webhook/package.json",
+      "bytes": 259
+    },
+    {
+      "path": "examples/signed-webhook/tsconfig.json",
+      "bytes": 211
+    },
+    {
+      "path": "examples/signed-webhook/src/consumer.ts",
+      "bytes": 5344
+    },
+    {
+      "path": "examples/signed-webhook/test/consumer.test.ts",
+      "bytes": 4399
+    },
+    {
+      "path": "examples/management-agent/bun.lock",
+      "bytes": 1416
+    },
+    {
+      "path": "examples/management-agent/README.md",
+      "bytes": 3195
+    },
+    {
+      "path": "examples/management-agent/package.json",
+      "bytes": 375
+    },
+    {
+      "path": "examples/management-agent/tsconfig.json",
+      "bytes": 366
+    },
+    {
+      "path": "examples/management-agent/src/agent.ts",
+      "bytes": 10836
+    },
+    {
+      "path": "examples/management-agent/test/agent.test.ts",
+      "bytes": 7033
+    },
+    {
+      "path": "examples/sveltekit-hosted-sign-in/svelte.config.js",
+      "bytes": 94
+    },
+    {
+      "path": "examples/sveltekit-hosted-sign-in/verify.ts",
+      "bytes": 3469
+    },
+    {
+      "path": "examples/sveltekit-hosted-sign-in/bun.lock",
+      "bytes": 20308
+    },
+    {
+      "path": "examples/sveltekit-hosted-sign-in/README.md",
+      "bytes": 1010
+    },
+    {
+      "path": "examples/sveltekit-hosted-sign-in/package.json",
+      "bytes": 604
+    },
+    {
+      "path": "examples/sveltekit-hosted-sign-in/tsconfig.json",
+      "bytes": 162
+    },
+    {
+      "path": "examples/sveltekit-hosted-sign-in/vite.config.ts",
+      "bytes": 142
+    },
+    {
+      "path": "examples/sveltekit-hosted-sign-in/src/app.d.ts",
+      "bytes": 611
+    },
+    {
+      "path": "examples/sveltekit-hosted-sign-in/src/app.html",
+      "bytes": 211
+    },
+    {
+      "path": "examples/sveltekit-hosted-sign-in/src/hooks.server.ts",
+      "bytes": 816
+    },
+    {
+      "path": "examples/sveltekit-hosted-sign-in/src/routes/+page.svelte",
+      "bytes": 203
+    },
+    {
+      "path": "examples/sveltekit-hosted-sign-in/src/routes/account/+page.server.ts",
+      "bytes": 426
+    },
+    {
+      "path": "examples/sveltekit-hosted-sign-in/src/routes/account/+page.svelte",
+      "bytes": 278
+    },
+    {
+      "path": "examples/sveltekit-hosted-sign-in/src/routes/sign-in/+server.ts",
+      "bytes": 741
+    },
+    {
+      "path": "examples/sveltekit-hosted-sign-in/src/routes/logout/+server.ts",
+      "bytes": 770
+    },
+    {
+      "path": "examples/sveltekit-hosted-sign-in/src/routes/auth/callback/+server.ts",
+      "bytes": 1911
+    },
+    {
+      "path": "examples/sveltekit-hosted-sign-in/src/lib/server/authless-demo.ts",
+      "bytes": 5415
+    },
+    {
+      "path": "examples/sveltekit-hosted-sign-in/vendor/browser/package.json",
+      "bytes": 138
+    },
+    {
+      "path": "examples/sveltekit-hosted-sign-in/vendor/browser/index.ts",
+      "bytes": 4660
+    },
+    {
+      "path": "examples/sveltekit-hosted-sign-in/vendor/sveltekit/package.json",
+      "bytes": 140
+    },
+    {
+      "path": "examples/sveltekit-hosted-sign-in/vendor/sveltekit/index.ts",
+      "bytes": 12377
+    },
+    {
+      "path": "schemas/authless.openapi.json",
+      "bytes": 327039
+    },
+    {
+      "path": "docs/README.md",
+      "bytes": 504
+    },
+    {
+      "path": "docs/developer-experience-review.md",
+      "bytes": 6899
+    },
+    {
+      "path": "docs/AGENTS.md",
+      "bytes": 275
+    },
+    {
+      "path": "docs/developer-readiness.md",
+      "bytes": 3698
+    },
+    {
+      "path": "docs/machine-readable/llms.txt",
+      "bytes": 2703
+    },
+    {
+      "path": "docs/machine-readable/rest-reference.json",
+      "bytes": 151934
+    },
+    {
+      "path": "docs/machine-readable/developer-documentation.json",
+      "bytes": 15432
+    },
+    {
+      "path": "docs/machine-readable/machine-docs.json",
+      "bytes": 15885
+    },
+    {
+      "path": "docs/machine-readable/llms-full.txt",
+      "bytes": 501133
+    },
+    {
+      "path": "docs/machine-readable/rest-management-guide.json",
+      "bytes": 13670
+    },
+    {
+      "path": "docs/machine-readable/crawler-policy.json",
+      "bytes": 1614
+    },
+    {
+      "path": "docs/machine-readable/llms-full.ar.txt",
+      "bytes": 511185
+    },
+    {
+      "path": "docs/machine-readable/webhook-catalog.json",
+      "bytes": 6172
+    },
+    {
+      "path": "docs/machine-readable/openapi.json",
+      "bytes": 327039
+    },
+    {
+      "path": "docs/markdown/en/trust.md",
+      "bytes": 17463
+    },
+    {
+      "path": "docs/markdown/en/reference.md",
+      "bytes": 16979
+    },
+    {
+      "path": "docs/markdown/en/operate.md",
+      "bytes": 11904
+    },
+    {
+      "path": "docs/markdown/en/understand.md",
+      "bytes": 16915
+    },
+    {
+      "path": "docs/markdown/en/index.md",
+      "bytes": 16934
+    },
+    {
+      "path": "docs/markdown/en/build.md",
+      "bytes": 17010
+    },
+    {
+      "path": "docs/markdown/en/changes.md",
+      "bytes": 136859
+    },
+    {
+      "path": "docs/markdown/en/agents.md",
+      "bytes": 17360
+    },
+    {
+      "path": "docs/markdown/en/start.md",
+      "bytes": 16815
+    },
+    {
+      "path": "docs/markdown/en/test.md",
+      "bytes": 16830
+    },
+    {
+      "path": "docs/markdown/en/secure.md",
+      "bytes": 16951
+    },
+    {
+      "path": "docs/markdown/en/reference/rest.md",
+      "bytes": 153747
+    },
+    {
+      "path": "docs/markdown/ar/trust.md",
+      "bytes": 18160
+    },
+    {
+      "path": "docs/markdown/ar/reference.md",
+      "bytes": 17516
+    },
+    {
+      "path": "docs/markdown/ar/operate.md",
+      "bytes": 12357
+    },
+    {
+      "path": "docs/markdown/ar/understand.md",
+      "bytes": 17347
+    },
+    {
+      "path": "docs/markdown/ar/index.md",
+      "bytes": 17465
+    },
+    {
+      "path": "docs/markdown/ar/build.md",
+      "bytes": 17525
+    },
+    {
+      "path": "docs/markdown/ar/changes.md",
+      "bytes": 137312
+    },
+    {
+      "path": "docs/markdown/ar/agents.md",
+      "bytes": 18031
+    },
+    {
+      "path": "docs/markdown/ar/start.md",
+      "bytes": 17326
+    },
+    {
+      "path": "docs/markdown/ar/test.md",
+      "bytes": 17367
+    },
+    {
+      "path": "docs/markdown/ar/secure.md",
+      "bytes": 17442
+    },
+    {
+      "path": "docs/markdown/ar/reference/rest.md",
+      "bytes": 154408
+    },
+    {
+      "path": "sdk-source/browser/src/side-effects.ts",
+      "bytes": 24130
+    },
+    {
+      "path": "sdk-source/browser/src/failures.ts",
+      "bytes": 3011
+    },
+    {
+      "path": "sdk-source/browser/src/authorization.ts",
+      "bytes": 4917
+    },
+    {
+      "path": "sdk-source/browser/src/index.ts",
+      "bytes": 142
+    },
+    {
+      "path": "sdk-source/sveltekit/conformance/example.ts",
+      "bytes": 1766
+    },
+    {
+      "path": "sdk-source/sveltekit/conformance/index.ts",
+      "bytes": 1275
+    },
+    {
+      "path": "sdk-source/sveltekit/src/session.ts",
+      "bytes": 1821
+    },
+    {
+      "path": "sdk-source/sveltekit/src/webhook.ts",
+      "bytes": 2339
+    },
+    {
+      "path": "sdk-source/sveltekit/src/index.ts",
+      "bytes": 394
+    },
+    {
+      "path": "sdk-source/sveltekit/src/oidc.ts",
+      "bytes": 9158
+    },
+    {
+      "path": "docs-mcp/corpus.generated.json",
+      "bytes": 1451047
+    },
+    {
+      "path": "docs-mcp/docs-mcp.config.json",
+      "bytes": 1101
+    },
+    {
+      "path": "docs-mcp/README.md",
+      "bytes": 504
+    },
+    {
+      "path": "docs-mcp/stdio.js",
+      "bytes": 1391753
+    }
+  ]
+}

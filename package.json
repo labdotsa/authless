@@ -1,0 +1,13 @@
+{
+  "name": "authless-public-developer-repo",
+  "private": true,
+  "type": "module",
+  "packageManager": "bun@1.3.10",
+  "dependencies": {
+    "@authless/api-client": "workspace:*"
+  },
+  "workspaces": [
+    "packages/api-client",
+    "examples/*"
+  ]
+}

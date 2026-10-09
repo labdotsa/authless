@@ -1,0 +1,52 @@
+{
+  "schema": "authless.crawler-policy/v1",
+  "updatedAt": "2026-10-09",
+  "canonical": "https://docs.authle.ss/crawler-policy.json",
+  "purposes": {
+    "searchIndexing": "allow",
+    "aiSearchRetrieval": "allow",
+    "modelTraining": "disallow",
+    "userTriggeredFetching": "allow",
+    "securityScanning": "passive-public-only"
+  },
+  "boundary": "Fetching public documentation does not authorize authentication, tenant discovery, mutation, vulnerability testing, or access to any non-public surface.",
+  "scope": [
+    "https://authle.ss/",
+    "https://docs.authle.ss/"
+  ],
+  "excludedPaths": [
+    "/__fixtures/",
+    "/internal/"
+  ],
+  "excludedMaterial": [
+    "authenticated-content",
+    "tenant-data",
+    "secrets",
+    "preview-material",
+    "internal-fixtures",
+    "private-measurement-evidence"
+  ],
+  "directives": {
+    "search": "robots.txt allows canonical public routes and disallows excluded paths",
+    "retrieval": "named user-triggered retrieval agents may fetch canonical public routes",
+    "training": "named model-training agents are disallowed from all paths",
+    "security": "security.txt defines contact; robots.txt is not authorization to scan"
+  },
+  "agents": {
+    "searchAndUserRetrieval": [
+      "OAI-SearchBot",
+      "ChatGPT-User",
+      "Claude-SearchBot",
+      "Claude-User",
+      "PerplexityBot"
+    ],
+    "modelTrainingDenied": [
+      "GPTBot",
+      "ClaudeBot",
+      "Google-Extended",
+      "CCBot"
+    ],
+    "unknown": "canonical-public-only",
+    "security": "passive-public-only; active testing requires the authority published in security.txt"
+  }
+}

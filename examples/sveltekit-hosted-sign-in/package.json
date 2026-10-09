@@ -1,0 +1,23 @@
+{
+  "name": "authless-sveltekit-hosted-sign-in-example",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "build": "vite build",
+    "verify": "bun run verify.ts"
+  },
+  "dependencies": {
+    "@authless/browser": "file:vendor/browser",
+    "@authless/sveltekit": "file:vendor/sveltekit",
+    "@sveltejs/adapter-auto": "7.0.1",
+    "@sveltejs/kit": "2.70.2",
+    "svelte": "5.56.8",
+    "vite": "8.2.1"
+  },
+  "devDependencies": {
+    "@types/node": "24.3.0",
+    "svelte-check": "4.7.5",
+    "typescript": "5.9.3"
+  }
+}
