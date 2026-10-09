@@ -11,7 +11,7 @@ var corpus_generated_default = {
   generatedAt: "2026-10-09",
   manifest: {
     canonical: "https://docs.authle.ss/machine-docs.json",
-    digest: "f3d3cf4d6c170edb8de1b627ccb6e0d33b483cca2f3ffc338d4ad6ebb39e6304",
+    digest: "3dcd76f073b2ea8d306c5b8d90360bf28d78b617eae7f21a6385756f3e241e8d",
     authority: "read-only-public-documentation",
     exclusions: [
       "authenticated-content",
@@ -166,7 +166,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "en": "Explicit Authorization Code with PKCE and an application-owned session.",
         "ar": "رمز تفويض صريح مع PKCE وجلسة يملكها التطبيق."
       },
-      "install": "bun add @authless/browser @authless/sveltekit",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { createAuthorizationRequest } from \\"@authless/browser\\";",
       "successSignal": "SIGNED_IN protected_data_ok logout_ok revoked_access_denied",
       "negativeChecks": [
@@ -188,7 +188,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "en": "Create a PKCE request only after an explicit visitor action.",
         "ar": "أنشئ طلب PKCE فقط بعد إجراء صريح من الزائر."
       },
-      "install": "bun add @authless/browser",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { createAuthorizationRequest } from \\"@authless/browser\\";",
       "successSignal": "authorization URL created; no identity or session on import",
       "negativeChecks": [
@@ -209,7 +209,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "en": "Validate the callback and project an application-owned server session.",
         "ar": "تحقق من الاستدعاء واعرض جلسة خادم يملكها التطبيق."
       },
-      "install": "bun add @authless/sveltekit",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { exchangeAuthorizationCode, createSessionHandle } from \\"@authless/sveltekit\\";",
       "successSignal": "validated tokens; protected server request succeeds",
       "negativeChecks": [
@@ -275,7 +275,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "en": "Verify exact bytes, timestamp, rotating signatures, and an atomic replay claim before dispatch.",
         "ar": "تحقق من البايتات الدقيقة والطابع الزمني والتوقيع المتناوب ومنع الإعادة الذري قبل المعالجة."
       },
-      "install": "cp -R examples/signed-webhook my-webhook-consumer && cd my-webhook-consumer && bun install --frozen-lockfile",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/signed-webhook && bun install --frozen-lockfile",
       "firstAction": "import { verifyAndConsume } from \\"./src/consumer\\";",
       "successSignal": "signature_valid event_claimed_once handler_idempotent",
       "negativeChecks": [
@@ -463,7 +463,7 @@ Source attribution: Developer documentation (https://docs.authle.ss/).
       title: "Documentation",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "6460f94053bd1fad7de3d396621c38ca0ca5fbcb1d1f0b460ac53fccca63c2dd"
+      contentDigest: "4343756a920dae1c381976865dc825969df7d12de64c9103a35310d989a791c1"
     },
     {
       canonical: "https://docs.authle.ss/?lang=ar",
@@ -556,7 +556,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "en": "Explicit Authorization Code with PKCE and an application-owned session.",
         "ar": "رمز تفويض صريح مع PKCE وجلسة يملكها التطبيق."
       },
-      "install": "bun add @authless/browser @authless/sveltekit",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { createAuthorizationRequest } from \\"@authless/browser\\";",
       "successSignal": "SIGNED_IN protected_data_ok logout_ok revoked_access_denied",
       "negativeChecks": [
@@ -578,7 +578,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "en": "Create a PKCE request only after an explicit visitor action.",
         "ar": "أنشئ طلب PKCE فقط بعد إجراء صريح من الزائر."
       },
-      "install": "bun add @authless/browser",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { createAuthorizationRequest } from \\"@authless/browser\\";",
       "successSignal": "authorization URL created; no identity or session on import",
       "negativeChecks": [
@@ -599,7 +599,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "en": "Validate the callback and project an application-owned server session.",
         "ar": "تحقق من الاستدعاء واعرض جلسة خادم يملكها التطبيق."
       },
-      "install": "bun add @authless/sveltekit",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { exchangeAuthorizationCode, createSessionHandle } from \\"@authless/sveltekit\\";",
       "successSignal": "validated tokens; protected server request succeeds",
       "negativeChecks": [
@@ -665,7 +665,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "en": "Verify exact bytes, timestamp, rotating signatures, and an atomic replay claim before dispatch.",
         "ar": "تحقق من البايتات الدقيقة والطابع الزمني والتوقيع المتناوب ومنع الإعادة الذري قبل المعالجة."
       },
-      "install": "cp -R examples/signed-webhook my-webhook-consumer && cd my-webhook-consumer && bun install --frozen-lockfile",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/signed-webhook && bun install --frozen-lockfile",
       "firstAction": "import { verifyAndConsume } from \\"./src/consumer\\";",
       "successSignal": "signature_valid event_claimed_once handler_idempotent",
       "negativeChecks": [
@@ -853,7 +853,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       title: "وثائق Authless",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "67c2bd0e639be27c07b179010f4922cf03abd5727041817aa2248100a462eb9a"
+      contentDigest: "f1e178e9cef6fa952b5a03405e4de83af902109b6de86575c4a50215bc906c82"
     },
     {
       canonical: "https://docs.authle.ss/start",
@@ -942,7 +942,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "en": "Explicit Authorization Code with PKCE and an application-owned session.",
         "ar": "رمز تفويض صريح مع PKCE وجلسة يملكها التطبيق."
       },
-      "install": "bun add @authless/browser @authless/sveltekit",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { createAuthorizationRequest } from \\"@authless/browser\\";",
       "successSignal": "SIGNED_IN protected_data_ok logout_ok revoked_access_denied",
       "negativeChecks": [
@@ -964,7 +964,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "en": "Create a PKCE request only after an explicit visitor action.",
         "ar": "أنشئ طلب PKCE فقط بعد إجراء صريح من الزائر."
       },
-      "install": "bun add @authless/browser",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { createAuthorizationRequest } from \\"@authless/browser\\";",
       "successSignal": "authorization URL created; no identity or session on import",
       "negativeChecks": [
@@ -985,7 +985,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "en": "Validate the callback and project an application-owned server session.",
         "ar": "تحقق من الاستدعاء واعرض جلسة خادم يملكها التطبيق."
       },
-      "install": "bun add @authless/sveltekit",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { exchangeAuthorizationCode, createSessionHandle } from \\"@authless/sveltekit\\";",
       "successSignal": "validated tokens; protected server request succeeds",
       "negativeChecks": [
@@ -1051,7 +1051,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "en": "Verify exact bytes, timestamp, rotating signatures, and an atomic replay claim before dispatch.",
         "ar": "تحقق من البايتات الدقيقة والطابع الزمني والتوقيع المتناوب ومنع الإعادة الذري قبل المعالجة."
       },
-      "install": "cp -R examples/signed-webhook my-webhook-consumer && cd my-webhook-consumer && bun install --frozen-lockfile",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/signed-webhook && bun install --frozen-lockfile",
       "firstAction": "import { verifyAndConsume } from \\"./src/consumer\\";",
       "successSignal": "signature_valid event_claimed_once handler_idempotent",
       "negativeChecks": [
@@ -1239,7 +1239,7 @@ Source attribution: Developer documentation (https://docs.authle.ss/start).
       title: "Start building",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "fd310d998cc244c99e3c66df22e1e1cb77184e87a4152ea77d24c3d45ff5ddf9"
+      contentDigest: "f4b48a31e59f5fd50ab72989f862f2dae15a8fdbe0ff4a377b1983f06aac59e0"
     },
     {
       canonical: "https://docs.authle.ss/start?lang=ar",
@@ -1328,7 +1328,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "en": "Explicit Authorization Code with PKCE and an application-owned session.",
         "ar": "رمز تفويض صريح مع PKCE وجلسة يملكها التطبيق."
       },
-      "install": "bun add @authless/browser @authless/sveltekit",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { createAuthorizationRequest } from \\"@authless/browser\\";",
       "successSignal": "SIGNED_IN protected_data_ok logout_ok revoked_access_denied",
       "negativeChecks": [
@@ -1350,7 +1350,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "en": "Create a PKCE request only after an explicit visitor action.",
         "ar": "أنشئ طلب PKCE فقط بعد إجراء صريح من الزائر."
       },
-      "install": "bun add @authless/browser",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { createAuthorizationRequest } from \\"@authless/browser\\";",
       "successSignal": "authorization URL created; no identity or session on import",
       "negativeChecks": [
@@ -1371,7 +1371,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "en": "Validate the callback and project an application-owned server session.",
         "ar": "تحقق من الاستدعاء واعرض جلسة خادم يملكها التطبيق."
       },
-      "install": "bun add @authless/sveltekit",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { exchangeAuthorizationCode, createSessionHandle } from \\"@authless/sveltekit\\";",
       "successSignal": "validated tokens; protected server request succeeds",
       "negativeChecks": [
@@ -1437,7 +1437,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "en": "Verify exact bytes, timestamp, rotating signatures, and an atomic replay claim before dispatch.",
         "ar": "تحقق من البايتات الدقيقة والطابع الزمني والتوقيع المتناوب ومنع الإعادة الذري قبل المعالجة."
       },
-      "install": "cp -R examples/signed-webhook my-webhook-consumer && cd my-webhook-consumer && bun install --frozen-lockfile",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/signed-webhook && bun install --frozen-lockfile",
       "firstAction": "import { verifyAndConsume } from \\"./src/consumer\\";",
       "successSignal": "signature_valid event_claimed_once handler_idempotent",
       "negativeChecks": [
@@ -1625,7 +1625,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       title: "ابدأ البناء",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "c721dbcd5f61f4bed6d80f18306cccea129e4c192d8f2c38a296566c2cfe47d2"
+      contentDigest: "6363d09f0e334168458734ea062e1e517ebe2751e7bc3456ac9588cf11a80354"
     },
     {
       canonical: "https://docs.authle.ss/understand",
@@ -1714,7 +1714,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "en": "Explicit Authorization Code with PKCE and an application-owned session.",
         "ar": "رمز تفويض صريح مع PKCE وجلسة يملكها التطبيق."
       },
-      "install": "bun add @authless/browser @authless/sveltekit",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { createAuthorizationRequest } from \\"@authless/browser\\";",
       "successSignal": "SIGNED_IN protected_data_ok logout_ok revoked_access_denied",
       "negativeChecks": [
@@ -1736,7 +1736,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "en": "Create a PKCE request only after an explicit visitor action.",
         "ar": "أنشئ طلب PKCE فقط بعد إجراء صريح من الزائر."
       },
-      "install": "bun add @authless/browser",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { createAuthorizationRequest } from \\"@authless/browser\\";",
       "successSignal": "authorization URL created; no identity or session on import",
       "negativeChecks": [
@@ -1757,7 +1757,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "en": "Validate the callback and project an application-owned server session.",
         "ar": "تحقق من الاستدعاء واعرض جلسة خادم يملكها التطبيق."
       },
-      "install": "bun add @authless/sveltekit",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { exchangeAuthorizationCode, createSessionHandle } from \\"@authless/sveltekit\\";",
       "successSignal": "validated tokens; protected server request succeeds",
       "negativeChecks": [
@@ -1823,7 +1823,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "en": "Verify exact bytes, timestamp, rotating signatures, and an atomic replay claim before dispatch.",
         "ar": "تحقق من البايتات الدقيقة والطابع الزمني والتوقيع المتناوب ومنع الإعادة الذري قبل المعالجة."
       },
-      "install": "cp -R examples/signed-webhook my-webhook-consumer && cd my-webhook-consumer && bun install --frozen-lockfile",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/signed-webhook && bun install --frozen-lockfile",
       "firstAction": "import { verifyAndConsume } from \\"./src/consumer\\";",
       "successSignal": "signature_valid event_claimed_once handler_idempotent",
       "negativeChecks": [
@@ -2011,7 +2011,7 @@ Source attribution: Developer documentation (https://docs.authle.ss/understand).
       title: "Understand Authless",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "be1c275f49fafcb2f0040eb1b373cc1d66580db30af508aa08de02c864309e88"
+      contentDigest: "1ffcc80eb72361f54271305842a098b92f713b81ef1dbe6ca6e99cedca51809d"
     },
     {
       canonical: "https://docs.authle.ss/understand?lang=ar",
@@ -2100,7 +2100,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "en": "Explicit Authorization Code with PKCE and an application-owned session.",
         "ar": "رمز تفويض صريح مع PKCE وجلسة يملكها التطبيق."
       },
-      "install": "bun add @authless/browser @authless/sveltekit",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { createAuthorizationRequest } from \\"@authless/browser\\";",
       "successSignal": "SIGNED_IN protected_data_ok logout_ok revoked_access_denied",
       "negativeChecks": [
@@ -2122,7 +2122,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "en": "Create a PKCE request only after an explicit visitor action.",
         "ar": "أنشئ طلب PKCE فقط بعد إجراء صريح من الزائر."
       },
-      "install": "bun add @authless/browser",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { createAuthorizationRequest } from \\"@authless/browser\\";",
       "successSignal": "authorization URL created; no identity or session on import",
       "negativeChecks": [
@@ -2143,7 +2143,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "en": "Validate the callback and project an application-owned server session.",
         "ar": "تحقق من الاستدعاء واعرض جلسة خادم يملكها التطبيق."
       },
-      "install": "bun add @authless/sveltekit",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { exchangeAuthorizationCode, createSessionHandle } from \\"@authless/sveltekit\\";",
       "successSignal": "validated tokens; protected server request succeeds",
       "negativeChecks": [
@@ -2209,7 +2209,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "en": "Verify exact bytes, timestamp, rotating signatures, and an atomic replay claim before dispatch.",
         "ar": "تحقق من البايتات الدقيقة والطابع الزمني والتوقيع المتناوب ومنع الإعادة الذري قبل المعالجة."
       },
-      "install": "cp -R examples/signed-webhook my-webhook-consumer && cd my-webhook-consumer && bun install --frozen-lockfile",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/signed-webhook && bun install --frozen-lockfile",
       "firstAction": "import { verifyAndConsume } from \\"./src/consumer\\";",
       "successSignal": "signature_valid event_claimed_once handler_idempotent",
       "negativeChecks": [
@@ -2397,7 +2397,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       title: "افهم Authless",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "d20447ccb6c5508a61995d6334cbdb72eea136c2f3175221733dac188e3aa177"
+      contentDigest: "9d32f48a15a773e2eaf3ff7b316605bac88d279fc022c5aca677c3866f2e7dc0"
     },
     {
       canonical: "https://docs.authle.ss/build",
@@ -2490,7 +2490,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "en": "Explicit Authorization Code with PKCE and an application-owned session.",
         "ar": "رمز تفويض صريح مع PKCE وجلسة يملكها التطبيق."
       },
-      "install": "bun add @authless/browser @authless/sveltekit",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { createAuthorizationRequest } from \\"@authless/browser\\";",
       "successSignal": "SIGNED_IN protected_data_ok logout_ok revoked_access_denied",
       "negativeChecks": [
@@ -2512,7 +2512,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "en": "Create a PKCE request only after an explicit visitor action.",
         "ar": "أنشئ طلب PKCE فقط بعد إجراء صريح من الزائر."
       },
-      "install": "bun add @authless/browser",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { createAuthorizationRequest } from \\"@authless/browser\\";",
       "successSignal": "authorization URL created; no identity or session on import",
       "negativeChecks": [
@@ -2533,7 +2533,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "en": "Validate the callback and project an application-owned server session.",
         "ar": "تحقق من الاستدعاء واعرض جلسة خادم يملكها التطبيق."
       },
-      "install": "bun add @authless/sveltekit",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { exchangeAuthorizationCode, createSessionHandle } from \\"@authless/sveltekit\\";",
       "successSignal": "validated tokens; protected server request succeeds",
       "negativeChecks": [
@@ -2599,7 +2599,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "en": "Verify exact bytes, timestamp, rotating signatures, and an atomic replay claim before dispatch.",
         "ar": "تحقق من البايتات الدقيقة والطابع الزمني والتوقيع المتناوب ومنع الإعادة الذري قبل المعالجة."
       },
-      "install": "cp -R examples/signed-webhook my-webhook-consumer && cd my-webhook-consumer && bun install --frozen-lockfile",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/signed-webhook && bun install --frozen-lockfile",
       "firstAction": "import { verifyAndConsume } from \\"./src/consumer\\";",
       "successSignal": "signature_valid event_claimed_once handler_idempotent",
       "negativeChecks": [
@@ -2787,7 +2787,7 @@ Source attribution: Developer documentation (https://docs.authle.ss/build).
       title: "Build an integration",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "215ed5e31526e1e21549a384500c014ea435d95a5dceafe1ab6edd15280fd55b"
+      contentDigest: "ad25594d9aad02651d818cb2d843c88b86cbfbf528632121ecf0daaf063d76f5"
     },
     {
       canonical: "https://docs.authle.ss/build?lang=ar",
@@ -2880,7 +2880,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "en": "Explicit Authorization Code with PKCE and an application-owned session.",
         "ar": "رمز تفويض صريح مع PKCE وجلسة يملكها التطبيق."
       },
-      "install": "bun add @authless/browser @authless/sveltekit",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { createAuthorizationRequest } from \\"@authless/browser\\";",
       "successSignal": "SIGNED_IN protected_data_ok logout_ok revoked_access_denied",
       "negativeChecks": [
@@ -2902,7 +2902,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "en": "Create a PKCE request only after an explicit visitor action.",
         "ar": "أنشئ طلب PKCE فقط بعد إجراء صريح من الزائر."
       },
-      "install": "bun add @authless/browser",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { createAuthorizationRequest } from \\"@authless/browser\\";",
       "successSignal": "authorization URL created; no identity or session on import",
       "negativeChecks": [
@@ -2923,7 +2923,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "en": "Validate the callback and project an application-owned server session.",
         "ar": "تحقق من الاستدعاء واعرض جلسة خادم يملكها التطبيق."
       },
-      "install": "bun add @authless/sveltekit",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { exchangeAuthorizationCode, createSessionHandle } from \\"@authless/sveltekit\\";",
       "successSignal": "validated tokens; protected server request succeeds",
       "negativeChecks": [
@@ -2989,7 +2989,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "en": "Verify exact bytes, timestamp, rotating signatures, and an atomic replay claim before dispatch.",
         "ar": "تحقق من البايتات الدقيقة والطابع الزمني والتوقيع المتناوب ومنع الإعادة الذري قبل المعالجة."
       },
-      "install": "cp -R examples/signed-webhook my-webhook-consumer && cd my-webhook-consumer && bun install --frozen-lockfile",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/signed-webhook && bun install --frozen-lockfile",
       "firstAction": "import { verifyAndConsume } from \\"./src/consumer\\";",
       "successSignal": "signature_valid event_claimed_once handler_idempotent",
       "negativeChecks": [
@@ -3177,7 +3177,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       title: "ابنِ تكاملاً",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "1dd78d5aa4ee150ec3fba552be844a6e07e57f6df0a4c22dfc78403dacfc0b53"
+      contentDigest: "c46808a3e8da3fa1a4daa4717f3a2e40b997399ff2fc2991889cffe87c1721a3"
     },
     {
       canonical: "https://docs.authle.ss/build/sveltekit",
@@ -5136,7 +5136,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "en": "Explicit Authorization Code with PKCE and an application-owned session.",
         "ar": "رمز تفويض صريح مع PKCE وجلسة يملكها التطبيق."
       },
-      "install": "bun add @authless/browser @authless/sveltekit",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { createAuthorizationRequest } from \\"@authless/browser\\";",
       "successSignal": "SIGNED_IN protected_data_ok logout_ok revoked_access_denied",
       "negativeChecks": [
@@ -5158,7 +5158,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "en": "Create a PKCE request only after an explicit visitor action.",
         "ar": "أنشئ طلب PKCE فقط بعد إجراء صريح من الزائر."
       },
-      "install": "bun add @authless/browser",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { createAuthorizationRequest } from \\"@authless/browser\\";",
       "successSignal": "authorization URL created; no identity or session on import",
       "negativeChecks": [
@@ -5179,7 +5179,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "en": "Validate the callback and project an application-owned server session.",
         "ar": "تحقق من الاستدعاء واعرض جلسة خادم يملكها التطبيق."
       },
-      "install": "bun add @authless/sveltekit",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { exchangeAuthorizationCode, createSessionHandle } from \\"@authless/sveltekit\\";",
       "successSignal": "validated tokens; protected server request succeeds",
       "negativeChecks": [
@@ -5245,7 +5245,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "en": "Verify exact bytes, timestamp, rotating signatures, and an atomic replay claim before dispatch.",
         "ar": "تحقق من البايتات الدقيقة والطابع الزمني والتوقيع المتناوب ومنع الإعادة الذري قبل المعالجة."
       },
-      "install": "cp -R examples/signed-webhook my-webhook-consumer && cd my-webhook-consumer && bun install --frozen-lockfile",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/signed-webhook && bun install --frozen-lockfile",
       "firstAction": "import { verifyAndConsume } from \\"./src/consumer\\";",
       "successSignal": "signature_valid event_claimed_once handler_idempotent",
       "negativeChecks": [
@@ -5433,7 +5433,7 @@ Source attribution: Developer documentation (https://docs.authle.ss/test).
       title: "Test safely",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "2a624387525ff6a8d90742e342e41c34d6c2b688da0dc74540c9d7892b2298dd"
+      contentDigest: "ebc22499c41c2293750672fa2715f0f0d2ee1c253935ecb275df96b011813018"
     },
     {
       canonical: "https://docs.authle.ss/test?lang=ar",
@@ -5522,7 +5522,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "en": "Explicit Authorization Code with PKCE and an application-owned session.",
         "ar": "رمز تفويض صريح مع PKCE وجلسة يملكها التطبيق."
       },
-      "install": "bun add @authless/browser @authless/sveltekit",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { createAuthorizationRequest } from \\"@authless/browser\\";",
       "successSignal": "SIGNED_IN protected_data_ok logout_ok revoked_access_denied",
       "negativeChecks": [
@@ -5544,7 +5544,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "en": "Create a PKCE request only after an explicit visitor action.",
         "ar": "أنشئ طلب PKCE فقط بعد إجراء صريح من الزائر."
       },
-      "install": "bun add @authless/browser",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { createAuthorizationRequest } from \\"@authless/browser\\";",
       "successSignal": "authorization URL created; no identity or session on import",
       "negativeChecks": [
@@ -5565,7 +5565,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "en": "Validate the callback and project an application-owned server session.",
         "ar": "تحقق من الاستدعاء واعرض جلسة خادم يملكها التطبيق."
       },
-      "install": "bun add @authless/sveltekit",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { exchangeAuthorizationCode, createSessionHandle } from \\"@authless/sveltekit\\";",
       "successSignal": "validated tokens; protected server request succeeds",
       "negativeChecks": [
@@ -5631,7 +5631,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "en": "Verify exact bytes, timestamp, rotating signatures, and an atomic replay claim before dispatch.",
         "ar": "تحقق من البايتات الدقيقة والطابع الزمني والتوقيع المتناوب ومنع الإعادة الذري قبل المعالجة."
       },
-      "install": "cp -R examples/signed-webhook my-webhook-consumer && cd my-webhook-consumer && bun install --frozen-lockfile",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/signed-webhook && bun install --frozen-lockfile",
       "firstAction": "import { verifyAndConsume } from \\"./src/consumer\\";",
       "successSignal": "signature_valid event_claimed_once handler_idempotent",
       "negativeChecks": [
@@ -5819,7 +5819,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       title: "اختبر بأمان",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "eb3540ad07486a30473f572f5712fa932e5575a2ae8c53df77923c2ed44a9fa4"
+      contentDigest: "1be02b97e18bb218971d14c7d527aabd4307fbfc51c09b3fc59c6ceca5a95068"
     },
     {
       canonical: "https://docs.authle.ss/secure",
@@ -5912,7 +5912,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "en": "Explicit Authorization Code with PKCE and an application-owned session.",
         "ar": "رمز تفويض صريح مع PKCE وجلسة يملكها التطبيق."
       },
-      "install": "bun add @authless/browser @authless/sveltekit",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { createAuthorizationRequest } from \\"@authless/browser\\";",
       "successSignal": "SIGNED_IN protected_data_ok logout_ok revoked_access_denied",
       "negativeChecks": [
@@ -5934,7 +5934,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "en": "Create a PKCE request only after an explicit visitor action.",
         "ar": "أنشئ طلب PKCE فقط بعد إجراء صريح من الزائر."
       },
-      "install": "bun add @authless/browser",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { createAuthorizationRequest } from \\"@authless/browser\\";",
       "successSignal": "authorization URL created; no identity or session on import",
       "negativeChecks": [
@@ -5955,7 +5955,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "en": "Validate the callback and project an application-owned server session.",
         "ar": "تحقق من الاستدعاء واعرض جلسة خادم يملكها التطبيق."
       },
-      "install": "bun add @authless/sveltekit",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { exchangeAuthorizationCode, createSessionHandle } from \\"@authless/sveltekit\\";",
       "successSignal": "validated tokens; protected server request succeeds",
       "negativeChecks": [
@@ -6021,7 +6021,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "en": "Verify exact bytes, timestamp, rotating signatures, and an atomic replay claim before dispatch.",
         "ar": "تحقق من البايتات الدقيقة والطابع الزمني والتوقيع المتناوب ومنع الإعادة الذري قبل المعالجة."
       },
-      "install": "cp -R examples/signed-webhook my-webhook-consumer && cd my-webhook-consumer && bun install --frozen-lockfile",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/signed-webhook && bun install --frozen-lockfile",
       "firstAction": "import { verifyAndConsume } from \\"./src/consumer\\";",
       "successSignal": "signature_valid event_claimed_once handler_idempotent",
       "negativeChecks": [
@@ -6209,7 +6209,7 @@ Source attribution: Developer documentation (https://docs.authle.ss/secure).
       title: "Secure the integration",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "07bd410dcdde75594024f4afc2c7bcf02fa824198bd8198a6656b16b2231a9e3"
+      contentDigest: "4832f1851bfd3fde54e43769e188df1c8c6a8b2c1d049fdccb65fd3857261ab6"
     },
     {
       canonical: "https://docs.authle.ss/secure?lang=ar",
@@ -6302,7 +6302,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "en": "Explicit Authorization Code with PKCE and an application-owned session.",
         "ar": "رمز تفويض صريح مع PKCE وجلسة يملكها التطبيق."
       },
-      "install": "bun add @authless/browser @authless/sveltekit",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { createAuthorizationRequest } from \\"@authless/browser\\";",
       "successSignal": "SIGNED_IN protected_data_ok logout_ok revoked_access_denied",
       "negativeChecks": [
@@ -6324,7 +6324,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "en": "Create a PKCE request only after an explicit visitor action.",
         "ar": "أنشئ طلب PKCE فقط بعد إجراء صريح من الزائر."
       },
-      "install": "bun add @authless/browser",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { createAuthorizationRequest } from \\"@authless/browser\\";",
       "successSignal": "authorization URL created; no identity or session on import",
       "negativeChecks": [
@@ -6345,7 +6345,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "en": "Validate the callback and project an application-owned server session.",
         "ar": "تحقق من الاستدعاء واعرض جلسة خادم يملكها التطبيق."
       },
-      "install": "bun add @authless/sveltekit",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { exchangeAuthorizationCode, createSessionHandle } from \\"@authless/sveltekit\\";",
       "successSignal": "validated tokens; protected server request succeeds",
       "negativeChecks": [
@@ -6411,7 +6411,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "en": "Verify exact bytes, timestamp, rotating signatures, and an atomic replay claim before dispatch.",
         "ar": "تحقق من البايتات الدقيقة والطابع الزمني والتوقيع المتناوب ومنع الإعادة الذري قبل المعالجة."
       },
-      "install": "cp -R examples/signed-webhook my-webhook-consumer && cd my-webhook-consumer && bun install --frozen-lockfile",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/signed-webhook && bun install --frozen-lockfile",
       "firstAction": "import { verifyAndConsume } from \\"./src/consumer\\";",
       "successSignal": "signature_valid event_claimed_once handler_idempotent",
       "negativeChecks": [
@@ -6599,7 +6599,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       title: "أمّن التكامل",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "a43fe73939e577403f2e41f3be395d71418fc57005f3ab5f4406c595b5966a45"
+      contentDigest: "158a246539d7ccd424998ce748805f1a894544813031cbbcd85d32c9fae5948f"
     },
     {
       canonical: "https://docs.authle.ss/operate",
@@ -7476,7 +7476,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "en": "Explicit Authorization Code with PKCE and an application-owned session.",
         "ar": "رمز تفويض صريح مع PKCE وجلسة يملكها التطبيق."
       },
-      "install": "bun add @authless/browser @authless/sveltekit",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { createAuthorizationRequest } from \\"@authless/browser\\";",
       "successSignal": "SIGNED_IN protected_data_ok logout_ok revoked_access_denied",
       "negativeChecks": [
@@ -7498,7 +7498,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "en": "Create a PKCE request only after an explicit visitor action.",
         "ar": "أنشئ طلب PKCE فقط بعد إجراء صريح من الزائر."
       },
-      "install": "bun add @authless/browser",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { createAuthorizationRequest } from \\"@authless/browser\\";",
       "successSignal": "authorization URL created; no identity or session on import",
       "negativeChecks": [
@@ -7519,7 +7519,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "en": "Validate the callback and project an application-owned server session.",
         "ar": "تحقق من الاستدعاء واعرض جلسة خادم يملكها التطبيق."
       },
-      "install": "bun add @authless/sveltekit",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { exchangeAuthorizationCode, createSessionHandle } from \\"@authless/sveltekit\\";",
       "successSignal": "validated tokens; protected server request succeeds",
       "negativeChecks": [
@@ -7585,7 +7585,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "en": "Verify exact bytes, timestamp, rotating signatures, and an atomic replay claim before dispatch.",
         "ar": "تحقق من البايتات الدقيقة والطابع الزمني والتوقيع المتناوب ومنع الإعادة الذري قبل المعالجة."
       },
-      "install": "cp -R examples/signed-webhook my-webhook-consumer && cd my-webhook-consumer && bun install --frozen-lockfile",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/signed-webhook && bun install --frozen-lockfile",
       "firstAction": "import { verifyAndConsume } from \\"./src/consumer\\";",
       "successSignal": "signature_valid event_claimed_once handler_idempotent",
       "negativeChecks": [
@@ -7773,7 +7773,7 @@ Source attribution: Developer documentation (https://docs.authle.ss/trust).
       title: "Security, privacy, and trust evidence",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "ff53480dc09e70a58bdc643a8add91434bbb44318bed7f771a72c4b14101c4b6"
+      contentDigest: "990b8b48e0e9ee5f625c0cb7eed54f378e170ad30d0af593894f760e5f45dafc"
     },
     {
       canonical: "https://docs.authle.ss/trust?lang=ar",
@@ -7874,7 +7874,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "en": "Explicit Authorization Code with PKCE and an application-owned session.",
         "ar": "رمز تفويض صريح مع PKCE وجلسة يملكها التطبيق."
       },
-      "install": "bun add @authless/browser @authless/sveltekit",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { createAuthorizationRequest } from \\"@authless/browser\\";",
       "successSignal": "SIGNED_IN protected_data_ok logout_ok revoked_access_denied",
       "negativeChecks": [
@@ -7896,7 +7896,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "en": "Create a PKCE request only after an explicit visitor action.",
         "ar": "أنشئ طلب PKCE فقط بعد إجراء صريح من الزائر."
       },
-      "install": "bun add @authless/browser",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { createAuthorizationRequest } from \\"@authless/browser\\";",
       "successSignal": "authorization URL created; no identity or session on import",
       "negativeChecks": [
@@ -7917,7 +7917,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "en": "Validate the callback and project an application-owned server session.",
         "ar": "تحقق من الاستدعاء واعرض جلسة خادم يملكها التطبيق."
       },
-      "install": "bun add @authless/sveltekit",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { exchangeAuthorizationCode, createSessionHandle } from \\"@authless/sveltekit\\";",
       "successSignal": "validated tokens; protected server request succeeds",
       "negativeChecks": [
@@ -7983,7 +7983,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "en": "Verify exact bytes, timestamp, rotating signatures, and an atomic replay claim before dispatch.",
         "ar": "تحقق من البايتات الدقيقة والطابع الزمني والتوقيع المتناوب ومنع الإعادة الذري قبل المعالجة."
       },
-      "install": "cp -R examples/signed-webhook my-webhook-consumer && cd my-webhook-consumer && bun install --frozen-lockfile",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/signed-webhook && bun install --frozen-lockfile",
       "firstAction": "import { verifyAndConsume } from \\"./src/consumer\\";",
       "successSignal": "signature_valid event_claimed_once handler_idempotent",
       "negativeChecks": [
@@ -8171,7 +8171,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       title: "أدلة الأمان والخصوصية والثقة",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "1e73b466ceb4917dedfe2b762a485a891ee56ee7c87517163df853bf801c8a3b"
+      contentDigest: "7425e579a9806d49930bad29ffe4440560a646e37fc4e305e2e90341aea54d8c"
     },
     {
       canonical: "https://docs.authle.ss/reference",
@@ -8268,7 +8268,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "en": "Explicit Authorization Code with PKCE and an application-owned session.",
         "ar": "رمز تفويض صريح مع PKCE وجلسة يملكها التطبيق."
       },
-      "install": "bun add @authless/browser @authless/sveltekit",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { createAuthorizationRequest } from \\"@authless/browser\\";",
       "successSignal": "SIGNED_IN protected_data_ok logout_ok revoked_access_denied",
       "negativeChecks": [
@@ -8290,7 +8290,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "en": "Create a PKCE request only after an explicit visitor action.",
         "ar": "أنشئ طلب PKCE فقط بعد إجراء صريح من الزائر."
       },
-      "install": "bun add @authless/browser",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { createAuthorizationRequest } from \\"@authless/browser\\";",
       "successSignal": "authorization URL created; no identity or session on import",
       "negativeChecks": [
@@ -8311,7 +8311,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "en": "Validate the callback and project an application-owned server session.",
         "ar": "تحقق من الاستدعاء واعرض جلسة خادم يملكها التطبيق."
       },
-      "install": "bun add @authless/sveltekit",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { exchangeAuthorizationCode, createSessionHandle } from \\"@authless/sveltekit\\";",
       "successSignal": "validated tokens; protected server request succeeds",
       "negativeChecks": [
@@ -8377,7 +8377,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "en": "Verify exact bytes, timestamp, rotating signatures, and an atomic replay claim before dispatch.",
         "ar": "تحقق من البايتات الدقيقة والطابع الزمني والتوقيع المتناوب ومنع الإعادة الذري قبل المعالجة."
       },
-      "install": "cp -R examples/signed-webhook my-webhook-consumer && cd my-webhook-consumer && bun install --frozen-lockfile",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/signed-webhook && bun install --frozen-lockfile",
       "firstAction": "import { verifyAndConsume } from \\"./src/consumer\\";",
       "successSignal": "signature_valid event_claimed_once handler_idempotent",
       "negativeChecks": [
@@ -8565,7 +8565,7 @@ Source attribution: Developer documentation (https://docs.authle.ss/reference).
       title: "Technical reference",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "8f037b0e2ead9d4c0a2a40ac125468992d13038db8e243cc730b5fbf145f8e72"
+      contentDigest: "85a3e4f8c7ccbb79a61938b7f824a9a6b03d0c1e1ae4db0a86f78ecf2e9ed10f"
     },
     {
       canonical: "https://docs.authle.ss/reference?lang=ar",
@@ -8662,7 +8662,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "en": "Explicit Authorization Code with PKCE and an application-owned session.",
         "ar": "رمز تفويض صريح مع PKCE وجلسة يملكها التطبيق."
       },
-      "install": "bun add @authless/browser @authless/sveltekit",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { createAuthorizationRequest } from \\"@authless/browser\\";",
       "successSignal": "SIGNED_IN protected_data_ok logout_ok revoked_access_denied",
       "negativeChecks": [
@@ -8684,7 +8684,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "en": "Create a PKCE request only after an explicit visitor action.",
         "ar": "أنشئ طلب PKCE فقط بعد إجراء صريح من الزائر."
       },
-      "install": "bun add @authless/browser",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { createAuthorizationRequest } from \\"@authless/browser\\";",
       "successSignal": "authorization URL created; no identity or session on import",
       "negativeChecks": [
@@ -8705,7 +8705,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "en": "Validate the callback and project an application-owned server session.",
         "ar": "تحقق من الاستدعاء واعرض جلسة خادم يملكها التطبيق."
       },
-      "install": "bun add @authless/sveltekit",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { exchangeAuthorizationCode, createSessionHandle } from \\"@authless/sveltekit\\";",
       "successSignal": "validated tokens; protected server request succeeds",
       "negativeChecks": [
@@ -8771,7 +8771,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "en": "Verify exact bytes, timestamp, rotating signatures, and an atomic replay claim before dispatch.",
         "ar": "تحقق من البايتات الدقيقة والطابع الزمني والتوقيع المتناوب ومنع الإعادة الذري قبل المعالجة."
       },
-      "install": "cp -R examples/signed-webhook my-webhook-consumer && cd my-webhook-consumer && bun install --frozen-lockfile",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/signed-webhook && bun install --frozen-lockfile",
       "firstAction": "import { verifyAndConsume } from \\"./src/consumer\\";",
       "successSignal": "signature_valid event_claimed_once handler_idempotent",
       "negativeChecks": [
@@ -8959,7 +8959,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       title: "المرجع التقني",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "f237530332d23deb61dc70cff21d5c99e46407c9ebd219270ada15bf8dd35e39"
+      contentDigest: "302237a4e7e70ad404fb137bd9bdd86b2db5fb6117a7e5f3a8f0b3bab325fb1b"
     },
     {
       canonical: "https://docs.authle.ss/reference/rest",
@@ -22562,7 +22562,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "en": "Explicit Authorization Code with PKCE and an application-owned session.",
         "ar": "رمز تفويض صريح مع PKCE وجلسة يملكها التطبيق."
       },
-      "install": "bun add @authless/browser @authless/sveltekit",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { createAuthorizationRequest } from \\"@authless/browser\\";",
       "successSignal": "SIGNED_IN protected_data_ok logout_ok revoked_access_denied",
       "negativeChecks": [
@@ -22584,7 +22584,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "en": "Create a PKCE request only after an explicit visitor action.",
         "ar": "أنشئ طلب PKCE فقط بعد إجراء صريح من الزائر."
       },
-      "install": "bun add @authless/browser",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { createAuthorizationRequest } from \\"@authless/browser\\";",
       "successSignal": "authorization URL created; no identity or session on import",
       "negativeChecks": [
@@ -22605,7 +22605,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "en": "Validate the callback and project an application-owned server session.",
         "ar": "تحقق من الاستدعاء واعرض جلسة خادم يملكها التطبيق."
       },
-      "install": "bun add @authless/sveltekit",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { exchangeAuthorizationCode, createSessionHandle } from \\"@authless/sveltekit\\";",
       "successSignal": "validated tokens; protected server request succeeds",
       "negativeChecks": [
@@ -22671,7 +22671,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "en": "Verify exact bytes, timestamp, rotating signatures, and an atomic replay claim before dispatch.",
         "ar": "تحقق من البايتات الدقيقة والطابع الزمني والتوقيع المتناوب ومنع الإعادة الذري قبل المعالجة."
       },
-      "install": "cp -R examples/signed-webhook my-webhook-consumer && cd my-webhook-consumer && bun install --frozen-lockfile",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/signed-webhook && bun install --frozen-lockfile",
       "firstAction": "import { verifyAndConsume } from \\"./src/consumer\\";",
       "successSignal": "signature_valid event_claimed_once handler_idempotent",
       "negativeChecks": [
@@ -22859,7 +22859,7 @@ Source attribution: Developer documentation (https://docs.authle.ss/agents).
       title: "Agent access",
       updatedAt: "2026-10-09",
       contentType: "text/markdown",
-      contentDigest: "9404775b9f62da1758b728ca7502fc073aae6de2cef886d7330d6541566c1a9c"
+      contentDigest: "12f0a0351b7e40036215dc87a54b81d068dd38acc9c7fc6ad2fd38382b8befa6"
     },
     {
       canonical: "https://docs.authle.ss/agents?lang=ar",
@@ -22956,7 +22956,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "en": "Explicit Authorization Code with PKCE and an application-owned session.",
         "ar": "رمز تفويض صريح مع PKCE وجلسة يملكها التطبيق."
       },
-      "install": "bun add @authless/browser @authless/sveltekit",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { createAuthorizationRequest } from \\"@authless/browser\\";",
       "successSignal": "SIGNED_IN protected_data_ok logout_ok revoked_access_denied",
       "negativeChecks": [
@@ -22978,7 +22978,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "en": "Create a PKCE request only after an explicit visitor action.",
         "ar": "أنشئ طلب PKCE فقط بعد إجراء صريح من الزائر."
       },
-      "install": "bun add @authless/browser",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { createAuthorizationRequest } from \\"@authless/browser\\";",
       "successSignal": "authorization URL created; no identity or session on import",
       "negativeChecks": [
@@ -22999,7 +22999,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "en": "Validate the callback and project an application-owned server session.",
         "ar": "تحقق من الاستدعاء واعرض جلسة خادم يملكها التطبيق."
       },
-      "install": "bun add @authless/sveltekit",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { exchangeAuthorizationCode, createSessionHandle } from \\"@authless/sveltekit\\";",
       "successSignal": "validated tokens; protected server request succeeds",
       "negativeChecks": [
@@ -23065,7 +23065,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "en": "Verify exact bytes, timestamp, rotating signatures, and an atomic replay claim before dispatch.",
         "ar": "تحقق من البايتات الدقيقة والطابع الزمني والتوقيع المتناوب ومنع الإعادة الذري قبل المعالجة."
       },
-      "install": "cp -R examples/signed-webhook my-webhook-consumer && cd my-webhook-consumer && bun install --frozen-lockfile",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/signed-webhook && bun install --frozen-lockfile",
       "firstAction": "import { verifyAndConsume } from \\"./src/consumer\\";",
       "successSignal": "signature_valid event_claimed_once handler_idempotent",
       "negativeChecks": [
@@ -23253,7 +23253,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       title: "وصول الوكلاء",
       updatedAt: "2026-10-09",
       contentType: "text/markdown",
-      contentDigest: "f1e427b9da4d62daf4606c8961b0fb90c28f43f5005ee75317d7271a23f7dee4"
+      contentDigest: "850a5c78c53850a6631ad520f4e1525d08cc8e8f48f739b6fd07522536493edb"
     }
   ],
   operations: [
@@ -34006,7 +34006,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       kind: "documentation-index",
       url: "/developer-documentation.json",
       updatedAt: "2026-10-09",
-      sha256: "f0726cf92a9877bdc3da6642a188b8a88f16528fdd7eb3e1263705cfc3067c39"
+      sha256: "ac3d25d081c6b5dc9c58c8c236401634b3ece42063f5d6b15648c44d8b1fc3f3"
     },
     {
       kind: "sitemap",

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "kind": "authless-public-developer-repo-export",
-  "sourceRevision": "8da0d1e759be6c8b982169d3da92dc8063395c2a",
+  "sourceRevision": "3775d0dea1965278988f0db86daf256a42688f40",
   "publicRepositoryUrl": "https://github.com/labdotsa/authless/tree/master",
   "licensePolicy": "Preserve existing package metadata: UNLICENSED; no new license granted.",
   "excluded": [
@@ -261,7 +261,7 @@
     },
     {
       "path": "docs/developer-experience-review.md",
-      "bytes": 7269
+      "bytes": 7692
     },
     {
       "path": "docs/AGENTS.md",
@@ -281,7 +281,7 @@
     },
     {
       "path": "docs/machine-readable/developer-documentation.json",
-      "bytes": 15432
+      "bytes": 15745
     },
     {
       "path": "docs/machine-readable/machine-docs.json",
@@ -289,7 +289,7 @@
     },
     {
       "path": "docs/machine-readable/llms-full.txt",
-      "bytes": 503726
+      "bytes": 506543
     },
     {
       "path": "docs/machine-readable/rest-management-guide.json",
@@ -301,7 +301,7 @@
     },
     {
       "path": "docs/machine-readable/llms-full.ar.txt",
-      "bytes": 513778
+      "bytes": 516595
     },
     {
       "path": "docs/machine-readable/webhook-catalog.json",
@@ -313,11 +313,11 @@
     },
     {
       "path": "docs/markdown/en/trust.md",
-      "bytes": 17463
+      "bytes": 17776
     },
     {
       "path": "docs/markdown/en/reference.md",
-      "bytes": 16979
+      "bytes": 17292
     },
     {
       "path": "docs/markdown/en/operate.md",
@@ -325,15 +325,15 @@
     },
     {
       "path": "docs/markdown/en/understand.md",
-      "bytes": 16915
+      "bytes": 17228
     },
     {
       "path": "docs/markdown/en/index.md",
-      "bytes": 16934
+      "bytes": 17247
     },
     {
       "path": "docs/markdown/en/build.md",
-      "bytes": 17010
+      "bytes": 17323
     },
     {
       "path": "docs/markdown/en/changes.md",
@@ -341,19 +341,19 @@
     },
     {
       "path": "docs/markdown/en/agents.md",
-      "bytes": 17360
+      "bytes": 17673
     },
     {
       "path": "docs/markdown/en/start.md",
-      "bytes": 16815
+      "bytes": 17128
     },
     {
       "path": "docs/markdown/en/test.md",
-      "bytes": 16830
+      "bytes": 17143
     },
     {
       "path": "docs/markdown/en/secure.md",
-      "bytes": 16951
+      "bytes": 17264
     },
     {
       "path": "docs/markdown/en/reference/rest.md",
@@ -361,11 +361,11 @@
     },
     {
       "path": "docs/markdown/ar/trust.md",
-      "bytes": 18160
+      "bytes": 18473
     },
     {
       "path": "docs/markdown/ar/reference.md",
-      "bytes": 17516
+      "bytes": 17829
     },
     {
       "path": "docs/markdown/ar/operate.md",
@@ -373,15 +373,15 @@
     },
     {
       "path": "docs/markdown/ar/understand.md",
-      "bytes": 17347
+      "bytes": 17660
     },
     {
       "path": "docs/markdown/ar/index.md",
-      "bytes": 17465
+      "bytes": 17778
     },
     {
       "path": "docs/markdown/ar/build.md",
-      "bytes": 17525
+      "bytes": 17838
     },
     {
       "path": "docs/markdown/ar/changes.md",
@@ -389,19 +389,19 @@
     },
     {
       "path": "docs/markdown/ar/agents.md",
-      "bytes": 18031
+      "bytes": 18344
     },
     {
       "path": "docs/markdown/ar/start.md",
-      "bytes": 17326
+      "bytes": 17639
     },
     {
       "path": "docs/markdown/ar/test.md",
-      "bytes": 17367
+      "bytes": 17680
     },
     {
       "path": "docs/markdown/ar/secure.md",
-      "bytes": 17442
+      "bytes": 17755
     },
     {
       "path": "docs/markdown/ar/reference/rest.md",
@@ -449,7 +449,7 @@
     },
     {
       "path": "docs-mcp/corpus.generated.json",
-      "bytes": 1458108
+      "bytes": 1463742
     },
     {
       "path": "docs-mcp/docs-mcp.config.json",
@@ -461,7 +461,7 @@
     },
     {
       "path": "docs-mcp/stdio.js",
-      "bytes": 1398466
+      "bytes": 1404100
     }
   ]
 }

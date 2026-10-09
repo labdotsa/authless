@@ -90,7 +90,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "en": "Explicit Authorization Code with PKCE and an application-owned session.",
         "ar": "رمز تفويض صريح مع PKCE وجلسة يملكها التطبيق."
       },
-      "install": "bun add @authless/browser @authless/sveltekit",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { createAuthorizationRequest } from \"@authless/browser\";",
       "successSignal": "SIGNED_IN protected_data_ok logout_ok revoked_access_denied",
       "negativeChecks": [
@@ -112,7 +112,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "en": "Create a PKCE request only after an explicit visitor action.",
         "ar": "أنشئ طلب PKCE فقط بعد إجراء صريح من الزائر."
       },
-      "install": "bun add @authless/browser",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { createAuthorizationRequest } from \"@authless/browser\";",
       "successSignal": "authorization URL created; no identity or session on import",
       "negativeChecks": [
@@ -133,7 +133,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "en": "Validate the callback and project an application-owned server session.",
         "ar": "تحقق من الاستدعاء واعرض جلسة خادم يملكها التطبيق."
       },
-      "install": "bun add @authless/sveltekit",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/sveltekit-hosted-sign-in && bun install --frozen-lockfile",
       "firstAction": "import { exchangeAuthorizationCode, createSessionHandle } from \"@authless/sveltekit\";",
       "successSignal": "validated tokens; protected server request succeeds",
       "negativeChecks": [
@@ -199,7 +199,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "en": "Verify exact bytes, timestamp, rotating signatures, and an atomic replay claim before dispatch.",
         "ar": "تحقق من البايتات الدقيقة والطابع الزمني والتوقيع المتناوب ومنع الإعادة الذري قبل المعالجة."
       },
-      "install": "cp -R examples/signed-webhook my-webhook-consumer && cd my-webhook-consumer && bun install --frozen-lockfile",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless/examples/signed-webhook && bun install --frozen-lockfile",
       "firstAction": "import { verifyAndConsume } from \"./src/consumer\";",
       "successSignal": "signature_valid event_claimed_once handler_idempotent",
       "negativeChecks": [
