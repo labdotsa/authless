@@ -17,6 +17,8 @@ This review records the final developer-facing structure in the public documenta
 
 Code is presented as a task step with an identifiable filename or command, rather than as an unexplained block embedded in a paragraph. Syntax is highlighted, and copy uses a compact icon-only control with an accessible label and visible success, failure, unavailable, and busy states. The copy action keeps focus while an attempt is pending, and code panels own their bounded horizontal scroll region and remain keyboard-focusable.
 
+Syntax tokenization belongs to the server. The page load supplies the same escaped token data for server rendering and browser hydration, while the browser handles selection, theme colors, and copying. The public build budget checks the resulting deployed JavaScript and largest asset; the highlighter engine and language grammars must stay outside the browser bundle.
+
 File tabs in the SvelteKit guide use installed shadcn primitives. Their labels describe the task—Sign-in, Callback, Session, Protected page, and Logout—while the active panel exposes the full file path. The tabs scroll from the leading edge in both English and Arabic. Code and file panels use LTR direction where source syntax requires it, while surrounding navigation and status remain localized.
 
 The same interaction rules apply to the REST guide’s TypeScript and raw HTTP examples. Production operations use a flat, ordered promotion checklist followed by evidence, retry, troubleshooting, closure, and degradation exercises; the checklist does not hide its required actions behind an inline disclosure. Tables preserve a bounded horizontal region rather than widening the page on narrow screens.

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "kind": "authless-public-developer-repo-export",
-  "sourceRevision": "bc0ca2b7723b660e8306d230d8873309edfb1f8d",
+  "sourceRevision": "8da0d1e759be6c8b982169d3da92dc8063395c2a",
   "publicRepositoryUrl": "https://github.com/labdotsa/authless/tree/master",
   "licensePolicy": "Preserve existing package metadata: UNLICENSED; no new license granted.",
   "excluded": [
@@ -261,7 +261,7 @@
     },
     {
       "path": "docs/developer-experience-review.md",
-      "bytes": 6899
+      "bytes": 7269
     },
     {
       "path": "docs/AGENTS.md",
