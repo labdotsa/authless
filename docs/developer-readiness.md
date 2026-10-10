@@ -72,6 +72,12 @@ explicitly, then use `auth status`, `auth refresh`, and `auth logout` as needed.
 configured without exposing access tokens.
 The CLI never extracts browser cookies.
 
+For the hosted user journey, an authenticated Dashboard browser can continue
+to Sign without another email OTP. OAuth still requires workspace selection and
+explicit consent. An unsigned browser uses email sign-in. This is user
+authentication, not management CLI or MCP authorization, and it does not grant
+an agent access.
+
 MCP uses a separate audience and secure-store entry. Sign in for that audience
 explicitly, then initialize the read-only CLI MCP surface:
 

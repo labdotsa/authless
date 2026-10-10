@@ -16,6 +16,7 @@
 - Server client: `@authless/server`, source-distributed for trusted Node.js 24+ server code.
 - CLI: `@authless/cli`, source-distributed for operators, scripts, and agents. Run `auth login` for native Authorization Code with S256 PKCE; omit `--workspace` to choose a workspace in the browser picker, or pass one explicitly. `auth status` reports separate `managementOAuth` and `mcpOAuth` status strings without returning access tokens. `auth refresh` rotates the stored grant and `auth logout` revokes and removes it. Management and MCP grants use separate Bun secure-store entries and audiences: use `--resource https://api.authle.ss/mcp` before `mcp initialize`, then `mcp tools`, `mcp resources`, `mcp read`, or `mcp call`. The native `workspace:read` grant is limited to workspace list/get, and MCP exposes read-only list/inspect tools. Use `AUTHLESS_SESSION_TOKEN` for remaining platform-session commands or `AUTHLESS_APP_CREDENTIAL` for app membership/access. It never extracts browser cookies.
 - Browser and SvelteKit helpers are source-only workspace packages; clean-room examples use local vendor snapshots.
+- Hosted user continuity: an authenticated Dashboard browser can continue to Sign without another email OTP. OAuth still requires workspace selection and explicit consent; unsigned browsers use email sign-in. This does not authorize CLI, MCP, or delegated agent access.
 - None of these packages is currently published to npm.
 
 ## API versioning

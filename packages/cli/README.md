@@ -19,6 +19,10 @@ For an interactive operator session, use `auth login` followed by
 Bun secure storage. The `workspace:read` grant supports only
 `workspaces list` and `workspaces get`.
 
+An authenticated Dashboard browser can continue to Sign without another email
+OTP. OAuth still requires workspace selection and explicit consent; unsigned
+browsers use email sign-in.
+
 Use `AUTHLESS_SESSION_TOKEN` for the remaining platform-session commands or
 `AUTHLESS_APP_CREDENTIAL` for app membership and access commands. Agents
 should use a delegated token or app credential from their secret manager. The

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "kind": "authless-public-developer-repo-export",
-  "sourceRevision": "14457235d2591987d1e305b8bf2a782d644b0675",
+  "sourceRevision": "fe507ea037a8a4735f3046419ece09a5d6ee1132",
   "publicRepositoryUrl": "https://github.com/labdotsa/authless/tree/master",
   "licensePolicy": "MIT; Copyright (c) 2026 LabDotSA.",
   "excluded": [
@@ -41,7 +41,7 @@
     },
     {
       "path": "packages/cli/README.md",
-      "bytes": 1047
+      "bytes": 1231
     },
     {
       "path": "packages/cli/package.json",
@@ -285,7 +285,7 @@
     },
     {
       "path": "docs/developer-experience-review.md",
-      "bytes": 5126
+      "bytes": 5456
     },
     {
       "path": "docs/AGENTS.md",
@@ -293,11 +293,11 @@
     },
     {
       "path": "docs/developer-readiness.md",
-      "bytes": 7685
+      "bytes": 8010
     },
     {
       "path": "docs/machine-readable/llms.txt",
-      "bytes": 3894
+      "bytes": 4164
     },
     {
       "path": "docs/machine-readable/rest-reference.json",

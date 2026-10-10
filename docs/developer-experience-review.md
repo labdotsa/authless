@@ -32,6 +32,12 @@ The CLI supports workspace and app lifecycle, environment lookup, membership inv
 
 MCP is an explicit second audience. Use `auth login --resource https://api.authle.ss/mcp` before `mcp initialize`; use the same `--resource` with `auth refresh` and `auth logout`. The CLI stores that grant separately from the management grant and exposes only tools marked with the server's `annotations.readOnlyHint` flag. A management bearer must never be sent to `/mcp`.
 
+The hosted user journey has separate browser continuity: an authenticated
+Dashboard browser can continue to Sign without another email OTP. OAuth still
+requires workspace selection and explicit consent. An unsigned browser uses
+email sign-in. This is separate from CLI management OAuth, MCP OAuth, and
+delegated agent authority.
+
 Agents can run the CLI with a server-held credential. An agent that needs delegated authority follows the owner-created `private_key_jwt` flow in the management-agent example, with one workspace, one resource, and one enabled scope. Live management OAuth can remain unavailable with `503 temporarily_unavailable`; protected management MCP also requires its terminal GA attestation. The local Docs MCP is read-only and does not authenticate.
 
 ## Verification limits
