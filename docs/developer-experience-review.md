@@ -28,9 +28,11 @@ The API returns the effective version in `authless-version` and varies the respo
 
 ## CLI and agent behavior
 
-The CLI supports workspace and app lifecycle, environment lookup, membership invitation and status changes, access lookup, and audit listing. Mutations require explicit `--yes`, idempotency keys, and expected versions where required. It prints JSON on success and a redacted error record on failure. Native `auth login`, `auth refresh`, and `auth logout` use the owner-approved management OAuth flow and Bun secure storage.
+The CLI supports workspace and app lifecycle, environment lookup, membership invitation and status changes, access lookup, and audit listing. Mutations require explicit `--yes`, idempotency keys, and expected versions where required. It prints JSON on success and a redacted error record on failure. Native `auth login`, `auth refresh`, and `auth logout` use the owner-approved management OAuth flow and Bun secure storage. Omitting `--workspace` opens the workspace picker; passing a workspace binds the grant to that choice. `auth status` reports separate `managementOAuth` and `mcpOAuth` status strings (`configured` or `native-pkce`) without returning access tokens.
 
-Agents can run the CLI with a server-held credential. An agent that needs delegated authority follows the owner-created `private_key_jwt` flow in the management-agent example. Live management OAuth can remain unavailable with `503 temporarily_unavailable`; protected management MCP also requires its terminal GA attestation. The local Docs MCP is read-only and does not authenticate.
+MCP is an explicit second audience. Use `auth login --resource https://api.authle.ss/mcp` before `mcp initialize`; use the same `--resource` with `auth refresh` and `auth logout`. The CLI stores that grant separately from the management grant and exposes only tools marked with the server's `annotations.readOnlyHint` flag. A management bearer must never be sent to `/mcp`.
+
+Agents can run the CLI with a server-held credential. An agent that needs delegated authority follows the owner-created `private_key_jwt` flow in the management-agent example, with one workspace, one resource, and one enabled scope. Live management OAuth can remain unavailable with `503 temporarily_unavailable`; protected management MCP also requires its terminal GA attestation. The local Docs MCP is read-only and does not authenticate.
 
 ## Verification limits
 

@@ -886,16 +886,52 @@ async function removeSecret(name) {
 }
 
 // src/oauth-client.ts
-var storeName = "oauth-session";
+var storeNames = {
+  management: "oauth-management",
+  mcp: "oauth-mcp"
+};
 var defaultClientId = "authless-cli";
 var defaultResource = "https://api.authle.ss/management";
 var defaultIssuer = "https://sign.authle.ss/management";
 var defaultScope = "workspace:read";
-var nativeStore = {
-  read: () => readSecret(storeName),
-  write: (value) => writeSecret(storeName, value),
-  remove: () => removeSecret(storeName)
-};
+function oauthResourceForUrl(value) {
+  const url = validateHttpsUrl(value, "OAuth resource");
+  if (url.pathname !== "/management" && url.pathname !== "/mcp")
+    throw new Error("OAuth resource must end at /management or /mcp");
+  return url.pathname === "/mcp" ? "mcp" : "management";
+}
+function oauthStoreNameForResource(resource) {
+  return storeNames[oauthResourceForUrl(resource)];
+}
+function oauthStoreForResource(resource) {
+  const name = oauthStoreNameForResource(resource);
+  return {
+    read: () => readSecret(name),
+    write: (value) => writeSecret(name, value),
+    remove: () => removeSecret(name)
+  };
+}
+function validateHttpsUrl(value, label) {
+  let url;
+  try {
+    url = new URL(value);
+  } catch {
+    throw new Error(`${label} must be a valid URL`);
+  }
+  const loopback = url.protocol === "http:" && ["localhost", "127.0.0.1", "[::1]"].includes(url.hostname);
+  if (url.protocol !== "https:" && !loopback)
+    throw new Error(`${label} must use HTTPS outside loopback`);
+  if (url.username || url.password || url.search || url.hash)
+    throw new Error(`${label} must not contain credentials, query, or fragment`);
+  return url;
+}
+function validateOAuthEndpoints(issuer, resource) {
+  const issuerUrl = validateHttpsUrl(issuer, "OAuth issuer");
+  const resourceUrl = validateHttpsUrl(resource, "OAuth resource");
+  if (issuerUrl.pathname !== "/management")
+    throw new Error("OAuth issuer must end at /management");
+  oauthResourceForUrl(resourceUrl.toString());
+}
 function randomUrlSafe(bytes = 32) {
   const data = new Uint8Array(bytes);
   crypto.getRandomValues(data);
@@ -914,7 +950,8 @@ async function requestToken(endpoint, body, fetcher) {
     headers: {
       accept: "application/json",
       "content-type": "application/x-www-form-urlencoded"
-    }
+    },
+    signal: AbortSignal.timeout(30000)
   });
   const payload = safeJson(await response.json().catch(() => null));
   if (!response.ok)
@@ -922,14 +959,21 @@ async function requestToken(endpoint, body, fetcher) {
   const accessToken = payload.access_token;
   if (typeof accessToken !== "string" || !accessToken)
     throw new Error("OAuth response did not contain an access token");
-  const expires = typeof payload.expires_in === "number" ? payload.expires_in : 300;
+  if (payload.token_type !== "Bearer")
+    throw new Error("OAuth response did not contain a Bearer token");
+  const expires = payload.expires_in;
+  if (typeof expires !== "number" || !Number.isFinite(expires) || expires <= 0)
+    throw new Error("OAuth response did not contain a valid expiry");
+  const requestedScope = String(body.get("scope") ?? defaultScope);
+  if (payload.scope !== requestedScope)
+    throw new Error("OAuth response scope did not match the requested scope");
   return {
     accessToken,
     refreshToken: typeof payload.refresh_token === "string" ? payload.refresh_token : undefined,
     expiresAt: Date.now() + Math.max(1, expires - 30) * 1000,
     issuer: endpoint.replace(/\/oauth\/token$/u, ""),
     resource: String(body.get("resource") ?? defaultResource),
-    scope: String(body.get("scope") ?? defaultScope),
+    scope: requestedScope,
     clientId: String(body.get("client_id") ?? defaultClientId),
     workspaceId: typeof payload.workspace_id === "string" && /^[A-Za-z0-9_-]{4,128}$/u.test(payload.workspace_id) ? payload.workspace_id : undefined
   };
@@ -939,6 +983,9 @@ async function loginOAuth(input) {
   const clientId = input.clientId ?? defaultClientId;
   const resource = input.resource ?? defaultResource;
   const scope = input.scope ?? defaultScope;
+  validateOAuthEndpoints(issuer, resource);
+  if (scope !== defaultScope)
+    throw new Error(`OAuth scope must be ${defaultScope}`);
   const workspaceId = input.workspaceId;
   const verifier = randomUrlSafe();
   const state = randomUrlSafe(24);
@@ -969,12 +1016,17 @@ async function loginOAuth(input) {
   if (workspaceId)
     authorizationParams.set("workspace_id", workspaceId);
   authorization.search = authorizationParams.toString();
+  let timer;
   const callback = new Promise((resolve, reject) => {
     let settled = false;
-    const timer = setTimeout(() => reject(new Error("OAuth callback timed out")), input.timeoutMs ?? 120000);
+    timer = setTimeout(() => reject(new Error("OAuth callback timed out")), input.timeoutMs ?? 600000);
     server.on("request", (request, response) => {
       if (settled) {
         response.writeHead(409).end();
+        return;
+      }
+      if (request.method !== "GET") {
+        response.writeHead(405, { allow: "GET" }).end("Method not allowed");
         return;
       }
       const url = new URL(request.url ?? "/", redirectUri);
@@ -1015,8 +1067,17 @@ async function loginOAuth(input) {
       resolve(code2);
     });
   });
-  await (input.openBrowser ? input.openBrowser(authorization.toString()) : Promise.resolve());
-  const code = await callback.finally(() => server.close());
+  const authorizationUrl = authorization.toString();
+  let code;
+  try {
+    input.onAuthorizationUrl?.(authorizationUrl);
+    await (input.openBrowser ? input.openBrowser(authorizationUrl) : Promise.resolve());
+    code = await callback;
+  } finally {
+    if (timer)
+      clearTimeout(timer);
+    server.close();
+  }
   const token = await requestToken(`${issuer}/oauth/token`, new URLSearchParams({
     client_id: clientId,
     code,
@@ -1028,23 +1089,38 @@ async function loginOAuth(input) {
   }), input.fetcher ?? fetch);
   token.clientId = clientId;
   token.workspaceId ??= workspaceId;
-  await (input.store ?? nativeStore).write(JSON.stringify(token));
+  await (input.store ?? oauthStoreForResource(resource)).write(JSON.stringify(token));
   return token;
 }
-async function readOAuth(store = nativeStore) {
+async function readOAuth(store = oauthStoreForResource(defaultResource)) {
   const raw = await store.read();
   if (!raw)
     return null;
   try {
     const value = JSON.parse(raw);
-    if (typeof value.accessToken !== "string" || typeof value.issuer !== "string" || typeof value.resource !== "string" || typeof value.scope !== "string" || typeof value.expiresAt !== "number" || typeof value.clientId !== "string")
+    if (!value || typeof value !== "object")
       throw new Error;
-    return value;
+    const record2 = value;
+    if (typeof record2.accessToken !== "string" || !record2.accessToken || typeof record2.issuer !== "string" || typeof record2.resource !== "string" || typeof record2.scope !== "string" || record2.scope !== defaultScope || typeof record2.expiresAt !== "number" || !Number.isFinite(record2.expiresAt) || typeof record2.clientId !== "string" || record2.clientId !== defaultClientId)
+      throw new Error;
+    validateOAuthEndpoints(record2.issuer, record2.resource);
+    if (record2.refreshToken !== undefined && typeof record2.refreshToken !== "string")
+      throw new Error;
+    return {
+      accessToken: record2.accessToken,
+      ...record2.refreshToken ? { refreshToken: record2.refreshToken } : {},
+      expiresAt: record2.expiresAt,
+      issuer: record2.issuer,
+      resource: record2.resource,
+      scope: record2.scope,
+      clientId: record2.clientId,
+      ...typeof record2.workspaceId === "string" ? { workspaceId: record2.workspaceId } : {}
+    };
   } catch {
     throw new Error("Stored OAuth credential is invalid; run auth login again");
   }
 }
-async function refreshOAuth(input, fetcher = fetch, store = nativeStore) {
+async function refreshOAuth(input, fetcher = fetch, store) {
   if (!input.refreshToken)
     throw new Error("No refresh token is stored");
   const next = await requestToken(`${input.issuer}/oauth/token`, new URLSearchParams({
@@ -1057,28 +1133,46 @@ async function refreshOAuth(input, fetcher = fetch, store = nativeStore) {
   next.issuer = input.issuer;
   next.workspaceId = input.workspaceId;
   next.clientId = input.clientId;
-  await store.write(JSON.stringify(next));
+  next.refreshToken ??= input.refreshToken;
+  await (store ?? oauthStoreForResource(input.resource)).write(JSON.stringify(next));
   return next;
 }
-async function logoutOAuth(input, fetcher = fetch, store = nativeStore) {
-  if (input.refreshToken)
-    await fetcher(`${input.issuer}/oauth/revoke`, {
-      method: "POST",
-      body: new URLSearchParams({
-        token: input.refreshToken,
-        token_type_hint: "refresh_token"
-      }),
-      redirect: "error",
-      headers: { "content-type": "application/x-www-form-urlencoded" }
-    });
-  await store.remove();
+async function logoutOAuth(input, fetcher = fetch, store) {
+  const endpoint = `${input.issuer}/oauth/revoke`;
+  const candidates = input.refreshToken ? [
+    { token: input.refreshToken, hint: "refresh_token" },
+    { token: input.accessToken, hint: "access_token" }
+  ] : [{ token: input.accessToken, hint: "access_token" }];
+  let revoked = false;
+  for (const candidate of candidates) {
+    try {
+      const response = await fetcher(endpoint, {
+        method: "POST",
+        body: new URLSearchParams({
+          token: candidate.token,
+          token_type_hint: candidate.hint
+        }),
+        redirect: "error",
+        headers: { "content-type": "application/x-www-form-urlencoded" },
+        signal: AbortSignal.timeout(30000)
+      });
+      if (response.ok) {
+        revoked = true;
+        break;
+      }
+    } catch {}
+  }
+  if (!revoked)
+    throw new Error("OAuth revocation was not confirmed; credential was retained");
+  await (store ?? oauthStoreForResource(input.resource)).remove();
 }
 
 // src/cli.ts
 var help = `Authless CLI
 
-Management API commands for humans, automation, and agents. Credentials stay in
-the environment or an external secret manager; the CLI never stores or prints them.
+Management API commands for humans, automation, and agents. Environment
+credentials stay in the environment or an external secret manager; native OAuth
+grants are stored in Bun's secure store and never printed.
 
 Usage:
   authless [--base-url URL] <command> [options]
@@ -1100,8 +1194,13 @@ Commands:
   access get|grant-role|grant-entitlement|revoke-role|revoke-entitlement
   auth status                              Show configured credential kind (safe)
   auth login                               Start PKCE login with a loopback callback
-  auth refresh                             Rotate the stored refresh token
-  auth logout                              Revoke and remove the stored grant
+  auth refresh [--resource URL]            Rotate the stored refresh token
+  auth logout [--resource URL]             Revoke and remove the stored grant
+  mcp initialize                           Authenticate and initialize MCP
+  mcp tools                               List read-only MCP tools
+  mcp resources                           List MCP resources
+  mcp read --uri URI                      Read one MCP resource
+  mcp call --tool NAME --arguments JSON   Call one read-only MCP tool
 
 Authentication:
   Set AUTHLESS_SESSION_TOKEN for platform-session commands.
@@ -1117,6 +1216,7 @@ Options:
   --status VALUE     Membership status filter
   --all               Follow opaque cursors (bounded to 20 pages)
   --format FORMAT    json (default) or human
+  --no-browser       Print the OAuth URL instead of opening a browser
   --yes               Confirm a mutating operation
   --help             Show this help
 `;
@@ -1135,7 +1235,7 @@ function parseArgs(argv) {
       const key = arg.slice(2);
       if (options.has(key))
         throw new Error(`Duplicate option --${key}`);
-      if (key === "yes" || key === "json" || key === "human" || key === "all") {
+      if (key === "yes" || key === "json" || key === "human" || key === "all" || key === "no-browser") {
         options.set(key, "true");
         continue;
       }
@@ -1183,6 +1283,17 @@ function formatOption(options) {
   if (value !== "json" && value !== "human")
     throw new Error("--format must be json or human");
   return value;
+}
+function parseJsonObject(value) {
+  let parsed;
+  try {
+    parsed = JSON.parse(value);
+  } catch {
+    throw new Error("--arguments must be valid JSON");
+  }
+  if (!parsed || typeof parsed !== "object" || Array.isArray(parsed))
+    throw new Error("--arguments must be a JSON object");
+  return Object.fromEntries(Object.entries(parsed));
 }
 async function allPages(firstCursor, limit, fetchPage) {
   let page = await fetchPage(firstCursor, limit);
@@ -1370,10 +1481,27 @@ function validateCommand(parsed) {
     ["auth status", ["base-url", "format", "human", "json"]],
     [
       "auth login",
-      ["format", "human", "json", "issuer", "resource", "scope", "workspace"]
+      [
+        "format",
+        "human",
+        "json",
+        "issuer",
+        "no-browser",
+        "resource",
+        "scope",
+        "workspace"
+      ]
     ],
-    ["auth refresh", ["format", "human", "json"]],
-    ["auth logout", ["format", "human", "json"]]
+    ["auth refresh", ["format", "human", "json", "resource"]],
+    ["auth logout", ["format", "human", "json", "resource"]],
+    ["mcp initialize", ["base-url", "format", "human", "json", "resource"]],
+    ["mcp tools", ["base-url", "format", "human", "json", "resource"]],
+    ["mcp resources", ["base-url", "format", "human", "json", "resource"]],
+    ["mcp read", ["base-url", "format", "human", "json", "resource", "uri"]],
+    [
+      "mcp call",
+      ["arguments", "base-url", "format", "human", "json", "resource", "tool"]
+    ]
   ]);
   const names = allowed.get(key);
   if (!names)
@@ -1392,9 +1520,93 @@ async function openBrowser(url) {
     child.once("exit", (code) => code === 0 ? resolve() : reject(new Error("Could not open the browser")));
   });
 }
-async function optionalOAuth() {
+function mcpOriginResource(origin, requested) {
+  const originUrl = new URL(origin);
+  const resourceUrl = new URL(requested ?? `${origin}/mcp`);
+  if (resourceUrl.origin !== originUrl.origin || resourceUrl.pathname !== "/mcp")
+    throw new Error("MCP resource must be the same origin at /mcp");
+  if (resourceUrl.username || resourceUrl.password || resourceUrl.search || resourceUrl.hash)
+    throw new Error("MCP resource must not contain credentials, query, or fragment");
+  return resourceUrl.toString();
+}
+function mcpResult(body, id) {
+  if (!body || typeof body !== "object")
+    throw new Error("MCP response was not a JSON object");
+  const record2 = body;
+  if (record2.jsonrpc !== "2.0" || record2.id !== id)
+    throw new Error("MCP response had an invalid JSON-RPC envelope");
+  if (record2.error && typeof record2.error === "object") {
+    const error = record2.error;
+    throw new Error(`MCP error ${String(error.code ?? "unknown")}: ${String(error.message ?? "request failed")}`);
+  }
+  if (!("result" in record2))
+    throw new Error("MCP response did not contain a result");
+  const result = record2.result;
+  if (result && typeof result === "object" && result.isError === true)
+    throw new Error("MCP tool reported an error");
+  return record2;
+}
+function readOnlyTool(tool) {
+  if (!tool || typeof tool !== "object")
+    return false;
+  const record2 = tool;
+  const annotations = record2.annotations;
+  if (!annotations || typeof annotations !== "object")
+    return false;
+  return annotations.readOnlyHint === true;
+}
+function readOnlyTools(body) {
+  const result = body.result;
+  if (!result || typeof result !== "object")
+    return body;
+  const tools = result.tools;
+  if (!Array.isArray(tools))
+    return body;
+  return {
+    ...body,
+    result: {
+      ...result,
+      tools: tools.filter(readOnlyTool)
+    }
+  };
+}
+async function requestMcp(options, env, method, params, dependencies = {}) {
+  const origin = baseUrl(options, env);
+  const resource = mcpOriginResource(origin, options.get("resource"));
+  const store = dependencies.mcpStore ?? oauthStoreForResource(resource);
+  let stored = await readOAuth(store);
+  if (!stored)
+    throw new Error("No stored MCP grant. Run auth login --resource https://api.authle.ss/mcp first.");
+  if (stored.resource !== resource)
+    throw new Error("Stored MCP grant targets a different resource; sign in again.");
+  if (stored.expiresAt <= Date.now())
+    stored = await refreshOAuth(stored, dependencies.fetcher ?? fetch, store);
+  const request = {
+    id: crypto.randomUUID(),
+    jsonrpc: "2.0",
+    method,
+    ...params ? { params } : {}
+  };
+  const response = await (dependencies.fetcher ?? fetch)(`${origin}/mcp`, {
+    method: "POST",
+    headers: {
+      accept: "application/json",
+      authorization: `Bearer ${stored.accessToken}`,
+      "content-type": "application/json",
+      "mcp-protocol-version": "2025-11-25"
+    },
+    body: JSON.stringify(request),
+    redirect: "error",
+    signal: AbortSignal.timeout(30000)
+  });
+  const body = await response.json().catch(() => null);
+  if (!response.ok)
+    throw new Error(`MCP request failed (${response.status})`);
+  return mcpResult(body, request.id);
+}
+async function optionalOAuth(store) {
   try {
-    return await readOAuth();
+    return await readOAuth(store);
   } catch (error) {
     if (error instanceof Error && error.message.includes("Bun.secrets"))
       return null;
@@ -1402,7 +1614,7 @@ async function optionalOAuth() {
   }
 }
 async function executeCli(argv, env = process.env, write = (value) => process.stdout.write(`${value}
-`)) {
+`), dependencies = {}) {
   const parsed = parseArgs(argv);
   if (parsed.options.has("help") || parsed.command.length === 0) {
     write(help);
@@ -1420,7 +1632,8 @@ async function executeCli(argv, env = process.env, write = (value) => process.st
       const value = {
         apiUrl: baseUrl(parsed.options, env),
         credential: session ? "session" : app ? "app-credential" : "not-configured",
-        managementOAuth: await optionalOAuth() ? "configured" : "native-pkce"
+        managementOAuth: await optionalOAuth(dependencies.managementStore) ? "configured" : "native-pkce",
+        mcpOAuth: await optionalOAuth(dependencies.mcpStore ?? oauthStoreForResource("https://api.authle.ss/mcp")) ? "configured" : "native-pkce"
       };
       write(outputFormat === "human" ? humanResult(value) : JSON.stringify(value, null, 2));
       return 0;
@@ -1431,24 +1644,68 @@ async function executeCli(argv, env = process.env, write = (value) => process.st
         resource: parsed.options.get("resource"),
         scope: parsed.options.get("scope"),
         workspaceId: parsed.options.get("workspace"),
-        openBrowser
+        openBrowser: parsed.options.has("no-browser") ? undefined : dependencies.openBrowser ?? openBrowser,
+        fetcher: dependencies.fetcher,
+        store: (() => {
+          const resourceUrl2 = parsed.options.get("resource");
+          if (!resourceUrl2)
+            return dependencies.managementStore;
+          return oauthResourceForUrl(resourceUrl2) === "mcp" ? dependencies.mcpStore ?? oauthStoreForResource(resourceUrl2) : dependencies.managementStore ?? oauthStoreForResource(resourceUrl2);
+        })(),
+        onAuthorizationUrl: parsed.options.has("no-browser") ? (url) => {
+          write(`Open this URL in a browser:
+${url}`);
+          dependencies.authorizationUrlHandler?.(url);
+        } : undefined
       });
       write(outputFormat === "human" ? `Authenticated with ${token.scope}` : JSON.stringify({ authenticated: true, scope: token.scope }, null, 2));
       return 0;
     }
-    const stored = await readOAuth();
+    const resourceUrl = parsed.options.get("resource") ?? "https://api.authle.ss/management";
+    const store = parsed.options.get("resource") ? oauthResourceForUrl(resourceUrl) === "mcp" ? dependencies.mcpStore ?? oauthStoreForResource(resourceUrl) : dependencies.managementStore ?? oauthStoreForResource(resourceUrl) : dependencies.managementStore;
+    const stored = await readOAuth(store);
     if (!stored)
       throw new Error("No stored OAuth grant. Run auth login first.");
+    if (parsed.options.has("resource") && stored.resource !== resourceUrl)
+      throw new Error("Stored OAuth grant targets a different resource; sign in again.");
     if (action === "refresh") {
-      await refreshOAuth(stored);
+      await refreshOAuth(stored, dependencies.fetcher ?? fetch, store);
       write(outputFormat === "human" ? "OAuth grant refreshed" : JSON.stringify({ refreshed: true }, null, 2));
       return 0;
     }
-    await logoutOAuth(stored);
+    await logoutOAuth(stored, dependencies.fetcher ?? fetch, store);
     write(outputFormat === "human" ? "OAuth grant revoked" : JSON.stringify({ loggedOut: true }, null, 2));
     return 0;
   }
-  const storedOAuth = await optionalOAuth();
+  if (resource === "mcp") {
+    const result2 = action === "initialize" ? await requestMcp(parsed.options, env, "initialize", {
+      protocolVersion: "2025-11-25",
+      capabilities: {},
+      clientInfo: { name: "authless-cli", version: "0.1.0" }
+    }, dependencies) : action === "tools" ? readOnlyTools(await requestMcp(parsed.options, env, "tools/list", undefined, dependencies)) : action === "resources" ? await requestMcp(parsed.options, env, "resources/list", undefined, dependencies) : action === "read" ? await requestMcp(parsed.options, env, "resources/read", {
+      uri: requiredOption(parsed.options, "uri")
+    }, dependencies) : await (async () => {
+      const toolName = requiredOption(parsed.options, "tool");
+      const catalog = await requestMcp(parsed.options, env, "tools/list", undefined, dependencies);
+      const tools = catalog.result?.tools;
+      const selected = Array.isArray(tools) ? tools.find((tool) => tool && typeof tool === "object" && tool.name === toolName) : undefined;
+      if (!readOnlyTool(selected))
+        throw new Error("--tool must be annotated read-only by the MCP server");
+      return requestMcp(parsed.options, env, "tools/call", {
+        name: toolName,
+        arguments: parsed.options.has("arguments") ? parseJsonObject(requiredOption(parsed.options, "arguments")) : {}
+      }, dependencies);
+    })();
+    write(outputFormat === "human" ? humanResult(result2) : JSON.stringify(result2, null, 2));
+    return 0;
+  }
+  let storedOAuth = await optionalOAuth(dependencies.managementStore);
+  const managementResource = `${baseUrl(parsed.options, env)}/management`;
+  if (storedOAuth && storedOAuth.resource !== managementResource)
+    throw new Error("Stored management grant targets a different resource; sign in again.");
+  if (storedOAuth && storedOAuth.expiresAt <= Date.now() && !env.AUTHLESS_SESSION_TOKEN?.trim() && !env.AUTHLESS_APP_CREDENTIAL?.trim()) {
+    storedOAuth = await refreshOAuth(storedOAuth, dependencies.fetcher ?? fetch, dependencies.managementStore);
+  }
   if (storedOAuth?.workspaceId) {
     const selected = parsed.options.get("workspace");
     if (selected && selected !== storedOAuth.workspaceId)

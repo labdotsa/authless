@@ -64,7 +64,31 @@ and `workspaces get`. `AUTHLESS_SESSION_TOKEN` supports the remaining
 platform-session commands. `AUTHLESS_APP_CREDENTIAL` is limited to app
 membership and access commands. Set exactly one environment credential for
 token-based commands. Pass credentials through a secret manager, never through
-command-line arguments. The CLI never extracts browser cookies.
+command-line arguments. For an interactive operator flow, run `auth login`,
+omit `--workspace` to use the browser workspace picker or pass one workspace
+explicitly, then use `auth status`, `auth refresh`, and `auth logout` as needed.
+`auth status` reports separate `managementOAuth` and `mcpOAuth` status strings
+(`configured` or `native-pkce`) so an operator can see which audience is
+configured without exposing access tokens.
+The CLI never extracts browser cookies.
+
+MCP uses a separate audience and secure-store entry. Sign in for that audience
+explicitly, then initialize the read-only CLI MCP surface:
+
+```sh
+packages/cli/dist/cli.js auth login --resource https://api.authle.ss/mcp
+packages/cli/dist/cli.js auth refresh --resource https://api.authle.ss/mcp
+packages/cli/dist/cli.js mcp initialize
+packages/cli/dist/cli.js mcp tools
+packages/cli/dist/cli.js mcp resources
+packages/cli/dist/cli.js mcp read --uri authless://management/catalog
+packages/cli/dist/cli.js auth logout --resource https://api.authle.ss/mcp
+```
+
+The management API grant and MCP grant are never interchangeable. The CLI
+allows only MCP tools marked by the server with the
+`annotations.readOnlyHint` flag; mutations stay on the authenticated REST
+command path and require their own credential and confirmation.
 
 Supported commands cover workspace and app lifecycle, environment lookup, membership invitation and status changes, access lookup, and audit listing. Mutations require explicit `--yes`, use idempotency keys, and require expected versions where the contract does. `auth login`, `auth refresh`, and `auth logout` manage the native grant. Agent processes use the separate owner-created delegation flow.
 
@@ -87,7 +111,15 @@ Health, well-known, and MCP routes do not use API version negotiation. Contract 
 
 Use Authorization Code with PKCE for a user signing in to an application. The browser and SvelteKit helpers never identify a visitor or create a session during module import. Your server exchanges the callback and creates the application-owned session.
 
-Agents do not sign in as a human. An owner creates a bounded delegation, registers the public JWKS, and allows a machine to use `private_key_jwt` with short-lived client credentials. The local management-agent example documents that protocol. Live management OAuth can return `503 temporarily_unavailable` while its deployment is unconfigured. The protected management MCP deployment also needs its terminal GA attestation. The read-only Docs MCP does not authenticate or access tenant data.
+Agents do not sign in as a human. An owner creates a bounded delegation for
+one workspace and one resource, registers the public JWKS, and allows a machine
+to use `private_key_jwt` with short-lived client credentials. The local
+management-agent example documents that protocol. Its bearer targets the exact
+`https://api.authle.ss/mcp` audience and is sent only to `/mcp`; it is separate
+from the CLI's human management grant. Live management OAuth can return `503
+temporarily_unavailable` while its deployment is unconfigured. The protected
+management MCP deployment also needs its terminal GA attestation. The
+read-only Docs MCP does not authenticate or access tenant data.
 
 ## Verification boundary
 

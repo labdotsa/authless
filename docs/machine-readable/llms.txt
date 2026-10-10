@@ -14,7 +14,7 @@
 ## Availability
 
 - Server client: `@authless/server`, source-distributed for trusted Node.js 24+ server code.
-- CLI: `@authless/cli`, source-distributed for operators, scripts, and agents. Native `auth login` uses loopback PKCE and Bun secure storage; the `workspace:read` grant is limited to workspace list/get. Use `AUTHLESS_SESSION_TOKEN` for remaining platform-session commands or `AUTHLESS_APP_CREDENTIAL` for app membership/access. It never extracts browser cookies.
+- CLI: `@authless/cli`, source-distributed for operators, scripts, and agents. Run `auth login` for native Authorization Code with S256 PKCE; omit `--workspace` to choose a workspace in the browser picker, or pass one explicitly. `auth status` reports separate `managementOAuth` and `mcpOAuth` status strings without returning access tokens. `auth refresh` rotates the stored grant and `auth logout` revokes and removes it. Management and MCP grants use separate Bun secure-store entries and audiences: use `--resource https://api.authle.ss/mcp` before `mcp initialize`, then `mcp tools`, `mcp resources`, `mcp read`, or `mcp call`. The native `workspace:read` grant is limited to workspace list/get, and MCP exposes read-only list/inspect tools. Use `AUTHLESS_SESSION_TOKEN` for remaining platform-session commands or `AUTHLESS_APP_CREDENTIAL` for app membership/access. It never extracts browser cookies.
 - Browser and SvelteKit helpers are source-only workspace packages; clean-room examples use local vendor snapshots.
 - None of these packages is currently published to npm.
 
@@ -26,6 +26,7 @@
 ## Agent access
 
 - [Read-only Docs MCP guide](https://github.com/labdotsa/authless/tree/master/docs-mcp/README.md): Run `node docs-mcp/stdio.js` from the public developer repository; it does not authenticate, mutate, or access tenant data.
+- Management MCP uses a separate delegated bearer audience at `https://api.authle.ss/mcp`. Human CLI login is not agent delegation. An owner must create one bounded workspace delegation, register the agent JWKS, and allow `private_key_jwt` client credentials; deployment attestation can still deny the request.
 
 ## Primary sources
 
