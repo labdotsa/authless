@@ -1,6 +1,7 @@
 {
   "name": "authless-sveltekit-hosted-sign-in-example",
   "private": true,
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",

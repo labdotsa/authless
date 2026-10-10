@@ -1,155 +1,155 @@
 // src/generated.ts
 var listWorkspacesOperation = {
-  authorization: "session",
+  authorization: "session-or-management-oauth",
   method: "GET",
-  path: "/v1/workspaces",
+  path: "/workspaces",
   retrySafety: "safe",
   status: "stable"
 };
 var createWorkspaceOperation = {
   authorization: "session",
   method: "POST",
-  path: "/v1/workspaces",
+  path: "/workspaces",
   retrySafety: "unsafe",
   status: "stable"
 };
 var getWorkspaceOperation = {
-  authorization: "session",
+  authorization: "session-or-management-oauth",
   method: "GET",
-  path: "/v1/workspaces/{workspaceId}",
+  path: "/workspaces/{workspaceId}",
   retrySafety: "safe",
   status: "stable"
 };
 var listAuditEventsOperation = {
   authorization: "session",
   method: "GET",
-  path: "/v1/workspaces/{workspaceId}/audit-events",
+  path: "/workspaces/{workspaceId}/audit-events",
   retrySafety: "safe",
   status: "stable"
 };
 var createAppOperation = {
   authorization: "session",
   method: "POST",
-  path: "/v1/workspaces/{workspaceId}/apps",
+  path: "/workspaces/{workspaceId}/apps",
   retrySafety: "unsafe",
   status: "stable"
 };
 var listAppsOperation = {
   authorization: "session",
   method: "GET",
-  path: "/v1/workspaces/{workspaceId}/apps",
+  path: "/workspaces/{workspaceId}/apps",
   retrySafety: "safe",
   status: "stable"
 };
 var getAppEnvironmentOperation = {
   authorization: "session",
   method: "GET",
-  path: "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}",
+  path: "/workspaces/{workspaceId}/apps/{appId}/{environment}",
   retrySafety: "safe",
   status: "stable"
 };
 var listAppMembershipsOperation = {
   authorization: "session-or-app-credential",
   method: "GET",
-  path: "/v1/workspaces/{workspaceId}/apps/{appId}/memberships",
+  path: "/workspaces/{workspaceId}/apps/{appId}/memberships",
   retrySafety: "safe",
   status: "stable"
 };
 var inviteAppMembershipOperation = {
   authorization: "session-or-app-credential",
   method: "POST",
-  path: "/v1/workspaces/{workspaceId}/apps/{appId}/memberships",
+  path: "/workspaces/{workspaceId}/apps/{appId}/memberships",
   retrySafety: "safe",
   status: "stable"
 };
 var getAppMembershipOperation = {
   authorization: "session-or-app-credential",
   method: "GET",
-  path: "/v1/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}",
+  path: "/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}",
   retrySafety: "safe",
   status: "stable"
 };
 var changeAppMembershipStatusOperation = {
   authorization: "session-or-app-credential",
   method: "POST",
-  path: "/v1/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/lifecycle",
+  path: "/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/lifecycle",
   retrySafety: "safe",
   status: "stable"
 };
 var getAppMembershipAccessOperation = {
   authorization: "session-or-app-credential",
   method: "GET",
-  path: "/v1/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/access",
+  path: "/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/access",
   retrySafety: "safe",
   status: "stable"
 };
 var grantAppRoleOperation = {
   authorization: "session-or-app-credential",
   method: "POST",
-  path: "/v1/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/roles",
+  path: "/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/roles",
   retrySafety: "safe",
   status: "stable"
 };
 var grantAppEntitlementOperation = {
   authorization: "session-or-app-credential",
   method: "POST",
-  path: "/v1/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/entitlements",
+  path: "/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/entitlements",
   retrySafety: "safe",
   status: "stable"
 };
 var revokeAppEntitlementOperation = {
   authorization: "session-or-app-credential",
   method: "DELETE",
-  path: "/v1/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/entitlements/{grantId}",
+  path: "/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/entitlements/{grantId}",
   retrySafety: "safe",
   status: "stable"
 };
 var revokeAppRoleOperation = {
   authorization: "session-or-app-credential",
   method: "DELETE",
-  path: "/v1/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/roles/{grantId}",
+  path: "/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/roles/{grantId}",
   retrySafety: "safe",
   status: "stable"
 };
 var createBulkAccessPreviewOperation = {
   authorization: "session",
   method: "POST",
-  path: "/v1/workspaces/{workspaceId}/apps/{appId}/bulk-access/previews",
+  path: "/workspaces/{workspaceId}/apps/{appId}/bulk-access/previews",
   retrySafety: "unsafe",
   status: "stable"
 };
 var getBulkAccessPreviewOperation = {
   authorization: "session",
   method: "GET",
-  path: "/v1/workspaces/{workspaceId}/apps/{appId}/bulk-access/previews/{previewId}",
+  path: "/workspaces/{workspaceId}/apps/{appId}/bulk-access/previews/{previewId}",
   retrySafety: "safe",
   status: "stable"
 };
 var executeBulkAccessPreviewOperation = {
   authorization: "session",
   method: "POST",
-  path: "/v1/workspaces/{workspaceId}/apps/{appId}/bulk-access/previews/{previewId}/executions",
+  path: "/workspaces/{workspaceId}/apps/{appId}/bulk-access/previews/{previewId}/executions",
   retrySafety: "safe",
   status: "stable"
 };
 var getBulkAccessOperationOperation = {
   authorization: "session",
   method: "GET",
-  path: "/v1/workspaces/{workspaceId}/apps/{appId}/bulk-access/operations/{operationId}",
+  path: "/workspaces/{workspaceId}/apps/{appId}/bulk-access/operations/{operationId}",
   retrySafety: "safe",
   status: "stable"
 };
 var cancelBulkAccessOperationOperation = {
   authorization: "session",
   method: "POST",
-  path: "/v1/workspaces/{workspaceId}/apps/{appId}/bulk-access/operations/{operationId}/cancellation",
+  path: "/workspaces/{workspaceId}/apps/{appId}/bulk-access/operations/{operationId}/cancellation",
   retrySafety: "safe",
   status: "stable"
 };
 var listBulkAccessResultsOperation = {
   authorization: "session",
   method: "GET",
-  path: "/v1/workspaces/{workspaceId}/apps/{appId}/bulk-access/operations/{operationId}/results",
+  path: "/workspaces/{workspaceId}/apps/{appId}/bulk-access/operations/{operationId}/results",
   retrySafety: "safe",
   status: "stable"
 };
@@ -381,6 +381,11 @@ var transientStatuses = new Set([408, 500, 502, 503, 504]);
 function record(value) {
   return value !== null && typeof value === "object" ? value : null;
 }
+function safeErrorCode(value) {
+  if (!value || value.length > 128 || !/^[a-z0-9][a-z0-9_.-]*$/u.test(value))
+    return null;
+  return value;
+}
 function appAccessActor(value) {
   const actor = record(value);
   if (!actor || actor.kind !== "person" && actor.kind !== "service" || typeof actor.reference !== "string")
@@ -443,13 +448,40 @@ class AuthlessApiError extends Error {
     this.status = input.status;
   }
 }
+function validateBaseUrl(value) {
+  let url;
+  try {
+    url = new URL(value);
+  } catch {
+    throw new TypeError("baseUrl must be an absolute origin URL.");
+  }
+  const loopback = url.hostname === "localhost" || url.hostname === "127.0.0.1" || url.hostname === "[::1]";
+  if (url.protocol !== "https:" && !loopback)
+    throw new TypeError("baseUrl must use HTTPS outside loopback hosts.");
+  if (url.username || url.password || url.search || url.hash || url.pathname !== "/")
+    throw new TypeError("baseUrl must be an origin without credentials, path, query, or fragment.");
+  return url.toString().replace(/\/$/u, "");
+}
 function createAuthlessTransport(options) {
+  const baseUrl = validateBaseUrl(options.baseUrl);
   const sessionToken = typeof options.sessionToken === "string" && options.sessionToken.length > 0 ? options.sessionToken : undefined;
   const appCredentialToken = typeof options.appCredentialToken === "string" && options.appCredentialToken.length > 0 ? options.appCredentialToken : undefined;
-  if (Boolean(sessionToken) === Boolean(appCredentialToken))
-    throw new TypeError("Exactly one server-side session or app credential is required.");
+  const managementAccessToken = typeof options.managementAccessToken === "string" && options.managementAccessToken.length > 0 ? options.managementAccessToken : undefined;
+  const credentials = [
+    sessionToken,
+    appCredentialToken,
+    managementAccessToken
+  ].filter((value) => value !== undefined);
+  if (credentials.length !== 1)
+    throw new TypeError("Exactly one server-side session, app credential, or management access token is required.");
+  for (const [name, value] of [
+    ["sessionToken", sessionToken],
+    ["appCredentialToken", appCredentialToken],
+    ["managementAccessToken", managementAccessToken]
+  ])
+    if (value && /[\r\n]/u.test(value))
+      throw new TypeError(`${name} must not contain CR or LF characters.`);
   const request = options.fetch ?? globalThis.fetch;
-  const baseUrl = options.baseUrl.replace(/\/$/, "");
   const baseDelayMilliseconds = options.retry?.baseDelayMilliseconds ?? 100;
   const maxAttempts = options.retry?.maxAttempts ?? 2;
   if (!Number.isSafeInteger(maxAttempts) || maxAttempts < 1 || maxAttempts > 3)
@@ -464,7 +496,11 @@ function createAuthlessTransport(options) {
       const requestCorrelationId = normalizeCorrelationId(input.correlationId);
       if (appCredentialToken && input.operation.authorization !== "session-or-app-credential")
         throw new TypeError("This Authless API operation requires a platform session.");
-      const authorityHeaders = appCredentialToken ? { authorization: `Bearer ${appCredentialToken}` } : { cookie: `__Host-authless_session=${sessionToken}` };
+      if (input.headers && Object.keys(input.headers).some((name) => /^(authorization|cookie|proxy-authorization|x-authless-client)$/iu.test(name)))
+        throw new TypeError("Request headers cannot override server credentials or client identity.");
+      const authorityHeaders = appCredentialToken || managementAccessToken ? {
+        authorization: `Bearer ${appCredentialToken ?? managementAccessToken}`
+      } : { cookie: `__Host-authless_session=${sessionToken}` };
       let attempt = 1;
       let response;
       while (true) {
@@ -476,10 +512,11 @@ function createAuthlessTransport(options) {
               ...authorityHeaders,
               ...input.body === undefined ? {} : { "content-type": "application/json" },
               ...input.headers,
-              "x-authless-client": "api-client",
+              "x-authless-client": "server",
               "x-correlation-id": requestCorrelationId
             },
-            method: input.operation.method
+            method: input.operation.method,
+            redirect: "error"
           });
         } catch {
           if (input.operation.retrySafety !== "safe" || attempt >= maxAttempts)
@@ -508,9 +545,10 @@ function createAuthlessTransport(options) {
       if (!response.ok) {
         const body = await response.json().catch(() => null);
         const responseCode = readApiErrorCode(body);
-        const code = responseCode && knownErrorCodes.has(responseCode) ? responseCode : "request_failed";
+        const safeResponseCode = safeErrorCode(responseCode);
+        const code = safeResponseCode && knownErrorCodes.has(safeResponseCode) ? safeResponseCode : "request_failed";
         const classification = classifyApiFailure({
-          code: responseCode,
+          code: safeResponseCode,
           retryAfter: response.headers.get("retry-after"),
           status: response.status
         });
@@ -521,7 +559,7 @@ function createAuthlessTransport(options) {
           code,
           correlationId,
           currentGrant: code === "version_conflict" ? appAccessGrant(body?.grant) : undefined,
-          error: responseCode ?? "request_failed",
+          error: safeResponseCode ?? "request_failed",
           kind: classification.kind,
           outcome: classification.outcome,
           preserveEdits: classification.preserveEdits,
@@ -819,7 +857,10 @@ function createWorkspaceClient(transport) {
 }
 
 // src/index.ts
-function createAuthlessApiClient(options) {
+if (typeof window !== "undefined") {
+  throw new Error("@authless/server is server-only. Move this import to server code. Use @authless/browser for browser authorization.");
+}
+function createAuthlessServerClient(options) {
   const transport = createAuthlessTransport(options);
   return {
     auditEvents: createAuditClient(transport),
@@ -834,7 +875,7 @@ export {
   createWorkspaceClient,
   createBulkAccessClient,
   createAuthlessTransport,
-  createAuthlessApiClient,
+  createAuthlessServerClient,
   createAuditClient,
   createAppMembershipClient,
   createAppClient,

@@ -1,7 +1,4 @@
-import {
-  AuthlessApiError,
-  createAuthlessApiClient,
-} from "@authless/api-client";
+import { AuthlessApiError, createAuthlessServerClient } from "@authless/server";
 
 const credential = `authless_secret_${"x".repeat(43)}`;
 const correlationId = "rest-guide-clean-room-001";
@@ -83,7 +80,7 @@ const boundary = async (input: RequestInfo | URL, init?: RequestInit) => {
   return Response.json({ error: "invalid_request" }, { status: 400, headers });
 };
 
-const client = createAuthlessApiClient({
+const client = createAuthlessServerClient({
   appCredentialToken: credential,
   baseUrl: "https://isolated.example.test",
   fetch: boundary,
@@ -135,7 +132,7 @@ if (!invitation || !revoked) throw new Error("clean_room_cleanup_incomplete");
 
 let failure: unknown;
 try {
-  await createAuthlessApiClient({
+  await createAuthlessServerClient({
     appCredentialToken: `authless_secret_${"z".repeat(43)}`,
     baseUrl: "https://isolated.example.test",
     fetch: boundary,

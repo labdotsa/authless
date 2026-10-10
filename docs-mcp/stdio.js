@@ -11,7 +11,7 @@ var corpus_generated_default = {
   generatedAt: "2026-10-09",
   manifest: {
     canonical: "https://docs.authle.ss/machine-docs.json",
-    digest: "3dcd76f073b2ea8d306c5b8d90360bf28d78b617eae7f21a6385756f3e241e8d",
+    digest: "d593d05dba1dcd4550c00919e78be806438f7a5d298767f2306bb99610de0b97",
     authority: "read-only-public-documentation",
     exclusions: [
       "authenticated-content",
@@ -149,9 +149,9 @@ The following checked projection is shared with the human-rendered guide and pre
       ]
     },
     {
-      "package": "@authless/api-client",
+      "package": "@authless/server",
       "symbols": [
-        "createAuthlessApiClient"
+        "createAuthlessServerClient"
       ]
     }
   ],
@@ -244,23 +244,45 @@ The following checked projection is shared with the human-rendered guide and pre
       "stage": "available"
     },
     {
-      "id": "rest-client",
+      "id": "server-client",
       "title": {
-        "en": "TypeScript REST client",
-        "ar": "عميل REST لـ TypeScript"
+        "en": "Node.js server client",
+        "ar": "عميل خادم Node.js"
       },
       "description": {
-        "en": "Call contract-derived management operations from trusted server code.",
-        "ar": "استدعِ عمليات الإدارة المشتقة من العقد من خادم موثوق."
+        "en": "Call typed management operations from trusted Node.js server code.",
+        "ar": "استدعِ عمليات الإدارة المعرّفة من خادم Node.js موثوق."
       },
-      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && mkdir api-client-check && cd api-client-check && npm init -y && npm install ../packages/api-client",
-      "firstAction": "import { createAuthlessApiClient } from \\"@authless/api-client\\";",
-      "successSignal": "membership_invited paged guarded_cleanup_ok",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && bun install --frozen-lockfile",
+      "firstAction": "import { createAuthlessServerClient } from \\"@authless/server\\";",
+      "successSignal": "server_request_ok credential_boundary_preserved",
       "negativeChecks": [
-        "insufficient scope",
-        "stale version",
-        "rate limit",
-        "unknown mutation outcome"
+        "browser import",
+        "missing credential",
+        "wrong authority",
+        "unsafe retry"
+      ],
+      "authoritativeGuide": "/build/rest",
+      "stage": "available"
+    },
+    {
+      "id": "cli",
+      "title": {
+        "en": "Authless CLI",
+        "ar": "واجهة Authless الطرفية"
+      },
+      "description": {
+        "en": "Manage Authless resources with native PKCE login or a bounded machine credential.",
+        "ar": "أدر موارد Authless عبر تسجيل دخول PKCE أصلي أو بيانات اعتماد آلية محدودة."
+      },
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && bun install --frozen-lockfile",
+      "firstAction": "packages/cli/dist/cli.js auth login",
+      "successSignal": "native_pkce_grant workspace_read json_output",
+      "negativeChecks": [
+        "credential on argv",
+        "browser cookie extraction",
+        "unconfirmed mutation",
+        "token in output"
       ],
       "authoritativeGuide": "/build/rest",
       "stage": "available"
@@ -463,7 +485,7 @@ Source attribution: Developer documentation (https://docs.authle.ss/).
       title: "Documentation",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "4343756a920dae1c381976865dc825969df7d12de64c9103a35310d989a791c1"
+      contentDigest: "1e23ceed6f64cce37d4b6d86a30b312c4c6be2e36ba65cebe2986ad8b01fd1b8"
     },
     {
       canonical: "https://docs.authle.ss/?lang=ar",
@@ -539,9 +561,9 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ]
     },
     {
-      "package": "@authless/api-client",
+      "package": "@authless/server",
       "symbols": [
-        "createAuthlessApiClient"
+        "createAuthlessServerClient"
       ]
     }
   ],
@@ -634,23 +656,45 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       "stage": "available"
     },
     {
-      "id": "rest-client",
+      "id": "server-client",
       "title": {
-        "en": "TypeScript REST client",
-        "ar": "عميل REST لـ TypeScript"
+        "en": "Node.js server client",
+        "ar": "عميل خادم Node.js"
       },
       "description": {
-        "en": "Call contract-derived management operations from trusted server code.",
-        "ar": "استدعِ عمليات الإدارة المشتقة من العقد من خادم موثوق."
+        "en": "Call typed management operations from trusted Node.js server code.",
+        "ar": "استدعِ عمليات الإدارة المعرّفة من خادم Node.js موثوق."
       },
-      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && mkdir api-client-check && cd api-client-check && npm init -y && npm install ../packages/api-client",
-      "firstAction": "import { createAuthlessApiClient } from \\"@authless/api-client\\";",
-      "successSignal": "membership_invited paged guarded_cleanup_ok",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && bun install --frozen-lockfile",
+      "firstAction": "import { createAuthlessServerClient } from \\"@authless/server\\";",
+      "successSignal": "server_request_ok credential_boundary_preserved",
       "negativeChecks": [
-        "insufficient scope",
-        "stale version",
-        "rate limit",
-        "unknown mutation outcome"
+        "browser import",
+        "missing credential",
+        "wrong authority",
+        "unsafe retry"
+      ],
+      "authoritativeGuide": "/build/rest",
+      "stage": "available"
+    },
+    {
+      "id": "cli",
+      "title": {
+        "en": "Authless CLI",
+        "ar": "واجهة Authless الطرفية"
+      },
+      "description": {
+        "en": "Manage Authless resources with native PKCE login or a bounded machine credential.",
+        "ar": "أدر موارد Authless عبر تسجيل دخول PKCE أصلي أو بيانات اعتماد آلية محدودة."
+      },
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && bun install --frozen-lockfile",
+      "firstAction": "packages/cli/dist/cli.js auth login",
+      "successSignal": "native_pkce_grant workspace_read json_output",
+      "negativeChecks": [
+        "credential on argv",
+        "browser cookie extraction",
+        "unconfirmed mutation",
+        "token in output"
       ],
       "authoritativeGuide": "/build/rest",
       "stage": "available"
@@ -853,7 +897,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       title: "وثائق Authless",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "f1e178e9cef6fa952b5a03405e4de83af902109b6de86575c4a50215bc906c82"
+      contentDigest: "fc06249f3e61b355620ed086b1200956eb2276f823124bea6d692eb2a27e5c2a"
     },
     {
       canonical: "https://docs.authle.ss/start",
@@ -925,9 +969,9 @@ The following checked projection is shared with the human-rendered guide and pre
       ]
     },
     {
-      "package": "@authless/api-client",
+      "package": "@authless/server",
       "symbols": [
-        "createAuthlessApiClient"
+        "createAuthlessServerClient"
       ]
     }
   ],
@@ -1020,23 +1064,45 @@ The following checked projection is shared with the human-rendered guide and pre
       "stage": "available"
     },
     {
-      "id": "rest-client",
+      "id": "server-client",
       "title": {
-        "en": "TypeScript REST client",
-        "ar": "عميل REST لـ TypeScript"
+        "en": "Node.js server client",
+        "ar": "عميل خادم Node.js"
       },
       "description": {
-        "en": "Call contract-derived management operations from trusted server code.",
-        "ar": "استدعِ عمليات الإدارة المشتقة من العقد من خادم موثوق."
+        "en": "Call typed management operations from trusted Node.js server code.",
+        "ar": "استدعِ عمليات الإدارة المعرّفة من خادم Node.js موثوق."
       },
-      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && mkdir api-client-check && cd api-client-check && npm init -y && npm install ../packages/api-client",
-      "firstAction": "import { createAuthlessApiClient } from \\"@authless/api-client\\";",
-      "successSignal": "membership_invited paged guarded_cleanup_ok",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && bun install --frozen-lockfile",
+      "firstAction": "import { createAuthlessServerClient } from \\"@authless/server\\";",
+      "successSignal": "server_request_ok credential_boundary_preserved",
       "negativeChecks": [
-        "insufficient scope",
-        "stale version",
-        "rate limit",
-        "unknown mutation outcome"
+        "browser import",
+        "missing credential",
+        "wrong authority",
+        "unsafe retry"
+      ],
+      "authoritativeGuide": "/build/rest",
+      "stage": "available"
+    },
+    {
+      "id": "cli",
+      "title": {
+        "en": "Authless CLI",
+        "ar": "واجهة Authless الطرفية"
+      },
+      "description": {
+        "en": "Manage Authless resources with native PKCE login or a bounded machine credential.",
+        "ar": "أدر موارد Authless عبر تسجيل دخول PKCE أصلي أو بيانات اعتماد آلية محدودة."
+      },
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && bun install --frozen-lockfile",
+      "firstAction": "packages/cli/dist/cli.js auth login",
+      "successSignal": "native_pkce_grant workspace_read json_output",
+      "negativeChecks": [
+        "credential on argv",
+        "browser cookie extraction",
+        "unconfirmed mutation",
+        "token in output"
       ],
       "authoritativeGuide": "/build/rest",
       "stage": "available"
@@ -1239,7 +1305,7 @@ Source attribution: Developer documentation (https://docs.authle.ss/start).
       title: "Start building",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "f4b48a31e59f5fd50ab72989f862f2dae15a8fdbe0ff4a377b1983f06aac59e0"
+      contentDigest: "4db6ebc4ee1c19dea24d6ca7fc828453f24e3e6283b28594f416f79e5b0d5895"
     },
     {
       canonical: "https://docs.authle.ss/start?lang=ar",
@@ -1311,9 +1377,9 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ]
     },
     {
-      "package": "@authless/api-client",
+      "package": "@authless/server",
       "symbols": [
-        "createAuthlessApiClient"
+        "createAuthlessServerClient"
       ]
     }
   ],
@@ -1406,23 +1472,45 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       "stage": "available"
     },
     {
-      "id": "rest-client",
+      "id": "server-client",
       "title": {
-        "en": "TypeScript REST client",
-        "ar": "عميل REST لـ TypeScript"
+        "en": "Node.js server client",
+        "ar": "عميل خادم Node.js"
       },
       "description": {
-        "en": "Call contract-derived management operations from trusted server code.",
-        "ar": "استدعِ عمليات الإدارة المشتقة من العقد من خادم موثوق."
+        "en": "Call typed management operations from trusted Node.js server code.",
+        "ar": "استدعِ عمليات الإدارة المعرّفة من خادم Node.js موثوق."
       },
-      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && mkdir api-client-check && cd api-client-check && npm init -y && npm install ../packages/api-client",
-      "firstAction": "import { createAuthlessApiClient } from \\"@authless/api-client\\";",
-      "successSignal": "membership_invited paged guarded_cleanup_ok",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && bun install --frozen-lockfile",
+      "firstAction": "import { createAuthlessServerClient } from \\"@authless/server\\";",
+      "successSignal": "server_request_ok credential_boundary_preserved",
       "negativeChecks": [
-        "insufficient scope",
-        "stale version",
-        "rate limit",
-        "unknown mutation outcome"
+        "browser import",
+        "missing credential",
+        "wrong authority",
+        "unsafe retry"
+      ],
+      "authoritativeGuide": "/build/rest",
+      "stage": "available"
+    },
+    {
+      "id": "cli",
+      "title": {
+        "en": "Authless CLI",
+        "ar": "واجهة Authless الطرفية"
+      },
+      "description": {
+        "en": "Manage Authless resources with native PKCE login or a bounded machine credential.",
+        "ar": "أدر موارد Authless عبر تسجيل دخول PKCE أصلي أو بيانات اعتماد آلية محدودة."
+      },
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && bun install --frozen-lockfile",
+      "firstAction": "packages/cli/dist/cli.js auth login",
+      "successSignal": "native_pkce_grant workspace_read json_output",
+      "negativeChecks": [
+        "credential on argv",
+        "browser cookie extraction",
+        "unconfirmed mutation",
+        "token in output"
       ],
       "authoritativeGuide": "/build/rest",
       "stage": "available"
@@ -1625,7 +1713,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       title: "ابدأ البناء",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "6363d09f0e334168458734ea062e1e517ebe2751e7bc3456ac9588cf11a80354"
+      contentDigest: "e768fb1853cada2baed678968f761252c1d28f465acb831349e4329231740db5"
     },
     {
       canonical: "https://docs.authle.ss/understand",
@@ -1697,9 +1785,9 @@ The following checked projection is shared with the human-rendered guide and pre
       ]
     },
     {
-      "package": "@authless/api-client",
+      "package": "@authless/server",
       "symbols": [
-        "createAuthlessApiClient"
+        "createAuthlessServerClient"
       ]
     }
   ],
@@ -1792,23 +1880,45 @@ The following checked projection is shared with the human-rendered guide and pre
       "stage": "available"
     },
     {
-      "id": "rest-client",
+      "id": "server-client",
       "title": {
-        "en": "TypeScript REST client",
-        "ar": "عميل REST لـ TypeScript"
+        "en": "Node.js server client",
+        "ar": "عميل خادم Node.js"
       },
       "description": {
-        "en": "Call contract-derived management operations from trusted server code.",
-        "ar": "استدعِ عمليات الإدارة المشتقة من العقد من خادم موثوق."
+        "en": "Call typed management operations from trusted Node.js server code.",
+        "ar": "استدعِ عمليات الإدارة المعرّفة من خادم Node.js موثوق."
       },
-      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && mkdir api-client-check && cd api-client-check && npm init -y && npm install ../packages/api-client",
-      "firstAction": "import { createAuthlessApiClient } from \\"@authless/api-client\\";",
-      "successSignal": "membership_invited paged guarded_cleanup_ok",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && bun install --frozen-lockfile",
+      "firstAction": "import { createAuthlessServerClient } from \\"@authless/server\\";",
+      "successSignal": "server_request_ok credential_boundary_preserved",
       "negativeChecks": [
-        "insufficient scope",
-        "stale version",
-        "rate limit",
-        "unknown mutation outcome"
+        "browser import",
+        "missing credential",
+        "wrong authority",
+        "unsafe retry"
+      ],
+      "authoritativeGuide": "/build/rest",
+      "stage": "available"
+    },
+    {
+      "id": "cli",
+      "title": {
+        "en": "Authless CLI",
+        "ar": "واجهة Authless الطرفية"
+      },
+      "description": {
+        "en": "Manage Authless resources with native PKCE login or a bounded machine credential.",
+        "ar": "أدر موارد Authless عبر تسجيل دخول PKCE أصلي أو بيانات اعتماد آلية محدودة."
+      },
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && bun install --frozen-lockfile",
+      "firstAction": "packages/cli/dist/cli.js auth login",
+      "successSignal": "native_pkce_grant workspace_read json_output",
+      "negativeChecks": [
+        "credential on argv",
+        "browser cookie extraction",
+        "unconfirmed mutation",
+        "token in output"
       ],
       "authoritativeGuide": "/build/rest",
       "stage": "available"
@@ -2011,7 +2121,7 @@ Source attribution: Developer documentation (https://docs.authle.ss/understand).
       title: "Understand Authless",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "1ffcc80eb72361f54271305842a098b92f713b81ef1dbe6ca6e99cedca51809d"
+      contentDigest: "cdce7cee6d495ecda08c160bd187d4bdd130dc1d507b0d5ca0454ea72d750358"
     },
     {
       canonical: "https://docs.authle.ss/understand?lang=ar",
@@ -2083,9 +2193,9 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ]
     },
     {
-      "package": "@authless/api-client",
+      "package": "@authless/server",
       "symbols": [
-        "createAuthlessApiClient"
+        "createAuthlessServerClient"
       ]
     }
   ],
@@ -2178,23 +2288,45 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       "stage": "available"
     },
     {
-      "id": "rest-client",
+      "id": "server-client",
       "title": {
-        "en": "TypeScript REST client",
-        "ar": "عميل REST لـ TypeScript"
+        "en": "Node.js server client",
+        "ar": "عميل خادم Node.js"
       },
       "description": {
-        "en": "Call contract-derived management operations from trusted server code.",
-        "ar": "استدعِ عمليات الإدارة المشتقة من العقد من خادم موثوق."
+        "en": "Call typed management operations from trusted Node.js server code.",
+        "ar": "استدعِ عمليات الإدارة المعرّفة من خادم Node.js موثوق."
       },
-      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && mkdir api-client-check && cd api-client-check && npm init -y && npm install ../packages/api-client",
-      "firstAction": "import { createAuthlessApiClient } from \\"@authless/api-client\\";",
-      "successSignal": "membership_invited paged guarded_cleanup_ok",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && bun install --frozen-lockfile",
+      "firstAction": "import { createAuthlessServerClient } from \\"@authless/server\\";",
+      "successSignal": "server_request_ok credential_boundary_preserved",
       "negativeChecks": [
-        "insufficient scope",
-        "stale version",
-        "rate limit",
-        "unknown mutation outcome"
+        "browser import",
+        "missing credential",
+        "wrong authority",
+        "unsafe retry"
+      ],
+      "authoritativeGuide": "/build/rest",
+      "stage": "available"
+    },
+    {
+      "id": "cli",
+      "title": {
+        "en": "Authless CLI",
+        "ar": "واجهة Authless الطرفية"
+      },
+      "description": {
+        "en": "Manage Authless resources with native PKCE login or a bounded machine credential.",
+        "ar": "أدر موارد Authless عبر تسجيل دخول PKCE أصلي أو بيانات اعتماد آلية محدودة."
+      },
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && bun install --frozen-lockfile",
+      "firstAction": "packages/cli/dist/cli.js auth login",
+      "successSignal": "native_pkce_grant workspace_read json_output",
+      "negativeChecks": [
+        "credential on argv",
+        "browser cookie extraction",
+        "unconfirmed mutation",
+        "token in output"
       ],
       "authoritativeGuide": "/build/rest",
       "stage": "available"
@@ -2397,7 +2529,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       title: "افهم Authless",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "9d32f48a15a773e2eaf3ff7b316605bac88d279fc022c5aca677c3866f2e7dc0"
+      contentDigest: "b2718c5e8a722a980f33e1166b05ea7f85cba3b147eae2236ee280c677fc4477"
     },
     {
       canonical: "https://docs.authle.ss/build",
@@ -2473,9 +2605,9 @@ The following checked projection is shared with the human-rendered guide and pre
       ]
     },
     {
-      "package": "@authless/api-client",
+      "package": "@authless/server",
       "symbols": [
-        "createAuthlessApiClient"
+        "createAuthlessServerClient"
       ]
     }
   ],
@@ -2568,23 +2700,45 @@ The following checked projection is shared with the human-rendered guide and pre
       "stage": "available"
     },
     {
-      "id": "rest-client",
+      "id": "server-client",
       "title": {
-        "en": "TypeScript REST client",
-        "ar": "عميل REST لـ TypeScript"
+        "en": "Node.js server client",
+        "ar": "عميل خادم Node.js"
       },
       "description": {
-        "en": "Call contract-derived management operations from trusted server code.",
-        "ar": "استدعِ عمليات الإدارة المشتقة من العقد من خادم موثوق."
+        "en": "Call typed management operations from trusted Node.js server code.",
+        "ar": "استدعِ عمليات الإدارة المعرّفة من خادم Node.js موثوق."
       },
-      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && mkdir api-client-check && cd api-client-check && npm init -y && npm install ../packages/api-client",
-      "firstAction": "import { createAuthlessApiClient } from \\"@authless/api-client\\";",
-      "successSignal": "membership_invited paged guarded_cleanup_ok",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && bun install --frozen-lockfile",
+      "firstAction": "import { createAuthlessServerClient } from \\"@authless/server\\";",
+      "successSignal": "server_request_ok credential_boundary_preserved",
       "negativeChecks": [
-        "insufficient scope",
-        "stale version",
-        "rate limit",
-        "unknown mutation outcome"
+        "browser import",
+        "missing credential",
+        "wrong authority",
+        "unsafe retry"
+      ],
+      "authoritativeGuide": "/build/rest",
+      "stage": "available"
+    },
+    {
+      "id": "cli",
+      "title": {
+        "en": "Authless CLI",
+        "ar": "واجهة Authless الطرفية"
+      },
+      "description": {
+        "en": "Manage Authless resources with native PKCE login or a bounded machine credential.",
+        "ar": "أدر موارد Authless عبر تسجيل دخول PKCE أصلي أو بيانات اعتماد آلية محدودة."
+      },
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && bun install --frozen-lockfile",
+      "firstAction": "packages/cli/dist/cli.js auth login",
+      "successSignal": "native_pkce_grant workspace_read json_output",
+      "negativeChecks": [
+        "credential on argv",
+        "browser cookie extraction",
+        "unconfirmed mutation",
+        "token in output"
       ],
       "authoritativeGuide": "/build/rest",
       "stage": "available"
@@ -2787,7 +2941,7 @@ Source attribution: Developer documentation (https://docs.authle.ss/build).
       title: "Build an integration",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "ad25594d9aad02651d818cb2d843c88b86cbfbf528632121ecf0daaf063d76f5"
+      contentDigest: "e4795bed3839674651f0758547168e5a1ab0289dc0310d312767bc10c5d93a18"
     },
     {
       canonical: "https://docs.authle.ss/build?lang=ar",
@@ -2863,9 +3017,9 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ]
     },
     {
-      "package": "@authless/api-client",
+      "package": "@authless/server",
       "symbols": [
-        "createAuthlessApiClient"
+        "createAuthlessServerClient"
       ]
     }
   ],
@@ -2958,23 +3112,45 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       "stage": "available"
     },
     {
-      "id": "rest-client",
+      "id": "server-client",
       "title": {
-        "en": "TypeScript REST client",
-        "ar": "عميل REST لـ TypeScript"
+        "en": "Node.js server client",
+        "ar": "عميل خادم Node.js"
       },
       "description": {
-        "en": "Call contract-derived management operations from trusted server code.",
-        "ar": "استدعِ عمليات الإدارة المشتقة من العقد من خادم موثوق."
+        "en": "Call typed management operations from trusted Node.js server code.",
+        "ar": "استدعِ عمليات الإدارة المعرّفة من خادم Node.js موثوق."
       },
-      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && mkdir api-client-check && cd api-client-check && npm init -y && npm install ../packages/api-client",
-      "firstAction": "import { createAuthlessApiClient } from \\"@authless/api-client\\";",
-      "successSignal": "membership_invited paged guarded_cleanup_ok",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && bun install --frozen-lockfile",
+      "firstAction": "import { createAuthlessServerClient } from \\"@authless/server\\";",
+      "successSignal": "server_request_ok credential_boundary_preserved",
       "negativeChecks": [
-        "insufficient scope",
-        "stale version",
-        "rate limit",
-        "unknown mutation outcome"
+        "browser import",
+        "missing credential",
+        "wrong authority",
+        "unsafe retry"
+      ],
+      "authoritativeGuide": "/build/rest",
+      "stage": "available"
+    },
+    {
+      "id": "cli",
+      "title": {
+        "en": "Authless CLI",
+        "ar": "واجهة Authless الطرفية"
+      },
+      "description": {
+        "en": "Manage Authless resources with native PKCE login or a bounded machine credential.",
+        "ar": "أدر موارد Authless عبر تسجيل دخول PKCE أصلي أو بيانات اعتماد آلية محدودة."
+      },
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && bun install --frozen-lockfile",
+      "firstAction": "packages/cli/dist/cli.js auth login",
+      "successSignal": "native_pkce_grant workspace_read json_output",
+      "negativeChecks": [
+        "credential on argv",
+        "browser cookie extraction",
+        "unconfirmed mutation",
+        "token in output"
       ],
       "authoritativeGuide": "/build/rest",
       "stage": "available"
@@ -3177,7 +3353,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       title: "ابنِ تكاملاً",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "c46808a3e8da3fa1a4daa4717f3a2e40b997399ff2fc2991889cffe87c1721a3"
+      contentDigest: "1325ff8f4fbabe538a217d7c8c69fba61ce8c726b8af56b15894c549b0844331"
     },
     {
       canonical: "https://docs.authle.ss/build/sveltekit",
@@ -4221,11 +4397,11 @@ The following checked projection is shared with the human-rendered guide and pre
   ],
   "typescript": {
     "filename": "manage-access.ts",
-    "source": "import {\\n  AuthlessApiError,\\n  createAuthlessApiClient,\\n} from \\"@authless/api-client\\";\\n\\nconst client = createAuthlessApiClient({\\n  appCredentialToken: process.env.AUTHLESS_APP_CREDENTIAL!,\\n  baseUrl: \\"https://api.authle.ss\\",\\n  retry: { maxAttempts: 2 },\\n});\\nconst scope = {\\n  workspaceId: process.env.AUTHLESS_TEST_WORKSPACE_ID!,\\n  appId: process.env.AUTHLESS_TEST_APP_ID!,\\n};\\nconst correlationId = crypto.randomUUID();\\nconst customerReference = \`rest-guide-\${crypto.randomUUID()}\`;\\n\\ntry {\\n  // Durable idempotency: reuse this key only for this exact invitation claim.\\n  await client.appMemberships.invite({\\n    ...scope,\\n    correlationId,\\n    idempotencyKey: crypto.randomUUID(),\\n    confirmed: true,\\n    customerReference,\\n    email: \\"rest-guide-user@example.test\\",\\n  });\\n\\n  // Invitations are enumeration-safe, so locate the created test record by\\n  // its caller-owned reference, then preserve the opaque continuation cursor.\\n  const first = await client.appMemberships.list({\\n    ...scope, correlationId, query: customerReference, limit: 1,\\n  });\\n  const membership = first.memberships[0];\\n  if (!membership) throw new Error(\\"created_test_membership_not_visible\\");\\n  if (first.nextCursor) {\\n    await client.appMemberships.list({\\n      ...scope, correlationId, cursor: first.nextCursor, limit: 1,\\n    });\\n  }\\n\\n  const current = await client.appMemberships.get({\\n    ...scope, correlationId, membershipId: membership.id,\\n  });\\n\\n  // The client sends If-Match: \\"<version>\\" and keeps this mutation's\\n  // idempotency key unchanged across only its classified-safe retries.\\n  await client.appMemberships.changeStatus({\\n    ...scope,\\n    correlationId,\\n    membershipId: current.id,\\n    expectedVersion: current.version,\\n    idempotencyKey: crypto.randomUUID(),\\n    action: \\"revoke\\",\\n    confirmed: true,\\n    reason: \\"access_ended\\",\\n  });\\n  console.info(\\"REST_GUIDE_COMPLETE cleanup_ok\\", { correlationId });\\n} catch (error) {\\n  if (error instanceof AuthlessApiError) {\\n    console.error(\\"AUTHLESS_REQUEST_FAILED\\", {\\n      status: error.status,\\n      code: error.code,\\n      correlationId: error.correlationId,\\n      retrySafety: error.retrySafety,\\n    });\\n  }\\n  throw error;\\n}"
+    "source": "import {\\n  AuthlessApiError,\\n  createAuthlessServerClient,\\n} from \\"@authless/server\\";\\n\\nconst client = createAuthlessServerClient({\\n  appCredentialToken: process.env.AUTHLESS_APP_CREDENTIAL!,\\n  baseUrl: \\"https://api.authle.ss\\",\\n  retry: { maxAttempts: 2 },\\n});\\nconst scope = {\\n  workspaceId: process.env.AUTHLESS_TEST_WORKSPACE_ID!,\\n  appId: process.env.AUTHLESS_TEST_APP_ID!,\\n};\\nconst correlationId = crypto.randomUUID();\\nconst customerReference = \`rest-guide-\${crypto.randomUUID()}\`;\\n\\ntry {\\n  // Durable idempotency: reuse this key only for this exact invitation claim.\\n  await client.appMemberships.invite({\\n    ...scope,\\n    correlationId,\\n    idempotencyKey: crypto.randomUUID(),\\n    confirmed: true,\\n    customerReference,\\n    email: \\"rest-guide-user@example.test\\",\\n  });\\n\\n  // Invitations are enumeration-safe, so locate the created test record by\\n  // its caller-owned reference, then preserve the opaque continuation cursor.\\n  const first = await client.appMemberships.list({\\n    ...scope, correlationId, query: customerReference, limit: 1,\\n  });\\n  const membership = first.memberships[0];\\n  if (!membership) throw new Error(\\"created_test_membership_not_visible\\");\\n  if (first.nextCursor) {\\n    await client.appMemberships.list({\\n      ...scope, correlationId, cursor: first.nextCursor, limit: 1,\\n    });\\n  }\\n\\n  const current = await client.appMemberships.get({\\n    ...scope, correlationId, membershipId: membership.id,\\n  });\\n\\n  // The client sends If-Match: \\"<version>\\" and keeps this mutation's\\n  // idempotency key unchanged across only its classified-safe retries.\\n  await client.appMemberships.changeStatus({\\n    ...scope,\\n    correlationId,\\n    membershipId: current.id,\\n    expectedVersion: current.version,\\n    idempotencyKey: crypto.randomUUID(),\\n    action: \\"revoke\\",\\n    confirmed: true,\\n    reason: \\"access_ended\\",\\n  });\\n  console.info(\\"REST_GUIDE_COMPLETE cleanup_ok\\", { correlationId });\\n} catch (error) {\\n  if (error instanceof AuthlessApiError) {\\n    console.error(\\"AUTHLESS_REQUEST_FAILED\\", {\\n      status: error.status,\\n      code: error.code,\\n      correlationId: error.correlationId,\\n      retrySafety: error.retrySafety,\\n    });\\n  }\\n  throw error;\\n}"
   },
   "rawHttp": {
     "filename": "manage-access.sh",
-    "source": "# AUTHLESS_APP_CREDENTIAL is server-only. Never paste it into browser code,\\n# a shell history on a shared machine, logs, tickets, or chat.\\nBASE=https://api.authle.ss\\nCORRELATION=rest-guide-request-001\\nINVITE_KEY=one-claim-one-key-001\\n\\ncurl --fail-with-body --request POST   \\"$BASE/v1/workspaces/$AUTHLESS_TEST_WORKSPACE_ID/apps/$AUTHLESS_TEST_APP_ID/memberships\\"   --header \\"Authorization: Bearer $AUTHLESS_APP_CREDENTIAL\\"   --header \\"Content-Type: application/json\\"   --header \\"X-Correlation-ID: $CORRELATION\\"   --header \\"Idempotency-Key: $INVITE_KEY\\"   --data '{\\"confirmed\\":true,\\"customerReference\\":\\"rest-guide-001\\",\\"email\\":\\"rest-guide-user@example.test\\"}'\\n\\ncurl --fail-with-body   \\"$BASE/v1/workspaces/$AUTHLESS_TEST_WORKSPACE_ID/apps/$AUTHLESS_TEST_APP_ID/memberships?query=rest-guide-001&limit=1\\"   --header \\"Authorization: Bearer $AUTHLESS_APP_CREDENTIAL\\"   --header \\"X-Correlation-ID: $CORRELATION\\"\\n\\n# Read the exact membership, retain its ETag/version, and use an opaque\\n# nextCursor unchanged on a subsequent list request when one is returned.\\ncurl --fail-with-body   \\"$BASE/v1/workspaces/$AUTHLESS_TEST_WORKSPACE_ID/apps/$AUTHLESS_TEST_APP_ID/memberships/$MEMBERSHIP_ID\\"   --header \\"Authorization: Bearer $AUTHLESS_APP_CREDENTIAL\\"   --header \\"X-Correlation-ID: $CORRELATION\\"\\n\\ncurl --fail-with-body --request POST   \\"$BASE/v1/workspaces/$AUTHLESS_TEST_WORKSPACE_ID/apps/$AUTHLESS_TEST_APP_ID/memberships/$MEMBERSHIP_ID/lifecycle\\"   --header \\"Authorization: Bearer $AUTHLESS_APP_CREDENTIAL\\"   --header \\"Content-Type: application/json\\"   --header \\"X-Correlation-ID: $CORRELATION\\"   --header \\"Idempotency-Key: one-claim-one-key-cleanup-001\\"   --header 'If-Match: \\"4\\"'   --data '{\\"action\\":\\"revoke\\",\\"confirmed\\":true,\\"reason\\":\\"access_ended\\"}'"
+    "source": "# AUTHLESS_APP_CREDENTIAL is server-only. Never paste it into browser code,\\n# a shell history on a shared machine, logs, tickets, or chat.\\nBASE=https://api.authle.ss\\nCORRELATION=rest-guide-request-001\\nINVITE_KEY=one-claim-one-key-001\\n\\ncurl --fail-with-body --request POST   \\"$BASE/workspaces/$AUTHLESS_TEST_WORKSPACE_ID/apps/$AUTHLESS_TEST_APP_ID/memberships\\"   --header \\"Authorization: Bearer $AUTHLESS_APP_CREDENTIAL\\"   --header \\"Content-Type: application/json\\"   --header \\"X-Correlation-ID: $CORRELATION\\"   --header \\"Idempotency-Key: $INVITE_KEY\\"   --data '{\\"confirmed\\":true,\\"customerReference\\":\\"rest-guide-001\\",\\"email\\":\\"rest-guide-user@example.test\\"}'\\n\\ncurl --fail-with-body   \\"$BASE/workspaces/$AUTHLESS_TEST_WORKSPACE_ID/apps/$AUTHLESS_TEST_APP_ID/memberships?query=rest-guide-001&limit=1\\"   --header \\"Authorization: Bearer $AUTHLESS_APP_CREDENTIAL\\"   --header \\"X-Correlation-ID: $CORRELATION\\"\\n\\n# Read the exact membership, retain its ETag/version, and use an opaque\\n# nextCursor unchanged on a subsequent list request when one is returned.\\ncurl --fail-with-body   \\"$BASE/workspaces/$AUTHLESS_TEST_WORKSPACE_ID/apps/$AUTHLESS_TEST_APP_ID/memberships/$MEMBERSHIP_ID\\"   --header \\"Authorization: Bearer $AUTHLESS_APP_CREDENTIAL\\"   --header \\"X-Correlation-ID: $CORRELATION\\"\\n\\ncurl --fail-with-body --request POST   \\"$BASE/workspaces/$AUTHLESS_TEST_WORKSPACE_ID/apps/$AUTHLESS_TEST_APP_ID/memberships/$MEMBERSHIP_ID/lifecycle\\"   --header \\"Authorization: Bearer $AUTHLESS_APP_CREDENTIAL\\"   --header \\"Content-Type: application/json\\"   --header \\"X-Correlation-ID: $CORRELATION\\"   --header \\"Idempotency-Key: one-claim-one-key-cleanup-001\\"   --header 'If-Match: \\"4\\"'   --data '{\\"action\\":\\"revoke\\",\\"confirmed\\":true,\\"reason\\":\\"access_ended\\"}'"
   },
   "equivalence": [
     "Both variants send the same contract paths, body claims, correlation ID, idempotency key, cursor, and quoted version precondition.",
@@ -4364,7 +4540,7 @@ Source attribution: Developer documentation (https://docs.authle.ss/build/rest).
       title: "Manage app access with the REST API",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "8818e11d4c6c20c064785dfe916bbed4b2dc3d437afafed6afe70590ea145758"
+      contentDigest: "a5e9f03cb389cec21c3e799ae82fce15327594bf599fee3882c19252e29f6906"
     },
     {
       canonical: "https://docs.authle.ss/build/rest?lang=ar",
@@ -4440,11 +4616,11 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
   ],
   "typescript": {
     "filename": "manage-access.ts",
-    "source": "import {\\n  AuthlessApiError,\\n  createAuthlessApiClient,\\n} from \\"@authless/api-client\\";\\n\\nconst client = createAuthlessApiClient({\\n  appCredentialToken: process.env.AUTHLESS_APP_CREDENTIAL!,\\n  baseUrl: \\"https://api.authle.ss\\",\\n  retry: { maxAttempts: 2 },\\n});\\nconst scope = {\\n  workspaceId: process.env.AUTHLESS_TEST_WORKSPACE_ID!,\\n  appId: process.env.AUTHLESS_TEST_APP_ID!,\\n};\\nconst correlationId = crypto.randomUUID();\\nconst customerReference = \`rest-guide-\${crypto.randomUUID()}\`;\\n\\ntry {\\n  // Durable idempotency: reuse this key only for this exact invitation claim.\\n  await client.appMemberships.invite({\\n    ...scope,\\n    correlationId,\\n    idempotencyKey: crypto.randomUUID(),\\n    confirmed: true,\\n    customerReference,\\n    email: \\"rest-guide-user@example.test\\",\\n  });\\n\\n  // Invitations are enumeration-safe, so locate the created test record by\\n  // its caller-owned reference, then preserve the opaque continuation cursor.\\n  const first = await client.appMemberships.list({\\n    ...scope, correlationId, query: customerReference, limit: 1,\\n  });\\n  const membership = first.memberships[0];\\n  if (!membership) throw new Error(\\"created_test_membership_not_visible\\");\\n  if (first.nextCursor) {\\n    await client.appMemberships.list({\\n      ...scope, correlationId, cursor: first.nextCursor, limit: 1,\\n    });\\n  }\\n\\n  const current = await client.appMemberships.get({\\n    ...scope, correlationId, membershipId: membership.id,\\n  });\\n\\n  // The client sends If-Match: \\"<version>\\" and keeps this mutation's\\n  // idempotency key unchanged across only its classified-safe retries.\\n  await client.appMemberships.changeStatus({\\n    ...scope,\\n    correlationId,\\n    membershipId: current.id,\\n    expectedVersion: current.version,\\n    idempotencyKey: crypto.randomUUID(),\\n    action: \\"revoke\\",\\n    confirmed: true,\\n    reason: \\"access_ended\\",\\n  });\\n  console.info(\\"REST_GUIDE_COMPLETE cleanup_ok\\", { correlationId });\\n} catch (error) {\\n  if (error instanceof AuthlessApiError) {\\n    console.error(\\"AUTHLESS_REQUEST_FAILED\\", {\\n      status: error.status,\\n      code: error.code,\\n      correlationId: error.correlationId,\\n      retrySafety: error.retrySafety,\\n    });\\n  }\\n  throw error;\\n}"
+    "source": "import {\\n  AuthlessApiError,\\n  createAuthlessServerClient,\\n} from \\"@authless/server\\";\\n\\nconst client = createAuthlessServerClient({\\n  appCredentialToken: process.env.AUTHLESS_APP_CREDENTIAL!,\\n  baseUrl: \\"https://api.authle.ss\\",\\n  retry: { maxAttempts: 2 },\\n});\\nconst scope = {\\n  workspaceId: process.env.AUTHLESS_TEST_WORKSPACE_ID!,\\n  appId: process.env.AUTHLESS_TEST_APP_ID!,\\n};\\nconst correlationId = crypto.randomUUID();\\nconst customerReference = \`rest-guide-\${crypto.randomUUID()}\`;\\n\\ntry {\\n  // Durable idempotency: reuse this key only for this exact invitation claim.\\n  await client.appMemberships.invite({\\n    ...scope,\\n    correlationId,\\n    idempotencyKey: crypto.randomUUID(),\\n    confirmed: true,\\n    customerReference,\\n    email: \\"rest-guide-user@example.test\\",\\n  });\\n\\n  // Invitations are enumeration-safe, so locate the created test record by\\n  // its caller-owned reference, then preserve the opaque continuation cursor.\\n  const first = await client.appMemberships.list({\\n    ...scope, correlationId, query: customerReference, limit: 1,\\n  });\\n  const membership = first.memberships[0];\\n  if (!membership) throw new Error(\\"created_test_membership_not_visible\\");\\n  if (first.nextCursor) {\\n    await client.appMemberships.list({\\n      ...scope, correlationId, cursor: first.nextCursor, limit: 1,\\n    });\\n  }\\n\\n  const current = await client.appMemberships.get({\\n    ...scope, correlationId, membershipId: membership.id,\\n  });\\n\\n  // The client sends If-Match: \\"<version>\\" and keeps this mutation's\\n  // idempotency key unchanged across only its classified-safe retries.\\n  await client.appMemberships.changeStatus({\\n    ...scope,\\n    correlationId,\\n    membershipId: current.id,\\n    expectedVersion: current.version,\\n    idempotencyKey: crypto.randomUUID(),\\n    action: \\"revoke\\",\\n    confirmed: true,\\n    reason: \\"access_ended\\",\\n  });\\n  console.info(\\"REST_GUIDE_COMPLETE cleanup_ok\\", { correlationId });\\n} catch (error) {\\n  if (error instanceof AuthlessApiError) {\\n    console.error(\\"AUTHLESS_REQUEST_FAILED\\", {\\n      status: error.status,\\n      code: error.code,\\n      correlationId: error.correlationId,\\n      retrySafety: error.retrySafety,\\n    });\\n  }\\n  throw error;\\n}"
   },
   "rawHttp": {
     "filename": "manage-access.sh",
-    "source": "# AUTHLESS_APP_CREDENTIAL is server-only. Never paste it into browser code,\\n# a shell history on a shared machine, logs, tickets, or chat.\\nBASE=https://api.authle.ss\\nCORRELATION=rest-guide-request-001\\nINVITE_KEY=one-claim-one-key-001\\n\\ncurl --fail-with-body --request POST   \\"$BASE/v1/workspaces/$AUTHLESS_TEST_WORKSPACE_ID/apps/$AUTHLESS_TEST_APP_ID/memberships\\"   --header \\"Authorization: Bearer $AUTHLESS_APP_CREDENTIAL\\"   --header \\"Content-Type: application/json\\"   --header \\"X-Correlation-ID: $CORRELATION\\"   --header \\"Idempotency-Key: $INVITE_KEY\\"   --data '{\\"confirmed\\":true,\\"customerReference\\":\\"rest-guide-001\\",\\"email\\":\\"rest-guide-user@example.test\\"}'\\n\\ncurl --fail-with-body   \\"$BASE/v1/workspaces/$AUTHLESS_TEST_WORKSPACE_ID/apps/$AUTHLESS_TEST_APP_ID/memberships?query=rest-guide-001&limit=1\\"   --header \\"Authorization: Bearer $AUTHLESS_APP_CREDENTIAL\\"   --header \\"X-Correlation-ID: $CORRELATION\\"\\n\\n# Read the exact membership, retain its ETag/version, and use an opaque\\n# nextCursor unchanged on a subsequent list request when one is returned.\\ncurl --fail-with-body   \\"$BASE/v1/workspaces/$AUTHLESS_TEST_WORKSPACE_ID/apps/$AUTHLESS_TEST_APP_ID/memberships/$MEMBERSHIP_ID\\"   --header \\"Authorization: Bearer $AUTHLESS_APP_CREDENTIAL\\"   --header \\"X-Correlation-ID: $CORRELATION\\"\\n\\ncurl --fail-with-body --request POST   \\"$BASE/v1/workspaces/$AUTHLESS_TEST_WORKSPACE_ID/apps/$AUTHLESS_TEST_APP_ID/memberships/$MEMBERSHIP_ID/lifecycle\\"   --header \\"Authorization: Bearer $AUTHLESS_APP_CREDENTIAL\\"   --header \\"Content-Type: application/json\\"   --header \\"X-Correlation-ID: $CORRELATION\\"   --header \\"Idempotency-Key: one-claim-one-key-cleanup-001\\"   --header 'If-Match: \\"4\\"'   --data '{\\"action\\":\\"revoke\\",\\"confirmed\\":true,\\"reason\\":\\"access_ended\\"}'"
+    "source": "# AUTHLESS_APP_CREDENTIAL is server-only. Never paste it into browser code,\\n# a shell history on a shared machine, logs, tickets, or chat.\\nBASE=https://api.authle.ss\\nCORRELATION=rest-guide-request-001\\nINVITE_KEY=one-claim-one-key-001\\n\\ncurl --fail-with-body --request POST   \\"$BASE/workspaces/$AUTHLESS_TEST_WORKSPACE_ID/apps/$AUTHLESS_TEST_APP_ID/memberships\\"   --header \\"Authorization: Bearer $AUTHLESS_APP_CREDENTIAL\\"   --header \\"Content-Type: application/json\\"   --header \\"X-Correlation-ID: $CORRELATION\\"   --header \\"Idempotency-Key: $INVITE_KEY\\"   --data '{\\"confirmed\\":true,\\"customerReference\\":\\"rest-guide-001\\",\\"email\\":\\"rest-guide-user@example.test\\"}'\\n\\ncurl --fail-with-body   \\"$BASE/workspaces/$AUTHLESS_TEST_WORKSPACE_ID/apps/$AUTHLESS_TEST_APP_ID/memberships?query=rest-guide-001&limit=1\\"   --header \\"Authorization: Bearer $AUTHLESS_APP_CREDENTIAL\\"   --header \\"X-Correlation-ID: $CORRELATION\\"\\n\\n# Read the exact membership, retain its ETag/version, and use an opaque\\n# nextCursor unchanged on a subsequent list request when one is returned.\\ncurl --fail-with-body   \\"$BASE/workspaces/$AUTHLESS_TEST_WORKSPACE_ID/apps/$AUTHLESS_TEST_APP_ID/memberships/$MEMBERSHIP_ID\\"   --header \\"Authorization: Bearer $AUTHLESS_APP_CREDENTIAL\\"   --header \\"X-Correlation-ID: $CORRELATION\\"\\n\\ncurl --fail-with-body --request POST   \\"$BASE/workspaces/$AUTHLESS_TEST_WORKSPACE_ID/apps/$AUTHLESS_TEST_APP_ID/memberships/$MEMBERSHIP_ID/lifecycle\\"   --header \\"Authorization: Bearer $AUTHLESS_APP_CREDENTIAL\\"   --header \\"Content-Type: application/json\\"   --header \\"X-Correlation-ID: $CORRELATION\\"   --header \\"Idempotency-Key: one-claim-one-key-cleanup-001\\"   --header 'If-Match: \\"4\\"'   --data '{\\"action\\":\\"revoke\\",\\"confirmed\\":true,\\"reason\\":\\"access_ended\\"}'"
   },
   "equivalence": [
     "Both variants send the same contract paths, body claims, correlation ID, idempotency key, cursor, and quoted version precondition.",
@@ -4583,7 +4759,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       title: "إدارة وصول التطبيق عبر واجهة REST",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "a50972849465fe66ef2ca2b03d729ed657d5539f2cb12e986fd00b909ec01be8"
+      contentDigest: "ab2dfe42c94802201a9459fae382c3e9af6109f94e8f95194696b9a7830ee28b"
     },
     {
       canonical: "https://docs.authle.ss/build/webhooks",
@@ -5119,9 +5295,9 @@ The following checked projection is shared with the human-rendered guide and pre
       ]
     },
     {
-      "package": "@authless/api-client",
+      "package": "@authless/server",
       "symbols": [
-        "createAuthlessApiClient"
+        "createAuthlessServerClient"
       ]
     }
   ],
@@ -5214,23 +5390,45 @@ The following checked projection is shared with the human-rendered guide and pre
       "stage": "available"
     },
     {
-      "id": "rest-client",
+      "id": "server-client",
       "title": {
-        "en": "TypeScript REST client",
-        "ar": "عميل REST لـ TypeScript"
+        "en": "Node.js server client",
+        "ar": "عميل خادم Node.js"
       },
       "description": {
-        "en": "Call contract-derived management operations from trusted server code.",
-        "ar": "استدعِ عمليات الإدارة المشتقة من العقد من خادم موثوق."
+        "en": "Call typed management operations from trusted Node.js server code.",
+        "ar": "استدعِ عمليات الإدارة المعرّفة من خادم Node.js موثوق."
       },
-      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && mkdir api-client-check && cd api-client-check && npm init -y && npm install ../packages/api-client",
-      "firstAction": "import { createAuthlessApiClient } from \\"@authless/api-client\\";",
-      "successSignal": "membership_invited paged guarded_cleanup_ok",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && bun install --frozen-lockfile",
+      "firstAction": "import { createAuthlessServerClient } from \\"@authless/server\\";",
+      "successSignal": "server_request_ok credential_boundary_preserved",
       "negativeChecks": [
-        "insufficient scope",
-        "stale version",
-        "rate limit",
-        "unknown mutation outcome"
+        "browser import",
+        "missing credential",
+        "wrong authority",
+        "unsafe retry"
+      ],
+      "authoritativeGuide": "/build/rest",
+      "stage": "available"
+    },
+    {
+      "id": "cli",
+      "title": {
+        "en": "Authless CLI",
+        "ar": "واجهة Authless الطرفية"
+      },
+      "description": {
+        "en": "Manage Authless resources with native PKCE login or a bounded machine credential.",
+        "ar": "أدر موارد Authless عبر تسجيل دخول PKCE أصلي أو بيانات اعتماد آلية محدودة."
+      },
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && bun install --frozen-lockfile",
+      "firstAction": "packages/cli/dist/cli.js auth login",
+      "successSignal": "native_pkce_grant workspace_read json_output",
+      "negativeChecks": [
+        "credential on argv",
+        "browser cookie extraction",
+        "unconfirmed mutation",
+        "token in output"
       ],
       "authoritativeGuide": "/build/rest",
       "stage": "available"
@@ -5433,7 +5631,7 @@ Source attribution: Developer documentation (https://docs.authle.ss/test).
       title: "Test safely",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "ebc22499c41c2293750672fa2715f0f0d2ee1c253935ecb275df96b011813018"
+      contentDigest: "5ce6bda9ed136425a77b4afed6f138cfc8e364c195639fb245d3ecaae29568f3"
     },
     {
       canonical: "https://docs.authle.ss/test?lang=ar",
@@ -5505,9 +5703,9 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ]
     },
     {
-      "package": "@authless/api-client",
+      "package": "@authless/server",
       "symbols": [
-        "createAuthlessApiClient"
+        "createAuthlessServerClient"
       ]
     }
   ],
@@ -5600,23 +5798,45 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       "stage": "available"
     },
     {
-      "id": "rest-client",
+      "id": "server-client",
       "title": {
-        "en": "TypeScript REST client",
-        "ar": "عميل REST لـ TypeScript"
+        "en": "Node.js server client",
+        "ar": "عميل خادم Node.js"
       },
       "description": {
-        "en": "Call contract-derived management operations from trusted server code.",
-        "ar": "استدعِ عمليات الإدارة المشتقة من العقد من خادم موثوق."
+        "en": "Call typed management operations from trusted Node.js server code.",
+        "ar": "استدعِ عمليات الإدارة المعرّفة من خادم Node.js موثوق."
       },
-      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && mkdir api-client-check && cd api-client-check && npm init -y && npm install ../packages/api-client",
-      "firstAction": "import { createAuthlessApiClient } from \\"@authless/api-client\\";",
-      "successSignal": "membership_invited paged guarded_cleanup_ok",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && bun install --frozen-lockfile",
+      "firstAction": "import { createAuthlessServerClient } from \\"@authless/server\\";",
+      "successSignal": "server_request_ok credential_boundary_preserved",
       "negativeChecks": [
-        "insufficient scope",
-        "stale version",
-        "rate limit",
-        "unknown mutation outcome"
+        "browser import",
+        "missing credential",
+        "wrong authority",
+        "unsafe retry"
+      ],
+      "authoritativeGuide": "/build/rest",
+      "stage": "available"
+    },
+    {
+      "id": "cli",
+      "title": {
+        "en": "Authless CLI",
+        "ar": "واجهة Authless الطرفية"
+      },
+      "description": {
+        "en": "Manage Authless resources with native PKCE login or a bounded machine credential.",
+        "ar": "أدر موارد Authless عبر تسجيل دخول PKCE أصلي أو بيانات اعتماد آلية محدودة."
+      },
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && bun install --frozen-lockfile",
+      "firstAction": "packages/cli/dist/cli.js auth login",
+      "successSignal": "native_pkce_grant workspace_read json_output",
+      "negativeChecks": [
+        "credential on argv",
+        "browser cookie extraction",
+        "unconfirmed mutation",
+        "token in output"
       ],
       "authoritativeGuide": "/build/rest",
       "stage": "available"
@@ -5819,7 +6039,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       title: "اختبر بأمان",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "1be02b97e18bb218971d14c7d527aabd4307fbfc51c09b3fc59c6ceca5a95068"
+      contentDigest: "93d50e1fae3685c9a511327135351573f811c8eae5ed9a3b368362d857ea24b4"
     },
     {
       canonical: "https://docs.authle.ss/secure",
@@ -5895,9 +6115,9 @@ The following checked projection is shared with the human-rendered guide and pre
       ]
     },
     {
-      "package": "@authless/api-client",
+      "package": "@authless/server",
       "symbols": [
-        "createAuthlessApiClient"
+        "createAuthlessServerClient"
       ]
     }
   ],
@@ -5990,23 +6210,45 @@ The following checked projection is shared with the human-rendered guide and pre
       "stage": "available"
     },
     {
-      "id": "rest-client",
+      "id": "server-client",
       "title": {
-        "en": "TypeScript REST client",
-        "ar": "عميل REST لـ TypeScript"
+        "en": "Node.js server client",
+        "ar": "عميل خادم Node.js"
       },
       "description": {
-        "en": "Call contract-derived management operations from trusted server code.",
-        "ar": "استدعِ عمليات الإدارة المشتقة من العقد من خادم موثوق."
+        "en": "Call typed management operations from trusted Node.js server code.",
+        "ar": "استدعِ عمليات الإدارة المعرّفة من خادم Node.js موثوق."
       },
-      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && mkdir api-client-check && cd api-client-check && npm init -y && npm install ../packages/api-client",
-      "firstAction": "import { createAuthlessApiClient } from \\"@authless/api-client\\";",
-      "successSignal": "membership_invited paged guarded_cleanup_ok",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && bun install --frozen-lockfile",
+      "firstAction": "import { createAuthlessServerClient } from \\"@authless/server\\";",
+      "successSignal": "server_request_ok credential_boundary_preserved",
       "negativeChecks": [
-        "insufficient scope",
-        "stale version",
-        "rate limit",
-        "unknown mutation outcome"
+        "browser import",
+        "missing credential",
+        "wrong authority",
+        "unsafe retry"
+      ],
+      "authoritativeGuide": "/build/rest",
+      "stage": "available"
+    },
+    {
+      "id": "cli",
+      "title": {
+        "en": "Authless CLI",
+        "ar": "واجهة Authless الطرفية"
+      },
+      "description": {
+        "en": "Manage Authless resources with native PKCE login or a bounded machine credential.",
+        "ar": "أدر موارد Authless عبر تسجيل دخول PKCE أصلي أو بيانات اعتماد آلية محدودة."
+      },
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && bun install --frozen-lockfile",
+      "firstAction": "packages/cli/dist/cli.js auth login",
+      "successSignal": "native_pkce_grant workspace_read json_output",
+      "negativeChecks": [
+        "credential on argv",
+        "browser cookie extraction",
+        "unconfirmed mutation",
+        "token in output"
       ],
       "authoritativeGuide": "/build/rest",
       "stage": "available"
@@ -6209,7 +6451,7 @@ Source attribution: Developer documentation (https://docs.authle.ss/secure).
       title: "Secure the integration",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "4832f1851bfd3fde54e43769e188df1c8c6a8b2c1d049fdccb65fd3857261ab6"
+      contentDigest: "6685fba10e38981a78702c291ee0f01bcb8465ce789d2eedfb70220bba282716"
     },
     {
       canonical: "https://docs.authle.ss/secure?lang=ar",
@@ -6285,9 +6527,9 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ]
     },
     {
-      "package": "@authless/api-client",
+      "package": "@authless/server",
       "symbols": [
-        "createAuthlessApiClient"
+        "createAuthlessServerClient"
       ]
     }
   ],
@@ -6380,23 +6622,45 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       "stage": "available"
     },
     {
-      "id": "rest-client",
+      "id": "server-client",
       "title": {
-        "en": "TypeScript REST client",
-        "ar": "عميل REST لـ TypeScript"
+        "en": "Node.js server client",
+        "ar": "عميل خادم Node.js"
       },
       "description": {
-        "en": "Call contract-derived management operations from trusted server code.",
-        "ar": "استدعِ عمليات الإدارة المشتقة من العقد من خادم موثوق."
+        "en": "Call typed management operations from trusted Node.js server code.",
+        "ar": "استدعِ عمليات الإدارة المعرّفة من خادم Node.js موثوق."
       },
-      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && mkdir api-client-check && cd api-client-check && npm init -y && npm install ../packages/api-client",
-      "firstAction": "import { createAuthlessApiClient } from \\"@authless/api-client\\";",
-      "successSignal": "membership_invited paged guarded_cleanup_ok",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && bun install --frozen-lockfile",
+      "firstAction": "import { createAuthlessServerClient } from \\"@authless/server\\";",
+      "successSignal": "server_request_ok credential_boundary_preserved",
       "negativeChecks": [
-        "insufficient scope",
-        "stale version",
-        "rate limit",
-        "unknown mutation outcome"
+        "browser import",
+        "missing credential",
+        "wrong authority",
+        "unsafe retry"
+      ],
+      "authoritativeGuide": "/build/rest",
+      "stage": "available"
+    },
+    {
+      "id": "cli",
+      "title": {
+        "en": "Authless CLI",
+        "ar": "واجهة Authless الطرفية"
+      },
+      "description": {
+        "en": "Manage Authless resources with native PKCE login or a bounded machine credential.",
+        "ar": "أدر موارد Authless عبر تسجيل دخول PKCE أصلي أو بيانات اعتماد آلية محدودة."
+      },
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && bun install --frozen-lockfile",
+      "firstAction": "packages/cli/dist/cli.js auth login",
+      "successSignal": "native_pkce_grant workspace_read json_output",
+      "negativeChecks": [
+        "credential on argv",
+        "browser cookie extraction",
+        "unconfirmed mutation",
+        "token in output"
       ],
       "authoritativeGuide": "/build/rest",
       "stage": "available"
@@ -6599,7 +6863,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       title: "أمّن التكامل",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "158a246539d7ccd424998ce748805f1a894544813031cbbcd85d32c9fae5948f"
+      contentDigest: "1c468db967e73d3ff4e1c734d5d64e7c585c93813e907ba3e85f43726057a6e4"
     },
     {
       canonical: "https://docs.authle.ss/operate",
@@ -7459,9 +7723,9 @@ The following checked projection is shared with the human-rendered guide and pre
       ]
     },
     {
-      "package": "@authless/api-client",
+      "package": "@authless/server",
       "symbols": [
-        "createAuthlessApiClient"
+        "createAuthlessServerClient"
       ]
     }
   ],
@@ -7554,23 +7818,45 @@ The following checked projection is shared with the human-rendered guide and pre
       "stage": "available"
     },
     {
-      "id": "rest-client",
+      "id": "server-client",
       "title": {
-        "en": "TypeScript REST client",
-        "ar": "عميل REST لـ TypeScript"
+        "en": "Node.js server client",
+        "ar": "عميل خادم Node.js"
       },
       "description": {
-        "en": "Call contract-derived management operations from trusted server code.",
-        "ar": "استدعِ عمليات الإدارة المشتقة من العقد من خادم موثوق."
+        "en": "Call typed management operations from trusted Node.js server code.",
+        "ar": "استدعِ عمليات الإدارة المعرّفة من خادم Node.js موثوق."
       },
-      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && mkdir api-client-check && cd api-client-check && npm init -y && npm install ../packages/api-client",
-      "firstAction": "import { createAuthlessApiClient } from \\"@authless/api-client\\";",
-      "successSignal": "membership_invited paged guarded_cleanup_ok",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && bun install --frozen-lockfile",
+      "firstAction": "import { createAuthlessServerClient } from \\"@authless/server\\";",
+      "successSignal": "server_request_ok credential_boundary_preserved",
       "negativeChecks": [
-        "insufficient scope",
-        "stale version",
-        "rate limit",
-        "unknown mutation outcome"
+        "browser import",
+        "missing credential",
+        "wrong authority",
+        "unsafe retry"
+      ],
+      "authoritativeGuide": "/build/rest",
+      "stage": "available"
+    },
+    {
+      "id": "cli",
+      "title": {
+        "en": "Authless CLI",
+        "ar": "واجهة Authless الطرفية"
+      },
+      "description": {
+        "en": "Manage Authless resources with native PKCE login or a bounded machine credential.",
+        "ar": "أدر موارد Authless عبر تسجيل دخول PKCE أصلي أو بيانات اعتماد آلية محدودة."
+      },
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && bun install --frozen-lockfile",
+      "firstAction": "packages/cli/dist/cli.js auth login",
+      "successSignal": "native_pkce_grant workspace_read json_output",
+      "negativeChecks": [
+        "credential on argv",
+        "browser cookie extraction",
+        "unconfirmed mutation",
+        "token in output"
       ],
       "authoritativeGuide": "/build/rest",
       "stage": "available"
@@ -7773,7 +8059,7 @@ Source attribution: Developer documentation (https://docs.authle.ss/trust).
       title: "Security, privacy, and trust evidence",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "990b8b48e0e9ee5f625c0cb7eed54f378e170ad30d0af593894f760e5f45dafc"
+      contentDigest: "d21cd559f767e530054b2e0f1c6397156f8ea835ac46833951d4ee6af22f2f4c"
     },
     {
       canonical: "https://docs.authle.ss/trust?lang=ar",
@@ -7857,9 +8143,9 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ]
     },
     {
-      "package": "@authless/api-client",
+      "package": "@authless/server",
       "symbols": [
-        "createAuthlessApiClient"
+        "createAuthlessServerClient"
       ]
     }
   ],
@@ -7952,23 +8238,45 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       "stage": "available"
     },
     {
-      "id": "rest-client",
+      "id": "server-client",
       "title": {
-        "en": "TypeScript REST client",
-        "ar": "عميل REST لـ TypeScript"
+        "en": "Node.js server client",
+        "ar": "عميل خادم Node.js"
       },
       "description": {
-        "en": "Call contract-derived management operations from trusted server code.",
-        "ar": "استدعِ عمليات الإدارة المشتقة من العقد من خادم موثوق."
+        "en": "Call typed management operations from trusted Node.js server code.",
+        "ar": "استدعِ عمليات الإدارة المعرّفة من خادم Node.js موثوق."
       },
-      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && mkdir api-client-check && cd api-client-check && npm init -y && npm install ../packages/api-client",
-      "firstAction": "import { createAuthlessApiClient } from \\"@authless/api-client\\";",
-      "successSignal": "membership_invited paged guarded_cleanup_ok",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && bun install --frozen-lockfile",
+      "firstAction": "import { createAuthlessServerClient } from \\"@authless/server\\";",
+      "successSignal": "server_request_ok credential_boundary_preserved",
       "negativeChecks": [
-        "insufficient scope",
-        "stale version",
-        "rate limit",
-        "unknown mutation outcome"
+        "browser import",
+        "missing credential",
+        "wrong authority",
+        "unsafe retry"
+      ],
+      "authoritativeGuide": "/build/rest",
+      "stage": "available"
+    },
+    {
+      "id": "cli",
+      "title": {
+        "en": "Authless CLI",
+        "ar": "واجهة Authless الطرفية"
+      },
+      "description": {
+        "en": "Manage Authless resources with native PKCE login or a bounded machine credential.",
+        "ar": "أدر موارد Authless عبر تسجيل دخول PKCE أصلي أو بيانات اعتماد آلية محدودة."
+      },
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && bun install --frozen-lockfile",
+      "firstAction": "packages/cli/dist/cli.js auth login",
+      "successSignal": "native_pkce_grant workspace_read json_output",
+      "negativeChecks": [
+        "credential on argv",
+        "browser cookie extraction",
+        "unconfirmed mutation",
+        "token in output"
       ],
       "authoritativeGuide": "/build/rest",
       "stage": "available"
@@ -8171,7 +8479,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       title: "أدلة الأمان والخصوصية والثقة",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "7425e579a9806d49930bad29ffe4440560a646e37fc4e305e2e90341aea54d8c"
+      contentDigest: "ba9556fed95ae73ebf9a0a11fe317f7878871dd56ea9fb21ea578b4bb3188991"
     },
     {
       canonical: "https://docs.authle.ss/reference",
@@ -8251,9 +8559,9 @@ The following checked projection is shared with the human-rendered guide and pre
       ]
     },
     {
-      "package": "@authless/api-client",
+      "package": "@authless/server",
       "symbols": [
-        "createAuthlessApiClient"
+        "createAuthlessServerClient"
       ]
     }
   ],
@@ -8346,23 +8654,45 @@ The following checked projection is shared with the human-rendered guide and pre
       "stage": "available"
     },
     {
-      "id": "rest-client",
+      "id": "server-client",
       "title": {
-        "en": "TypeScript REST client",
-        "ar": "عميل REST لـ TypeScript"
+        "en": "Node.js server client",
+        "ar": "عميل خادم Node.js"
       },
       "description": {
-        "en": "Call contract-derived management operations from trusted server code.",
-        "ar": "استدعِ عمليات الإدارة المشتقة من العقد من خادم موثوق."
+        "en": "Call typed management operations from trusted Node.js server code.",
+        "ar": "استدعِ عمليات الإدارة المعرّفة من خادم Node.js موثوق."
       },
-      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && mkdir api-client-check && cd api-client-check && npm init -y && npm install ../packages/api-client",
-      "firstAction": "import { createAuthlessApiClient } from \\"@authless/api-client\\";",
-      "successSignal": "membership_invited paged guarded_cleanup_ok",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && bun install --frozen-lockfile",
+      "firstAction": "import { createAuthlessServerClient } from \\"@authless/server\\";",
+      "successSignal": "server_request_ok credential_boundary_preserved",
       "negativeChecks": [
-        "insufficient scope",
-        "stale version",
-        "rate limit",
-        "unknown mutation outcome"
+        "browser import",
+        "missing credential",
+        "wrong authority",
+        "unsafe retry"
+      ],
+      "authoritativeGuide": "/build/rest",
+      "stage": "available"
+    },
+    {
+      "id": "cli",
+      "title": {
+        "en": "Authless CLI",
+        "ar": "واجهة Authless الطرفية"
+      },
+      "description": {
+        "en": "Manage Authless resources with native PKCE login or a bounded machine credential.",
+        "ar": "أدر موارد Authless عبر تسجيل دخول PKCE أصلي أو بيانات اعتماد آلية محدودة."
+      },
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && bun install --frozen-lockfile",
+      "firstAction": "packages/cli/dist/cli.js auth login",
+      "successSignal": "native_pkce_grant workspace_read json_output",
+      "negativeChecks": [
+        "credential on argv",
+        "browser cookie extraction",
+        "unconfirmed mutation",
+        "token in output"
       ],
       "authoritativeGuide": "/build/rest",
       "stage": "available"
@@ -8565,7 +8895,7 @@ Source attribution: Developer documentation (https://docs.authle.ss/reference).
       title: "Technical reference",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "85a3e4f8c7ccbb79a61938b7f824a9a6b03d0c1e1ae4db0a86f78ecf2e9ed10f"
+      contentDigest: "68dea446e6c5d6352ba34cb70d221180c3e35ed84e945e1b9711b90ddf69bbf0"
     },
     {
       canonical: "https://docs.authle.ss/reference?lang=ar",
@@ -8645,9 +8975,9 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ]
     },
     {
-      "package": "@authless/api-client",
+      "package": "@authless/server",
       "symbols": [
-        "createAuthlessApiClient"
+        "createAuthlessServerClient"
       ]
     }
   ],
@@ -8740,23 +9070,45 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       "stage": "available"
     },
     {
-      "id": "rest-client",
+      "id": "server-client",
       "title": {
-        "en": "TypeScript REST client",
-        "ar": "عميل REST لـ TypeScript"
+        "en": "Node.js server client",
+        "ar": "عميل خادم Node.js"
       },
       "description": {
-        "en": "Call contract-derived management operations from trusted server code.",
-        "ar": "استدعِ عمليات الإدارة المشتقة من العقد من خادم موثوق."
+        "en": "Call typed management operations from trusted Node.js server code.",
+        "ar": "استدعِ عمليات الإدارة المعرّفة من خادم Node.js موثوق."
       },
-      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && mkdir api-client-check && cd api-client-check && npm init -y && npm install ../packages/api-client",
-      "firstAction": "import { createAuthlessApiClient } from \\"@authless/api-client\\";",
-      "successSignal": "membership_invited paged guarded_cleanup_ok",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && bun install --frozen-lockfile",
+      "firstAction": "import { createAuthlessServerClient } from \\"@authless/server\\";",
+      "successSignal": "server_request_ok credential_boundary_preserved",
       "negativeChecks": [
-        "insufficient scope",
-        "stale version",
-        "rate limit",
-        "unknown mutation outcome"
+        "browser import",
+        "missing credential",
+        "wrong authority",
+        "unsafe retry"
+      ],
+      "authoritativeGuide": "/build/rest",
+      "stage": "available"
+    },
+    {
+      "id": "cli",
+      "title": {
+        "en": "Authless CLI",
+        "ar": "واجهة Authless الطرفية"
+      },
+      "description": {
+        "en": "Manage Authless resources with native PKCE login or a bounded machine credential.",
+        "ar": "أدر موارد Authless عبر تسجيل دخول PKCE أصلي أو بيانات اعتماد آلية محدودة."
+      },
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && bun install --frozen-lockfile",
+      "firstAction": "packages/cli/dist/cli.js auth login",
+      "successSignal": "native_pkce_grant workspace_read json_output",
+      "negativeChecks": [
+        "credential on argv",
+        "browser cookie extraction",
+        "unconfirmed mutation",
+        "token in output"
       ],
       "authoritativeGuide": "/build/rest",
       "stage": "available"
@@ -8959,7 +9311,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       title: "المرجع التقني",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "302237a4e7e70ad404fb137bd9bdd86b2db5fb6117a7e5f3a8f0b3bab325fb1b"
+      contentDigest: "0a02d931cabc5144c9543091c6cfc7d18bd604e974259fae3294e142ecffde10"
     },
     {
       canonical: "https://docs.authle.ss/reference/rest",
@@ -9054,12 +9406,13 @@ The following checked projection is shared with the human-rendered guide and pre
   "lifecycle": {
     "contractVersion": "0.1.0",
     "compatibility": "Additive schemas and operations require release review; generated clients and rendered reference must be regenerated from the same contract.",
-    "versioning": "Stable operations remain on /v1. A breaking contract change requires a new major path and a separately supported contract.",
+    "versioning": "Operation paths are unversioned by default; the server pins each request to the supported contract version. Clients may select a version with Authless-Version or api-version.",
     "breakingChanges": "Removing or moving an operation, tightening inputs, changing authority, or changing response shapes requires a new major path.",
     "deprecation": "Deprecated operations are marked in OpenAPI and announced with Deprecation and Sunset dates before removal.",
     "sunset": "A deprecated operation stays available until its published Sunset date; no unpublished minimum duration is promised.",
     "changelog": "/changes",
-    "supportWindow": "The published contract version and any explicitly non-sunset major path are supported; preview and unpublished surfaces are excluded."
+    "supportWindow": "The published contract version and any explicitly non-sunset major path are supported; preview and unpublished surfaces are excluded.",
+    "selectors": "Use one selector only. Authless-Version: 1 or v1 and ?api-version=1 or v1 select the effective contract version. Conflicting or unsupported selectors fail before dispatch."
   },
   "operations": [
     {
@@ -9070,12 +9423,13 @@ The following checked projection is shared with the human-rendered guide and pre
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RequestIdentityContinuationRequest"
       ],
-      "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"email\\":\\"person@example.test\\"}' 'https://api.authle.ss/v1/identity/continuations'",
+      "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"email\\":\\"person@example.com\\",\\"locale\\":\\"en\\"}' 'https://api.authle.ss/identity/continuations'",
       "exampleParameters": {
         "x-correlation-id": "request_example_001"
       },
       "exampleRequestBody": {
-        "email": "person@example.test"
+        "email": "person@example.com",
+        "locale": "en"
       },
       "method": "POST",
       "operationId": "requestIdentityContinuation",
@@ -9096,7 +9450,33 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/identity/continuations",
+      "path": "/identity/continuations",
+      "parameters": [
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "person@example.com",
+          "name": "email",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1, maxLength 320"
+        },
+        {
+          "example": "en",
+          "name": "locale",
+          "required": false,
+          "type": "string",
+          "validation": "one of ar | en"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/RequestIdentityContinuationRequest"
       },
@@ -9111,13 +9491,14 @@ The following checked projection is shared with the human-rendered guide and pre
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/VerifyIdentityContinuationRequest"
       ],
-      "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"challengeId\\":\\"{challengeId}\\",\\"code\\":\\"{code}\\"}' 'https://api.authle.ss/v1/identity/continuations/verifications'",
+      "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"challengeId\\":\\"identity_continuation_example\\",\\"code\\":\\"12345678\\",\\"locale\\":\\"en\\"}' 'https://api.authle.ss/identity/continuations/verifications'",
       "exampleParameters": {
         "x-correlation-id": "request_example_001"
       },
       "exampleRequestBody": {
-        "challengeId": "{challengeId}",
-        "code": "{code}"
+        "challengeId": "identity_continuation_example",
+        "code": "12345678",
+        "locale": "en"
       },
       "method": "POST",
       "operationId": "verifyIdentityContinuation",
@@ -9143,7 +9524,40 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/identity/continuations/verifications",
+      "path": "/identity/continuations/verifications",
+      "parameters": [
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "identity_continuation_example",
+          "name": "challengeId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "12345678",
+          "name": "code",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "en",
+          "name": "locale",
+          "required": false,
+          "type": "string",
+          "validation": "one of ar | en"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/VerifyIdentityContinuationRequest"
       },
@@ -9158,12 +9572,12 @@ The following checked projection is shared with the human-rendered guide and pre
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/ConsumeIdentityRecoveryRequest"
       ],
-      "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"token\\":\\"{token}\\"}' 'https://api.authle.ss/v1/identity/recovery-proofs'",
+      "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"token\\":\\"recovery-proof-token\\"}' 'https://api.authle.ss/identity/recovery-proofs'",
       "exampleParameters": {
         "x-correlation-id": "request_example_001"
       },
       "exampleRequestBody": {
-        "token": "{token}"
+        "token": "recovery-proof-token"
       },
       "method": "POST",
       "operationId": "consumeIdentityRecovery",
@@ -9189,7 +9603,26 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/identity/recovery-proofs",
+      "path": "/identity/recovery-proofs",
+      "parameters": [
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "recovery-proof-token",
+          "name": "token",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/ConsumeIdentityRecoveryRequest"
       },
@@ -9204,12 +9637,13 @@ The following checked projection is shared with the human-rendered guide and pre
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RequestIdentityRecoveryRequest"
       ],
-      "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"identifier\\":\\"{identifier}\\"}' 'https://api.authle.ss/v1/identity/recovery-requests'",
+      "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"identifier\\":\\"person@example.com\\",\\"locale\\":\\"en\\"}' 'https://api.authle.ss/identity/recovery-requests'",
       "exampleParameters": {
         "x-correlation-id": "request_example_001"
       },
       "exampleRequestBody": {
-        "identifier": "{identifier}"
+        "identifier": "person@example.com",
+        "locale": "en"
       },
       "method": "POST",
       "operationId": "requestIdentityRecovery",
@@ -9230,7 +9664,33 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/identity/recovery-requests",
+      "path": "/identity/recovery-requests",
+      "parameters": [
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "person@example.com",
+          "name": "identifier",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1, maxLength 320"
+        },
+        {
+          "example": "en",
+          "name": "locale",
+          "required": false,
+          "type": "string",
+          "validation": "one of ar | en"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/RequestIdentityRecoveryRequest"
       },
@@ -9245,11 +9705,14 @@ The following checked projection is shared with the human-rendered guide and pre
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RevokeIdentityRecoveryPasswordRequest"
       ],
-      "example": "curl --request DELETE -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/v1/identity/recovery/authenticators/password'",
+      "example": "curl --request DELETE -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"locale\\":\\"en\\"}' 'https://api.authle.ss/identity/recovery/authenticators/password'",
       "exampleParameters": {
         "x-correlation-id": "request_example_001"
       },
-      "exampleRequestBody": {},
+      "exampleRequestBody": {
+        "confirmed": true,
+        "locale": "en"
+      },
       "method": "DELETE",
       "operationId": "revokeIdentityRecoveryPassword",
       "outcomes": [
@@ -9289,7 +9752,33 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/identity/recovery/authenticators/password",
+      "path": "/identity/recovery/authenticators/password",
+      "parameters": [
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": true,
+          "name": "confirmed",
+          "required": false,
+          "type": "boolean",
+          "validation": "—"
+        },
+        {
+          "example": "en",
+          "name": "locale",
+          "required": false,
+          "type": "string",
+          "validation": "one of ar | en"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/RevokeIdentityRecoveryPasswordRequest"
       },
@@ -9301,7 +9790,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "Bounded recovery authority. Never expose this value in response bodies, browser bundles, or logs."
       ],
       "constraints": [],
-      "example": "curl --request GET 'https://api.authle.ss/v1/identity/recovery/factors'",
+      "example": "curl --request GET 'https://api.authle.ss/identity/recovery/factors'",
       "exampleParameters": {},
       "method": "GET",
       "operationId": "getIdentityRecoveryFactors",
@@ -9322,7 +9811,9 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/identity/recovery/factors",
+      "path": "/identity/recovery/factors",
+      "parameters": [],
+      "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "List the secret-free recovery factor inventory"
     },
@@ -9334,11 +9825,15 @@ The following checked projection is shared with the human-rendered guide and pre
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RequestIdentityRecoveryEmailReplacementRequest"
       ],
-      "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/v1/identity/recovery/identifier-replacements/email'",
+      "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"email\\":\\"new.person@example.com\\",\\"locale\\":\\"en\\"}' 'https://api.authle.ss/identity/recovery/identifier-replacements/email'",
       "exampleParameters": {
         "x-correlation-id": "request_example_001"
       },
-      "exampleRequestBody": {},
+      "exampleRequestBody": {
+        "confirmed": true,
+        "email": "new.person@example.com",
+        "locale": "en"
+      },
       "method": "POST",
       "operationId": "requestIdentityRecoveryEmailReplacement",
       "outcomes": [
@@ -9373,7 +9868,40 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/identity/recovery/identifier-replacements/email",
+      "path": "/identity/recovery/identifier-replacements/email",
+      "parameters": [
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": true,
+          "name": "confirmed",
+          "required": false,
+          "type": "boolean",
+          "validation": "—"
+        },
+        {
+          "example": "new.person@example.com",
+          "name": "email",
+          "required": false,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "en",
+          "name": "locale",
+          "required": false,
+          "type": "string",
+          "validation": "one of ar | en"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/RequestIdentityRecoveryEmailReplacementRequest"
       },
@@ -9388,12 +9916,13 @@ The following checked projection is shared with the human-rendered guide and pre
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/VerifyIdentityRecoveryEmailReplacementRequest"
       ],
-      "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"token\\":\\"{token}\\"}' 'https://api.authle.ss/v1/identity/recovery/identifier-replacements/email/verifications'",
+      "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"locale\\":\\"en\\",\\"token\\":\\"replacement-proof-token\\"}' 'https://api.authle.ss/identity/recovery/identifier-replacements/email/verifications'",
       "exampleParameters": {
         "x-correlation-id": "request_example_001"
       },
       "exampleRequestBody": {
-        "token": "{token}"
+        "locale": "en",
+        "token": "replacement-proof-token"
       },
       "method": "POST",
       "operationId": "verifyIdentityRecoveryEmailReplacement",
@@ -9419,7 +9948,33 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/identity/recovery/identifier-replacements/email/verifications",
+      "path": "/identity/recovery/identifier-replacements/email/verifications",
+      "parameters": [
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "en",
+          "name": "locale",
+          "required": false,
+          "type": "string",
+          "validation": "one of ar | en"
+        },
+        {
+          "example": "replacement-proof-token",
+          "name": "token",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/VerifyIdentityRecoveryEmailReplacementRequest"
       },
@@ -9434,11 +9989,15 @@ The following checked projection is shared with the human-rendered guide and pre
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/ReplaceIdentityRecoveryUsernameRequest"
       ],
-      "example": "curl --request PUT -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/v1/identity/recovery/identifiers/username'",
+      "example": "curl --request PUT -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"locale\\":\\"en\\",\\"username\\":\\"new_name\\"}' 'https://api.authle.ss/identity/recovery/identifiers/username'",
       "exampleParameters": {
         "x-correlation-id": "request_example_001"
       },
-      "exampleRequestBody": {},
+      "exampleRequestBody": {
+        "confirmed": true,
+        "locale": "en",
+        "username": "new_name"
+      },
       "method": "PUT",
       "operationId": "replaceIdentityRecoveryUsername",
       "outcomes": [
@@ -9473,7 +10032,40 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/identity/recovery/identifiers/username",
+      "path": "/identity/recovery/identifiers/username",
+      "parameters": [
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": true,
+          "name": "confirmed",
+          "required": false,
+          "type": "boolean",
+          "validation": "—"
+        },
+        {
+          "example": "en",
+          "name": "locale",
+          "required": false,
+          "type": "string",
+          "validation": "one of ar | en"
+        },
+        {
+          "example": "new_name",
+          "name": "username",
+          "required": false,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/ReplaceIdentityRecoveryUsernameRequest"
       },
@@ -9488,13 +10080,14 @@ The following checked projection is shared with the human-rendered guide and pre
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RegisterIdentityRequest"
       ],
-      "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"email\\":\\"person@example.test\\",\\"password\\":\\"{password}\\"}' 'https://api.authle.ss/v1/identity/registrations'",
+      "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"email\\":\\"person@example.com\\",\\"locale\\":\\"en\\",\\"password\\":\\"correct horse battery staple\\"}' 'https://api.authle.ss/identity/registrations'",
       "exampleParameters": {
         "x-correlation-id": "request_example_001"
       },
       "exampleRequestBody": {
-        "email": "person@example.test",
-        "password": "{password}"
+        "email": "person@example.com",
+        "locale": "en",
+        "password": "correct horse battery staple"
       },
       "method": "POST",
       "operationId": "registerIdentity",
@@ -9520,7 +10113,40 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/identity/registrations",
+      "path": "/identity/registrations",
+      "parameters": [
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "person@example.com",
+          "name": "email",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1"
+        },
+        {
+          "example": "en",
+          "name": "locale",
+          "required": false,
+          "type": "string",
+          "validation": "one of ar | en"
+        },
+        {
+          "example": "correct horse battery staple",
+          "name": "password",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/RegisterIdentityRequest"
       },
@@ -9535,12 +10161,13 @@ The following checked projection is shared with the human-rendered guide and pre
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/VerifyIdentityRequest"
       ],
-      "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"token\\":\\"{token}\\"}' 'https://api.authle.ss/v1/identity/verifications'",
+      "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"locale\\":\\"en\\",\\"token\\":\\"verification-token\\"}' 'https://api.authle.ss/identity/verifications'",
       "exampleParameters": {
         "x-correlation-id": "request_example_001"
       },
       "exampleRequestBody": {
-        "token": "{token}"
+        "locale": "en",
+        "token": "verification-token"
       },
       "method": "POST",
       "operationId": "verifyIdentity",
@@ -9561,7 +10188,33 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/identity/verifications",
+      "path": "/identity/verifications",
+      "parameters": [
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "en",
+          "name": "locale",
+          "required": false,
+          "type": "string",
+          "validation": "one of ar | en"
+        },
+        {
+          "example": "verification-token",
+          "name": "token",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/VerifyIdentityRequest"
       },
@@ -9573,7 +10226,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "Server-side platform session. Never expose this value to browser bundles or logs."
       ],
       "constraints": [],
-      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/v1/me/security-activity'",
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/me/security-activity'",
       "exampleParameters": {},
       "method": "GET",
       "operationId": "listPersonalSecurityActivity",
@@ -9594,7 +10247,9 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/me/security-activity",
+      "path": "/me/security-activity",
+      "parameters": [],
+      "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "List the current person's session-security activity"
     },
@@ -9606,7 +10261,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (optional): #/components/schemas/SignOutOtherSessionsRequest"
       ],
-      "example": "curl --request DELETE -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/v1/me/sessions'",
+      "example": "curl --request DELETE -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/me/sessions'",
       "exampleParameters": {
         "x-correlation-id": "request_example_001"
       },
@@ -9645,7 +10300,31 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/me/sessions",
+      "path": "/me/sessions",
+      "parameters": [
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "confirmed",
+          "required": false,
+          "type": "boolean",
+          "validation": "—"
+        },
+        {
+          "name": "locale",
+          "required": false,
+          "type": "string",
+          "validation": "one of ar | en"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/SignOutOtherSessionsRequest"
       },
@@ -9657,7 +10336,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "Server-side platform session. Never expose this value to browser bundles or logs."
       ],
       "constraints": [],
-      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/v1/me/sessions'",
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/me/sessions'",
       "exampleParameters": {},
       "method": "GET",
       "operationId": "listPersonalSessions",
@@ -9678,7 +10357,9 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/me/sessions",
+      "path": "/me/sessions",
+      "parameters": [],
+      "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "List the current person's platform sessions"
     },
@@ -9691,7 +10372,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (optional): #/components/schemas/RevokePersonalSessionRequest"
       ],
-      "example": "curl --request DELETE -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/v1/me/sessions/session_01J5K6M7N8P9QRSTVWXYZABCDE'",
+      "example": "curl --request DELETE -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/me/sessions/session_01J5K6M7N8P9QRSTVWXYZABCDE'",
       "exampleParameters": {
         "sessionId": "session_01J5K6M7N8P9QRSTVWXYZABCDE",
         "x-correlation-id": "request_example_001"
@@ -9731,7 +10412,33 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/me/sessions/{sessionId}",
+      "path": "/me/sessions/{sessionId}",
+      "parameters": [
+        {
+          "example": "session_01J5K6M7N8P9QRSTVWXYZABCDE",
+          "location": "path",
+          "name": "sessionId",
+          "required": true,
+          "type": "string",
+          "validation": "pattern ^session_[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "locale",
+          "required": false,
+          "type": "string",
+          "validation": "one of ar | en"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/RevokePersonalSessionRequest"
       },
@@ -9747,7 +10454,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (optional): #/components/schemas/ReportPersonalSessionRiskRequest"
       ],
-      "example": "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/v1/me/sessions/session_01J5K6M7N8P9QRSTVWXYZABCDE/risk'",
+      "example": "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/me/sessions/session_01J5K6M7N8P9QRSTVWXYZABCDE/risk'",
       "exampleParameters": {
         "sessionId": "session_01J5K6M7N8P9QRSTVWXYZABCDE",
         "x-correlation-id": "request_example_001"
@@ -9792,7 +10499,39 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/me/sessions/{sessionId}/risk",
+      "path": "/me/sessions/{sessionId}/risk",
+      "parameters": [
+        {
+          "example": "session_01J5K6M7N8P9QRSTVWXYZABCDE",
+          "location": "path",
+          "name": "sessionId",
+          "required": true,
+          "type": "string",
+          "validation": "pattern ^session_[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "confirmed",
+          "required": false,
+          "type": "boolean",
+          "validation": "—"
+        },
+        {
+          "name": "locale",
+          "required": false,
+          "type": "string",
+          "validation": "one of ar | en"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/ReportPersonalSessionRiskRequest"
       },
@@ -9804,7 +10543,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "Server-side platform session. Never expose this value to browser bundles or logs."
       ],
       "constraints": [],
-      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/v1/personal/overview'",
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/personal/overview'",
       "exampleParameters": {},
       "method": "GET",
       "operationId": "getPersonalOverview",
@@ -9825,7 +10564,9 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/personal/overview",
+      "path": "/personal/overview",
+      "parameters": [],
+      "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "Get the current person's safe account overview"
     },
@@ -9837,7 +10578,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (optional): #/components/schemas/RemovePersonalUsernameRequest"
       ],
-      "example": "curl --request DELETE -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/v1/personal/username'",
+      "example": "curl --request DELETE -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/personal/username'",
       "exampleParameters": {
         "x-correlation-id": "request_example_001"
       },
@@ -9876,7 +10617,25 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/personal/username",
+      "path": "/personal/username",
+      "parameters": [
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "confirmed",
+          "required": false,
+          "type": "boolean",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/RemovePersonalUsernameRequest"
       },
@@ -9891,7 +10650,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/AddPersonalUsernameRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"username\\":\\"{username}\\"}' 'https://api.authle.ss/v1/personal/username'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"username\\":\\"{username}\\"}' 'https://api.authle.ss/personal/username'",
       "exampleParameters": {
         "x-correlation-id": "request_example_001"
       },
@@ -9932,7 +10691,26 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/personal/username",
+      "path": "/personal/username",
+      "parameters": [
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{username}",
+          "name": "username",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/AddPersonalUsernameRequest"
       },
@@ -9947,7 +10725,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/ChangePersonalUsernameRequest"
       ],
-      "example": "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"username\\":\\"{username}\\"}' 'https://api.authle.ss/v1/personal/username'",
+      "example": "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"username\\":\\"{username}\\"}' 'https://api.authle.ss/personal/username'",
       "exampleParameters": {
         "x-correlation-id": "request_example_001"
       },
@@ -9988,7 +10766,26 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/personal/username",
+      "path": "/personal/username",
+      "parameters": [
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{username}",
+          "name": "username",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/ChangePersonalUsernameRequest"
       },
@@ -10000,7 +10797,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "Server-side platform session. Never expose this value to browser bundles or logs."
       ],
       "constraints": [],
-      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/v1/personal/workspace-correlations'",
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/personal/workspace-correlations'",
       "exampleParameters": {},
       "method": "GET",
       "operationId": "listPersonalWorkspaceCorrelations",
@@ -10016,7 +10813,9 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/personal/workspace-correlations",
+      "path": "/personal/workspace-correlations",
+      "parameters": [],
+      "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "List the current person's workspace correlation disclosures"
     },
@@ -10029,7 +10828,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/SplitPersonalWorkspaceCorrelationRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"expectedVersion\\":1}' 'https://api.authle.ss/v1/personal/workspace-correlations/%7BworkspaceId%7D/split'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"expectedVersion\\":1}' 'https://api.authle.ss/personal/workspace-correlations/%7BworkspaceId%7D/split'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "x-correlation-id": "request_example_001"
@@ -10077,7 +10876,41 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/personal/workspace-correlations/{workspaceId}/split",
+      "path": "/personal/workspace-correlations/{workspaceId}/split",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": true,
+          "name": "confirmed",
+          "required": true,
+          "type": "boolean",
+          "validation": "—"
+        },
+        {
+          "example": 1,
+          "name": "expectedVersion",
+          "required": true,
+          "type": "integer",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/SplitPersonalWorkspaceCorrelationRequest"
       },
@@ -10092,7 +10925,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "header merchant-signature (required): string",
         "JSON request body (required): object"
       ],
-      "example": "curl --request POST -H 'merchant-signature: {merchant-signature}' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/v1/providers/merchant/billing-events'",
+      "example": "curl --request POST -H 'merchant-signature: {merchant-signature}' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/providers/merchant/billing-events'",
       "exampleParameters": {
         "merchant-signature": "{merchant-signature}"
       },
@@ -10111,7 +10944,18 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/providers/merchant/billing-events",
+      "path": "/providers/merchant/billing-events",
+      "parameters": [
+        {
+          "example": "{merchant-signature}",
+          "location": "header",
+          "name": "merchant-signature",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [],
       "requestSchema": {
         "type": "object",
         "additionalProperties": true
@@ -10121,14 +10965,15 @@ The following checked projection is shared with the human-rendered guide and pre
     },
     {
       "authority": [
-        "Server-side platform session. Never expose this value to browser bundles or logs."
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "Server-side management OAuth bearer issued for an owner-created workspace delegation. This scheme is supported only on operations that list it explicitly, currently workspace reads, and requires x-authless-client: server. Never use a browser session cookie as an agent credential. Required scope: workspace:read."
       ],
       "constraints": [
         "query cursor (optional): string, maxLength 1024",
         "query limit (optional): integer, min 1, max 100",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128"
       ],
-      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/v1/workspaces'",
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/workspaces'",
       "exampleParameters": {
         "x-correlation-id": "request_example_001"
       },
@@ -10151,7 +10996,32 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces",
+      "path": "/workspaces",
+      "parameters": [
+        {
+          "location": "query",
+          "name": "cursor",
+          "required": false,
+          "type": "string",
+          "validation": "maxLength 1024"
+        },
+        {
+          "location": "query",
+          "name": "limit",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1, max 100"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "List workspaces available to the current platform session"
     },
@@ -10164,13 +11034,13 @@ The following checked projection is shared with the human-rendered guide and pre
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/CreateWorkspaceRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"name\\":\\"Example\\",\\"termsAccepted\\":true}' 'https://api.authle.ss/v1/workspaces'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"name\\":\\"Example workspace\\",\\"termsAccepted\\":true}' 'https://api.authle.ss/workspaces'",
       "exampleParameters": {
         "idempotency-key": "request-example-001",
         "x-correlation-id": "request_example_001"
       },
       "exampleRequestBody": {
-        "name": "Example",
+        "name": "Example workspace",
         "termsAccepted": true
       },
       "method": "POST",
@@ -10202,7 +11072,41 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces",
+      "path": "/workspaces",
+      "parameters": [
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "Example workspace",
+          "name": "name",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1, maxLength 80"
+        },
+        {
+          "example": true,
+          "name": "termsAccepted",
+          "required": true,
+          "type": "boolean",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/CreateWorkspaceRequest"
       },
@@ -10211,13 +11115,14 @@ The following checked projection is shared with the human-rendered guide and pre
     },
     {
       "authority": [
-        "Server-side platform session. Never expose this value to browser bundles or logs."
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "Server-side management OAuth bearer issued for an owner-created workspace delegation. This scheme is supported only on operations that list it explicitly, currently workspace reads, and requires x-authless-client: server. Never use a browser session cookie as an agent credential. Required scope: workspace:read."
       ],
       "constraints": [
         "path workspaceId (required): string, minLength 3, maxLength 128",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128"
       ],
-      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D'",
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "x-correlation-id": "request_example_001"
@@ -10241,7 +11146,26 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}",
+      "path": "/workspaces/{workspaceId}",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "Read one workspace available to the current platform session"
     },
@@ -10255,7 +11179,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "query limit (optional): integer, min 1, max 100",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128"
       ],
-      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps'",
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "x-correlation-id": "request_example_001"
@@ -10284,7 +11208,40 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps",
+      "path": "/workspaces/{workspaceId}/apps",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "location": "query",
+          "name": "cursor",
+          "required": false,
+          "type": "string",
+          "validation": "maxLength 1024"
+        },
+        {
+          "location": "query",
+          "name": "limit",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1, max 100"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "List apps available in one workspace"
     },
@@ -10298,16 +11255,16 @@ The following checked projection is shared with the human-rendered guide and pre
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/CreateAppRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"description\\":\\"{description}\\",\\"name\\":\\"Example\\",\\"ownerContactEmail\\":\\"{ownerContactEmail}\\"}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"description\\":\\"Customer sign-in for the Example product\\",\\"name\\":\\"Example web app\\",\\"ownerContactEmail\\":\\"security@example.com\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "idempotency-key": "request-example-001",
         "x-correlation-id": "request_example_001"
       },
       "exampleRequestBody": {
-        "description": "{description}",
-        "name": "Example",
-        "ownerContactEmail": "{ownerContactEmail}"
+        "description": "Customer sign-in for the Example product",
+        "name": "Example web app",
+        "ownerContactEmail": "security@example.com"
       },
       "method": "POST",
       "operationId": "createApp",
@@ -10338,7 +11295,56 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps",
+      "path": "/workspaces/{workspaceId}/apps",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "Customer sign-in for the Example product",
+          "name": "description",
+          "required": true,
+          "type": "string",
+          "validation": "maxLength 500"
+        },
+        {
+          "example": "Example web app",
+          "name": "name",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1, maxLength 80"
+        },
+        {
+          "example": "security@example.com",
+          "name": "ownerContactEmail",
+          "required": true,
+          "type": "string",
+          "validation": "maxLength 254, format email"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/CreateAppRequest"
       },
@@ -10355,7 +11361,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "path environment (required): string, one of production | test",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128"
       ],
-      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production'",
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -10381,7 +11387,42 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "production",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of production | test"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "Read one versioned app environment"
     },
@@ -10396,7 +11437,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "query cursor (optional): string, maxLength 1024",
         "query limit (optional): integer, min 1, max 100"
       ],
-      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/credentials'",
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/credentials'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -10426,7 +11467,48 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/credentials",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/credentials",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "production",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of production | test"
+        },
+        {
+          "location": "query",
+          "name": "cursor",
+          "required": false,
+          "type": "string",
+          "validation": "maxLength 1024"
+        },
+        {
+          "location": "query",
+          "name": "limit",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1, max 100"
+        }
+      ],
+      "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "List secret-free integration credentials for an app environment"
     },
@@ -10442,7 +11524,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/CreateIntegrationCredentialRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"name\\":\\"Example\\"}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/credentials'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"name\\":\\"Example\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/credentials'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -10502,7 +11584,64 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/credentials",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/credentials",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "production",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of production | test"
+        },
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "confirmed",
+          "required": false,
+          "type": "boolean",
+          "validation": "—"
+        },
+        {
+          "example": "Example",
+          "name": "name",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/CreateIntegrationCredentialRequest"
       },
@@ -10523,7 +11662,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RevokeIntegrationCredentialRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/credentials/%7BcredentialId%7D/revoke'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/credentials/%7BcredentialId%7D/revoke'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -10578,7 +11717,79 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/credentials/{credentialId}/revoke",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/credentials/{credentialId}/revoke",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "production",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of production | test"
+        },
+        {
+          "example": "{credentialId}",
+          "location": "path",
+          "name": "credentialId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "\\"1\\"",
+          "location": "header",
+          "name": "if-match",
+          "required": true,
+          "type": "string",
+          "validation": "pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$"
+        },
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "compromised",
+          "required": false,
+          "type": "boolean",
+          "validation": "—"
+        },
+        {
+          "name": "confirmed",
+          "required": false,
+          "type": "boolean",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/RevokeIntegrationCredentialRequest"
       },
@@ -10599,7 +11810,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RotateIntegrationCredentialRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"overlapSeconds\\":1}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/credentials/%7BcredentialId%7D/rotate'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"overlapSeconds\\":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/credentials/%7BcredentialId%7D/rotate'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -10656,7 +11867,80 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/credentials/{credentialId}/rotate",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/credentials/{credentialId}/rotate",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "production",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of production | test"
+        },
+        {
+          "example": "{credentialId}",
+          "location": "path",
+          "name": "credentialId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "\\"1\\"",
+          "location": "header",
+          "name": "if-match",
+          "required": true,
+          "type": "string",
+          "validation": "pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$"
+        },
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "confirmed",
+          "required": false,
+          "type": "boolean",
+          "validation": "—"
+        },
+        {
+          "example": 1,
+          "name": "overlapSeconds",
+          "required": true,
+          "type": "number",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/RotateIntegrationCredentialRequest"
       },
@@ -10674,7 +11958,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "query cursor (optional): string, maxLength 1024",
         "query limit (optional): integer, min 1, max 100"
       ],
-      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks'",
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -10704,7 +11988,48 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "production",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of production | test"
+        },
+        {
+          "location": "query",
+          "name": "cursor",
+          "required": false,
+          "type": "string",
+          "validation": "maxLength 1024"
+        },
+        {
+          "location": "query",
+          "name": "limit",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1, max 100"
+        }
+      ],
+      "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "List secret-free webhooks for an app environment"
     },
@@ -10720,7 +12045,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RegisterIntegrationWebhookRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"subscriptions\\":[],\\"url\\":\\"{url}\\"}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"subscriptions\\":[],\\"url\\":\\"{url}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -10781,7 +12106,71 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "production",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of production | test"
+        },
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "confirmed",
+          "required": false,
+          "type": "boolean",
+          "validation": "—"
+        },
+        {
+          "example": [],
+          "name": "subscriptions",
+          "required": true,
+          "type": "array",
+          "validation": "—"
+        },
+        {
+          "example": "{url}",
+          "name": "url",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/RegisterIntegrationWebhookRequest"
       },
@@ -10800,7 +12189,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "query cursor (optional): string, maxLength 1024",
         "query limit (optional): integer, min 1, max 100"
       ],
-      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/deliveries'",
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/deliveries'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -10831,7 +12220,56 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/{webhookId}/deliveries",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/{webhookId}/deliveries",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "production",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of production | test"
+        },
+        {
+          "example": "{webhookId}",
+          "location": "path",
+          "name": "webhookId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "location": "query",
+          "name": "cursor",
+          "required": false,
+          "type": "string",
+          "validation": "maxLength 1024"
+        },
+        {
+          "location": "query",
+          "name": "limit",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1, max 100"
+        }
+      ],
+      "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "List secret-free delivery state for an app-environment webhook"
     },
@@ -10849,7 +12287,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/ReplayIntegrationWebhookDeliveryRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/deliveries/%7BdeliveryId%7D/replay'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/deliveries/%7BdeliveryId%7D/replay'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -10899,7 +12337,73 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/{webhookId}/deliveries/{deliveryId}/replay",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/{webhookId}/deliveries/{deliveryId}/replay",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "production",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of production | test"
+        },
+        {
+          "example": "{webhookId}",
+          "location": "path",
+          "name": "webhookId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{deliveryId}",
+          "location": "path",
+          "name": "deliveryId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "confirmed",
+          "required": false,
+          "type": "boolean",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/ReplayIntegrationWebhookDeliveryRequest"
       },
@@ -10920,7 +12424,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/DisableIntegrationWebhookRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/disable'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/disable'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -10975,7 +12479,73 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/{webhookId}/disable",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/{webhookId}/disable",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "production",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of production | test"
+        },
+        {
+          "example": "{webhookId}",
+          "location": "path",
+          "name": "webhookId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "\\"1\\"",
+          "location": "header",
+          "name": "if-match",
+          "required": true,
+          "type": "string",
+          "validation": "pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$"
+        },
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "confirmed",
+          "required": false,
+          "type": "boolean",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/DisableIntegrationWebhookRequest"
       },
@@ -10996,7 +12566,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RotateIntegrationWebhookSecretRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"overlapSeconds\\":1}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/rotate'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"overlapSeconds\\":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/rotate'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -11053,7 +12623,80 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/{webhookId}/rotate",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/{webhookId}/rotate",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "production",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of production | test"
+        },
+        {
+          "example": "{webhookId}",
+          "location": "path",
+          "name": "webhookId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "\\"1\\"",
+          "location": "header",
+          "name": "if-match",
+          "required": true,
+          "type": "string",
+          "validation": "pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$"
+        },
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "confirmed",
+          "required": false,
+          "type": "boolean",
+          "validation": "—"
+        },
+        {
+          "example": 1,
+          "name": "overlapSeconds",
+          "required": true,
+          "type": "number",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/RotateIntegrationWebhookSecretRequest"
       },
@@ -11074,7 +12717,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/ReplaceIntegrationWebhookSubscriptionsRequest"
       ],
-      "example": "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"subscriptions\\":[]}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/subscriptions'",
+      "example": "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"subscriptions\\":[]}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/subscriptions'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -11131,7 +12774,80 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/{webhookId}/subscriptions",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/{webhookId}/subscriptions",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "production",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of production | test"
+        },
+        {
+          "example": "{webhookId}",
+          "location": "path",
+          "name": "webhookId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "\\"1\\"",
+          "location": "header",
+          "name": "if-match",
+          "required": true,
+          "type": "string",
+          "validation": "pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$"
+        },
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "confirmed",
+          "required": false,
+          "type": "boolean",
+          "validation": "—"
+        },
+        {
+          "example": [],
+          "name": "subscriptions",
+          "required": true,
+          "type": "array",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/ReplaceIntegrationWebhookSubscriptionsRequest"
       },
@@ -11150,7 +12866,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/ReconcileIntegrationWebhooksRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/reconcile'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/reconcile'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -11198,7 +12914,57 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/reconcile",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/reconcile",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "production",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of production | test"
+        },
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "confirmed",
+          "required": false,
+          "type": "boolean",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/ReconcileIntegrationWebhooksRequest"
       },
@@ -11215,7 +12981,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "path operationId (required): string",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128"
       ],
-      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/operations/%7BoperationId%7D'",
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/operations/%7BoperationId%7D'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -11251,7 +13017,42 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/bulk-access/operations/{operationId}",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/bulk-access/operations/{operationId}",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{operationId}",
+          "location": "path",
+          "name": "operationId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "Read one exact durable bulk access operation"
     },
@@ -11268,7 +13069,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/ConfirmBulkAccessRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/operations/%7BoperationId%7D/cancellation'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/operations/%7BoperationId%7D/cancellation'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -11329,7 +13130,66 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/bulk-access/operations/{operationId}/cancellation",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/bulk-access/operations/{operationId}/cancellation",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{operationId}",
+          "location": "path",
+          "name": "operationId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "\\"1\\"",
+          "location": "header",
+          "name": "if-match",
+          "required": true,
+          "type": "string",
+          "validation": "pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$"
+        },
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": true,
+          "name": "confirmed",
+          "required": true,
+          "type": "boolean",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/ConfirmBulkAccessRequest"
       },
@@ -11349,7 +13209,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "query download (optional): string, one of 1",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128"
       ],
-      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/operations/%7BoperationId%7D/results'",
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/operations/%7BoperationId%7D/results'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -11390,7 +13250,63 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/bulk-access/operations/{operationId}/results",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/bulk-access/operations/{operationId}/results",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{operationId}",
+          "location": "path",
+          "name": "operationId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "location": "query",
+          "name": "cursor",
+          "required": false,
+          "type": "string",
+          "validation": "maxLength 1024"
+        },
+        {
+          "location": "query",
+          "name": "limit",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1, max 100"
+        },
+        {
+          "location": "query",
+          "name": "download",
+          "required": false,
+          "type": "string",
+          "validation": "one of 1"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "List safe item results or download immutable JSONL evidence for one bulk operation"
     },
@@ -11404,7 +13320,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/CreateBulkAccessPreviewRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"action\\":\\"suspend_memberships\\",\\"filter\\":{\\"membershipIds\\":[\\"{membershipIds_1}\\"]},\\"reason\\":\\"administrator_action\\"}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/previews'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"action\\":\\"suspend_memberships\\",\\"filter\\":{\\"membershipIds\\":[\\"{membershipIds_1}\\"]},\\"reason\\":\\"administrator_action\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/previews'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -11448,7 +13364,72 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/bulk-access/previews",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/bulk-access/previews",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "suspend_memberships",
+          "name": "action",
+          "required": true,
+          "type": "string",
+          "validation": "one of grant_entitlements | grant_roles | suspend_memberships"
+        },
+        {
+          "name": "entitlement",
+          "required": false,
+          "type": "object",
+          "validation": "—"
+        },
+        {
+          "example": {
+            "membershipIds": [
+              "{membershipIds_1}"
+            ]
+          },
+          "name": "filter",
+          "required": true,
+          "type": "object",
+          "validation": "—"
+        },
+        {
+          "example": "administrator_action",
+          "name": "reason",
+          "required": true,
+          "type": "string",
+          "validation": "one of administrator_action | policy_violation | security_review"
+        },
+        {
+          "name": "role",
+          "required": false,
+          "type": "object",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/CreateBulkAccessPreviewRequest"
       },
@@ -11465,7 +13446,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "path previewId (required): string",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128"
       ],
-      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/previews/%7BpreviewId%7D'",
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/previews/%7BpreviewId%7D'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -11501,7 +13482,42 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/bulk-access/previews/{previewId}",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/bulk-access/previews/{previewId}",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{previewId}",
+          "location": "path",
+          "name": "previewId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "Read one exact durable bulk access preview"
     },
@@ -11517,7 +13533,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/ExecuteBulkAccessPreviewRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"previewIntegrityDigest\\":\\"sha256:0000000000000000000000000000000000000000000000000000000000000000\\",\\"previewVersion\\":1}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/previews/%7BpreviewId%7D/executions'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"previewIntegrityDigest\\":\\"sha256:0000000000000000000000000000000000000000000000000000000000000000\\",\\"previewVersion\\":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/previews/%7BpreviewId%7D/executions'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -11589,7 +13605,72 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/bulk-access/previews/{previewId}/executions",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/bulk-access/previews/{previewId}/executions",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{previewId}",
+          "location": "path",
+          "name": "previewId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": true,
+          "name": "confirmed",
+          "required": true,
+          "type": "boolean",
+          "validation": "—"
+        },
+        {
+          "example": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+          "name": "previewIntegrityDigest",
+          "required": true,
+          "type": "string",
+          "validation": "pattern ^sha256:[0-9a-f]{64}$"
+        },
+        {
+          "example": 1,
+          "name": "previewVersion",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/ExecuteBulkAccessPreviewRequest"
       },
@@ -11610,7 +13691,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "query status (optional): ",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128"
       ],
-      "example": "curl --request GET -H 'authorization: Bearer {app_credential}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships'",
+      "example": "curl --request GET -H 'authorization: Bearer {app_credential}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -11640,7 +13721,62 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/memberships",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/memberships",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "location": "query",
+          "name": "cursor",
+          "required": false,
+          "type": "string",
+          "validation": "maxLength 2048"
+        },
+        {
+          "location": "query",
+          "name": "limit",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1, max 100"
+        },
+        {
+          "location": "query",
+          "name": "query",
+          "required": false,
+          "type": "string",
+          "validation": "maxLength 254"
+        },
+        {
+          "location": "query",
+          "name": "status",
+          "required": false,
+          "type": "string",
+          "validation": "one of active | deleted | invited | pending_approval | pending_consent | revoked | suspended"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "List privacy-safe app memberships under exact app authority"
     },
@@ -11656,7 +13792,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/InviteAppMembershipRequest"
       ],
-      "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"email\\":\\"person@example.test\\"}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships'",
+      "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"email\\":\\"person@example.test\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -11706,7 +13842,63 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/memberships",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/memberships",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": true,
+          "name": "confirmed",
+          "required": true,
+          "type": "boolean",
+          "validation": "—"
+        },
+        {
+          "name": "customerReference",
+          "required": false,
+          "type": "string",
+          "validation": "maxLength 128"
+        },
+        {
+          "example": "person@example.test",
+          "name": "email",
+          "required": true,
+          "type": "string",
+          "validation": "format email"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/InviteAppMembershipRequest"
       },
@@ -11724,7 +13916,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "path membershipId (required): string, minLength 3, maxLength 128",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128"
       ],
-      "example": "curl --request GET -H 'authorization: Bearer {app_credential}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D'",
+      "example": "curl --request GET -H 'authorization: Bearer {app_credential}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -11760,7 +13952,42 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{membershipId}",
+          "location": "path",
+          "name": "membershipId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "Inspect one privacy-safe versioned app membership"
     },
@@ -11775,7 +14002,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "path membershipId (required): string, minLength 3, maxLength 128",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128"
       ],
-      "example": "curl --request GET -H 'authorization: Bearer {app_credential}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/access'",
+      "example": "curl --request GET -H 'authorization: Bearer {app_credential}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/access'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -11806,7 +14033,42 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/access",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/access",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{membershipId}",
+          "location": "path",
+          "name": "membershipId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "Inspect one membership's independent role and entitlement grants"
     },
@@ -11824,7 +14086,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/GrantAppEntitlementRequest"
       ],
-      "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"key\\":\\"{key}\\",\\"source\\":\\"{source}\\"}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/entitlements'",
+      "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"key\\":\\"{key}\\",\\"source\\":\\"{source}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/entitlements'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -11877,7 +14139,86 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/entitlements",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/entitlements",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{membershipId}",
+          "location": "path",
+          "name": "membershipId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "\\"1\\"",
+          "location": "header",
+          "name": "if-match",
+          "required": true,
+          "type": "string",
+          "validation": "pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$"
+        },
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": true,
+          "name": "confirmed",
+          "required": true,
+          "type": "boolean",
+          "validation": "—"
+        },
+        {
+          "name": "expiresAt",
+          "required": false,
+          "type": "string",
+          "validation": "format date-time"
+        },
+        {
+          "example": "{key}",
+          "name": "key",
+          "required": true,
+          "type": "string",
+          "validation": "maxLength 128"
+        },
+        {
+          "example": "{source}",
+          "name": "source",
+          "required": true,
+          "type": "string",
+          "validation": "maxLength 200"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/GrantAppEntitlementRequest"
       },
@@ -11899,7 +14240,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RevokeAppEntitlementRequest"
       ],
-      "example": "curl --request DELETE -H 'authorization: Bearer {app_credential}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/entitlements/%7BgrantId%7D'",
+      "example": "curl --request DELETE -H 'authorization: Bearer {app_credential}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/entitlements/%7BgrantId%7D'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -11961,7 +14302,74 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/entitlements/{grantId}",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/entitlements/{grantId}",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{membershipId}",
+          "location": "path",
+          "name": "membershipId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{grantId}",
+          "location": "path",
+          "name": "grantId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "\\"1\\"",
+          "location": "header",
+          "name": "if-match",
+          "required": true,
+          "type": "string",
+          "validation": "pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$"
+        },
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": true,
+          "name": "confirmed",
+          "required": true,
+          "type": "boolean",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/RevokeAppEntitlementRequest"
       },
@@ -11982,7 +14390,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/ChangeAppMembershipStatusRequest"
       ],
-      "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"action\\":\\"activate\\",\\"confirmed\\":true,\\"reason\\":\\"access_ended\\"}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/lifecycle'",
+      "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"action\\":\\"activate\\",\\"confirmed\\":true,\\"reason\\":\\"access_ended\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/lifecycle'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -12045,7 +14453,80 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/lifecycle",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/lifecycle",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{membershipId}",
+          "location": "path",
+          "name": "membershipId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "\\"1\\"",
+          "location": "header",
+          "name": "if-match",
+          "required": true,
+          "type": "string",
+          "validation": "pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$"
+        },
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "activate",
+          "name": "action",
+          "required": true,
+          "type": "string",
+          "validation": "one of activate | delete | revoke | suspend"
+        },
+        {
+          "example": true,
+          "name": "confirmed",
+          "required": true,
+          "type": "boolean",
+          "validation": "—"
+        },
+        {
+          "example": "access_ended",
+          "name": "reason",
+          "required": true,
+          "type": "string",
+          "validation": "one of access_ended | administrator_action | approval_granted | data_retention_complete | policy_violation | security_review"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/ChangeAppMembershipStatusRequest"
       },
@@ -12066,7 +14547,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/GrantAppRoleRequest"
       ],
-      "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"key\\":\\"{key}\\",\\"source\\":\\"{source}\\"}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/roles'",
+      "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"key\\":\\"{key}\\",\\"source\\":\\"{source}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/roles'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -12119,7 +14600,80 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/roles",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/roles",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{membershipId}",
+          "location": "path",
+          "name": "membershipId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "\\"1\\"",
+          "location": "header",
+          "name": "if-match",
+          "required": true,
+          "type": "string",
+          "validation": "pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$"
+        },
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": true,
+          "name": "confirmed",
+          "required": true,
+          "type": "boolean",
+          "validation": "—"
+        },
+        {
+          "example": "{key}",
+          "name": "key",
+          "required": true,
+          "type": "string",
+          "validation": "maxLength 128"
+        },
+        {
+          "example": "{source}",
+          "name": "source",
+          "required": true,
+          "type": "string",
+          "validation": "maxLength 200"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/GrantAppRoleRequest"
       },
@@ -12141,7 +14695,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RevokeAppRoleRequest"
       ],
-      "example": "curl --request DELETE -H 'authorization: Bearer {app_credential}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/roles/%7BgrantId%7D'",
+      "example": "curl --request DELETE -H 'authorization: Bearer {app_credential}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/roles/%7BgrantId%7D'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -12203,7 +14757,74 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/roles/{grantId}",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/roles/{grantId}",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{membershipId}",
+          "location": "path",
+          "name": "membershipId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{grantId}",
+          "location": "path",
+          "name": "grantId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "\\"1\\"",
+          "location": "header",
+          "name": "if-match",
+          "required": true,
+          "type": "string",
+          "validation": "pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$"
+        },
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": true,
+          "name": "confirmed",
+          "required": true,
+          "type": "boolean",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/RevokeAppRoleRequest"
       },
@@ -12222,13 +14843,13 @@ The following checked projection is shared with the human-rendered guide and pre
         "query actor (optional): string, maxLength 160",
         "query appId (optional): string, maxLength 160",
         "query correlation (optional): string, maxLength 160",
-        "query from (optional): string",
+        "query from (optional): string, format date-time",
         "query outcome (optional): string, one of failure | retry | success",
         "query resource (optional): string, maxLength 160",
-        "query to (optional): string",
+        "query to (optional): string, format date-time",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128"
       ],
-      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/audit-events'",
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/audit-events'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "x-correlation-id": "request_example_001"
@@ -12257,7 +14878,96 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/audit-events",
+      "path": "/workspaces/{workspaceId}/audit-events",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "location": "query",
+          "name": "cursor",
+          "required": false,
+          "type": "string",
+          "validation": "maxLength 1024"
+        },
+        {
+          "location": "query",
+          "name": "limit",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1, max 100"
+        },
+        {
+          "location": "query",
+          "name": "action",
+          "required": false,
+          "type": "string",
+          "validation": "maxLength 160"
+        },
+        {
+          "location": "query",
+          "name": "actor",
+          "required": false,
+          "type": "string",
+          "validation": "maxLength 160"
+        },
+        {
+          "location": "query",
+          "name": "appId",
+          "required": false,
+          "type": "string",
+          "validation": "maxLength 160"
+        },
+        {
+          "location": "query",
+          "name": "correlation",
+          "required": false,
+          "type": "string",
+          "validation": "maxLength 160"
+        },
+        {
+          "location": "query",
+          "name": "from",
+          "required": false,
+          "type": "string",
+          "validation": "format date-time"
+        },
+        {
+          "location": "query",
+          "name": "outcome",
+          "required": false,
+          "type": "string",
+          "validation": "one of failure | retry | success"
+        },
+        {
+          "location": "query",
+          "name": "resource",
+          "required": false,
+          "type": "string",
+          "validation": "maxLength 160"
+        },
+        {
+          "location": "query",
+          "name": "to",
+          "required": false,
+          "type": "string",
+          "validation": "format date-time"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "List one bounded page of redacted audit evidence within the session's effective workspace scope"
     },
@@ -12268,7 +14978,7 @@ The following checked projection is shared with the human-rendered guide and pre
       "constraints": [
         "path workspaceId (required): string"
       ],
-      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/billing'",
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/billing'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}"
       },
@@ -12291,7 +15001,18 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/billing",
+      "path": "/workspaces/{workspaceId}/billing",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "Inspect the current commercial billing subscription"
     },
@@ -12303,7 +15024,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "path workspaceId (required): string",
         "JSON request body (required): #/components/schemas/CommercialBillingCancellationReviewRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"idempotencyKey\\":\\"{idempotencyKey}\\",\\"mode\\":\\"period_end\\"}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/billing/cancellation-reviews'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"idempotencyKey\\":\\"{idempotencyKey}\\",\\"mode\\":\\"period_end\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/billing/cancellation-reviews'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}"
       },
@@ -12345,7 +15066,33 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/billing/cancellation-reviews",
+      "path": "/workspaces/{workspaceId}/billing/cancellation-reviews",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{idempotencyKey}",
+          "name": "idempotencyKey",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 200"
+        },
+        {
+          "example": "period_end",
+          "name": "mode",
+          "required": true,
+          "type": "string",
+          "validation": "one of period_end | immediate"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/CommercialBillingCancellationReviewRequest"
       },
@@ -12360,7 +15107,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "path workspaceId (required): string",
         "JSON request body (required): #/components/schemas/CommercialBillingCancellationConfirmationRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"confirmationToken\\":\\"{confirmationToken}\\",\\"idempotencyKey\\":\\"{idempotencyKey}\\"}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/billing/cancellations'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"confirmationToken\\":\\"{confirmationToken}\\",\\"idempotencyKey\\":\\"{idempotencyKey}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/billing/cancellations'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}"
       },
@@ -12402,7 +15149,33 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/billing/cancellations",
+      "path": "/workspaces/{workspaceId}/billing/cancellations",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{confirmationToken}",
+          "name": "confirmationToken",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 400"
+        },
+        {
+          "example": "{idempotencyKey}",
+          "name": "idempotencyKey",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 200"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/CommercialBillingCancellationConfirmationRequest"
       },
@@ -12417,7 +15190,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "path workspaceId (required): string",
         "JSON request body (required): #/components/schemas/CommercialBillingChangeAuthorizationRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"changeId\\":\\"{changeId}\\"}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/billing/change-authorizations'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"changeId\\":\\"{changeId}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/billing/change-authorizations'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}"
       },
@@ -12453,7 +15226,26 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/billing/change-authorizations",
+      "path": "/workspaces/{workspaceId}/billing/change-authorizations",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{changeId}",
+          "name": "changeId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 240"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/CommercialBillingChangeAuthorizationRequest"
       },
@@ -12468,7 +15260,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "path workspaceId (required): string",
         "JSON request body (required): #/components/schemas/CommercialBillingChangeReviewRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"idempotencyKey\\":\\"{idempotencyKey}\\",\\"period\\":\\"monthly\\",\\"planId\\":\\"launch\\"}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/billing/change-reviews'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"idempotencyKey\\":\\"{idempotencyKey}\\",\\"period\\":\\"monthly\\",\\"planId\\":\\"launch\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/billing/change-reviews'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}"
       },
@@ -12506,7 +15298,46 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/billing/change-reviews",
+      "path": "/workspaces/{workspaceId}/billing/change-reviews",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{idempotencyKey}",
+          "name": "idempotencyKey",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 200"
+        },
+        {
+          "example": "monthly",
+          "name": "period",
+          "required": true,
+          "type": "string",
+          "validation": "one of monthly | annual"
+        },
+        {
+          "example": "launch",
+          "name": "planId",
+          "required": true,
+          "type": "string",
+          "validation": "one of launch | growth | scale"
+        },
+        {
+          "name": "quantity",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1, max 100"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/CommercialBillingChangeReviewRequest"
       },
@@ -12521,7 +15352,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "path workspaceId (required): string",
         "JSON request body (required): #/components/schemas/CommercialBillingRefundRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"amountMicros\\":1,\\"category\\":\\"first_purchase_goodwill\\",\\"consumedOverageMicros\\":0,\\"idempotencyKey\\":\\"{idempotencyKey}\\",\\"invoiceRef\\":\\"{invoiceRef}\\"}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/billing/refund-requests'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"amountMicros\\":1,\\"category\\":\\"first_purchase_goodwill\\",\\"consumedOverageMicros\\":0,\\"idempotencyKey\\":\\"{idempotencyKey}\\",\\"invoiceRef\\":\\"{invoiceRef}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/billing/refund-requests'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}"
       },
@@ -12571,7 +15402,60 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/billing/refund-requests",
+      "path": "/workspaces/{workspaceId}/billing/refund-requests",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": 1,
+          "name": "amountMicros",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1"
+        },
+        {
+          "example": "first_purchase_goodwill",
+          "name": "category",
+          "required": true,
+          "type": "string",
+          "validation": "one of first_purchase_goodwill | verified_correction"
+        },
+        {
+          "example": 0,
+          "name": "consumedOverageMicros",
+          "required": true,
+          "type": "integer",
+          "validation": "min 0"
+        },
+        {
+          "example": "{idempotencyKey}",
+          "name": "idempotencyKey",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 200"
+        },
+        {
+          "example": "{invoiceRef}",
+          "name": "invoiceRef",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 240"
+        },
+        {
+          "name": "verifiedCorrection",
+          "required": false,
+          "type": "boolean",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/CommercialBillingRefundRequest"
       },
@@ -12588,7 +15472,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "JSON request body (required): #/components/schemas/CommercialPurchaseConfirmationRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'content-type: application/json' --data '{\\"acceptanceToken\\":\\"acceptance-example-001\\",\\"confirmed\\":true}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/commercial-purchases/launch/confirmations'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'content-type: application/json' --data '{\\"acceptanceToken\\":\\"acceptance-example-001\\",\\"confirmed\\":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/commercial-purchases/launch/confirmations'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "planId": "launch",
@@ -12632,7 +15516,49 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/commercial-purchases/{planId}/confirmations",
+      "path": "/workspaces/{workspaceId}/commercial-purchases/{planId}/confirmations",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "launch",
+          "location": "path",
+          "name": "planId",
+          "required": true,
+          "type": "string",
+          "validation": "one of launch | growth | scale"
+        },
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "acceptance-example-001",
+          "name": "acceptanceToken",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          "example": true,
+          "name": "confirmed",
+          "required": true,
+          "type": "boolean",
+          "validation": "one of true"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/CommercialPurchaseConfirmationRequest"
       },
@@ -12648,7 +15574,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "path planId (required): string, one of launch | growth | scale",
         "JSON request body (required): #/components/schemas/CommercialPurchaseReviewRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"billingPeriod\\":\\"monthly\\",\\"locale\\":\\"en\\"}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/commercial-purchases/launch/reviews'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"billingPeriod\\":\\"monthly\\",\\"locale\\":\\"en\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/commercial-purchases/launch/reviews'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "planId": "launch"
@@ -12681,7 +15607,47 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/commercial-purchases/{planId}/reviews",
+      "path": "/workspaces/{workspaceId}/commercial-purchases/{planId}/reviews",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "launch",
+          "location": "path",
+          "name": "planId",
+          "required": true,
+          "type": "string",
+          "validation": "one of launch | growth | scale"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "monthly",
+          "name": "billingPeriod",
+          "required": true,
+          "type": "string",
+          "validation": "one of monthly | annual"
+        },
+        {
+          "name": "customerType",
+          "required": false,
+          "type": "string",
+          "validation": "one of b2c | b2b"
+        },
+        {
+          "example": "en",
+          "name": "locale",
+          "required": true,
+          "type": "string",
+          "validation": "one of en | ar"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/CommercialPurchaseReviewRequest"
       },
@@ -12696,7 +15662,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "path workspaceId (required): string",
         "path purchaseId (required): string, minLength 3, maxLength 200"
       ],
-      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/commercial-purchases/%7BpurchaseId%7D/receipt'",
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/commercial-purchases/%7BpurchaseId%7D/receipt'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "purchaseId": "{purchaseId}"
@@ -12725,7 +15691,26 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/commercial-purchases/{purchaseId}/receipt",
+      "path": "/workspaces/{workspaceId}/commercial-purchases/{purchaseId}/receipt",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{purchaseId}",
+          "location": "path",
+          "name": "purchaseId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 200"
+        }
+      ],
+      "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "Inspect durable evidence for an activated commercial purchase"
     },
@@ -12736,7 +15721,7 @@ The following checked projection is shared with the human-rendered guide and pre
       "constraints": [
         "path workspaceId (required): string"
       ],
-      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/commercial-usage'",
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/commercial-usage'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}"
       },
@@ -12759,7 +15744,18 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/commercial-usage",
+      "path": "/workspaces/{workspaceId}/commercial-usage",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "Inspect authoritative commercial usage and next-unit effects"
     },
@@ -12771,7 +15767,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "path workspaceId (required): string",
         "JSON request body (required): #/components/schemas/CommercialOverageConfigurationRequest"
       ],
-      "example": "curl --request PATCH -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"enabled\\":true,\\"idempotencyKey\\":\\"{idempotencyKey}\\",\\"monthlySpendCapMicrosSar\\":0}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/overages'",
+      "example": "curl --request PATCH -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"enabled\\":true,\\"idempotencyKey\\":\\"{idempotencyKey}\\",\\"monthlySpendCapMicrosSar\\":0}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/overages'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}"
       },
@@ -12814,7 +15810,40 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/overages",
+      "path": "/workspaces/{workspaceId}/overages",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": true,
+          "name": "enabled",
+          "required": true,
+          "type": "boolean",
+          "validation": "—"
+        },
+        {
+          "example": "{idempotencyKey}",
+          "name": "idempotencyKey",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": 0,
+          "name": "monthlySpendCapMicrosSar",
+          "required": true,
+          "type": "integer",
+          "validation": "min 0"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/CommercialOverageConfigurationRequest"
       },
@@ -12829,7 +15858,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "path workspaceId (required): string",
         "JSON request body (required): #/components/schemas/CommercialOverageActivationRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"idempotencyKey\\":\\"{idempotencyKey}\\",\\"monthlySpendCapMicrosSar\\":1,\\"reviewId\\":\\"{reviewId}\\"}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/overages/activations'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"idempotencyKey\\":\\"{idempotencyKey}\\",\\"monthlySpendCapMicrosSar\\":1,\\"reviewId\\":\\"{reviewId}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/overages/activations'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}"
       },
@@ -12872,7 +15901,46 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/overages/activations",
+      "path": "/workspaces/{workspaceId}/overages/activations",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "confirmed",
+          "required": false,
+          "type": "boolean",
+          "validation": "—"
+        },
+        {
+          "example": "{idempotencyKey}",
+          "name": "idempotencyKey",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": 1,
+          "name": "monthlySpendCapMicrosSar",
+          "required": true,
+          "type": "integer",
+          "validation": "—"
+        },
+        {
+          "example": "{reviewId}",
+          "name": "reviewId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/CommercialOverageActivationRequest"
       },
@@ -12887,7 +15955,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "path workspaceId (required): string",
         "JSON request body (required): #/components/schemas/CommercialOverageReviewRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"idempotencyKey\\":\\"{idempotencyKey}\\",\\"monthlySpendCapMicrosSar\\":1}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/overages/reviews'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"idempotencyKey\\":\\"{idempotencyKey}\\",\\"monthlySpendCapMicrosSar\\":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/overages/reviews'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}"
       },
@@ -12929,7 +15997,33 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/overages/reviews",
+      "path": "/workspaces/{workspaceId}/overages/reviews",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{idempotencyKey}",
+          "name": "idempotencyKey",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 200"
+        },
+        {
+          "example": 1,
+          "name": "monthlySpendCapMicrosSar",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/CommercialOverageReviewRequest"
       },
@@ -12939,7 +16033,7 @@ The following checked projection is shared with the human-rendered guide and pre
   ],
   "walkthrough": {
     "operationId": "listWorkspaces",
-    "success": "Call GET /v1/workspaces with a server-held platform session and x-correlation-id; inspect the workspaces array and nextCursor.",
+    "success": "Call GET /workspaces with a server-held platform session and x-correlation-id; inspect the workspaces array and nextCursor.",
     "failure": {
       "status": 401,
       "diagnose": "Repeat without the session only in a test environment. Read the RFC 9457 error code and give support the echoed x-correlation-id; never send the credential."
@@ -12971,7 +16065,7 @@ Source attribution: Developer documentation (https://docs.authle.ss/reference/re
       title: "REST API reference",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "fbef6c06bfcc85377ccba9065b60e389ef44735a8252281d4dfb8927c49252bd"
+      contentDigest: "be6721ecaa032c7ac7ea385d74698825f9b530ce16a96b6fc7ae142561e7008d"
     },
     {
       canonical: "https://docs.authle.ss/reference/rest?lang=ar",
@@ -13066,12 +16160,13 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
   "lifecycle": {
     "contractVersion": "0.1.0",
     "compatibility": "Additive schemas and operations require release review; generated clients and rendered reference must be regenerated from the same contract.",
-    "versioning": "Stable operations remain on /v1. A breaking contract change requires a new major path and a separately supported contract.",
+    "versioning": "Operation paths are unversioned by default; the server pins each request to the supported contract version. Clients may select a version with Authless-Version or api-version.",
     "breakingChanges": "Removing or moving an operation, tightening inputs, changing authority, or changing response shapes requires a new major path.",
     "deprecation": "Deprecated operations are marked in OpenAPI and announced with Deprecation and Sunset dates before removal.",
     "sunset": "A deprecated operation stays available until its published Sunset date; no unpublished minimum duration is promised.",
     "changelog": "/changes",
-    "supportWindow": "The published contract version and any explicitly non-sunset major path are supported; preview and unpublished surfaces are excluded."
+    "supportWindow": "The published contract version and any explicitly non-sunset major path are supported; preview and unpublished surfaces are excluded.",
+    "selectors": "Use one selector only. Authless-Version: 1 or v1 and ?api-version=1 or v1 select the effective contract version. Conflicting or unsupported selectors fail before dispatch."
   },
   "operations": [
     {
@@ -13082,12 +16177,13 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RequestIdentityContinuationRequest"
       ],
-      "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"email\\":\\"person@example.test\\"}' 'https://api.authle.ss/v1/identity/continuations'",
+      "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"email\\":\\"person@example.com\\",\\"locale\\":\\"en\\"}' 'https://api.authle.ss/identity/continuations'",
       "exampleParameters": {
         "x-correlation-id": "request_example_001"
       },
       "exampleRequestBody": {
-        "email": "person@example.test"
+        "email": "person@example.com",
+        "locale": "en"
       },
       "method": "POST",
       "operationId": "requestIdentityContinuation",
@@ -13108,7 +16204,33 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/identity/continuations",
+      "path": "/identity/continuations",
+      "parameters": [
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "person@example.com",
+          "name": "email",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1, maxLength 320"
+        },
+        {
+          "example": "en",
+          "name": "locale",
+          "required": false,
+          "type": "string",
+          "validation": "one of ar | en"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/RequestIdentityContinuationRequest"
       },
@@ -13123,13 +16245,14 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/VerifyIdentityContinuationRequest"
       ],
-      "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"challengeId\\":\\"{challengeId}\\",\\"code\\":\\"{code}\\"}' 'https://api.authle.ss/v1/identity/continuations/verifications'",
+      "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"challengeId\\":\\"identity_continuation_example\\",\\"code\\":\\"12345678\\",\\"locale\\":\\"en\\"}' 'https://api.authle.ss/identity/continuations/verifications'",
       "exampleParameters": {
         "x-correlation-id": "request_example_001"
       },
       "exampleRequestBody": {
-        "challengeId": "{challengeId}",
-        "code": "{code}"
+        "challengeId": "identity_continuation_example",
+        "code": "12345678",
+        "locale": "en"
       },
       "method": "POST",
       "operationId": "verifyIdentityContinuation",
@@ -13155,7 +16278,40 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/identity/continuations/verifications",
+      "path": "/identity/continuations/verifications",
+      "parameters": [
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "identity_continuation_example",
+          "name": "challengeId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "12345678",
+          "name": "code",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "en",
+          "name": "locale",
+          "required": false,
+          "type": "string",
+          "validation": "one of ar | en"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/VerifyIdentityContinuationRequest"
       },
@@ -13170,12 +16326,12 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/ConsumeIdentityRecoveryRequest"
       ],
-      "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"token\\":\\"{token}\\"}' 'https://api.authle.ss/v1/identity/recovery-proofs'",
+      "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"token\\":\\"recovery-proof-token\\"}' 'https://api.authle.ss/identity/recovery-proofs'",
       "exampleParameters": {
         "x-correlation-id": "request_example_001"
       },
       "exampleRequestBody": {
-        "token": "{token}"
+        "token": "recovery-proof-token"
       },
       "method": "POST",
       "operationId": "consumeIdentityRecovery",
@@ -13201,7 +16357,26 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/identity/recovery-proofs",
+      "path": "/identity/recovery-proofs",
+      "parameters": [
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "recovery-proof-token",
+          "name": "token",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/ConsumeIdentityRecoveryRequest"
       },
@@ -13216,12 +16391,13 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RequestIdentityRecoveryRequest"
       ],
-      "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"identifier\\":\\"{identifier}\\"}' 'https://api.authle.ss/v1/identity/recovery-requests'",
+      "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"identifier\\":\\"person@example.com\\",\\"locale\\":\\"en\\"}' 'https://api.authle.ss/identity/recovery-requests'",
       "exampleParameters": {
         "x-correlation-id": "request_example_001"
       },
       "exampleRequestBody": {
-        "identifier": "{identifier}"
+        "identifier": "person@example.com",
+        "locale": "en"
       },
       "method": "POST",
       "operationId": "requestIdentityRecovery",
@@ -13242,7 +16418,33 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/identity/recovery-requests",
+      "path": "/identity/recovery-requests",
+      "parameters": [
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "person@example.com",
+          "name": "identifier",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1, maxLength 320"
+        },
+        {
+          "example": "en",
+          "name": "locale",
+          "required": false,
+          "type": "string",
+          "validation": "one of ar | en"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/RequestIdentityRecoveryRequest"
       },
@@ -13257,11 +16459,14 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RevokeIdentityRecoveryPasswordRequest"
       ],
-      "example": "curl --request DELETE -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/v1/identity/recovery/authenticators/password'",
+      "example": "curl --request DELETE -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"locale\\":\\"en\\"}' 'https://api.authle.ss/identity/recovery/authenticators/password'",
       "exampleParameters": {
         "x-correlation-id": "request_example_001"
       },
-      "exampleRequestBody": {},
+      "exampleRequestBody": {
+        "confirmed": true,
+        "locale": "en"
+      },
       "method": "DELETE",
       "operationId": "revokeIdentityRecoveryPassword",
       "outcomes": [
@@ -13301,7 +16506,33 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/identity/recovery/authenticators/password",
+      "path": "/identity/recovery/authenticators/password",
+      "parameters": [
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": true,
+          "name": "confirmed",
+          "required": false,
+          "type": "boolean",
+          "validation": "—"
+        },
+        {
+          "example": "en",
+          "name": "locale",
+          "required": false,
+          "type": "string",
+          "validation": "one of ar | en"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/RevokeIdentityRecoveryPasswordRequest"
       },
@@ -13313,7 +16544,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "Bounded recovery authority. Never expose this value in response bodies, browser bundles, or logs."
       ],
       "constraints": [],
-      "example": "curl --request GET 'https://api.authle.ss/v1/identity/recovery/factors'",
+      "example": "curl --request GET 'https://api.authle.ss/identity/recovery/factors'",
       "exampleParameters": {},
       "method": "GET",
       "operationId": "getIdentityRecoveryFactors",
@@ -13334,7 +16565,9 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/identity/recovery/factors",
+      "path": "/identity/recovery/factors",
+      "parameters": [],
+      "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "List the secret-free recovery factor inventory"
     },
@@ -13346,11 +16579,15 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RequestIdentityRecoveryEmailReplacementRequest"
       ],
-      "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/v1/identity/recovery/identifier-replacements/email'",
+      "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"email\\":\\"new.person@example.com\\",\\"locale\\":\\"en\\"}' 'https://api.authle.ss/identity/recovery/identifier-replacements/email'",
       "exampleParameters": {
         "x-correlation-id": "request_example_001"
       },
-      "exampleRequestBody": {},
+      "exampleRequestBody": {
+        "confirmed": true,
+        "email": "new.person@example.com",
+        "locale": "en"
+      },
       "method": "POST",
       "operationId": "requestIdentityRecoveryEmailReplacement",
       "outcomes": [
@@ -13385,7 +16622,40 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/identity/recovery/identifier-replacements/email",
+      "path": "/identity/recovery/identifier-replacements/email",
+      "parameters": [
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": true,
+          "name": "confirmed",
+          "required": false,
+          "type": "boolean",
+          "validation": "—"
+        },
+        {
+          "example": "new.person@example.com",
+          "name": "email",
+          "required": false,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "en",
+          "name": "locale",
+          "required": false,
+          "type": "string",
+          "validation": "one of ar | en"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/RequestIdentityRecoveryEmailReplacementRequest"
       },
@@ -13400,12 +16670,13 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/VerifyIdentityRecoveryEmailReplacementRequest"
       ],
-      "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"token\\":\\"{token}\\"}' 'https://api.authle.ss/v1/identity/recovery/identifier-replacements/email/verifications'",
+      "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"locale\\":\\"en\\",\\"token\\":\\"replacement-proof-token\\"}' 'https://api.authle.ss/identity/recovery/identifier-replacements/email/verifications'",
       "exampleParameters": {
         "x-correlation-id": "request_example_001"
       },
       "exampleRequestBody": {
-        "token": "{token}"
+        "locale": "en",
+        "token": "replacement-proof-token"
       },
       "method": "POST",
       "operationId": "verifyIdentityRecoveryEmailReplacement",
@@ -13431,7 +16702,33 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/identity/recovery/identifier-replacements/email/verifications",
+      "path": "/identity/recovery/identifier-replacements/email/verifications",
+      "parameters": [
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "en",
+          "name": "locale",
+          "required": false,
+          "type": "string",
+          "validation": "one of ar | en"
+        },
+        {
+          "example": "replacement-proof-token",
+          "name": "token",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/VerifyIdentityRecoveryEmailReplacementRequest"
       },
@@ -13446,11 +16743,15 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/ReplaceIdentityRecoveryUsernameRequest"
       ],
-      "example": "curl --request PUT -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/v1/identity/recovery/identifiers/username'",
+      "example": "curl --request PUT -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"locale\\":\\"en\\",\\"username\\":\\"new_name\\"}' 'https://api.authle.ss/identity/recovery/identifiers/username'",
       "exampleParameters": {
         "x-correlation-id": "request_example_001"
       },
-      "exampleRequestBody": {},
+      "exampleRequestBody": {
+        "confirmed": true,
+        "locale": "en",
+        "username": "new_name"
+      },
       "method": "PUT",
       "operationId": "replaceIdentityRecoveryUsername",
       "outcomes": [
@@ -13485,7 +16786,40 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/identity/recovery/identifiers/username",
+      "path": "/identity/recovery/identifiers/username",
+      "parameters": [
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": true,
+          "name": "confirmed",
+          "required": false,
+          "type": "boolean",
+          "validation": "—"
+        },
+        {
+          "example": "en",
+          "name": "locale",
+          "required": false,
+          "type": "string",
+          "validation": "one of ar | en"
+        },
+        {
+          "example": "new_name",
+          "name": "username",
+          "required": false,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/ReplaceIdentityRecoveryUsernameRequest"
       },
@@ -13500,13 +16834,14 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RegisterIdentityRequest"
       ],
-      "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"email\\":\\"person@example.test\\",\\"password\\":\\"{password}\\"}' 'https://api.authle.ss/v1/identity/registrations'",
+      "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"email\\":\\"person@example.com\\",\\"locale\\":\\"en\\",\\"password\\":\\"correct horse battery staple\\"}' 'https://api.authle.ss/identity/registrations'",
       "exampleParameters": {
         "x-correlation-id": "request_example_001"
       },
       "exampleRequestBody": {
-        "email": "person@example.test",
-        "password": "{password}"
+        "email": "person@example.com",
+        "locale": "en",
+        "password": "correct horse battery staple"
       },
       "method": "POST",
       "operationId": "registerIdentity",
@@ -13532,7 +16867,40 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/identity/registrations",
+      "path": "/identity/registrations",
+      "parameters": [
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "person@example.com",
+          "name": "email",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1"
+        },
+        {
+          "example": "en",
+          "name": "locale",
+          "required": false,
+          "type": "string",
+          "validation": "one of ar | en"
+        },
+        {
+          "example": "correct horse battery staple",
+          "name": "password",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/RegisterIdentityRequest"
       },
@@ -13547,12 +16915,13 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/VerifyIdentityRequest"
       ],
-      "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"token\\":\\"{token}\\"}' 'https://api.authle.ss/v1/identity/verifications'",
+      "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"locale\\":\\"en\\",\\"token\\":\\"verification-token\\"}' 'https://api.authle.ss/identity/verifications'",
       "exampleParameters": {
         "x-correlation-id": "request_example_001"
       },
       "exampleRequestBody": {
-        "token": "{token}"
+        "locale": "en",
+        "token": "verification-token"
       },
       "method": "POST",
       "operationId": "verifyIdentity",
@@ -13573,7 +16942,33 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/identity/verifications",
+      "path": "/identity/verifications",
+      "parameters": [
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "en",
+          "name": "locale",
+          "required": false,
+          "type": "string",
+          "validation": "one of ar | en"
+        },
+        {
+          "example": "verification-token",
+          "name": "token",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/VerifyIdentityRequest"
       },
@@ -13585,7 +16980,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "Server-side platform session. Never expose this value to browser bundles or logs."
       ],
       "constraints": [],
-      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/v1/me/security-activity'",
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/me/security-activity'",
       "exampleParameters": {},
       "method": "GET",
       "operationId": "listPersonalSecurityActivity",
@@ -13606,7 +17001,9 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/me/security-activity",
+      "path": "/me/security-activity",
+      "parameters": [],
+      "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "List the current person's session-security activity"
     },
@@ -13618,7 +17015,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (optional): #/components/schemas/SignOutOtherSessionsRequest"
       ],
-      "example": "curl --request DELETE -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/v1/me/sessions'",
+      "example": "curl --request DELETE -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/me/sessions'",
       "exampleParameters": {
         "x-correlation-id": "request_example_001"
       },
@@ -13657,7 +17054,31 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/me/sessions",
+      "path": "/me/sessions",
+      "parameters": [
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "confirmed",
+          "required": false,
+          "type": "boolean",
+          "validation": "—"
+        },
+        {
+          "name": "locale",
+          "required": false,
+          "type": "string",
+          "validation": "one of ar | en"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/SignOutOtherSessionsRequest"
       },
@@ -13669,7 +17090,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "Server-side platform session. Never expose this value to browser bundles or logs."
       ],
       "constraints": [],
-      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/v1/me/sessions'",
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/me/sessions'",
       "exampleParameters": {},
       "method": "GET",
       "operationId": "listPersonalSessions",
@@ -13690,7 +17111,9 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/me/sessions",
+      "path": "/me/sessions",
+      "parameters": [],
+      "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "List the current person's platform sessions"
     },
@@ -13703,7 +17126,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (optional): #/components/schemas/RevokePersonalSessionRequest"
       ],
-      "example": "curl --request DELETE -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/v1/me/sessions/session_01J5K6M7N8P9QRSTVWXYZABCDE'",
+      "example": "curl --request DELETE -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/me/sessions/session_01J5K6M7N8P9QRSTVWXYZABCDE'",
       "exampleParameters": {
         "sessionId": "session_01J5K6M7N8P9QRSTVWXYZABCDE",
         "x-correlation-id": "request_example_001"
@@ -13743,7 +17166,33 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/me/sessions/{sessionId}",
+      "path": "/me/sessions/{sessionId}",
+      "parameters": [
+        {
+          "example": "session_01J5K6M7N8P9QRSTVWXYZABCDE",
+          "location": "path",
+          "name": "sessionId",
+          "required": true,
+          "type": "string",
+          "validation": "pattern ^session_[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "locale",
+          "required": false,
+          "type": "string",
+          "validation": "one of ar | en"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/RevokePersonalSessionRequest"
       },
@@ -13759,7 +17208,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (optional): #/components/schemas/ReportPersonalSessionRiskRequest"
       ],
-      "example": "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/v1/me/sessions/session_01J5K6M7N8P9QRSTVWXYZABCDE/risk'",
+      "example": "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/me/sessions/session_01J5K6M7N8P9QRSTVWXYZABCDE/risk'",
       "exampleParameters": {
         "sessionId": "session_01J5K6M7N8P9QRSTVWXYZABCDE",
         "x-correlation-id": "request_example_001"
@@ -13804,7 +17253,39 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/me/sessions/{sessionId}/risk",
+      "path": "/me/sessions/{sessionId}/risk",
+      "parameters": [
+        {
+          "example": "session_01J5K6M7N8P9QRSTVWXYZABCDE",
+          "location": "path",
+          "name": "sessionId",
+          "required": true,
+          "type": "string",
+          "validation": "pattern ^session_[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "confirmed",
+          "required": false,
+          "type": "boolean",
+          "validation": "—"
+        },
+        {
+          "name": "locale",
+          "required": false,
+          "type": "string",
+          "validation": "one of ar | en"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/ReportPersonalSessionRiskRequest"
       },
@@ -13816,7 +17297,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "Server-side platform session. Never expose this value to browser bundles or logs."
       ],
       "constraints": [],
-      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/v1/personal/overview'",
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/personal/overview'",
       "exampleParameters": {},
       "method": "GET",
       "operationId": "getPersonalOverview",
@@ -13837,7 +17318,9 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/personal/overview",
+      "path": "/personal/overview",
+      "parameters": [],
+      "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "Get the current person's safe account overview"
     },
@@ -13849,7 +17332,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (optional): #/components/schemas/RemovePersonalUsernameRequest"
       ],
-      "example": "curl --request DELETE -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/v1/personal/username'",
+      "example": "curl --request DELETE -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/personal/username'",
       "exampleParameters": {
         "x-correlation-id": "request_example_001"
       },
@@ -13888,7 +17371,25 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/personal/username",
+      "path": "/personal/username",
+      "parameters": [
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "confirmed",
+          "required": false,
+          "type": "boolean",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/RemovePersonalUsernameRequest"
       },
@@ -13903,7 +17404,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/AddPersonalUsernameRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"username\\":\\"{username}\\"}' 'https://api.authle.ss/v1/personal/username'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"username\\":\\"{username}\\"}' 'https://api.authle.ss/personal/username'",
       "exampleParameters": {
         "x-correlation-id": "request_example_001"
       },
@@ -13944,7 +17445,26 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/personal/username",
+      "path": "/personal/username",
+      "parameters": [
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{username}",
+          "name": "username",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/AddPersonalUsernameRequest"
       },
@@ -13959,7 +17479,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/ChangePersonalUsernameRequest"
       ],
-      "example": "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"username\\":\\"{username}\\"}' 'https://api.authle.ss/v1/personal/username'",
+      "example": "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"username\\":\\"{username}\\"}' 'https://api.authle.ss/personal/username'",
       "exampleParameters": {
         "x-correlation-id": "request_example_001"
       },
@@ -14000,7 +17520,26 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/personal/username",
+      "path": "/personal/username",
+      "parameters": [
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{username}",
+          "name": "username",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/ChangePersonalUsernameRequest"
       },
@@ -14012,7 +17551,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "Server-side platform session. Never expose this value to browser bundles or logs."
       ],
       "constraints": [],
-      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/v1/personal/workspace-correlations'",
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/personal/workspace-correlations'",
       "exampleParameters": {},
       "method": "GET",
       "operationId": "listPersonalWorkspaceCorrelations",
@@ -14028,7 +17567,9 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/personal/workspace-correlations",
+      "path": "/personal/workspace-correlations",
+      "parameters": [],
+      "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "List the current person's workspace correlation disclosures"
     },
@@ -14041,7 +17582,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/SplitPersonalWorkspaceCorrelationRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"expectedVersion\\":1}' 'https://api.authle.ss/v1/personal/workspace-correlations/%7BworkspaceId%7D/split'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"expectedVersion\\":1}' 'https://api.authle.ss/personal/workspace-correlations/%7BworkspaceId%7D/split'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "x-correlation-id": "request_example_001"
@@ -14089,7 +17630,41 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/personal/workspace-correlations/{workspaceId}/split",
+      "path": "/personal/workspace-correlations/{workspaceId}/split",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": true,
+          "name": "confirmed",
+          "required": true,
+          "type": "boolean",
+          "validation": "—"
+        },
+        {
+          "example": 1,
+          "name": "expectedVersion",
+          "required": true,
+          "type": "integer",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/SplitPersonalWorkspaceCorrelationRequest"
       },
@@ -14104,7 +17679,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header merchant-signature (required): string",
         "JSON request body (required): object"
       ],
-      "example": "curl --request POST -H 'merchant-signature: {merchant-signature}' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/v1/providers/merchant/billing-events'",
+      "example": "curl --request POST -H 'merchant-signature: {merchant-signature}' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/providers/merchant/billing-events'",
       "exampleParameters": {
         "merchant-signature": "{merchant-signature}"
       },
@@ -14123,7 +17698,18 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/providers/merchant/billing-events",
+      "path": "/providers/merchant/billing-events",
+      "parameters": [
+        {
+          "example": "{merchant-signature}",
+          "location": "header",
+          "name": "merchant-signature",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [],
       "requestSchema": {
         "type": "object",
         "additionalProperties": true
@@ -14133,14 +17719,15 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
     },
     {
       "authority": [
-        "Server-side platform session. Never expose this value to browser bundles or logs."
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "Server-side management OAuth bearer issued for an owner-created workspace delegation. This scheme is supported only on operations that list it explicitly, currently workspace reads, and requires x-authless-client: server. Never use a browser session cookie as an agent credential. Required scope: workspace:read."
       ],
       "constraints": [
         "query cursor (optional): string, maxLength 1024",
         "query limit (optional): integer, min 1, max 100",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128"
       ],
-      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/v1/workspaces'",
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/workspaces'",
       "exampleParameters": {
         "x-correlation-id": "request_example_001"
       },
@@ -14163,7 +17750,32 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces",
+      "path": "/workspaces",
+      "parameters": [
+        {
+          "location": "query",
+          "name": "cursor",
+          "required": false,
+          "type": "string",
+          "validation": "maxLength 1024"
+        },
+        {
+          "location": "query",
+          "name": "limit",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1, max 100"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "List workspaces available to the current platform session"
     },
@@ -14176,13 +17788,13 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/CreateWorkspaceRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"name\\":\\"Example\\",\\"termsAccepted\\":true}' 'https://api.authle.ss/v1/workspaces'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"name\\":\\"Example workspace\\",\\"termsAccepted\\":true}' 'https://api.authle.ss/workspaces'",
       "exampleParameters": {
         "idempotency-key": "request-example-001",
         "x-correlation-id": "request_example_001"
       },
       "exampleRequestBody": {
-        "name": "Example",
+        "name": "Example workspace",
         "termsAccepted": true
       },
       "method": "POST",
@@ -14214,7 +17826,41 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces",
+      "path": "/workspaces",
+      "parameters": [
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "Example workspace",
+          "name": "name",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1, maxLength 80"
+        },
+        {
+          "example": true,
+          "name": "termsAccepted",
+          "required": true,
+          "type": "boolean",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/CreateWorkspaceRequest"
       },
@@ -14223,13 +17869,14 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
     },
     {
       "authority": [
-        "Server-side platform session. Never expose this value to browser bundles or logs."
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "Server-side management OAuth bearer issued for an owner-created workspace delegation. This scheme is supported only on operations that list it explicitly, currently workspace reads, and requires x-authless-client: server. Never use a browser session cookie as an agent credential. Required scope: workspace:read."
       ],
       "constraints": [
         "path workspaceId (required): string, minLength 3, maxLength 128",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128"
       ],
-      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D'",
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "x-correlation-id": "request_example_001"
@@ -14253,7 +17900,26 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}",
+      "path": "/workspaces/{workspaceId}",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "Read one workspace available to the current platform session"
     },
@@ -14267,7 +17933,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "query limit (optional): integer, min 1, max 100",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128"
       ],
-      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps'",
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "x-correlation-id": "request_example_001"
@@ -14296,7 +17962,40 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps",
+      "path": "/workspaces/{workspaceId}/apps",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "location": "query",
+          "name": "cursor",
+          "required": false,
+          "type": "string",
+          "validation": "maxLength 1024"
+        },
+        {
+          "location": "query",
+          "name": "limit",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1, max 100"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "List apps available in one workspace"
     },
@@ -14310,16 +18009,16 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/CreateAppRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"description\\":\\"{description}\\",\\"name\\":\\"Example\\",\\"ownerContactEmail\\":\\"{ownerContactEmail}\\"}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"description\\":\\"Customer sign-in for the Example product\\",\\"name\\":\\"Example web app\\",\\"ownerContactEmail\\":\\"security@example.com\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "idempotency-key": "request-example-001",
         "x-correlation-id": "request_example_001"
       },
       "exampleRequestBody": {
-        "description": "{description}",
-        "name": "Example",
-        "ownerContactEmail": "{ownerContactEmail}"
+        "description": "Customer sign-in for the Example product",
+        "name": "Example web app",
+        "ownerContactEmail": "security@example.com"
       },
       "method": "POST",
       "operationId": "createApp",
@@ -14350,7 +18049,56 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps",
+      "path": "/workspaces/{workspaceId}/apps",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "Customer sign-in for the Example product",
+          "name": "description",
+          "required": true,
+          "type": "string",
+          "validation": "maxLength 500"
+        },
+        {
+          "example": "Example web app",
+          "name": "name",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1, maxLength 80"
+        },
+        {
+          "example": "security@example.com",
+          "name": "ownerContactEmail",
+          "required": true,
+          "type": "string",
+          "validation": "maxLength 254, format email"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/CreateAppRequest"
       },
@@ -14367,7 +18115,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path environment (required): string, one of production | test",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128"
       ],
-      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production'",
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -14393,7 +18141,42 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "production",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of production | test"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "Read one versioned app environment"
     },
@@ -14408,7 +18191,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "query cursor (optional): string, maxLength 1024",
         "query limit (optional): integer, min 1, max 100"
       ],
-      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/credentials'",
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/credentials'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -14438,7 +18221,48 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/credentials",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/credentials",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "production",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of production | test"
+        },
+        {
+          "location": "query",
+          "name": "cursor",
+          "required": false,
+          "type": "string",
+          "validation": "maxLength 1024"
+        },
+        {
+          "location": "query",
+          "name": "limit",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1, max 100"
+        }
+      ],
+      "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "List secret-free integration credentials for an app environment"
     },
@@ -14454,7 +18278,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/CreateIntegrationCredentialRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"name\\":\\"Example\\"}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/credentials'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"name\\":\\"Example\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/credentials'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -14514,7 +18338,64 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/credentials",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/credentials",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "production",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of production | test"
+        },
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "confirmed",
+          "required": false,
+          "type": "boolean",
+          "validation": "—"
+        },
+        {
+          "example": "Example",
+          "name": "name",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/CreateIntegrationCredentialRequest"
       },
@@ -14535,7 +18416,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RevokeIntegrationCredentialRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/credentials/%7BcredentialId%7D/revoke'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/credentials/%7BcredentialId%7D/revoke'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -14590,7 +18471,79 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/credentials/{credentialId}/revoke",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/credentials/{credentialId}/revoke",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "production",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of production | test"
+        },
+        {
+          "example": "{credentialId}",
+          "location": "path",
+          "name": "credentialId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "\\"1\\"",
+          "location": "header",
+          "name": "if-match",
+          "required": true,
+          "type": "string",
+          "validation": "pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$"
+        },
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "compromised",
+          "required": false,
+          "type": "boolean",
+          "validation": "—"
+        },
+        {
+          "name": "confirmed",
+          "required": false,
+          "type": "boolean",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/RevokeIntegrationCredentialRequest"
       },
@@ -14611,7 +18564,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RotateIntegrationCredentialRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"overlapSeconds\\":1}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/credentials/%7BcredentialId%7D/rotate'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"overlapSeconds\\":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/credentials/%7BcredentialId%7D/rotate'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -14668,7 +18621,80 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/credentials/{credentialId}/rotate",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/credentials/{credentialId}/rotate",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "production",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of production | test"
+        },
+        {
+          "example": "{credentialId}",
+          "location": "path",
+          "name": "credentialId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "\\"1\\"",
+          "location": "header",
+          "name": "if-match",
+          "required": true,
+          "type": "string",
+          "validation": "pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$"
+        },
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "confirmed",
+          "required": false,
+          "type": "boolean",
+          "validation": "—"
+        },
+        {
+          "example": 1,
+          "name": "overlapSeconds",
+          "required": true,
+          "type": "number",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/RotateIntegrationCredentialRequest"
       },
@@ -14686,7 +18712,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "query cursor (optional): string, maxLength 1024",
         "query limit (optional): integer, min 1, max 100"
       ],
-      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks'",
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -14716,7 +18742,48 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "production",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of production | test"
+        },
+        {
+          "location": "query",
+          "name": "cursor",
+          "required": false,
+          "type": "string",
+          "validation": "maxLength 1024"
+        },
+        {
+          "location": "query",
+          "name": "limit",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1, max 100"
+        }
+      ],
+      "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "List secret-free webhooks for an app environment"
     },
@@ -14732,7 +18799,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RegisterIntegrationWebhookRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"subscriptions\\":[],\\"url\\":\\"{url}\\"}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"subscriptions\\":[],\\"url\\":\\"{url}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -14793,7 +18860,71 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "production",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of production | test"
+        },
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "confirmed",
+          "required": false,
+          "type": "boolean",
+          "validation": "—"
+        },
+        {
+          "example": [],
+          "name": "subscriptions",
+          "required": true,
+          "type": "array",
+          "validation": "—"
+        },
+        {
+          "example": "{url}",
+          "name": "url",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/RegisterIntegrationWebhookRequest"
       },
@@ -14812,7 +18943,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "query cursor (optional): string, maxLength 1024",
         "query limit (optional): integer, min 1, max 100"
       ],
-      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/deliveries'",
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/deliveries'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -14843,7 +18974,56 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/{webhookId}/deliveries",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/{webhookId}/deliveries",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "production",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of production | test"
+        },
+        {
+          "example": "{webhookId}",
+          "location": "path",
+          "name": "webhookId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "location": "query",
+          "name": "cursor",
+          "required": false,
+          "type": "string",
+          "validation": "maxLength 1024"
+        },
+        {
+          "location": "query",
+          "name": "limit",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1, max 100"
+        }
+      ],
+      "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "List secret-free delivery state for an app-environment webhook"
     },
@@ -14861,7 +19041,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/ReplayIntegrationWebhookDeliveryRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/deliveries/%7BdeliveryId%7D/replay'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/deliveries/%7BdeliveryId%7D/replay'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -14911,7 +19091,73 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/{webhookId}/deliveries/{deliveryId}/replay",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/{webhookId}/deliveries/{deliveryId}/replay",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "production",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of production | test"
+        },
+        {
+          "example": "{webhookId}",
+          "location": "path",
+          "name": "webhookId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{deliveryId}",
+          "location": "path",
+          "name": "deliveryId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "confirmed",
+          "required": false,
+          "type": "boolean",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/ReplayIntegrationWebhookDeliveryRequest"
       },
@@ -14932,7 +19178,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/DisableIntegrationWebhookRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/disable'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/disable'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -14987,7 +19233,73 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/{webhookId}/disable",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/{webhookId}/disable",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "production",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of production | test"
+        },
+        {
+          "example": "{webhookId}",
+          "location": "path",
+          "name": "webhookId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "\\"1\\"",
+          "location": "header",
+          "name": "if-match",
+          "required": true,
+          "type": "string",
+          "validation": "pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$"
+        },
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "confirmed",
+          "required": false,
+          "type": "boolean",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/DisableIntegrationWebhookRequest"
       },
@@ -15008,7 +19320,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RotateIntegrationWebhookSecretRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"overlapSeconds\\":1}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/rotate'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"overlapSeconds\\":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/rotate'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -15065,7 +19377,80 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/{webhookId}/rotate",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/{webhookId}/rotate",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "production",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of production | test"
+        },
+        {
+          "example": "{webhookId}",
+          "location": "path",
+          "name": "webhookId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "\\"1\\"",
+          "location": "header",
+          "name": "if-match",
+          "required": true,
+          "type": "string",
+          "validation": "pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$"
+        },
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "confirmed",
+          "required": false,
+          "type": "boolean",
+          "validation": "—"
+        },
+        {
+          "example": 1,
+          "name": "overlapSeconds",
+          "required": true,
+          "type": "number",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/RotateIntegrationWebhookSecretRequest"
       },
@@ -15086,7 +19471,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/ReplaceIntegrationWebhookSubscriptionsRequest"
       ],
-      "example": "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"subscriptions\\":[]}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/subscriptions'",
+      "example": "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"subscriptions\\":[]}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/subscriptions'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -15143,7 +19528,80 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/{webhookId}/subscriptions",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/{webhookId}/subscriptions",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "production",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of production | test"
+        },
+        {
+          "example": "{webhookId}",
+          "location": "path",
+          "name": "webhookId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "\\"1\\"",
+          "location": "header",
+          "name": "if-match",
+          "required": true,
+          "type": "string",
+          "validation": "pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$"
+        },
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "confirmed",
+          "required": false,
+          "type": "boolean",
+          "validation": "—"
+        },
+        {
+          "example": [],
+          "name": "subscriptions",
+          "required": true,
+          "type": "array",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/ReplaceIntegrationWebhookSubscriptionsRequest"
       },
@@ -15162,7 +19620,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/ReconcileIntegrationWebhooksRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/reconcile'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/reconcile'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -15210,7 +19668,57 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/reconcile",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/reconcile",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "production",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of production | test"
+        },
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "confirmed",
+          "required": false,
+          "type": "boolean",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/ReconcileIntegrationWebhooksRequest"
       },
@@ -15227,7 +19735,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path operationId (required): string",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128"
       ],
-      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/operations/%7BoperationId%7D'",
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/operations/%7BoperationId%7D'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -15263,7 +19771,42 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/bulk-access/operations/{operationId}",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/bulk-access/operations/{operationId}",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{operationId}",
+          "location": "path",
+          "name": "operationId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "Read one exact durable bulk access operation"
     },
@@ -15280,7 +19823,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/ConfirmBulkAccessRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/operations/%7BoperationId%7D/cancellation'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/operations/%7BoperationId%7D/cancellation'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -15341,7 +19884,66 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/bulk-access/operations/{operationId}/cancellation",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/bulk-access/operations/{operationId}/cancellation",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{operationId}",
+          "location": "path",
+          "name": "operationId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "\\"1\\"",
+          "location": "header",
+          "name": "if-match",
+          "required": true,
+          "type": "string",
+          "validation": "pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$"
+        },
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": true,
+          "name": "confirmed",
+          "required": true,
+          "type": "boolean",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/ConfirmBulkAccessRequest"
       },
@@ -15361,7 +19963,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "query download (optional): string, one of 1",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128"
       ],
-      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/operations/%7BoperationId%7D/results'",
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/operations/%7BoperationId%7D/results'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -15402,7 +20004,63 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/bulk-access/operations/{operationId}/results",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/bulk-access/operations/{operationId}/results",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{operationId}",
+          "location": "path",
+          "name": "operationId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "location": "query",
+          "name": "cursor",
+          "required": false,
+          "type": "string",
+          "validation": "maxLength 1024"
+        },
+        {
+          "location": "query",
+          "name": "limit",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1, max 100"
+        },
+        {
+          "location": "query",
+          "name": "download",
+          "required": false,
+          "type": "string",
+          "validation": "one of 1"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "List safe item results or download immutable JSONL evidence for one bulk operation"
     },
@@ -15416,7 +20074,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/CreateBulkAccessPreviewRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"action\\":\\"suspend_memberships\\",\\"filter\\":{\\"membershipIds\\":[\\"{membershipIds_1}\\"]},\\"reason\\":\\"administrator_action\\"}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/previews'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"action\\":\\"suspend_memberships\\",\\"filter\\":{\\"membershipIds\\":[\\"{membershipIds_1}\\"]},\\"reason\\":\\"administrator_action\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/previews'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -15460,7 +20118,72 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/bulk-access/previews",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/bulk-access/previews",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "suspend_memberships",
+          "name": "action",
+          "required": true,
+          "type": "string",
+          "validation": "one of grant_entitlements | grant_roles | suspend_memberships"
+        },
+        {
+          "name": "entitlement",
+          "required": false,
+          "type": "object",
+          "validation": "—"
+        },
+        {
+          "example": {
+            "membershipIds": [
+              "{membershipIds_1}"
+            ]
+          },
+          "name": "filter",
+          "required": true,
+          "type": "object",
+          "validation": "—"
+        },
+        {
+          "example": "administrator_action",
+          "name": "reason",
+          "required": true,
+          "type": "string",
+          "validation": "one of administrator_action | policy_violation | security_review"
+        },
+        {
+          "name": "role",
+          "required": false,
+          "type": "object",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/CreateBulkAccessPreviewRequest"
       },
@@ -15477,7 +20200,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path previewId (required): string",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128"
       ],
-      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/previews/%7BpreviewId%7D'",
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/previews/%7BpreviewId%7D'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -15513,7 +20236,42 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/bulk-access/previews/{previewId}",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/bulk-access/previews/{previewId}",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{previewId}",
+          "location": "path",
+          "name": "previewId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "Read one exact durable bulk access preview"
     },
@@ -15529,7 +20287,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/ExecuteBulkAccessPreviewRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"previewIntegrityDigest\\":\\"sha256:0000000000000000000000000000000000000000000000000000000000000000\\",\\"previewVersion\\":1}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/previews/%7BpreviewId%7D/executions'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"previewIntegrityDigest\\":\\"sha256:0000000000000000000000000000000000000000000000000000000000000000\\",\\"previewVersion\\":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/previews/%7BpreviewId%7D/executions'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -15601,7 +20359,72 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/bulk-access/previews/{previewId}/executions",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/bulk-access/previews/{previewId}/executions",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{previewId}",
+          "location": "path",
+          "name": "previewId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": true,
+          "name": "confirmed",
+          "required": true,
+          "type": "boolean",
+          "validation": "—"
+        },
+        {
+          "example": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+          "name": "previewIntegrityDigest",
+          "required": true,
+          "type": "string",
+          "validation": "pattern ^sha256:[0-9a-f]{64}$"
+        },
+        {
+          "example": 1,
+          "name": "previewVersion",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/ExecuteBulkAccessPreviewRequest"
       },
@@ -15622,7 +20445,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "query status (optional): ",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128"
       ],
-      "example": "curl --request GET -H 'authorization: Bearer {app_credential}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships'",
+      "example": "curl --request GET -H 'authorization: Bearer {app_credential}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -15652,7 +20475,62 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/memberships",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/memberships",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "location": "query",
+          "name": "cursor",
+          "required": false,
+          "type": "string",
+          "validation": "maxLength 2048"
+        },
+        {
+          "location": "query",
+          "name": "limit",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1, max 100"
+        },
+        {
+          "location": "query",
+          "name": "query",
+          "required": false,
+          "type": "string",
+          "validation": "maxLength 254"
+        },
+        {
+          "location": "query",
+          "name": "status",
+          "required": false,
+          "type": "string",
+          "validation": "one of active | deleted | invited | pending_approval | pending_consent | revoked | suspended"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "List privacy-safe app memberships under exact app authority"
     },
@@ -15668,7 +20546,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/InviteAppMembershipRequest"
       ],
-      "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"email\\":\\"person@example.test\\"}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships'",
+      "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"email\\":\\"person@example.test\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -15718,7 +20596,63 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/memberships",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/memberships",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": true,
+          "name": "confirmed",
+          "required": true,
+          "type": "boolean",
+          "validation": "—"
+        },
+        {
+          "name": "customerReference",
+          "required": false,
+          "type": "string",
+          "validation": "maxLength 128"
+        },
+        {
+          "example": "person@example.test",
+          "name": "email",
+          "required": true,
+          "type": "string",
+          "validation": "format email"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/InviteAppMembershipRequest"
       },
@@ -15736,7 +20670,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path membershipId (required): string, minLength 3, maxLength 128",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128"
       ],
-      "example": "curl --request GET -H 'authorization: Bearer {app_credential}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D'",
+      "example": "curl --request GET -H 'authorization: Bearer {app_credential}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -15772,7 +20706,42 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{membershipId}",
+          "location": "path",
+          "name": "membershipId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "Inspect one privacy-safe versioned app membership"
     },
@@ -15787,7 +20756,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path membershipId (required): string, minLength 3, maxLength 128",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128"
       ],
-      "example": "curl --request GET -H 'authorization: Bearer {app_credential}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/access'",
+      "example": "curl --request GET -H 'authorization: Bearer {app_credential}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/access'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -15818,7 +20787,42 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/access",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/access",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{membershipId}",
+          "location": "path",
+          "name": "membershipId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "Inspect one membership's independent role and entitlement grants"
     },
@@ -15836,7 +20840,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/GrantAppEntitlementRequest"
       ],
-      "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"key\\":\\"{key}\\",\\"source\\":\\"{source}\\"}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/entitlements'",
+      "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"key\\":\\"{key}\\",\\"source\\":\\"{source}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/entitlements'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -15889,7 +20893,86 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/entitlements",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/entitlements",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{membershipId}",
+          "location": "path",
+          "name": "membershipId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "\\"1\\"",
+          "location": "header",
+          "name": "if-match",
+          "required": true,
+          "type": "string",
+          "validation": "pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$"
+        },
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": true,
+          "name": "confirmed",
+          "required": true,
+          "type": "boolean",
+          "validation": "—"
+        },
+        {
+          "name": "expiresAt",
+          "required": false,
+          "type": "string",
+          "validation": "format date-time"
+        },
+        {
+          "example": "{key}",
+          "name": "key",
+          "required": true,
+          "type": "string",
+          "validation": "maxLength 128"
+        },
+        {
+          "example": "{source}",
+          "name": "source",
+          "required": true,
+          "type": "string",
+          "validation": "maxLength 200"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/GrantAppEntitlementRequest"
       },
@@ -15911,7 +20994,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RevokeAppEntitlementRequest"
       ],
-      "example": "curl --request DELETE -H 'authorization: Bearer {app_credential}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/entitlements/%7BgrantId%7D'",
+      "example": "curl --request DELETE -H 'authorization: Bearer {app_credential}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/entitlements/%7BgrantId%7D'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -15973,7 +21056,74 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/entitlements/{grantId}",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/entitlements/{grantId}",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{membershipId}",
+          "location": "path",
+          "name": "membershipId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{grantId}",
+          "location": "path",
+          "name": "grantId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "\\"1\\"",
+          "location": "header",
+          "name": "if-match",
+          "required": true,
+          "type": "string",
+          "validation": "pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$"
+        },
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": true,
+          "name": "confirmed",
+          "required": true,
+          "type": "boolean",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/RevokeAppEntitlementRequest"
       },
@@ -15994,7 +21144,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/ChangeAppMembershipStatusRequest"
       ],
-      "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"action\\":\\"activate\\",\\"confirmed\\":true,\\"reason\\":\\"access_ended\\"}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/lifecycle'",
+      "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"action\\":\\"activate\\",\\"confirmed\\":true,\\"reason\\":\\"access_ended\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/lifecycle'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -16057,7 +21207,80 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/lifecycle",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/lifecycle",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{membershipId}",
+          "location": "path",
+          "name": "membershipId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "\\"1\\"",
+          "location": "header",
+          "name": "if-match",
+          "required": true,
+          "type": "string",
+          "validation": "pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$"
+        },
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "activate",
+          "name": "action",
+          "required": true,
+          "type": "string",
+          "validation": "one of activate | delete | revoke | suspend"
+        },
+        {
+          "example": true,
+          "name": "confirmed",
+          "required": true,
+          "type": "boolean",
+          "validation": "—"
+        },
+        {
+          "example": "access_ended",
+          "name": "reason",
+          "required": true,
+          "type": "string",
+          "validation": "one of access_ended | administrator_action | approval_granted | data_retention_complete | policy_violation | security_review"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/ChangeAppMembershipStatusRequest"
       },
@@ -16078,7 +21301,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/GrantAppRoleRequest"
       ],
-      "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"key\\":\\"{key}\\",\\"source\\":\\"{source}\\"}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/roles'",
+      "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"key\\":\\"{key}\\",\\"source\\":\\"{source}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/roles'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -16131,7 +21354,80 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/roles",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/roles",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{membershipId}",
+          "location": "path",
+          "name": "membershipId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "\\"1\\"",
+          "location": "header",
+          "name": "if-match",
+          "required": true,
+          "type": "string",
+          "validation": "pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$"
+        },
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": true,
+          "name": "confirmed",
+          "required": true,
+          "type": "boolean",
+          "validation": "—"
+        },
+        {
+          "example": "{key}",
+          "name": "key",
+          "required": true,
+          "type": "string",
+          "validation": "maxLength 128"
+        },
+        {
+          "example": "{source}",
+          "name": "source",
+          "required": true,
+          "type": "string",
+          "validation": "maxLength 200"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/GrantAppRoleRequest"
       },
@@ -16153,7 +21449,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RevokeAppRoleRequest"
       ],
-      "example": "curl --request DELETE -H 'authorization: Bearer {app_credential}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/roles/%7BgrantId%7D'",
+      "example": "curl --request DELETE -H 'authorization: Bearer {app_credential}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/roles/%7BgrantId%7D'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
@@ -16215,7 +21511,74 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/roles/{grantId}",
+      "path": "/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/roles/{grantId}",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{membershipId}",
+          "location": "path",
+          "name": "membershipId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{grantId}",
+          "location": "path",
+          "name": "grantId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "\\"1\\"",
+          "location": "header",
+          "name": "if-match",
+          "required": true,
+          "type": "string",
+          "validation": "pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$"
+        },
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": true,
+          "name": "confirmed",
+          "required": true,
+          "type": "boolean",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/RevokeAppRoleRequest"
       },
@@ -16234,13 +21597,13 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "query actor (optional): string, maxLength 160",
         "query appId (optional): string, maxLength 160",
         "query correlation (optional): string, maxLength 160",
-        "query from (optional): string",
+        "query from (optional): string, format date-time",
         "query outcome (optional): string, one of failure | retry | success",
         "query resource (optional): string, maxLength 160",
-        "query to (optional): string",
+        "query to (optional): string, format date-time",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128"
       ],
-      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/audit-events'",
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/audit-events'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "x-correlation-id": "request_example_001"
@@ -16269,7 +21632,96 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/audit-events",
+      "path": "/workspaces/{workspaceId}/audit-events",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "location": "query",
+          "name": "cursor",
+          "required": false,
+          "type": "string",
+          "validation": "maxLength 1024"
+        },
+        {
+          "location": "query",
+          "name": "limit",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1, max 100"
+        },
+        {
+          "location": "query",
+          "name": "action",
+          "required": false,
+          "type": "string",
+          "validation": "maxLength 160"
+        },
+        {
+          "location": "query",
+          "name": "actor",
+          "required": false,
+          "type": "string",
+          "validation": "maxLength 160"
+        },
+        {
+          "location": "query",
+          "name": "appId",
+          "required": false,
+          "type": "string",
+          "validation": "maxLength 160"
+        },
+        {
+          "location": "query",
+          "name": "correlation",
+          "required": false,
+          "type": "string",
+          "validation": "maxLength 160"
+        },
+        {
+          "location": "query",
+          "name": "from",
+          "required": false,
+          "type": "string",
+          "validation": "format date-time"
+        },
+        {
+          "location": "query",
+          "name": "outcome",
+          "required": false,
+          "type": "string",
+          "validation": "one of failure | retry | success"
+        },
+        {
+          "location": "query",
+          "name": "resource",
+          "required": false,
+          "type": "string",
+          "validation": "maxLength 160"
+        },
+        {
+          "location": "query",
+          "name": "to",
+          "required": false,
+          "type": "string",
+          "validation": "format date-time"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "List one bounded page of redacted audit evidence within the session's effective workspace scope"
     },
@@ -16280,7 +21732,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       "constraints": [
         "path workspaceId (required): string"
       ],
-      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/billing'",
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/billing'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}"
       },
@@ -16303,7 +21755,18 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/billing",
+      "path": "/workspaces/{workspaceId}/billing",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "Inspect the current commercial billing subscription"
     },
@@ -16315,7 +21778,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path workspaceId (required): string",
         "JSON request body (required): #/components/schemas/CommercialBillingCancellationReviewRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"idempotencyKey\\":\\"{idempotencyKey}\\",\\"mode\\":\\"period_end\\"}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/billing/cancellation-reviews'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"idempotencyKey\\":\\"{idempotencyKey}\\",\\"mode\\":\\"period_end\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/billing/cancellation-reviews'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}"
       },
@@ -16357,7 +21820,33 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/billing/cancellation-reviews",
+      "path": "/workspaces/{workspaceId}/billing/cancellation-reviews",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{idempotencyKey}",
+          "name": "idempotencyKey",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 200"
+        },
+        {
+          "example": "period_end",
+          "name": "mode",
+          "required": true,
+          "type": "string",
+          "validation": "one of period_end | immediate"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/CommercialBillingCancellationReviewRequest"
       },
@@ -16372,7 +21861,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path workspaceId (required): string",
         "JSON request body (required): #/components/schemas/CommercialBillingCancellationConfirmationRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"confirmationToken\\":\\"{confirmationToken}\\",\\"idempotencyKey\\":\\"{idempotencyKey}\\"}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/billing/cancellations'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"confirmationToken\\":\\"{confirmationToken}\\",\\"idempotencyKey\\":\\"{idempotencyKey}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/billing/cancellations'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}"
       },
@@ -16414,7 +21903,33 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/billing/cancellations",
+      "path": "/workspaces/{workspaceId}/billing/cancellations",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{confirmationToken}",
+          "name": "confirmationToken",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 400"
+        },
+        {
+          "example": "{idempotencyKey}",
+          "name": "idempotencyKey",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 200"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/CommercialBillingCancellationConfirmationRequest"
       },
@@ -16429,7 +21944,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path workspaceId (required): string",
         "JSON request body (required): #/components/schemas/CommercialBillingChangeAuthorizationRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"changeId\\":\\"{changeId}\\"}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/billing/change-authorizations'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"changeId\\":\\"{changeId}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/billing/change-authorizations'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}"
       },
@@ -16465,7 +21980,26 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/billing/change-authorizations",
+      "path": "/workspaces/{workspaceId}/billing/change-authorizations",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{changeId}",
+          "name": "changeId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 240"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/CommercialBillingChangeAuthorizationRequest"
       },
@@ -16480,7 +22014,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path workspaceId (required): string",
         "JSON request body (required): #/components/schemas/CommercialBillingChangeReviewRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"idempotencyKey\\":\\"{idempotencyKey}\\",\\"period\\":\\"monthly\\",\\"planId\\":\\"launch\\"}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/billing/change-reviews'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"idempotencyKey\\":\\"{idempotencyKey}\\",\\"period\\":\\"monthly\\",\\"planId\\":\\"launch\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/billing/change-reviews'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}"
       },
@@ -16518,7 +22052,46 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/billing/change-reviews",
+      "path": "/workspaces/{workspaceId}/billing/change-reviews",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{idempotencyKey}",
+          "name": "idempotencyKey",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 200"
+        },
+        {
+          "example": "monthly",
+          "name": "period",
+          "required": true,
+          "type": "string",
+          "validation": "one of monthly | annual"
+        },
+        {
+          "example": "launch",
+          "name": "planId",
+          "required": true,
+          "type": "string",
+          "validation": "one of launch | growth | scale"
+        },
+        {
+          "name": "quantity",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1, max 100"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/CommercialBillingChangeReviewRequest"
       },
@@ -16533,7 +22106,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path workspaceId (required): string",
         "JSON request body (required): #/components/schemas/CommercialBillingRefundRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"amountMicros\\":1,\\"category\\":\\"first_purchase_goodwill\\",\\"consumedOverageMicros\\":0,\\"idempotencyKey\\":\\"{idempotencyKey}\\",\\"invoiceRef\\":\\"{invoiceRef}\\"}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/billing/refund-requests'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"amountMicros\\":1,\\"category\\":\\"first_purchase_goodwill\\",\\"consumedOverageMicros\\":0,\\"idempotencyKey\\":\\"{idempotencyKey}\\",\\"invoiceRef\\":\\"{invoiceRef}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/billing/refund-requests'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}"
       },
@@ -16583,7 +22156,60 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/billing/refund-requests",
+      "path": "/workspaces/{workspaceId}/billing/refund-requests",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": 1,
+          "name": "amountMicros",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1"
+        },
+        {
+          "example": "first_purchase_goodwill",
+          "name": "category",
+          "required": true,
+          "type": "string",
+          "validation": "one of first_purchase_goodwill | verified_correction"
+        },
+        {
+          "example": 0,
+          "name": "consumedOverageMicros",
+          "required": true,
+          "type": "integer",
+          "validation": "min 0"
+        },
+        {
+          "example": "{idempotencyKey}",
+          "name": "idempotencyKey",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 200"
+        },
+        {
+          "example": "{invoiceRef}",
+          "name": "invoiceRef",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 240"
+        },
+        {
+          "name": "verifiedCorrection",
+          "required": false,
+          "type": "boolean",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/CommercialBillingRefundRequest"
       },
@@ -16600,7 +22226,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "JSON request body (required): #/components/schemas/CommercialPurchaseConfirmationRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'content-type: application/json' --data '{\\"acceptanceToken\\":\\"acceptance-example-001\\",\\"confirmed\\":true}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/commercial-purchases/launch/confirmations'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'content-type: application/json' --data '{\\"acceptanceToken\\":\\"acceptance-example-001\\",\\"confirmed\\":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/commercial-purchases/launch/confirmations'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "planId": "launch",
@@ -16644,7 +22270,49 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/commercial-purchases/{planId}/confirmations",
+      "path": "/workspaces/{workspaceId}/commercial-purchases/{planId}/confirmations",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "launch",
+          "location": "path",
+          "name": "planId",
+          "required": true,
+          "type": "string",
+          "validation": "one of launch | growth | scale"
+        },
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "acceptance-example-001",
+          "name": "acceptanceToken",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          "example": true,
+          "name": "confirmed",
+          "required": true,
+          "type": "boolean",
+          "validation": "one of true"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/CommercialPurchaseConfirmationRequest"
       },
@@ -16660,7 +22328,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path planId (required): string, one of launch | growth | scale",
         "JSON request body (required): #/components/schemas/CommercialPurchaseReviewRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"billingPeriod\\":\\"monthly\\",\\"locale\\":\\"en\\"}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/commercial-purchases/launch/reviews'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"billingPeriod\\":\\"monthly\\",\\"locale\\":\\"en\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/commercial-purchases/launch/reviews'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "planId": "launch"
@@ -16693,7 +22361,47 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/commercial-purchases/{planId}/reviews",
+      "path": "/workspaces/{workspaceId}/commercial-purchases/{planId}/reviews",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "launch",
+          "location": "path",
+          "name": "planId",
+          "required": true,
+          "type": "string",
+          "validation": "one of launch | growth | scale"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "monthly",
+          "name": "billingPeriod",
+          "required": true,
+          "type": "string",
+          "validation": "one of monthly | annual"
+        },
+        {
+          "name": "customerType",
+          "required": false,
+          "type": "string",
+          "validation": "one of b2c | b2b"
+        },
+        {
+          "example": "en",
+          "name": "locale",
+          "required": true,
+          "type": "string",
+          "validation": "one of en | ar"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/CommercialPurchaseReviewRequest"
       },
@@ -16708,7 +22416,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path workspaceId (required): string",
         "path purchaseId (required): string, minLength 3, maxLength 200"
       ],
-      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/commercial-purchases/%7BpurchaseId%7D/receipt'",
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/commercial-purchases/%7BpurchaseId%7D/receipt'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "purchaseId": "{purchaseId}"
@@ -16737,7 +22445,26 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/commercial-purchases/{purchaseId}/receipt",
+      "path": "/workspaces/{workspaceId}/commercial-purchases/{purchaseId}/receipt",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{purchaseId}",
+          "location": "path",
+          "name": "purchaseId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 200"
+        }
+      ],
+      "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "Inspect durable evidence for an activated commercial purchase"
     },
@@ -16748,7 +22475,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       "constraints": [
         "path workspaceId (required): string"
       ],
-      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/commercial-usage'",
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/commercial-usage'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}"
       },
@@ -16771,7 +22498,18 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/commercial-usage",
+      "path": "/workspaces/{workspaceId}/commercial-usage",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "Inspect authoritative commercial usage and next-unit effects"
     },
@@ -16783,7 +22521,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path workspaceId (required): string",
         "JSON request body (required): #/components/schemas/CommercialOverageConfigurationRequest"
       ],
-      "example": "curl --request PATCH -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"enabled\\":true,\\"idempotencyKey\\":\\"{idempotencyKey}\\",\\"monthlySpendCapMicrosSar\\":0}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/overages'",
+      "example": "curl --request PATCH -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"enabled\\":true,\\"idempotencyKey\\":\\"{idempotencyKey}\\",\\"monthlySpendCapMicrosSar\\":0}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/overages'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}"
       },
@@ -16826,7 +22564,40 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/overages",
+      "path": "/workspaces/{workspaceId}/overages",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": true,
+          "name": "enabled",
+          "required": true,
+          "type": "boolean",
+          "validation": "—"
+        },
+        {
+          "example": "{idempotencyKey}",
+          "name": "idempotencyKey",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": 0,
+          "name": "monthlySpendCapMicrosSar",
+          "required": true,
+          "type": "integer",
+          "validation": "min 0"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/CommercialOverageConfigurationRequest"
       },
@@ -16841,7 +22612,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path workspaceId (required): string",
         "JSON request body (required): #/components/schemas/CommercialOverageActivationRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"idempotencyKey\\":\\"{idempotencyKey}\\",\\"monthlySpendCapMicrosSar\\":1,\\"reviewId\\":\\"{reviewId}\\"}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/overages/activations'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"idempotencyKey\\":\\"{idempotencyKey}\\",\\"monthlySpendCapMicrosSar\\":1,\\"reviewId\\":\\"{reviewId}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/overages/activations'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}"
       },
@@ -16884,7 +22655,46 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/overages/activations",
+      "path": "/workspaces/{workspaceId}/overages/activations",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "confirmed",
+          "required": false,
+          "type": "boolean",
+          "validation": "—"
+        },
+        {
+          "example": "{idempotencyKey}",
+          "name": "idempotencyKey",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": 1,
+          "name": "monthlySpendCapMicrosSar",
+          "required": true,
+          "type": "integer",
+          "validation": "—"
+        },
+        {
+          "example": "{reviewId}",
+          "name": "reviewId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/CommercialOverageActivationRequest"
       },
@@ -16899,7 +22709,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path workspaceId (required): string",
         "JSON request body (required): #/components/schemas/CommercialOverageReviewRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"idempotencyKey\\":\\"{idempotencyKey}\\",\\"monthlySpendCapMicrosSar\\":1}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/overages/reviews'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"idempotencyKey\\":\\"{idempotencyKey}\\",\\"monthlySpendCapMicrosSar\\":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/overages/reviews'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}"
       },
@@ -16941,7 +22751,33 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         }
       ],
-      "path": "/v1/workspaces/{workspaceId}/overages/reviews",
+      "path": "/workspaces/{workspaceId}/overages/reviews",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{idempotencyKey}",
+          "name": "idempotencyKey",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 200"
+        },
+        {
+          "example": 1,
+          "name": "monthlySpendCapMicrosSar",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1"
+        }
+      ],
       "requestSchema": {
         "$ref": "#/components/schemas/CommercialOverageReviewRequest"
       },
@@ -16951,7 +22787,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
   ],
   "walkthrough": {
     "operationId": "listWorkspaces",
-    "success": "Call GET /v1/workspaces with a server-held platform session and x-correlation-id; inspect the workspaces array and nextCursor.",
+    "success": "Call GET /workspaces with a server-held platform session and x-correlation-id; inspect the workspaces array and nextCursor.",
     "failure": {
       "status": 401,
       "diagnose": "Repeat without the session only in a test environment. Read the RFC 9457 error code and give support the echoed x-correlation-id; never send the credential."
@@ -16983,7 +22819,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       title: "مرجع واجهة REST",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "b535821e29f19307eac9b3df5ff20c59a755870fcaee243a7b2af04bb7e0a1f8"
+      contentDigest: "b6454a293997223959dc0f47b1d4c2d02ffd39db29ca431ba2176f262b0b585c"
     },
     {
       canonical: "https://docs.authle.ss/changes",
@@ -17038,7 +22874,7 @@ The following checked projection is shared with the human-rendered guide and pre
 \`\`\`json
 {
   "schema": "authless.release-center/v1",
-  "updatedAt": "2026-10-09",
+  "updatedAt": "2026-10-10",
   "compatibility": [
     {
       "component": "REST API",
@@ -17046,30 +22882,11 @@ The following checked projection is shared with the human-rendered guide and pre
       "releaseNotes": "/changes#2026-08-22-identity-continuation-terminal-reasons",
       "version": "0.1.0",
       "stability": "stable",
-      "contract": "/v1 (0.1.0)",
+      "contract": "unversioned default (0.1.0)",
       "testedAt": "2026-08-22",
       "evidence": [
         "packages/contracts/openapi/authless.openapi.json",
         "tests/rest-api-reference.test.ts"
-      ]
-    },
-    {
-      "component": "@authless/api-client",
-      "deprecation": "current",
-      "releaseNotes": "/changes#2026-08-22-sensitive-mutation-readiness",
-      "version": "0.2.0",
-      "stability": "stable",
-      "contract": "0.1.0",
-      "runtime": "Node 24.x",
-      "testedAt": "2026-08-22",
-      "evidence": [
-        "packages/api-client/package.json",
-        "packages/api-client/src/index.ts",
-        "packages/api-client/src/transport.ts",
-        "packages/api-client/src/workspaces.ts",
-        "tests/api-client-workspace-family.test.ts",
-        "tests/docs-compatibility.test.ts",
-        "packages/api-client/tests/api-client.node.mjs"
       ]
     },
     {
@@ -17088,6 +22905,36 @@ The following checked projection is shared with the human-rendered guide and pre
         "tests/browser-capability-entrypoints.test.ts",
         "tests/relying-app-helpers.test.ts",
         "playwright.config.ts"
+      ]
+    },
+    {
+      "component": "@authless/server",
+      "deprecation": "current",
+      "releaseNotes": "/changes#2026-10-10-native-cli-and-docs-navigation",
+      "version": "0.1.0",
+      "stability": "source-only",
+      "contract": "0.1.0",
+      "runtime": "Node 24.x",
+      "testedAt": "2026-10-10",
+      "evidence": [
+        "packages/server/package.json",
+        "packages/server/src/index.ts",
+        "packages/server/tests/server.node.mjs"
+      ]
+    },
+    {
+      "component": "@authless/cli",
+      "deprecation": "current",
+      "releaseNotes": "/changes#2026-10-10-native-cli-and-docs-navigation",
+      "version": "0.1.0",
+      "stability": "source-only",
+      "contract": "0.1.0",
+      "runtime": "Bun 1.3.10",
+      "testedAt": "2026-10-10",
+      "evidence": [
+        "packages/cli/package.json",
+        "packages/cli/src/cli.ts",
+        "packages/cli/test/cli.test.ts"
       ]
     },
     {
@@ -17114,6 +22961,55 @@ The following checked projection is shared with the human-rendered guide and pre
   ],
   "changes": [
     {
+      "id": "2026-10-10-native-cli-and-docs-navigation",
+      "publishedAt": "2026-10-10",
+      "title": {
+        "en": "Native CLI login and shared Docs navigation",
+        "ar": "تسجيل دخول CLI والتنقّل المشترك للوثائق"
+      },
+      "summary": {
+        "en": "CLI login uses browser consent and PKCE for workspace reads. Docs and API reference share full-width footer controls, active navigation styling, and wrapping technical tables.",
+        "ar": "يستخدم تسجيل دخول CLI موافقة المتصفح وPKCE لقراءة مساحات العمل. تشترك الوثائق ومرجع API في عناصر تذييل بعرض كامل، وتمييز التنقّل النشط، وجداول تقنية تلتف محتوياتها."
+      },
+      "categories": [
+        "api",
+        "sdk",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Native login supports workspace list and get with workspace:read. Other platform commands require AUTHLESS_SESSION_TOKEN; app administration requires AUTHLESS_APP_CREDENTIAL. Use the public repository until npm publication.",
+        "ar": "يدعم تسجيل الدخول الأصلي عرض مساحات العمل وقراءتها بصلاحية workspace:read. تتطلب أوامر المنصة الأخرى AUTHLESS_SESSION_TOKEN، وتتطلب إدارة التطبيقات AUTHLESS_APP_CREDENTIAL. استخدم المستودع العام حتى النشر على npm."
+      },
+      "announcement": {
+        "en": "The checked contract now declares native OAuth only for its supported workspace reads. Broader mutations remain protected by their required scopes.",
+        "ar": "يعلن العقد المتحقق منه OAuth الأصلي لعمليات قراءة مساحات العمل المدعومة فقط. تبقى عمليات التغيير الأوسع محمية بالصلاحيات المطلوبة."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "apps/docs/src/lib/DocsFrame.svelte",
+        "apps/docs/src/lib/DocsSidebarNavigation.svelte",
+        "apps/docs/src/lib/DocsTechnicalTable.svelte",
+        "apps/sign/src/management-oauth.ts",
+        "packages/contracts/openapi/authless.openapi.json",
+        "packages/cli/README.md",
+        "scripts/generate-server-client.ts",
+        "tests/management-oauth-native-http.test.ts",
+        "tests/integration/native-management-api-postgres.integration.ts",
+        "tests/ui/docs-content-system.ui.ts"
+      ],
+      "permalink": "/changes#2026-10-10-native-cli-and-docs-navigation"
+    },
+    {
       "id": "2026-10-09-developer-docs-boundaries",
       "publishedAt": "2026-10-09",
       "title": {
@@ -17135,12 +23031,12 @@ The following checked projection is shared with the human-rendered guide and pre
       ],
       "impact": "additive",
       "migration": {
-        "en": "No API migration is required. Install @authless/api-client from the public repository until npm publication. Management-agent OAuth remains preview-only; follow the readiness report before connecting a live deployment.",
-        "ar": "لا يلزم ترحيل لواجهة API. ثبّت @authless/api-client من المستودع العام حتى نشره على npm. يبقى OAuth لوكلاء الإدارة في المعاينة؛ راجع تقرير الجاهزية قبل الاتصال بنشر حي."
+        "en": "No API migration is required. Use @authless/server or @authless/cli from the public repository until npm publication. Management-agent OAuth remains preview-only; follow the readiness report before connecting a live deployment.",
+        "ar": "لا يلزم ترحيل لواجهة API. استخدم ‎@authless/server‎ أو ‎@authless/cli‎ من المستودع العام حتى نشرها على npm. يبقى OAuth لوكلاء الإدارة في المعاينة؛ راجع تقرير الجاهزية قبل الاتصال بنشر حي."
       },
       "announcement": {
-        "en": "Use the public examples and read-only agent documentation. Package publication and live OAuth availability remain unchanged.",
-        "ar": "استخدم الأمثلة العامة ووثائق الوكلاء للقراءة فقط. تبقى حالة نشر الحزم وإتاحة OAuth الحي دون تغيير."
+        "en": "Use the public examples, server facade, CLI, and agent documentation. Package publication and live OAuth availability remain unchanged.",
+        "ar": "استخدم الأمثلة العامة وواجهة الخادم وCLI ووثائق الوكلاء. تبقى حالة نشر الحزم وإتاحة OAuth الحي دون تغيير."
       },
       "replacement": null,
       "supportWindow": null,
@@ -17155,8 +23051,8 @@ The following checked projection is shared with the human-rendered guide and pre
         "apps/docs/src/lib/release-docs-mcp-projection.ts",
         "apps/docs/static/developer-documentation.json",
         "packages/docs-mcp/src/corpus.generated.json",
-        "packages/api-client/README.md",
-        "packages/api-client/package.json",
+        "packages/server/README.md",
+        "packages/server/package.json",
         "tests/docs-mcp.test.ts",
         "tests/ui/developer-documentation.ui.ts"
       ],
@@ -19704,7 +25600,7 @@ The following checked projection is shared with the human-rendered guide and pre
   },
   "policy": {
     "semver": "Published packages use SemVer. A breaking public package API requires a major version; additive API is minor; compatible fixes are patch releases.",
-    "api": "Stable REST operations remain on /v1. A breaking contract requires a new major path; additive changes require compatibility and changelog review.",
+    "api": "Stable REST operations remain on the current contract. A breaking contract requires a new major path; additive changes require compatibility and changelog review.",
     "events": "Events retain their type and schemaVersion. A breaking payload change requires a new schemaVersion and a dual-consumption migration window.",
     "deprecation": "A deprecation is not actionable until its announcement names a replacement, migration guide, support window, approved Sunset date, status, and support contact."
   }
@@ -19724,7 +25620,7 @@ Source attribution: Developer documentation (https://docs.authle.ss/changes).
       title: "Changes and migration",
       updatedAt: "2026-08-21",
       contentType: "text/markdown",
-      contentDigest: "70583776df8901b10d5c0c3e994cdaafb74b29e3309553bee74138408d969caa"
+      contentDigest: "a098afd87e2ec582f9270a952da6fa8e26f0b7ae02b05f9dc45ab2237d2f17f9"
     },
     {
       canonical: "https://docs.authle.ss/changes?lang=ar",
@@ -19779,7 +25675,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
 \`\`\`json
 {
   "schema": "authless.release-center/v1",
-  "updatedAt": "2026-10-09",
+  "updatedAt": "2026-10-10",
   "compatibility": [
     {
       "component": "REST API",
@@ -19787,30 +25683,11 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       "releaseNotes": "/changes#2026-08-22-identity-continuation-terminal-reasons",
       "version": "0.1.0",
       "stability": "stable",
-      "contract": "/v1 (0.1.0)",
+      "contract": "unversioned default (0.1.0)",
       "testedAt": "2026-08-22",
       "evidence": [
         "packages/contracts/openapi/authless.openapi.json",
         "tests/rest-api-reference.test.ts"
-      ]
-    },
-    {
-      "component": "@authless/api-client",
-      "deprecation": "current",
-      "releaseNotes": "/changes#2026-08-22-sensitive-mutation-readiness",
-      "version": "0.2.0",
-      "stability": "stable",
-      "contract": "0.1.0",
-      "runtime": "Node 24.x",
-      "testedAt": "2026-08-22",
-      "evidence": [
-        "packages/api-client/package.json",
-        "packages/api-client/src/index.ts",
-        "packages/api-client/src/transport.ts",
-        "packages/api-client/src/workspaces.ts",
-        "tests/api-client-workspace-family.test.ts",
-        "tests/docs-compatibility.test.ts",
-        "packages/api-client/tests/api-client.node.mjs"
       ]
     },
     {
@@ -19829,6 +25706,36 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "tests/browser-capability-entrypoints.test.ts",
         "tests/relying-app-helpers.test.ts",
         "playwright.config.ts"
+      ]
+    },
+    {
+      "component": "@authless/server",
+      "deprecation": "current",
+      "releaseNotes": "/changes#2026-10-10-native-cli-and-docs-navigation",
+      "version": "0.1.0",
+      "stability": "source-only",
+      "contract": "0.1.0",
+      "runtime": "Node 24.x",
+      "testedAt": "2026-10-10",
+      "evidence": [
+        "packages/server/package.json",
+        "packages/server/src/index.ts",
+        "packages/server/tests/server.node.mjs"
+      ]
+    },
+    {
+      "component": "@authless/cli",
+      "deprecation": "current",
+      "releaseNotes": "/changes#2026-10-10-native-cli-and-docs-navigation",
+      "version": "0.1.0",
+      "stability": "source-only",
+      "contract": "0.1.0",
+      "runtime": "Bun 1.3.10",
+      "testedAt": "2026-10-10",
+      "evidence": [
+        "packages/cli/package.json",
+        "packages/cli/src/cli.ts",
+        "packages/cli/test/cli.test.ts"
       ]
     },
     {
@@ -19855,6 +25762,55 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
   ],
   "changes": [
     {
+      "id": "2026-10-10-native-cli-and-docs-navigation",
+      "publishedAt": "2026-10-10",
+      "title": {
+        "en": "Native CLI login and shared Docs navigation",
+        "ar": "تسجيل دخول CLI والتنقّل المشترك للوثائق"
+      },
+      "summary": {
+        "en": "CLI login uses browser consent and PKCE for workspace reads. Docs and API reference share full-width footer controls, active navigation styling, and wrapping technical tables.",
+        "ar": "يستخدم تسجيل دخول CLI موافقة المتصفح وPKCE لقراءة مساحات العمل. تشترك الوثائق ومرجع API في عناصر تذييل بعرض كامل، وتمييز التنقّل النشط، وجداول تقنية تلتف محتوياتها."
+      },
+      "categories": [
+        "api",
+        "sdk",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Native login supports workspace list and get with workspace:read. Other platform commands require AUTHLESS_SESSION_TOKEN; app administration requires AUTHLESS_APP_CREDENTIAL. Use the public repository until npm publication.",
+        "ar": "يدعم تسجيل الدخول الأصلي عرض مساحات العمل وقراءتها بصلاحية workspace:read. تتطلب أوامر المنصة الأخرى AUTHLESS_SESSION_TOKEN، وتتطلب إدارة التطبيقات AUTHLESS_APP_CREDENTIAL. استخدم المستودع العام حتى النشر على npm."
+      },
+      "announcement": {
+        "en": "The checked contract now declares native OAuth only for its supported workspace reads. Broader mutations remain protected by their required scopes.",
+        "ar": "يعلن العقد المتحقق منه OAuth الأصلي لعمليات قراءة مساحات العمل المدعومة فقط. تبقى عمليات التغيير الأوسع محمية بالصلاحيات المطلوبة."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "apps/docs/src/lib/DocsFrame.svelte",
+        "apps/docs/src/lib/DocsSidebarNavigation.svelte",
+        "apps/docs/src/lib/DocsTechnicalTable.svelte",
+        "apps/sign/src/management-oauth.ts",
+        "packages/contracts/openapi/authless.openapi.json",
+        "packages/cli/README.md",
+        "scripts/generate-server-client.ts",
+        "tests/management-oauth-native-http.test.ts",
+        "tests/integration/native-management-api-postgres.integration.ts",
+        "tests/ui/docs-content-system.ui.ts"
+      ],
+      "permalink": "/changes#2026-10-10-native-cli-and-docs-navigation"
+    },
+    {
       "id": "2026-10-09-developer-docs-boundaries",
       "publishedAt": "2026-10-09",
       "title": {
@@ -19876,12 +25832,12 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       "impact": "additive",
       "migration": {
-        "en": "No API migration is required. Install @authless/api-client from the public repository until npm publication. Management-agent OAuth remains preview-only; follow the readiness report before connecting a live deployment.",
-        "ar": "لا يلزم ترحيل لواجهة API. ثبّت @authless/api-client من المستودع العام حتى نشره على npm. يبقى OAuth لوكلاء الإدارة في المعاينة؛ راجع تقرير الجاهزية قبل الاتصال بنشر حي."
+        "en": "No API migration is required. Use @authless/server or @authless/cli from the public repository until npm publication. Management-agent OAuth remains preview-only; follow the readiness report before connecting a live deployment.",
+        "ar": "لا يلزم ترحيل لواجهة API. استخدم ‎@authless/server‎ أو ‎@authless/cli‎ من المستودع العام حتى نشرها على npm. يبقى OAuth لوكلاء الإدارة في المعاينة؛ راجع تقرير الجاهزية قبل الاتصال بنشر حي."
       },
       "announcement": {
-        "en": "Use the public examples and read-only agent documentation. Package publication and live OAuth availability remain unchanged.",
-        "ar": "استخدم الأمثلة العامة ووثائق الوكلاء للقراءة فقط. تبقى حالة نشر الحزم وإتاحة OAuth الحي دون تغيير."
+        "en": "Use the public examples, server facade, CLI, and agent documentation. Package publication and live OAuth availability remain unchanged.",
+        "ar": "استخدم الأمثلة العامة وواجهة الخادم وCLI ووثائق الوكلاء. تبقى حالة نشر الحزم وإتاحة OAuth الحي دون تغيير."
       },
       "replacement": null,
       "supportWindow": null,
@@ -19896,8 +25852,8 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "apps/docs/src/lib/release-docs-mcp-projection.ts",
         "apps/docs/static/developer-documentation.json",
         "packages/docs-mcp/src/corpus.generated.json",
-        "packages/api-client/README.md",
-        "packages/api-client/package.json",
+        "packages/server/README.md",
+        "packages/server/package.json",
         "tests/docs-mcp.test.ts",
         "tests/ui/developer-documentation.ui.ts"
       ],
@@ -22445,7 +28401,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
   },
   "policy": {
     "semver": "Published packages use SemVer. A breaking public package API requires a major version; additive API is minor; compatible fixes are patch releases.",
-    "api": "Stable REST operations remain on /v1. A breaking contract requires a new major path; additive changes require compatibility and changelog review.",
+    "api": "Stable REST operations remain on the current contract. A breaking contract requires a new major path; additive changes require compatibility and changelog review.",
     "events": "Events retain their type and schemaVersion. A breaking payload change requires a new schemaVersion and a dual-consumption migration window.",
     "deprecation": "A deprecation is not actionable until its announcement names a replacement, migration guide, support window, approved Sunset date, status, and support contact."
   }
@@ -22465,7 +28421,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       title: "التغييرات والترحيل",
       updatedAt: "2026-08-21",
       contentType: "text/markdown",
-      contentDigest: "748a2ae9527f33e75f1a8e7f9e710fb3e301e367d18de060a812f394dd4ee3b8"
+      contentDigest: "a6ff385872df4dc46cced757e6c8974e2582e2429bcc2ad8e4e1f705e863e614"
     },
     {
       canonical: "https://docs.authle.ss/agents",
@@ -22545,9 +28501,9 @@ The following checked projection is shared with the human-rendered guide and pre
       ]
     },
     {
-      "package": "@authless/api-client",
+      "package": "@authless/server",
       "symbols": [
-        "createAuthlessApiClient"
+        "createAuthlessServerClient"
       ]
     }
   ],
@@ -22640,23 +28596,45 @@ The following checked projection is shared with the human-rendered guide and pre
       "stage": "available"
     },
     {
-      "id": "rest-client",
+      "id": "server-client",
       "title": {
-        "en": "TypeScript REST client",
-        "ar": "عميل REST لـ TypeScript"
+        "en": "Node.js server client",
+        "ar": "عميل خادم Node.js"
       },
       "description": {
-        "en": "Call contract-derived management operations from trusted server code.",
-        "ar": "استدعِ عمليات الإدارة المشتقة من العقد من خادم موثوق."
+        "en": "Call typed management operations from trusted Node.js server code.",
+        "ar": "استدعِ عمليات الإدارة المعرّفة من خادم Node.js موثوق."
       },
-      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && mkdir api-client-check && cd api-client-check && npm init -y && npm install ../packages/api-client",
-      "firstAction": "import { createAuthlessApiClient } from \\"@authless/api-client\\";",
-      "successSignal": "membership_invited paged guarded_cleanup_ok",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && bun install --frozen-lockfile",
+      "firstAction": "import { createAuthlessServerClient } from \\"@authless/server\\";",
+      "successSignal": "server_request_ok credential_boundary_preserved",
       "negativeChecks": [
-        "insufficient scope",
-        "stale version",
-        "rate limit",
-        "unknown mutation outcome"
+        "browser import",
+        "missing credential",
+        "wrong authority",
+        "unsafe retry"
+      ],
+      "authoritativeGuide": "/build/rest",
+      "stage": "available"
+    },
+    {
+      "id": "cli",
+      "title": {
+        "en": "Authless CLI",
+        "ar": "واجهة Authless الطرفية"
+      },
+      "description": {
+        "en": "Manage Authless resources with native PKCE login or a bounded machine credential.",
+        "ar": "أدر موارد Authless عبر تسجيل دخول PKCE أصلي أو بيانات اعتماد آلية محدودة."
+      },
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && bun install --frozen-lockfile",
+      "firstAction": "packages/cli/dist/cli.js auth login",
+      "successSignal": "native_pkce_grant workspace_read json_output",
+      "negativeChecks": [
+        "credential on argv",
+        "browser cookie extraction",
+        "unconfirmed mutation",
+        "token in output"
       ],
       "authoritativeGuide": "/build/rest",
       "stage": "available"
@@ -22859,7 +28837,7 @@ Source attribution: Developer documentation (https://docs.authle.ss/agents).
       title: "Agent access",
       updatedAt: "2026-10-09",
       contentType: "text/markdown",
-      contentDigest: "12f0a0351b7e40036215dc87a54b81d068dd38acc9c7fc6ad2fd38382b8befa6"
+      contentDigest: "72e3efc0079cc1faaf95373c81f503d99a6dfa83662b5acdff6ea8c18809e80d"
     },
     {
       canonical: "https://docs.authle.ss/agents?lang=ar",
@@ -22939,9 +28917,9 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ]
     },
     {
-      "package": "@authless/api-client",
+      "package": "@authless/server",
       "symbols": [
-        "createAuthlessApiClient"
+        "createAuthlessServerClient"
       ]
     }
   ],
@@ -23034,23 +29012,45 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       "stage": "available"
     },
     {
-      "id": "rest-client",
+      "id": "server-client",
       "title": {
-        "en": "TypeScript REST client",
-        "ar": "عميل REST لـ TypeScript"
+        "en": "Node.js server client",
+        "ar": "عميل خادم Node.js"
       },
       "description": {
-        "en": "Call contract-derived management operations from trusted server code.",
-        "ar": "استدعِ عمليات الإدارة المشتقة من العقد من خادم موثوق."
+        "en": "Call typed management operations from trusted Node.js server code.",
+        "ar": "استدعِ عمليات الإدارة المعرّفة من خادم Node.js موثوق."
       },
-      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && mkdir api-client-check && cd api-client-check && npm init -y && npm install ../packages/api-client",
-      "firstAction": "import { createAuthlessApiClient } from \\"@authless/api-client\\";",
-      "successSignal": "membership_invited paged guarded_cleanup_ok",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && bun install --frozen-lockfile",
+      "firstAction": "import { createAuthlessServerClient } from \\"@authless/server\\";",
+      "successSignal": "server_request_ok credential_boundary_preserved",
       "negativeChecks": [
-        "insufficient scope",
-        "stale version",
-        "rate limit",
-        "unknown mutation outcome"
+        "browser import",
+        "missing credential",
+        "wrong authority",
+        "unsafe retry"
+      ],
+      "authoritativeGuide": "/build/rest",
+      "stage": "available"
+    },
+    {
+      "id": "cli",
+      "title": {
+        "en": "Authless CLI",
+        "ar": "واجهة Authless الطرفية"
+      },
+      "description": {
+        "en": "Manage Authless resources with native PKCE login or a bounded machine credential.",
+        "ar": "أدر موارد Authless عبر تسجيل دخول PKCE أصلي أو بيانات اعتماد آلية محدودة."
+      },
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && bun install --frozen-lockfile",
+      "firstAction": "packages/cli/dist/cli.js auth login",
+      "successSignal": "native_pkce_grant workspace_read json_output",
+      "negativeChecks": [
+        "credential on argv",
+        "browser cookie extraction",
+        "unconfirmed mutation",
+        "token in output"
       ],
       "authoritativeGuide": "/build/rest",
       "stage": "available"
@@ -23253,7 +29253,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       title: "وصول الوكلاء",
       updatedAt: "2026-10-09",
       contentType: "text/markdown",
-      contentDigest: "850a5c78c53850a6631ad520f4e1525d08cc8e8f48f739b6fd07522536493edb"
+      contentDigest: "dd9892e183c2a24a666bf70c20ad6e59041a182b0a996c395046903ad148f8ec"
     }
   ],
   operations: [
@@ -23265,12 +29265,13 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RequestIdentityContinuationRequest"
       ],
-      example: `curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"email":"person@example.test"}' 'https://api.authle.ss/v1/identity/continuations'`,
+      example: `curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"email":"person@example.com","locale":"en"}' 'https://api.authle.ss/identity/continuations'`,
       exampleParameters: {
         "x-correlation-id": "request_example_001"
       },
       exampleRequestBody: {
-        email: "person@example.test"
+        email: "person@example.com",
+        locale: "en"
       },
       method: "POST",
       operationId: "requestIdentityContinuation",
@@ -23291,7 +29292,33 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/identity/continuations",
+      path: "/identity/continuations",
+      parameters: [
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: "person@example.com",
+          name: "email",
+          required: true,
+          type: "string",
+          validation: "minLength 1, maxLength 320"
+        },
+        {
+          example: "en",
+          name: "locale",
+          required: false,
+          type: "string",
+          validation: "one of ar | en"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/RequestIdentityContinuationRequest"
       },
@@ -23306,13 +29333,14 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/VerifyIdentityContinuationRequest"
       ],
-      example: `curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"challengeId":"{challengeId}","code":"{code}"}' 'https://api.authle.ss/v1/identity/continuations/verifications'`,
+      example: `curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"challengeId":"identity_continuation_example","code":"12345678","locale":"en"}' 'https://api.authle.ss/identity/continuations/verifications'`,
       exampleParameters: {
         "x-correlation-id": "request_example_001"
       },
       exampleRequestBody: {
-        challengeId: "{challengeId}",
-        code: "{code}"
+        challengeId: "identity_continuation_example",
+        code: "12345678",
+        locale: "en"
       },
       method: "POST",
       operationId: "verifyIdentityContinuation",
@@ -23338,7 +29366,40 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/identity/continuations/verifications",
+      path: "/identity/continuations/verifications",
+      parameters: [
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: "identity_continuation_example",
+          name: "challengeId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "12345678",
+          name: "code",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "en",
+          name: "locale",
+          required: false,
+          type: "string",
+          validation: "one of ar | en"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/VerifyIdentityContinuationRequest"
       },
@@ -23353,12 +29414,12 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/ConsumeIdentityRecoveryRequest"
       ],
-      example: `curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"token":"{token}"}' 'https://api.authle.ss/v1/identity/recovery-proofs'`,
+      example: `curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"token":"recovery-proof-token"}' 'https://api.authle.ss/identity/recovery-proofs'`,
       exampleParameters: {
         "x-correlation-id": "request_example_001"
       },
       exampleRequestBody: {
-        token: "{token}"
+        token: "recovery-proof-token"
       },
       method: "POST",
       operationId: "consumeIdentityRecovery",
@@ -23384,7 +29445,26 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/identity/recovery-proofs",
+      path: "/identity/recovery-proofs",
+      parameters: [
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: "recovery-proof-token",
+          name: "token",
+          required: true,
+          type: "string",
+          validation: "—"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/ConsumeIdentityRecoveryRequest"
       },
@@ -23399,12 +29479,13 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RequestIdentityRecoveryRequest"
       ],
-      example: `curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"identifier":"{identifier}"}' 'https://api.authle.ss/v1/identity/recovery-requests'`,
+      example: `curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"identifier":"person@example.com","locale":"en"}' 'https://api.authle.ss/identity/recovery-requests'`,
       exampleParameters: {
         "x-correlation-id": "request_example_001"
       },
       exampleRequestBody: {
-        identifier: "{identifier}"
+        identifier: "person@example.com",
+        locale: "en"
       },
       method: "POST",
       operationId: "requestIdentityRecovery",
@@ -23425,7 +29506,33 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/identity/recovery-requests",
+      path: "/identity/recovery-requests",
+      parameters: [
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: "person@example.com",
+          name: "identifier",
+          required: true,
+          type: "string",
+          validation: "minLength 1, maxLength 320"
+        },
+        {
+          example: "en",
+          name: "locale",
+          required: false,
+          type: "string",
+          validation: "one of ar | en"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/RequestIdentityRecoveryRequest"
       },
@@ -23440,11 +29547,14 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RevokeIdentityRecoveryPasswordRequest"
       ],
-      example: "curl --request DELETE -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/v1/identity/recovery/authenticators/password'",
+      example: `curl --request DELETE -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"confirmed":true,"locale":"en"}' 'https://api.authle.ss/identity/recovery/authenticators/password'`,
       exampleParameters: {
         "x-correlation-id": "request_example_001"
       },
-      exampleRequestBody: {},
+      exampleRequestBody: {
+        confirmed: true,
+        locale: "en"
+      },
       method: "DELETE",
       operationId: "revokeIdentityRecoveryPassword",
       outcomes: [
@@ -23484,7 +29594,33 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/identity/recovery/authenticators/password",
+      path: "/identity/recovery/authenticators/password",
+      parameters: [
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: true,
+          name: "confirmed",
+          required: false,
+          type: "boolean",
+          validation: "—"
+        },
+        {
+          example: "en",
+          name: "locale",
+          required: false,
+          type: "string",
+          validation: "one of ar | en"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/RevokeIdentityRecoveryPasswordRequest"
       },
@@ -23496,7 +29632,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "Bounded recovery authority. Never expose this value in response bodies, browser bundles, or logs."
       ],
       constraints: [],
-      example: "curl --request GET 'https://api.authle.ss/v1/identity/recovery/factors'",
+      example: "curl --request GET 'https://api.authle.ss/identity/recovery/factors'",
       exampleParameters: {},
       method: "GET",
       operationId: "getIdentityRecoveryFactors",
@@ -23517,7 +29653,9 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/identity/recovery/factors",
+      path: "/identity/recovery/factors",
+      parameters: [],
+      requestBodyFields: [],
       retrySafety: "safe",
       summary: "List the secret-free recovery factor inventory"
     },
@@ -23529,11 +29667,15 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RequestIdentityRecoveryEmailReplacementRequest"
       ],
-      example: "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/v1/identity/recovery/identifier-replacements/email'",
+      example: `curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"confirmed":true,"email":"new.person@example.com","locale":"en"}' 'https://api.authle.ss/identity/recovery/identifier-replacements/email'`,
       exampleParameters: {
         "x-correlation-id": "request_example_001"
       },
-      exampleRequestBody: {},
+      exampleRequestBody: {
+        confirmed: true,
+        email: "new.person@example.com",
+        locale: "en"
+      },
       method: "POST",
       operationId: "requestIdentityRecoveryEmailReplacement",
       outcomes: [
@@ -23568,7 +29710,40 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/identity/recovery/identifier-replacements/email",
+      path: "/identity/recovery/identifier-replacements/email",
+      parameters: [
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: true,
+          name: "confirmed",
+          required: false,
+          type: "boolean",
+          validation: "—"
+        },
+        {
+          example: "new.person@example.com",
+          name: "email",
+          required: false,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "en",
+          name: "locale",
+          required: false,
+          type: "string",
+          validation: "one of ar | en"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/RequestIdentityRecoveryEmailReplacementRequest"
       },
@@ -23583,12 +29758,13 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/VerifyIdentityRecoveryEmailReplacementRequest"
       ],
-      example: `curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"token":"{token}"}' 'https://api.authle.ss/v1/identity/recovery/identifier-replacements/email/verifications'`,
+      example: `curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"locale":"en","token":"replacement-proof-token"}' 'https://api.authle.ss/identity/recovery/identifier-replacements/email/verifications'`,
       exampleParameters: {
         "x-correlation-id": "request_example_001"
       },
       exampleRequestBody: {
-        token: "{token}"
+        locale: "en",
+        token: "replacement-proof-token"
       },
       method: "POST",
       operationId: "verifyIdentityRecoveryEmailReplacement",
@@ -23614,7 +29790,33 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/identity/recovery/identifier-replacements/email/verifications",
+      path: "/identity/recovery/identifier-replacements/email/verifications",
+      parameters: [
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: "en",
+          name: "locale",
+          required: false,
+          type: "string",
+          validation: "one of ar | en"
+        },
+        {
+          example: "replacement-proof-token",
+          name: "token",
+          required: true,
+          type: "string",
+          validation: "—"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/VerifyIdentityRecoveryEmailReplacementRequest"
       },
@@ -23629,11 +29831,15 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/ReplaceIdentityRecoveryUsernameRequest"
       ],
-      example: "curl --request PUT -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/v1/identity/recovery/identifiers/username'",
+      example: `curl --request PUT -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"confirmed":true,"locale":"en","username":"new_name"}' 'https://api.authle.ss/identity/recovery/identifiers/username'`,
       exampleParameters: {
         "x-correlation-id": "request_example_001"
       },
-      exampleRequestBody: {},
+      exampleRequestBody: {
+        confirmed: true,
+        locale: "en",
+        username: "new_name"
+      },
       method: "PUT",
       operationId: "replaceIdentityRecoveryUsername",
       outcomes: [
@@ -23668,7 +29874,40 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/identity/recovery/identifiers/username",
+      path: "/identity/recovery/identifiers/username",
+      parameters: [
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: true,
+          name: "confirmed",
+          required: false,
+          type: "boolean",
+          validation: "—"
+        },
+        {
+          example: "en",
+          name: "locale",
+          required: false,
+          type: "string",
+          validation: "one of ar | en"
+        },
+        {
+          example: "new_name",
+          name: "username",
+          required: false,
+          type: "string",
+          validation: "—"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/ReplaceIdentityRecoveryUsernameRequest"
       },
@@ -23683,13 +29922,14 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RegisterIdentityRequest"
       ],
-      example: `curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"email":"person@example.test","password":"{password}"}' 'https://api.authle.ss/v1/identity/registrations'`,
+      example: `curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"email":"person@example.com","locale":"en","password":"correct horse battery staple"}' 'https://api.authle.ss/identity/registrations'`,
       exampleParameters: {
         "x-correlation-id": "request_example_001"
       },
       exampleRequestBody: {
-        email: "person@example.test",
-        password: "{password}"
+        email: "person@example.com",
+        locale: "en",
+        password: "correct horse battery staple"
       },
       method: "POST",
       operationId: "registerIdentity",
@@ -23715,7 +29955,40 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/identity/registrations",
+      path: "/identity/registrations",
+      parameters: [
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: "person@example.com",
+          name: "email",
+          required: true,
+          type: "string",
+          validation: "minLength 1"
+        },
+        {
+          example: "en",
+          name: "locale",
+          required: false,
+          type: "string",
+          validation: "one of ar | en"
+        },
+        {
+          example: "correct horse battery staple",
+          name: "password",
+          required: true,
+          type: "string",
+          validation: "minLength 1"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/RegisterIdentityRequest"
       },
@@ -23730,12 +30003,13 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/VerifyIdentityRequest"
       ],
-      example: `curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"token":"{token}"}' 'https://api.authle.ss/v1/identity/verifications'`,
+      example: `curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"locale":"en","token":"verification-token"}' 'https://api.authle.ss/identity/verifications'`,
       exampleParameters: {
         "x-correlation-id": "request_example_001"
       },
       exampleRequestBody: {
-        token: "{token}"
+        locale: "en",
+        token: "verification-token"
       },
       method: "POST",
       operationId: "verifyIdentity",
@@ -23756,7 +30030,33 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/identity/verifications",
+      path: "/identity/verifications",
+      parameters: [
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: "en",
+          name: "locale",
+          required: false,
+          type: "string",
+          validation: "one of ar | en"
+        },
+        {
+          example: "verification-token",
+          name: "token",
+          required: true,
+          type: "string",
+          validation: "minLength 1"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/VerifyIdentityRequest"
       },
@@ -23768,7 +30068,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "Server-side platform session. Never expose this value to browser bundles or logs."
       ],
       constraints: [],
-      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/v1/me/security-activity'",
+      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/me/security-activity'",
       exampleParameters: {},
       method: "GET",
       operationId: "listPersonalSecurityActivity",
@@ -23789,7 +30089,9 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/me/security-activity",
+      path: "/me/security-activity",
+      parameters: [],
+      requestBodyFields: [],
       retrySafety: "safe",
       summary: "List the current person's session-security activity"
     },
@@ -23801,7 +30103,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (optional): #/components/schemas/SignOutOtherSessionsRequest"
       ],
-      example: "curl --request DELETE -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/v1/me/sessions'",
+      example: "curl --request DELETE -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/me/sessions'",
       exampleParameters: {
         "x-correlation-id": "request_example_001"
       },
@@ -23840,7 +30142,31 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/me/sessions",
+      path: "/me/sessions",
+      parameters: [
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          name: "confirmed",
+          required: false,
+          type: "boolean",
+          validation: "—"
+        },
+        {
+          name: "locale",
+          required: false,
+          type: "string",
+          validation: "one of ar | en"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/SignOutOtherSessionsRequest"
       },
@@ -23852,7 +30178,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "Server-side platform session. Never expose this value to browser bundles or logs."
       ],
       constraints: [],
-      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/v1/me/sessions'",
+      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/me/sessions'",
       exampleParameters: {},
       method: "GET",
       operationId: "listPersonalSessions",
@@ -23873,7 +30199,9 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/me/sessions",
+      path: "/me/sessions",
+      parameters: [],
+      requestBodyFields: [],
       retrySafety: "safe",
       summary: "List the current person's platform sessions"
     },
@@ -23886,7 +30214,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (optional): #/components/schemas/RevokePersonalSessionRequest"
       ],
-      example: "curl --request DELETE -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/v1/me/sessions/session_01J5K6M7N8P9QRSTVWXYZABCDE'",
+      example: "curl --request DELETE -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/me/sessions/session_01J5K6M7N8P9QRSTVWXYZABCDE'",
       exampleParameters: {
         sessionId: "session_01J5K6M7N8P9QRSTVWXYZABCDE",
         "x-correlation-id": "request_example_001"
@@ -23926,7 +30254,33 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/me/sessions/{sessionId}",
+      path: "/me/sessions/{sessionId}",
+      parameters: [
+        {
+          example: "session_01J5K6M7N8P9QRSTVWXYZABCDE",
+          location: "path",
+          name: "sessionId",
+          required: true,
+          type: "string",
+          validation: "pattern ^session_[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          name: "locale",
+          required: false,
+          type: "string",
+          validation: "one of ar | en"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/RevokePersonalSessionRequest"
       },
@@ -23942,7 +30296,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (optional): #/components/schemas/ReportPersonalSessionRiskRequest"
       ],
-      example: "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/v1/me/sessions/session_01J5K6M7N8P9QRSTVWXYZABCDE/risk'",
+      example: "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/me/sessions/session_01J5K6M7N8P9QRSTVWXYZABCDE/risk'",
       exampleParameters: {
         sessionId: "session_01J5K6M7N8P9QRSTVWXYZABCDE",
         "x-correlation-id": "request_example_001"
@@ -23987,7 +30341,39 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/me/sessions/{sessionId}/risk",
+      path: "/me/sessions/{sessionId}/risk",
+      parameters: [
+        {
+          example: "session_01J5K6M7N8P9QRSTVWXYZABCDE",
+          location: "path",
+          name: "sessionId",
+          required: true,
+          type: "string",
+          validation: "pattern ^session_[0-9A-HJKMNP-TV-Z]{26}$"
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          name: "confirmed",
+          required: false,
+          type: "boolean",
+          validation: "—"
+        },
+        {
+          name: "locale",
+          required: false,
+          type: "string",
+          validation: "one of ar | en"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/ReportPersonalSessionRiskRequest"
       },
@@ -23999,7 +30385,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "Server-side platform session. Never expose this value to browser bundles or logs."
       ],
       constraints: [],
-      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/v1/personal/overview'",
+      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/personal/overview'",
       exampleParameters: {},
       method: "GET",
       operationId: "getPersonalOverview",
@@ -24020,7 +30406,9 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/personal/overview",
+      path: "/personal/overview",
+      parameters: [],
+      requestBodyFields: [],
       retrySafety: "safe",
       summary: "Get the current person's safe account overview"
     },
@@ -24032,7 +30420,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (optional): #/components/schemas/RemovePersonalUsernameRequest"
       ],
-      example: "curl --request DELETE -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/v1/personal/username'",
+      example: "curl --request DELETE -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/personal/username'",
       exampleParameters: {
         "x-correlation-id": "request_example_001"
       },
@@ -24071,7 +30459,25 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/personal/username",
+      path: "/personal/username",
+      parameters: [
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          name: "confirmed",
+          required: false,
+          type: "boolean",
+          validation: "—"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/RemovePersonalUsernameRequest"
       },
@@ -24086,7 +30492,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/AddPersonalUsernameRequest"
       ],
-      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"username":"{username}"}' 'https://api.authle.ss/v1/personal/username'`,
+      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"username":"{username}"}' 'https://api.authle.ss/personal/username'`,
       exampleParameters: {
         "x-correlation-id": "request_example_001"
       },
@@ -24127,7 +30533,26 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/personal/username",
+      path: "/personal/username",
+      parameters: [
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: "{username}",
+          name: "username",
+          required: true,
+          type: "string",
+          validation: "—"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/AddPersonalUsernameRequest"
       },
@@ -24142,7 +30567,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/ChangePersonalUsernameRequest"
       ],
-      example: `curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"username":"{username}"}' 'https://api.authle.ss/v1/personal/username'`,
+      example: `curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"username":"{username}"}' 'https://api.authle.ss/personal/username'`,
       exampleParameters: {
         "x-correlation-id": "request_example_001"
       },
@@ -24183,7 +30608,26 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/personal/username",
+      path: "/personal/username",
+      parameters: [
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: "{username}",
+          name: "username",
+          required: true,
+          type: "string",
+          validation: "—"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/ChangePersonalUsernameRequest"
       },
@@ -24195,7 +30639,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "Server-side platform session. Never expose this value to browser bundles or logs."
       ],
       constraints: [],
-      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/v1/personal/workspace-correlations'",
+      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/personal/workspace-correlations'",
       exampleParameters: {},
       method: "GET",
       operationId: "listPersonalWorkspaceCorrelations",
@@ -24211,7 +30655,9 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/personal/workspace-correlations",
+      path: "/personal/workspace-correlations",
+      parameters: [],
+      requestBodyFields: [],
       retrySafety: "safe",
       summary: "List the current person's workspace correlation disclosures"
     },
@@ -24224,7 +30670,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/SplitPersonalWorkspaceCorrelationRequest"
       ],
-      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"confirmed":true,"expectedVersion":1}' 'https://api.authle.ss/v1/personal/workspace-correlations/%7BworkspaceId%7D/split'`,
+      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"confirmed":true,"expectedVersion":1}' 'https://api.authle.ss/personal/workspace-correlations/%7BworkspaceId%7D/split'`,
       exampleParameters: {
         workspaceId: "{workspaceId}",
         "x-correlation-id": "request_example_001"
@@ -24272,7 +30718,41 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/personal/workspace-correlations/{workspaceId}/split",
+      path: "/personal/workspace-correlations/{workspaceId}/split",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: true,
+          name: "confirmed",
+          required: true,
+          type: "boolean",
+          validation: "—"
+        },
+        {
+          example: 1,
+          name: "expectedVersion",
+          required: true,
+          type: "integer",
+          validation: "—"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/SplitPersonalWorkspaceCorrelationRequest"
       },
@@ -24287,7 +30767,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header merchant-signature (required): string",
         "JSON request body (required): object"
       ],
-      example: "curl --request POST -H 'merchant-signature: {merchant-signature}' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/v1/providers/merchant/billing-events'",
+      example: "curl --request POST -H 'merchant-signature: {merchant-signature}' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/providers/merchant/billing-events'",
       exampleParameters: {
         "merchant-signature": "{merchant-signature}"
       },
@@ -24306,7 +30786,18 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/providers/merchant/billing-events",
+      path: "/providers/merchant/billing-events",
+      parameters: [
+        {
+          example: "{merchant-signature}",
+          location: "header",
+          name: "merchant-signature",
+          required: true,
+          type: "string",
+          validation: "—"
+        }
+      ],
+      requestBodyFields: [],
       requestSchema: {
         type: "object",
         additionalProperties: true
@@ -24316,14 +30807,15 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
     },
     {
       authority: [
-        "Server-side platform session. Never expose this value to browser bundles or logs."
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "Server-side management OAuth bearer issued for an owner-created workspace delegation. This scheme is supported only on operations that list it explicitly, currently workspace reads, and requires x-authless-client: server. Never use a browser session cookie as an agent credential. Required scope: workspace:read."
       ],
       constraints: [
         "query cursor (optional): string, maxLength 1024",
         "query limit (optional): integer, min 1, max 100",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128"
       ],
-      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/v1/workspaces'",
+      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/workspaces'",
       exampleParameters: {
         "x-correlation-id": "request_example_001"
       },
@@ -24346,7 +30838,32 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces",
+      path: "/workspaces",
+      parameters: [
+        {
+          location: "query",
+          name: "cursor",
+          required: false,
+          type: "string",
+          validation: "maxLength 1024"
+        },
+        {
+          location: "query",
+          name: "limit",
+          required: false,
+          type: "integer",
+          validation: "min 1, max 100"
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [],
       retrySafety: "safe",
       summary: "List workspaces available to the current platform session"
     },
@@ -24359,13 +30876,13 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/CreateWorkspaceRequest"
       ],
-      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"name":"Example","termsAccepted":true}' 'https://api.authle.ss/v1/workspaces'`,
+      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"name":"Example workspace","termsAccepted":true}' 'https://api.authle.ss/workspaces'`,
       exampleParameters: {
         "idempotency-key": "request-example-001",
         "x-correlation-id": "request_example_001"
       },
       exampleRequestBody: {
-        name: "Example",
+        name: "Example workspace",
         termsAccepted: true
       },
       method: "POST",
@@ -24397,7 +30914,41 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces",
+      path: "/workspaces",
+      parameters: [
+        {
+          example: "request-example-001",
+          location: "header",
+          name: "idempotency-key",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: "Example workspace",
+          name: "name",
+          required: true,
+          type: "string",
+          validation: "minLength 1, maxLength 80"
+        },
+        {
+          example: true,
+          name: "termsAccepted",
+          required: true,
+          type: "boolean",
+          validation: "—"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/CreateWorkspaceRequest"
       },
@@ -24406,13 +30957,14 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
     },
     {
       authority: [
-        "Server-side platform session. Never expose this value to browser bundles or logs."
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "Server-side management OAuth bearer issued for an owner-created workspace delegation. This scheme is supported only on operations that list it explicitly, currently workspace reads, and requires x-authless-client: server. Never use a browser session cookie as an agent credential. Required scope: workspace:read."
       ],
       constraints: [
         "path workspaceId (required): string, minLength 3, maxLength 128",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128"
       ],
-      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D'",
+      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D'",
       exampleParameters: {
         workspaceId: "{workspaceId}",
         "x-correlation-id": "request_example_001"
@@ -24436,7 +30988,26 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces/{workspaceId}",
+      path: "/workspaces/{workspaceId}",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 128"
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [],
       retrySafety: "safe",
       summary: "Read one workspace available to the current platform session"
     },
@@ -24450,7 +31021,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "query limit (optional): integer, min 1, max 100",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128"
       ],
-      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps'",
+      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps'",
       exampleParameters: {
         workspaceId: "{workspaceId}",
         "x-correlation-id": "request_example_001"
@@ -24479,7 +31050,40 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces/{workspaceId}/apps",
+      path: "/workspaces/{workspaceId}/apps",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 128"
+        },
+        {
+          location: "query",
+          name: "cursor",
+          required: false,
+          type: "string",
+          validation: "maxLength 1024"
+        },
+        {
+          location: "query",
+          name: "limit",
+          required: false,
+          type: "integer",
+          validation: "min 1, max 100"
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [],
       retrySafety: "safe",
       summary: "List apps available in one workspace"
     },
@@ -24493,16 +31097,16 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/CreateAppRequest"
       ],
-      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"description":"{description}","name":"Example","ownerContactEmail":"{ownerContactEmail}"}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps'`,
+      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"description":"Customer sign-in for the Example product","name":"Example web app","ownerContactEmail":"security@example.com"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps'`,
       exampleParameters: {
         workspaceId: "{workspaceId}",
         "idempotency-key": "request-example-001",
         "x-correlation-id": "request_example_001"
       },
       exampleRequestBody: {
-        description: "{description}",
-        name: "Example",
-        ownerContactEmail: "{ownerContactEmail}"
+        description: "Customer sign-in for the Example product",
+        name: "Example web app",
+        ownerContactEmail: "security@example.com"
       },
       method: "POST",
       operationId: "createApp",
@@ -24533,7 +31137,56 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces/{workspaceId}/apps",
+      path: "/workspaces/{workspaceId}/apps",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 128"
+        },
+        {
+          example: "request-example-001",
+          location: "header",
+          name: "idempotency-key",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: "Customer sign-in for the Example product",
+          name: "description",
+          required: true,
+          type: "string",
+          validation: "maxLength 500"
+        },
+        {
+          example: "Example web app",
+          name: "name",
+          required: true,
+          type: "string",
+          validation: "minLength 1, maxLength 80"
+        },
+        {
+          example: "security@example.com",
+          name: "ownerContactEmail",
+          required: true,
+          type: "string",
+          validation: "maxLength 254, format email"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/CreateAppRequest"
       },
@@ -24550,7 +31203,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path environment (required): string, one of production | test",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128"
       ],
-      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production'",
+      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production'",
       exampleParameters: {
         workspaceId: "{workspaceId}",
         appId: "{appId}",
@@ -24576,7 +31229,42 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}",
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 128"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 128"
+        },
+        {
+          example: "production",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of production | test"
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [],
       retrySafety: "safe",
       summary: "Read one versioned app environment"
     },
@@ -24591,7 +31279,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "query cursor (optional): string, maxLength 1024",
         "query limit (optional): integer, min 1, max 100"
       ],
-      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/credentials'",
+      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/credentials'",
       exampleParameters: {
         workspaceId: "{workspaceId}",
         appId: "{appId}",
@@ -24621,7 +31309,48 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/credentials",
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/credentials",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "production",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of production | test"
+        },
+        {
+          location: "query",
+          name: "cursor",
+          required: false,
+          type: "string",
+          validation: "maxLength 1024"
+        },
+        {
+          location: "query",
+          name: "limit",
+          required: false,
+          type: "integer",
+          validation: "min 1, max 100"
+        }
+      ],
+      requestBodyFields: [],
       retrySafety: "safe",
       summary: "List secret-free integration credentials for an app environment"
     },
@@ -24637,7 +31366,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/CreateIntegrationCredentialRequest"
       ],
-      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"name":"Example"}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/credentials'`,
+      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"name":"Example"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/credentials'`,
       exampleParameters: {
         workspaceId: "{workspaceId}",
         appId: "{appId}",
@@ -24697,7 +31426,64 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/credentials",
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/credentials",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "production",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of production | test"
+        },
+        {
+          example: "request-example-001",
+          location: "header",
+          name: "idempotency-key",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          name: "confirmed",
+          required: false,
+          type: "boolean",
+          validation: "—"
+        },
+        {
+          example: "Example",
+          name: "name",
+          required: true,
+          type: "string",
+          validation: "—"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/CreateIntegrationCredentialRequest"
       },
@@ -24718,7 +31504,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RevokeIntegrationCredentialRequest"
       ],
-      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: "1"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/credentials/%7BcredentialId%7D/revoke'`,
+      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: "1"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/credentials/%7BcredentialId%7D/revoke'`,
       exampleParameters: {
         workspaceId: "{workspaceId}",
         appId: "{appId}",
@@ -24773,7 +31559,79 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/credentials/{credentialId}/revoke",
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/credentials/{credentialId}/revoke",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "production",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of production | test"
+        },
+        {
+          example: "{credentialId}",
+          location: "path",
+          name: "credentialId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: '"1"',
+          location: "header",
+          name: "if-match",
+          required: true,
+          type: "string",
+          validation: "pattern ^\\\"[1-9][0-9]*\\\"$"
+        },
+        {
+          example: "request-example-001",
+          location: "header",
+          name: "idempotency-key",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          name: "compromised",
+          required: false,
+          type: "boolean",
+          validation: "—"
+        },
+        {
+          name: "confirmed",
+          required: false,
+          type: "boolean",
+          validation: "—"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/RevokeIntegrationCredentialRequest"
       },
@@ -24794,7 +31652,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RotateIntegrationCredentialRequest"
       ],
-      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: "1"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"overlapSeconds":1}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/credentials/%7BcredentialId%7D/rotate'`,
+      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: "1"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"overlapSeconds":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/credentials/%7BcredentialId%7D/rotate'`,
       exampleParameters: {
         workspaceId: "{workspaceId}",
         appId: "{appId}",
@@ -24851,7 +31709,80 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/credentials/{credentialId}/rotate",
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/credentials/{credentialId}/rotate",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "production",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of production | test"
+        },
+        {
+          example: "{credentialId}",
+          location: "path",
+          name: "credentialId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: '"1"',
+          location: "header",
+          name: "if-match",
+          required: true,
+          type: "string",
+          validation: "pattern ^\\\"[1-9][0-9]*\\\"$"
+        },
+        {
+          example: "request-example-001",
+          location: "header",
+          name: "idempotency-key",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          name: "confirmed",
+          required: false,
+          type: "boolean",
+          validation: "—"
+        },
+        {
+          example: 1,
+          name: "overlapSeconds",
+          required: true,
+          type: "number",
+          validation: "—"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/RotateIntegrationCredentialRequest"
       },
@@ -24869,7 +31800,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "query cursor (optional): string, maxLength 1024",
         "query limit (optional): integer, min 1, max 100"
       ],
-      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks'",
+      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks'",
       exampleParameters: {
         workspaceId: "{workspaceId}",
         appId: "{appId}",
@@ -24899,7 +31830,48 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks",
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "production",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of production | test"
+        },
+        {
+          location: "query",
+          name: "cursor",
+          required: false,
+          type: "string",
+          validation: "maxLength 1024"
+        },
+        {
+          location: "query",
+          name: "limit",
+          required: false,
+          type: "integer",
+          validation: "min 1, max 100"
+        }
+      ],
+      requestBodyFields: [],
       retrySafety: "safe",
       summary: "List secret-free webhooks for an app environment"
     },
@@ -24915,7 +31887,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RegisterIntegrationWebhookRequest"
       ],
-      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"subscriptions":[],"url":"{url}"}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks'`,
+      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"subscriptions":[],"url":"{url}"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks'`,
       exampleParameters: {
         workspaceId: "{workspaceId}",
         appId: "{appId}",
@@ -24976,7 +31948,71 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks",
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "production",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of production | test"
+        },
+        {
+          example: "request-example-001",
+          location: "header",
+          name: "idempotency-key",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          name: "confirmed",
+          required: false,
+          type: "boolean",
+          validation: "—"
+        },
+        {
+          example: [],
+          name: "subscriptions",
+          required: true,
+          type: "array",
+          validation: "—"
+        },
+        {
+          example: "{url}",
+          name: "url",
+          required: true,
+          type: "string",
+          validation: "—"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/RegisterIntegrationWebhookRequest"
       },
@@ -24995,7 +32031,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "query cursor (optional): string, maxLength 1024",
         "query limit (optional): integer, min 1, max 100"
       ],
-      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/deliveries'",
+      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/deliveries'",
       exampleParameters: {
         workspaceId: "{workspaceId}",
         appId: "{appId}",
@@ -25026,7 +32062,56 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/{webhookId}/deliveries",
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/{webhookId}/deliveries",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "production",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of production | test"
+        },
+        {
+          example: "{webhookId}",
+          location: "path",
+          name: "webhookId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          location: "query",
+          name: "cursor",
+          required: false,
+          type: "string",
+          validation: "maxLength 1024"
+        },
+        {
+          location: "query",
+          name: "limit",
+          required: false,
+          type: "integer",
+          validation: "min 1, max 100"
+        }
+      ],
+      requestBodyFields: [],
       retrySafety: "safe",
       summary: "List secret-free delivery state for an app-environment webhook"
     },
@@ -25044,7 +32129,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/ReplayIntegrationWebhookDeliveryRequest"
       ],
-      example: "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/deliveries/%7BdeliveryId%7D/replay'",
+      example: "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/deliveries/%7BdeliveryId%7D/replay'",
       exampleParameters: {
         workspaceId: "{workspaceId}",
         appId: "{appId}",
@@ -25094,7 +32179,73 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/{webhookId}/deliveries/{deliveryId}/replay",
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/{webhookId}/deliveries/{deliveryId}/replay",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "production",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of production | test"
+        },
+        {
+          example: "{webhookId}",
+          location: "path",
+          name: "webhookId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{deliveryId}",
+          location: "path",
+          name: "deliveryId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "request-example-001",
+          location: "header",
+          name: "idempotency-key",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          name: "confirmed",
+          required: false,
+          type: "boolean",
+          validation: "—"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/ReplayIntegrationWebhookDeliveryRequest"
       },
@@ -25115,7 +32266,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/DisableIntegrationWebhookRequest"
       ],
-      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: "1"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/disable'`,
+      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: "1"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/disable'`,
       exampleParameters: {
         workspaceId: "{workspaceId}",
         appId: "{appId}",
@@ -25170,7 +32321,73 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/{webhookId}/disable",
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/{webhookId}/disable",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "production",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of production | test"
+        },
+        {
+          example: "{webhookId}",
+          location: "path",
+          name: "webhookId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: '"1"',
+          location: "header",
+          name: "if-match",
+          required: true,
+          type: "string",
+          validation: "pattern ^\\\"[1-9][0-9]*\\\"$"
+        },
+        {
+          example: "request-example-001",
+          location: "header",
+          name: "idempotency-key",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          name: "confirmed",
+          required: false,
+          type: "boolean",
+          validation: "—"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/DisableIntegrationWebhookRequest"
       },
@@ -25191,7 +32408,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RotateIntegrationWebhookSecretRequest"
       ],
-      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: "1"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"overlapSeconds":1}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/rotate'`,
+      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: "1"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"overlapSeconds":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/rotate'`,
       exampleParameters: {
         workspaceId: "{workspaceId}",
         appId: "{appId}",
@@ -25248,7 +32465,80 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/{webhookId}/rotate",
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/{webhookId}/rotate",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "production",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of production | test"
+        },
+        {
+          example: "{webhookId}",
+          location: "path",
+          name: "webhookId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: '"1"',
+          location: "header",
+          name: "if-match",
+          required: true,
+          type: "string",
+          validation: "pattern ^\\\"[1-9][0-9]*\\\"$"
+        },
+        {
+          example: "request-example-001",
+          location: "header",
+          name: "idempotency-key",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          name: "confirmed",
+          required: false,
+          type: "boolean",
+          validation: "—"
+        },
+        {
+          example: 1,
+          name: "overlapSeconds",
+          required: true,
+          type: "number",
+          validation: "—"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/RotateIntegrationWebhookSecretRequest"
       },
@@ -25269,7 +32559,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/ReplaceIntegrationWebhookSubscriptionsRequest"
       ],
-      example: `curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: "1"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"subscriptions":[]}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/subscriptions'`,
+      example: `curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: "1"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"subscriptions":[]}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/subscriptions'`,
       exampleParameters: {
         workspaceId: "{workspaceId}",
         appId: "{appId}",
@@ -25326,7 +32616,80 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/{webhookId}/subscriptions",
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/{webhookId}/subscriptions",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "production",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of production | test"
+        },
+        {
+          example: "{webhookId}",
+          location: "path",
+          name: "webhookId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: '"1"',
+          location: "header",
+          name: "if-match",
+          required: true,
+          type: "string",
+          validation: "pattern ^\\\"[1-9][0-9]*\\\"$"
+        },
+        {
+          example: "request-example-001",
+          location: "header",
+          name: "idempotency-key",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          name: "confirmed",
+          required: false,
+          type: "boolean",
+          validation: "—"
+        },
+        {
+          example: [],
+          name: "subscriptions",
+          required: true,
+          type: "array",
+          validation: "—"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/ReplaceIntegrationWebhookSubscriptionsRequest"
       },
@@ -25345,7 +32708,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/ReconcileIntegrationWebhooksRequest"
       ],
-      example: "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/reconcile'",
+      example: "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/reconcile'",
       exampleParameters: {
         workspaceId: "{workspaceId}",
         appId: "{appId}",
@@ -25393,7 +32756,57 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/reconcile",
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/reconcile",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "production",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of production | test"
+        },
+        {
+          example: "request-example-001",
+          location: "header",
+          name: "idempotency-key",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          name: "confirmed",
+          required: false,
+          type: "boolean",
+          validation: "—"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/ReconcileIntegrationWebhooksRequest"
       },
@@ -25410,7 +32823,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path operationId (required): string",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128"
       ],
-      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/operations/%7BoperationId%7D'",
+      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/operations/%7BoperationId%7D'",
       exampleParameters: {
         workspaceId: "{workspaceId}",
         appId: "{appId}",
@@ -25446,7 +32859,42 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces/{workspaceId}/apps/{appId}/bulk-access/operations/{operationId}",
+      path: "/workspaces/{workspaceId}/apps/{appId}/bulk-access/operations/{operationId}",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{operationId}",
+          location: "path",
+          name: "operationId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [],
       retrySafety: "safe",
       summary: "Read one exact durable bulk access operation"
     },
@@ -25463,7 +32911,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/ConfirmBulkAccessRequest"
       ],
-      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: "1"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"confirmed":true}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/operations/%7BoperationId%7D/cancellation'`,
+      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: "1"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"confirmed":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/operations/%7BoperationId%7D/cancellation'`,
       exampleParameters: {
         workspaceId: "{workspaceId}",
         appId: "{appId}",
@@ -25524,7 +32972,66 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces/{workspaceId}/apps/{appId}/bulk-access/operations/{operationId}/cancellation",
+      path: "/workspaces/{workspaceId}/apps/{appId}/bulk-access/operations/{operationId}/cancellation",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{operationId}",
+          location: "path",
+          name: "operationId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: '"1"',
+          location: "header",
+          name: "if-match",
+          required: true,
+          type: "string",
+          validation: "pattern ^\\\"[1-9][0-9]*\\\"$"
+        },
+        {
+          example: "request-example-001",
+          location: "header",
+          name: "idempotency-key",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: true,
+          name: "confirmed",
+          required: true,
+          type: "boolean",
+          validation: "—"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/ConfirmBulkAccessRequest"
       },
@@ -25544,7 +33051,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "query download (optional): string, one of 1",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128"
       ],
-      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/operations/%7BoperationId%7D/results'",
+      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/operations/%7BoperationId%7D/results'",
       exampleParameters: {
         workspaceId: "{workspaceId}",
         appId: "{appId}",
@@ -25585,7 +33092,63 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces/{workspaceId}/apps/{appId}/bulk-access/operations/{operationId}/results",
+      path: "/workspaces/{workspaceId}/apps/{appId}/bulk-access/operations/{operationId}/results",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{operationId}",
+          location: "path",
+          name: "operationId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          location: "query",
+          name: "cursor",
+          required: false,
+          type: "string",
+          validation: "maxLength 1024"
+        },
+        {
+          location: "query",
+          name: "limit",
+          required: false,
+          type: "integer",
+          validation: "min 1, max 100"
+        },
+        {
+          location: "query",
+          name: "download",
+          required: false,
+          type: "string",
+          validation: "one of 1"
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [],
       retrySafety: "safe",
       summary: "List safe item results or download immutable JSONL evidence for one bulk operation"
     },
@@ -25599,7 +33162,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/CreateBulkAccessPreviewRequest"
       ],
-      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"action":"suspend_memberships","filter":{"membershipIds":["{membershipIds_1}"]},"reason":"administrator_action"}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/previews'`,
+      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"action":"suspend_memberships","filter":{"membershipIds":["{membershipIds_1}"]},"reason":"administrator_action"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/previews'`,
       exampleParameters: {
         workspaceId: "{workspaceId}",
         appId: "{appId}",
@@ -25643,7 +33206,72 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces/{workspaceId}/apps/{appId}/bulk-access/previews",
+      path: "/workspaces/{workspaceId}/apps/{appId}/bulk-access/previews",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 128"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 128"
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: "suspend_memberships",
+          name: "action",
+          required: true,
+          type: "string",
+          validation: "one of grant_entitlements | grant_roles | suspend_memberships"
+        },
+        {
+          name: "entitlement",
+          required: false,
+          type: "object",
+          validation: "—"
+        },
+        {
+          example: {
+            membershipIds: [
+              "{membershipIds_1}"
+            ]
+          },
+          name: "filter",
+          required: true,
+          type: "object",
+          validation: "—"
+        },
+        {
+          example: "administrator_action",
+          name: "reason",
+          required: true,
+          type: "string",
+          validation: "one of administrator_action | policy_violation | security_review"
+        },
+        {
+          name: "role",
+          required: false,
+          type: "object",
+          validation: "—"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/CreateBulkAccessPreviewRequest"
       },
@@ -25660,7 +33288,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path previewId (required): string",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128"
       ],
-      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/previews/%7BpreviewId%7D'",
+      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/previews/%7BpreviewId%7D'",
       exampleParameters: {
         workspaceId: "{workspaceId}",
         appId: "{appId}",
@@ -25696,7 +33324,42 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces/{workspaceId}/apps/{appId}/bulk-access/previews/{previewId}",
+      path: "/workspaces/{workspaceId}/apps/{appId}/bulk-access/previews/{previewId}",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{previewId}",
+          location: "path",
+          name: "previewId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [],
       retrySafety: "safe",
       summary: "Read one exact durable bulk access preview"
     },
@@ -25712,7 +33375,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/ExecuteBulkAccessPreviewRequest"
       ],
-      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"confirmed":true,"previewIntegrityDigest":"sha256:0000000000000000000000000000000000000000000000000000000000000000","previewVersion":1}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/previews/%7BpreviewId%7D/executions'`,
+      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"confirmed":true,"previewIntegrityDigest":"sha256:0000000000000000000000000000000000000000000000000000000000000000","previewVersion":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/previews/%7BpreviewId%7D/executions'`,
       exampleParameters: {
         workspaceId: "{workspaceId}",
         appId: "{appId}",
@@ -25784,7 +33447,72 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces/{workspaceId}/apps/{appId}/bulk-access/previews/{previewId}/executions",
+      path: "/workspaces/{workspaceId}/apps/{appId}/bulk-access/previews/{previewId}/executions",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{previewId}",
+          location: "path",
+          name: "previewId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "request-example-001",
+          location: "header",
+          name: "idempotency-key",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: true,
+          name: "confirmed",
+          required: true,
+          type: "boolean",
+          validation: "—"
+        },
+        {
+          example: "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+          name: "previewIntegrityDigest",
+          required: true,
+          type: "string",
+          validation: "pattern ^sha256:[0-9a-f]{64}$"
+        },
+        {
+          example: 1,
+          name: "previewVersion",
+          required: true,
+          type: "integer",
+          validation: "min 1"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/ExecuteBulkAccessPreviewRequest"
       },
@@ -25805,7 +33533,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "query status (optional): ",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128"
       ],
-      example: "curl --request GET -H 'authorization: Bearer {app_credential}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships'",
+      example: "curl --request GET -H 'authorization: Bearer {app_credential}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships'",
       exampleParameters: {
         workspaceId: "{workspaceId}",
         appId: "{appId}",
@@ -25835,7 +33563,62 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces/{workspaceId}/apps/{appId}/memberships",
+      path: "/workspaces/{workspaceId}/apps/{appId}/memberships",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 128"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 128"
+        },
+        {
+          location: "query",
+          name: "cursor",
+          required: false,
+          type: "string",
+          validation: "maxLength 2048"
+        },
+        {
+          location: "query",
+          name: "limit",
+          required: false,
+          type: "integer",
+          validation: "min 1, max 100"
+        },
+        {
+          location: "query",
+          name: "query",
+          required: false,
+          type: "string",
+          validation: "maxLength 254"
+        },
+        {
+          location: "query",
+          name: "status",
+          required: false,
+          type: "string",
+          validation: "one of active | deleted | invited | pending_approval | pending_consent | revoked | suspended"
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [],
       retrySafety: "safe",
       summary: "List privacy-safe app memberships under exact app authority"
     },
@@ -25851,7 +33634,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/InviteAppMembershipRequest"
       ],
-      example: `curl --request POST -H 'authorization: Bearer {app_credential}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"confirmed":true,"email":"person@example.test"}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships'`,
+      example: `curl --request POST -H 'authorization: Bearer {app_credential}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"confirmed":true,"email":"person@example.test"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships'`,
       exampleParameters: {
         workspaceId: "{workspaceId}",
         appId: "{appId}",
@@ -25901,7 +33684,63 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces/{workspaceId}/apps/{appId}/memberships",
+      path: "/workspaces/{workspaceId}/apps/{appId}/memberships",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 128"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 128"
+        },
+        {
+          example: "request-example-001",
+          location: "header",
+          name: "idempotency-key",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: true,
+          name: "confirmed",
+          required: true,
+          type: "boolean",
+          validation: "—"
+        },
+        {
+          name: "customerReference",
+          required: false,
+          type: "string",
+          validation: "maxLength 128"
+        },
+        {
+          example: "person@example.test",
+          name: "email",
+          required: true,
+          type: "string",
+          validation: "format email"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/InviteAppMembershipRequest"
       },
@@ -25919,7 +33758,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path membershipId (required): string, minLength 3, maxLength 128",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128"
       ],
-      example: "curl --request GET -H 'authorization: Bearer {app_credential}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D'",
+      example: "curl --request GET -H 'authorization: Bearer {app_credential}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D'",
       exampleParameters: {
         workspaceId: "{workspaceId}",
         appId: "{appId}",
@@ -25955,7 +33794,42 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}",
+      path: "/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 128"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 128"
+        },
+        {
+          example: "{membershipId}",
+          location: "path",
+          name: "membershipId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 128"
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [],
       retrySafety: "safe",
       summary: "Inspect one privacy-safe versioned app membership"
     },
@@ -25970,7 +33844,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path membershipId (required): string, minLength 3, maxLength 128",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128"
       ],
-      example: "curl --request GET -H 'authorization: Bearer {app_credential}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/access'",
+      example: "curl --request GET -H 'authorization: Bearer {app_credential}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/access'",
       exampleParameters: {
         workspaceId: "{workspaceId}",
         appId: "{appId}",
@@ -26001,7 +33875,42 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/access",
+      path: "/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/access",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 128"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 128"
+        },
+        {
+          example: "{membershipId}",
+          location: "path",
+          name: "membershipId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 128"
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [],
       retrySafety: "safe",
       summary: "Inspect one membership's independent role and entitlement grants"
     },
@@ -26019,7 +33928,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/GrantAppEntitlementRequest"
       ],
-      example: `curl --request POST -H 'authorization: Bearer {app_credential}' -H 'if-match: "1"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"confirmed":true,"key":"{key}","source":"{source}"}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/entitlements'`,
+      example: `curl --request POST -H 'authorization: Bearer {app_credential}' -H 'if-match: "1"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"confirmed":true,"key":"{key}","source":"{source}"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/entitlements'`,
       exampleParameters: {
         workspaceId: "{workspaceId}",
         appId: "{appId}",
@@ -26072,7 +33981,86 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/entitlements",
+      path: "/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/entitlements",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 128"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 128"
+        },
+        {
+          example: "{membershipId}",
+          location: "path",
+          name: "membershipId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 128"
+        },
+        {
+          example: '"1"',
+          location: "header",
+          name: "if-match",
+          required: true,
+          type: "string",
+          validation: "pattern ^\\\"[1-9][0-9]*\\\"$"
+        },
+        {
+          example: "request-example-001",
+          location: "header",
+          name: "idempotency-key",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: true,
+          name: "confirmed",
+          required: true,
+          type: "boolean",
+          validation: "—"
+        },
+        {
+          name: "expiresAt",
+          required: false,
+          type: "string",
+          validation: "format date-time"
+        },
+        {
+          example: "{key}",
+          name: "key",
+          required: true,
+          type: "string",
+          validation: "maxLength 128"
+        },
+        {
+          example: "{source}",
+          name: "source",
+          required: true,
+          type: "string",
+          validation: "maxLength 200"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/GrantAppEntitlementRequest"
       },
@@ -26094,7 +34082,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RevokeAppEntitlementRequest"
       ],
-      example: `curl --request DELETE -H 'authorization: Bearer {app_credential}' -H 'if-match: "1"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"confirmed":true}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/entitlements/%7BgrantId%7D'`,
+      example: `curl --request DELETE -H 'authorization: Bearer {app_credential}' -H 'if-match: "1"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"confirmed":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/entitlements/%7BgrantId%7D'`,
       exampleParameters: {
         workspaceId: "{workspaceId}",
         appId: "{appId}",
@@ -26156,7 +34144,74 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/entitlements/{grantId}",
+      path: "/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/entitlements/{grantId}",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 128"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 128"
+        },
+        {
+          example: "{membershipId}",
+          location: "path",
+          name: "membershipId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 128"
+        },
+        {
+          example: "{grantId}",
+          location: "path",
+          name: "grantId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 128"
+        },
+        {
+          example: '"1"',
+          location: "header",
+          name: "if-match",
+          required: true,
+          type: "string",
+          validation: "pattern ^\\\"[1-9][0-9]*\\\"$"
+        },
+        {
+          example: "request-example-001",
+          location: "header",
+          name: "idempotency-key",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: true,
+          name: "confirmed",
+          required: true,
+          type: "boolean",
+          validation: "—"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/RevokeAppEntitlementRequest"
       },
@@ -26177,7 +34232,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/ChangeAppMembershipStatusRequest"
       ],
-      example: `curl --request POST -H 'authorization: Bearer {app_credential}' -H 'if-match: "1"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"action":"activate","confirmed":true,"reason":"access_ended"}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/lifecycle'`,
+      example: `curl --request POST -H 'authorization: Bearer {app_credential}' -H 'if-match: "1"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"action":"activate","confirmed":true,"reason":"access_ended"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/lifecycle'`,
       exampleParameters: {
         workspaceId: "{workspaceId}",
         appId: "{appId}",
@@ -26240,7 +34295,80 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/lifecycle",
+      path: "/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/lifecycle",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 128"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 128"
+        },
+        {
+          example: "{membershipId}",
+          location: "path",
+          name: "membershipId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 128"
+        },
+        {
+          example: '"1"',
+          location: "header",
+          name: "if-match",
+          required: true,
+          type: "string",
+          validation: "pattern ^\\\"[1-9][0-9]*\\\"$"
+        },
+        {
+          example: "request-example-001",
+          location: "header",
+          name: "idempotency-key",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: "activate",
+          name: "action",
+          required: true,
+          type: "string",
+          validation: "one of activate | delete | revoke | suspend"
+        },
+        {
+          example: true,
+          name: "confirmed",
+          required: true,
+          type: "boolean",
+          validation: "—"
+        },
+        {
+          example: "access_ended",
+          name: "reason",
+          required: true,
+          type: "string",
+          validation: "one of access_ended | administrator_action | approval_granted | data_retention_complete | policy_violation | security_review"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/ChangeAppMembershipStatusRequest"
       },
@@ -26261,7 +34389,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/GrantAppRoleRequest"
       ],
-      example: `curl --request POST -H 'authorization: Bearer {app_credential}' -H 'if-match: "1"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"confirmed":true,"key":"{key}","source":"{source}"}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/roles'`,
+      example: `curl --request POST -H 'authorization: Bearer {app_credential}' -H 'if-match: "1"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"confirmed":true,"key":"{key}","source":"{source}"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/roles'`,
       exampleParameters: {
         workspaceId: "{workspaceId}",
         appId: "{appId}",
@@ -26314,7 +34442,80 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/roles",
+      path: "/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/roles",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 128"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 128"
+        },
+        {
+          example: "{membershipId}",
+          location: "path",
+          name: "membershipId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 128"
+        },
+        {
+          example: '"1"',
+          location: "header",
+          name: "if-match",
+          required: true,
+          type: "string",
+          validation: "pattern ^\\\"[1-9][0-9]*\\\"$"
+        },
+        {
+          example: "request-example-001",
+          location: "header",
+          name: "idempotency-key",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: true,
+          name: "confirmed",
+          required: true,
+          type: "boolean",
+          validation: "—"
+        },
+        {
+          example: "{key}",
+          name: "key",
+          required: true,
+          type: "string",
+          validation: "maxLength 128"
+        },
+        {
+          example: "{source}",
+          name: "source",
+          required: true,
+          type: "string",
+          validation: "maxLength 200"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/GrantAppRoleRequest"
       },
@@ -26336,7 +34537,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RevokeAppRoleRequest"
       ],
-      example: `curl --request DELETE -H 'authorization: Bearer {app_credential}' -H 'if-match: "1"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"confirmed":true}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/roles/%7BgrantId%7D'`,
+      example: `curl --request DELETE -H 'authorization: Bearer {app_credential}' -H 'if-match: "1"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"confirmed":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/roles/%7BgrantId%7D'`,
       exampleParameters: {
         workspaceId: "{workspaceId}",
         appId: "{appId}",
@@ -26398,7 +34599,74 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/roles/{grantId}",
+      path: "/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/roles/{grantId}",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 128"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 128"
+        },
+        {
+          example: "{membershipId}",
+          location: "path",
+          name: "membershipId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 128"
+        },
+        {
+          example: "{grantId}",
+          location: "path",
+          name: "grantId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 128"
+        },
+        {
+          example: '"1"',
+          location: "header",
+          name: "if-match",
+          required: true,
+          type: "string",
+          validation: "pattern ^\\\"[1-9][0-9]*\\\"$"
+        },
+        {
+          example: "request-example-001",
+          location: "header",
+          name: "idempotency-key",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: true,
+          name: "confirmed",
+          required: true,
+          type: "boolean",
+          validation: "—"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/RevokeAppRoleRequest"
       },
@@ -26417,13 +34685,13 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "query actor (optional): string, maxLength 160",
         "query appId (optional): string, maxLength 160",
         "query correlation (optional): string, maxLength 160",
-        "query from (optional): string",
+        "query from (optional): string, format date-time",
         "query outcome (optional): string, one of failure | retry | success",
         "query resource (optional): string, maxLength 160",
-        "query to (optional): string",
+        "query to (optional): string, format date-time",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128"
       ],
-      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/audit-events'",
+      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/audit-events'",
       exampleParameters: {
         workspaceId: "{workspaceId}",
         "x-correlation-id": "request_example_001"
@@ -26452,7 +34720,96 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces/{workspaceId}/audit-events",
+      path: "/workspaces/{workspaceId}/audit-events",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 128"
+        },
+        {
+          location: "query",
+          name: "cursor",
+          required: false,
+          type: "string",
+          validation: "maxLength 1024"
+        },
+        {
+          location: "query",
+          name: "limit",
+          required: false,
+          type: "integer",
+          validation: "min 1, max 100"
+        },
+        {
+          location: "query",
+          name: "action",
+          required: false,
+          type: "string",
+          validation: "maxLength 160"
+        },
+        {
+          location: "query",
+          name: "actor",
+          required: false,
+          type: "string",
+          validation: "maxLength 160"
+        },
+        {
+          location: "query",
+          name: "appId",
+          required: false,
+          type: "string",
+          validation: "maxLength 160"
+        },
+        {
+          location: "query",
+          name: "correlation",
+          required: false,
+          type: "string",
+          validation: "maxLength 160"
+        },
+        {
+          location: "query",
+          name: "from",
+          required: false,
+          type: "string",
+          validation: "format date-time"
+        },
+        {
+          location: "query",
+          name: "outcome",
+          required: false,
+          type: "string",
+          validation: "one of failure | retry | success"
+        },
+        {
+          location: "query",
+          name: "resource",
+          required: false,
+          type: "string",
+          validation: "maxLength 160"
+        },
+        {
+          location: "query",
+          name: "to",
+          required: false,
+          type: "string",
+          validation: "format date-time"
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [],
       retrySafety: "safe",
       summary: "List one bounded page of redacted audit evidence within the session's effective workspace scope"
     },
@@ -26463,7 +34820,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       constraints: [
         "path workspaceId (required): string"
       ],
-      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/billing'",
+      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/billing'",
       exampleParameters: {
         workspaceId: "{workspaceId}"
       },
@@ -26486,7 +34843,18 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces/{workspaceId}/billing",
+      path: "/workspaces/{workspaceId}/billing",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        }
+      ],
+      requestBodyFields: [],
       retrySafety: "safe",
       summary: "Inspect the current commercial billing subscription"
     },
@@ -26498,7 +34866,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path workspaceId (required): string",
         "JSON request body (required): #/components/schemas/CommercialBillingCancellationReviewRequest"
       ],
-      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{"idempotencyKey":"{idempotencyKey}","mode":"period_end"}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/billing/cancellation-reviews'`,
+      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{"idempotencyKey":"{idempotencyKey}","mode":"period_end"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/billing/cancellation-reviews'`,
       exampleParameters: {
         workspaceId: "{workspaceId}"
       },
@@ -26540,7 +34908,33 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces/{workspaceId}/billing/cancellation-reviews",
+      path: "/workspaces/{workspaceId}/billing/cancellation-reviews",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: "{idempotencyKey}",
+          name: "idempotencyKey",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 200"
+        },
+        {
+          example: "period_end",
+          name: "mode",
+          required: true,
+          type: "string",
+          validation: "one of period_end | immediate"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/CommercialBillingCancellationReviewRequest"
       },
@@ -26555,7 +34949,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path workspaceId (required): string",
         "JSON request body (required): #/components/schemas/CommercialBillingCancellationConfirmationRequest"
       ],
-      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{"confirmationToken":"{confirmationToken}","idempotencyKey":"{idempotencyKey}"}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/billing/cancellations'`,
+      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{"confirmationToken":"{confirmationToken}","idempotencyKey":"{idempotencyKey}"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/billing/cancellations'`,
       exampleParameters: {
         workspaceId: "{workspaceId}"
       },
@@ -26597,7 +34991,33 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces/{workspaceId}/billing/cancellations",
+      path: "/workspaces/{workspaceId}/billing/cancellations",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: "{confirmationToken}",
+          name: "confirmationToken",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 400"
+        },
+        {
+          example: "{idempotencyKey}",
+          name: "idempotencyKey",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 200"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/CommercialBillingCancellationConfirmationRequest"
       },
@@ -26612,7 +35032,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path workspaceId (required): string",
         "JSON request body (required): #/components/schemas/CommercialBillingChangeAuthorizationRequest"
       ],
-      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{"changeId":"{changeId}"}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/billing/change-authorizations'`,
+      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{"changeId":"{changeId}"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/billing/change-authorizations'`,
       exampleParameters: {
         workspaceId: "{workspaceId}"
       },
@@ -26648,7 +35068,26 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces/{workspaceId}/billing/change-authorizations",
+      path: "/workspaces/{workspaceId}/billing/change-authorizations",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: "{changeId}",
+          name: "changeId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 240"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/CommercialBillingChangeAuthorizationRequest"
       },
@@ -26663,7 +35102,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path workspaceId (required): string",
         "JSON request body (required): #/components/schemas/CommercialBillingChangeReviewRequest"
       ],
-      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{"idempotencyKey":"{idempotencyKey}","period":"monthly","planId":"launch"}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/billing/change-reviews'`,
+      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{"idempotencyKey":"{idempotencyKey}","period":"monthly","planId":"launch"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/billing/change-reviews'`,
       exampleParameters: {
         workspaceId: "{workspaceId}"
       },
@@ -26701,7 +35140,46 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces/{workspaceId}/billing/change-reviews",
+      path: "/workspaces/{workspaceId}/billing/change-reviews",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: "{idempotencyKey}",
+          name: "idempotencyKey",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 200"
+        },
+        {
+          example: "monthly",
+          name: "period",
+          required: true,
+          type: "string",
+          validation: "one of monthly | annual"
+        },
+        {
+          example: "launch",
+          name: "planId",
+          required: true,
+          type: "string",
+          validation: "one of launch | growth | scale"
+        },
+        {
+          name: "quantity",
+          required: false,
+          type: "integer",
+          validation: "min 1, max 100"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/CommercialBillingChangeReviewRequest"
       },
@@ -26716,7 +35194,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path workspaceId (required): string",
         "JSON request body (required): #/components/schemas/CommercialBillingRefundRequest"
       ],
-      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{"amountMicros":1,"category":"first_purchase_goodwill","consumedOverageMicros":0,"idempotencyKey":"{idempotencyKey}","invoiceRef":"{invoiceRef}"}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/billing/refund-requests'`,
+      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{"amountMicros":1,"category":"first_purchase_goodwill","consumedOverageMicros":0,"idempotencyKey":"{idempotencyKey}","invoiceRef":"{invoiceRef}"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/billing/refund-requests'`,
       exampleParameters: {
         workspaceId: "{workspaceId}"
       },
@@ -26766,7 +35244,60 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces/{workspaceId}/billing/refund-requests",
+      path: "/workspaces/{workspaceId}/billing/refund-requests",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: 1,
+          name: "amountMicros",
+          required: true,
+          type: "integer",
+          validation: "min 1"
+        },
+        {
+          example: "first_purchase_goodwill",
+          name: "category",
+          required: true,
+          type: "string",
+          validation: "one of first_purchase_goodwill | verified_correction"
+        },
+        {
+          example: 0,
+          name: "consumedOverageMicros",
+          required: true,
+          type: "integer",
+          validation: "min 0"
+        },
+        {
+          example: "{idempotencyKey}",
+          name: "idempotencyKey",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 200"
+        },
+        {
+          example: "{invoiceRef}",
+          name: "invoiceRef",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 240"
+        },
+        {
+          name: "verifiedCorrection",
+          required: false,
+          type: "boolean",
+          validation: "—"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/CommercialBillingRefundRequest"
       },
@@ -26783,7 +35314,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "JSON request body (required): #/components/schemas/CommercialPurchaseConfirmationRequest"
       ],
-      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'content-type: application/json' --data '{"acceptanceToken":"acceptance-example-001","confirmed":true}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/commercial-purchases/launch/confirmations'`,
+      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'content-type: application/json' --data '{"acceptanceToken":"acceptance-example-001","confirmed":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/commercial-purchases/launch/confirmations'`,
       exampleParameters: {
         workspaceId: "{workspaceId}",
         planId: "launch",
@@ -26827,7 +35358,49 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces/{workspaceId}/commercial-purchases/{planId}/confirmations",
+      path: "/workspaces/{workspaceId}/commercial-purchases/{planId}/confirmations",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "launch",
+          location: "path",
+          name: "planId",
+          required: true,
+          type: "string",
+          validation: "one of launch | growth | scale"
+        },
+        {
+          example: "request-example-001",
+          location: "header",
+          name: "idempotency-key",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: "acceptance-example-001",
+          name: "acceptanceToken",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          example: true,
+          name: "confirmed",
+          required: true,
+          type: "boolean",
+          validation: "one of true"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/CommercialPurchaseConfirmationRequest"
       },
@@ -26843,7 +35416,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path planId (required): string, one of launch | growth | scale",
         "JSON request body (required): #/components/schemas/CommercialPurchaseReviewRequest"
       ],
-      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{"billingPeriod":"monthly","locale":"en"}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/commercial-purchases/launch/reviews'`,
+      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{"billingPeriod":"monthly","locale":"en"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/commercial-purchases/launch/reviews'`,
       exampleParameters: {
         workspaceId: "{workspaceId}",
         planId: "launch"
@@ -26876,7 +35449,47 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces/{workspaceId}/commercial-purchases/{planId}/reviews",
+      path: "/workspaces/{workspaceId}/commercial-purchases/{planId}/reviews",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "launch",
+          location: "path",
+          name: "planId",
+          required: true,
+          type: "string",
+          validation: "one of launch | growth | scale"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: "monthly",
+          name: "billingPeriod",
+          required: true,
+          type: "string",
+          validation: "one of monthly | annual"
+        },
+        {
+          name: "customerType",
+          required: false,
+          type: "string",
+          validation: "one of b2c | b2b"
+        },
+        {
+          example: "en",
+          name: "locale",
+          required: true,
+          type: "string",
+          validation: "one of en | ar"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/CommercialPurchaseReviewRequest"
       },
@@ -26891,7 +35504,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path workspaceId (required): string",
         "path purchaseId (required): string, minLength 3, maxLength 200"
       ],
-      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/commercial-purchases/%7BpurchaseId%7D/receipt'",
+      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/commercial-purchases/%7BpurchaseId%7D/receipt'",
       exampleParameters: {
         workspaceId: "{workspaceId}",
         purchaseId: "{purchaseId}"
@@ -26920,7 +35533,26 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces/{workspaceId}/commercial-purchases/{purchaseId}/receipt",
+      path: "/workspaces/{workspaceId}/commercial-purchases/{purchaseId}/receipt",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{purchaseId}",
+          location: "path",
+          name: "purchaseId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 200"
+        }
+      ],
+      requestBodyFields: [],
       retrySafety: "safe",
       summary: "Inspect durable evidence for an activated commercial purchase"
     },
@@ -26931,7 +35563,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       constraints: [
         "path workspaceId (required): string"
       ],
-      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/commercial-usage'",
+      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/commercial-usage'",
       exampleParameters: {
         workspaceId: "{workspaceId}"
       },
@@ -26954,7 +35586,18 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces/{workspaceId}/commercial-usage",
+      path: "/workspaces/{workspaceId}/commercial-usage",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        }
+      ],
+      requestBodyFields: [],
       retrySafety: "safe",
       summary: "Inspect authoritative commercial usage and next-unit effects"
     },
@@ -26966,7 +35609,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path workspaceId (required): string",
         "JSON request body (required): #/components/schemas/CommercialOverageConfigurationRequest"
       ],
-      example: `curl --request PATCH -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{"enabled":true,"idempotencyKey":"{idempotencyKey}","monthlySpendCapMicrosSar":0}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/overages'`,
+      example: `curl --request PATCH -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{"enabled":true,"idempotencyKey":"{idempotencyKey}","monthlySpendCapMicrosSar":0}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/overages'`,
       exampleParameters: {
         workspaceId: "{workspaceId}"
       },
@@ -27009,7 +35652,40 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces/{workspaceId}/overages",
+      path: "/workspaces/{workspaceId}/overages",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: true,
+          name: "enabled",
+          required: true,
+          type: "boolean",
+          validation: "—"
+        },
+        {
+          example: "{idempotencyKey}",
+          name: "idempotencyKey",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: 0,
+          name: "monthlySpendCapMicrosSar",
+          required: true,
+          type: "integer",
+          validation: "min 0"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/CommercialOverageConfigurationRequest"
       },
@@ -27024,7 +35700,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path workspaceId (required): string",
         "JSON request body (required): #/components/schemas/CommercialOverageActivationRequest"
       ],
-      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{"idempotencyKey":"{idempotencyKey}","monthlySpendCapMicrosSar":1,"reviewId":"{reviewId}"}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/overages/activations'`,
+      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{"idempotencyKey":"{idempotencyKey}","monthlySpendCapMicrosSar":1,"reviewId":"{reviewId}"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/overages/activations'`,
       exampleParameters: {
         workspaceId: "{workspaceId}"
       },
@@ -27067,7 +35743,46 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces/{workspaceId}/overages/activations",
+      path: "/workspaces/{workspaceId}/overages/activations",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        }
+      ],
+      requestBodyFields: [
+        {
+          name: "confirmed",
+          required: false,
+          type: "boolean",
+          validation: "—"
+        },
+        {
+          example: "{idempotencyKey}",
+          name: "idempotencyKey",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: 1,
+          name: "monthlySpendCapMicrosSar",
+          required: true,
+          type: "integer",
+          validation: "—"
+        },
+        {
+          example: "{reviewId}",
+          name: "reviewId",
+          required: true,
+          type: "string",
+          validation: "—"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/CommercialOverageActivationRequest"
       },
@@ -27082,7 +35797,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path workspaceId (required): string",
         "JSON request body (required): #/components/schemas/CommercialOverageReviewRequest"
       ],
-      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{"idempotencyKey":"{idempotencyKey}","monthlySpendCapMicrosSar":1}' 'https://api.authle.ss/v1/workspaces/%7BworkspaceId%7D/overages/reviews'`,
+      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{"idempotencyKey":"{idempotencyKey}","monthlySpendCapMicrosSar":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/overages/reviews'`,
       exampleParameters: {
         workspaceId: "{workspaceId}"
       },
@@ -27124,7 +35839,33 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         }
       ],
-      path: "/v1/workspaces/{workspaceId}/overages/reviews",
+      path: "/workspaces/{workspaceId}/overages/reviews",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: "{idempotencyKey}",
+          name: "idempotencyKey",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 200"
+        },
+        {
+          example: 1,
+          name: "monthlySpendCapMicrosSar",
+          required: true,
+          type: "integer",
+          validation: "min 1"
+        }
+      ],
       requestSchema: {
         $ref: "#/components/schemas/CommercialOverageReviewRequest"
       },
@@ -29125,6 +37866,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "name",
         "termsAccepted"
       ],
+      description: "Creates a workspace with a normalized name. Names are 1–80 characters, may contain Unicode letters or numbers plus spaces, periods, ampersands, apostrophes, parentheses, underscores, and hyphens, and cannot use reserved names such as admin, authless, personal, root, support, or system.",
       examples: [
         {
           name: "Example workspace",
@@ -29133,7 +37875,10 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       properties: {
         name: {
-          type: "string"
+          type: "string",
+          minLength: 1,
+          maxLength: 80,
+          description: "Workspace display name. Leading and trailing whitespace is trimmed and internal whitespace is normalized before validation. Reserved names and unsupported punctuation are rejected by the server."
         },
         termsAccepted: {
           type: "boolean"
@@ -30812,15 +39557,31 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "name",
         "ownerContactEmail"
       ],
+      description: "Registers an app in a workspace. The server trims the name and description and normalizes the owner contact email to lowercase.",
+      examples: [
+        {
+          description: "Customer sign-in for the Example product",
+          name: "Example web app",
+          ownerContactEmail: "security@example.com"
+        }
+      ],
       properties: {
         description: {
-          type: "string"
+          type: "string",
+          maxLength: 500,
+          description: "Public app description. Maximum 500 characters."
         },
         name: {
-          type: "string"
+          type: "string",
+          minLength: 1,
+          maxLength: 80,
+          description: "App display name. Maximum 80 characters after trimming."
         },
         ownerContactEmail: {
-          type: "string"
+          type: "string",
+          format: "email",
+          maxLength: 254,
+          description: "Operational owner contact address. It is normalized to lowercase and must be a valid email address."
         }
       }
     },
@@ -32364,30 +41125,11 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         releaseNotes: "/changes#2026-08-22-identity-continuation-terminal-reasons",
         version: "0.1.0",
         stability: "stable",
-        contract: "/v1 (0.1.0)",
+        contract: "unversioned default (0.1.0)",
         testedAt: "2026-08-22",
         evidence: [
           "packages/contracts/openapi/authless.openapi.json",
           "tests/rest-api-reference.test.ts"
-        ]
-      },
-      {
-        component: "@authless/api-client",
-        deprecation: "current",
-        releaseNotes: "/changes#2026-08-22-sensitive-mutation-readiness",
-        version: "0.2.0",
-        stability: "stable",
-        contract: "0.1.0",
-        runtime: "Node 24.x",
-        testedAt: "2026-08-22",
-        evidence: [
-          "packages/api-client/package.json",
-          "packages/api-client/src/index.ts",
-          "packages/api-client/src/transport.ts",
-          "packages/api-client/src/workspaces.ts",
-          "tests/api-client-workspace-family.test.ts",
-          "tests/docs-compatibility.test.ts",
-          "packages/api-client/tests/api-client.node.mjs"
         ]
       },
       {
@@ -32406,6 +41148,36 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "tests/browser-capability-entrypoints.test.ts",
           "tests/relying-app-helpers.test.ts",
           "playwright.config.ts"
+        ]
+      },
+      {
+        component: "@authless/server",
+        deprecation: "current",
+        releaseNotes: "/changes#2026-10-10-native-cli-and-docs-navigation",
+        version: "0.1.0",
+        stability: "source-only",
+        contract: "0.1.0",
+        runtime: "Node 24.x",
+        testedAt: "2026-10-10",
+        evidence: [
+          "packages/server/package.json",
+          "packages/server/src/index.ts",
+          "packages/server/tests/server.node.mjs"
+        ]
+      },
+      {
+        component: "@authless/cli",
+        deprecation: "current",
+        releaseNotes: "/changes#2026-10-10-native-cli-and-docs-navigation",
+        version: "0.1.0",
+        stability: "source-only",
+        contract: "0.1.0",
+        runtime: "Bun 1.3.10",
+        testedAt: "2026-10-10",
+        evidence: [
+          "packages/cli/package.json",
+          "packages/cli/src/cli.ts",
+          "packages/cli/test/cli.test.ts"
         ]
       },
       {
@@ -32432,6 +41204,33 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
     ],
     changes: [
       {
+        id: "2026-10-10-native-cli-and-docs-navigation",
+        publishedAt: "2026-10-10",
+        title: {
+          en: "Native CLI login and shared Docs navigation",
+          ar: "تسجيل دخول CLI والتنقّل المشترك للوثائق"
+        },
+        summary: {
+          en: "CLI login uses browser consent and PKCE for workspace reads. Docs and API reference share full-width footer controls, active navigation styling, and wrapping technical tables.",
+          ar: "يستخدم تسجيل دخول CLI موافقة المتصفح وPKCE لقراءة مساحات العمل. تشترك الوثائق ومرجع API في عناصر تذييل بعرض كامل، وتمييز التنقّل النشط، وجداول تقنية تلتف محتوياتها."
+        },
+        categories: [
+          "api",
+          "sdk",
+          "security",
+          "docs"
+        ],
+        impact: "additive",
+        migration: {
+          en: "Native login supports workspace list and get with workspace:read. Other platform commands require AUTHLESS_SESSION_TOKEN; app administration requires AUTHLESS_APP_CREDENTIAL. Use the public repository until npm publication.",
+          ar: "يدعم تسجيل الدخول الأصلي عرض مساحات العمل وقراءتها بصلاحية workspace:read. تتطلب أوامر المنصة الأخرى AUTHLESS_SESSION_TOKEN، وتتطلب إدارة التطبيقات AUTHLESS_APP_CREDENTIAL. استخدم المستودع العام حتى النشر على npm."
+        },
+        supportWindow: null,
+        sunsetAt: null,
+        status: "available",
+        permalink: "/changes#2026-10-10-native-cli-and-docs-navigation"
+      },
+      {
         id: "2026-10-09-developer-docs-boundaries",
         publishedAt: "2026-10-09",
         title: {
@@ -32448,8 +41247,8 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         ],
         impact: "additive",
         migration: {
-          en: "No API migration is required. Install @authless/api-client from the public repository until npm publication. Management-agent OAuth remains preview-only; follow the readiness report before connecting a live deployment.",
-          ar: "لا يلزم ترحيل لواجهة API. ثبّت @authless/api-client من المستودع العام حتى نشره على npm. يبقى OAuth لوكلاء الإدارة في المعاينة؛ راجع تقرير الجاهزية قبل الاتصال بنشر حي."
+          en: "No API migration is required. Use @authless/server or @authless/cli from the public repository until npm publication. Management-agent OAuth remains preview-only; follow the readiness report before connecting a live deployment.",
+          ar: "لا يلزم ترحيل لواجهة API. استخدم ‎@authless/server‎ أو ‎@authless/cli‎ من المستودع العام حتى نشرها على npm. يبقى OAuth لوكلاء الإدارة في المعاينة؛ راجع تقرير الجاهزية قبل الاتصال بنشر حي."
         },
         supportWindow: null,
         sunsetAt: null,
@@ -33944,13 +42743,13 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       kind: "openapi",
       url: "/openapi.json",
       updatedAt: "2026-10-09",
-      sha256: "87b370d03196f526b688d4d6f896666ef05ab54ddfbffa4b891cff0f112aa743"
+      sha256: "29118aa187b13cd1263f95dca02a3b5dc7bca9ceef06d4d8b8f9bbee99acad72"
     },
     {
       kind: "openapi",
       url: "/rest-reference.json",
       updatedAt: "2026-10-09",
-      sha256: "30e83279d650a57dd9ac199da55ba16257b22301c65388384957585afd42aec3"
+      sha256: "826bf90ca6168e4d83bc7a5b0072fff954f203e67015eeeb670e15376a5bf572"
     },
     {
       kind: "discovery",
@@ -33968,27 +42767,27 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       kind: "compatibility",
       url: "/release-center.json",
       updatedAt: "2026-10-09",
-      sha256: "fd6373f301186414f05ba4a5b90eec3f3928dbd839bbd90864f784abf5953f10"
+      sha256: "b1bf7347572011ef961efac7e41120f618aad01d66b1c044d2c265f8ac6e7c25"
     },
     {
       kind: "compatibility",
       url: "/compatibility.json",
       updatedAt: "2026-10-09",
-      sha256: "14768fdc938282e9d273f13baec28b2a988081c0d86346e66a750def78d5ee55"
+      sha256: "234a2f3f68606403ac1d054e575eca05722f0de3bdc7a25d18b708b3c025bb78"
     },
     {
       kind: "changelog",
       url: "/changes.json?lang=en",
       locale: "en",
       updatedAt: "2026-10-09",
-      sha256: "071537886ab5f030623515d821e1f33ad46b8b434e9030803f17b2175af22240"
+      sha256: "c7935ef13908c341fe9d76fe2d8452fce68b569241f3ddfa211f9f59bde49ead"
     },
     {
       kind: "changelog",
       url: "/changes.json?lang=ar",
       locale: "ar",
       updatedAt: "2026-10-09",
-      sha256: "bfc42c9b69aec0ef9220fcc7be286c3c006032c4a9cce96240abe752e00f8e22"
+      sha256: "0b9e6b349e8a47f9f0466220f5c756d90d338ebebb803ebcfb2ee7e9d503610d"
     },
     {
       kind: "operations",
@@ -34000,13 +42799,13 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       kind: "documentation-index",
       url: "/rest-management-guide.json",
       updatedAt: "2026-10-09",
-      sha256: "3918cdbb7905dbb0d765bdd23ac985a56b0bc7e0545780c9787e0d5fe0c155df"
+      sha256: "cbe847781748cfa0d54f45b46094044ffb36d99fa57652d164b0723b61a3a566"
     },
     {
       kind: "documentation-index",
       url: "/developer-documentation.json",
       updatedAt: "2026-10-09",
-      sha256: "ac3d25d081c6b5dc9c58c8c236401634b3ece42063f5d6b15648c44d8b1fc3f3"
+      sha256: "edff53a83e8ebca02e3cda975e10b703d3b8b73249ae7ac0a80af523bbec35f4"
     },
     {
       kind: "sitemap",

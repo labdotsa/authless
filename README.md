@@ -2,11 +2,12 @@
 
 Source repository: https://github.com/labdotsa/authless/tree/master
 
-Build an Authless integration with the server-only API client, browser and SvelteKit source references, or one of five runnable examples. Read the [developer readiness report](docs/developer-readiness.md) for package availability and current agent-access limits.
+Build an Authless integration with the server-only `@authless/server` SDK, the source-distributed `@authless/cli`, browser and SvelteKit source references, or one of five runnable examples. Read the [developer readiness report](docs/developer-readiness.md) for package availability and current agent-access limits.
 
 ## Public paths
 
-- `packages/api-client`: server-only client distribution and usage reference.
+- `packages/server`: server-only facade for trusted Node.js applications.
+- `packages/cli`: source-distributed CLI with interactive PKCE login and delegated agent credentials.
 - `sdk-source/browser` and `sdk-source/sveltekit`: reviewed source references used by the examples.
 - `examples/*`: direct OIDC, management agent, REST management, signed webhook, and hosted SvelteKit sign-in journeys.
 - `schemas/authless.openapi.json`: public OpenAPI contract.
@@ -17,4 +18,4 @@ Install with `bun install --frozen-lockfile`, then follow each example README. T
 
 The examples use placeholder hosts, synthetic credentials, or in-memory test boundaries. Keep secrets server-side.
 
-The exported package metadata retains Authless's existing `UNLICENSED` terms. This export grants no new license.
+This public developer export is licensed under the MIT License. Copyright (c) 2026 LabDotSA. The private application repository remains proprietary and is not included.

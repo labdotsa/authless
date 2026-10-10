@@ -23,7 +23,7 @@ bun run ./src/agent.ts keygen > agent-public-jwks.json
 ## Contract
 
 An owner first creates a delegation through the authenticated REST route
-`POST /v1/workspaces/{workspaceId}/agent-delegations`. The owner must use a
+`POST /workspaces/{workspaceId}/agent-delegations`. The owner must use a
 recent platform session, send `confirmed: true`, register the agent public
 JWKS, choose exactly one enabled scope, and bind one exact HTTPS resource:
 

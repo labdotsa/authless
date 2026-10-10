@@ -354,13 +354,13 @@
       "kind": "openapi",
       "url": "/openapi.json",
       "updatedAt": "2026-10-09",
-      "sha256": "87b370d03196f526b688d4d6f896666ef05ab54ddfbffa4b891cff0f112aa743"
+      "sha256": "29118aa187b13cd1263f95dca02a3b5dc7bca9ceef06d4d8b8f9bbee99acad72"
     },
     {
       "kind": "openapi",
       "url": "/rest-reference.json",
       "updatedAt": "2026-10-09",
-      "sha256": "30e83279d650a57dd9ac199da55ba16257b22301c65388384957585afd42aec3"
+      "sha256": "826bf90ca6168e4d83bc7a5b0072fff954f203e67015eeeb670e15376a5bf572"
     },
     {
       "kind": "discovery",
@@ -378,27 +378,27 @@
       "kind": "compatibility",
       "url": "/release-center.json",
       "updatedAt": "2026-10-09",
-      "sha256": "fd6373f301186414f05ba4a5b90eec3f3928dbd839bbd90864f784abf5953f10"
+      "sha256": "b1bf7347572011ef961efac7e41120f618aad01d66b1c044d2c265f8ac6e7c25"
     },
     {
       "kind": "compatibility",
       "url": "/compatibility.json",
       "updatedAt": "2026-10-09",
-      "sha256": "14768fdc938282e9d273f13baec28b2a988081c0d86346e66a750def78d5ee55"
+      "sha256": "234a2f3f68606403ac1d054e575eca05722f0de3bdc7a25d18b708b3c025bb78"
     },
     {
       "kind": "changelog",
       "url": "/changes.json?lang=en",
       "locale": "en",
       "updatedAt": "2026-10-09",
-      "sha256": "071537886ab5f030623515d821e1f33ad46b8b434e9030803f17b2175af22240"
+      "sha256": "c7935ef13908c341fe9d76fe2d8452fce68b569241f3ddfa211f9f59bde49ead"
     },
     {
       "kind": "changelog",
       "url": "/changes.json?lang=ar",
       "locale": "ar",
       "updatedAt": "2026-10-09",
-      "sha256": "bfc42c9b69aec0ef9220fcc7be286c3c006032c4a9cce96240abe752e00f8e22"
+      "sha256": "0b9e6b349e8a47f9f0466220f5c756d90d338ebebb803ebcfb2ee7e9d503610d"
     },
     {
       "kind": "operations",
@@ -410,13 +410,13 @@
       "kind": "documentation-index",
       "url": "/rest-management-guide.json",
       "updatedAt": "2026-10-09",
-      "sha256": "3918cdbb7905dbb0d765bdd23ac985a56b0bc7e0545780c9787e0d5fe0c155df"
+      "sha256": "cbe847781748cfa0d54f45b46094044ffb36d99fa57652d164b0723b61a3a566"
     },
     {
       "kind": "documentation-index",
       "url": "/developer-documentation.json",
       "updatedAt": "2026-10-09",
-      "sha256": "ac3d25d081c6b5dc9c58c8c236401634b3ece42063f5d6b15648c44d8b1fc3f3"
+      "sha256": "edff53a83e8ebca02e3cda975e10b703d3b8b73249ae7ac0a80af523bbec35f4"
     },
     {
       "kind": "sitemap",

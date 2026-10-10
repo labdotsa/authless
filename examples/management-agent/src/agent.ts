@@ -157,7 +157,7 @@ export async function createDelegation(input: {
   const request = input.fetch ?? fetch;
   const response = await request(
     new URL(
-      `/v1/workspaces/${encodeURIComponent(input.workspaceId)}/agent-delegations`,
+      `/workspaces/${encodeURIComponent(input.workspaceId)}/agent-delegations`,
       base,
     ),
     {

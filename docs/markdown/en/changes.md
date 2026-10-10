@@ -48,7 +48,7 @@ The following checked projection is shared with the human-rendered guide and pre
 ```json
 {
   "schema": "authless.release-center/v1",
-  "updatedAt": "2026-10-09",
+  "updatedAt": "2026-10-10",
   "compatibility": [
     {
       "component": "REST API",
@@ -56,30 +56,11 @@ The following checked projection is shared with the human-rendered guide and pre
       "releaseNotes": "/changes#2026-08-22-identity-continuation-terminal-reasons",
       "version": "0.1.0",
       "stability": "stable",
-      "contract": "/v1 (0.1.0)",
+      "contract": "unversioned default (0.1.0)",
       "testedAt": "2026-08-22",
       "evidence": [
         "packages/contracts/openapi/authless.openapi.json",
         "tests/rest-api-reference.test.ts"
-      ]
-    },
-    {
-      "component": "@authless/api-client",
-      "deprecation": "current",
-      "releaseNotes": "/changes#2026-08-22-sensitive-mutation-readiness",
-      "version": "0.2.0",
-      "stability": "stable",
-      "contract": "0.1.0",
-      "runtime": "Node 24.x",
-      "testedAt": "2026-08-22",
-      "evidence": [
-        "packages/api-client/package.json",
-        "packages/api-client/src/index.ts",
-        "packages/api-client/src/transport.ts",
-        "packages/api-client/src/workspaces.ts",
-        "tests/api-client-workspace-family.test.ts",
-        "tests/docs-compatibility.test.ts",
-        "packages/api-client/tests/api-client.node.mjs"
       ]
     },
     {
@@ -98,6 +79,36 @@ The following checked projection is shared with the human-rendered guide and pre
         "tests/browser-capability-entrypoints.test.ts",
         "tests/relying-app-helpers.test.ts",
         "playwright.config.ts"
+      ]
+    },
+    {
+      "component": "@authless/server",
+      "deprecation": "current",
+      "releaseNotes": "/changes#2026-10-10-native-cli-and-docs-navigation",
+      "version": "0.1.0",
+      "stability": "source-only",
+      "contract": "0.1.0",
+      "runtime": "Node 24.x",
+      "testedAt": "2026-10-10",
+      "evidence": [
+        "packages/server/package.json",
+        "packages/server/src/index.ts",
+        "packages/server/tests/server.node.mjs"
+      ]
+    },
+    {
+      "component": "@authless/cli",
+      "deprecation": "current",
+      "releaseNotes": "/changes#2026-10-10-native-cli-and-docs-navigation",
+      "version": "0.1.0",
+      "stability": "source-only",
+      "contract": "0.1.0",
+      "runtime": "Bun 1.3.10",
+      "testedAt": "2026-10-10",
+      "evidence": [
+        "packages/cli/package.json",
+        "packages/cli/src/cli.ts",
+        "packages/cli/test/cli.test.ts"
       ]
     },
     {
@@ -124,6 +135,55 @@ The following checked projection is shared with the human-rendered guide and pre
   ],
   "changes": [
     {
+      "id": "2026-10-10-native-cli-and-docs-navigation",
+      "publishedAt": "2026-10-10",
+      "title": {
+        "en": "Native CLI login and shared Docs navigation",
+        "ar": "تسجيل دخول CLI والتنقّل المشترك للوثائق"
+      },
+      "summary": {
+        "en": "CLI login uses browser consent and PKCE for workspace reads. Docs and API reference share full-width footer controls, active navigation styling, and wrapping technical tables.",
+        "ar": "يستخدم تسجيل دخول CLI موافقة المتصفح وPKCE لقراءة مساحات العمل. تشترك الوثائق ومرجع API في عناصر تذييل بعرض كامل، وتمييز التنقّل النشط، وجداول تقنية تلتف محتوياتها."
+      },
+      "categories": [
+        "api",
+        "sdk",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Native login supports workspace list and get with workspace:read. Other platform commands require AUTHLESS_SESSION_TOKEN; app administration requires AUTHLESS_APP_CREDENTIAL. Use the public repository until npm publication.",
+        "ar": "يدعم تسجيل الدخول الأصلي عرض مساحات العمل وقراءتها بصلاحية workspace:read. تتطلب أوامر المنصة الأخرى AUTHLESS_SESSION_TOKEN، وتتطلب إدارة التطبيقات AUTHLESS_APP_CREDENTIAL. استخدم المستودع العام حتى النشر على npm."
+      },
+      "announcement": {
+        "en": "The checked contract now declares native OAuth only for its supported workspace reads. Broader mutations remain protected by their required scopes.",
+        "ar": "يعلن العقد المتحقق منه OAuth الأصلي لعمليات قراءة مساحات العمل المدعومة فقط. تبقى عمليات التغيير الأوسع محمية بالصلاحيات المطلوبة."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "apps/docs/src/lib/DocsFrame.svelte",
+        "apps/docs/src/lib/DocsSidebarNavigation.svelte",
+        "apps/docs/src/lib/DocsTechnicalTable.svelte",
+        "apps/sign/src/management-oauth.ts",
+        "packages/contracts/openapi/authless.openapi.json",
+        "packages/cli/README.md",
+        "scripts/generate-server-client.ts",
+        "tests/management-oauth-native-http.test.ts",
+        "tests/integration/native-management-api-postgres.integration.ts",
+        "tests/ui/docs-content-system.ui.ts"
+      ],
+      "permalink": "/changes#2026-10-10-native-cli-and-docs-navigation"
+    },
+    {
       "id": "2026-10-09-developer-docs-boundaries",
       "publishedAt": "2026-10-09",
       "title": {
@@ -145,12 +205,12 @@ The following checked projection is shared with the human-rendered guide and pre
       ],
       "impact": "additive",
       "migration": {
-        "en": "No API migration is required. Install @authless/api-client from the public repository until npm publication. Management-agent OAuth remains preview-only; follow the readiness report before connecting a live deployment.",
-        "ar": "لا يلزم ترحيل لواجهة API. ثبّت @authless/api-client من المستودع العام حتى نشره على npm. يبقى OAuth لوكلاء الإدارة في المعاينة؛ راجع تقرير الجاهزية قبل الاتصال بنشر حي."
+        "en": "No API migration is required. Use @authless/server or @authless/cli from the public repository until npm publication. Management-agent OAuth remains preview-only; follow the readiness report before connecting a live deployment.",
+        "ar": "لا يلزم ترحيل لواجهة API. استخدم ‎@authless/server‎ أو ‎@authless/cli‎ من المستودع العام حتى نشرها على npm. يبقى OAuth لوكلاء الإدارة في المعاينة؛ راجع تقرير الجاهزية قبل الاتصال بنشر حي."
       },
       "announcement": {
-        "en": "Use the public examples and read-only agent documentation. Package publication and live OAuth availability remain unchanged.",
-        "ar": "استخدم الأمثلة العامة ووثائق الوكلاء للقراءة فقط. تبقى حالة نشر الحزم وإتاحة OAuth الحي دون تغيير."
+        "en": "Use the public examples, server facade, CLI, and agent documentation. Package publication and live OAuth availability remain unchanged.",
+        "ar": "استخدم الأمثلة العامة وواجهة الخادم وCLI ووثائق الوكلاء. تبقى حالة نشر الحزم وإتاحة OAuth الحي دون تغيير."
       },
       "replacement": null,
       "supportWindow": null,
@@ -165,8 +225,8 @@ The following checked projection is shared with the human-rendered guide and pre
         "apps/docs/src/lib/release-docs-mcp-projection.ts",
         "apps/docs/static/developer-documentation.json",
         "packages/docs-mcp/src/corpus.generated.json",
-        "packages/api-client/README.md",
-        "packages/api-client/package.json",
+        "packages/server/README.md",
+        "packages/server/package.json",
         "tests/docs-mcp.test.ts",
         "tests/ui/developer-documentation.ui.ts"
       ],
@@ -2714,7 +2774,7 @@ The following checked projection is shared with the human-rendered guide and pre
   },
   "policy": {
     "semver": "Published packages use SemVer. A breaking public package API requires a major version; additive API is minor; compatible fixes are patch releases.",
-    "api": "Stable REST operations remain on /v1. A breaking contract requires a new major path; additive changes require compatibility and changelog review.",
+    "api": "Stable REST operations remain on the current contract. A breaking contract requires a new major path; additive changes require compatibility and changelog review.",
     "events": "Events retain their type and schemaVersion. A breaking payload change requires a new schemaVersion and a dual-consumption migration window.",
     "deprecation": "A deprecation is not actionable until its announcement names a replacement, migration guide, support window, approved Sunset date, status, and support contact."
   }

@@ -9,4 +9,4 @@ The export is intended for a clean clone with Bun 1.3.10 or Node.js 24+. Validat
 - signed webhook: `bun run --cwd examples/signed-webhook verify`
 - hosted SvelteKit sign-in: `bun run --cwd examples/sveltekit-hosted-sign-in check`, `build`, `verify`
 
-Checks use synthetic credentials and disposable in-memory boundaries. They do not contact hosted databases or publish credentials. The SvelteKit and signed-webhook example type checks use `skipLibCheck` for ambient dependency declarations; application code remains checked. Existing package metadata retains `UNLICENSED`; this export grants no new license.
+Checks use synthetic credentials and disposable in-memory boundaries. They do not contact hosted databases or publish credentials. The SvelteKit and signed-webhook example type checks use `skipLibCheck` for ambient dependency declarations; application code remains checked. Public package metadata and this repository are licensed under MIT, Copyright (c) 2026 LabDotSA. The private application repository remains proprietary and is excluded.

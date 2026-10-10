@@ -40,10 +40,16 @@ interface AuthlessApiClientCommonOptions {
     retry?: AuthlessRetryOptions;
 }
 export type AuthlessApiClientOptions = AuthlessApiClientCommonOptions & ({
+    managementAccessToken: string;
+    appCredentialToken?: never;
+    sessionToken?: never;
+} | {
     appCredentialToken: string;
+    managementAccessToken?: never;
     sessionToken?: never;
 } | {
     appCredentialToken?: never;
+    managementAccessToken?: never;
     sessionToken: string;
 });
 export interface AuthlessRetryOptions {

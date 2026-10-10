@@ -5,17 +5,23 @@
 ## Integration paths
 
 - [Developer documentation](https://docs.authle.ss/start): Choose a supported path and package.
-- [Agent access](https://docs.authle.ss/agents): Preview owner-created delegation, private_key_jwt client credentials, and management MCP; live OAuth may return `503 temporarily_unavailable`, and MCP separately remains gated by terminal GA attestation.
-- [Hosted sign-in with SvelteKit](https://docs.authle.ss/build/sveltekit): Authorization Code with PKCE; browser and SvelteKit packages are source-only today, so use the linked standalone example.
-- [Direct OIDC](https://docs.authle.ss/build/oidc): Standards-based server integration without an Authless SDK.
-- [REST management](https://docs.authle.ss/build/rest): Versioned, idempotent management operations.
+- [Hosted sign-in with SvelteKit](https://docs.authle.ss/build/sveltekit): Authorization Code with PKCE and an application-owned session.
+- [Direct OIDC](https://docs.authle.ss/build/oidc): Standards-based server integration without a framework helper.
+- [REST management](https://docs.authle.ss/build/rest): The server client, the CLI, and management operations.
+- [Agent access](https://docs.authle.ss/agents): Owner-created delegation with `private_key_jwt`; live OAuth may return `503 temporarily_unavailable`, and management MCP needs terminal GA attestation.
 - [Signed webhooks](https://docs.authle.ss/build/webhooks): Verification and reconciliation.
 
 ## Availability
 
-- API client source package: `@authless/api-client` targets Node.js 24+ server code but is not currently published to npm; clone the public repository and install the prebuilt `./packages/api-client` distribution.
-- Browser and SvelteKit helpers are private workspace packages; clean-room examples use local vendor snapshots until public release.
-- There is no published Authless CLI or device-flow package. Do not invent install commands for either.
+- Server client: `@authless/server`, source-distributed for trusted Node.js 24+ server code.
+- CLI: `@authless/cli`, source-distributed for operators, scripts, and agents. Native `auth login` uses loopback PKCE and Bun secure storage; the `workspace:read` grant is limited to workspace list/get. Use `AUTHLESS_SESSION_TOKEN` for remaining platform-session commands or `AUTHLESS_APP_CREDENTIAL` for app membership/access. It never extracts browser cookies.
+- Browser and SvelteKit helpers are source-only workspace packages; clean-room examples use local vendor snapshots.
+- None of these packages is currently published to npm.
+
+## API versioning
+
+- Operation paths are unversioned by default and the server pins them to the supported contract version.
+- Select a version with `Authless-Version: 1|v1` or `?api-version=1|v1`. Conflicting or unsupported selectors fail before dispatch.
 
 ## Agent access
 

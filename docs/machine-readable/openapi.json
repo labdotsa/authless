@@ -2,7 +2,8 @@
   "openapi": "3.1.0",
   "info": {
     "title": "Authless REST API",
-    "version": "0.1.0"
+    "version": "0.1.0",
+    "description": "Management REST API. Requests use unversioned paths and default to v1. Select a supported version with Authless-Version or api-version. Unsupported or conflicting selectors return 400."
   },
   "servers": [
     {
@@ -11,7 +12,7 @@
     }
   ],
   "paths": {
-    "/v1/providers/merchant/billing-events": {
+    "/providers/merchant/billing-events": {
       "post": {
         "operationId": "reconcileCommercialBillingProviderEvent",
         "summary": "Reconcile a signed merchant billing provider event",
@@ -60,7 +61,7 @@
         "x-authless-retry-safety": "unsafe"
       }
     },
-    "/v1/workspaces/{workspaceId}/billing": {
+    "/workspaces/{workspaceId}/billing": {
       "get": {
         "operationId": "inspectCommercialBilling",
         "summary": "Inspect the current commercial billing subscription",
@@ -103,7 +104,7 @@
         "x-authless-retry-safety": "safe"
       }
     },
-    "/v1/workspaces/{workspaceId}/billing/change-reviews": {
+    "/workspaces/{workspaceId}/billing/change-reviews": {
       "post": {
         "operationId": "reviewCommercialBillingChange",
         "summary": "Review a commercial plan, period, or quantity change",
@@ -170,7 +171,7 @@
         "x-authless-retry-safety": "unsafe"
       }
     },
-    "/v1/workspaces/{workspaceId}/billing/change-authorizations": {
+    "/workspaces/{workspaceId}/billing/change-authorizations": {
       "post": {
         "operationId": "authorizeCommercialBillingChange",
         "summary": "Authorize a reviewed commercial billing change with the provider",
@@ -237,7 +238,7 @@
         "x-authless-retry-safety": "unsafe"
       }
     },
-    "/v1/workspaces/{workspaceId}/billing/cancellation-reviews": {
+    "/workspaces/{workspaceId}/billing/cancellation-reviews": {
       "post": {
         "operationId": "reviewCommercialBillingCancellation",
         "summary": "Review the financial and access effects of commercial billing cancellation",
@@ -312,7 +313,7 @@
         "x-authless-retry-safety": "unsafe"
       }
     },
-    "/v1/workspaces/{workspaceId}/billing/cancellations": {
+    "/workspaces/{workspaceId}/billing/cancellations": {
       "post": {
         "operationId": "confirmCommercialBillingCancellation",
         "summary": "Confirm a reviewed commercial billing cancellation",
@@ -387,7 +388,7 @@
         "x-authless-retry-safety": "unsafe"
       }
     },
-    "/v1/workspaces/{workspaceId}/billing/refund-requests": {
+    "/workspaces/{workspaceId}/billing/refund-requests": {
       "post": {
         "operationId": "requestCommercialBillingRefund",
         "summary": "Request a goodwill refund or verified billing correction",
@@ -470,7 +471,7 @@
         "x-authless-retry-safety": "unsafe"
       }
     },
-    "/v1/workspaces/{workspaceId}/commercial-purchases/{planId}/reviews": {
+    "/workspaces/{workspaceId}/commercial-purchases/{planId}/reviews": {
       "post": {
         "operationId": "reviewCommercialPurchase",
         "summary": "Review an exact self-service commercial purchase",
@@ -538,7 +539,7 @@
         "x-authless-retry-safety": "unsafe"
       }
     },
-    "/v1/workspaces/{workspaceId}/commercial-purchases/{planId}/confirmations": {
+    "/workspaces/{workspaceId}/commercial-purchases/{planId}/confirmations": {
       "post": {
         "operationId": "confirmCommercialPurchase",
         "summary": "Explicitly confirm a reviewed self-service commercial purchase",
@@ -633,7 +634,7 @@
         "x-authless-retry-safety": "unsafe"
       }
     },
-    "/v1/workspaces/{workspaceId}/commercial-purchases/{purchaseId}/receipt": {
+    "/workspaces/{workspaceId}/commercial-purchases/{purchaseId}/receipt": {
       "get": {
         "operationId": "getCommercialPurchaseReceipt",
         "summary": "Inspect durable evidence for an activated commercial purchase",
@@ -690,7 +691,7 @@
         "x-authless-retry-safety": "safe"
       }
     },
-    "/v1/workspaces/{workspaceId}/commercial-usage": {
+    "/workspaces/{workspaceId}/commercial-usage": {
       "get": {
         "operationId": "inspectCommercialUsage",
         "summary": "Inspect authoritative commercial usage and next-unit effects",
@@ -735,7 +736,7 @@
         "x-authless-retry-safety": "safe"
       }
     },
-    "/v1/workspaces/{workspaceId}/overages/reviews": {
+    "/workspaces/{workspaceId}/overages/reviews": {
       "post": {
         "operationId": "reviewCommercialOverages",
         "summary": "Review commercial overage rates and a monthly spend cap",
@@ -814,7 +815,7 @@
         "x-authless-retry-safety": "unsafe"
       }
     },
-    "/v1/workspaces/{workspaceId}/overages/activations": {
+    "/workspaces/{workspaceId}/overages/activations": {
       "post": {
         "operationId": "activateCommercialOverages",
         "summary": "Activate a reviewed commercial overage configuration",
@@ -891,7 +892,7 @@
         "x-authless-retry-safety": "unsafe"
       }
     },
-    "/v1/workspaces/{workspaceId}/overages": {
+    "/workspaces/{workspaceId}/overages": {
       "patch": {
         "operationId": "configureCommercialOverages",
         "summary": "Configure an activated commercial overage policy",
@@ -968,7 +969,7 @@
         "x-authless-retry-safety": "unsafe"
       }
     },
-    "/v1/me/sessions": {
+    "/me/sessions": {
       "get": {
         "operationId": "listPersonalSessions",
         "summary": "List the current person's platform sessions",
@@ -1082,7 +1083,7 @@
         "x-authless-retry-safety": "unsafe"
       }
     },
-    "/v1/me/security-activity": {
+    "/me/security-activity": {
       "get": {
         "operationId": "listPersonalSecurityActivity",
         "summary": "List the current person's session-security activity",
@@ -1119,7 +1120,7 @@
         "x-authless-retry-safety": "safe"
       }
     },
-    "/v1/me/sessions/{sessionId}": {
+    "/me/sessions/{sessionId}": {
       "delete": {
         "operationId": "revokePersonalSession",
         "summary": "Revoke one platform session",
@@ -1203,7 +1204,7 @@
         "x-authless-retry-safety": "unsafe"
       }
     },
-    "/v1/me/sessions/{sessionId}/risk": {
+    "/me/sessions/{sessionId}/risk": {
       "put": {
         "operationId": "reportPersonalSessionRisk",
         "summary": "Report one platform session as high risk",
@@ -1295,7 +1296,7 @@
         "x-authless-retry-safety": "unsafe"
       }
     },
-    "/v1/personal/workspace-correlations": {
+    "/personal/workspace-correlations": {
       "get": {
         "operationId": "listPersonalWorkspaceCorrelations",
         "summary": "List the current person's workspace correlation disclosures",
@@ -1324,7 +1325,7 @@
         "x-authless-retry-safety": "safe"
       }
     },
-    "/v1/personal/workspace-correlations/{workspaceId}/split": {
+    "/personal/workspace-correlations/{workspaceId}/split": {
       "post": {
         "operationId": "splitPersonalWorkspaceCorrelation",
         "summary": "Split the current person's identity correlation in one workspace",
@@ -1424,7 +1425,7 @@
         "x-authless-retry-safety": "unsafe"
       }
     },
-    "/v1/personal/overview": {
+    "/personal/overview": {
       "get": {
         "operationId": "getPersonalOverview",
         "summary": "Get the current person's safe account overview",
@@ -1467,7 +1468,7 @@
         "x-authless-retry-safety": "safe"
       }
     },
-    "/v1/personal/username": {
+    "/personal/username": {
       "post": {
         "operationId": "addPersonalUsername",
         "summary": "Add a username to the current person's identity",
@@ -1721,13 +1722,16 @@
         "x-authless-retry-safety": "unsafe"
       }
     },
-    "/v1/workspaces": {
+    "/workspaces": {
       "get": {
         "operationId": "listWorkspaces",
         "summary": "List workspaces available to the current platform session",
         "security": [
           {
             "sessionCookie": []
+          },
+          {
+            "managementOAuth": ["workspace:read"]
           }
         ],
         "parameters": [
@@ -1910,13 +1914,16 @@
         "x-authless-retry-safety": "unsafe"
       }
     },
-    "/v1/workspaces/{workspaceId}": {
+    "/workspaces/{workspaceId}": {
       "get": {
         "operationId": "getWorkspace",
         "summary": "Read one workspace available to the current platform session",
         "security": [
           {
             "sessionCookie": []
+          },
+          {
+            "managementOAuth": ["workspace:read"]
           }
         ],
         "parameters": [
@@ -1984,7 +1991,7 @@
         "x-authless-retry-safety": "safe"
       }
     },
-    "/v1/workspaces/{workspaceId}/audit-events": {
+    "/workspaces/{workspaceId}/audit-events": {
       "get": {
         "operationId": "listAuditEvents",
         "summary": "List one bounded page of redacted audit evidence within the session's effective workspace scope",
@@ -2160,7 +2167,7 @@
         "x-authless-retry-safety": "safe"
       }
     },
-    "/v1/workspaces/{workspaceId}/apps": {
+    "/workspaces/{workspaceId}/apps": {
       "post": {
         "operationId": "createApp",
         "summary": "Create an app in one workspace",
@@ -2379,7 +2386,7 @@
         "x-authless-retry-safety": "safe"
       }
     },
-    "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}": {
+    "/workspaces/{workspaceId}/apps/{appId}/{environment}": {
       "get": {
         "operationId": "getAppEnvironment",
         "summary": "Read one versioned app environment",
@@ -2477,7 +2484,7 @@
         "x-authless-retry-safety": "safe"
       }
     },
-    "/v1/workspaces/{workspaceId}/apps/{appId}/memberships": {
+    "/workspaces/{workspaceId}/apps/{appId}/memberships": {
       "get": {
         "operationId": "listAppMemberships",
         "summary": "List privacy-safe app memberships under exact app authority",
@@ -2759,7 +2766,7 @@
         "x-authless-retry-safety": "safe"
       }
     },
-    "/v1/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}": {
+    "/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}": {
       "get": {
         "operationId": "getAppMembership",
         "summary": "Inspect one privacy-safe versioned app membership",
@@ -2882,7 +2889,7 @@
         "x-authless-retry-safety": "safe"
       }
     },
-    "/v1/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/lifecycle": {
+    "/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/lifecycle": {
       "post": {
         "operationId": "changeAppMembershipStatus",
         "summary": "Apply one confirmed, version-bound app-membership transition",
@@ -3073,7 +3080,7 @@
         "x-authless-version-precondition": "if-match"
       }
     },
-    "/v1/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/access": {
+    "/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/access": {
       "get": {
         "operationId": "getAppMembershipAccess",
         "summary": "Inspect one membership's independent role and entitlement grants",
@@ -3180,7 +3187,7 @@
         "x-authless-retry-safety": "safe"
       }
     },
-    "/v1/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/roles": {
+    "/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/roles": {
       "post": {
         "operationId": "grantAppRole",
         "summary": "Grant one version-bound role to an exact app membership",
@@ -3358,7 +3365,7 @@
         "x-authless-version-precondition": "role-definition-if-match"
       }
     },
-    "/v1/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/entitlements": {
+    "/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/entitlements": {
       "post": {
         "operationId": "grantAppEntitlement",
         "summary": "Grant one optionally expiring entitlement to an exact app membership",
@@ -3536,7 +3543,7 @@
         "x-authless-version-precondition": "entitlement-definition-if-match"
       }
     },
-    "/v1/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/entitlements/{grantId}": {
+    "/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/entitlements/{grantId}": {
       "delete": {
         "operationId": "revokeAppEntitlement",
         "summary": "Revoke one exact versioned app-entitlement grant",
@@ -3737,7 +3744,7 @@
         "x-authless-version-precondition": "entitlement-grant-if-match"
       }
     },
-    "/v1/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/roles/{grantId}": {
+    "/workspaces/{workspaceId}/apps/{appId}/memberships/{membershipId}/roles/{grantId}": {
       "delete": {
         "operationId": "revokeAppRole",
         "summary": "Revoke one exact versioned app-role grant",
@@ -3938,7 +3945,7 @@
         "x-authless-version-precondition": "role-grant-if-match"
       }
     },
-    "/v1/workspaces/{workspaceId}/apps/{appId}/bulk-access/previews": {
+    "/workspaces/{workspaceId}/apps/{appId}/bulk-access/previews": {
       "post": {
         "operationId": "createBulkAccessPreview",
         "summary": "Create a read-only preview of an exact-app bulk access change",
@@ -4045,7 +4052,7 @@
         "x-authless-retry-safety": "unsafe"
       }
     },
-    "/v1/workspaces/{workspaceId}/apps/{appId}/bulk-access/previews/{previewId}": {
+    "/workspaces/{workspaceId}/apps/{appId}/bulk-access/previews/{previewId}": {
       "get": {
         "operationId": "getBulkAccessPreview",
         "summary": "Read one exact durable bulk access preview",
@@ -4146,7 +4153,7 @@
         "x-authless-retry-safety": "safe"
       }
     },
-    "/v1/workspaces/{workspaceId}/apps/{appId}/bulk-access/previews/{previewId}/executions": {
+    "/workspaces/{workspaceId}/apps/{appId}/bulk-access/previews/{previewId}/executions": {
       "post": {
         "operationId": "executeBulkAccessPreview",
         "summary": "Confirm and queue one exact durable bulk access preview",
@@ -4329,7 +4336,7 @@
         "x-authless-retry-safety": "safe"
       }
     },
-    "/v1/workspaces/{workspaceId}/apps/{appId}/bulk-access/operations/{operationId}": {
+    "/workspaces/{workspaceId}/apps/{appId}/bulk-access/operations/{operationId}": {
       "get": {
         "operationId": "getBulkAccessOperation",
         "summary": "Read one exact durable bulk access operation",
@@ -4430,7 +4437,7 @@
         "x-authless-retry-safety": "safe"
       }
     },
-    "/v1/workspaces/{workspaceId}/apps/{appId}/bulk-access/operations/{operationId}/cancellation": {
+    "/workspaces/{workspaceId}/apps/{appId}/bulk-access/operations/{operationId}/cancellation": {
       "post": {
         "operationId": "cancelBulkAccessOperation",
         "summary": "Cancel one exact version-bound bulk access operation",
@@ -4603,7 +4610,7 @@
         "x-authless-version-precondition": "operation-if-match"
       }
     },
-    "/v1/workspaces/{workspaceId}/apps/{appId}/bulk-access/operations/{operationId}/results": {
+    "/workspaces/{workspaceId}/apps/{appId}/bulk-access/operations/{operationId}/results": {
       "get": {
         "operationId": "listBulkAccessResults",
         "summary": "List safe item results or download immutable JSONL evidence for one bulk operation",
@@ -4766,7 +4773,7 @@
         "x-authless-retry-safety": "safe"
       }
     },
-    "/v1/identity/continuations": {
+    "/identity/continuations": {
       "post": {
         "operationId": "requestIdentityContinuation",
         "summary": "Request an enumeration-safe platform email continuation code",
@@ -4836,7 +4843,7 @@
         "x-authless-retry-safety": "unsafe"
       }
     },
-    "/v1/identity/continuations/verifications": {
+    "/identity/continuations/verifications": {
       "post": {
         "operationId": "verifyIdentityContinuation",
         "summary": "Verify a platform email continuation code and create a session",
@@ -4915,7 +4922,7 @@
         "x-authless-retry-safety": "unsafe"
       }
     },
-    "/v1/identity/registrations": {
+    "/identity/registrations": {
       "post": {
         "operationId": "registerIdentity",
         "summary": "Register an identity without disclosing existing identity state",
@@ -5003,7 +5010,7 @@
         "x-authless-retry-safety": "unsafe"
       }
     },
-    "/v1/identity/recovery-requests": {
+    "/identity/recovery-requests": {
       "post": {
         "operationId": "requestIdentityRecovery",
         "summary": "Request enumeration-safe identity recovery delivery",
@@ -5073,7 +5080,7 @@
         "x-authless-retry-safety": "unsafe"
       }
     },
-    "/v1/identity/recovery-proofs": {
+    "/identity/recovery-proofs": {
       "post": {
         "operationId": "consumeIdentityRecovery",
         "summary": "Consume a recovery proof and create bounded recovery authority",
@@ -5160,7 +5167,7 @@
         "x-authless-retry-safety": "unsafe"
       }
     },
-    "/v1/identity/recovery/factors": {
+    "/identity/recovery/factors": {
       "get": {
         "operationId": "getIdentityRecoveryFactors",
         "summary": "List the secret-free recovery factor inventory",
@@ -5205,7 +5212,7 @@
         "x-authless-retry-safety": "safe"
       }
     },
-    "/v1/identity/recovery/authenticators/password": {
+    "/identity/recovery/authenticators/password": {
       "delete": {
         "operationId": "revokeIdentityRecoveryPassword",
         "summary": "Revoke a password through bounded recovery authority",
@@ -5325,7 +5332,7 @@
         "x-authless-retry-safety": "unsafe"
       }
     },
-    "/v1/identity/recovery/identifiers/username": {
+    "/identity/recovery/identifiers/username": {
       "put": {
         "operationId": "replaceIdentityRecoveryUsername",
         "summary": "Replace a username through bounded recovery authority",
@@ -5435,7 +5442,7 @@
         "x-authless-retry-safety": "unsafe"
       }
     },
-    "/v1/identity/recovery/identifier-replacements/email": {
+    "/identity/recovery/identifier-replacements/email": {
       "post": {
         "operationId": "requestIdentityRecoveryEmailReplacement",
         "summary": "Request independent proof for a recovery email replacement",
@@ -5539,7 +5546,7 @@
         "x-authless-retry-safety": "unsafe"
       }
     },
-    "/v1/identity/recovery/identifier-replacements/email/verifications": {
+    "/identity/recovery/identifier-replacements/email/verifications": {
       "post": {
         "operationId": "verifyIdentityRecoveryEmailReplacement",
         "summary": "Verify independent proof and promote a recovery email replacement",
@@ -5629,7 +5636,7 @@
         "x-authless-retry-safety": "unsafe"
       }
     },
-    "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/credentials": {
+    "/workspaces/{workspaceId}/apps/{appId}/{environment}/credentials": {
       "post": {
         "operationId": "createIntegrationCredential",
         "summary": "Create an app-environment credential with one-time secret disclosure",
@@ -5873,7 +5880,7 @@
         "x-authless-retry-safety": "safe"
       }
     },
-    "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/credentials/{credentialId}/rotate": {
+    "/workspaces/{workspaceId}/apps/{appId}/{environment}/credentials/{credentialId}/rotate": {
       "post": {
         "operationId": "rotateIntegrationCredential",
         "summary": "Rotate an app-environment credential with bounded secret overlap",
@@ -6031,7 +6038,7 @@
         "x-authless-retry-safety": "unsafe"
       }
     },
-    "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/credentials/{credentialId}/revoke": {
+    "/workspaces/{workspaceId}/apps/{appId}/{environment}/credentials/{credentialId}/revoke": {
       "post": {
         "operationId": "revokeIntegrationCredential",
         "summary": "Revoke an app-environment credential without disclosing secret material",
@@ -6186,7 +6193,7 @@
         "x-authless-retry-safety": "unsafe"
       }
     },
-    "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks": {
+    "/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks": {
       "post": {
         "operationId": "registerIntegrationWebhook",
         "summary": "Register an app-environment webhook with one-time signing-secret disclosure",
@@ -6424,7 +6431,7 @@
         "x-authless-retry-safety": "safe"
       }
     },
-    "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/{webhookId}/subscriptions": {
+    "/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/{webhookId}/subscriptions": {
       "put": {
         "operationId": "replaceIntegrationWebhookSubscriptions",
         "summary": "Replace an app-environment webhook subscription set",
@@ -6577,7 +6584,7 @@
         "x-authless-retry-safety": "unsafe"
       }
     },
-    "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/{webhookId}/rotate": {
+    "/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/{webhookId}/rotate": {
       "post": {
         "operationId": "rotateIntegrationWebhookSecret",
         "summary": "Rotate an app-environment webhook signing secret with bounded overlap",
@@ -6730,7 +6737,7 @@
         "x-authless-retry-safety": "unsafe"
       }
     },
-    "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/{webhookId}/disable": {
+    "/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/{webhookId}/disable": {
       "post": {
         "operationId": "disableIntegrationWebhook",
         "summary": "Disable an app-environment webhook without exposing signing-secret state",
@@ -6883,7 +6890,7 @@
         "x-authless-retry-safety": "unsafe"
       }
     },
-    "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/{webhookId}/deliveries": {
+    "/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/{webhookId}/deliveries": {
       "get": {
         "operationId": "listIntegrationWebhookDeliveries",
         "summary": "List secret-free delivery state for an app-environment webhook",
@@ -6975,7 +6982,7 @@
         "x-authless-retry-safety": "safe"
       }
     },
-    "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/{webhookId}/deliveries/{deliveryId}/replay": {
+    "/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/{webhookId}/deliveries/{deliveryId}/replay": {
       "post": {
         "operationId": "replayIntegrationWebhookDelivery",
         "summary": "Replay one webhook delivery with an idempotent operation envelope",
@@ -7117,7 +7124,7 @@
         "x-authless-retry-safety": "unsafe"
       }
     },
-    "/v1/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/reconcile": {
+    "/workspaces/{workspaceId}/apps/{appId}/{environment}/webhooks/reconcile": {
       "post": {
         "operationId": "reconcileIntegrationWebhooks",
         "summary": "Reconcile webhook delivery state with an idempotent operation envelope",
@@ -7247,7 +7254,7 @@
         "x-authless-retry-safety": "unsafe"
       }
     },
-    "/v1/identity/verifications": {
+    "/identity/verifications": {
       "post": {
         "operationId": "verifyIdentity",
         "summary": "Verify a registration email token and create a platform session",
@@ -7324,6 +7331,19 @@
         "in": "cookie",
         "name": "__Host-authless_session",
         "description": "Server-side platform session. Never expose this value to browser bundles or logs."
+      },
+      "managementOAuth": {
+        "type": "oauth2",
+        "description": "Server-side management OAuth bearer issued for an owner-created workspace delegation. This scheme is supported only on operations that list it explicitly, currently workspace reads, and requires x-authless-client: server. Never use a browser session cookie as an agent credential.",
+        "flows": {
+          "authorizationCode": {
+            "authorizationUrl": "https://sign.authle.ss/management/oauth/authorize",
+            "tokenUrl": "https://sign.authle.ss/management/oauth/token",
+            "scopes": {
+              "workspace:read": "Read workspaces available to the authorized owner"
+            }
+          }
+        }
       },
       "recoveryCookie": {
         "type": "apiKey",
@@ -8551,6 +8571,7 @@
         "type": "object",
         "additionalProperties": false,
         "required": ["name", "termsAccepted"],
+        "description": "Creates a workspace with a normalized name. Names are 1–80 characters, may contain Unicode letters or numbers plus spaces, periods, ampersands, apostrophes, parentheses, underscores, and hyphens, and cannot use reserved names such as admin, authless, personal, root, support, or system.",
         "examples": [
           {
             "name": "Example workspace",
@@ -8559,7 +8580,10 @@
         ],
         "properties": {
           "name": {
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80,
+            "description": "Workspace display name. Leading and trailing whitespace is trimmed and internal whitespace is normalized before validation. Reserved names and unsupported punctuation are rejected by the server."
           },
           "termsAccepted": {
             "type": "boolean"
@@ -9761,15 +9785,31 @@
         "type": "object",
         "additionalProperties": false,
         "required": ["description", "name", "ownerContactEmail"],
+        "description": "Registers an app in a workspace. The server trims the name and description and normalizes the owner contact email to lowercase.",
+        "examples": [
+          {
+            "description": "Customer sign-in for the Example product",
+            "name": "Example web app",
+            "ownerContactEmail": "security@example.com"
+          }
+        ],
         "properties": {
           "description": {
-            "type": "string"
+            "type": "string",
+            "maxLength": 500,
+            "description": "Public app description. Maximum 500 characters."
           },
           "name": {
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 80,
+            "description": "App display name. Maximum 80 characters after trimming."
           },
           "ownerContactEmail": {
-            "type": "string"
+            "type": "string",
+            "format": "email",
+            "maxLength": 254,
+            "description": "Operational owner contact address. It is normalized to lowercase and must be a valid email address."
           }
         }
       },

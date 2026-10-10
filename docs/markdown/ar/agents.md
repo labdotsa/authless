@@ -73,9 +73,9 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ]
     },
     {
-      "package": "@authless/api-client",
+      "package": "@authless/server",
       "symbols": [
-        "createAuthlessApiClient"
+        "createAuthlessServerClient"
       ]
     }
   ],
@@ -168,23 +168,45 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       "stage": "available"
     },
     {
-      "id": "rest-client",
+      "id": "server-client",
       "title": {
-        "en": "TypeScript REST client",
-        "ar": "عميل REST لـ TypeScript"
+        "en": "Node.js server client",
+        "ar": "عميل خادم Node.js"
       },
       "description": {
-        "en": "Call contract-derived management operations from trusted server code.",
-        "ar": "استدعِ عمليات الإدارة المشتقة من العقد من خادم موثوق."
+        "en": "Call typed management operations from trusted Node.js server code.",
+        "ar": "استدعِ عمليات الإدارة المعرّفة من خادم Node.js موثوق."
       },
-      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && mkdir api-client-check && cd api-client-check && npm init -y && npm install ../packages/api-client",
-      "firstAction": "import { createAuthlessApiClient } from \"@authless/api-client\";",
-      "successSignal": "membership_invited paged guarded_cleanup_ok",
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && bun install --frozen-lockfile",
+      "firstAction": "import { createAuthlessServerClient } from \"@authless/server\";",
+      "successSignal": "server_request_ok credential_boundary_preserved",
       "negativeChecks": [
-        "insufficient scope",
-        "stale version",
-        "rate limit",
-        "unknown mutation outcome"
+        "browser import",
+        "missing credential",
+        "wrong authority",
+        "unsafe retry"
+      ],
+      "authoritativeGuide": "/build/rest",
+      "stage": "available"
+    },
+    {
+      "id": "cli",
+      "title": {
+        "en": "Authless CLI",
+        "ar": "واجهة Authless الطرفية"
+      },
+      "description": {
+        "en": "Manage Authless resources with native PKCE login or a bounded machine credential.",
+        "ar": "أدر موارد Authless عبر تسجيل دخول PKCE أصلي أو بيانات اعتماد آلية محدودة."
+      },
+      "install": "git clone https://github.com/labdotsa/authless.git && cd authless && bun install --frozen-lockfile",
+      "firstAction": "packages/cli/dist/cli.js auth login",
+      "successSignal": "native_pkce_grant workspace_read json_output",
+      "negativeChecks": [
+        "credential on argv",
+        "browser cookie extraction",
+        "unconfirmed mutation",
+        "token in output"
       ],
       "authoritativeGuide": "/build/rest",
       "stage": "available"

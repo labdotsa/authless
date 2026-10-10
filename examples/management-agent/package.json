@@ -1,6 +1,7 @@
 {
   "name": "authless-management-agent-example",
   "private": true,
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "check": "tsc --noEmit",

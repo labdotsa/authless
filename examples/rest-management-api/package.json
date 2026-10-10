@@ -1,11 +1,12 @@
 {
   "name": "authless-rest-management-guide",
   "private": true,
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "verify": "bun verify.ts"
   },
   "dependencies": {
-    "@authless/api-client": "file:../../packages/api-client"
+    "@authless/server": "workspace:*"
   }
 }

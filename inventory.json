@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "kind": "authless-public-developer-repo-export",
-  "sourceRevision": "5c2fc0e1b0059097edbc30944579c9fe5138fd32",
+  "sourceRevision": "6e64d912a33d3a6ea7f9a2bb32b6cbaf8f5c61fb",
   "publicRepositoryUrl": "https://github.com/labdotsa/authless/tree/master",
-  "licensePolicy": "Preserve existing package metadata: UNLICENSED; no new license granted.",
+  "licensePolicy": "MIT; Copyright (c) 2026 LabDotSA.",
   "excluded": [
     "private application code",
     "contracts/core/config source",
@@ -16,68 +16,92 @@
   ],
   "files": [
     {
+      "path": "LICENSE",
+      "bytes": 1065
+    },
+    {
       "path": "VALIDATION.md",
-      "bytes": 993
+      "bytes": 1079
     },
     {
       "path": "bun.lock",
-      "bytes": 23279
+      "bytes": 23404
     },
     {
       "path": "README.md",
-      "bytes": 1353
+      "bytes": 1559
     },
     {
       "path": "package.json",
-      "bytes": 254
+      "bytes": 286
     },
     {
       "path": "AGENTS.md",
-      "bytes": 311
+      "bytes": 401
     },
     {
-      "path": "packages/api-client/README.md",
-      "bytes": 6579
+      "path": "packages/cli/README.md",
+      "bytes": 1047
     },
     {
-      "path": "packages/api-client/package.json",
-      "bytes": 1155
+      "path": "packages/cli/package.json",
+      "bytes": 688
     },
     {
-      "path": "packages/api-client/dist/audit.d.ts",
+      "path": "packages/cli/dist/cli.js",
+      "bytes": 62472
+    },
+    {
+      "path": "packages/server/README.md",
+      "bytes": 2695
+    },
+    {
+      "path": "packages/server/package.json",
+      "bytes": 1025
+    },
+    {
+      "path": "packages/server/dist/audit.d.ts",
       "bytes": 640
     },
     {
-      "path": "packages/api-client/dist/generated.d.ts",
-      "bytes": 49537
+      "path": "packages/server/dist/generated.d.ts",
+      "bytes": 49370
     },
     {
-      "path": "packages/api-client/dist/bulk-access.d.ts",
+      "path": "packages/server/dist/bulk-access.d.ts",
       "bytes": 2311
     },
     {
-      "path": "packages/api-client/dist/index.js",
-      "bytes": 30553
+      "path": "packages/server/dist/index.js",
+      "bytes": 32498
     },
     {
-      "path": "packages/api-client/dist/memberships.d.ts",
+      "path": "packages/server/dist/memberships.d.ts",
       "bytes": 3328
     },
     {
-      "path": "packages/api-client/dist/workspaces.d.ts",
+      "path": "packages/server/dist/workspaces.d.ts",
       "bytes": 792
     },
     {
-      "path": "packages/api-client/dist/transport.d.ts",
-      "bytes": 2482
+      "path": "packages/server/dist/transport.d.ts",
+      "bytes": 2651
     },
     {
-      "path": "packages/api-client/dist/index.d.ts",
-      "bytes": 3386
+      "path": "packages/server/dist/index.d.ts",
+      "bytes": 3351
     },
     {
-      "path": "packages/api-client/dist/apps.d.ts",
+      "path": "packages/server/dist/apps.d.ts",
       "bytes": 866
+    },
+    {
+      "path": "packages/server/dist/browser.js",
+      "bytes": 153
+    },
+    {
+      "path": "packages/server/dist/browser.d.ts",
+      "bytes": 11
     },
     {
       "path": "examples/rest-management-api/verify.ts",
@@ -85,11 +109,11 @@
     },
     {
       "path": "examples/rest-management-api/README.md",
-      "bytes": 648
+      "bytes": 650
     },
     {
       "path": "examples/rest-management-api/package.json",
-      "bytes": 222
+      "bytes": 219
     },
     {
       "path": "examples/direct-oidc/verify.ts",
@@ -105,7 +129,7 @@
     },
     {
       "path": "examples/direct-oidc/package.json",
-      "bytes": 357
+      "bytes": 377
     },
     {
       "path": "examples/direct-oidc/tsconfig.json",
@@ -129,7 +153,7 @@
     },
     {
       "path": "examples/signed-webhook/package.json",
-      "bytes": 259
+      "bytes": 279
     },
     {
       "path": "examples/signed-webhook/tsconfig.json",
@@ -149,11 +173,11 @@
     },
     {
       "path": "examples/management-agent/README.md",
-      "bytes": 3195
+      "bytes": 3192
     },
     {
       "path": "examples/management-agent/package.json",
-      "bytes": 375
+      "bytes": 395
     },
     {
       "path": "examples/management-agent/tsconfig.json",
@@ -161,7 +185,7 @@
     },
     {
       "path": "examples/management-agent/src/agent.ts",
-      "bytes": 10836
+      "bytes": 10833
     },
     {
       "path": "examples/management-agent/test/agent.test.ts",
@@ -185,7 +209,7 @@
     },
     {
       "path": "examples/sveltekit-hosted-sign-in/package.json",
-      "bytes": 604
+      "bytes": 624
     },
     {
       "path": "examples/sveltekit-hosted-sign-in/tsconfig.json",
@@ -197,7 +221,7 @@
     },
     {
       "path": "examples/sveltekit-hosted-sign-in/src/app.d.ts",
-      "bytes": 611
+      "bytes": 599
     },
     {
       "path": "examples/sveltekit-hosted-sign-in/src/app.html",
@@ -237,7 +261,7 @@
     },
     {
       "path": "examples/sveltekit-hosted-sign-in/vendor/browser/package.json",
-      "bytes": 138
+      "bytes": 158
     },
     {
       "path": "examples/sveltekit-hosted-sign-in/vendor/browser/index.ts",
@@ -245,7 +269,7 @@
     },
     {
       "path": "examples/sveltekit-hosted-sign-in/vendor/sveltekit/package.json",
-      "bytes": 140
+      "bytes": 160
     },
     {
       "path": "examples/sveltekit-hosted-sign-in/vendor/sveltekit/index.ts",
@@ -253,7 +277,7 @@
     },
     {
       "path": "schemas/authless.openapi.json",
-      "bytes": 327039
+      "bytes": 329349
     },
     {
       "path": "docs/README.md",
@@ -261,7 +285,7 @@
     },
     {
       "path": "docs/developer-experience-review.md",
-      "bytes": 7692
+      "bytes": 4447
     },
     {
       "path": "docs/AGENTS.md",
@@ -269,19 +293,19 @@
     },
     {
       "path": "docs/developer-readiness.md",
-      "bytes": 3698
+      "bytes": 6276
     },
     {
       "path": "docs/machine-readable/llms.txt",
-      "bytes": 2703
+      "bytes": 3039
     },
     {
       "path": "docs/machine-readable/rest-reference.json",
-      "bytes": 151934
+      "bytes": 226132
     },
     {
       "path": "docs/machine-readable/developer-documentation.json",
-      "bytes": 15745
+      "bytes": 16548
     },
     {
       "path": "docs/machine-readable/machine-docs.json",
@@ -289,11 +313,11 @@
     },
     {
       "path": "docs/machine-readable/llms-full.txt",
-      "bytes": 506543
+      "bytes": 591120
     },
     {
       "path": "docs/machine-readable/rest-management-guide.json",
-      "bytes": 13670
+      "bytes": 13660
     },
     {
       "path": "docs/machine-readable/crawler-policy.json",
@@ -301,7 +325,7 @@
     },
     {
       "path": "docs/machine-readable/llms-full.ar.txt",
-      "bytes": 516595
+      "bytes": 601172
     },
     {
       "path": "docs/machine-readable/webhook-catalog.json",
@@ -309,15 +333,15 @@
     },
     {
       "path": "docs/machine-readable/openapi.json",
-      "bytes": 327039
+      "bytes": 329349
     },
     {
       "path": "docs/markdown/en/trust.md",
-      "bytes": 17776
+      "bytes": 18579
     },
     {
       "path": "docs/markdown/en/reference.md",
-      "bytes": 17292
+      "bytes": 18095
     },
     {
       "path": "docs/markdown/en/operate.md",
@@ -325,47 +349,47 @@
     },
     {
       "path": "docs/markdown/en/understand.md",
-      "bytes": 17228
+      "bytes": 18031
     },
     {
       "path": "docs/markdown/en/index.md",
-      "bytes": 17247
+      "bytes": 18050
     },
     {
       "path": "docs/markdown/en/build.md",
-      "bytes": 17323
+      "bytes": 18126
     },
     {
       "path": "docs/markdown/en/changes.md",
-      "bytes": 139452
+      "bytes": 142614
     },
     {
       "path": "docs/markdown/en/agents.md",
-      "bytes": 17673
+      "bytes": 18476
     },
     {
       "path": "docs/markdown/en/start.md",
-      "bytes": 17128
+      "bytes": 17931
     },
     {
       "path": "docs/markdown/en/test.md",
-      "bytes": 17143
+      "bytes": 17946
     },
     {
       "path": "docs/markdown/en/secure.md",
-      "bytes": 17264
+      "bytes": 18067
     },
     {
       "path": "docs/markdown/en/reference/rest.md",
-      "bytes": 153747
+      "bytes": 227945
     },
     {
       "path": "docs/markdown/ar/trust.md",
-      "bytes": 18473
+      "bytes": 19276
     },
     {
       "path": "docs/markdown/ar/reference.md",
-      "bytes": 17829
+      "bytes": 18632
     },
     {
       "path": "docs/markdown/ar/operate.md",
@@ -373,39 +397,39 @@
     },
     {
       "path": "docs/markdown/ar/understand.md",
-      "bytes": 17660
+      "bytes": 18463
     },
     {
       "path": "docs/markdown/ar/index.md",
-      "bytes": 17778
+      "bytes": 18581
     },
     {
       "path": "docs/markdown/ar/build.md",
-      "bytes": 17838
+      "bytes": 18641
     },
     {
       "path": "docs/markdown/ar/changes.md",
-      "bytes": 139905
+      "bytes": 143067
     },
     {
       "path": "docs/markdown/ar/agents.md",
-      "bytes": 18344
+      "bytes": 19147
     },
     {
       "path": "docs/markdown/ar/start.md",
-      "bytes": 17639
+      "bytes": 18442
     },
     {
       "path": "docs/markdown/ar/test.md",
-      "bytes": 17680
+      "bytes": 18483
     },
     {
       "path": "docs/markdown/ar/secure.md",
-      "bytes": 17755
+      "bytes": 18558
     },
     {
       "path": "docs/markdown/ar/reference/rest.md",
-      "bytes": 154408
+      "bytes": 228606
     },
     {
       "path": "sdk-source/browser/src/side-effects.ts",
@@ -449,7 +473,7 @@
     },
     {
       "path": "docs-mcp/corpus.generated.json",
-      "bytes": 1463742
+      "bytes": 1731773
     },
     {
       "path": "docs-mcp/docs-mcp.config.json",
@@ -461,7 +485,11 @@
     },
     {
       "path": "docs-mcp/stdio.js",
-      "bytes": 1404100
+      "bytes": 1646859
+    },
+    {
+      "path": "docs-mcp/package.json",
+      "bytes": 332
     }
   ]
 }

@@ -5,7 +5,7 @@
     "": {
       "name": "authless-public-developer-repo",
       "dependencies": {
-        "@authless/api-client": "workspace:*",
+        "@authless/server": "workspace:*",
       },
     },
     "examples/direct-oidc": {
@@ -33,7 +33,7 @@
     "examples/rest-management-api": {
       "name": "authless-rest-management-guide",
       "dependencies": {
-        "@authless/api-client": "file:../../packages/api-client",
+        "@authless/server": "workspace:*",
       },
     },
     "examples/signed-webhook": {
@@ -59,13 +59,25 @@
         "typescript": "5.9.3",
       },
     },
-    "packages/api-client": {
-      "name": "@authless/api-client",
-      "version": "0.2.0",
+    "packages/cli": {
+      "name": "@authless/cli",
+      "version": "0.1.0",
+      "bin": {
+        "authless": "./dist/cli.js",
+      },
+      "dependencies": {
+        "@authless/server": "workspace:*",
+      },
+    },
+    "packages/server": {
+      "name": "@authless/server",
+      "version": "0.1.0",
     },
   },
   "packages": {
-    "@authless/api-client": ["@authless/api-client@workspace:packages/api-client"],
+    "@authless/cli": ["@authless/cli@workspace:packages/cli"],
+
+    "@authless/server": ["@authless/server@workspace:packages/server"],
 
     "@jridgewell/gen-mapping": ["@jridgewell/gen-mapping@0.3.13", "", { "dependencies": { "@jridgewell/sourcemap-codec": "^1.5.0", "@jridgewell/trace-mapping": "^0.3.24" } }, "sha512-2kkt/7niJ6MgEPxF0bYdQ6etZaA+fQvDcLKckhy1yIQOzaoKjBBjSj63/aLVjYE3qhRt5dvM+uUyfCg6UKCBbA=="],
 
@@ -252,8 +264,6 @@
     "zimmerframe": ["zimmerframe@1.1.5", "", {}, "sha512-msJxIvYDYcoNL+PJsu+7qmpDWsYmAxTY+2TNYXXF0hzBzBk0BMecOqDOG/EckUoKCuKwObfbugIl8QpqHDXeFA=="],
 
     "@sveltejs/vite-plugin-svelte/magic-string": ["magic-string@1.4.3", "", { "dependencies": { "@jridgewell/sourcemap-codec": "^1.6.0" } }, "sha512-z12OxmaPGE0F4xlpGdjuAUckipLpQlTAuAmyGhNoD7ODpYUzvDfvtxUbjM/jwznyP178oju/KDdyi220wNJ0RQ=="],
-
-    "authless-rest-management-guide/@authless/api-client": ["@authless/api-client@file:packages/api-client", {}],
 
     "authless-sveltekit-hosted-sign-in-example/@authless/browser": ["@authless/browser@file:examples/sveltekit-hosted-sign-in/vendor/browser", {}],
 

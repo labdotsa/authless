@@ -1,6 +1,6 @@
 {
-  "name": "@authless/api-client",
-  "version": "0.2.0",
+  "name": "@authless/server",
+  "version": "0.1.0",
   "private": false,
   "browser": false,
   "type": "module",
@@ -8,16 +8,17 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/labdotsa/authless.git",
-    "directory": "packages/api-client"
+    "directory": "packages/server"
   },
-  "homepage": "https://github.com/labdotsa/authless/tree/master/packages/api-client",
+  "homepage": "https://github.com/labdotsa/authless/tree/master/packages/server",
   "bugs": {
     "url": "https://github.com/labdotsa/authless/issues"
   },
-  "license": "UNLICENSED",
+  "license": "MIT",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
+      "browser": "./dist/browser.js",
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     }
@@ -34,16 +35,14 @@
     "authless",
     "authentication",
     "authorization",
-    "rest",
+    "server",
     "typescript"
   ],
-  "sideEffects": false,
+  "sideEffects": true,
   "engines": {
     "node": ">=24"
   },
   "authless": {
-    "additiveCompatibilityEvidence": "2026-08-25-personal-session-contracts",
-    "compatibilityEvidence": "2026-08-22-sensitive-mutation-readiness",
     "owner": "REST client"
   }
 }

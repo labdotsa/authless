@@ -1,0 +1,16 @@
+{
+  "name": "@authless/docs-mcp",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Read-only Authless public documentation MCP bundle.",
+  "bin": {
+    "authless-docs-mcp": "./stdio.js"
+  },
+  "files": [
+    "stdio.js",
+    "corpus.generated.json",
+    "docs-mcp.config.json"
+  ],
+  "license": "MIT"
+}

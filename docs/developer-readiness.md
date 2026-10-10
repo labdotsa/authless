@@ -1,84 +1,108 @@
 # Developer readiness
 
-This repository publishes a checked REST contract and source distributions.
-The API client is prepared for publication but is not currently available from
-the npm registry. The remaining integration helpers and the documentation MCP
-server are repository sources or examples.
+Authless exposes these developer paths in this revision:
 
-## What can be installed
+- `@authless/server` is the server-facing facade.
+- `@authless/cli` is a source-distributed command-line client for scripts and agents.
+- Direct OIDC, the browser helper, and the SvelteKit helper cover interactive application sign-in.
 
-`@authless/api-client` is the prepared, unpublished Node.js 24 or newer
-package. It is a server-only TypeScript client for the management REST API. Its wire contract is
-the generated OpenAPI document in `packages/contracts/openapi/`, projected to
-the public REST reference and client types by the repository checks.
+The server and CLI packages are available from the public developer repository. They are not published to the npm registry in this revision. Install them from a clean clone of [`labdotsa/authless`](https://github.com/labdotsa/authless). The application repository, `Alja7dali/authle.ss`, remains private.
+
+## Install the server client
+
+Use `@authless/server` from trusted Node.js 24 or newer server code.
 
 ```sh
 git clone https://github.com/labdotsa/authless.git
 cd authless
-mkdir api-client-check
-cd api-client-check
-npm init -y
-npm install ../packages/api-client
+bun install --frozen-lockfile
 ```
 
-Keep either `sessionToken` or `appCredentialToken` in a trusted server secret
-boundary. The client does not perform interactive sign-in, store browser
-tokens, authorize product data, or decide confirmation and role policy.
+The public repository includes the checked `dist` artifacts, so this path does
+not run package build scripts. The private application workspace may build the
+packages from source as part of its own development workflow.
 
-## What is source-only
+```ts
+import { createAuthlessServerClient } from "@authless/server";
 
-`@authless/browser` and `@authless/sveltekit` are private workspace packages.
-The SvelteKit example uses local vendor snapshots and can be verified without
-contacting Authless:
+const authless = createAuthlessServerClient({
+  baseUrl: process.env.AUTHLESS_API_URL ?? "https://api.authle.ss",
+  sessionToken: process.env.AUTHLESS_SESSION_TOKEN!,
+});
+
+const workspaces = await authless.workspaces.list({
+  correlationId: crypto.randomUUID(),
+  limit: 25,
+});
+```
+
+The server client owns the REST transport and resource clients. It does not add interactive sign-in, session storage, tenant policy, or agent OAuth. Keep exactly one `sessionToken` or `appCredentialToken` in a server-side secret boundary.
+
+The client sends the platform session as `__Host-authless_session` when you select `sessionToken`. The `__Host-` prefix is a browser security rule. Supporting browsers require `Secure`, `Path=/`, and no `Domain`, so a sibling subdomain cannot set the same cookie for a wider domain. Your application session is separate. Use a different name such as `__Host-app_session` after the OIDC callback.
+
+An app credential is a different authority from a platform session and from a delegated OAuth token. Do not copy a browser cookie into an agent or CLI process.
+
+## Use the CLI
+
+`@authless/cli` is source-distributed. Native management Authorization Code
+with S256 PKCE uses a loopback callback and Bun secure secret storage. The
+stored grant is separate from environment credentials and is never printed or
+written to a project configuration file.
 
 ```sh
-cd examples/sveltekit-hosted-sign-in
+git clone https://github.com/labdotsa/authless.git
+cd authless
 bun install --frozen-lockfile
-bun run check
-bun run build
-bun run verify
+
+AUTHLESS_API_URL=https://api.authle.ss \
+AUTHLESS_SESSION_TOKEN="$AUTHLESS_SESSION_TOKEN" \
+  packages/cli/dist/cli.js workspaces list
 ```
 
-Direct OIDC is the supported SDK-free path. The standalone example uses
-`jose`, Web Crypto, discovery, S256 PKCE, ID-token validation, and DPoP. The
-REST and signed-webhook examples are clean-room examples; their README files
-state their verification commands and fixture boundaries.
+Native OAuth with the `workspace:read` grant supports only `workspaces list`
+and `workspaces get`. `AUTHLESS_SESSION_TOKEN` supports the remaining
+platform-session commands. `AUTHLESS_APP_CREDENTIAL` is limited to app
+membership and access commands. Set exactly one environment credential for
+token-based commands. Pass credentials through a secret manager, never through
+command-line arguments. The CLI never extracts browser cookies.
 
-## Agent and automation access
+Supported commands cover workspace and app lifecycle, environment lookup, membership invitation and status changes, access lookup, and audit listing. Mutations require explicit `--yes`, use idempotency keys, and require expected versions where the contract does. `auth login`, `auth refresh`, and `auth logout` manage the native grant. Agent processes use the separate owner-created delegation flow.
 
-The public developer repository includes a bundled Docs MCP server. From its
-repository root, run `node docs-mcp/stdio.js`. It exposes read-only
-documentation search and lookup over newline-delimited JSON-RPC. It does not
-authenticate, discover tenants, exchange credentials, mutate resources, or
-listen on a network port. The source workspace additionally runs
-`bun run docs:mcp:check` before rebuilding the bundle.
+## Version the API for long-lived clients
 
-The machine-readable documentation exports are the stable read-only agent
-alternative:
+The default contract is unversioned. Use `/workspaces` and other operation paths directly; the server pins the request to the supported contract version and returns it in `authless-version`.
 
-- `https://docs.authle.ss/llms.txt` for a short index.
-- `https://docs.authle.ss/llms-full.txt` for the reviewed public corpus.
-- `https://docs.authle.ss/machine-docs.json` for locale, URL, digest, stage, and update metadata.
-- `https://docs.authle.ss/openapi.json` for the HTTP contract.
+You can select the version with either the `Authless-Version` header or the `api-version` query parameter. Use one selector. If selectors disagree or are unsupported, the API returns an error before dispatch.
 
-The management-agent example and management MCP integration are preview-only
-in this revision. The live management OAuth discovery and token endpoints may
-return `503 temporarily_unavailable` while that deployment is unconfigured.
-If OAuth is available, the protected MCP deployment separately requires a
-terminal GA attestation callback; when that callback is unavailable, MCP
-returns its attestation challenge and grants no access. Use the checked local
-fixture for protocol work.
-Generate the agent key once, persist the mode-0600 private key in server
-custody, register only the public JWKS with the owner delegation, and reuse the
-same key file for token assertions. Do not generate a new key on every run.
+```sh
+curl --request GET \
+  -H "Authless-Version: 1" \
+  -H "cookie: __Host-authless_session={platform_session}" \
+  "https://api.authle.ss/workspaces"
+```
 
-No published Authless CLI or device-flow package exists in this revision. Use
-the documented REST, OIDC, webhook, or local SvelteKit paths instead of
-guessing a command or capability.
+Health, well-known, and MCP routes do not use API version negotiation. Contract changes are released through the selected version policy and appear in the changelog.
+
+## Interactive sign-in and agents
+
+Use Authorization Code with PKCE for a user signing in to an application. The browser and SvelteKit helpers never identify a visitor or create a session during module import. Your server exchanges the callback and creates the application-owned session.
+
+Agents do not sign in as a human. An owner creates a bounded delegation, registers the public JWKS, and allows a machine to use `private_key_jwt` with short-lived client credentials. The local management-agent example documents that protocol. Live management OAuth can return `503 temporarily_unavailable` while its deployment is unconfigured. The protected management MCP deployment also needs its terminal GA attestation. The read-only Docs MCP does not authenticate or access tenant data.
 
 ## Verification boundary
 
-Run example checks with disposable or in-memory fixtures as their README files
-specify. Never use production credentials or a hosted production database for
-rehearsals. Treat machine exports and the MCP corpus as checked build artifacts:
-regenerate them through repository scripts and fail on digest drift.
+Run package and example checks with disposable or in-memory fixtures. Never use production credentials or a hosted production database for rehearsal. Regenerate machine exports through the repository scripts and fail on digest drift.
+
+The current revision proves source behavior, contract projections, package checks, CLI tests, and local agent protocol tests. It does not claim npm publication, live management OAuth, or a management MCP GA deployment until those external services pass their own checks.
+
+## Personal export limits and expiry
+
+Personal exports are bounded before serialization. The service includes at most
+1,000 activity events and 500 app connections in one export, and refuses an
+export whose serialized UTF-8 content exceeds 1,000,000 bytes. The request
+finishes in the terminal `export_too_large` state when a limit is exceeded.
+The worker never silently drops rows or retries this terminal result.
+
+Ready exports expire after 24 hours. Scheduled personal-data runs delete
+expired ciphertext in bounded batches and clear the request's object metadata.
+Cleanup is retry-safe and does not expose export content.
