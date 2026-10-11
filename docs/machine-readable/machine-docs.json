@@ -354,13 +354,13 @@
       "kind": "openapi",
       "url": "/openapi.json",
       "updatedAt": "2026-10-09",
-      "sha256": "78399c2adf3623385f4a1e388676ac4ff9448f7ad8a830a9973effc9d516a3fe"
+      "sha256": "b33416bb1d7741ea4ecbaaeff8f0809049046120dac0ebfcfc04438e09b99ee3"
     },
     {
       "kind": "openapi",
       "url": "/rest-reference.json",
       "updatedAt": "2026-10-09",
-      "sha256": "f91e8650cfc1a280710bbe87be14d9f5ecb9277c801a5ef51c09a9546bf718be"
+      "sha256": "cfed6cebf6579a1a70221f2e2c5ed980ed505ae059cce7b8dc1c3054b0b2850a"
     },
     {
       "kind": "discovery",
@@ -384,7 +384,7 @@
       "kind": "compatibility",
       "url": "/compatibility.json",
       "updatedAt": "2026-10-09",
-      "sha256": "2d34f5a7d1b110bc3284fbaaf1184d7e0ee639c9f6f28fb2580b3a91f4cdc405"
+      "sha256": "b9d8a8f9361c68d1d7650b3b161fda5837acae486c1e8ac855541c3ad26dc60b"
     },
     {
       "kind": "changelog",

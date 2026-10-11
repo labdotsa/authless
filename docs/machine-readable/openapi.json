@@ -7390,7 +7390,7 @@
           "activatedAt": { "type": "string", "format": "date-time" },
           "billingPeriod": {
             "type": "string",
-            "enum": ["monthly", "annual"]
+            "enum": ["monthly"]
           },
           "catalogueDigest": { "type": "string" },
           "legalBundleDigest": { "type": "string" },
@@ -7457,7 +7457,7 @@
         "properties": {
           "billingPeriod": {
             "type": "string",
-            "enum": ["monthly", "annual"]
+            "enum": ["monthly"]
           },
           "customerType": {
             "type": "string",
@@ -7576,7 +7576,7 @@
           "amountSar": { "type": "number", "minimum": 0 },
           "billingPeriod": {
             "type": "string",
-            "enum": ["monthly", "annual"]
+            "enum": ["monthly"]
           },
           "charge": { "$ref": "#/components/schemas/CommercialPurchaseCharge" },
           "currency": { "type": "string", "enum": ["SAR"] },
@@ -7843,7 +7843,7 @@
             "minLength": 3,
             "maxLength": 200
           },
-          "period": { "type": "string", "enum": ["monthly", "annual"] },
+          "period": { "type": "string", "enum": ["monthly"] },
           "planId": {
             "type": "string",
             "enum": ["launch", "growth", "scale"]
@@ -7893,7 +7893,7 @@
           },
           "targetPeriod": {
             "type": "string",
-            "enum": ["monthly", "annual"]
+            "enum": ["monthly"]
           },
           "targetPlanId": {
             "type": "string",
@@ -7981,7 +7981,7 @@
             "items": { "$ref": "#/components/schemas/CommercialBillingFinancialRecord" }
           },
           "pendingInvoiceItemsMicros": { "type": "integer" },
-          "period": { "type": "string", "enum": ["monthly", "annual"] },
+          "period": { "type": "string", "enum": ["monthly"] },
           "planId": {
             "type": "string",
             "enum": ["launch", "growth", "scale"]

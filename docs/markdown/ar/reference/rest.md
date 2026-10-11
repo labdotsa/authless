@@ -6004,7 +6004,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "name": "period",
           "required": true,
           "type": "string",
-          "validation": "one of monthly | annual"
+          "validation": "one of monthly"
         },
         {
           "example": "launch",
@@ -6314,7 +6314,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "name": "billingPeriod",
           "required": true,
           "type": "string",
-          "validation": "one of monthly | annual"
+          "validation": "one of monthly"
         },
         {
           "name": "customerType",

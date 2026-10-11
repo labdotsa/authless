@@ -6004,7 +6004,7 @@ The following checked projection is shared with the human-rendered guide and pre
           "name": "period",
           "required": true,
           "type": "string",
-          "validation": "one of monthly | annual"
+          "validation": "one of monthly"
         },
         {
           "example": "launch",
@@ -6314,7 +6314,7 @@ The following checked projection is shared with the human-rendered guide and pre
           "name": "billingPeriod",
           "required": true,
           "type": "string",
-          "validation": "one of monthly | annual"
+          "validation": "one of monthly"
         },
         {
           "name": "customerType",

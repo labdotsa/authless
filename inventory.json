@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "kind": "authless-public-developer-repo-export",
-  "sourceRevision": "51b9de31e381c1ddafa6b2d52449d3d6167cf6bc",
+  "sourceRevision": "6c3f72b895b4582e46691eb8a9d73b49af949df6",
   "publicRepositoryUrl": "https://github.com/labdotsa/authless/tree/master",
   "licensePolicy": "MIT; Copyright (c) 2026 LabDotSA.",
   "excluded": [
@@ -277,7 +277,7 @@
     },
     {
       "path": "schemas/authless.openapi.json",
-      "bytes": 329440
+      "bytes": 329380
     },
     {
       "path": "docs/README.md",
@@ -301,7 +301,7 @@
     },
     {
       "path": "docs/machine-readable/rest-reference.json",
-      "bytes": 226167
+      "bytes": 226149
     },
     {
       "path": "docs/machine-readable/developer-documentation.json",
@@ -313,7 +313,7 @@
     },
     {
       "path": "docs/machine-readable/llms-full.txt",
-      "bytes": 594103
+      "bytes": 594085
     },
     {
       "path": "docs/machine-readable/rest-management-guide.json",
@@ -325,7 +325,7 @@
     },
     {
       "path": "docs/machine-readable/llms-full.ar.txt",
-      "bytes": 604155
+      "bytes": 604137
     },
     {
       "path": "docs/machine-readable/webhook-catalog.json",
@@ -333,7 +333,7 @@
     },
     {
       "path": "docs/machine-readable/openapi.json",
-      "bytes": 329440
+      "bytes": 329380
     },
     {
       "path": "docs/markdown/en/trust.md",
@@ -381,7 +381,7 @@
     },
     {
       "path": "docs/markdown/en/reference/rest.md",
-      "bytes": 227980
+      "bytes": 227962
     },
     {
       "path": "docs/markdown/ar/trust.md",
@@ -429,7 +429,7 @@
     },
     {
       "path": "docs/markdown/ar/reference/rest.md",
-      "bytes": 228641
+      "bytes": 228623
     },
     {
       "path": "sdk-source/browser/src/side-effects.ts",
@@ -473,7 +473,7 @@
     },
     {
       "path": "docs-mcp/corpus.generated.json",
-      "bytes": 1739934
+      "bytes": 1739748
     },
     {
       "path": "docs-mcp/docs-mcp.config.json",

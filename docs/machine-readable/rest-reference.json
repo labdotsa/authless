@@ -5960,7 +5960,7 @@
           "name": "period",
           "required": true,
           "type": "string",
-          "validation": "one of monthly | annual"
+          "validation": "one of monthly"
         },
         {
           "example": "launch",
@@ -6270,7 +6270,7 @@
           "name": "billingPeriod",
           "required": true,
           "type": "string",
-          "validation": "one of monthly | annual"
+          "validation": "one of monthly"
         },
         {
           "name": "customerType",
