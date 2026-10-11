@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "kind": "authless-public-developer-repo-export",
-  "sourceRevision": "c51ecbf24f487260b6edada1d004b864d4fc1108",
+  "sourceRevision": "938af4f0bdee67cb9bce855ed9adf90bf278ba83",
   "publicRepositoryUrl": "https://github.com/labdotsa/authless/tree/master",
   "licensePolicy": "MIT; Copyright (c) 2026 LabDotSA.",
   "excluded": [
@@ -41,7 +41,7 @@
     },
     {
       "path": "packages/cli/README.md",
-      "bytes": 1231
+      "bytes": 1707
     },
     {
       "path": "packages/cli/package.json",
@@ -53,7 +53,7 @@
     },
     {
       "path": "packages/server/README.md",
-      "bytes": 2695
+      "bytes": 3117
     },
     {
       "path": "packages/server/package.json",
@@ -301,7 +301,7 @@
     },
     {
       "path": "docs/developer-readiness.md",
-      "bytes": 8010
+      "bytes": 8646
     },
     {
       "path": "docs/machine-readable/llms.txt",
@@ -321,7 +321,7 @@
     },
     {
       "path": "docs/machine-readable/llms-full.txt",
-      "bytes": 670241
+      "bytes": 674022
     },
     {
       "path": "docs/machine-readable/rest-management-guide.json",
@@ -333,7 +333,7 @@
     },
     {
       "path": "docs/machine-readable/llms-full.ar.txt",
-      "bytes": 680293
+      "bytes": 684074
     },
     {
       "path": "docs/machine-readable/webhook-catalog.json",
@@ -369,7 +369,7 @@
     },
     {
       "path": "docs/markdown/en/changes.md",
-      "bytes": 150741
+      "bytes": 154522
     },
     {
       "path": "docs/markdown/en/agents.md",
@@ -417,7 +417,7 @@
     },
     {
       "path": "docs/markdown/ar/changes.md",
-      "bytes": 151194
+      "bytes": 154975
     },
     {
       "path": "docs/markdown/ar/agents.md",
@@ -481,7 +481,7 @@
     },
     {
       "path": "docs-mcp/corpus.generated.json",
-      "bytes": 2006197
+      "bytes": 2016438
     },
     {
       "path": "docs-mcp/docs-mcp.config.json",
@@ -493,7 +493,7 @@
     },
     {
       "path": "docs-mcp/stdio.js",
-      "bytes": 1901491
+      "bytes": 1911330
     },
     {
       "path": "docs-mcp/package.json",

@@ -11,7 +11,7 @@ var corpus_generated_default = {
   generatedAt: "2026-10-09",
   manifest: {
     canonical: "https://docs.authle.ss/machine-docs.json",
-    digest: "b3524b9abb92627964866a86dbd56b850aa5b3b995e1e32189577f7f11ced886",
+    digest: "2981f32334221c7c2a860ff20616c661fbcc4d48aefe6e8385e85d41d37eb2e8",
     authority: "read-only-public-documentation",
     exclusions: [
       "authenticated-content",
@@ -27338,7 +27338,7 @@ The following checked projection is shared with the human-rendered guide and pre
 \`\`\`json
 {
   "schema": "authless.release-center/v1",
-  "updatedAt": "2026-10-11",
+  "updatedAt": "2026-10-12",
   "compatibility": [
     {
       "component": "REST API",
@@ -27424,6 +27424,62 @@ The following checked projection is shared with the human-rendered guide and pre
     }
   ],
   "changes": [
+    {
+      "id": "2026-10-12-monthly-authless-platform-billing",
+      "publishedAt": "2026-10-12",
+      "title": {
+        "en": "Monthly Authless workspace billing contract",
+        "ar": "عقد الفوترة الشهرية لمساحة عمل Authless"
+      },
+      "summary": {
+        "en": "Authless workspace billing now publishes a monthly-only plan, review, authorization, cancellation, refund, and usage contract with matching server, CLI, and documentation exports. App-defined plans and profile-owned app subscriptions remain separate products.",
+        "ar": "تنشر فوترة مساحة عمل Authless الآن عقداً شهرياً فقط للخطة والمراجعة والتفويض والإلغاء والاسترداد والاستخدام مع صادرات متطابقة للخادم وCLI والوثائق. تبقى خطط التطبيقات المعرّفة من المطور واشتراكات التطبيقات المملوكة للملف الشخصي منتجات منفصلة."
+      },
+      "categories": [
+        "api",
+        "sdk",
+        "security",
+        "docs",
+        "operations"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference",
+        "evaluator"
+      ],
+      "impact": "breaking",
+      "migration": {
+        "en": "Authless platform billing accepts monthly periods only; update integrations that send annual billing periods. This applies to the Authless workspace product only and does not change developer app plan intervals or personal app subscriptions. Verify the generated REST, server, CLI, and Docs MCP projections before publishing an integration.",
+        "ar": "تقبل فوترة منصة Authless الفترات الشهرية فقط؛ حدّث التكاملات التي ترسل فترات سنوية. ينطبق ذلك على منتج مساحة عمل Authless فقط ولا يغيّر فترات خطط تطبيقات المطور أو اشتراكات التطبيقات الشخصية. تحقق من إسقاطات REST والخادم وCLI وDocs MCP المولّدة قبل نشر التكامل."
+      },
+      "announcement": {
+        "en": "The public contract and generated exports now agree on monthly Authless workspace billing, credential separation, and the independent app-commerce model. This release does not enable live payment collection, worldwide coverage, or MCP GA.",
+        "ar": "يتفق العقد العام والصادرات المولّدة الآن على فوترة مساحة عمل Authless الشهرية وفصل بيانات الاعتماد ونموذج تجارة التطبيقات المستقل. لا يفعّل هذا الإصدار تحصيل مدفوعات حية أو تغطية عالمية أو الإصدار العام لـ MCP."
+      },
+      "replacement": "/reference/rest",
+      "supportWindow": "Current monthly-only Authless workspace billing contract.",
+      "sunsetAt": "2026-10-12",
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/contracts/src/commercial-wire.generated.ts",
+        "packages/contracts/openapi/authless.openapi.json",
+        "packages/server/src/billing.ts",
+        "packages/server/src/commerce.ts",
+        "packages/server/README.md",
+        "packages/cli/src/cli.ts",
+        "packages/cli/README.md",
+        "packages/docs-mcp/src/corpus.generated.json",
+        "apps/docs/static/openapi.json",
+        "apps/docs/static/rest-reference.json",
+        "apps/docs/machine-readable/llms-full.txt",
+        "tests/commercial-billing-api.test.ts",
+        "tests/commercial-billing.test.ts",
+        "tests/docs-mcp.test.ts"
+      ],
+      "permalink": "/changes#2026-10-12-monthly-authless-platform-billing"
+    },
     {
       "id": "2026-10-11-profile-workspace-app-commerce-boundaries",
       "publishedAt": "2026-10-11",
@@ -30208,7 +30264,7 @@ Source attribution: Developer documentation (https://docs.authle.ss/changes).
       title: "Changes and migration",
       updatedAt: "2026-08-21",
       contentType: "text/markdown",
-      contentDigest: "e5508aca479a7824c961e87544be6a6924ff89350c6039694314458d0688ebbd"
+      contentDigest: "0176d511f39343863f988d082a324bb42a583fa363f14cf15a0d9c14bd7a3e04"
     },
     {
       canonical: "https://docs.authle.ss/changes?lang=ar",
@@ -30263,7 +30319,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
 \`\`\`json
 {
   "schema": "authless.release-center/v1",
-  "updatedAt": "2026-10-11",
+  "updatedAt": "2026-10-12",
   "compatibility": [
     {
       "component": "REST API",
@@ -30349,6 +30405,62 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
     }
   ],
   "changes": [
+    {
+      "id": "2026-10-12-monthly-authless-platform-billing",
+      "publishedAt": "2026-10-12",
+      "title": {
+        "en": "Monthly Authless workspace billing contract",
+        "ar": "عقد الفوترة الشهرية لمساحة عمل Authless"
+      },
+      "summary": {
+        "en": "Authless workspace billing now publishes a monthly-only plan, review, authorization, cancellation, refund, and usage contract with matching server, CLI, and documentation exports. App-defined plans and profile-owned app subscriptions remain separate products.",
+        "ar": "تنشر فوترة مساحة عمل Authless الآن عقداً شهرياً فقط للخطة والمراجعة والتفويض والإلغاء والاسترداد والاستخدام مع صادرات متطابقة للخادم وCLI والوثائق. تبقى خطط التطبيقات المعرّفة من المطور واشتراكات التطبيقات المملوكة للملف الشخصي منتجات منفصلة."
+      },
+      "categories": [
+        "api",
+        "sdk",
+        "security",
+        "docs",
+        "operations"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference",
+        "evaluator"
+      ],
+      "impact": "breaking",
+      "migration": {
+        "en": "Authless platform billing accepts monthly periods only; update integrations that send annual billing periods. This applies to the Authless workspace product only and does not change developer app plan intervals or personal app subscriptions. Verify the generated REST, server, CLI, and Docs MCP projections before publishing an integration.",
+        "ar": "تقبل فوترة منصة Authless الفترات الشهرية فقط؛ حدّث التكاملات التي ترسل فترات سنوية. ينطبق ذلك على منتج مساحة عمل Authless فقط ولا يغيّر فترات خطط تطبيقات المطور أو اشتراكات التطبيقات الشخصية. تحقق من إسقاطات REST والخادم وCLI وDocs MCP المولّدة قبل نشر التكامل."
+      },
+      "announcement": {
+        "en": "The public contract and generated exports now agree on monthly Authless workspace billing, credential separation, and the independent app-commerce model. This release does not enable live payment collection, worldwide coverage, or MCP GA.",
+        "ar": "يتفق العقد العام والصادرات المولّدة الآن على فوترة مساحة عمل Authless الشهرية وفصل بيانات الاعتماد ونموذج تجارة التطبيقات المستقل. لا يفعّل هذا الإصدار تحصيل مدفوعات حية أو تغطية عالمية أو الإصدار العام لـ MCP."
+      },
+      "replacement": "/reference/rest",
+      "supportWindow": "Current monthly-only Authless workspace billing contract.",
+      "sunsetAt": "2026-10-12",
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/contracts/src/commercial-wire.generated.ts",
+        "packages/contracts/openapi/authless.openapi.json",
+        "packages/server/src/billing.ts",
+        "packages/server/src/commerce.ts",
+        "packages/server/README.md",
+        "packages/cli/src/cli.ts",
+        "packages/cli/README.md",
+        "packages/docs-mcp/src/corpus.generated.json",
+        "apps/docs/static/openapi.json",
+        "apps/docs/static/rest-reference.json",
+        "apps/docs/machine-readable/llms-full.txt",
+        "tests/commercial-billing-api.test.ts",
+        "tests/commercial-billing.test.ts",
+        "tests/docs-mcp.test.ts"
+      ],
+      "permalink": "/changes#2026-10-12-monthly-authless-platform-billing"
+    },
     {
       "id": "2026-10-11-profile-workspace-app-commerce-boundaries",
       "publishedAt": "2026-10-11",
@@ -33133,7 +33245,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       title: "التغييرات والترحيل",
       updatedAt: "2026-08-21",
       contentType: "text/markdown",
-      contentDigest: "3567ff5df3f61b15752f9d338684c6d04030e999226c013da0d975d7977e29dd"
+      contentDigest: "ae4c6cac7b6b783da2e1a6f3c3b0e37f7e62142345e9e3f5f196814808d24983"
     },
     {
       canonical: "https://docs.authle.ss/agents",
@@ -49296,6 +49408,34 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
     ],
     changes: [
       {
+        id: "2026-10-12-monthly-authless-platform-billing",
+        publishedAt: "2026-10-12",
+        title: {
+          en: "Monthly Authless workspace billing contract",
+          ar: "عقد الفوترة الشهرية لمساحة عمل Authless"
+        },
+        summary: {
+          en: "Authless workspace billing now publishes a monthly-only plan, review, authorization, cancellation, refund, and usage contract with matching server, CLI, and documentation exports. App-defined plans and profile-owned app subscriptions remain separate products.",
+          ar: "تنشر فوترة مساحة عمل Authless الآن عقداً شهرياً فقط للخطة والمراجعة والتفويض والإلغاء والاسترداد والاستخدام مع صادرات متطابقة للخادم وCLI والوثائق. تبقى خطط التطبيقات المعرّفة من المطور واشتراكات التطبيقات المملوكة للملف الشخصي منتجات منفصلة."
+        },
+        categories: [
+          "api",
+          "sdk",
+          "security",
+          "docs",
+          "operations"
+        ],
+        impact: "breaking",
+        migration: {
+          en: "Authless platform billing accepts monthly periods only; update integrations that send annual billing periods. This applies to the Authless workspace product only and does not change developer app plan intervals or personal app subscriptions. Verify the generated REST, server, CLI, and Docs MCP projections before publishing an integration.",
+          ar: "تقبل فوترة منصة Authless الفترات الشهرية فقط؛ حدّث التكاملات التي ترسل فترات سنوية. ينطبق ذلك على منتج مساحة عمل Authless فقط ولا يغيّر فترات خطط تطبيقات المطور أو اشتراكات التطبيقات الشخصية. تحقق من إسقاطات REST والخادم وCLI وDocs MCP المولّدة قبل نشر التكامل."
+        },
+        supportWindow: "Current monthly-only Authless workspace billing contract.",
+        sunsetAt: "2026-10-12",
+        status: "available",
+        permalink: "/changes#2026-10-12-monthly-authless-platform-billing"
+      },
+      {
         id: "2026-10-11-profile-workspace-app-commerce-boundaries",
         publishedAt: "2026-10-11",
         title: {
@@ -50915,7 +51055,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       kind: "compatibility",
       url: "/release-center.json",
       updatedAt: "2026-10-09",
-      sha256: "d82564d81515b2cbb074fb975efea1dcfe07ebc1421aa634efe7dc273bc2e727"
+      sha256: "99dfcbe96a4b27558522b5dd639b8aca8649b5f983e2234094d8050460b73ab8"
     },
     {
       kind: "compatibility",
@@ -50928,14 +51068,14 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       url: "/changes.json?lang=en",
       locale: "en",
       updatedAt: "2026-10-09",
-      sha256: "f321f678ca49d61b0ae9328f6e4bbc2ce31c2a3446aea3bd6f622350c01a9814"
+      sha256: "e02f64b037de8b2300b6c1d7068450734a428293788e6d4ac9e268f83a47bfe7"
     },
     {
       kind: "changelog",
       url: "/changes.json?lang=ar",
       locale: "ar",
       updatedAt: "2026-10-09",
-      sha256: "4b66308f998da9fe2f680cd3e34bb5476196cbb505b22a04d84447ca7f07628f"
+      sha256: "e6c155d83aef88df735dcca261a46b3fc85985c7a21d61b080ccc54dd0910dd2"
     },
     {
       kind: "operations",

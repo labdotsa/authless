@@ -45,10 +45,17 @@ public JWKS and exact resource and scope. The agent exchanges a short-lived
 `private_key_jwt` at the management OAuth token endpoint. There is no device
 grant, browser login, refresh-token flow, or automatic privilege grant.
 
-There is no published Authless CLI in this package. Use the documented
-CLI package separately for read-only terminal workflows. Use the documented
-management-agent example for delegated machine authority and the OIDC flow for
-interactive application sign-in.
+There is no published Authless CLI in this package. Use the documented CLI
+package separately for terminal workflows. The CLI keeps personal profile
+subscriptions, developer app and environment commerce, and Authless workspace
+billing in separate command authorities. Use the documented management-agent
+example for delegated machine authority and the OIDC flow for interactive
+application sign-in.
+
+App credentials can access app-commerce operations only when the API contract
+grants the requested app, workspace, and environment. They cannot access the
+buyer's profile subscriptions or Authless workspace billing. Workspace-owner
+authority remains required for Authless billing.
 
 ## Requests and errors
 

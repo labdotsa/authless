@@ -18,9 +18,10 @@ cd authless
 bun install --frozen-lockfile
 ```
 
-The public repository includes the checked `dist` artifacts, so this path does
-not run package build scripts. The private application workspace may build the
-packages from source as part of its own development workflow.
+The public repository includes checked `dist` artifacts. A clean clone can run
+the packages without the private application source or a build step. The
+private application workspace rebuilds these artifacts before each public
+export.
 
 ```ts
 import { createAuthlessServerClient } from "@authless/server";
@@ -61,8 +62,9 @@ AUTHLESS_SESSION_TOKEN="$AUTHLESS_SESSION_TOKEN" \
 
 Native OAuth with the `workspace:read` grant supports only `workspaces list`
 and `workspaces get`. `AUTHLESS_SESSION_TOKEN` supports the remaining
-platform-session commands. `AUTHLESS_APP_CREDENTIAL` is limited to app
-membership and access commands. Set exactly one environment credential for
+platform-session commands. `AUTHLESS_APP_CREDENTIAL` supports app membership,
+access, and contract-authorized app-commerce commands for one app,
+workspace, and environment. Set exactly one environment credential for
 token-based commands. Pass credentials through a secret manager, never through
 command-line arguments. For an interactive operator flow, run `auth login`,
 omit `--workspace` to use the browser workspace picker or pass one workspace
@@ -92,11 +94,23 @@ packages/cli/dist/cli.js auth logout --resource https://api.authle.ss/mcp
 ```
 
 The management API grant and MCP grant are never interchangeable. The CLI
-allows only MCP tools marked by the server with the
-`annotations.readOnlyHint` flag; mutations stay on the authenticated REST
-command path and require their own credential and confirmation.
+allows `mcp call` only for MCP tools marked by the server with the
+`annotations.readOnlyHint` flag. Delegated commerce and Authless billing
+mutations use the explicit `mcp preview` and confirmed `mcp apply` flow with
+their own credential and scope. Buyer profile operations stay outside MCP.
 
-Supported commands cover workspace and app lifecycle, environment lookup, membership invitation and status changes, access lookup, and audit listing. Mutations require explicit `--yes`, use idempotency keys, and require expected versions where the contract does. `auth login`, `auth refresh`, and `auth logout` manage the native grant. Agent processes use the separate owner-created delegation flow.
+Supported commands cover workspace and app lifecycle, environment lookup,
+membership invitation and status changes, access lookup, audit listing, app
+catalog plans, features, add-ons, subscriptions, invoices, checkout,
+publisher refunds, settlements, payouts, usage, and the separate Authless
+workspace billing review and change flow. Personal subscription commands use
+the profile session. App catalog and environment commands use authority bound
+to the exact workspace, app, and environment. Authless billing requires a
+workspace-owner session or an owner-approved delegated `billing:write` grant.
+Mutations require explicit `--yes`, use idempotency keys, and require expected
+versions where the contract does. `auth login`, `auth refresh`, and `auth
+logout` manage the native grant. Agent processes use the separate owner-created
+delegation flow.
 
 ## Version the API for long-lived clients
 

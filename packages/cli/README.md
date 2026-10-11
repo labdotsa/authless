@@ -24,7 +24,13 @@ OTP. OAuth still requires workspace selection and explicit consent; unsigned
 browsers use email sign-in.
 
 Use `AUTHLESS_SESSION_TOKEN` for the remaining platform-session commands or
-`AUTHLESS_APP_CREDENTIAL` for app membership and access commands. Agents
-should use a delegated token or app credential from their secret manager. The
-CLI never extracts browser cookies. Supported mutations require explicit
+`AUTHLESS_APP_CREDENTIAL` for app membership, access, and contract-authorized
+app-commerce commands. Personal app subscriptions and invoices belong to the
+signed-in profile. App catalogs, plans, features, add-ons, customers, and
+environment commerce belong to the developer workspace. Authless billing is
+the workspace owner's platform billing and is separate from app subscriptions.
+The CLI MCP buyer surface is excluded. MCP `call` remains read-only; delegated
+commerce and billing writes use explicit preview and confirmed apply commands.
+Agents should use a delegated token or app credential from their secret manager.
+The CLI never extracts browser cookies. Supported mutations require explicit
 `--yes` and preserve idempotency and expected-version checks.
