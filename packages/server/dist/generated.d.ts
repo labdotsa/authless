@@ -4,7 +4,7 @@ export type CommercialPurchaseReceipt = {
     acceptedAt: string;
     acceptedLocale: "en" | "ar";
     activatedAt: string;
-    billingPeriod: "monthly" | "annual";
+    billingPeriod: "monthly";
     catalogueDigest: string;
     legalBundleDigest: string;
     legalBundleVersion: string;
@@ -34,7 +34,7 @@ export type CommercialPurchaseAuthorization = {
     workspaceId: string;
 };
 export type CommercialPurchaseReviewRequest = {
-    billingPeriod: "monthly" | "annual";
+    billingPeriod: "monthly";
     customerType?: "b2c" | "b2b";
     locale: "en" | "ar";
 };
@@ -74,7 +74,7 @@ export type CommercialPurchaseSupportSchedule = {
 };
 export type CommercialPurchaseOffer = {
     amountSar: number;
-    billingPeriod: "monthly" | "annual";
+    billingPeriod: "monthly";
     charge: CommercialPurchaseCharge;
     currency: "SAR";
     disclosures: {
@@ -167,7 +167,7 @@ export type CommercialBillingChangeAuthorization = {
 };
 export type CommercialBillingChangeReviewRequest = {
     idempotencyKey: string;
-    period: "monthly" | "annual";
+    period: "monthly";
     planId: "launch" | "growth" | "scale";
     quantity?: number;
 };
@@ -183,7 +183,7 @@ export type CommercialBillingChangeReview = {
     providerBinding: {
         changeId: string;
     };
-    targetPeriod: "monthly" | "annual";
+    targetPeriod: "monthly";
     targetPlanId: "launch" | "growth" | "scale";
     targetQuantity: number;
 };
@@ -214,7 +214,7 @@ export type CommercialBillingView = {
     creditsMicros: number;
     financialRecords: Array<CommercialBillingFinancialRecord>;
     pendingInvoiceItemsMicros: number;
-    period: "monthly" | "annual";
+    period: "monthly";
     planId: "launch" | "growth" | "scale";
     quantity: number;
     renewalDate: string;

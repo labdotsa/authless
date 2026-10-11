@@ -11,7 +11,7 @@ var corpus_generated_default = {
   generatedAt: "2026-10-09",
   manifest: {
     canonical: "https://docs.authle.ss/machine-docs.json",
-    digest: "557d8113ab5fd6d847073f6999b6cee5ca9f5d1d8035e064a7203c36f60d506d",
+    digest: "82f009bbd32e6e0baf9af343157337569c0ba2ce055baad88b47604877ee75c5",
     authority: "read-only-public-documentation",
     exclusions: [
       "authenticated-content",
@@ -15322,7 +15322,7 @@ The following checked projection is shared with the human-rendered guide and pre
           "name": "period",
           "required": true,
           "type": "string",
-          "validation": "one of monthly | annual"
+          "validation": "one of monthly"
         },
         {
           "example": "launch",
@@ -15632,7 +15632,7 @@ The following checked projection is shared with the human-rendered guide and pre
           "name": "billingPeriod",
           "required": true,
           "type": "string",
-          "validation": "one of monthly | annual"
+          "validation": "one of monthly"
         },
         {
           "name": "customerType",
@@ -16065,7 +16065,7 @@ Source attribution: Developer documentation (https://docs.authle.ss/reference/re
       title: "REST API reference",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "2d867bd0249ec80f7ab503bc02c41c6d141285dd8863ad81474ae2c67b31afd9"
+      contentDigest: "c20ba71126104a0ec153bf2baca42ce8eb9d5314fa5435b1d8f167541f3be091"
     },
     {
       canonical: "https://docs.authle.ss/reference/rest?lang=ar",
@@ -22076,7 +22076,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "name": "period",
           "required": true,
           "type": "string",
-          "validation": "one of monthly | annual"
+          "validation": "one of monthly"
         },
         {
           "example": "launch",
@@ -22386,7 +22386,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "name": "billingPeriod",
           "required": true,
           "type": "string",
-          "validation": "one of monthly | annual"
+          "validation": "one of monthly"
         },
         {
           "name": "customerType",
@@ -22819,7 +22819,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       title: "مرجع واجهة REST",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "219ed1c117493de730739bf5047f68e27fef2d47e42a693666978c942a12691e"
+      contentDigest: "29ff27c091e234a43429d79ae6a2197f15d07ea8f97cebcdbc27fc0fb636a611"
     },
     {
       canonical: "https://docs.authle.ss/changes",
@@ -35270,7 +35270,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           name: "period",
           required: true,
           type: "string",
-          validation: "one of monthly | annual"
+          validation: "one of monthly"
         },
         {
           example: "launch",
@@ -35580,7 +35580,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           name: "billingPeriod",
           required: true,
           type: "string",
-          validation: "one of monthly | annual"
+          validation: "one of monthly"
         },
         {
           name: "customerType",
@@ -36026,8 +36026,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         billingPeriod: {
           type: "string",
           enum: [
-            "monthly",
-            "annual"
+            "monthly"
           ]
         },
         catalogueDigest: {
@@ -36168,8 +36167,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         billingPeriod: {
           type: "string",
           enum: [
-            "monthly",
-            "annual"
+            "monthly"
           ]
         },
         customerType: {
@@ -36379,8 +36377,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         billingPeriod: {
           type: "string",
           enum: [
-            "monthly",
-            "annual"
+            "monthly"
           ]
         },
         charge: {
@@ -36839,8 +36836,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         period: {
           type: "string",
           enum: [
-            "monthly",
-            "annual"
+            "monthly"
           ]
         },
         planId: {
@@ -36922,8 +36918,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         targetPeriod: {
           type: "string",
           enum: [
-            "monthly",
-            "annual"
+            "monthly"
           ]
         },
         targetPlanId: {
@@ -37076,8 +37071,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         period: {
           type: "string",
           enum: [
-            "monthly",
-            "annual"
+            "monthly"
           ]
         },
         planId: {
@@ -42880,13 +42874,13 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       kind: "openapi",
       url: "/openapi.json",
       updatedAt: "2026-10-09",
-      sha256: "78399c2adf3623385f4a1e388676ac4ff9448f7ad8a830a9973effc9d516a3fe"
+      sha256: "b33416bb1d7741ea4ecbaaeff8f0809049046120dac0ebfcfc04438e09b99ee3"
     },
     {
       kind: "openapi",
       url: "/rest-reference.json",
       updatedAt: "2026-10-09",
-      sha256: "f91e8650cfc1a280710bbe87be14d9f5ecb9277c801a5ef51c09a9546bf718be"
+      sha256: "cfed6cebf6579a1a70221f2e2c5ed980ed505ae059cce7b8dc1c3054b0b2850a"
     },
     {
       kind: "discovery",
@@ -42910,7 +42904,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       kind: "compatibility",
       url: "/compatibility.json",
       updatedAt: "2026-10-09",
-      sha256: "2d34f5a7d1b110bc3284fbaaf1184d7e0ee639c9f6f28fb2580b3a91f4cdc405"
+      sha256: "b9d8a8f9361c68d1d7650b3b161fda5837acae486c1e8ac855541c3ad26dc60b"
     },
     {
       kind: "changelog",
