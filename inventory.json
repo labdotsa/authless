@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "kind": "authless-public-developer-repo-export",
-  "sourceRevision": "d0aff37ceec143ea33fdd3bbf02fd0cfea5b51b8",
+  "sourceRevision": "387d43bcd6a4a32c70cc089e6ac27539c541f0db",
   "publicRepositoryUrl": "https://github.com/labdotsa/authless/tree/master",
   "licensePolicy": "MIT; Copyright (c) 2026 LabDotSA.",
   "excluded": [
@@ -493,7 +493,7 @@
     },
     {
       "path": "docs-mcp/stdio.js",
-      "bytes": 1654444
+      "bytes": 1901491
     },
     {
       "path": "docs-mcp/package.json",
