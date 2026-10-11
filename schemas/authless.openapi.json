@@ -8639,7 +8639,7 @@
         "examples": [
           {
             "challengeId": "identity_continuation_example",
-            "code": "12345678",
+            "code": "123456",
             "locale": "en"
           }
         ],
@@ -8648,7 +8648,10 @@
             "type": "string"
           },
           "code": {
-            "type": "string"
+            "type": "string",
+            "minLength": 6,
+            "maxLength": 6,
+            "pattern": "^[0-9]{6}$"
           },
           "locale": {
             "type": "string",

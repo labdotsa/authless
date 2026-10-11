@@ -11,7 +11,7 @@ var corpus_generated_default = {
   generatedAt: "2026-10-09",
   manifest: {
     canonical: "https://docs.authle.ss/machine-docs.json",
-    digest: "d593d05dba1dcd4550c00919e78be806438f7a5d298767f2306bb99610de0b97",
+    digest: "557d8113ab5fd6d847073f6999b6cee5ca9f5d1d8035e064a7203c36f60d506d",
     authority: "read-only-public-documentation",
     exclusions: [
       "authenticated-content",
@@ -9491,13 +9491,13 @@ The following checked projection is shared with the human-rendered guide and pre
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/VerifyIdentityContinuationRequest"
       ],
-      "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"challengeId\\":\\"identity_continuation_example\\",\\"code\\":\\"12345678\\",\\"locale\\":\\"en\\"}' 'https://api.authle.ss/identity/continuations/verifications'",
+      "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"challengeId\\":\\"identity_continuation_example\\",\\"code\\":\\"123456\\",\\"locale\\":\\"en\\"}' 'https://api.authle.ss/identity/continuations/verifications'",
       "exampleParameters": {
         "x-correlation-id": "request_example_001"
       },
       "exampleRequestBody": {
         "challengeId": "identity_continuation_example",
-        "code": "12345678",
+        "code": "123456",
         "locale": "en"
       },
       "method": "POST",
@@ -9544,11 +9544,11 @@ The following checked projection is shared with the human-rendered guide and pre
           "validation": "—"
         },
         {
-          "example": "12345678",
+          "example": "123456",
           "name": "code",
           "required": true,
           "type": "string",
-          "validation": "—"
+          "validation": "minLength 6, maxLength 6, pattern ^[0-9]{6}$"
         },
         {
           "example": "en",
@@ -16065,7 +16065,7 @@ Source attribution: Developer documentation (https://docs.authle.ss/reference/re
       title: "REST API reference",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "be6721ecaa032c7ac7ea385d74698825f9b530ce16a96b6fc7ae142561e7008d"
+      contentDigest: "2d867bd0249ec80f7ab503bc02c41c6d141285dd8863ad81474ae2c67b31afd9"
     },
     {
       canonical: "https://docs.authle.ss/reference/rest?lang=ar",
@@ -16245,13 +16245,13 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/VerifyIdentityContinuationRequest"
       ],
-      "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"challengeId\\":\\"identity_continuation_example\\",\\"code\\":\\"12345678\\",\\"locale\\":\\"en\\"}' 'https://api.authle.ss/identity/continuations/verifications'",
+      "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"challengeId\\":\\"identity_continuation_example\\",\\"code\\":\\"123456\\",\\"locale\\":\\"en\\"}' 'https://api.authle.ss/identity/continuations/verifications'",
       "exampleParameters": {
         "x-correlation-id": "request_example_001"
       },
       "exampleRequestBody": {
         "challengeId": "identity_continuation_example",
-        "code": "12345678",
+        "code": "123456",
         "locale": "en"
       },
       "method": "POST",
@@ -16298,11 +16298,11 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "validation": "—"
         },
         {
-          "example": "12345678",
+          "example": "123456",
           "name": "code",
           "required": true,
           "type": "string",
-          "validation": "—"
+          "validation": "minLength 6, maxLength 6, pattern ^[0-9]{6}$"
         },
         {
           "example": "en",
@@ -22819,7 +22819,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       title: "مرجع واجهة REST",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "b6454a293997223959dc0f47b1d4c2d02ffd39db29ca431ba2176f262b0b585c"
+      contentDigest: "219ed1c117493de730739bf5047f68e27fef2d47e42a693666978c942a12691e"
     },
     {
       canonical: "https://docs.authle.ss/changes",
@@ -22874,16 +22874,16 @@ The following checked projection is shared with the human-rendered guide and pre
 \`\`\`json
 {
   "schema": "authless.release-center/v1",
-  "updatedAt": "2026-10-10",
+  "updatedAt": "2026-10-11",
   "compatibility": [
     {
       "component": "REST API",
       "deprecation": "current",
-      "releaseNotes": "/changes#2026-08-22-identity-continuation-terminal-reasons",
+      "releaseNotes": "/changes#2026-10-11-six-digit-authentication",
       "version": "0.1.0",
       "stability": "stable",
       "contract": "unversioned default (0.1.0)",
-      "testedAt": "2026-08-22",
+      "testedAt": "2026-10-11",
       "evidence": [
         "packages/contracts/openapi/authless.openapi.json",
         "tests/rest-api-reference.test.ts"
@@ -22910,12 +22910,12 @@ The following checked projection is shared with the human-rendered guide and pre
     {
       "component": "@authless/server",
       "deprecation": "current",
-      "releaseNotes": "/changes#2026-10-10-native-cli-and-docs-navigation",
+      "releaseNotes": "/changes#2026-10-11-six-digit-authentication",
       "version": "0.1.0",
       "stability": "source-only",
       "contract": "0.1.0",
       "runtime": "Node 24.x",
-      "testedAt": "2026-10-10",
+      "testedAt": "2026-10-11",
       "evidence": [
         "packages/server/package.json",
         "packages/server/src/index.ts",
@@ -22960,6 +22960,59 @@ The following checked projection is shared with the human-rendered guide and pre
     }
   ],
   "changes": [
+    {
+      "id": "2026-10-11-six-digit-authentication",
+      "publishedAt": "2026-10-11",
+      "title": {
+        "en": "Six-digit authentication and a simpler sign-in journey",
+        "ar": "مصادقة من ستة أرقام ومسار تسجيل دخول أبسط"
+      },
+      "summary": {
+        "en": "Hosted sign-in and identity-continuation codes now use six numeric digits. Generated clients and public references share the same contract, while Sign, the landing page, and confirmation email use shorter focused copy.",
+        "ar": "تستخدم رموز تسجيل الدخول المستضاف واستمرارية الهوية الآن ستة أرقام فقط. تستخدم العملاء المولّدة والمراجع العامة العقد نفسه، بينما تستخدم Sign والصفحة الرئيسية ورسالة التأكيد نصاً أقصر وأكثر تركيزاً."
+      },
+      "categories": [
+        "product",
+        "api",
+        "sdk",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "reference",
+        "evaluator"
+      ],
+      "impact": "breaking",
+      "migration": {
+        "en": "Update verification inputs, integrations, and test fixtures to send exactly six ASCII digits. Preserve leading zeros as part of the code.",
+        "ar": "حدّث مدخلات التحقق والتكاملات وبيانات الاختبار لإرسال ستة أرقام ASCII بالضبط. حافظ على الأصفار البادئة باعتبارها جزءاً من الرمز."
+      },
+      "announcement": {
+        "en": "The canonical OpenAPI schema, runtime codecs, generated clients, REST reference, machine-readable docs, and Docs MCP now enforce the same six-digit rule.",
+        "ar": "يفرض مخطط OpenAPI المعياري ومحلّلات التشغيل والعملاء المولّدون ومرجع REST والوثائق المقروءة آلياً وDocs MCP القاعدة نفسها المكوّنة من ستة أرقام."
+      },
+      "replacement": "/reference/rest",
+      "supportWindow": "Current six-digit contract.",
+      "sunsetAt": "2026-10-11",
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/contracts/openapi/authless.openapi.json",
+        "packages/contracts/src/identity-wire.generated.ts",
+        "packages/server/src/generated.ts",
+        "packages/identity-node/src/secret-protection.ts",
+        "packages/jobs/src/identity-verification.ts",
+        "packages/oidc/src/interactions.ts",
+        "apps/docs/static/openapi.json",
+        "apps/docs/static/rest-reference.json",
+        "apps/docs/machine-readable/llms-full.txt",
+        "packages/docs-mcp/src/corpus.generated.json",
+        "tests/identity-contract-codec.test.ts",
+        "tests/identity-verification-job.test.ts"
+      ],
+      "permalink": "/changes#2026-10-11-six-digit-authentication"
+    },
     {
       "id": "2026-10-10-native-cli-and-docs-navigation",
       "publishedAt": "2026-10-10",
@@ -25620,7 +25673,7 @@ Source attribution: Developer documentation (https://docs.authle.ss/changes).
       title: "Changes and migration",
       updatedAt: "2026-08-21",
       contentType: "text/markdown",
-      contentDigest: "a098afd87e2ec582f9270a952da6fa8e26f0b7ae02b05f9dc45ab2237d2f17f9"
+      contentDigest: "779edcf2761893e8f326c31390a7721f931b2fdb65019dc054fe13156b6b7be2"
     },
     {
       canonical: "https://docs.authle.ss/changes?lang=ar",
@@ -25675,16 +25728,16 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
 \`\`\`json
 {
   "schema": "authless.release-center/v1",
-  "updatedAt": "2026-10-10",
+  "updatedAt": "2026-10-11",
   "compatibility": [
     {
       "component": "REST API",
       "deprecation": "current",
-      "releaseNotes": "/changes#2026-08-22-identity-continuation-terminal-reasons",
+      "releaseNotes": "/changes#2026-10-11-six-digit-authentication",
       "version": "0.1.0",
       "stability": "stable",
       "contract": "unversioned default (0.1.0)",
-      "testedAt": "2026-08-22",
+      "testedAt": "2026-10-11",
       "evidence": [
         "packages/contracts/openapi/authless.openapi.json",
         "tests/rest-api-reference.test.ts"
@@ -25711,12 +25764,12 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
     {
       "component": "@authless/server",
       "deprecation": "current",
-      "releaseNotes": "/changes#2026-10-10-native-cli-and-docs-navigation",
+      "releaseNotes": "/changes#2026-10-11-six-digit-authentication",
       "version": "0.1.0",
       "stability": "source-only",
       "contract": "0.1.0",
       "runtime": "Node 24.x",
-      "testedAt": "2026-10-10",
+      "testedAt": "2026-10-11",
       "evidence": [
         "packages/server/package.json",
         "packages/server/src/index.ts",
@@ -25761,6 +25814,59 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
     }
   ],
   "changes": [
+    {
+      "id": "2026-10-11-six-digit-authentication",
+      "publishedAt": "2026-10-11",
+      "title": {
+        "en": "Six-digit authentication and a simpler sign-in journey",
+        "ar": "مصادقة من ستة أرقام ومسار تسجيل دخول أبسط"
+      },
+      "summary": {
+        "en": "Hosted sign-in and identity-continuation codes now use six numeric digits. Generated clients and public references share the same contract, while Sign, the landing page, and confirmation email use shorter focused copy.",
+        "ar": "تستخدم رموز تسجيل الدخول المستضاف واستمرارية الهوية الآن ستة أرقام فقط. تستخدم العملاء المولّدة والمراجع العامة العقد نفسه، بينما تستخدم Sign والصفحة الرئيسية ورسالة التأكيد نصاً أقصر وأكثر تركيزاً."
+      },
+      "categories": [
+        "product",
+        "api",
+        "sdk",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "reference",
+        "evaluator"
+      ],
+      "impact": "breaking",
+      "migration": {
+        "en": "Update verification inputs, integrations, and test fixtures to send exactly six ASCII digits. Preserve leading zeros as part of the code.",
+        "ar": "حدّث مدخلات التحقق والتكاملات وبيانات الاختبار لإرسال ستة أرقام ASCII بالضبط. حافظ على الأصفار البادئة باعتبارها جزءاً من الرمز."
+      },
+      "announcement": {
+        "en": "The canonical OpenAPI schema, runtime codecs, generated clients, REST reference, machine-readable docs, and Docs MCP now enforce the same six-digit rule.",
+        "ar": "يفرض مخطط OpenAPI المعياري ومحلّلات التشغيل والعملاء المولّدون ومرجع REST والوثائق المقروءة آلياً وDocs MCP القاعدة نفسها المكوّنة من ستة أرقام."
+      },
+      "replacement": "/reference/rest",
+      "supportWindow": "Current six-digit contract.",
+      "sunsetAt": "2026-10-11",
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/contracts/openapi/authless.openapi.json",
+        "packages/contracts/src/identity-wire.generated.ts",
+        "packages/server/src/generated.ts",
+        "packages/identity-node/src/secret-protection.ts",
+        "packages/jobs/src/identity-verification.ts",
+        "packages/oidc/src/interactions.ts",
+        "apps/docs/static/openapi.json",
+        "apps/docs/static/rest-reference.json",
+        "apps/docs/machine-readable/llms-full.txt",
+        "packages/docs-mcp/src/corpus.generated.json",
+        "tests/identity-contract-codec.test.ts",
+        "tests/identity-verification-job.test.ts"
+      ],
+      "permalink": "/changes#2026-10-11-six-digit-authentication"
+    },
     {
       "id": "2026-10-10-native-cli-and-docs-navigation",
       "publishedAt": "2026-10-10",
@@ -28421,7 +28527,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       title: "التغييرات والترحيل",
       updatedAt: "2026-08-21",
       contentType: "text/markdown",
-      contentDigest: "a6ff385872df4dc46cced757e6c8974e2582e2429bcc2ad8e4e1f705e863e614"
+      contentDigest: "8f2ea539a803780ddb9dc902e050a4c0b1dc1e4dccdd28c2316b67981d62299b"
     },
     {
       canonical: "https://docs.authle.ss/agents",
@@ -29333,13 +29439,13 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/VerifyIdentityContinuationRequest"
       ],
-      example: `curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"challengeId":"identity_continuation_example","code":"12345678","locale":"en"}' 'https://api.authle.ss/identity/continuations/verifications'`,
+      example: `curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"challengeId":"identity_continuation_example","code":"123456","locale":"en"}' 'https://api.authle.ss/identity/continuations/verifications'`,
       exampleParameters: {
         "x-correlation-id": "request_example_001"
       },
       exampleRequestBody: {
         challengeId: "identity_continuation_example",
-        code: "12345678",
+        code: "123456",
         locale: "en"
       },
       method: "POST",
@@ -29386,11 +29492,11 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           validation: "—"
         },
         {
-          example: "12345678",
+          example: "123456",
           name: "code",
           required: true,
           type: "string",
-          validation: "—"
+          validation: "minLength 6, maxLength 6, pattern ^[0-9]{6}$"
         },
         {
           example: "en",
@@ -37949,7 +38055,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       examples: [
         {
           challengeId: "identity_continuation_example",
-          code: "12345678",
+          code: "123456",
           locale: "en"
         }
       ],
@@ -37958,7 +38064,10 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           type: "string"
         },
         code: {
-          type: "string"
+          type: "string",
+          minLength: 6,
+          maxLength: 6,
+          pattern: "^[0-9]{6}$"
         },
         locale: {
           type: "string",
@@ -41122,11 +41231,11 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       {
         component: "REST API",
         deprecation: "current",
-        releaseNotes: "/changes#2026-08-22-identity-continuation-terminal-reasons",
+        releaseNotes: "/changes#2026-10-11-six-digit-authentication",
         version: "0.1.0",
         stability: "stable",
         contract: "unversioned default (0.1.0)",
-        testedAt: "2026-08-22",
+        testedAt: "2026-10-11",
         evidence: [
           "packages/contracts/openapi/authless.openapi.json",
           "tests/rest-api-reference.test.ts"
@@ -41153,12 +41262,12 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       {
         component: "@authless/server",
         deprecation: "current",
-        releaseNotes: "/changes#2026-10-10-native-cli-and-docs-navigation",
+        releaseNotes: "/changes#2026-10-11-six-digit-authentication",
         version: "0.1.0",
         stability: "source-only",
         contract: "0.1.0",
         runtime: "Node 24.x",
-        testedAt: "2026-10-10",
+        testedAt: "2026-10-11",
         evidence: [
           "packages/server/package.json",
           "packages/server/src/index.ts",
@@ -41203,6 +41312,34 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       }
     ],
     changes: [
+      {
+        id: "2026-10-11-six-digit-authentication",
+        publishedAt: "2026-10-11",
+        title: {
+          en: "Six-digit authentication and a simpler sign-in journey",
+          ar: "مصادقة من ستة أرقام ومسار تسجيل دخول أبسط"
+        },
+        summary: {
+          en: "Hosted sign-in and identity-continuation codes now use six numeric digits. Generated clients and public references share the same contract, while Sign, the landing page, and confirmation email use shorter focused copy.",
+          ar: "تستخدم رموز تسجيل الدخول المستضاف واستمرارية الهوية الآن ستة أرقام فقط. تستخدم العملاء المولّدة والمراجع العامة العقد نفسه، بينما تستخدم Sign والصفحة الرئيسية ورسالة التأكيد نصاً أقصر وأكثر تركيزاً."
+        },
+        categories: [
+          "product",
+          "api",
+          "sdk",
+          "security",
+          "docs"
+        ],
+        impact: "breaking",
+        migration: {
+          en: "Update verification inputs, integrations, and test fixtures to send exactly six ASCII digits. Preserve leading zeros as part of the code.",
+          ar: "حدّث مدخلات التحقق والتكاملات وبيانات الاختبار لإرسال ستة أرقام ASCII بالضبط. حافظ على الأصفار البادئة باعتبارها جزءاً من الرمز."
+        },
+        supportWindow: "Current six-digit contract.",
+        sunsetAt: "2026-10-11",
+        status: "available",
+        permalink: "/changes#2026-10-11-six-digit-authentication"
+      },
       {
         id: "2026-10-10-native-cli-and-docs-navigation",
         publishedAt: "2026-10-10",
@@ -42743,13 +42880,13 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       kind: "openapi",
       url: "/openapi.json",
       updatedAt: "2026-10-09",
-      sha256: "29118aa187b13cd1263f95dca02a3b5dc7bca9ceef06d4d8b8f9bbee99acad72"
+      sha256: "78399c2adf3623385f4a1e388676ac4ff9448f7ad8a830a9973effc9d516a3fe"
     },
     {
       kind: "openapi",
       url: "/rest-reference.json",
       updatedAt: "2026-10-09",
-      sha256: "826bf90ca6168e4d83bc7a5b0072fff954f203e67015eeeb670e15376a5bf572"
+      sha256: "f91e8650cfc1a280710bbe87be14d9f5ecb9277c801a5ef51c09a9546bf718be"
     },
     {
       kind: "discovery",
@@ -42767,27 +42904,27 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       kind: "compatibility",
       url: "/release-center.json",
       updatedAt: "2026-10-09",
-      sha256: "b1bf7347572011ef961efac7e41120f618aad01d66b1c044d2c265f8ac6e7c25"
+      sha256: "794444bb2a9effa9b0c20924975112563f10b19cda54abc9a146c158688d4f28"
     },
     {
       kind: "compatibility",
       url: "/compatibility.json",
       updatedAt: "2026-10-09",
-      sha256: "234a2f3f68606403ac1d054e575eca05722f0de3bdc7a25d18b708b3c025bb78"
+      sha256: "2d34f5a7d1b110bc3284fbaaf1184d7e0ee639c9f6f28fb2580b3a91f4cdc405"
     },
     {
       kind: "changelog",
       url: "/changes.json?lang=en",
       locale: "en",
       updatedAt: "2026-10-09",
-      sha256: "c7935ef13908c341fe9d76fe2d8452fce68b569241f3ddfa211f9f59bde49ead"
+      sha256: "749be5af473a612b3bef9326949a86f21d2e8b4b5e7182489edd2e9b78090d69"
     },
     {
       kind: "changelog",
       url: "/changes.json?lang=ar",
       locale: "ar",
       updatedAt: "2026-10-09",
-      sha256: "0b9e6b349e8a47f9f0466220f5c756d90d338ebebb803ebcfb2ee7e9d503610d"
+      sha256: "86a6182096dfa56f0bf267486764482f37bb646be35c4a5f941eb5c8db7883c5"
     },
     {
       kind: "operations",

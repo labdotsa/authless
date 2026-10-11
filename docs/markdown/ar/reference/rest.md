@@ -173,13 +173,13 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/VerifyIdentityContinuationRequest"
       ],
-      "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\"challengeId\":\"identity_continuation_example\",\"code\":\"12345678\",\"locale\":\"en\"}' 'https://api.authle.ss/identity/continuations/verifications'",
+      "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\"challengeId\":\"identity_continuation_example\",\"code\":\"123456\",\"locale\":\"en\"}' 'https://api.authle.ss/identity/continuations/verifications'",
       "exampleParameters": {
         "x-correlation-id": "request_example_001"
       },
       "exampleRequestBody": {
         "challengeId": "identity_continuation_example",
-        "code": "12345678",
+        "code": "123456",
         "locale": "en"
       },
       "method": "POST",
@@ -226,11 +226,11 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "validation": "—"
         },
         {
-          "example": "12345678",
+          "example": "123456",
           "name": "code",
           "required": true,
           "type": "string",
-          "validation": "—"
+          "validation": "minLength 6, maxLength 6, pattern ^[0-9]{6}$"
         },
         {
           "example": "en",

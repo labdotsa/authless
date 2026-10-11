@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "kind": "authless-public-developer-repo-export",
-  "sourceRevision": "8385fa6e0ac5f644bb723e0a4c4eac6b1d62596a",
+  "sourceRevision": "448012874b64e01f7d763dc2dc2fc50208718401",
   "publicRepositoryUrl": "https://github.com/labdotsa/authless/tree/master",
   "licensePolicy": "MIT; Copyright (c) 2026 LabDotSA.",
   "excluded": [
@@ -277,7 +277,7 @@
     },
     {
       "path": "schemas/authless.openapi.json",
-      "bytes": 329349
+      "bytes": 329440
     },
     {
       "path": "docs/README.md",
@@ -301,7 +301,7 @@
     },
     {
       "path": "docs/machine-readable/rest-reference.json",
-      "bytes": 226132
+      "bytes": 226167
     },
     {
       "path": "docs/machine-readable/developer-documentation.json",
@@ -313,7 +313,7 @@
     },
     {
       "path": "docs/machine-readable/llms-full.txt",
-      "bytes": 591120
+      "bytes": 594103
     },
     {
       "path": "docs/machine-readable/rest-management-guide.json",
@@ -325,7 +325,7 @@
     },
     {
       "path": "docs/machine-readable/llms-full.ar.txt",
-      "bytes": 601172
+      "bytes": 604155
     },
     {
       "path": "docs/machine-readable/webhook-catalog.json",
@@ -333,7 +333,7 @@
     },
     {
       "path": "docs/machine-readable/openapi.json",
-      "bytes": 329349
+      "bytes": 329440
     },
     {
       "path": "docs/markdown/en/trust.md",
@@ -361,7 +361,7 @@
     },
     {
       "path": "docs/markdown/en/changes.md",
-      "bytes": 142614
+      "bytes": 145562
     },
     {
       "path": "docs/markdown/en/agents.md",
@@ -381,7 +381,7 @@
     },
     {
       "path": "docs/markdown/en/reference/rest.md",
-      "bytes": 227945
+      "bytes": 227980
     },
     {
       "path": "docs/markdown/ar/trust.md",
@@ -409,7 +409,7 @@
     },
     {
       "path": "docs/markdown/ar/changes.md",
-      "bytes": 143067
+      "bytes": 146015
     },
     {
       "path": "docs/markdown/ar/agents.md",
@@ -429,7 +429,7 @@
     },
     {
       "path": "docs/markdown/ar/reference/rest.md",
-      "bytes": 228606
+      "bytes": 228641
     },
     {
       "path": "sdk-source/browser/src/side-effects.ts",
@@ -473,7 +473,7 @@
     },
     {
       "path": "docs-mcp/corpus.generated.json",
-      "bytes": 1731773
+      "bytes": 1739934
     },
     {
       "path": "docs-mcp/docs-mcp.config.json",
@@ -485,7 +485,7 @@
     },
     {
       "path": "docs-mcp/stdio.js",
-      "bytes": 1646859
+      "bytes": 1654630
     },
     {
       "path": "docs-mcp/package.json",

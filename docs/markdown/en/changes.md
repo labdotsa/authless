@@ -48,16 +48,16 @@ The following checked projection is shared with the human-rendered guide and pre
 ```json
 {
   "schema": "authless.release-center/v1",
-  "updatedAt": "2026-10-10",
+  "updatedAt": "2026-10-11",
   "compatibility": [
     {
       "component": "REST API",
       "deprecation": "current",
-      "releaseNotes": "/changes#2026-08-22-identity-continuation-terminal-reasons",
+      "releaseNotes": "/changes#2026-10-11-six-digit-authentication",
       "version": "0.1.0",
       "stability": "stable",
       "contract": "unversioned default (0.1.0)",
-      "testedAt": "2026-08-22",
+      "testedAt": "2026-10-11",
       "evidence": [
         "packages/contracts/openapi/authless.openapi.json",
         "tests/rest-api-reference.test.ts"
@@ -84,12 +84,12 @@ The following checked projection is shared with the human-rendered guide and pre
     {
       "component": "@authless/server",
       "deprecation": "current",
-      "releaseNotes": "/changes#2026-10-10-native-cli-and-docs-navigation",
+      "releaseNotes": "/changes#2026-10-11-six-digit-authentication",
       "version": "0.1.0",
       "stability": "source-only",
       "contract": "0.1.0",
       "runtime": "Node 24.x",
-      "testedAt": "2026-10-10",
+      "testedAt": "2026-10-11",
       "evidence": [
         "packages/server/package.json",
         "packages/server/src/index.ts",
@@ -134,6 +134,59 @@ The following checked projection is shared with the human-rendered guide and pre
     }
   ],
   "changes": [
+    {
+      "id": "2026-10-11-six-digit-authentication",
+      "publishedAt": "2026-10-11",
+      "title": {
+        "en": "Six-digit authentication and a simpler sign-in journey",
+        "ar": "مصادقة من ستة أرقام ومسار تسجيل دخول أبسط"
+      },
+      "summary": {
+        "en": "Hosted sign-in and identity-continuation codes now use six numeric digits. Generated clients and public references share the same contract, while Sign, the landing page, and confirmation email use shorter focused copy.",
+        "ar": "تستخدم رموز تسجيل الدخول المستضاف واستمرارية الهوية الآن ستة أرقام فقط. تستخدم العملاء المولّدة والمراجع العامة العقد نفسه، بينما تستخدم Sign والصفحة الرئيسية ورسالة التأكيد نصاً أقصر وأكثر تركيزاً."
+      },
+      "categories": [
+        "product",
+        "api",
+        "sdk",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "reference",
+        "evaluator"
+      ],
+      "impact": "breaking",
+      "migration": {
+        "en": "Update verification inputs, integrations, and test fixtures to send exactly six ASCII digits. Preserve leading zeros as part of the code.",
+        "ar": "حدّث مدخلات التحقق والتكاملات وبيانات الاختبار لإرسال ستة أرقام ASCII بالضبط. حافظ على الأصفار البادئة باعتبارها جزءاً من الرمز."
+      },
+      "announcement": {
+        "en": "The canonical OpenAPI schema, runtime codecs, generated clients, REST reference, machine-readable docs, and Docs MCP now enforce the same six-digit rule.",
+        "ar": "يفرض مخطط OpenAPI المعياري ومحلّلات التشغيل والعملاء المولّدون ومرجع REST والوثائق المقروءة آلياً وDocs MCP القاعدة نفسها المكوّنة من ستة أرقام."
+      },
+      "replacement": "/reference/rest",
+      "supportWindow": "Current six-digit contract.",
+      "sunsetAt": "2026-10-11",
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/contracts/openapi/authless.openapi.json",
+        "packages/contracts/src/identity-wire.generated.ts",
+        "packages/server/src/generated.ts",
+        "packages/identity-node/src/secret-protection.ts",
+        "packages/jobs/src/identity-verification.ts",
+        "packages/oidc/src/interactions.ts",
+        "apps/docs/static/openapi.json",
+        "apps/docs/static/rest-reference.json",
+        "apps/docs/machine-readable/llms-full.txt",
+        "packages/docs-mcp/src/corpus.generated.json",
+        "tests/identity-contract-codec.test.ts",
+        "tests/identity-verification-job.test.ts"
+      ],
+      "permalink": "/changes#2026-10-11-six-digit-authentication"
+    },
     {
       "id": "2026-10-10-native-cli-and-docs-navigation",
       "publishedAt": "2026-10-10",
