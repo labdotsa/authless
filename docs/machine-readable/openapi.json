@@ -12,6 +12,488 @@
     }
   ],
   "paths": {
+    "/workspaces/{workspaceId}/apps/{appId}/commerce": {
+      "get": {
+        "operationId": "getAppCommerceView",
+        "summary": "Get app commerce configuration",
+        "security": [{ "sessionCookie": [] }, { "appCredential": [] }],
+        "parameters": [
+          { "in": "path", "name": "workspaceId", "required": true, "schema": { "type": "string" } },
+          { "in": "path", "name": "appId", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": { "description": "App commerce configuration", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/AppCommerceViewEnvelope" } } } },
+          "401": { "description": "Authentication required", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } },
+          "404": { "description": "App unavailable", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } }
+        },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "safe"
+      }
+    },
+    "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/catalog": {
+      "post": {
+        "operationId": "createAppCommerceCatalog",
+        "summary": "Create an app commerce catalog",
+        "description": "Creates the developer-owned catalog for one app environment. The developer selects the catalog currency before adding plans or add-ons.",
+        "security": [{ "sessionCookie": [] }, { "appCredential": [] }],
+        "parameters": [
+          { "in": "path", "name": "workspaceId", "required": true, "schema": { "type": "string" } },
+          { "in": "path", "name": "appId", "required": true, "schema": { "type": "string" } },
+          { "in": "path", "name": "environment", "required": true, "schema": { "type": "string", "enum": ["test", "production"] } },
+          { "in": "header", "name": "Idempotency-Key", "required": true, "schema": { "type": "string", "minLength": 1, "maxLength": 240 } }
+        ],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CreateAppCommerceCatalogRequest" } } } },
+        "responses": {
+          "201": { "description": "Catalog created", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/AppCommerceCommandEnvelope" } } } },
+          "400": { "description": "Invalid catalog", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } },
+          "401": { "description": "Authentication required", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } },
+          "409": { "description": "Catalog already exists", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } }
+        },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "unsafe"
+      }
+    },
+    "/workspaces/{workspaceId}/apps/{appId}/commerce/simulate-renewal": {
+      "post": {
+        "operationId": "simulateMockCommerceRenewal",
+        "summary": "Simulate a provider renewal in the test mock",
+        "description": "Test-only operation. It is available only when the configured provider adapter is the Authless mock and never represents a production provider action.",
+        "security": [{ "sessionCookie": [] }, { "appCredential": [] }],
+        "parameters": [
+          { "in": "path", "name": "workspaceId", "required": true, "schema": { "type": "string" } },
+          { "in": "path", "name": "appId", "required": true, "schema": { "type": "string" } },
+          { "in": "header", "name": "Idempotency-Key", "required": true, "schema": { "type": "string", "minLength": 1, "maxLength": 240 } }
+        ],
+        "responses": {
+          "202": { "description": "Mock renewal accepted", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/AppCommerceCommandEnvelope" } } } },
+          "400": { "description": "The configured provider is not the test mock", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } },
+          "401": { "description": "Authentication required", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } }
+        },
+        "x-authless-test-only": true,
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "unsafe"
+      }
+    },
+    "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}": {
+      "get": {
+        "operationId": "getAppCommerceEnvironmentView",
+        "summary": "Get app commerce configuration for an environment",
+        "security": [{ "sessionCookie": [] }, { "appCredential": [] }],
+        "parameters": [
+          { "in": "path", "name": "workspaceId", "required": true, "schema": { "type": "string" } },
+          { "in": "path", "name": "appId", "required": true, "schema": { "type": "string" } },
+          { "in": "path", "name": "environment", "required": true, "schema": { "type": "string", "enum": ["test", "production"] } }
+        ],
+        "responses": {
+          "200": { "description": "Environment commerce configuration", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/AppCommerceViewEnvelope" } } } },
+          "401": { "description": "Authentication required", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } },
+          "404": { "description": "App environment unavailable", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } }
+        },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "safe"
+      }
+    },
+    "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/features": {
+      "post": {
+        "operationId": "createAppCommerceFeature",
+        "summary": "Create an app commerce feature",
+        "security": [{ "sessionCookie": [] }, { "appCredential": [] }],
+        "parameters": [
+          { "in": "path", "name": "workspaceId", "required": true, "schema": { "type": "string" } },
+          { "in": "path", "name": "appId", "required": true, "schema": { "type": "string" } },
+          { "in": "path", "name": "environment", "required": true, "schema": { "type": "string", "enum": ["test", "production"] } },
+          { "in": "header", "name": "Idempotency-Key", "required": true, "schema": { "type": "string", "minLength": 1, "maxLength": 240 } }
+        ],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CreateAppCommerceFeatureRequest" } } } },
+        "responses": { "201": { "description": "Feature created", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/AppCommerceCommandEnvelope" } } } }, "400": { "description": "Invalid feature", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } }, "401": { "description": "Authentication required", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } } },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "unsafe"
+      }
+    },
+    "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/addons": {
+      "post": {
+        "operationId": "createAppCommerceAddon",
+        "summary": "Create an app commerce add-on",
+        "security": [{ "sessionCookie": [] }, { "appCredential": [] }],
+        "parameters": [
+          { "in": "path", "name": "workspaceId", "required": true, "schema": { "type": "string" } },
+          { "in": "path", "name": "appId", "required": true, "schema": { "type": "string" } },
+          { "in": "path", "name": "environment", "required": true, "schema": { "type": "string", "enum": ["test", "production"] } },
+          { "in": "header", "name": "Idempotency-Key", "required": true, "schema": { "type": "string", "minLength": 1, "maxLength": 240 } }
+        ],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CreateAppCommerceAddonRequest" } } } },
+        "responses": { "201": { "description": "Add-on created", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/AppCommerceCommandEnvelope" } } } }, "400": { "description": "Invalid add-on", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } }, "401": { "description": "Authentication required", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } } },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "unsafe"
+      }
+    },
+    "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/customers/{customerRef}/usage": {
+      "post": {
+        "operationId": "recordAppCommerceUsage",
+        "summary": "Record usage for an app customer",
+        "security": [{ "sessionCookie": [] }, { "appCredential": [] }],
+        "parameters": [
+          { "in": "path", "name": "workspaceId", "required": true, "schema": { "type": "string" } },
+          { "in": "path", "name": "appId", "required": true, "schema": { "type": "string" } },
+          { "in": "path", "name": "environment", "required": true, "schema": { "type": "string", "enum": ["test", "production"] } },
+          { "in": "path", "name": "customerRef", "required": true, "schema": { "type": "string" } },
+          { "in": "header", "name": "Idempotency-Key", "required": true, "schema": { "type": "string", "minLength": 1, "maxLength": 240 } }
+        ],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/RecordAppCommerceUsageRequest" } } } },
+        "responses": { "202": { "description": "Usage accepted", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/AppCommerceCommandEnvelope" } } } }, "400": { "description": "Invalid usage", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } }, "401": { "description": "Authentication required", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } } },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "unsafe"
+      }
+    },
+    "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/invoices/{invoiceId}/refunds": {
+      "post": {
+        "operationId": "requestAppCommerceRefund",
+        "summary": "Request a refund for an app invoice",
+        "security": [{ "sessionCookie": [] }],
+        "parameters": [
+          { "in": "path", "name": "workspaceId", "required": true, "schema": { "type": "string" } },
+          { "in": "path", "name": "appId", "required": true, "schema": { "type": "string" } },
+          { "in": "path", "name": "environment", "required": true, "schema": { "type": "string", "enum": ["test", "production"] } },
+          { "in": "path", "name": "invoiceId", "required": true, "schema": { "type": "string" } },
+          { "in": "header", "name": "Idempotency-Key", "required": true, "schema": { "type": "string", "minLength": 1, "maxLength": 240 } }
+        ],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/RequestAppCommerceRefundRequest" } } } },
+        "responses": { "202": { "description": "Refund request accepted", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/AppCommerceCommandEnvelope" } } } }, "400": { "description": "Invalid refund request", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } }, "401": { "description": "Authentication required", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } } },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "unsafe"
+      }
+    },
+    "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/plans/{planId}/publish": {
+      "post": {
+        "operationId": "publishAppCommercePlan",
+        "summary": "Publish an app commerce plan revision",
+        "security": [{ "sessionCookie": [] }, { "appCredential": [] }],
+        "parameters": [
+          { "in": "path", "name": "workspaceId", "required": true, "schema": { "type": "string" } },
+          { "in": "path", "name": "appId", "required": true, "schema": { "type": "string" } },
+          { "in": "path", "name": "environment", "required": true, "schema": { "type": "string", "enum": ["test", "production"] } },
+          { "in": "path", "name": "planId", "required": true, "schema": { "type": "string" } },
+          { "in": "header", "name": "Idempotency-Key", "required": true, "schema": { "type": "string", "minLength": 1, "maxLength": 240 } }
+        ],
+        "responses": { "202": { "description": "Plan publication accepted", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/AppCommerceCommandEnvelope" } } } }, "400": { "description": "Invalid plan", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } }, "401": { "description": "Authentication required", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } }, "404": { "description": "Plan unavailable", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } } },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "unsafe"
+      }
+    },
+    "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/accounting": {
+      "get": {
+        "operationId": "getAppCommercePublisherAccounting",
+        "summary": "Read app publisher accounting",
+        "security": [{ "sessionCookie": [] }, { "appCredential": [] }],
+        "parameters": [
+          { "in": "path", "name": "workspaceId", "required": true, "schema": { "type": "string" } },
+          { "in": "path", "name": "appId", "required": true, "schema": { "type": "string" } },
+          { "in": "path", "name": "environment", "required": true, "schema": { "type": "string", "enum": ["test", "production"] } }
+        ],
+        "responses": { "200": { "description": "Publisher accounting state", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/AppCommercePublisherAccountingEnvelope" } } } }, "401": { "description": "Authentication required", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } }, "404": { "description": "Accounting unavailable", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } } },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "safe"
+      }
+    },
+    "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/accounting/release-reserves": {
+      "post": {
+        "operationId": "releaseAppCommercePublisherReserves",
+        "summary": "Release matured publisher reserves",
+        "security": [{ "sessionCookie": [] }, { "appCredential": [] }],
+        "parameters": [
+          { "in": "path", "name": "workspaceId", "required": true, "schema": { "type": "string" } },
+          { "in": "path", "name": "appId", "required": true, "schema": { "type": "string" } },
+          { "in": "path", "name": "environment", "required": true, "schema": { "type": "string", "enum": ["test", "production"] } },
+          { "in": "header", "name": "Idempotency-Key", "required": true, "schema": { "type": "string", "minLength": 1, "maxLength": 240 } }
+        ],
+        "responses": { "202": { "description": "Reserve release accepted", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/AppCommerceCommandEnvelope" } } } }, "401": { "description": "Authentication required", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } } },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "unsafe"
+      }
+    },
+    "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/settlements": {
+      "post": {
+        "operationId": "createAppCommerceSettlement",
+        "summary": "Create a publisher settlement",
+        "security": [{ "sessionCookie": [] }, { "appCredential": [] }],
+        "parameters": [
+          { "in": "path", "name": "workspaceId", "required": true, "schema": { "type": "string" } },
+          { "in": "path", "name": "appId", "required": true, "schema": { "type": "string" } },
+          { "in": "path", "name": "environment", "required": true, "schema": { "type": "string", "enum": ["test", "production"] } },
+          { "in": "header", "name": "Idempotency-Key", "required": true, "schema": { "type": "string", "minLength": 1, "maxLength": 240 } }
+        ],
+        "responses": { "201": { "description": "Settlement created", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/AppCommerceCommandEnvelope" } } } }, "400": { "description": "Settlement unavailable", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } }, "401": { "description": "Authentication required", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } } },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "unsafe"
+      }
+    },
+    "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/settlements/{settlementId}/payouts": {
+      "post": {
+        "operationId": "simulateAppCommercePayout",
+        "summary": "Create a simulated publisher payout",
+        "description": "Test-only payout simulation. This records accounting state and never transfers real funds.",
+        "security": [{ "sessionCookie": [] }, { "appCredential": [] }],
+        "parameters": [
+          { "in": "path", "name": "workspaceId", "required": true, "schema": { "type": "string" } },
+          { "in": "path", "name": "appId", "required": true, "schema": { "type": "string" } },
+          { "in": "path", "name": "environment", "required": true, "schema": { "type": "string", "enum": ["test", "production"] } },
+          { "in": "path", "name": "settlementId", "required": true, "schema": { "type": "string" } },
+          { "in": "header", "name": "Idempotency-Key", "required": true, "schema": { "type": "string", "minLength": 1, "maxLength": 240 } }
+        ],
+        "responses": { "201": { "description": "Simulated payout recorded", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/AppCommerceCommandEnvelope" } } } }, "400": { "description": "Payout unavailable", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } }, "401": { "description": "Authentication required", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } } },
+        "x-authless-test-only": true,
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "unsafe"
+      }
+    },
+    "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/plans": {
+      "get": {
+        "operationId": "listAppCommercePlans",
+        "summary": "List published plans for an app environment",
+        "security": [{ "sessionCookie": [] }, { "appCredential": [] }],
+        "parameters": [
+          { "in": "path", "name": "workspaceId", "required": true, "schema": { "type": "string" } },
+          { "in": "path", "name": "appId", "required": true, "schema": { "type": "string" } },
+          { "in": "path", "name": "environment", "required": true, "schema": { "type": "string", "enum": ["test", "production"] } }
+        ],
+        "responses": {
+          "200": { "description": "Published plans", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/AppCommercePlanListEnvelope" } } } },
+          "401": { "description": "Authentication required", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } },
+          "404": { "description": "App environment unavailable", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } }
+        },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "safe"
+      },
+      "post": {
+        "operationId": "createAppCommercePlan",
+        "summary": "Create a plan in an app environment",
+        "security": [{ "sessionCookie": [] }, { "appCredential": [] }],
+        "parameters": [
+          { "in": "path", "name": "workspaceId", "required": true, "schema": { "type": "string" } },
+          { "in": "path", "name": "appId", "required": true, "schema": { "type": "string" } },
+          { "in": "path", "name": "environment", "required": true, "schema": { "type": "string", "enum": ["test", "production"] } },
+          { "in": "header", "name": "Idempotency-Key", "required": true, "schema": { "type": "string", "minLength": 1, "maxLength": 240 } }
+        ],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CreateAppCommercePlanRequest" } } } },
+        "responses": {
+          "201": { "description": "Plan created", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/AppCommercePlanEnvelope" } } } },
+          "200": { "description": "Idempotent replay", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/AppCommercePlanEnvelope" } } } },
+          "400": { "description": "Invalid plan", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } },
+          "401": { "description": "Authentication required", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } },
+          "409": { "description": "Idempotency conflict", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } }
+        },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "unsafe"
+      }
+    },
+    "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/customers/{customerRef}/entitlements": {
+      "get": {
+        "operationId": "getAppCommerceEntitlements",
+        "summary": "Get effective entitlements for an app customer",
+        "security": [{ "sessionCookie": [] }, { "appCredential": [] }],
+        "parameters": [
+          { "in": "path", "name": "workspaceId", "required": true, "schema": { "type": "string" } },
+          { "in": "path", "name": "appId", "required": true, "schema": { "type": "string" } },
+          { "in": "path", "name": "environment", "required": true, "schema": { "type": "string", "enum": ["test", "production"] } },
+          { "in": "path", "name": "customerRef", "required": true, "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": { "description": "Effective entitlements", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/AppCommerceEntitlementListEnvelope" } } } },
+          "401": { "description": "Authentication required", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } },
+          "404": { "description": "Customer or app environment unavailable", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } }
+        },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "safe"
+      }
+    },
+    "/me/commerce/subscriptions": {
+      "get": {
+        "operationId": "listPersonalCommerceSubscriptions",
+        "summary": "List subscriptions linked to the personal profile",
+        "security": [{ "sessionCookie": [] }],
+        "parameters": [
+          { "in": "query", "name": "appId", "required": false, "schema": { "type": "string" } },
+          { "in": "query", "name": "cursor", "required": false, "schema": { "type": "string" } },
+          { "in": "query", "name": "limit", "required": false, "schema": { "type": "integer", "minimum": 1, "maximum": 100, "default": 50 } }
+        ],
+        "responses": {
+          "200": { "description": "Personal subscriptions", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/AppCommerceSubscriptionListEnvelope" } } } },
+          "400": { "description": "Invalid page", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } },
+          "401": { "description": "Personal session required", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } }
+        },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "safe"
+      }
+    },
+    "/me/commerce/apps/{appId}/catalog": {
+      "get": {
+        "operationId": "listPersonalCommerceCatalog",
+        "summary": "List an app catalog available to the personal profile",
+        "security": [{ "sessionCookie": [] }],
+        "parameters": [
+          { "in": "path", "name": "appId", "required": true, "schema": { "type": "string" } },
+          { "in": "query", "name": "environment", "required": false, "schema": { "type": "string", "minLength": 1, "maxLength": 240, "description": "Environment kind (test or production) or an opaque environment ID such as env_test." } }
+        ],
+        "responses": { "200": { "description": "Connected app catalog", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/AppCommerceCatalogEnvelope" } } } }, "401": { "description": "Personal session required", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } }, "404": { "description": "App catalog unavailable", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } } },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "safe"
+      }
+    },
+    "/me/commerce/quotes": {
+      "post": {
+        "operationId": "createPersonalCommerceQuote",
+        "summary": "Create an immutable personal commerce quote",
+        "security": [{ "sessionCookie": [] }],
+        "parameters": [{ "in": "header", "name": "Idempotency-Key", "required": true, "schema": { "type": "string", "minLength": 1, "maxLength": 240 } }],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CreatePersonalCommerceQuoteRequest" } } } },
+        "responses": { "201": { "description": "Quote created", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/AppCommerceQuoteEnvelope" } } } }, "200": { "description": "Idempotent replay", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/AppCommerceQuoteEnvelope" } } } }, "400": { "description": "Invalid quote request", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } }, "401": { "description": "Personal session required", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } } },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "unsafe"
+      }
+    },
+    "/me/commerce/quotes/{quoteId}/accept": {
+      "post": {
+        "operationId": "acceptPersonalCommerceQuote",
+        "summary": "Accept a personal commerce quote",
+        "security": [{ "sessionCookie": [] }],
+        "parameters": [
+          { "in": "path", "name": "quoteId", "required": true, "schema": { "type": "string" } },
+          { "in": "header", "name": "Idempotency-Key", "required": true, "schema": { "type": "string", "minLength": 1, "maxLength": 240 } }
+        ],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/AcceptPersonalCommerceQuoteRequest" } } } },
+        "responses": { "202": { "description": "Quote acceptance recorded", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/AppCommerceQuoteEnvelope" } } } }, "400": { "description": "Invalid or expired quote", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } }, "401": { "description": "Personal session required", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } }, "404": { "description": "Quote unavailable", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } } },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "unsafe"
+      }
+    },
+    "/me/commerce/checkouts": {
+      "post": {
+        "operationId": "createPersonalCommerceCheckout",
+        "summary": "Create a provider checkout for an app plan",
+        "security": [{ "sessionCookie": [] }],
+        "parameters": [{ "in": "header", "name": "Idempotency-Key", "required": true, "schema": { "type": "string", "minLength": 1, "maxLength": 240 } }],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CreatePersonalCommerceCheckoutRequest" } } } },
+        "responses": {
+          "202": { "description": "Checkout accepted by the configured provider adapter", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/AppCommerceCommandEnvelope" } } } },
+          "400": { "description": "Invalid checkout", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } },
+          "401": { "description": "Personal session required", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } },
+          "409": { "description": "Idempotency conflict", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } }
+        },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "unsafe"
+      }
+    },
+    "/me/commerce/checkouts/{checkoutRef}/complete": {
+      "post": {
+        "operationId": "completePersonalCommerceCheckout",
+        "summary": "Complete a test checkout in the mock provider",
+        "description": "Test-only operation. Production payment completion comes from the configured provider checkout and verified provider events.",
+        "security": [{ "sessionCookie": [] }],
+        "parameters": [
+          { "in": "path", "name": "checkoutRef", "required": true, "schema": { "type": "string" } },
+          { "in": "header", "name": "Idempotency-Key", "required": true, "schema": { "type": "string", "minLength": 1, "maxLength": 240 } }
+        ],
+        "responses": {
+          "202": { "description": "Mock checkout completion accepted", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/AppCommerceCommandEnvelope" } } } },
+          "400": { "description": "Checkout cannot be completed", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } },
+          "401": { "description": "Personal session required", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } },
+          "404": { "description": "Checkout unavailable", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } }
+        },
+        "x-authless-test-only": true,
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "unsafe"
+      }
+    },
+    "/me/commerce/subscriptions/{subscriptionRef}/changes": {
+      "post": {
+        "operationId": "changePersonalCommerceSubscription",
+        "summary": "Change a personal app subscription",
+        "security": [{ "sessionCookie": [] }],
+        "parameters": [
+          { "in": "path", "name": "subscriptionRef", "required": true, "schema": { "type": "string" } },
+          { "in": "header", "name": "Idempotency-Key", "required": true, "schema": { "type": "string", "minLength": 1, "maxLength": 240 } }
+        ],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ChangePersonalCommerceSubscriptionRequest" } } } },
+        "responses": {
+          "202": { "description": "Subscription change accepted", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/AppCommerceCommandEnvelope" } } } },
+          "400": { "description": "Invalid subscription change", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } },
+          "401": { "description": "Personal session required", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } },
+          "409": { "description": "Idempotency or version conflict", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } }
+        },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "unsafe"
+      }
+    },
+    "/me/commerce/subscriptions/{subscriptionRef}/cancel": {
+      "post": {
+        "operationId": "cancelPersonalCommerceSubscription",
+        "summary": "Cancel a personal app subscription",
+        "security": [{ "sessionCookie": [] }],
+        "parameters": [
+          { "in": "path", "name": "subscriptionRef", "required": true, "schema": { "type": "string" } },
+          { "in": "header", "name": "Idempotency-Key", "required": true, "schema": { "type": "string", "minLength": 1, "maxLength": 240 } }
+        ],
+        "responses": {
+          "202": { "description": "Cancellation accepted", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/AppCommerceCommandEnvelope" } } } },
+          "401": { "description": "Personal session required", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } },
+          "404": { "description": "Subscription unavailable", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } }
+        },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "unsafe"
+      }
+    },
+    "/me/commerce/subscriptions/{subscriptionRef}/resume": {
+      "post": {
+        "operationId": "resumePersonalCommerceSubscription",
+        "summary": "Resume a personal app subscription",
+        "security": [{ "sessionCookie": [] }],
+        "parameters": [
+          { "in": "path", "name": "subscriptionRef", "required": true, "schema": { "type": "string" } },
+          { "in": "header", "name": "Idempotency-Key", "required": true, "schema": { "type": "string", "minLength": 1, "maxLength": 240 } }
+        ],
+        "responses": {
+          "202": { "description": "Resume accepted", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/AppCommerceCommandEnvelope" } } } },
+          "401": { "description": "Personal session required", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } },
+          "404": { "description": "Subscription unavailable", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } }
+        },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "unsafe"
+      }
+    },
+    "/me/commerce/invoices": {
+      "get": {
+        "operationId": "listPersonalCommerceInvoices",
+        "summary": "List invoices linked to the personal profile",
+        "security": [{ "sessionCookie": [] }],
+        "parameters": [
+          { "in": "query", "name": "appId", "required": false, "schema": { "type": "string" } },
+          { "in": "query", "name": "cursor", "required": false, "schema": { "type": "string" } },
+          { "in": "query", "name": "limit", "required": false, "schema": { "type": "integer", "minimum": 1, "maximum": 100, "default": 50 } }
+        ],
+        "responses": {
+          "200": { "description": "Personal invoices", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/AppCommerceInvoiceListEnvelope" } } } },
+          "400": { "description": "Invalid page", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } },
+          "401": { "description": "Personal session required", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } }
+        },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "safe"
+      }
+    },
+    "/me/commerce/portal-sessions": {
+      "post": {
+        "operationId": "createPersonalCommercePortalSession",
+        "summary": "Create a short-lived provider billing portal session",
+        "security": [{ "sessionCookie": [] }],
+        "requestBody": { "required": true, "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CreatePersonalCommercePortalSessionRequest" } } } },
+        "responses": {
+          "201": { "description": "Portal session created", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/AppCommerceCommandEnvelope" } } } },
+          "400": { "description": "Invalid portal request", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } },
+          "401": { "description": "Personal session required", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } }
+        },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "unsafe"
+      }
+    },
     "/providers/merchant/billing-events": {
       "post": {
         "operationId": "reconcileCommercialBillingProviderEvent",
@@ -7359,6 +7841,314 @@
       }
     },
     "schemas": {
+      "AppCommerceMoney": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["amountMinor", "currency"],
+        "properties": {
+          "amountMinor": { "type": "integer", "minimum": 0 },
+          "currency": { "type": "string" }
+        }
+      },
+      "AppCommercePlan": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["amountMinor", "currency", "features", "id", "interval", "key", "name"],
+        "properties": {
+          "id": { "type": "string" },
+          "key": { "type": "string" },
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "currency": { "type": "string" },
+          "amountMinor": { "type": "integer", "minimum": 0 },
+          "interval": { "type": "string", "enum": ["month", "year"] },
+          "features": { "type": "object", "additionalProperties": { "$ref": "#/components/schemas/AppCommerceFeatureValue" } },
+          "addOns": { "type": "array", "items": { "type": "string" } },
+          "includedMeters": { "type": "object", "additionalProperties": { "type": ["integer", "null"], "minimum": 0 } },
+          "trialDays": { "type": "integer", "minimum": 0, "maximum": 365 }
+        }
+      },
+      "AppCommercePlanEnvelope": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["data"],
+        "properties": { "data": { "$ref": "#/components/schemas/AppCommercePlan" } }
+      },
+      "AppCommercePlanListEnvelope": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["plans"],
+        "properties": { "plans": { "type": "array", "items": { "$ref": "#/components/schemas/AppCommercePlan" } } }
+      },
+      "CreateAppCommerceCatalogRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["defaultCurrency", "name"],
+        "properties": {
+          "name": { "type": "string", "minLength": 3, "maxLength": 240 },
+          "defaultCurrency": { "type": "string", "minLength": 3, "maxLength": 3, "examples": ["USD"] }
+        }
+      },
+      "CreateAppCommercePlanRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["amountMicros", "currency", "interval", "key", "name"],
+        "properties": {
+          "key": { "type": "string", "minLength": 3, "maxLength": 240 },
+          "name": { "type": "string", "minLength": 3, "maxLength": 240 },
+          "description": { "type": "string", "maxLength": 2000 },
+          "currency": { "type": "string" },
+          "amountMicros": { "type": "integer", "minimum": 0, "description": "Price in Authless micros: major units multiplied by 1,000,000, then converted to minor units using the currency exponent. For USD, 10,000,000 micros = 1,000 minor units = $10." },
+          "interval": { "type": "string", "enum": ["month", "year"] },
+          "features": { "type": "object", "additionalProperties": { "$ref": "#/components/schemas/AppCommerceFeatureValue" } },
+          "addOns": { "type": "array", "items": { "type": "string" } },
+          "includedMeters": { "type": "object", "additionalProperties": { "type": ["integer", "null"], "minimum": 0 } },
+          "trialDays": { "type": "integer", "minimum": 0, "maximum": 365 }
+        }
+      },
+      "CreateAppCommerceFeatureRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["key", "name"],
+        "properties": {
+          "key": { "type": "string", "minLength": 1, "maxLength": 240 },
+          "name": { "type": "string", "minLength": 1, "maxLength": 240 },
+          "description": { "type": "string", "maxLength": 2000 },
+          "metered": { "type": "boolean" }
+        }
+      },
+      "CreateAppCommerceAddonRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["amountMicros", "currency", "interval", "key", "name"],
+        "properties": {
+          "key": { "type": "string", "minLength": 1, "maxLength": 240 },
+          "name": { "type": "string", "minLength": 1, "maxLength": 240 },
+          "description": { "type": "string", "maxLength": 2000 },
+          "currency": { "type": "string" },
+          "amountMicros": { "type": "integer", "minimum": 0, "description": "Price in Authless micros: major units multiplied by 1,000,000, then converted to minor units using the currency exponent. For USD, 10,000,000 micros = 1,000 minor units = $10." },
+          "interval": { "type": "string", "enum": ["month", "year", "one_time"] },
+          "features": { "type": "object", "additionalProperties": { "$ref": "#/components/schemas/AppCommerceFeatureValue" } },
+          "entitlementDuration": { "type": "string", "enum": ["period", "indefinite"] }
+        }
+      },
+      "RecordAppCommerceUsageRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["meterKey", "quantity"],
+        "properties": { "meterKey": { "type": "string", "minLength": 1, "maxLength": 240 }, "quantity": { "type": "integer", "minimum": 0 } }
+      },
+      "RequestAppCommerceRefundRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["amountMinor", "currency", "paymentId"],
+        "properties": { "paymentId": { "type": "string" }, "currency": { "type": "string" }, "amountMinor": { "type": "integer", "minimum": 1 } }
+      },
+      "AppCommerceCatalogEnvelope": {
+        "type": "object",
+        "additionalProperties": true
+      },
+      "AppCommerceFeatureValue": {
+        "type": ["boolean", "number", "string"]
+      },
+      "AppCommerceFeature": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "key", "name", "metered"],
+        "properties": { "id": { "type": "string" }, "key": { "type": "string" }, "name": { "type": "string" }, "description": { "type": "string" }, "metered": { "type": "boolean" } }
+      },
+      "AppCommerceAddon": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["amountMinor", "currency", "entitlementDuration", "features", "id", "interval", "key", "name"],
+        "properties": { "id": { "type": "string" }, "key": { "type": "string" }, "name": { "type": "string" }, "description": { "type": "string" }, "currency": { "type": "string" }, "amountMinor": { "type": "integer", "minimum": 0 }, "interval": { "type": "string", "enum": ["month", "year", "one_time"] }, "features": { "type": "object", "additionalProperties": { "$ref": "#/components/schemas/AppCommerceFeatureValue" } }, "entitlementDuration": { "type": "string", "enum": ["period", "indefinite"] } }
+      },
+      "AppCommercePublisherLiability": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["availableAt", "gross", "id", "invoiceRef", "net", "status"],
+        "properties": { "id": { "type": "string" }, "invoiceRef": { "type": "string" }, "providerPaymentRef": { "type": "string" }, "gross": { "$ref": "#/components/schemas/AppCommerceMoney" }, "platformFee": { "$ref": "#/components/schemas/AppCommerceMoney" }, "processorFee": { "$ref": "#/components/schemas/AppCommerceMoney" }, "net": { "$ref": "#/components/schemas/AppCommerceMoney" }, "reserved": { "$ref": "#/components/schemas/AppCommerceMoney" }, "refunded": { "$ref": "#/components/schemas/AppCommerceMoney" }, "disputed": { "$ref": "#/components/schemas/AppCommerceMoney" }, "status": { "type": "string", "enum": ["pending", "available", "paid", "reversed"] }, "availableAt": { "type": "string", "format": "date-time" }, "createdAt": { "type": "string", "format": "date-time" } }
+      },
+      "AppCommerceSettlement": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["amount", "createdAt", "id", "liabilityIds", "status"],
+        "properties": { "id": { "type": "string" }, "liabilityIds": { "type": "array", "items": { "type": "string" } }, "amount": { "$ref": "#/components/schemas/AppCommerceMoney" }, "status": { "type": "string", "enum": ["created", "paid", "reversed"] }, "createdAt": { "type": "string", "format": "date-time" }, "paidAt": { "type": ["string", "null"], "format": "date-time" } }
+      },
+      "AppCommercePayout": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["amount", "createdAt", "id", "providerTransferRef", "settlementId", "status"],
+        "properties": { "id": { "type": "string" }, "settlementId": { "type": "string" }, "amount": { "$ref": "#/components/schemas/AppCommerceMoney" }, "status": { "type": "string", "enum": ["simulated"] }, "providerTransferRef": { "type": "string" }, "createdAt": { "type": "string", "format": "date-time" } }
+      },
+      "AppCommercePublisherAccounting": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["liabilities", "payouts", "settlements"],
+        "properties": { "liabilities": { "type": "array", "items": { "$ref": "#/components/schemas/AppCommercePublisherLiability" } }, "settlements": { "type": "array", "items": { "$ref": "#/components/schemas/AppCommerceSettlement" } }, "payouts": { "type": "array", "items": { "$ref": "#/components/schemas/AppCommercePayout" } } }
+      },
+      "AppCommercePublisherAccountingEnvelope": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["data"],
+        "properties": { "data": { "$ref": "#/components/schemas/AppCommercePublisherAccounting" } }
+      },
+      "AppCommerceEntitlement": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["customerId", "featureKey", "id", "source", "value"],
+        "properties": {
+          "id": { "type": "string" },
+          "customerId": { "type": "string" },
+          "featureKey": { "type": "string" },
+          "source": { "type": "string", "enum": ["subscription", "complimentary", "addon"] },
+          "value": { "type": ["boolean", "number"] }
+        }
+      },
+      "AppCommerceEntitlementListEnvelope": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["entitlements"],
+        "properties": { "entitlements": { "type": "array", "items": { "$ref": "#/components/schemas/AppCommerceEntitlement" } } }
+      },
+      "AppCommerceSubscription": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["currentPeriodEnd", "currentPeriodStart", "id", "status"],
+        "properties": {
+          "id": { "type": "string" },
+          "appId": { "type": "string" },
+          "environment": { "type": "string", "enum": ["test", "production"] },
+          "status": { "type": "string", "enum": ["incomplete", "trialing", "active", "past_due", "paused", "canceled"] },
+          "currentPeriodStart": { "type": "string", "format": "date-time" },
+          "currentPeriodEnd": { "type": "string", "format": "date-time" },
+          "cancelAtPeriodEnd": { "type": "boolean" }
+        }
+      },
+      "AppCommerceSubscriptionListEnvelope": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["data", "nextCursor"],
+        "properties": { "data": { "type": "array", "items": { "$ref": "#/components/schemas/AppCommerceSubscription" } }, "nextCursor": { "type": ["string", "null"] } }
+      },
+      "AppCommerceInvoice": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["createdAt", "id", "status", "total"],
+        "properties": {
+          "id": { "type": "string" },
+          "status": { "type": "string", "enum": ["draft", "open", "paid", "void", "uncollectible"] },
+          "total": { "$ref": "#/components/schemas/AppCommerceMoney" },
+          "createdAt": { "type": "string", "format": "date-time" }
+        }
+      },
+      "AppCommerceInvoiceListEnvelope": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["data", "nextCursor"],
+        "properties": { "data": { "type": "array", "items": { "$ref": "#/components/schemas/AppCommerceInvoice" } }, "nextCursor": { "type": ["string", "null"] } }
+      },
+      "AppCommerceCommandEnvelope": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["data"],
+        "properties": { "data": { "type": "object", "additionalProperties": true } }
+      },
+      "AppCommerceViewEnvelope": {
+        "type": "object",
+        "additionalProperties": true
+      },
+      "CreatePersonalCommerceCheckoutRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["acceptedTermsDigest", "appId", "planKey", "returnUrl"],
+        "properties": {
+          "appId": { "type": "string" },
+          "environment": { "type": "string", "enum": ["test", "production"] },
+          "planKey": { "type": "string" },
+          "returnUrl": { "type": "string", "format": "uri" },
+          "quantity": { "type": "integer", "minimum": 1, "maximum": 100, "default": 1 },
+          "acceptedTermsDigest": { "type": "string", "minLength": 1 },
+          "addOns": { "type": "array", "items": { "type": "string" } }
+        }
+      },
+      "CreatePersonalCommerceQuoteRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["appId", "planKey"],
+        "properties": { "appId": { "type": "string" }, "environment": { "type": "string", "enum": ["test", "production"] }, "planKey": { "type": "string" }, "quantity": { "type": "integer", "minimum": 1, "maximum": 100, "default": 1 }, "addOns": { "type": "array", "items": { "type": "string" } }, "discountCode": { "type": "string" } }
+      },
+      "AcceptPersonalCommerceQuoteRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["termsDigest"],
+        "properties": { "termsDigest": { "type": "string", "minLength": 1 } }
+      },
+      "AppCommerceQuoteLineItem": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["amount", "interval", "kind", "priceId", "quantity", "unitAmount"],
+        "properties": { "kind": { "type": "string", "enum": ["base", "recurring_addon", "one_time_addon"] }, "priceId": { "type": "string" }, "interval": { "type": "string", "enum": ["month", "year", "one_time"] }, "quantity": { "type": "integer", "minimum": 1 }, "unitAmount": { "$ref": "#/components/schemas/AppCommerceMoney" }, "amount": { "$ref": "#/components/schemas/AppCommerceMoney" } }
+      },
+      "AppCommerceQuote": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["acceptedAt", "addonIds", "createdAt", "currency", "customerId", "discount", "discountCode", "discountDuration", "discountDurationCycles", "expiresAt", "id", "idempotencyKey", "lineItems", "planRevisionId", "quantity", "scope", "status", "subtotal", "tax", "taxPolicy", "termsDigest", "termsText", "termsVersion", "total"],
+        "properties": {
+          "id": { "type": "string" },
+          "scope": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["workspaceId", "appId", "environmentId"],
+            "properties": { "workspaceId": { "type": "string" }, "appId": { "type": "string" }, "environmentId": { "type": "string" } }
+          },
+          "customerId": { "type": "string" },
+          "planRevisionId": { "type": "string" },
+          "quantity": { "type": "integer", "minimum": 1, "maximum": 100 },
+          "addonIds": { "type": "array", "items": { "type": "string" } },
+          "discountCode": { "type": ["string", "null"] },
+          "currency": { "type": "string" },
+          "subtotal": { "$ref": "#/components/schemas/AppCommerceMoney" },
+          "discount": { "$ref": "#/components/schemas/AppCommerceMoney" },
+          "tax": { "$ref": "#/components/schemas/AppCommerceMoney" },
+          "total": { "$ref": "#/components/schemas/AppCommerceMoney" },
+          "taxPolicy": { "type": "string", "enum": ["mock_zero"] },
+          "termsVersion": { "type": "string" },
+          "termsText": { "type": "string" },
+          "termsDigest": { "type": "string" },
+          "discountDuration": { "type": ["string", "null"], "enum": ["once", "repeating", "forever", null] },
+          "discountDurationCycles": { "type": ["integer", "null"], "minimum": 1 },
+          "status": { "type": "string", "enum": ["open", "accepted", "expired", "consumed"] },
+          "idempotencyKey": { "type": "string" },
+          "lineItems": { "type": "array", "items": { "$ref": "#/components/schemas/AppCommerceQuoteLineItem" } },
+          "createdAt": { "type": "string", "format": "date-time" },
+          "expiresAt": { "type": "string", "format": "date-time" },
+          "acceptedAt": { "type": ["string", "null"], "format": "date-time" }
+        }
+      },
+      "AppCommerceQuoteEnvelope": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["data"],
+        "properties": { "data": { "$ref": "#/components/schemas/AppCommerceQuote" } }
+      },
+      "ChangePersonalCommerceSubscriptionRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["effectiveAt"],
+        "properties": {
+          "planKey": { "type": "string" },
+          "addOns": { "type": "array", "items": { "type": "string" } },
+          "quantity": { "type": "integer", "minimum": 1, "maximum": 100 },
+          "effectiveAt": { "type": "string", "enum": ["now", "renewal"] }
+        }
+      },
+      "CreatePersonalCommercePortalSessionRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["appId", "returnUrl"],
+        "properties": { "appId": { "type": "string" }, "returnUrl": { "type": "string", "format": "uri" } }
+      },
       "CommercialPurchaseReceipt": {
         "type": "object",
         "additionalProperties": false,

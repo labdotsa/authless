@@ -1,4 +1,235 @@
 // src/generated.ts
+var getAppCommerceViewOperation = {
+  authorization: "session-or-app-credential",
+  method: "GET",
+  path: "/workspaces/{workspaceId}/apps/{appId}/commerce",
+  retrySafety: "safe",
+  status: "stable"
+};
+var createAppCommerceCatalogOperation = {
+  authorization: "session-or-app-credential",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/catalog",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var simulateMockCommerceRenewalOperation = {
+  authorization: "session-or-app-credential",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/apps/{appId}/commerce/simulate-renewal",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var getAppCommerceEnvironmentViewOperation = {
+  authorization: "session-or-app-credential",
+  method: "GET",
+  path: "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}",
+  retrySafety: "safe",
+  status: "stable"
+};
+var createAppCommerceFeatureOperation = {
+  authorization: "session-or-app-credential",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/features",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var createAppCommerceAddonOperation = {
+  authorization: "session-or-app-credential",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/addons",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var recordAppCommerceUsageOperation = {
+  authorization: "session-or-app-credential",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/customers/{customerRef}/usage",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var requestAppCommerceRefundOperation = {
+  authorization: "session",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/invoices/{invoiceId}/refunds",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var publishAppCommercePlanOperation = {
+  authorization: "session-or-app-credential",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/plans/{planId}/publish",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var getAppCommercePublisherAccountingOperation = {
+  authorization: "session-or-app-credential",
+  method: "GET",
+  path: "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/accounting",
+  retrySafety: "safe",
+  status: "stable"
+};
+var releaseAppCommercePublisherReservesOperation = {
+  authorization: "session-or-app-credential",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/accounting/release-reserves",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var createAppCommerceSettlementOperation = {
+  authorization: "session-or-app-credential",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/settlements",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var simulateAppCommercePayoutOperation = {
+  authorization: "session-or-app-credential",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/settlements/{settlementId}/payouts",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var listAppCommercePlansOperation = {
+  authorization: "session-or-app-credential",
+  method: "GET",
+  path: "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/plans",
+  retrySafety: "safe",
+  status: "stable"
+};
+var createAppCommercePlanOperation = {
+  authorization: "session-or-app-credential",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/plans",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var getAppCommerceEntitlementsOperation = {
+  authorization: "session-or-app-credential",
+  method: "GET",
+  path: "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/customers/{customerRef}/entitlements",
+  retrySafety: "safe",
+  status: "stable"
+};
+var listPersonalCommerceSubscriptionsOperation = {
+  authorization: "session",
+  method: "GET",
+  path: "/me/commerce/subscriptions",
+  retrySafety: "safe",
+  status: "stable"
+};
+var listPersonalCommerceCatalogOperation = {
+  authorization: "session",
+  method: "GET",
+  path: "/me/commerce/apps/{appId}/catalog",
+  retrySafety: "safe",
+  status: "stable"
+};
+var createPersonalCommerceQuoteOperation = {
+  authorization: "session",
+  method: "POST",
+  path: "/me/commerce/quotes",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var acceptPersonalCommerceQuoteOperation = {
+  authorization: "session",
+  method: "POST",
+  path: "/me/commerce/quotes/{quoteId}/accept",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var createPersonalCommerceCheckoutOperation = {
+  authorization: "session",
+  method: "POST",
+  path: "/me/commerce/checkouts",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var completePersonalCommerceCheckoutOperation = {
+  authorization: "session",
+  method: "POST",
+  path: "/me/commerce/checkouts/{checkoutRef}/complete",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var changePersonalCommerceSubscriptionOperation = {
+  authorization: "session",
+  method: "POST",
+  path: "/me/commerce/subscriptions/{subscriptionRef}/changes",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var cancelPersonalCommerceSubscriptionOperation = {
+  authorization: "session",
+  method: "POST",
+  path: "/me/commerce/subscriptions/{subscriptionRef}/cancel",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var resumePersonalCommerceSubscriptionOperation = {
+  authorization: "session",
+  method: "POST",
+  path: "/me/commerce/subscriptions/{subscriptionRef}/resume",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var listPersonalCommerceInvoicesOperation = {
+  authorization: "session",
+  method: "GET",
+  path: "/me/commerce/invoices",
+  retrySafety: "safe",
+  status: "stable"
+};
+var createPersonalCommercePortalSessionOperation = {
+  authorization: "session",
+  method: "POST",
+  path: "/me/commerce/portal-sessions",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var inspectCommercialBillingOperation = {
+  authorization: "session",
+  method: "GET",
+  path: "/workspaces/{workspaceId}/billing",
+  retrySafety: "safe",
+  status: "stable"
+};
+var reviewCommercialBillingChangeOperation = {
+  authorization: "session",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/billing/change-reviews",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var authorizeCommercialBillingChangeOperation = {
+  authorization: "session",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/billing/change-authorizations",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var reviewCommercialBillingCancellationOperation = {
+  authorization: "session",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/billing/cancellation-reviews",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var confirmCommercialBillingCancellationOperation = {
+  authorization: "session",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/billing/cancellations",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var requestCommercialBillingRefundOperation = {
+  authorization: "session",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/billing/refund-requests",
+  retrySafety: "unsafe",
+  status: "stable"
+};
 var listWorkspacesOperation = {
   authorization: "session-or-management-oauth",
   method: "GET",
@@ -856,6 +1087,470 @@ function createWorkspaceClient(transport) {
   };
 }
 
+// src/commerce.ts
+function replacePath(path, values) {
+  return Object.entries(values).reduce((result, [key, value]) => result.replace(`{${key}}`, encodeURIComponent(value)), path);
+}
+function pageQuery(input) {
+  const query = new URLSearchParams;
+  if (input.appId !== undefined)
+    query.set("appId", input.appId);
+  if (input.cursor !== undefined)
+    query.set("cursor", input.cursor);
+  if (input.limit !== undefined)
+    query.set("limit", String(input.limit));
+  return query.size === 0 ? "" : `?${query.toString()}`;
+}
+function createCommerceClient(transport) {
+  return {
+    async createCatalog(input) {
+      const path = replacePath(createAppCommerceCatalogOperation.path, {
+        appId: input.appId,
+        environment: input.environment,
+        workspaceId: input.workspaceId
+      });
+      return transport.execute({
+        body: JSON.stringify({
+          defaultCurrency: input.defaultCurrency,
+          name: input.name
+        }),
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: createAppCommerceCatalogOperation,
+        path
+      });
+    },
+    async getAppView(input) {
+      const path = replacePath(getAppCommerceViewOperation.path, input);
+      return transport.execute({
+        correlationId: input.correlationId,
+        operation: getAppCommerceViewOperation,
+        path
+      });
+    },
+    async getAppEnvironmentView(input) {
+      const path = replacePath(getAppCommerceEnvironmentViewOperation.path, {
+        appId: input.appId,
+        environment: input.environment,
+        workspaceId: input.workspaceId
+      });
+      return transport.execute({
+        correlationId: input.correlationId,
+        operation: getAppCommerceEnvironmentViewOperation,
+        path
+      });
+    },
+    async simulateMockRenewal(input) {
+      const path = replacePath(simulateMockCommerceRenewalOperation.path, input);
+      return transport.execute({
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: simulateMockCommerceRenewalOperation,
+        path
+      });
+    },
+    async listPlans(input) {
+      const path = replacePath(listAppCommercePlansOperation.path, {
+        appId: input.appId,
+        environment: input.environment,
+        workspaceId: input.workspaceId
+      });
+      return transport.execute({
+        correlationId: input.correlationId,
+        operation: listAppCommercePlansOperation,
+        path
+      });
+    },
+    async createPlan(input) {
+      const path = replacePath(createAppCommercePlanOperation.path, {
+        appId: input.appId,
+        environment: input.environment,
+        workspaceId: input.workspaceId
+      });
+      const body = await transport.execute({
+        body: JSON.stringify({
+          addOns: input.addOns,
+          amountMicros: input.amountMicros,
+          currency: input.currency,
+          description: input.description,
+          features: input.features,
+          includedMeters: input.includedMeters,
+          interval: input.interval,
+          key: input.key,
+          name: input.name,
+          trialDays: input.trialDays
+        }),
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: createAppCommercePlanOperation,
+        path
+      });
+      return body.data;
+    },
+    async createFeature(input) {
+      const path = replacePath(createAppCommerceFeatureOperation.path, {
+        appId: input.appId,
+        environment: input.environment,
+        workspaceId: input.workspaceId
+      });
+      return transport.execute({
+        body: JSON.stringify({
+          description: input.description,
+          key: input.key,
+          metered: input.metered,
+          name: input.name
+        }),
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: createAppCommerceFeatureOperation,
+        path
+      });
+    },
+    async createAddon(input) {
+      const path = replacePath(createAppCommerceAddonOperation.path, {
+        appId: input.appId,
+        environment: input.environment,
+        workspaceId: input.workspaceId
+      });
+      return transport.execute({
+        body: JSON.stringify({
+          amountMicros: input.amountMicros,
+          currency: input.currency,
+          description: input.description,
+          entitlementDuration: input.entitlementDuration,
+          features: input.features,
+          interval: input.interval,
+          key: input.key,
+          name: input.name
+        }),
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: createAppCommerceAddonOperation,
+        path
+      });
+    },
+    async publishPlan(input) {
+      const path = replacePath(publishAppCommercePlanOperation.path, {
+        appId: input.appId,
+        environment: input.environment,
+        planId: input.planId,
+        workspaceId: input.workspaceId
+      });
+      return transport.execute({
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: publishAppCommercePlanOperation,
+        path
+      });
+    },
+    async getPublisherAccounting(input) {
+      const path = replacePath(getAppCommercePublisherAccountingOperation.path, {
+        appId: input.appId,
+        environment: input.environment,
+        workspaceId: input.workspaceId
+      });
+      return transport.execute({
+        correlationId: input.correlationId,
+        operation: getAppCommercePublisherAccountingOperation,
+        path
+      });
+    },
+    async releasePublisherReserves(input) {
+      const path = replacePath(releaseAppCommercePublisherReservesOperation.path, {
+        appId: input.appId,
+        environment: input.environment,
+        workspaceId: input.workspaceId
+      });
+      return transport.execute({
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: releaseAppCommercePublisherReservesOperation,
+        path
+      });
+    },
+    async createSettlement(input) {
+      const path = replacePath(createAppCommerceSettlementOperation.path, {
+        appId: input.appId,
+        environment: input.environment,
+        workspaceId: input.workspaceId
+      });
+      return transport.execute({
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: createAppCommerceSettlementOperation,
+        path
+      });
+    },
+    async simulatePayout(input) {
+      const path = replacePath(simulateAppCommercePayoutOperation.path, {
+        appId: input.appId,
+        environment: input.environment,
+        settlementId: input.settlementId,
+        workspaceId: input.workspaceId
+      });
+      return transport.execute({
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: simulateAppCommercePayoutOperation,
+        path
+      });
+    },
+    async recordUsage(input) {
+      const path = replacePath(recordAppCommerceUsageOperation.path, {
+        appId: input.appId,
+        customerRef: input.customerRef,
+        environment: input.environment,
+        workspaceId: input.workspaceId
+      });
+      return transport.execute({
+        body: JSON.stringify({
+          meterKey: input.meterKey,
+          quantity: input.quantity
+        }),
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: recordAppCommerceUsageOperation,
+        path
+      });
+    },
+    async requestRefund(input) {
+      const path = replacePath(requestAppCommerceRefundOperation.path, {
+        appId: input.appId,
+        environment: input.environment,
+        invoiceId: input.invoiceId,
+        workspaceId: input.workspaceId
+      });
+      return transport.execute({
+        body: JSON.stringify({
+          amountMinor: input.amountMinor,
+          currency: input.currency,
+          paymentId: input.paymentId
+        }),
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: requestAppCommerceRefundOperation,
+        path
+      });
+    },
+    async listCatalog(input) {
+      const path = replacePath(listPersonalCommerceCatalogOperation.path, {
+        appId: input.appId
+      });
+      const query = input.environment ? `?environment=${encodeURIComponent(input.environment)}` : "";
+      return transport.execute({
+        correlationId: input.correlationId,
+        operation: listPersonalCommerceCatalogOperation,
+        path: `${path}${query}`
+      });
+    },
+    async getEntitlements(input) {
+      const path = replacePath(getAppCommerceEntitlementsOperation.path, {
+        appId: input.appId,
+        customerRef: input.customerRef,
+        environment: input.environment,
+        workspaceId: input.workspaceId
+      });
+      return transport.execute({
+        correlationId: input.correlationId,
+        operation: getAppCommerceEntitlementsOperation,
+        path
+      });
+    },
+    async listSubscriptions(input) {
+      return transport.execute({
+        correlationId: input.correlationId,
+        operation: listPersonalCommerceSubscriptionsOperation,
+        path: `${listPersonalCommerceSubscriptionsOperation.path}${pageQuery(input)}`
+      });
+    },
+    async createCheckout(input) {
+      return transport.execute({
+        body: JSON.stringify({
+          acceptedTermsDigest: input.acceptedTermsDigest,
+          addOns: input.addOns,
+          appId: input.appId,
+          environment: input.environment,
+          planKey: input.planKey,
+          quantity: input.quantity,
+          returnUrl: input.returnUrl
+        }),
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: createPersonalCommerceCheckoutOperation,
+        path: createPersonalCommerceCheckoutOperation.path
+      });
+    },
+    async createQuote(input) {
+      return transport.execute({
+        body: JSON.stringify({
+          appId: input.appId,
+          addOns: input.addOns,
+          discountCode: input.discountCode,
+          environment: input.environment,
+          planKey: input.planKey,
+          quantity: input.quantity
+        }),
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: createPersonalCommerceQuoteOperation,
+        path: createPersonalCommerceQuoteOperation.path
+      });
+    },
+    async acceptQuote(input) {
+      const path = replacePath(acceptPersonalCommerceQuoteOperation.path, {
+        quoteId: input.quoteId
+      });
+      return transport.execute({
+        body: JSON.stringify({
+          termsDigest: input.termsDigest
+        }),
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: acceptPersonalCommerceQuoteOperation,
+        path
+      });
+    },
+    async completeCheckout(input) {
+      const path = replacePath(completePersonalCommerceCheckoutOperation.path, input);
+      return transport.execute({
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: completePersonalCommerceCheckoutOperation,
+        path
+      });
+    },
+    async changeSubscription(input) {
+      const path = replacePath(changePersonalCommerceSubscriptionOperation.path, {
+        subscriptionRef: input.subscriptionRef
+      });
+      return transport.execute({
+        body: JSON.stringify({
+          addOns: input.addOns,
+          effectiveAt: input.effectiveAt,
+          planKey: input.planKey,
+          quantity: input.quantity
+        }),
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: changePersonalCommerceSubscriptionOperation,
+        path
+      });
+    },
+    async cancelSubscription(input) {
+      const path = replacePath(cancelPersonalCommerceSubscriptionOperation.path, input);
+      return transport.execute({
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: cancelPersonalCommerceSubscriptionOperation,
+        path
+      });
+    },
+    async resumeSubscription(input) {
+      const path = replacePath(resumePersonalCommerceSubscriptionOperation.path, input);
+      return transport.execute({
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: resumePersonalCommerceSubscriptionOperation,
+        path
+      });
+    },
+    async listInvoices(input) {
+      return transport.execute({
+        correlationId: input.correlationId,
+        operation: listPersonalCommerceInvoicesOperation,
+        path: `${listPersonalCommerceInvoicesOperation.path}${pageQuery(input)}`
+      });
+    },
+    async createPortalSession(input) {
+      return transport.execute({
+        body: JSON.stringify({
+          appId: input.appId,
+          returnUrl: input.returnUrl
+        }),
+        correlationId: input.correlationId,
+        operation: createPersonalCommercePortalSessionOperation,
+        path: createPersonalCommercePortalSessionOperation.path
+      });
+    }
+  };
+}
+
+// src/billing.ts
+function workspacePath(operation, workspaceId) {
+  return operation.path.replace("{workspaceId}", encodeURIComponent(workspaceId));
+}
+function createBillingClient(transport) {
+  return {
+    async inspect(input) {
+      return transport.execute({
+        correlationId: input.correlationId,
+        operation: inspectCommercialBillingOperation,
+        path: workspacePath(inspectCommercialBillingOperation, input.workspaceId)
+      });
+    },
+    async reviewChange(input) {
+      return transport.execute({
+        body: JSON.stringify({
+          idempotencyKey: input.idempotencyKey,
+          period: input.period,
+          planId: input.planId,
+          quantity: input.quantity
+        }),
+        correlationId: input.correlationId,
+        operation: reviewCommercialBillingChangeOperation,
+        path: workspacePath(reviewCommercialBillingChangeOperation, input.workspaceId)
+      });
+    },
+    async authorizeChange(input) {
+      return transport.execute({
+        body: JSON.stringify({
+          changeId: input.changeId
+        }),
+        correlationId: input.correlationId,
+        operation: authorizeCommercialBillingChangeOperation,
+        path: workspacePath(authorizeCommercialBillingChangeOperation, input.workspaceId)
+      });
+    },
+    async reviewCancellation(input) {
+      return transport.execute({
+        body: JSON.stringify({
+          idempotencyKey: input.idempotencyKey,
+          mode: input.mode
+        }),
+        correlationId: input.correlationId,
+        operation: reviewCommercialBillingCancellationOperation,
+        path: workspacePath(reviewCommercialBillingCancellationOperation, input.workspaceId)
+      });
+    },
+    async confirmCancellation(input) {
+      return transport.execute({
+        body: JSON.stringify({
+          confirmationToken: input.confirmationToken,
+          idempotencyKey: input.idempotencyKey
+        }),
+        correlationId: input.correlationId,
+        operation: confirmCommercialBillingCancellationOperation,
+        path: workspacePath(confirmCommercialBillingCancellationOperation, input.workspaceId)
+      });
+    },
+    async requestRefund(input) {
+      return transport.execute({
+        body: JSON.stringify({
+          amountMicros: input.amountMicros,
+          category: input.category,
+          consumedOverageMicros: input.consumedOverageMicros,
+          idempotencyKey: input.idempotencyKey,
+          invoiceRef: input.invoiceRef,
+          verifiedCorrection: input.verifiedCorrection
+        }),
+        correlationId: input.correlationId,
+        operation: requestCommercialBillingRefundOperation,
+        path: workspacePath(requestCommercialBillingRefundOperation, input.workspaceId)
+      });
+    }
+  };
+}
+
 // src/index.ts
 if (typeof window !== "undefined") {
   throw new Error("@authless/server is server-only. Move this import to server code. Use @authless/browser for browser authorization.");
@@ -868,12 +1563,16 @@ function createAuthlessServerClient(options) {
     appMemberships: createAppMembershipClient(transport),
     bulkAccess: createBulkAccessClient(transport),
     apps: createAppClient(transport),
+    billing: createBillingClient(transport),
+    commerce: createCommerceClient(transport),
     workspaces: createWorkspaceClient(transport)
   };
 }
 export {
   createWorkspaceClient,
+  createCommerceClient,
   createBulkAccessClient,
+  createBillingClient,
   createAuthlessTransport,
   createAuthlessServerClient,
   createAuditClient,

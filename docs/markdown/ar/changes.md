@@ -135,6 +135,77 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
   ],
   "changes": [
     {
+      "id": "2026-10-11-profile-workspace-app-commerce-boundaries",
+      "publishedAt": "2026-10-11",
+      "title": {
+        "en": "Profile and developer workspace commerce boundaries",
+        "ar": "حدود التجارة بين الملف الشخصي ومساحة عمل المطور"
+      },
+      "summary": {
+        "en": "A personal profile can upgrade to developer capability through workspace membership and switch views without a second identity. App subscriptions remain profile-owned, while app catalog administration and Authless platform billing remain workspace-scoped. The local mock provider, CLI, and delegated MCP preview/apply flow now preserve these boundaries across the API, database, and operator tooling.",
+        "ar": "يمكن للملف الشخصي الترقية إلى إمكانات المطور عبر عضوية مساحة العمل والتنقل بين العرضين دون هوية ثانية. تبقى اشتراكات التطبيقات مملوكة للملف الشخصي، بينما تبقى إدارة كتالوج التطبيقات وفوترة Authless للمنصة ضمن نطاق مساحة العمل. يحافظ موفر الدفع الوهمي المحلي وCLI وتدفق المعاينة والتنفيذ المفوض عبر MCP على هذه الحدود عبر واجهة API وقاعدة البيانات وأدوات التشغيل."
+      },
+      "categories": [
+        "product",
+        "api",
+        "security",
+        "operations",
+        "docs"
+      ],
+      "audiences": [
+        "operator",
+        "integrator",
+        "reference",
+        "evaluator"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "No live-payment migration is implied. Treat developer account as a product label for an existing profile with workspace capability. Migrations 0102–0105 add local app-commerce, scope-integrity, and durable management approval state; verify the intended database with the read-only status check before any deployment migration.",
+        "ar": "لا يعني ذلك ترحيلاً لمدفوعات حية. تعامل مع حساب المطور كتسمية منتج لملف شخصي قائم يملك إمكانات مساحة العمل. تضيف الترحيلات 0102–0105 حالة تجارة التطبيقات وسلامة النطاق والموافقات الإدارية الدائمة محلياً؛ تحقق من قاعدة البيانات المقصودة بفحص الحالة للقراءة فقط قبل أي ترحيل للنشر."
+      },
+      "announcement": {
+        "en": "Personal subscriptions, developer workspace administration, app commerce, and Authless platform billing now have separate UI contexts, API authorities, and database scopes. The mock provider remains local-only and does not claim live worldwide payment support.",
+        "ar": "أصبحت الاشتراكات الشخصية وإدارة مساحة عمل المطور وتجارة التطبيقات وفوترة Authless للمنصة تملك سياقات واجهة وصلاحيات API ونطاقات قاعدة بيانات منفصلة. يبقى موفر الدفع الوهمي محلياً ولا يدعي دعم مدفوعات عالمية حية."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "CONTEXT.md",
+        "docs/adr/0001-profile-workspace-and-commerce-boundaries.md",
+        "docs/operations/mock-managed-payments.md",
+        "apps/dash/src/routes/+layout.svelte",
+        "apps/dash/src/routes/personal/subscriptions/+page.svelte",
+        "apps/dash/src/routes/workspaces/+page.svelte",
+        "apps/api/src/app-commerce-routes.ts",
+        "apps/api/src/runtime/commerce-authority.ts",
+        "apps/api/src/management-mcp/catalog.ts",
+        "apps/api/src/management-mcp/tool-routes/commerce.ts",
+        "apps/api/src/runtime/management-commerce-input.ts",
+        "apps/api/src/runtime/management-commerce.ts",
+        "apps/api/src/runtime/management-mcp-attestation.ts",
+        "packages/cli/README.md",
+        "packages/cli/src/cli.ts",
+        "packages/cli/test/cli.test.ts",
+        "packages/server/src/commerce.ts",
+        "packages/server/src/billing.ts",
+        "packages/core/src/app-commerce/service.ts",
+        "packages/core/src/agent-management/management-scopes.ts",
+        "packages/db/src/agent-management/commerce-mutation-store.ts",
+        "packages/db/src/migration-status-cli.ts",
+        "packages/db/drizzle/0105_management_agent_commerce_billing_scopes_up.sql",
+        "packages/db/drizzle/0104_app_commerce_scope_integrity_up.sql",
+        "packages/db/drizzle/0104_app_commerce_scope_integrity_down.sql",
+        "tests/integration/commerce-authority-postgres.integration.ts",
+        "tests/integration/management-commerce-runtime-postgres.integration.ts",
+        "apps/api/src/runtime/management-commerce-input.test.ts",
+        "tests/ui/workspace-context.ui.ts"
+      ],
+      "permalink": "/changes#2026-10-11-profile-workspace-app-commerce-boundaries"
+    },
+    {
       "id": "2026-10-11-six-digit-authentication",
       "publishedAt": "2026-10-11",
       "title": {

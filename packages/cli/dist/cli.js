@@ -5,6 +5,237 @@
 import { spawn } from "child_process";
 
 // ../server/dist/index.js
+var getAppCommerceViewOperation = {
+  authorization: "session-or-app-credential",
+  method: "GET",
+  path: "/workspaces/{workspaceId}/apps/{appId}/commerce",
+  retrySafety: "safe",
+  status: "stable"
+};
+var createAppCommerceCatalogOperation = {
+  authorization: "session-or-app-credential",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/catalog",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var simulateMockCommerceRenewalOperation = {
+  authorization: "session-or-app-credential",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/apps/{appId}/commerce/simulate-renewal",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var getAppCommerceEnvironmentViewOperation = {
+  authorization: "session-or-app-credential",
+  method: "GET",
+  path: "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}",
+  retrySafety: "safe",
+  status: "stable"
+};
+var createAppCommerceFeatureOperation = {
+  authorization: "session-or-app-credential",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/features",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var createAppCommerceAddonOperation = {
+  authorization: "session-or-app-credential",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/addons",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var recordAppCommerceUsageOperation = {
+  authorization: "session-or-app-credential",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/customers/{customerRef}/usage",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var requestAppCommerceRefundOperation = {
+  authorization: "session",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/invoices/{invoiceId}/refunds",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var publishAppCommercePlanOperation = {
+  authorization: "session-or-app-credential",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/plans/{planId}/publish",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var getAppCommercePublisherAccountingOperation = {
+  authorization: "session-or-app-credential",
+  method: "GET",
+  path: "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/accounting",
+  retrySafety: "safe",
+  status: "stable"
+};
+var releaseAppCommercePublisherReservesOperation = {
+  authorization: "session-or-app-credential",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/accounting/release-reserves",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var createAppCommerceSettlementOperation = {
+  authorization: "session-or-app-credential",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/settlements",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var simulateAppCommercePayoutOperation = {
+  authorization: "session-or-app-credential",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/settlements/{settlementId}/payouts",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var listAppCommercePlansOperation = {
+  authorization: "session-or-app-credential",
+  method: "GET",
+  path: "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/plans",
+  retrySafety: "safe",
+  status: "stable"
+};
+var createAppCommercePlanOperation = {
+  authorization: "session-or-app-credential",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/plans",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var getAppCommerceEntitlementsOperation = {
+  authorization: "session-or-app-credential",
+  method: "GET",
+  path: "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/customers/{customerRef}/entitlements",
+  retrySafety: "safe",
+  status: "stable"
+};
+var listPersonalCommerceSubscriptionsOperation = {
+  authorization: "session",
+  method: "GET",
+  path: "/me/commerce/subscriptions",
+  retrySafety: "safe",
+  status: "stable"
+};
+var listPersonalCommerceCatalogOperation = {
+  authorization: "session",
+  method: "GET",
+  path: "/me/commerce/apps/{appId}/catalog",
+  retrySafety: "safe",
+  status: "stable"
+};
+var createPersonalCommerceQuoteOperation = {
+  authorization: "session",
+  method: "POST",
+  path: "/me/commerce/quotes",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var acceptPersonalCommerceQuoteOperation = {
+  authorization: "session",
+  method: "POST",
+  path: "/me/commerce/quotes/{quoteId}/accept",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var createPersonalCommerceCheckoutOperation = {
+  authorization: "session",
+  method: "POST",
+  path: "/me/commerce/checkouts",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var completePersonalCommerceCheckoutOperation = {
+  authorization: "session",
+  method: "POST",
+  path: "/me/commerce/checkouts/{checkoutRef}/complete",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var changePersonalCommerceSubscriptionOperation = {
+  authorization: "session",
+  method: "POST",
+  path: "/me/commerce/subscriptions/{subscriptionRef}/changes",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var cancelPersonalCommerceSubscriptionOperation = {
+  authorization: "session",
+  method: "POST",
+  path: "/me/commerce/subscriptions/{subscriptionRef}/cancel",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var resumePersonalCommerceSubscriptionOperation = {
+  authorization: "session",
+  method: "POST",
+  path: "/me/commerce/subscriptions/{subscriptionRef}/resume",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var listPersonalCommerceInvoicesOperation = {
+  authorization: "session",
+  method: "GET",
+  path: "/me/commerce/invoices",
+  retrySafety: "safe",
+  status: "stable"
+};
+var createPersonalCommercePortalSessionOperation = {
+  authorization: "session",
+  method: "POST",
+  path: "/me/commerce/portal-sessions",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var inspectCommercialBillingOperation = {
+  authorization: "session",
+  method: "GET",
+  path: "/workspaces/{workspaceId}/billing",
+  retrySafety: "safe",
+  status: "stable"
+};
+var reviewCommercialBillingChangeOperation = {
+  authorization: "session",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/billing/change-reviews",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var authorizeCommercialBillingChangeOperation = {
+  authorization: "session",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/billing/change-authorizations",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var reviewCommercialBillingCancellationOperation = {
+  authorization: "session",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/billing/cancellation-reviews",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var confirmCommercialBillingCancellationOperation = {
+  authorization: "session",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/billing/cancellations",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var requestCommercialBillingRefundOperation = {
+  authorization: "session",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/billing/refund-requests",
+  retrySafety: "unsafe",
+  status: "stable"
+};
 var listWorkspacesOperation = {
   authorization: "session-or-management-oauth",
   method: "GET",
@@ -847,6 +1078,466 @@ function createWorkspaceClient(transport) {
     }
   };
 }
+function replacePath(path, values) {
+  return Object.entries(values).reduce((result, [key, value]) => result.replace(`{${key}}`, encodeURIComponent(value)), path);
+}
+function pageQuery(input) {
+  const query = new URLSearchParams;
+  if (input.appId !== undefined)
+    query.set("appId", input.appId);
+  if (input.cursor !== undefined)
+    query.set("cursor", input.cursor);
+  if (input.limit !== undefined)
+    query.set("limit", String(input.limit));
+  return query.size === 0 ? "" : `?${query.toString()}`;
+}
+function createCommerceClient(transport) {
+  return {
+    async createCatalog(input) {
+      const path = replacePath(createAppCommerceCatalogOperation.path, {
+        appId: input.appId,
+        environment: input.environment,
+        workspaceId: input.workspaceId
+      });
+      return transport.execute({
+        body: JSON.stringify({
+          defaultCurrency: input.defaultCurrency,
+          name: input.name
+        }),
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: createAppCommerceCatalogOperation,
+        path
+      });
+    },
+    async getAppView(input) {
+      const path = replacePath(getAppCommerceViewOperation.path, input);
+      return transport.execute({
+        correlationId: input.correlationId,
+        operation: getAppCommerceViewOperation,
+        path
+      });
+    },
+    async getAppEnvironmentView(input) {
+      const path = replacePath(getAppCommerceEnvironmentViewOperation.path, {
+        appId: input.appId,
+        environment: input.environment,
+        workspaceId: input.workspaceId
+      });
+      return transport.execute({
+        correlationId: input.correlationId,
+        operation: getAppCommerceEnvironmentViewOperation,
+        path
+      });
+    },
+    async simulateMockRenewal(input) {
+      const path = replacePath(simulateMockCommerceRenewalOperation.path, input);
+      return transport.execute({
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: simulateMockCommerceRenewalOperation,
+        path
+      });
+    },
+    async listPlans(input) {
+      const path = replacePath(listAppCommercePlansOperation.path, {
+        appId: input.appId,
+        environment: input.environment,
+        workspaceId: input.workspaceId
+      });
+      return transport.execute({
+        correlationId: input.correlationId,
+        operation: listAppCommercePlansOperation,
+        path
+      });
+    },
+    async createPlan(input) {
+      const path = replacePath(createAppCommercePlanOperation.path, {
+        appId: input.appId,
+        environment: input.environment,
+        workspaceId: input.workspaceId
+      });
+      const body = await transport.execute({
+        body: JSON.stringify({
+          addOns: input.addOns,
+          amountMicros: input.amountMicros,
+          currency: input.currency,
+          description: input.description,
+          features: input.features,
+          includedMeters: input.includedMeters,
+          interval: input.interval,
+          key: input.key,
+          name: input.name,
+          trialDays: input.trialDays
+        }),
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: createAppCommercePlanOperation,
+        path
+      });
+      return body.data;
+    },
+    async createFeature(input) {
+      const path = replacePath(createAppCommerceFeatureOperation.path, {
+        appId: input.appId,
+        environment: input.environment,
+        workspaceId: input.workspaceId
+      });
+      return transport.execute({
+        body: JSON.stringify({
+          description: input.description,
+          key: input.key,
+          metered: input.metered,
+          name: input.name
+        }),
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: createAppCommerceFeatureOperation,
+        path
+      });
+    },
+    async createAddon(input) {
+      const path = replacePath(createAppCommerceAddonOperation.path, {
+        appId: input.appId,
+        environment: input.environment,
+        workspaceId: input.workspaceId
+      });
+      return transport.execute({
+        body: JSON.stringify({
+          amountMicros: input.amountMicros,
+          currency: input.currency,
+          description: input.description,
+          entitlementDuration: input.entitlementDuration,
+          features: input.features,
+          interval: input.interval,
+          key: input.key,
+          name: input.name
+        }),
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: createAppCommerceAddonOperation,
+        path
+      });
+    },
+    async publishPlan(input) {
+      const path = replacePath(publishAppCommercePlanOperation.path, {
+        appId: input.appId,
+        environment: input.environment,
+        planId: input.planId,
+        workspaceId: input.workspaceId
+      });
+      return transport.execute({
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: publishAppCommercePlanOperation,
+        path
+      });
+    },
+    async getPublisherAccounting(input) {
+      const path = replacePath(getAppCommercePublisherAccountingOperation.path, {
+        appId: input.appId,
+        environment: input.environment,
+        workspaceId: input.workspaceId
+      });
+      return transport.execute({
+        correlationId: input.correlationId,
+        operation: getAppCommercePublisherAccountingOperation,
+        path
+      });
+    },
+    async releasePublisherReserves(input) {
+      const path = replacePath(releaseAppCommercePublisherReservesOperation.path, {
+        appId: input.appId,
+        environment: input.environment,
+        workspaceId: input.workspaceId
+      });
+      return transport.execute({
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: releaseAppCommercePublisherReservesOperation,
+        path
+      });
+    },
+    async createSettlement(input) {
+      const path = replacePath(createAppCommerceSettlementOperation.path, {
+        appId: input.appId,
+        environment: input.environment,
+        workspaceId: input.workspaceId
+      });
+      return transport.execute({
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: createAppCommerceSettlementOperation,
+        path
+      });
+    },
+    async simulatePayout(input) {
+      const path = replacePath(simulateAppCommercePayoutOperation.path, {
+        appId: input.appId,
+        environment: input.environment,
+        settlementId: input.settlementId,
+        workspaceId: input.workspaceId
+      });
+      return transport.execute({
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: simulateAppCommercePayoutOperation,
+        path
+      });
+    },
+    async recordUsage(input) {
+      const path = replacePath(recordAppCommerceUsageOperation.path, {
+        appId: input.appId,
+        customerRef: input.customerRef,
+        environment: input.environment,
+        workspaceId: input.workspaceId
+      });
+      return transport.execute({
+        body: JSON.stringify({
+          meterKey: input.meterKey,
+          quantity: input.quantity
+        }),
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: recordAppCommerceUsageOperation,
+        path
+      });
+    },
+    async requestRefund(input) {
+      const path = replacePath(requestAppCommerceRefundOperation.path, {
+        appId: input.appId,
+        environment: input.environment,
+        invoiceId: input.invoiceId,
+        workspaceId: input.workspaceId
+      });
+      return transport.execute({
+        body: JSON.stringify({
+          amountMinor: input.amountMinor,
+          currency: input.currency,
+          paymentId: input.paymentId
+        }),
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: requestAppCommerceRefundOperation,
+        path
+      });
+    },
+    async listCatalog(input) {
+      const path = replacePath(listPersonalCommerceCatalogOperation.path, {
+        appId: input.appId
+      });
+      const query = input.environment ? `?environment=${encodeURIComponent(input.environment)}` : "";
+      return transport.execute({
+        correlationId: input.correlationId,
+        operation: listPersonalCommerceCatalogOperation,
+        path: `${path}${query}`
+      });
+    },
+    async getEntitlements(input) {
+      const path = replacePath(getAppCommerceEntitlementsOperation.path, {
+        appId: input.appId,
+        customerRef: input.customerRef,
+        environment: input.environment,
+        workspaceId: input.workspaceId
+      });
+      return transport.execute({
+        correlationId: input.correlationId,
+        operation: getAppCommerceEntitlementsOperation,
+        path
+      });
+    },
+    async listSubscriptions(input) {
+      return transport.execute({
+        correlationId: input.correlationId,
+        operation: listPersonalCommerceSubscriptionsOperation,
+        path: `${listPersonalCommerceSubscriptionsOperation.path}${pageQuery(input)}`
+      });
+    },
+    async createCheckout(input) {
+      return transport.execute({
+        body: JSON.stringify({
+          acceptedTermsDigest: input.acceptedTermsDigest,
+          addOns: input.addOns,
+          appId: input.appId,
+          environment: input.environment,
+          planKey: input.planKey,
+          quantity: input.quantity,
+          returnUrl: input.returnUrl
+        }),
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: createPersonalCommerceCheckoutOperation,
+        path: createPersonalCommerceCheckoutOperation.path
+      });
+    },
+    async createQuote(input) {
+      return transport.execute({
+        body: JSON.stringify({
+          appId: input.appId,
+          addOns: input.addOns,
+          discountCode: input.discountCode,
+          environment: input.environment,
+          planKey: input.planKey,
+          quantity: input.quantity
+        }),
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: createPersonalCommerceQuoteOperation,
+        path: createPersonalCommerceQuoteOperation.path
+      });
+    },
+    async acceptQuote(input) {
+      const path = replacePath(acceptPersonalCommerceQuoteOperation.path, {
+        quoteId: input.quoteId
+      });
+      return transport.execute({
+        body: JSON.stringify({
+          termsDigest: input.termsDigest
+        }),
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: acceptPersonalCommerceQuoteOperation,
+        path
+      });
+    },
+    async completeCheckout(input) {
+      const path = replacePath(completePersonalCommerceCheckoutOperation.path, input);
+      return transport.execute({
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: completePersonalCommerceCheckoutOperation,
+        path
+      });
+    },
+    async changeSubscription(input) {
+      const path = replacePath(changePersonalCommerceSubscriptionOperation.path, {
+        subscriptionRef: input.subscriptionRef
+      });
+      return transport.execute({
+        body: JSON.stringify({
+          addOns: input.addOns,
+          effectiveAt: input.effectiveAt,
+          planKey: input.planKey,
+          quantity: input.quantity
+        }),
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: changePersonalCommerceSubscriptionOperation,
+        path
+      });
+    },
+    async cancelSubscription(input) {
+      const path = replacePath(cancelPersonalCommerceSubscriptionOperation.path, input);
+      return transport.execute({
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: cancelPersonalCommerceSubscriptionOperation,
+        path
+      });
+    },
+    async resumeSubscription(input) {
+      const path = replacePath(resumePersonalCommerceSubscriptionOperation.path, input);
+      return transport.execute({
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: resumePersonalCommerceSubscriptionOperation,
+        path
+      });
+    },
+    async listInvoices(input) {
+      return transport.execute({
+        correlationId: input.correlationId,
+        operation: listPersonalCommerceInvoicesOperation,
+        path: `${listPersonalCommerceInvoicesOperation.path}${pageQuery(input)}`
+      });
+    },
+    async createPortalSession(input) {
+      return transport.execute({
+        body: JSON.stringify({
+          appId: input.appId,
+          returnUrl: input.returnUrl
+        }),
+        correlationId: input.correlationId,
+        operation: createPersonalCommercePortalSessionOperation,
+        path: createPersonalCommercePortalSessionOperation.path
+      });
+    }
+  };
+}
+function workspacePath(operation, workspaceId) {
+  return operation.path.replace("{workspaceId}", encodeURIComponent(workspaceId));
+}
+function createBillingClient(transport) {
+  return {
+    async inspect(input) {
+      return transport.execute({
+        correlationId: input.correlationId,
+        operation: inspectCommercialBillingOperation,
+        path: workspacePath(inspectCommercialBillingOperation, input.workspaceId)
+      });
+    },
+    async reviewChange(input) {
+      return transport.execute({
+        body: JSON.stringify({
+          idempotencyKey: input.idempotencyKey,
+          period: input.period,
+          planId: input.planId,
+          quantity: input.quantity
+        }),
+        correlationId: input.correlationId,
+        operation: reviewCommercialBillingChangeOperation,
+        path: workspacePath(reviewCommercialBillingChangeOperation, input.workspaceId)
+      });
+    },
+    async authorizeChange(input) {
+      return transport.execute({
+        body: JSON.stringify({
+          changeId: input.changeId
+        }),
+        correlationId: input.correlationId,
+        operation: authorizeCommercialBillingChangeOperation,
+        path: workspacePath(authorizeCommercialBillingChangeOperation, input.workspaceId)
+      });
+    },
+    async reviewCancellation(input) {
+      return transport.execute({
+        body: JSON.stringify({
+          idempotencyKey: input.idempotencyKey,
+          mode: input.mode
+        }),
+        correlationId: input.correlationId,
+        operation: reviewCommercialBillingCancellationOperation,
+        path: workspacePath(reviewCommercialBillingCancellationOperation, input.workspaceId)
+      });
+    },
+    async confirmCancellation(input) {
+      return transport.execute({
+        body: JSON.stringify({
+          confirmationToken: input.confirmationToken,
+          idempotencyKey: input.idempotencyKey
+        }),
+        correlationId: input.correlationId,
+        operation: confirmCommercialBillingCancellationOperation,
+        path: workspacePath(confirmCommercialBillingCancellationOperation, input.workspaceId)
+      });
+    },
+    async requestRefund(input) {
+      return transport.execute({
+        body: JSON.stringify({
+          amountMicros: input.amountMicros,
+          category: input.category,
+          consumedOverageMicros: input.consumedOverageMicros,
+          idempotencyKey: input.idempotencyKey,
+          invoiceRef: input.invoiceRef,
+          verifiedCorrection: input.verifiedCorrection
+        }),
+        correlationId: input.correlationId,
+        operation: requestCommercialBillingRefundOperation,
+        path: workspacePath(requestCommercialBillingRefundOperation, input.workspaceId)
+      });
+    }
+  };
+}
 if (typeof window !== "undefined") {
   throw new Error("@authless/server is server-only. Move this import to server code. Use @authless/browser for browser authorization.");
 }
@@ -858,6 +1549,8 @@ function createAuthlessServerClient(options) {
     appMemberships: createAppMembershipClient(transport),
     bulkAccess: createBulkAccessClient(transport),
     apps: createAppClient(transport),
+    billing: createBillingClient(transport),
+    commerce: createCommerceClient(transport),
     workspaces: createWorkspaceClient(transport)
   };
 }
@@ -894,6 +1587,13 @@ var defaultClientId = "authless-cli";
 var defaultResource = "https://api.authle.ss/management";
 var defaultIssuer = "https://sign.authle.ss/management";
 var defaultScope = "workspace:read";
+var supportedScopes = [
+  "workspace:read",
+  "commerce:read",
+  "commerce:write",
+  "billing:read",
+  "billing:write"
+];
 function oauthResourceForUrl(value) {
   const url = validateHttpsUrl(value, "OAuth resource");
   if (url.pathname !== "/management" && url.pathname !== "/mcp")
@@ -942,6 +1642,14 @@ function safeJson(value) {
     throw new Error("OAuth response was not an object");
   return value;
 }
+function normalizeScope(value) {
+  const requested = value.split(/\s+/u).filter(Boolean);
+  if (requested.length === 0 || new Set(requested).size !== requested.length)
+    return null;
+  if (!requested.every((scope) => supportedScopes.includes(scope)))
+    return null;
+  return supportedScopes.filter((scope) => requested.includes(scope)).join(" ");
+}
 async function requestToken(endpoint, body, fetcher) {
   const response = await fetcher(endpoint, {
     method: "POST",
@@ -982,10 +1690,10 @@ async function loginOAuth(input) {
   const issuer = input.issuer ?? defaultIssuer;
   const clientId = input.clientId ?? defaultClientId;
   const resource = input.resource ?? defaultResource;
-  const scope = input.scope ?? defaultScope;
+  const scope = normalizeScope(input.scope ?? defaultScope);
+  if (!scope)
+    throw new Error(`OAuth scope must contain only: ${supportedScopes.join(", ")}`);
   validateOAuthEndpoints(issuer, resource);
-  if (scope !== defaultScope)
-    throw new Error(`OAuth scope must be ${defaultScope}`);
   const workspaceId = input.workspaceId;
   const verifier = randomUrlSafe();
   const state = randomUrlSafe(24);
@@ -1101,7 +1809,7 @@ async function readOAuth(store = oauthStoreForResource(defaultResource)) {
     if (!value || typeof value !== "object")
       throw new Error;
     const record2 = value;
-    if (typeof record2.accessToken !== "string" || !record2.accessToken || typeof record2.issuer !== "string" || typeof record2.resource !== "string" || typeof record2.scope !== "string" || record2.scope !== defaultScope || typeof record2.expiresAt !== "number" || !Number.isFinite(record2.expiresAt) || typeof record2.clientId !== "string" || record2.clientId !== defaultClientId)
+    if (typeof record2.accessToken !== "string" || !record2.accessToken || typeof record2.issuer !== "string" || typeof record2.resource !== "string" || typeof record2.scope !== "string" || !normalizeScope(record2.scope) || typeof record2.expiresAt !== "number" || !Number.isFinite(record2.expiresAt) || typeof record2.clientId !== "string" || record2.clientId !== defaultClientId)
       throw new Error;
     validateOAuthEndpoints(record2.issuer, record2.resource);
     if (record2.refreshToken !== undefined && typeof record2.refreshToken !== "string")
@@ -1191,20 +1899,53 @@ Commands:
   memberships status --workspace ID --app ID --membership ID --action ACTION
   apps create --workspace ID --name NAME --owner-email EMAIL --yes
   workspaces create --name NAME --yes
+  commerce plans --workspace ID --app ID --environment test|production
+  commerce view --workspace ID --app ID
+  commerce environment --workspace ID --app ID --environment test|production
+  commerce catalog --app ID [--environment test|production]
+  commerce catalog-create --workspace ID --app ID --environment ENV --name NAME --currency CUR --yes
+  commerce entitlements --workspace ID --app ID --environment ENV --customer-ref REF
+  commerce plan-create --workspace ID --app ID --environment ENV --key KEY --name NAME --amount-micros N --currency CUR --interval month|year [--trial-days N] [--included-meters JSON] --yes
+  commerce feature-create --workspace ID --app ID --environment ENV --key KEY --name NAME --yes
+  commerce addon-create --workspace ID --app ID --environment ENV --key KEY --name NAME --amount-micros N --currency CUR --interval month|year|one_time --yes
+  commerce publish --workspace ID --app ID --environment ENV --plan ID --yes
+  commerce accounting|settle --workspace ID --app ID --environment ENV
+  commerce reserves-release --workspace ID --app ID --environment ENV --yes
+  commerce payout --workspace ID --app ID --environment ENV --settlement ID --yes (test mock only)
+  commerce usage --workspace ID --app ID --environment ENV --customer-ref REF --meter-key KEY --quantity N --yes
+  commerce refund --workspace ID --app ID --environment ENV --invoice ID --payment-id ID --currency CUR --amount-minor N --yes
+  commerce subscriptions [--app ID]
+  commerce invoices [--app ID]
+  commerce checkout --app ID --plan KEY --return-url URL --terms-digest DIGEST --yes
+  commerce quote --app ID --plan KEY [--quantity N]
+  commerce quote-accept --quote ID --terms-digest DIGEST --yes
+  commerce change --subscription ID --effective-at now|renewal --yes
+  commerce cancel|resume --subscription ID --yes
+  commerce portal --app ID --return-url URL
+  commerce checkout-complete --checkout ID --yes (test mock only)
+  commerce renewal --workspace ID --app ID --yes (test mock only)
+  billing inspect --workspace ID
+  billing change-review --workspace ID --plan launch|growth|scale --period monthly --yes
+  billing change-authorize --workspace ID --change ID --yes
+  billing cancellation-review --workspace ID --mode period_end|immediate --yes
+  billing cancel --workspace ID --confirmation-token TOKEN --yes
+  billing refund --workspace ID --invoice ID --amount-micros N --consumed-overage-micros N --category CATEGORY --yes
   access get|grant-role|grant-entitlement|revoke-role|revoke-entitlement
   auth status                              Show configured credential kind (safe)
   auth login                               Start PKCE login with a loopback callback
   auth refresh [--resource URL]            Rotate the stored refresh token
   auth logout [--resource URL]             Revoke and remove the stored grant
   mcp initialize                           Authenticate and initialize MCP
-  mcp tools                               List read-only MCP tools
+  mcp tools [--include-writes]            List MCP tools (read-only by default)
   mcp resources                           List MCP resources
   mcp read --uri URI                      Read one MCP resource
   mcp call --tool NAME --arguments JSON   Call one read-only MCP tool
+  mcp preview --tool NAME --arguments JSON Preview approved commerce/billing change
+  mcp apply --tool NAME --arguments JSON --yes Apply confirmed preview
 
 Authentication:
-  Set AUTHLESS_SESSION_TOKEN for platform-session commands.
-  Set AUTHLESS_APP_CREDENTIAL for app-scoped membership commands.
+  Set AUTHLESS_SESSION_TOKEN for personal profile commands and platform-session commands.
+  Set AUTHLESS_APP_CREDENTIAL for delegated developer app commands.
   Set AUTHLESS_API_URL to override https://api.authle.ss.
   Pass credentials through the environment or a secret manager. Do not pass them on argv.
 
@@ -1235,7 +1976,7 @@ function parseArgs(argv) {
       const key = arg.slice(2);
       if (options.has(key))
         throw new Error(`Duplicate option --${key}`);
-      if (key === "yes" || key === "json" || key === "human" || key === "all" || key === "no-browser") {
+      if (key === "yes" || key === "json" || key === "human" || key === "all" || key === "no-browser" || key === "include-writes") {
         options.set(key, "true");
         continue;
       }
@@ -1295,6 +2036,22 @@ function parseJsonObject(value) {
     throw new Error("--arguments must be a JSON object");
   return Object.fromEntries(Object.entries(parsed));
 }
+function parseFeatureValues(value) {
+  const parsed = parseJsonObject(value);
+  for (const [key, item] of Object.entries(parsed)) {
+    if (typeof item !== "boolean" && typeof item !== "string" && !(typeof item === "number" && Number.isFinite(item)))
+      throw new Error(`--features value for ${key} must be boolean, number, or string`);
+  }
+  return parsed;
+}
+function parseIncludedMeters(value) {
+  const parsed = parseJsonObject(value);
+  for (const [key, item] of Object.entries(parsed)) {
+    if (item !== null && (typeof item !== "number" || !Number.isSafeInteger(item) || item < 0))
+      throw new Error(`--included-meters value for ${key} must be a non-negative integer or null`);
+  }
+  return parsed;
+}
 async function allPages(firstCursor, limit, fetchPage) {
   let page = await fetchPage(firstCursor, limit);
   const items = { ...page };
@@ -1349,8 +2106,10 @@ function client(options, env) {
 function correlationId() {
   return crypto.randomUUID();
 }
-function sessionOnly() {
-  throw new Error("This command requires AUTHLESS_SESSION_TOKEN. App credentials are limited to membership and access commands.");
+function sessionOnly(env) {
+  if (env.AUTHLESS_SESSION_TOKEN?.trim() && !env.AUTHLESS_APP_CREDENTIAL?.trim())
+    return;
+  throw new Error("This command requires AUTHLESS_SESSION_TOKEN. App credentials cannot access personal profile commerce or Authless workspace billing.");
 }
 function membershipStatus(value) {
   if (value === undefined)
@@ -1381,6 +2140,238 @@ function validateCommand(parsed) {
       ]
     ],
     ["apps environment", ["app", "base-url", "environment", "workspace"]],
+    ["commerce view", ["app", "base-url", "workspace"]],
+    ["commerce environment", ["app", "base-url", "environment", "workspace"]],
+    ["commerce catalog", ["app", "base-url", "environment"]],
+    [
+      "commerce catalog-create",
+      [
+        "app",
+        "base-url",
+        "currency",
+        "environment",
+        "idempotency-key",
+        "name",
+        "workspace",
+        "yes"
+      ]
+    ],
+    [
+      "commerce entitlements",
+      ["app", "base-url", "customer-ref", "environment", "workspace"]
+    ],
+    ["commerce plans", ["app", "base-url", "environment", "workspace"]],
+    [
+      "commerce plan-create",
+      [
+        "add-ons",
+        "app",
+        "base-url",
+        "currency",
+        "description",
+        "environment",
+        "features",
+        "included-meters",
+        "idempotency-key",
+        "interval",
+        "key",
+        "name",
+        "amount-micros",
+        "trial-days",
+        "workspace",
+        "yes"
+      ]
+    ],
+    [
+      "commerce feature-create",
+      [
+        "app",
+        "base-url",
+        "description",
+        "environment",
+        "idempotency-key",
+        "key",
+        "name",
+        "metered",
+        "workspace",
+        "yes"
+      ]
+    ],
+    [
+      "commerce addon-create",
+      [
+        "app",
+        "base-url",
+        "currency",
+        "description",
+        "entitlement-duration",
+        "environment",
+        "features",
+        "idempotency-key",
+        "interval",
+        "key",
+        "name",
+        "amount-micros",
+        "workspace",
+        "yes"
+      ]
+    ],
+    [
+      "commerce publish",
+      [
+        "app",
+        "base-url",
+        "environment",
+        "idempotency-key",
+        "plan",
+        "workspace",
+        "yes"
+      ]
+    ],
+    ["commerce accounting", ["app", "base-url", "environment", "workspace"]],
+    [
+      "commerce settle",
+      ["app", "base-url", "environment", "idempotency-key", "workspace", "yes"]
+    ],
+    [
+      "commerce reserves-release",
+      ["app", "base-url", "environment", "idempotency-key", "workspace", "yes"]
+    ],
+    [
+      "commerce payout",
+      [
+        "app",
+        "base-url",
+        "environment",
+        "idempotency-key",
+        "settlement",
+        "workspace",
+        "yes"
+      ]
+    ],
+    [
+      "commerce usage",
+      [
+        "app",
+        "base-url",
+        "customer-ref",
+        "environment",
+        "idempotency-key",
+        "meter-key",
+        "quantity",
+        "workspace",
+        "yes"
+      ]
+    ],
+    [
+      "commerce refund",
+      [
+        "amount-minor",
+        "app",
+        "base-url",
+        "currency",
+        "environment",
+        "idempotency-key",
+        "invoice",
+        "payment-id",
+        "workspace",
+        "yes"
+      ]
+    ],
+    ["commerce subscriptions", ["all", "app", "base-url", "cursor", "limit"]],
+    ["commerce invoices", ["all", "app", "base-url", "cursor", "limit"]],
+    [
+      "commerce checkout",
+      [
+        "add-ons",
+        "app",
+        "base-url",
+        "environment",
+        "plan",
+        "quantity",
+        "return-url",
+        "terms-digest",
+        "idempotency-key",
+        "yes"
+      ]
+    ],
+    [
+      "commerce quote",
+      [
+        "add-ons",
+        "app",
+        "base-url",
+        "discount-code",
+        "environment",
+        "plan",
+        "quantity",
+        "idempotency-key"
+      ]
+    ],
+    [
+      "commerce quote-accept",
+      ["base-url", "idempotency-key", "quote", "terms-digest", "yes"]
+    ],
+    [
+      "commerce change",
+      [
+        "add-ons",
+        "base-url",
+        "effective-at",
+        "idempotency-key",
+        "plan",
+        "quantity",
+        "subscription",
+        "yes"
+      ]
+    ],
+    ["commerce cancel", ["base-url", "idempotency-key", "subscription", "yes"]],
+    ["commerce resume", ["base-url", "idempotency-key", "subscription", "yes"]],
+    ["commerce portal", ["app", "base-url", "return-url"]],
+    [
+      "commerce checkout-complete",
+      ["base-url", "checkout", "idempotency-key", "yes"]
+    ],
+    [
+      "commerce renewal",
+      ["app", "base-url", "idempotency-key", "workspace", "yes"]
+    ],
+    ["billing inspect", ["base-url", "workspace"]],
+    [
+      "billing change-review",
+      [
+        "base-url",
+        "idempotency-key",
+        "period",
+        "plan",
+        "quantity",
+        "workspace",
+        "yes"
+      ]
+    ],
+    ["billing change-authorize", ["base-url", "change", "workspace", "yes"]],
+    [
+      "billing cancellation-review",
+      ["base-url", "idempotency-key", "mode", "workspace", "yes"]
+    ],
+    [
+      "billing cancel",
+      ["base-url", "confirmation-token", "idempotency-key", "workspace", "yes"]
+    ],
+    [
+      "billing refund",
+      [
+        "amount-micros",
+        "base-url",
+        "category",
+        "consumed-overage-micros",
+        "idempotency-key",
+        "invoice",
+        "verified-correction",
+        "workspace",
+        "yes"
+      ]
+    ],
     [
       "memberships list",
       [
@@ -1495,12 +2486,32 @@ function validateCommand(parsed) {
     ["auth refresh", ["format", "human", "json", "resource"]],
     ["auth logout", ["format", "human", "json", "resource"]],
     ["mcp initialize", ["base-url", "format", "human", "json", "resource"]],
-    ["mcp tools", ["base-url", "format", "human", "json", "resource"]],
+    [
+      "mcp tools",
+      ["base-url", "format", "human", "include-writes", "json", "resource"]
+    ],
     ["mcp resources", ["base-url", "format", "human", "json", "resource"]],
     ["mcp read", ["base-url", "format", "human", "json", "resource", "uri"]],
     [
       "mcp call",
       ["arguments", "base-url", "format", "human", "json", "resource", "tool"]
+    ],
+    [
+      "mcp preview",
+      ["arguments", "base-url", "format", "human", "json", "resource", "tool"]
+    ],
+    [
+      "mcp apply",
+      [
+        "arguments",
+        "base-url",
+        "format",
+        "human",
+        "json",
+        "resource",
+        "tool",
+        "yes"
+      ]
     ]
   ]);
   const names = allowed.get(key);
@@ -1555,7 +2566,17 @@ function readOnlyTool(tool) {
     return false;
   return annotations.readOnlyHint === true;
 }
-function readOnlyTools(body) {
+var approvedMcpPreviewTools = new Set([
+  "authless_app_commerce_mutation_preview",
+  "authless_billing_change_preview"
+]);
+var approvedMcpApplyTools = new Set([
+  "authless_app_commerce_mutation_apply",
+  "authless_billing_change_apply"
+]);
+function readOnlyTools(body, includeWrites = false) {
+  if (includeWrites)
+    return body;
   const result = body.result;
   if (!result || typeof result !== "object")
     return body;
@@ -1603,6 +2624,18 @@ async function requestMcp(options, env, method, params, dependencies = {}) {
   if (!response.ok)
     throw new Error(`MCP request failed (${response.status})`);
   return mcpResult(body, request.id);
+}
+async function requestApprovedMcpMutation(action, options, env, dependencies) {
+  const toolName = requiredOption(options, "tool");
+  const allowed = action === "preview" ? approvedMcpPreviewTools : approvedMcpApplyTools;
+  if (!allowed.has(toolName))
+    throw new Error(`--tool must be one of the approved ${action} commerce or billing MCP tools`);
+  if (action === "apply")
+    requireConfirmation(options);
+  const args = parseJsonObject(requiredOption(options, "arguments"));
+  if (action === "apply" && (args.confirmed !== true || typeof args.previewId !== "string" || args.previewId.length < 8))
+    throw new Error("--arguments for mcp apply must include confirmed: true and a previewId");
+  return requestMcp(options, env, "tools/call", { arguments: args, name: toolName }, dependencies);
 }
 async function optionalOAuth(store) {
   try {
@@ -1682,9 +2715,9 @@ ${url}`);
       protocolVersion: "2025-11-25",
       capabilities: {},
       clientInfo: { name: "authless-cli", version: "0.1.0" }
-    }, dependencies) : action === "tools" ? readOnlyTools(await requestMcp(parsed.options, env, "tools/list", undefined, dependencies)) : action === "resources" ? await requestMcp(parsed.options, env, "resources/list", undefined, dependencies) : action === "read" ? await requestMcp(parsed.options, env, "resources/read", {
+    }, dependencies) : action === "tools" ? readOnlyTools(await requestMcp(parsed.options, env, "tools/list", undefined, dependencies), parsed.options.has("include-writes")) : action === "resources" ? await requestMcp(parsed.options, env, "resources/list", undefined, dependencies) : action === "read" ? await requestMcp(parsed.options, env, "resources/read", {
       uri: requiredOption(parsed.options, "uri")
-    }, dependencies) : await (async () => {
+    }, dependencies) : action === "preview" ? await requestApprovedMcpMutation("preview", parsed.options, env, dependencies) : action === "apply" ? await requestApprovedMcpMutation("apply", parsed.options, env, dependencies) : await (async () => {
       const toolName = requiredOption(parsed.options, "tool");
       const catalog = await requestMcp(parsed.options, env, "tools/list", undefined, dependencies);
       const tools = catalog.result?.tools;
@@ -1722,9 +2755,426 @@ ${url}`);
   const collect = parsed.options.has("all");
   const requestId = correlationId();
   let result;
-  if (resource === "workspaces" && action === "list") {
+  if (resource === "billing") {
+    sessionOnly(env);
+    const workspaceId = requiredOption(parsed.options, "workspace");
+    if (action === "inspect") {
+      result = await api.billing.inspect({
+        correlationId: requestId,
+        workspaceId
+      });
+    } else if (action === "change-review") {
+      requireConfirmation(parsed.options);
+      const plan = requiredOption(parsed.options, "plan");
+      if (plan !== "launch" && plan !== "growth" && plan !== "scale")
+        throw new Error("--plan must be launch, growth, or scale");
+      const period = requiredOption(parsed.options, "period");
+      if (period !== "monthly")
+        throw new Error("--period must be monthly");
+      result = await api.billing.reviewChange({
+        correlationId: requestId,
+        idempotencyKey: idempotencyKey(parsed.options),
+        period: "monthly",
+        planId: plan === "launch" ? "launch" : plan === "growth" ? "growth" : "scale",
+        quantity: parsed.options.has("quantity") ? integerOption(parsed.options, "quantity") : undefined,
+        workspaceId
+      });
+    } else if (action === "change-authorize") {
+      requireConfirmation(parsed.options);
+      result = await api.billing.authorizeChange({
+        changeId: requiredOption(parsed.options, "change"),
+        correlationId: requestId,
+        workspaceId
+      });
+    } else if (action === "cancellation-review") {
+      requireConfirmation(parsed.options);
+      const mode = requiredOption(parsed.options, "mode");
+      if (mode !== "period_end" && mode !== "immediate")
+        throw new Error("--mode must be period_end or immediate");
+      result = await api.billing.reviewCancellation({
+        correlationId: requestId,
+        idempotencyKey: idempotencyKey(parsed.options),
+        mode: mode === "period_end" ? "period_end" : "immediate",
+        workspaceId
+      });
+    } else if (action === "cancel") {
+      requireConfirmation(parsed.options);
+      result = await api.billing.confirmCancellation({
+        confirmationToken: requiredOption(parsed.options, "confirmation-token"),
+        correlationId: requestId,
+        idempotencyKey: idempotencyKey(parsed.options),
+        workspaceId
+      });
+    } else if (action === "refund") {
+      requireConfirmation(parsed.options);
+      const category = requiredOption(parsed.options, "category");
+      if (category !== "first_purchase_goodwill" && category !== "verified_correction")
+        throw new Error("--category must be first_purchase_goodwill or verified_correction");
+      result = await api.billing.requestRefund({
+        amountMicros: integerOption(parsed.options, "amount-micros"),
+        category: category === "first_purchase_goodwill" ? "first_purchase_goodwill" : "verified_correction",
+        consumedOverageMicros: integerOption(parsed.options, "consumed-overage-micros"),
+        correlationId: requestId,
+        idempotencyKey: idempotencyKey(parsed.options),
+        invoiceRef: requiredOption(parsed.options, "invoice"),
+        verifiedCorrection: parsed.options.get("verified-correction") === "true",
+        workspaceId
+      });
+    } else {
+      throw new Error(`Unknown command: ${parsed.command.join(" ")}`);
+    }
+  } else if (resource === "commerce" && action === "view") {
+    result = await api.commerce.getAppView({
+      appId: requiredOption(parsed.options, "app"),
+      correlationId: requestId,
+      workspaceId: requiredOption(parsed.options, "workspace")
+    });
+  } else if (resource === "commerce" && action === "environment") {
+    const environment = requiredOption(parsed.options, "environment");
+    if (environment !== "test" && environment !== "production")
+      throw new Error("--environment must be test or production");
+    result = await api.commerce.getAppEnvironmentView({
+      appId: requiredOption(parsed.options, "app"),
+      correlationId: requestId,
+      environment: environment === "test" ? "test" : "production",
+      workspaceId: requiredOption(parsed.options, "workspace")
+    });
+  } else if (resource === "commerce" && action === "catalog") {
+    sessionOnly(env);
+    const environment = parsed.options.get("environment");
+    if (environment !== undefined && environment !== "test" && environment !== "production")
+      throw new Error("--environment must be test or production");
+    result = await api.commerce.listCatalog({
+      appId: requiredOption(parsed.options, "app"),
+      correlationId: requestId,
+      environment
+    });
+  } else if (resource === "commerce" && action === "catalog-create") {
+    requireConfirmation(parsed.options);
+    const environment = requiredOption(parsed.options, "environment");
+    if (environment !== "test" && environment !== "production")
+      throw new Error("--environment must be test or production");
+    result = await api.commerce.createCatalog({
+      appId: requiredOption(parsed.options, "app"),
+      correlationId: requestId,
+      defaultCurrency: requiredOption(parsed.options, "currency"),
+      environment,
+      idempotencyKey: idempotencyKey(parsed.options),
+      name: requiredOption(parsed.options, "name"),
+      workspaceId: requiredOption(parsed.options, "workspace")
+    });
+  } else if (resource === "commerce" && action === "entitlements") {
+    const environment = requiredOption(parsed.options, "environment");
+    if (environment !== "test" && environment !== "production")
+      throw new Error("--environment must be test or production");
+    result = await api.commerce.getEntitlements({
+      appId: requiredOption(parsed.options, "app"),
+      correlationId: requestId,
+      customerRef: requiredOption(parsed.options, "customer-ref"),
+      environment,
+      workspaceId: requiredOption(parsed.options, "workspace")
+    });
+  } else if (resource === "commerce" && action === "plans") {
+    const environment = requiredOption(parsed.options, "environment");
+    if (environment !== "test" && environment !== "production")
+      throw new Error("--environment must be test or production");
+    result = await api.commerce.listPlans({
+      appId: requiredOption(parsed.options, "app"),
+      correlationId: requestId,
+      environment,
+      workspaceId: requiredOption(parsed.options, "workspace")
+    });
+  } else if (resource === "commerce" && action === "plan-create") {
+    requireConfirmation(parsed.options);
+    const environment = requiredOption(parsed.options, "environment");
+    if (environment !== "test" && environment !== "production")
+      throw new Error("--environment must be test or production");
+    const addOns = parsed.options.get("add-ons")?.split(",").filter(Boolean);
+    if (addOns?.length)
+      throw new Error("--add-ons is unsupported for plan creation. Create add-ons separately and select them during checkout.");
+    const features = parsed.options.has("features") ? parseFeatureValues(requiredOption(parsed.options, "features")) : undefined;
+    const includedMeters = parsed.options.has("included-meters") ? parseIncludedMeters(requiredOption(parsed.options, "included-meters")) : undefined;
+    const trialDays = parsed.options.has("trial-days") ? integerOption(parsed.options, "trial-days") : undefined;
+    if (trialDays !== undefined && trialDays > 365)
+      throw new Error("--trial-days must be from 0 through 365");
+    result = await api.commerce.createPlan({
+      amountMicros: integerOption(parsed.options, "amount-micros"),
+      appId: requiredOption(parsed.options, "app"),
+      correlationId: requestId,
+      currency: requiredOption(parsed.options, "currency"),
+      description: parsed.options.get("description"),
+      environment,
+      features,
+      includedMeters,
+      idempotencyKey: idempotencyKey(parsed.options),
+      interval: (() => {
+        const value = requiredOption(parsed.options, "interval");
+        if (value !== "month" && value !== "year")
+          throw new Error("--interval must be month or year");
+        return value;
+      })(),
+      key: requiredOption(parsed.options, "key"),
+      name: requiredOption(parsed.options, "name"),
+      trialDays,
+      workspaceId: requiredOption(parsed.options, "workspace")
+    });
+  } else if (resource === "commerce" && action === "feature-create") {
+    requireConfirmation(parsed.options);
+    const environment = requiredOption(parsed.options, "environment");
+    if (environment !== "test" && environment !== "production")
+      throw new Error("--environment must be test or production");
+    result = await api.commerce.createFeature({
+      appId: requiredOption(parsed.options, "app"),
+      correlationId: requestId,
+      description: parsed.options.get("description"),
+      environment,
+      idempotencyKey: idempotencyKey(parsed.options),
+      key: requiredOption(parsed.options, "key"),
+      metered: parsed.options.get("metered") === "true",
+      name: requiredOption(parsed.options, "name"),
+      workspaceId: requiredOption(parsed.options, "workspace")
+    });
+  } else if (resource === "commerce" && action === "addon-create") {
+    requireConfirmation(parsed.options);
+    const environment = requiredOption(parsed.options, "environment");
+    if (environment !== "test" && environment !== "production")
+      throw new Error("--environment must be test or production");
+    const interval = requiredOption(parsed.options, "interval");
+    if (interval !== "month" && interval !== "year" && interval !== "one_time")
+      throw new Error("--interval must be month, year, or one_time");
+    const entitlementDuration = parsed.options.get("entitlement-duration");
+    if (entitlementDuration !== undefined && entitlementDuration !== "period" && entitlementDuration !== "indefinite")
+      throw new Error("--entitlement-duration must be period or indefinite");
+    const features = parsed.options.has("features") ? parseJsonObject(requiredOption(parsed.options, "features")) : undefined;
+    result = await api.commerce.createAddon({
+      amountMicros: integerOption(parsed.options, "amount-micros"),
+      appId: requiredOption(parsed.options, "app"),
+      correlationId: requestId,
+      currency: requiredOption(parsed.options, "currency"),
+      description: parsed.options.get("description"),
+      entitlementDuration,
+      environment,
+      features,
+      idempotencyKey: idempotencyKey(parsed.options),
+      interval,
+      key: requiredOption(parsed.options, "key"),
+      name: requiredOption(parsed.options, "name"),
+      workspaceId: requiredOption(parsed.options, "workspace")
+    });
+  } else if (resource === "commerce" && action === "publish") {
+    requireConfirmation(parsed.options);
+    const environment = requiredOption(parsed.options, "environment");
+    if (environment !== "test" && environment !== "production")
+      throw new Error("--environment must be test or production");
+    result = await api.commerce.publishPlan({
+      appId: requiredOption(parsed.options, "app"),
+      correlationId: requestId,
+      environment,
+      idempotencyKey: idempotencyKey(parsed.options),
+      planId: requiredOption(parsed.options, "plan"),
+      workspaceId: requiredOption(parsed.options, "workspace")
+    });
+  } else if (resource === "commerce" && action === "accounting") {
+    const environment = requiredOption(parsed.options, "environment");
+    if (environment !== "test" && environment !== "production")
+      throw new Error("--environment must be test or production");
+    result = await api.commerce.getPublisherAccounting({
+      appId: requiredOption(parsed.options, "app"),
+      correlationId: requestId,
+      environment,
+      workspaceId: requiredOption(parsed.options, "workspace")
+    });
+  } else if (resource === "commerce" && action === "settle") {
+    requireConfirmation(parsed.options);
+    const environment = requiredOption(parsed.options, "environment");
+    if (environment !== "test" && environment !== "production")
+      throw new Error("--environment must be test or production");
+    result = await api.commerce.createSettlement({
+      appId: requiredOption(parsed.options, "app"),
+      correlationId: requestId,
+      environment,
+      idempotencyKey: idempotencyKey(parsed.options),
+      workspaceId: requiredOption(parsed.options, "workspace")
+    });
+  } else if (resource === "commerce" && action === "reserves-release") {
+    requireConfirmation(parsed.options);
+    const environment = requiredOption(parsed.options, "environment");
+    if (environment !== "test" && environment !== "production")
+      throw new Error("--environment must be test or production");
+    result = await api.commerce.releasePublisherReserves({
+      appId: requiredOption(parsed.options, "app"),
+      correlationId: requestId,
+      environment,
+      idempotencyKey: idempotencyKey(parsed.options),
+      workspaceId: requiredOption(parsed.options, "workspace")
+    });
+  } else if (resource === "commerce" && action === "payout") {
+    sessionOnly(env);
+    requireConfirmation(parsed.options);
+    const environment = requiredOption(parsed.options, "environment");
+    if (environment !== "test" && environment !== "production")
+      throw new Error("--environment must be test or production");
+    result = await api.commerce.simulatePayout({
+      appId: requiredOption(parsed.options, "app"),
+      correlationId: requestId,
+      environment,
+      idempotencyKey: idempotencyKey(parsed.options),
+      settlementId: requiredOption(parsed.options, "settlement"),
+      workspaceId: requiredOption(parsed.options, "workspace")
+    });
+  } else if (resource === "commerce" && action === "usage") {
+    requireConfirmation(parsed.options);
+    const environment = requiredOption(parsed.options, "environment");
+    if (environment !== "test" && environment !== "production")
+      throw new Error("--environment must be test or production");
+    result = await api.commerce.recordUsage({
+      appId: requiredOption(parsed.options, "app"),
+      correlationId: requestId,
+      customerRef: requiredOption(parsed.options, "customer-ref"),
+      environment,
+      idempotencyKey: idempotencyKey(parsed.options),
+      meterKey: requiredOption(parsed.options, "meter-key"),
+      quantity: integerOption(parsed.options, "quantity"),
+      workspaceId: requiredOption(parsed.options, "workspace")
+    });
+  } else if (resource === "commerce" && action === "refund") {
+    sessionOnly(env);
+    requireConfirmation(parsed.options);
+    const environment = requiredOption(parsed.options, "environment");
+    if (environment !== "test" && environment !== "production")
+      throw new Error("--environment must be test or production");
+    result = await api.commerce.requestRefund({
+      amountMinor: integerOption(parsed.options, "amount-minor"),
+      appId: requiredOption(parsed.options, "app"),
+      correlationId: requestId,
+      currency: requiredOption(parsed.options, "currency"),
+      environment: environment === "test" ? "test" : "production",
+      idempotencyKey: idempotencyKey(parsed.options),
+      invoiceId: requiredOption(parsed.options, "invoice"),
+      paymentId: requiredOption(parsed.options, "payment-id"),
+      workspaceId: requiredOption(parsed.options, "workspace")
+    });
+  } else if (resource === "commerce" && action === "subscriptions") {
+    sessionOnly(env);
+    result = collect ? await allPages(cursor, limit, (nextCursor, nextLimit) => api.commerce.listSubscriptions({
+      appId: parsed.options.get("app"),
+      correlationId: requestId,
+      cursor: nextCursor,
+      limit: nextLimit
+    })) : await api.commerce.listSubscriptions({
+      appId: parsed.options.get("app"),
+      correlationId: requestId,
+      cursor,
+      limit
+    });
+  } else if (resource === "commerce" && action === "invoices") {
+    sessionOnly(env);
+    result = collect ? await allPages(cursor, limit, (nextCursor, nextLimit) => api.commerce.listInvoices({
+      appId: parsed.options.get("app"),
+      correlationId: requestId,
+      cursor: nextCursor,
+      limit: nextLimit
+    })) : await api.commerce.listInvoices({
+      appId: parsed.options.get("app"),
+      correlationId: requestId,
+      cursor,
+      limit
+    });
+  } else if (resource === "commerce" && action === "quote") {
+    sessionOnly(env);
+    const environmentValue = parsed.options.get("environment");
+    if (environmentValue !== undefined && environmentValue !== "test" && environmentValue !== "production")
+      throw new Error("--environment must be test or production");
+    const environment = environmentValue === undefined ? undefined : environmentValue === "test" ? "test" : "production";
+    result = await api.commerce.createQuote({
+      addOns: parsed.options.get("add-ons")?.split(",").filter(Boolean),
+      appId: requiredOption(parsed.options, "app"),
+      correlationId: requestId,
+      discountCode: parsed.options.get("discount-code"),
+      environment,
+      idempotencyKey: idempotencyKey(parsed.options),
+      planKey: requiredOption(parsed.options, "plan"),
+      quantity: parsed.options.has("quantity") ? integerOption(parsed.options, "quantity") : undefined
+    });
+  } else if (resource === "commerce" && action === "quote-accept") {
+    sessionOnly(env);
+    requireConfirmation(parsed.options);
+    result = await api.commerce.acceptQuote({
+      correlationId: requestId,
+      idempotencyKey: idempotencyKey(parsed.options),
+      quoteId: requiredOption(parsed.options, "quote"),
+      termsDigest: requiredOption(parsed.options, "terms-digest")
+    });
+  } else if (resource === "commerce" && action === "checkout") {
+    sessionOnly(env);
+    requireConfirmation(parsed.options);
+    const environmentValue = parsed.options.get("environment");
+    if (environmentValue !== undefined && environmentValue !== "test" && environmentValue !== "production")
+      throw new Error("--environment must be test or production");
+    const environment = environmentValue === undefined ? undefined : environmentValue === "test" ? "test" : "production";
+    result = await api.commerce.createCheckout({
+      acceptedTermsDigest: requiredOption(parsed.options, "terms-digest"),
+      addOns: parsed.options.get("add-ons")?.split(",").filter(Boolean),
+      appId: requiredOption(parsed.options, "app"),
+      correlationId: requestId,
+      environment,
+      idempotencyKey: idempotencyKey(parsed.options),
+      planKey: requiredOption(parsed.options, "plan"),
+      quantity: parsed.options.has("quantity") ? integerOption(parsed.options, "quantity") : undefined,
+      returnUrl: requiredOption(parsed.options, "return-url")
+    });
+  } else if (resource === "commerce" && action === "change") {
+    sessionOnly(env);
+    requireConfirmation(parsed.options);
+    const effectiveAtValue = requiredOption(parsed.options, "effective-at");
+    if (effectiveAtValue !== "now" && effectiveAtValue !== "renewal")
+      throw new Error("--effective-at must be now or renewal");
+    const effectiveAt = effectiveAtValue === "now" ? "now" : "renewal";
+    result = await api.commerce.changeSubscription({
+      addOns: parsed.options.get("add-ons")?.split(",").filter(Boolean),
+      correlationId: requestId,
+      effectiveAt,
+      idempotencyKey: idempotencyKey(parsed.options),
+      planKey: parsed.options.get("plan"),
+      quantity: parsed.options.has("quantity") ? integerOption(parsed.options, "quantity") : undefined,
+      subscriptionRef: requiredOption(parsed.options, "subscription")
+    });
+  } else if (resource === "commerce" && (action === "cancel" || action === "resume")) {
+    sessionOnly(env);
+    requireConfirmation(parsed.options);
+    const input = {
+      correlationId: requestId,
+      idempotencyKey: idempotencyKey(parsed.options),
+      subscriptionRef: requiredOption(parsed.options, "subscription")
+    };
+    result = action === "cancel" ? await api.commerce.cancelSubscription(input) : await api.commerce.resumeSubscription(input);
+  } else if (resource === "commerce" && action === "portal") {
+    sessionOnly(env);
+    result = await api.commerce.createPortalSession({
+      appId: requiredOption(parsed.options, "app"),
+      correlationId: requestId,
+      returnUrl: requiredOption(parsed.options, "return-url")
+    });
+  } else if (resource === "commerce" && action === "checkout-complete") {
+    sessionOnly(env);
+    requireConfirmation(parsed.options);
+    result = await api.commerce.completeCheckout({
+      checkoutRef: requiredOption(parsed.options, "checkout"),
+      correlationId: requestId,
+      idempotencyKey: idempotencyKey(parsed.options)
+    });
+  } else if (resource === "commerce" && action === "renewal") {
+    sessionOnly(env);
+    requireConfirmation(parsed.options);
+    result = await api.commerce.simulateMockRenewal({
+      appId: requiredOption(parsed.options, "app"),
+      correlationId: requestId,
+      idempotencyKey: idempotencyKey(parsed.options),
+      workspaceId: requiredOption(parsed.options, "workspace")
+    });
+  } else if (resource === "workspaces" && action === "list") {
     if (!env.AUTHLESS_SESSION_TOKEN?.trim() && !storedOAuth)
-      sessionOnly();
+      sessionOnly(env);
     result = collect ? await allPages(cursor, limit, (nextCursor, nextLimit) => api.workspaces.list({
       correlationId: requestId,
       cursor: nextCursor,
@@ -1732,14 +3182,14 @@ ${url}`);
     })) : await api.workspaces.list({ correlationId: requestId, cursor, limit });
   } else if (resource === "workspaces" && action === "get") {
     if (!env.AUTHLESS_SESSION_TOKEN?.trim() && !storedOAuth)
-      sessionOnly();
+      sessionOnly(env);
     result = await api.workspaces.get({
       correlationId: requestId,
       workspaceId: requiredOption(parsed.options, "workspace")
     });
   } else if (resource === "workspaces" && action === "create") {
     if (!env.AUTHLESS_SESSION_TOKEN?.trim() && !storedOAuth)
-      sessionOnly();
+      sessionOnly(env);
     requireConfirmation(parsed.options);
     result = await api.workspaces.create({
       correlationId: requestId,
@@ -1749,7 +3199,7 @@ ${url}`);
     });
   } else if (resource === "apps" && action === "list") {
     if (!env.AUTHLESS_SESSION_TOKEN?.trim() && !storedOAuth)
-      sessionOnly();
+      sessionOnly(env);
     const workspaceId = requiredOption(parsed.options, "workspace");
     result = collect ? await allPages(cursor, limit, (nextCursor, nextLimit) => api.apps.list({
       correlationId: requestId,
@@ -1764,7 +3214,7 @@ ${url}`);
     });
   } else if (resource === "apps" && action === "create") {
     if (!env.AUTHLESS_SESSION_TOKEN?.trim() && !storedOAuth)
-      sessionOnly();
+      sessionOnly(env);
     requireConfirmation(parsed.options);
     result = await api.apps.create({
       correlationId: requestId,
@@ -1776,7 +3226,7 @@ ${url}`);
     });
   } else if (resource === "apps" && action === "environment") {
     if (!env.AUTHLESS_SESSION_TOKEN?.trim() && !storedOAuth)
-      sessionOnly();
+      sessionOnly(env);
     const environment = requiredOption(parsed.options, "environment");
     if (environment !== "test" && environment !== "production")
       throw new Error("--environment must be test or production");
@@ -1891,7 +3341,7 @@ ${url}`);
     result = action === "revoke-role" ? await api.appAccess.revokeRole(common) : await api.appAccess.revokeEntitlement(common);
   } else if (resource === "audit" && action === "list") {
     if (!env.AUTHLESS_SESSION_TOKEN?.trim() && !storedOAuth)
-      sessionOnly();
+      sessionOnly(env);
     const workspaceId = requiredOption(parsed.options, "workspace");
     result = collect ? await allPages(cursor, limit, (nextCursor, nextLimit) => api.auditEvents.list({
       correlationId: requestId,

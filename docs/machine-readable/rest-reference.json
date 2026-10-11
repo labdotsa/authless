@@ -15,6 +15,7 @@
         "actor",
         "appId",
         "correlation",
+        "environment",
         "from",
         "outcome",
         "query",
@@ -858,6 +859,773 @@
       },
       "retrySafety": "unsafe",
       "summary": "Verify a registration email token and create a platform session"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
+      "constraints": [
+        "path appId (required): string",
+        "query environment (optional): string, minLength 1, maxLength 240"
+      ],
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/me/commerce/apps/%7BappId%7D/catalog'",
+      "exampleParameters": {
+        "appId": "{appId}"
+      },
+      "method": "GET",
+      "operationId": "listPersonalCommerceCatalog",
+      "outcomes": [
+        {
+          "description": "Connected app catalog",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Personal session required",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "App catalog unavailable",
+          "status": 404,
+          "success": false
+        }
+      ],
+      "path": "/me/commerce/apps/{appId}/catalog",
+      "parameters": [
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "location": "query",
+          "name": "environment",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 1, maxLength 240"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "List an app catalog available to the personal profile"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
+      "constraints": [
+        "header Idempotency-Key (required): string, minLength 1, maxLength 240",
+        "JSON request body (required): #/components/schemas/CreatePersonalCommerceCheckoutRequest"
+      ],
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'Idempotency-Key: {Idempotency-Key}' -H 'content-type: application/json' --data '{\"acceptedTermsDigest\":\"{acceptedTermsDigest}\",\"appId\":\"{appId}\",\"planKey\":\"{planKey}\",\"returnUrl\":\"{returnUrl}\"}' 'https://api.authle.ss/me/commerce/checkouts'",
+      "exampleParameters": {
+        "Idempotency-Key": "{Idempotency-Key}"
+      },
+      "exampleRequestBody": {
+        "acceptedTermsDigest": "{acceptedTermsDigest}",
+        "appId": "{appId}",
+        "planKey": "{planKey}",
+        "returnUrl": "{returnUrl}"
+      },
+      "method": "POST",
+      "operationId": "createPersonalCommerceCheckout",
+      "outcomes": [
+        {
+          "description": "Checkout accepted by the configured provider adapter",
+          "status": 202,
+          "success": true
+        },
+        {
+          "description": "Invalid checkout",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Personal session required",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Idempotency conflict",
+          "status": 409,
+          "success": false
+        }
+      ],
+      "path": "/me/commerce/checkouts",
+      "parameters": [
+        {
+          "example": "{Idempotency-Key}",
+          "location": "header",
+          "name": "Idempotency-Key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1, maxLength 240"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{appId}",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "name": "environment",
+          "required": false,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": "{planKey}",
+          "name": "planKey",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{returnUrl}",
+          "name": "returnUrl",
+          "required": true,
+          "type": "string",
+          "validation": "format uri"
+        },
+        {
+          "name": "quantity",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1, max 100"
+        },
+        {
+          "example": "{acceptedTermsDigest}",
+          "name": "acceptedTermsDigest",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1"
+        },
+        {
+          "name": "addOns",
+          "required": false,
+          "type": "array",
+          "validation": "—"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/CreatePersonalCommerceCheckoutRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Create a provider checkout for an app plan"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
+      "constraints": [
+        "path checkoutRef (required): string",
+        "header Idempotency-Key (required): string, minLength 1, maxLength 240"
+      ],
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'Idempotency-Key: {Idempotency-Key}' 'https://api.authle.ss/me/commerce/checkouts/%7BcheckoutRef%7D/complete'",
+      "exampleParameters": {
+        "checkoutRef": "{checkoutRef}",
+        "Idempotency-Key": "{Idempotency-Key}"
+      },
+      "method": "POST",
+      "operationId": "completePersonalCommerceCheckout",
+      "outcomes": [
+        {
+          "description": "Mock checkout completion accepted",
+          "status": 202,
+          "success": true
+        },
+        {
+          "description": "Checkout cannot be completed",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Personal session required",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Checkout unavailable",
+          "status": 404,
+          "success": false
+        }
+      ],
+      "path": "/me/commerce/checkouts/{checkoutRef}/complete",
+      "parameters": [
+        {
+          "example": "{checkoutRef}",
+          "location": "path",
+          "name": "checkoutRef",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{Idempotency-Key}",
+          "location": "header",
+          "name": "Idempotency-Key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1, maxLength 240"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "unsafe",
+      "summary": "Complete a test checkout in the mock provider"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
+      "constraints": [
+        "query appId (optional): string",
+        "query cursor (optional): string",
+        "query limit (optional): integer, min 1, max 100"
+      ],
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/me/commerce/invoices'",
+      "exampleParameters": {},
+      "method": "GET",
+      "operationId": "listPersonalCommerceInvoices",
+      "outcomes": [
+        {
+          "description": "Personal invoices",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Invalid page",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Personal session required",
+          "status": 401,
+          "success": false
+        }
+      ],
+      "path": "/me/commerce/invoices",
+      "parameters": [
+        {
+          "location": "query",
+          "name": "appId",
+          "required": false,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "location": "query",
+          "name": "cursor",
+          "required": false,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "location": "query",
+          "name": "limit",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1, max 100"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "List invoices linked to the personal profile"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
+      "constraints": [
+        "JSON request body (required): #/components/schemas/CreatePersonalCommercePortalSessionRequest"
+      ],
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\"appId\":\"{appId}\",\"returnUrl\":\"{returnUrl}\"}' 'https://api.authle.ss/me/commerce/portal-sessions'",
+      "exampleParameters": {},
+      "exampleRequestBody": {
+        "appId": "{appId}",
+        "returnUrl": "{returnUrl}"
+      },
+      "method": "POST",
+      "operationId": "createPersonalCommercePortalSession",
+      "outcomes": [
+        {
+          "description": "Portal session created",
+          "status": 201,
+          "success": true
+        },
+        {
+          "description": "Invalid portal request",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Personal session required",
+          "status": 401,
+          "success": false
+        }
+      ],
+      "path": "/me/commerce/portal-sessions",
+      "parameters": [],
+      "requestBodyFields": [
+        {
+          "example": "{appId}",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{returnUrl}",
+          "name": "returnUrl",
+          "required": true,
+          "type": "string",
+          "validation": "format uri"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/CreatePersonalCommercePortalSessionRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Create a short-lived provider billing portal session"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
+      "constraints": [
+        "header Idempotency-Key (required): string, minLength 1, maxLength 240",
+        "JSON request body (required): #/components/schemas/CreatePersonalCommerceQuoteRequest"
+      ],
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'Idempotency-Key: {Idempotency-Key}' -H 'content-type: application/json' --data '{\"appId\":\"{appId}\",\"planKey\":\"{planKey}\"}' 'https://api.authle.ss/me/commerce/quotes'",
+      "exampleParameters": {
+        "Idempotency-Key": "{Idempotency-Key}"
+      },
+      "exampleRequestBody": {
+        "appId": "{appId}",
+        "planKey": "{planKey}"
+      },
+      "method": "POST",
+      "operationId": "createPersonalCommerceQuote",
+      "outcomes": [
+        {
+          "description": "Idempotent replay",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Quote created",
+          "status": 201,
+          "success": true
+        },
+        {
+          "description": "Invalid quote request",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Personal session required",
+          "status": 401,
+          "success": false
+        }
+      ],
+      "path": "/me/commerce/quotes",
+      "parameters": [
+        {
+          "example": "{Idempotency-Key}",
+          "location": "header",
+          "name": "Idempotency-Key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1, maxLength 240"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{appId}",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "name": "environment",
+          "required": false,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": "{planKey}",
+          "name": "planKey",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "name": "quantity",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1, max 100"
+        },
+        {
+          "name": "addOns",
+          "required": false,
+          "type": "array",
+          "validation": "—"
+        },
+        {
+          "name": "discountCode",
+          "required": false,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/CreatePersonalCommerceQuoteRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Create an immutable personal commerce quote"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
+      "constraints": [
+        "path quoteId (required): string",
+        "header Idempotency-Key (required): string, minLength 1, maxLength 240",
+        "JSON request body (required): #/components/schemas/AcceptPersonalCommerceQuoteRequest"
+      ],
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'Idempotency-Key: {Idempotency-Key}' -H 'content-type: application/json' --data '{\"termsDigest\":\"{termsDigest}\"}' 'https://api.authle.ss/me/commerce/quotes/%7BquoteId%7D/accept'",
+      "exampleParameters": {
+        "quoteId": "{quoteId}",
+        "Idempotency-Key": "{Idempotency-Key}"
+      },
+      "exampleRequestBody": {
+        "termsDigest": "{termsDigest}"
+      },
+      "method": "POST",
+      "operationId": "acceptPersonalCommerceQuote",
+      "outcomes": [
+        {
+          "description": "Quote acceptance recorded",
+          "status": 202,
+          "success": true
+        },
+        {
+          "description": "Invalid or expired quote",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Personal session required",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Quote unavailable",
+          "status": 404,
+          "success": false
+        }
+      ],
+      "path": "/me/commerce/quotes/{quoteId}/accept",
+      "parameters": [
+        {
+          "example": "{quoteId}",
+          "location": "path",
+          "name": "quoteId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{Idempotency-Key}",
+          "location": "header",
+          "name": "Idempotency-Key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1, maxLength 240"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{termsDigest}",
+          "name": "termsDigest",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/AcceptPersonalCommerceQuoteRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Accept a personal commerce quote"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
+      "constraints": [
+        "query appId (optional): string",
+        "query cursor (optional): string",
+        "query limit (optional): integer, min 1, max 100"
+      ],
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/me/commerce/subscriptions'",
+      "exampleParameters": {},
+      "method": "GET",
+      "operationId": "listPersonalCommerceSubscriptions",
+      "outcomes": [
+        {
+          "description": "Personal subscriptions",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Invalid page",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Personal session required",
+          "status": 401,
+          "success": false
+        }
+      ],
+      "path": "/me/commerce/subscriptions",
+      "parameters": [
+        {
+          "location": "query",
+          "name": "appId",
+          "required": false,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "location": "query",
+          "name": "cursor",
+          "required": false,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "location": "query",
+          "name": "limit",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1, max 100"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "List subscriptions linked to the personal profile"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
+      "constraints": [
+        "path subscriptionRef (required): string",
+        "header Idempotency-Key (required): string, minLength 1, maxLength 240"
+      ],
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'Idempotency-Key: {Idempotency-Key}' 'https://api.authle.ss/me/commerce/subscriptions/%7BsubscriptionRef%7D/cancel'",
+      "exampleParameters": {
+        "subscriptionRef": "{subscriptionRef}",
+        "Idempotency-Key": "{Idempotency-Key}"
+      },
+      "method": "POST",
+      "operationId": "cancelPersonalCommerceSubscription",
+      "outcomes": [
+        {
+          "description": "Cancellation accepted",
+          "status": 202,
+          "success": true
+        },
+        {
+          "description": "Personal session required",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Subscription unavailable",
+          "status": 404,
+          "success": false
+        }
+      ],
+      "path": "/me/commerce/subscriptions/{subscriptionRef}/cancel",
+      "parameters": [
+        {
+          "example": "{subscriptionRef}",
+          "location": "path",
+          "name": "subscriptionRef",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{Idempotency-Key}",
+          "location": "header",
+          "name": "Idempotency-Key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1, maxLength 240"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "unsafe",
+      "summary": "Cancel a personal app subscription"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
+      "constraints": [
+        "path subscriptionRef (required): string",
+        "header Idempotency-Key (required): string, minLength 1, maxLength 240",
+        "JSON request body (required): #/components/schemas/ChangePersonalCommerceSubscriptionRequest"
+      ],
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'Idempotency-Key: {Idempotency-Key}' -H 'content-type: application/json' --data '{\"effectiveAt\":\"now\"}' 'https://api.authle.ss/me/commerce/subscriptions/%7BsubscriptionRef%7D/changes'",
+      "exampleParameters": {
+        "subscriptionRef": "{subscriptionRef}",
+        "Idempotency-Key": "{Idempotency-Key}"
+      },
+      "exampleRequestBody": {
+        "effectiveAt": "now"
+      },
+      "method": "POST",
+      "operationId": "changePersonalCommerceSubscription",
+      "outcomes": [
+        {
+          "description": "Subscription change accepted",
+          "status": 202,
+          "success": true
+        },
+        {
+          "description": "Invalid subscription change",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Personal session required",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Idempotency or version conflict",
+          "status": 409,
+          "success": false
+        }
+      ],
+      "path": "/me/commerce/subscriptions/{subscriptionRef}/changes",
+      "parameters": [
+        {
+          "example": "{subscriptionRef}",
+          "location": "path",
+          "name": "subscriptionRef",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{Idempotency-Key}",
+          "location": "header",
+          "name": "Idempotency-Key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1, maxLength 240"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "planKey",
+          "required": false,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "name": "addOns",
+          "required": false,
+          "type": "array",
+          "validation": "—"
+        },
+        {
+          "name": "quantity",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1, max 100"
+        },
+        {
+          "example": "now",
+          "name": "effectiveAt",
+          "required": true,
+          "type": "string",
+          "validation": "one of now | renewal"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/ChangePersonalCommerceSubscriptionRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Change a personal app subscription"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
+      "constraints": [
+        "path subscriptionRef (required): string",
+        "header Idempotency-Key (required): string, minLength 1, maxLength 240"
+      ],
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'Idempotency-Key: {Idempotency-Key}' 'https://api.authle.ss/me/commerce/subscriptions/%7BsubscriptionRef%7D/resume'",
+      "exampleParameters": {
+        "subscriptionRef": "{subscriptionRef}",
+        "Idempotency-Key": "{Idempotency-Key}"
+      },
+      "method": "POST",
+      "operationId": "resumePersonalCommerceSubscription",
+      "outcomes": [
+        {
+          "description": "Resume accepted",
+          "status": 202,
+          "success": true
+        },
+        {
+          "description": "Personal session required",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Subscription unavailable",
+          "status": 404,
+          "success": false
+        }
+      ],
+      "path": "/me/commerce/subscriptions/{subscriptionRef}/resume",
+      "parameters": [
+        {
+          "example": "{subscriptionRef}",
+          "location": "path",
+          "name": "subscriptionRef",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{Idempotency-Key}",
+          "location": "header",
+          "name": "Idempotency-Key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1, maxLength 240"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "unsafe",
+      "summary": "Resume a personal app subscription"
     },
     {
       "authority": [
@@ -4314,6 +5082,1470 @@
       },
       "retrySafety": "safe",
       "summary": "Confirm and queue one exact durable bulk access preview"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "Server-side credential scoped to one exact app environment. Never expose this value to browser bundles, logs, examples, or diagnostics."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string"
+      ],
+      "example": "curl --request GET -H 'authorization: Bearer {app_credential}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/commerce'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}"
+      },
+      "method": "GET",
+      "operationId": "getAppCommerceView",
+      "outcomes": [
+        {
+          "description": "App commerce configuration",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Authentication required",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "App unavailable",
+          "status": 404,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/commerce",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "Get app commerce configuration"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "Server-side credential scoped to one exact app environment. Never expose this value to browser bundles, logs, examples, or diagnostics."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production"
+      ],
+      "example": "curl --request GET -H 'authorization: Bearer {app_credential}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/commerce/test'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test"
+      },
+      "method": "GET",
+      "operationId": "getAppCommerceEnvironmentView",
+      "outcomes": [
+        {
+          "description": "Environment commerce configuration",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Authentication required",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "App environment unavailable",
+          "status": 404,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "Get app commerce configuration for an environment"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "Server-side credential scoped to one exact app environment. Never expose this value to browser bundles, logs, examples, or diagnostics."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production"
+      ],
+      "example": "curl --request GET -H 'authorization: Bearer {app_credential}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/commerce/test/accounting'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test"
+      },
+      "method": "GET",
+      "operationId": "getAppCommercePublisherAccounting",
+      "outcomes": [
+        {
+          "description": "Publisher accounting state",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Authentication required",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Accounting unavailable",
+          "status": 404,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/accounting",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "Read app publisher accounting"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "Server-side credential scoped to one exact app environment. Never expose this value to browser bundles, logs, examples, or diagnostics."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "header Idempotency-Key (required): string, minLength 1, maxLength 240"
+      ],
+      "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'Idempotency-Key: {Idempotency-Key}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/commerce/test/accounting/release-reserves'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "Idempotency-Key": "{Idempotency-Key}"
+      },
+      "method": "POST",
+      "operationId": "releaseAppCommercePublisherReserves",
+      "outcomes": [
+        {
+          "description": "Reserve release accepted",
+          "status": 202,
+          "success": true
+        },
+        {
+          "description": "Authentication required",
+          "status": 401,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/accounting/release-reserves",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": "{Idempotency-Key}",
+          "location": "header",
+          "name": "Idempotency-Key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1, maxLength 240"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "unsafe",
+      "summary": "Release matured publisher reserves"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "Server-side credential scoped to one exact app environment. Never expose this value to browser bundles, logs, examples, or diagnostics."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "header Idempotency-Key (required): string, minLength 1, maxLength 240",
+        "JSON request body (required): #/components/schemas/CreateAppCommerceAddonRequest"
+      ],
+      "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'Idempotency-Key: {Idempotency-Key}' -H 'content-type: application/json' --data '{\"amountMicros\":0,\"currency\":\"{currency}\",\"interval\":\"month\",\"key\":\"{key}\",\"name\":\"Example\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/commerce/test/addons'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "Idempotency-Key": "{Idempotency-Key}"
+      },
+      "exampleRequestBody": {
+        "amountMicros": 0,
+        "currency": "{currency}",
+        "interval": "month",
+        "key": "{key}",
+        "name": "Example"
+      },
+      "method": "POST",
+      "operationId": "createAppCommerceAddon",
+      "outcomes": [
+        {
+          "description": "Add-on created",
+          "status": 201,
+          "success": true
+        },
+        {
+          "description": "Invalid add-on",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Authentication required",
+          "status": 401,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/addons",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": "{Idempotency-Key}",
+          "location": "header",
+          "name": "Idempotency-Key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1, maxLength 240"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{key}",
+          "name": "key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1, maxLength 240"
+        },
+        {
+          "example": "Example",
+          "name": "name",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1, maxLength 240"
+        },
+        {
+          "name": "description",
+          "required": false,
+          "type": "string",
+          "validation": "maxLength 2000"
+        },
+        {
+          "example": "{currency}",
+          "name": "currency",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": 0,
+          "name": "amountMicros",
+          "required": true,
+          "type": "integer",
+          "validation": "min 0"
+        },
+        {
+          "example": "month",
+          "name": "interval",
+          "required": true,
+          "type": "string",
+          "validation": "one of month | year | one_time"
+        },
+        {
+          "name": "features",
+          "required": false,
+          "type": "object",
+          "validation": "—"
+        },
+        {
+          "name": "entitlementDuration",
+          "required": false,
+          "type": "string",
+          "validation": "one of period | indefinite"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/CreateAppCommerceAddonRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Create an app commerce add-on"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "Server-side credential scoped to one exact app environment. Never expose this value to browser bundles, logs, examples, or diagnostics."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "header Idempotency-Key (required): string, minLength 1, maxLength 240",
+        "JSON request body (required): #/components/schemas/CreateAppCommerceCatalogRequest"
+      ],
+      "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'Idempotency-Key: {Idempotency-Key}' -H 'content-type: application/json' --data '{\"defaultCurrency\":\"USD\",\"name\":\"Example\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/commerce/test/catalog'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "Idempotency-Key": "{Idempotency-Key}"
+      },
+      "exampleRequestBody": {
+        "defaultCurrency": "USD",
+        "name": "Example"
+      },
+      "method": "POST",
+      "operationId": "createAppCommerceCatalog",
+      "outcomes": [
+        {
+          "description": "Catalog created",
+          "status": 201,
+          "success": true
+        },
+        {
+          "description": "Invalid catalog",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Authentication required",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Catalog already exists",
+          "status": 409,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/catalog",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": "{Idempotency-Key}",
+          "location": "header",
+          "name": "Idempotency-Key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1, maxLength 240"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "Example",
+          "name": "name",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 240"
+        },
+        {
+          "example": "USD",
+          "name": "defaultCurrency",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 3"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/CreateAppCommerceCatalogRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Create an app commerce catalog"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "Server-side credential scoped to one exact app environment. Never expose this value to browser bundles, logs, examples, or diagnostics."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path customerRef (required): string"
+      ],
+      "example": "curl --request GET -H 'authorization: Bearer {app_credential}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/commerce/test/customers/%7BcustomerRef%7D/entitlements'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "customerRef": "{customerRef}"
+      },
+      "method": "GET",
+      "operationId": "getAppCommerceEntitlements",
+      "outcomes": [
+        {
+          "description": "Effective entitlements",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Authentication required",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Customer or app environment unavailable",
+          "status": 404,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/customers/{customerRef}/entitlements",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": "{customerRef}",
+          "location": "path",
+          "name": "customerRef",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "Get effective entitlements for an app customer"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "Server-side credential scoped to one exact app environment. Never expose this value to browser bundles, logs, examples, or diagnostics."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path customerRef (required): string",
+        "header Idempotency-Key (required): string, minLength 1, maxLength 240",
+        "JSON request body (required): #/components/schemas/RecordAppCommerceUsageRequest"
+      ],
+      "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'Idempotency-Key: {Idempotency-Key}' -H 'content-type: application/json' --data '{\"meterKey\":\"{meterKey}\",\"quantity\":0}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/commerce/test/customers/%7BcustomerRef%7D/usage'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "customerRef": "{customerRef}",
+        "Idempotency-Key": "{Idempotency-Key}"
+      },
+      "exampleRequestBody": {
+        "meterKey": "{meterKey}",
+        "quantity": 0
+      },
+      "method": "POST",
+      "operationId": "recordAppCommerceUsage",
+      "outcomes": [
+        {
+          "description": "Usage accepted",
+          "status": 202,
+          "success": true
+        },
+        {
+          "description": "Invalid usage",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Authentication required",
+          "status": 401,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/customers/{customerRef}/usage",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": "{customerRef}",
+          "location": "path",
+          "name": "customerRef",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{Idempotency-Key}",
+          "location": "header",
+          "name": "Idempotency-Key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1, maxLength 240"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{meterKey}",
+          "name": "meterKey",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1, maxLength 240"
+        },
+        {
+          "example": 0,
+          "name": "quantity",
+          "required": true,
+          "type": "integer",
+          "validation": "min 0"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/RecordAppCommerceUsageRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Record usage for an app customer"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "Server-side credential scoped to one exact app environment. Never expose this value to browser bundles, logs, examples, or diagnostics."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "header Idempotency-Key (required): string, minLength 1, maxLength 240",
+        "JSON request body (required): #/components/schemas/CreateAppCommerceFeatureRequest"
+      ],
+      "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'Idempotency-Key: {Idempotency-Key}' -H 'content-type: application/json' --data '{\"key\":\"{key}\",\"name\":\"Example\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/commerce/test/features'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "Idempotency-Key": "{Idempotency-Key}"
+      },
+      "exampleRequestBody": {
+        "key": "{key}",
+        "name": "Example"
+      },
+      "method": "POST",
+      "operationId": "createAppCommerceFeature",
+      "outcomes": [
+        {
+          "description": "Feature created",
+          "status": 201,
+          "success": true
+        },
+        {
+          "description": "Invalid feature",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Authentication required",
+          "status": 401,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/features",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": "{Idempotency-Key}",
+          "location": "header",
+          "name": "Idempotency-Key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1, maxLength 240"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{key}",
+          "name": "key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1, maxLength 240"
+        },
+        {
+          "example": "Example",
+          "name": "name",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1, maxLength 240"
+        },
+        {
+          "name": "description",
+          "required": false,
+          "type": "string",
+          "validation": "maxLength 2000"
+        },
+        {
+          "name": "metered",
+          "required": false,
+          "type": "boolean",
+          "validation": "—"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/CreateAppCommerceFeatureRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Create an app commerce feature"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path invoiceId (required): string",
+        "header Idempotency-Key (required): string, minLength 1, maxLength 240",
+        "JSON request body (required): #/components/schemas/RequestAppCommerceRefundRequest"
+      ],
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'Idempotency-Key: {Idempotency-Key}' -H 'content-type: application/json' --data '{\"amountMinor\":1,\"currency\":\"{currency}\",\"paymentId\":\"{paymentId}\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/commerce/test/invoices/%7BinvoiceId%7D/refunds'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "invoiceId": "{invoiceId}",
+        "Idempotency-Key": "{Idempotency-Key}"
+      },
+      "exampleRequestBody": {
+        "amountMinor": 1,
+        "currency": "{currency}",
+        "paymentId": "{paymentId}"
+      },
+      "method": "POST",
+      "operationId": "requestAppCommerceRefund",
+      "outcomes": [
+        {
+          "description": "Refund request accepted",
+          "status": 202,
+          "success": true
+        },
+        {
+          "description": "Invalid refund request",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Authentication required",
+          "status": 401,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/invoices/{invoiceId}/refunds",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": "{invoiceId}",
+          "location": "path",
+          "name": "invoiceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{Idempotency-Key}",
+          "location": "header",
+          "name": "Idempotency-Key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1, maxLength 240"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{paymentId}",
+          "name": "paymentId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{currency}",
+          "name": "currency",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": 1,
+          "name": "amountMinor",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/RequestAppCommerceRefundRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Request a refund for an app invoice"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "Server-side credential scoped to one exact app environment. Never expose this value to browser bundles, logs, examples, or diagnostics."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production"
+      ],
+      "example": "curl --request GET -H 'authorization: Bearer {app_credential}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/commerce/test/plans'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test"
+      },
+      "method": "GET",
+      "operationId": "listAppCommercePlans",
+      "outcomes": [
+        {
+          "description": "Published plans",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Authentication required",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "App environment unavailable",
+          "status": 404,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/plans",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "List published plans for an app environment"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "Server-side credential scoped to one exact app environment. Never expose this value to browser bundles, logs, examples, or diagnostics."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "header Idempotency-Key (required): string, minLength 1, maxLength 240",
+        "JSON request body (required): #/components/schemas/CreateAppCommercePlanRequest"
+      ],
+      "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'Idempotency-Key: {Idempotency-Key}' -H 'content-type: application/json' --data '{\"amountMicros\":0,\"currency\":\"{currency}\",\"interval\":\"month\",\"key\":\"{key}\",\"name\":\"Example\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/commerce/test/plans'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "Idempotency-Key": "{Idempotency-Key}"
+      },
+      "exampleRequestBody": {
+        "amountMicros": 0,
+        "currency": "{currency}",
+        "interval": "month",
+        "key": "{key}",
+        "name": "Example"
+      },
+      "method": "POST",
+      "operationId": "createAppCommercePlan",
+      "outcomes": [
+        {
+          "description": "Idempotent replay",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Plan created",
+          "status": 201,
+          "success": true
+        },
+        {
+          "description": "Invalid plan",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Authentication required",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Idempotency conflict",
+          "status": 409,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/plans",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": "{Idempotency-Key}",
+          "location": "header",
+          "name": "Idempotency-Key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1, maxLength 240"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{key}",
+          "name": "key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 240"
+        },
+        {
+          "example": "Example",
+          "name": "name",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 240"
+        },
+        {
+          "name": "description",
+          "required": false,
+          "type": "string",
+          "validation": "maxLength 2000"
+        },
+        {
+          "example": "{currency}",
+          "name": "currency",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": 0,
+          "name": "amountMicros",
+          "required": true,
+          "type": "integer",
+          "validation": "min 0"
+        },
+        {
+          "example": "month",
+          "name": "interval",
+          "required": true,
+          "type": "string",
+          "validation": "one of month | year"
+        },
+        {
+          "name": "features",
+          "required": false,
+          "type": "object",
+          "validation": "—"
+        },
+        {
+          "name": "addOns",
+          "required": false,
+          "type": "array",
+          "validation": "—"
+        },
+        {
+          "name": "includedMeters",
+          "required": false,
+          "type": "object",
+          "validation": "—"
+        },
+        {
+          "name": "trialDays",
+          "required": false,
+          "type": "integer",
+          "validation": "min 0, max 365"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/CreateAppCommercePlanRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Create a plan in an app environment"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "Server-side credential scoped to one exact app environment. Never expose this value to browser bundles, logs, examples, or diagnostics."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path planId (required): string",
+        "header Idempotency-Key (required): string, minLength 1, maxLength 240"
+      ],
+      "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'Idempotency-Key: {Idempotency-Key}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/commerce/test/plans/%7BplanId%7D/publish'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "planId": "{planId}",
+        "Idempotency-Key": "{Idempotency-Key}"
+      },
+      "method": "POST",
+      "operationId": "publishAppCommercePlan",
+      "outcomes": [
+        {
+          "description": "Plan publication accepted",
+          "status": 202,
+          "success": true
+        },
+        {
+          "description": "Invalid plan",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Authentication required",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Plan unavailable",
+          "status": 404,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/plans/{planId}/publish",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": "{planId}",
+          "location": "path",
+          "name": "planId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{Idempotency-Key}",
+          "location": "header",
+          "name": "Idempotency-Key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1, maxLength 240"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "unsafe",
+      "summary": "Publish an app commerce plan revision"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "Server-side credential scoped to one exact app environment. Never expose this value to browser bundles, logs, examples, or diagnostics."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "header Idempotency-Key (required): string, minLength 1, maxLength 240"
+      ],
+      "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'Idempotency-Key: {Idempotency-Key}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/commerce/test/settlements'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "Idempotency-Key": "{Idempotency-Key}"
+      },
+      "method": "POST",
+      "operationId": "createAppCommerceSettlement",
+      "outcomes": [
+        {
+          "description": "Settlement created",
+          "status": 201,
+          "success": true
+        },
+        {
+          "description": "Settlement unavailable",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Authentication required",
+          "status": 401,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/settlements",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": "{Idempotency-Key}",
+          "location": "header",
+          "name": "Idempotency-Key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1, maxLength 240"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "unsafe",
+      "summary": "Create a publisher settlement"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "Server-side credential scoped to one exact app environment. Never expose this value to browser bundles, logs, examples, or diagnostics."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path settlementId (required): string",
+        "header Idempotency-Key (required): string, minLength 1, maxLength 240"
+      ],
+      "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'Idempotency-Key: {Idempotency-Key}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/commerce/test/settlements/%7BsettlementId%7D/payouts'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "settlementId": "{settlementId}",
+        "Idempotency-Key": "{Idempotency-Key}"
+      },
+      "method": "POST",
+      "operationId": "simulateAppCommercePayout",
+      "outcomes": [
+        {
+          "description": "Simulated payout recorded",
+          "status": 201,
+          "success": true
+        },
+        {
+          "description": "Payout unavailable",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Authentication required",
+          "status": 401,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/commerce/{environment}/settlements/{settlementId}/payouts",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": "{settlementId}",
+          "location": "path",
+          "name": "settlementId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{Idempotency-Key}",
+          "location": "header",
+          "name": "Idempotency-Key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1, maxLength 240"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "unsafe",
+      "summary": "Create a simulated publisher payout"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "Server-side credential scoped to one exact app environment. Never expose this value to browser bundles, logs, examples, or diagnostics."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "header Idempotency-Key (required): string, minLength 1, maxLength 240"
+      ],
+      "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'Idempotency-Key: {Idempotency-Key}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/commerce/simulate-renewal'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "Idempotency-Key": "{Idempotency-Key}"
+      },
+      "method": "POST",
+      "operationId": "simulateMockCommerceRenewal",
+      "outcomes": [
+        {
+          "description": "Mock renewal accepted",
+          "status": 202,
+          "success": true
+        },
+        {
+          "description": "The configured provider is not the test mock",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Authentication required",
+          "status": 401,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/commerce/simulate-renewal",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{Idempotency-Key}",
+          "location": "header",
+          "name": "Idempotency-Key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1, maxLength 240"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "unsafe",
+      "summary": "Simulate a provider renewal in the test mock"
     },
     {
       "authority": [

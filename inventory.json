@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "kind": "authless-public-developer-repo-export",
-  "sourceRevision": "22732ebf5339200569a9e60c82ae4397d4acdbd0",
+  "sourceRevision": "d0aff37ceec143ea33fdd3bbf02fd0cfea5b51b8",
   "publicRepositoryUrl": "https://github.com/labdotsa/authless/tree/master",
   "licensePolicy": "MIT; Copyright (c) 2026 LabDotSA.",
   "excluded": [
@@ -49,7 +49,7 @@
     },
     {
       "path": "packages/cli/dist/cli.js",
-      "bytes": 74259
+      "bytes": 129195
     },
     {
       "path": "packages/server/README.md",
@@ -65,7 +65,11 @@
     },
     {
       "path": "packages/server/dist/generated.d.ts",
-      "bytes": 49304
+      "bytes": 63715
+    },
+    {
+      "path": "packages/server/dist/commerce.d.ts",
+      "bytes": 6680
     },
     {
       "path": "packages/server/dist/bulk-access.d.ts",
@@ -73,7 +77,7 @@
     },
     {
       "path": "packages/server/dist/index.js",
-      "bytes": 32498
+      "bytes": 55928
     },
     {
       "path": "packages/server/dist/memberships.d.ts",
@@ -88,8 +92,12 @@
       "bytes": 2651
     },
     {
+      "path": "packages/server/dist/billing.d.ts",
+      "bytes": 2520
+    },
+    {
       "path": "packages/server/dist/index.d.ts",
-      "bytes": 3351
+      "bytes": 6010
     },
     {
       "path": "packages/server/dist/apps.d.ts",
@@ -277,7 +285,7 @@
     },
     {
       "path": "schemas/authless.openapi.json",
-      "bytes": 329380
+      "bytes": 385149
     },
     {
       "path": "docs/README.md",
@@ -301,7 +309,7 @@
     },
     {
       "path": "docs/machine-readable/rest-reference.json",
-      "bytes": 226149
+      "bytes": 297126
     },
     {
       "path": "docs/machine-readable/developer-documentation.json",
@@ -313,7 +321,7 @@
     },
     {
       "path": "docs/machine-readable/llms-full.txt",
-      "bytes": 594085
+      "bytes": 670241
     },
     {
       "path": "docs/machine-readable/rest-management-guide.json",
@@ -325,7 +333,7 @@
     },
     {
       "path": "docs/machine-readable/llms-full.ar.txt",
-      "bytes": 604137
+      "bytes": 680293
     },
     {
       "path": "docs/machine-readable/webhook-catalog.json",
@@ -333,7 +341,7 @@
     },
     {
       "path": "docs/machine-readable/openapi.json",
-      "bytes": 329380
+      "bytes": 385149
     },
     {
       "path": "docs/markdown/en/trust.md",
@@ -361,7 +369,7 @@
     },
     {
       "path": "docs/markdown/en/changes.md",
-      "bytes": 145562
+      "bytes": 150741
     },
     {
       "path": "docs/markdown/en/agents.md",
@@ -381,7 +389,7 @@
     },
     {
       "path": "docs/markdown/en/reference/rest.md",
-      "bytes": 227962
+      "bytes": 298939
     },
     {
       "path": "docs/markdown/ar/trust.md",
@@ -409,7 +417,7 @@
     },
     {
       "path": "docs/markdown/ar/changes.md",
-      "bytes": 146015
+      "bytes": 151194
     },
     {
       "path": "docs/markdown/ar/agents.md",
@@ -429,7 +437,7 @@
     },
     {
       "path": "docs/markdown/ar/reference/rest.md",
-      "bytes": 228623
+      "bytes": 299600
     },
     {
       "path": "sdk-source/browser/src/side-effects.ts",
@@ -473,7 +481,7 @@
     },
     {
       "path": "docs-mcp/corpus.generated.json",
-      "bytes": 1739748
+      "bytes": 2006197
     },
     {
       "path": "docs-mcp/docs-mcp.config.json",

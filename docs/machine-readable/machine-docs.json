@@ -354,13 +354,13 @@
       "kind": "openapi",
       "url": "/openapi.json",
       "updatedAt": "2026-10-09",
-      "sha256": "b33416bb1d7741ea4ecbaaeff8f0809049046120dac0ebfcfc04438e09b99ee3"
+      "sha256": "6520b5c362af7b19f2f740a9de94a68b8c3e2d1e5b6a4b565ccc11626a6ee37e"
     },
     {
       "kind": "openapi",
       "url": "/rest-reference.json",
       "updatedAt": "2026-10-09",
-      "sha256": "cfed6cebf6579a1a70221f2e2c5ed980ed505ae059cce7b8dc1c3054b0b2850a"
+      "sha256": "2bfb3b8367cd2581de97f577670864f5f112c0e114fb47332bf15bd53081fe62"
     },
     {
       "kind": "discovery",
@@ -378,27 +378,27 @@
       "kind": "compatibility",
       "url": "/release-center.json",
       "updatedAt": "2026-10-09",
-      "sha256": "794444bb2a9effa9b0c20924975112563f10b19cda54abc9a146c158688d4f28"
+      "sha256": "d82564d81515b2cbb074fb975efea1dcfe07ebc1421aa634efe7dc273bc2e727"
     },
     {
       "kind": "compatibility",
       "url": "/compatibility.json",
       "updatedAt": "2026-10-09",
-      "sha256": "b9d8a8f9361c68d1d7650b3b161fda5837acae486c1e8ac855541c3ad26dc60b"
+      "sha256": "1b2c9a9e3a0c5e8a8a179396f683ed812ae2d11dc7486a894c8e2a2081b168ed"
     },
     {
       "kind": "changelog",
       "url": "/changes.json?lang=en",
       "locale": "en",
       "updatedAt": "2026-10-09",
-      "sha256": "749be5af473a612b3bef9326949a86f21d2e8b4b5e7182489edd2e9b78090d69"
+      "sha256": "f321f678ca49d61b0ae9328f6e4bbc2ce31c2a3446aea3bd6f622350c01a9814"
     },
     {
       "kind": "changelog",
       "url": "/changes.json?lang=ar",
       "locale": "ar",
       "updatedAt": "2026-10-09",
-      "sha256": "86a6182096dfa56f0bf267486764482f37bb646be35c4a5f941eb5c8db7883c5"
+      "sha256": "4b66308f998da9fe2f680cd3e34bb5476196cbb505b22a04d84447ca7f07628f"
     },
     {
       "kind": "operations",
