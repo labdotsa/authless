@@ -1,3 +1,51 @@
+const responseParameters = new Set([
+  "code",
+  "state",
+  "error",
+  "error_description",
+  "error_uri",
+  "iss",
+  "session_state",
+]);
+
+function matchesRegisteredRedirect(
+  callback: URL,
+  redirectUri: string,
+): boolean {
+  try {
+    const registered = new URL(redirectUri);
+    if (
+      !["http:", "https:"].includes(registered.protocol) ||
+      registered.username ||
+      registered.password ||
+      registered.hash ||
+      callback.username ||
+      callback.password ||
+      callback.hash ||
+      callback.origin !== registered.origin ||
+      callback.pathname !== registered.pathname
+    )
+      return false;
+    const query = new URLSearchParams(callback.search);
+    for (const name of responseParameters) {
+      if (registered.searchParams.has(name) || query.getAll(name).length > 1)
+        return false;
+      query.delete(name);
+    }
+    if (callback.searchParams.has("code") && callback.searchParams.has("error"))
+      return false;
+    for (const name of ["code", "error", "state"]) {
+      if (callback.searchParams.has(name) && !callback.searchParams.get(name))
+        return false;
+    }
+    query.sort();
+    registered.searchParams.sort();
+    return query.toString() === registered.searchParams.toString();
+  } catch {
+    return false;
+  }
+}
+
 type Jwks = { keys: Array<Record<string, unknown>> };
 type Fetcher = (
   input: Request | string | URL,
@@ -59,11 +107,25 @@ export async function validateIdToken(input: {
   if (!valid) throw new Error("ID token signature is invalid");
   const claims = decode(encodedClaims, "ID token claims");
   const now = Math.floor((input.now?.() ?? new Date()).getTime() / 1_000);
-  const audiences = typeof claims.aud === "string" ? [claims.aud] : claims.aud;
+  const audiences =
+    typeof claims.aud === "string" && claims.aud
+      ? [claims.aud]
+      : Array.isArray(claims.aud) &&
+          claims.aud.length > 0 &&
+          claims.aud.every(
+            (audience) => typeof audience === "string" && audience,
+          )
+        ? claims.aud
+        : null;
   if (claims.iss !== input.issuer)
     throw new Error("ID token issuer does not match");
   if (!Array.isArray(audiences) || !audiences.includes(input.audience))
     throw new Error("ID token audience does not match");
+  if (
+    (audiences.length > 1 || Object.hasOwn(claims, "azp")) &&
+    (typeof claims.azp !== "string" || claims.azp !== input.audience)
+  )
+    throw new Error("ID token authorized party does not match");
   if (claims.nonce !== input.nonce)
     throw new Error("ID token nonce does not match");
   if (typeof claims.exp !== "number" || claims.exp <= now)
@@ -106,7 +168,7 @@ export async function exchangeAuthorizationCode(input: {
   tokenType: "DPoP";
 }> {
   const callback = new URL(input.callbackUrl);
-  if (`${callback.origin}${callback.pathname}` !== input.pending.redirectUri)
+  if (!matchesRegisteredRedirect(callback, input.pending.redirectUri))
     throw new Error("Callback redirect does not match");
   if (callback.searchParams.get("state") !== input.pending.state)
     throw new Error("Callback state does not match");

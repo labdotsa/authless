@@ -422,8 +422,26 @@ export type CommercialBillingChangeReviewEnvelope = {
     review: CommercialBillingChangeReview;
 };
 export type CommercialBillingEnvelope = {
-    billing: CommercialBillingView;
+    billing: CommercialBillingNullableView;
 };
+export type CommercialBillingNullableView = {
+    accruedOverageMicros: number;
+    cancelledAt: string | null;
+    catalogueDigest: string;
+    catalogueVersion: string;
+    contractualVersion: string;
+    creditsMicros: number;
+    financialRecords: Array<CommercialBillingFinancialRecord>;
+    pendingInvoiceItemsMicros: number;
+    period: "monthly";
+    planId: "launch" | "growth" | "scale";
+    quantity: number;
+    renewalDate: string;
+    upcomingInvoice: {
+        projectedTotalMicros: number;
+        taxMicros: number;
+    };
+} | null;
 export type CommercialBillingFinancialRecord = {
     amountMicros: number;
     consumedOverageMicros?: number;
@@ -573,7 +591,6 @@ export type PersonalOverviewEnvelope = {
     connectedApps: Array<PersonalConnectedApp>;
     email: string;
     security: PersonalOverviewSecurity;
-    sensitiveMutationReadiness?: "ready" | "reauthentication_required";
     username: string | null;
     usernameChangeAvailableAt: string | null;
 };
@@ -635,7 +652,7 @@ export type PersonalUsernameRemovalEnvelope = {
 };
 export type CreateWorkspaceRequest = {
     name: string;
-    termsAccepted: boolean;
+    termsAccepted?: boolean;
 };
 export type RequestIdentityContinuationRequest = {
     email: string;
@@ -701,6 +718,7 @@ export type CreateIntegrationCredentialResponse = {
 export type RotateIntegrationCredentialRequest = {
     confirmed?: boolean;
     overlapSeconds: number;
+    expectedVersion?: number;
 };
 export type RotateIntegrationCredentialResponse = {
     credential: IntegrationCredential;
@@ -715,6 +733,7 @@ export type RotateIntegrationCredentialStaleResponse = {
 export type RevokeIntegrationCredentialRequest = {
     compromised?: boolean;
     confirmed?: boolean;
+    expectedVersion?: number;
 };
 export type RevokeIntegrationCredentialResponse = {
     credential: IntegrationCredential;
@@ -753,6 +772,7 @@ export type IntegrationWebhookListResponse = {
 export type ReplaceIntegrationWebhookSubscriptionsRequest = {
     confirmed?: boolean;
     subscriptions: Array<string>;
+    expectedVersion?: number;
 };
 export type ReplaceIntegrationWebhookSubscriptionsResponse = {
     operation: IntegrationOperation;
@@ -761,6 +781,7 @@ export type ReplaceIntegrationWebhookSubscriptionsResponse = {
 export type RotateIntegrationWebhookSecretRequest = {
     confirmed?: boolean;
     overlapSeconds: number;
+    expectedVersion?: number;
 };
 export type RotateIntegrationWebhookSecretResponse = {
     operation: IntegrationOperation;
@@ -769,6 +790,7 @@ export type RotateIntegrationWebhookSecretResponse = {
 };
 export type DisableIntegrationWebhookRequest = {
     confirmed?: boolean;
+    expectedVersion?: number;
 };
 export type DisableIntegrationWebhookResponse = {
     operation: IntegrationOperation;
@@ -811,7 +833,7 @@ export type IntegrationOperation = {
     deliveryState: "degraded" | "disabled" | "not_applicable" | "pending" | "reconciled";
     idempotencyStatus: "applied" | "replayed" | "rejected";
     lifecycleState: "active" | "compromised" | "disabled" | "expiring" | "pending" | "revoked";
-    nextAction: "acknowledge_secret" | "contact_support" | "inspect" | "reauthenticate" | "refresh" | "retry";
+    nextAction: "acknowledge_secret" | "contact_support" | "inspect" | "refresh" | "retry";
     operationId: string;
     resourceVersion: number;
     secretPresentOnce: boolean;
@@ -922,6 +944,7 @@ export type IdentityVerificationFailure = {
 };
 export type ErrorEnvelope = {
     error: string;
+    requiredScope?: WorkspaceServiceScope;
     type?: string;
     title?: string;
     status?: number;
@@ -962,6 +985,23 @@ export type AuditEvent = {
 export type AuditEventListEnvelope = {
     events: Array<AuditEvent>;
     nextCursor: string | null;
+};
+export type AgentDelegationKeyRotationPreviewRequest = {
+    publicJwks: Record<string, unknown>;
+    expectedVersion?: number;
+};
+export type AgentDelegationKeyRotationPreviewResponse = {
+    preview: AgentDelegationKeyRotationPreview;
+};
+export type AgentDelegationKeyRotationPreview = {
+    currentKeyCount: number;
+    delegationId: string;
+    effectSummary: string;
+    expectedKeyVersion: number;
+    expiresAt: string;
+    id: string;
+    replacementKeyIds: Array<string>;
+    workspaceId: string;
 };
 export type CreateAppRequest = {
     description: string;
@@ -1010,6 +1050,7 @@ export type App = {
     id: string;
     name: string;
     ownerContactEmail: string;
+    version: number;
 };
 export type AppListEnvelope = {
     apps: Array<App>;
@@ -1072,6 +1113,7 @@ export type ChangeAppMembershipStatusRequest = {
     action: "activate" | "delete" | "revoke" | "suspend";
     confirmed: boolean;
     reason: "access_ended" | "administrator_action" | "approval_granted" | "data_retention_complete" | "policy_violation" | "security_review";
+    expectedVersion?: number;
 };
 export type AppMembershipLifecycleEnvelope = {
     membership: AppMembership;
@@ -1127,12 +1169,14 @@ export type GrantAppRoleRequest = {
     confirmed: boolean;
     key: string;
     source: string;
+    expectedDefinitionVersion?: number;
 };
 export type GrantAppEntitlementRequest = {
     confirmed: boolean;
     expiresAt?: string;
     key: string;
     source: string;
+    expectedDefinitionVersion?: number;
 };
 export type AppAccessGrantEnvelope = {
     grant: AppAccessGrant;
@@ -1140,9 +1184,11 @@ export type AppAccessGrantEnvelope = {
 };
 export type RevokeAppRoleRequest = {
     confirmed: boolean;
+    expectedGrantVersion?: number;
 };
 export type RevokeAppEntitlementRequest = {
     confirmed: boolean;
+    expectedGrantVersion?: number;
 };
 export type AppAccessGrantVersionConflictEnvelope = {
     error: "version_conflict";
@@ -1198,6 +1244,7 @@ export type BulkAccessPreviewEnvelope = {
 };
 export type ConfirmBulkAccessRequest = {
     confirmed: boolean;
+    expectedVersion?: number;
 };
 export type ExecuteBulkAccessPreviewRequest = {
     confirmed: boolean;
@@ -1251,9 +1298,241 @@ export type WorkspaceEnvelope = {
     workspace: Workspace;
 };
 export type WorkspaceListEnvelope = {
-    creationReadiness?: "ready" | "reauthentication_required";
     nextCursor: string | null;
     workspaces: Array<Workspace>;
+};
+export type WorkspaceEnvironment = "test" | "production";
+export type WorkspaceServiceScope = "app:read" | "app:create" | "app:write" | "app:activate" | "policy:read" | "policy:write" | "policy:activate" | "endpoint:write" | "oidc-profile:write" | "credential:write";
+export type WorkspaceServiceRestrictions = {
+    appIds: Array<string>;
+    environments: Array<WorkspaceEnvironment>;
+};
+export type WorkspaceCapability = {
+    workspaceId: string;
+    credentialId: string;
+    principalId: string;
+    scopes: Array<WorkspaceServiceScope>;
+    restrictions: WorkspaceServiceRestrictions;
+};
+export type WorkspaceCapabilitiesEnvelope = {
+    capabilities: WorkspaceCapability;
+};
+export type CreateWorkspaceServicePrincipalRequest = {
+    name: string;
+    scopes: Array<WorkspaceServiceScope>;
+    restrictions: WorkspaceServiceRestrictions;
+};
+export type IssueWorkspaceServiceCredentialRequest = {
+    name: string;
+    scopes: Array<WorkspaceServiceScope>;
+    restrictions: WorkspaceServiceRestrictions;
+    expiresAt?: string | null;
+};
+export type RotateWorkspaceServiceCredentialRequest = {
+    overlapSeconds: number;
+    expiresAt?: string | null;
+    expectedVersion?: number;
+};
+export type RevokeWorkspaceServiceCredentialRequest = {
+    expectedVersion?: number;
+};
+export type WorkspaceServicePrincipal = {
+    id: string;
+    workspaceId: string;
+    name: string;
+    status: "active" | "suspended" | "revoked";
+    scopes: Array<WorkspaceServiceScope>;
+    restrictions: WorkspaceServiceRestrictions;
+    version: number;
+    createdAt: string;
+    revokedAt: string | null;
+};
+export type WorkspaceServiceCredential = {
+    id: string;
+    principalId: string;
+    workspaceId: string;
+    name: string;
+    scopes: Array<WorkspaceServiceScope>;
+    restrictions: WorkspaceServiceRestrictions;
+    status: "active" | "expiring" | "revoked";
+    version: number;
+    createdAt: string;
+    expiresAt: string | null;
+    revokedAt: string | null;
+    overlapExpiresAt: string | null;
+    lastUsedAt: string | null;
+    createdBy?: WorkspaceServiceActor;
+};
+export type WorkspaceServicePrincipalResponse = {
+    principal: WorkspaceServicePrincipal;
+};
+export type WorkspaceServiceCredentialResponse = {
+    credential: WorkspaceServiceCredential;
+};
+export type WorkspaceServiceCredentialListResponse = {
+    credentials: Array<WorkspaceServiceCredential>;
+};
+export type IssueWorkspaceServiceCredentialResponse = {
+    credential: WorkspaceServiceCredential;
+    secret: string;
+};
+export type AuthenticationMethod = "M-01" | "M-02" | "M-04" | "M-06" | "M-08" | "M-10";
+export type AuthenticationPolicyDefinition = {
+    appIdentity: {
+        description: string;
+        name: string;
+        ownerContactEmail: string;
+    };
+    consentPurpose: string;
+    correlation: {
+        boundary: "app" | "workspace";
+        essential: boolean;
+        purpose: string;
+    };
+    eligibleMethods: Array<AuthenticationMethod>;
+    emailAuthentication?: {
+        emailCode: {
+            attemptLimit: number;
+            lifetimeSeconds: number;
+        };
+        emailLink: {
+            attemptLimit: number;
+            lifetimeSeconds: number;
+        };
+    };
+    enrollmentMode: "administrator_approval" | "invitation_only" | "open";
+    recovery: {
+        verifiedEmailRequired: boolean;
+    };
+    requiredAssurance?: "single_factor" | "multi_factor";
+    requestedClaims: Array<"email" | "email_verified" | "preferred_username" | "workspace_subject">;
+    session: {
+        absoluteSeconds: number;
+        idleSeconds: number;
+    };
+};
+export type PolicyDefinitionRequest = {
+    definition: AuthenticationPolicyDefinition;
+    expectedDraftVersion?: number;
+};
+export type ActivatePolicyRequest = {
+    confirmed: true;
+    expectedDraftVersion?: number;
+};
+export type RestorePolicyRequest = {
+    expectedDraftVersion?: number;
+};
+export type PolicyVersion = {
+    version: number;
+    activatedAt: string;
+    activatedBy?: WorkspaceServiceActor;
+    definition: AuthenticationPolicyDefinition;
+};
+export type PolicyView = {
+    active: {
+        version: number;
+        activatedAt: string;
+        definition: AuthenticationPolicyDefinition;
+    } | null;
+    comparison: {
+        changed: boolean;
+        claimsAdded: Array<string>;
+        correlationExpanded: boolean;
+        renewedConsentRequired: boolean;
+    };
+    draft: Record<string, unknown> | null;
+    draftVersion: number;
+    environmentStatus: "active" | "suspended" | "retired";
+};
+export type PolicyHistoryResponse = {
+    history: {
+        items: Array<PolicyVersion>;
+        nextCursor: string | null;
+    };
+};
+export type PolicyViewEnvelope = {
+    policy: PolicyView;
+};
+export type ChangeAppEnvironmentStatusRequest = {
+    status: "suspended" | "retired";
+    confirmed?: boolean;
+    expectedVersion?: number;
+} | {
+    action: "resume";
+    confirmed?: boolean;
+    expectedVersion?: number;
+} | {
+    action: "activate";
+    confirmed?: boolean;
+    expectedVersion?: number;
+};
+export type ValidateAppSessionRequest = {
+    sessionReference: string;
+};
+export type ValidateAppSessionResponse = {
+    status: "compliant";
+    sessionId: string;
+    policyVersion: number;
+} | {
+    status: "interaction_required";
+    sessionId: string;
+    policyVersion: number;
+    reason: "consent" | "proof";
+} | {
+    status: "denied";
+    sessionId: string | null;
+    policyVersion: null;
+    reason: string;
+} | {
+    status: "expired";
+    sessionId: string | null;
+    policyVersion: null;
+    reason: string;
+};
+export type WorkspaceServiceActor = {
+    kind: "person" | "service";
+    ref: string;
+};
+export type WorkspaceServicePrincipalListResponse = {
+    principals: Array<WorkspaceServicePrincipal>;
+};
+export type ChangeWorkspaceServicePrincipalStatusRequest = {
+    status: "active" | "suspended" | "revoked";
+    expectedVersion: number;
+};
+export type UpdateAppMetadataRequest = {
+    name: string;
+    description: string;
+    ownerContactEmail: string;
+    expectedVersion?: number;
+};
+export type WorkspaceServiceCredentialReplayResponse = {
+    credential: WorkspaceServiceCredential;
+    replayed: true;
+};
+export type EndpointSetMutationRequest = {
+    postLogoutUris: Array<string>;
+    redirectUris: Array<string>;
+    trustedOrigins: Array<string>;
+    expectedVersion?: number;
+};
+export type OidcClientProfileMutationRequest = {
+    backchannelLogoutUri?: string | null;
+    dpopBoundAccessTokens: boolean;
+    jwtAccessTokenResources?: Array<OidcJwtAccessTokenResource>;
+    publicJwks: {
+        keys: Array<OidcPublicJwk>;
+    } | null;
+    refreshEligible: boolean;
+    tokenEndpointAuthMethod: "none" | "private_key_jwt";
+    expectedVersion?: number;
+};
+export declare const previewAgentDelegationKeyRotationOperation: {
+    readonly authorization: "session";
+    readonly method: "POST";
+    readonly path: "/workspaces/{workspaceId}/agent-delegations/{delegationId}/key-rotation-previews";
+    readonly retrySafety: "unsafe";
+    readonly status: "stable";
 };
 export declare const getAppCommerceViewOperation: {
     readonly authorization: "session-or-app-credential";
@@ -1648,24 +1927,31 @@ export declare const listAuditEventsOperation: {
     readonly status: "stable";
 };
 export declare const createAppOperation: {
-    readonly authorization: "session";
+    readonly authorization: "session-or-workspace-service";
     readonly method: "POST";
     readonly path: "/workspaces/{workspaceId}/apps";
     readonly retrySafety: "unsafe";
     readonly status: "stable";
 };
 export declare const listAppsOperation: {
-    readonly authorization: "session";
+    readonly authorization: "session-or-workspace-service";
     readonly method: "GET";
     readonly path: "/workspaces/{workspaceId}/apps";
     readonly retrySafety: "safe";
     readonly status: "stable";
 };
 export declare const getAppEnvironmentOperation: {
-    readonly authorization: "session";
+    readonly authorization: "session-or-workspace-service";
     readonly method: "GET";
     readonly path: "/workspaces/{workspaceId}/apps/{appId}/{environment}";
     readonly retrySafety: "safe";
+    readonly status: "stable";
+};
+export declare const changeAppEnvironmentStatusOperation: {
+    readonly authorization: "session-or-workspace-service";
+    readonly method: "PATCH";
+    readonly path: "/workspaces/{workspaceId}/apps/{appId}/{environment}";
+    readonly retrySafety: "unsafe";
     readonly status: "stable";
 };
 export declare const listAppMembershipsOperation: {
@@ -1931,6 +2217,139 @@ export declare const verifyIdentityOperation: {
     readonly authorization: "public";
     readonly method: "POST";
     readonly path: "/identity/verifications";
+    readonly retrySafety: "unsafe";
+    readonly status: "stable";
+};
+export declare const inspectWorkspaceCapabilitiesOperation: {
+    readonly authorization: "workspace-service";
+    readonly method: "GET";
+    readonly path: "/workspaces/{workspaceId}/capabilities";
+    readonly retrySafety: "safe";
+    readonly status: "stable";
+};
+export declare const createWorkspaceServicePrincipalOperation: {
+    readonly authorization: "session-or-workspace-service";
+    readonly method: "POST";
+    readonly path: "/workspaces/{workspaceId}/service-principals";
+    readonly retrySafety: "unsafe";
+    readonly status: "stable";
+};
+export declare const listWorkspaceServicePrincipalsOperation: {
+    readonly authorization: "session-or-workspace-service";
+    readonly method: "GET";
+    readonly path: "/workspaces/{workspaceId}/service-principals";
+    readonly retrySafety: "safe";
+    readonly status: "stable";
+};
+export declare const listWorkspaceServiceCredentialsOperation: {
+    readonly authorization: "session-or-workspace-service";
+    readonly method: "GET";
+    readonly path: "/workspaces/{workspaceId}/service-principals/{principalId}/credentials";
+    readonly retrySafety: "safe";
+    readonly status: "stable";
+};
+export declare const issueWorkspaceServiceCredentialOperation: {
+    readonly authorization: "session-or-workspace-service";
+    readonly method: "POST";
+    readonly path: "/workspaces/{workspaceId}/service-principals/{principalId}/credentials";
+    readonly retrySafety: "unsafe";
+    readonly status: "stable";
+};
+export declare const rotateWorkspaceServiceCredentialOperation: {
+    readonly authorization: "session-or-workspace-service";
+    readonly method: "POST";
+    readonly path: "/workspaces/{workspaceId}/service-principals/{principalId}/credentials/{credentialId}/rotate";
+    readonly retrySafety: "unsafe";
+    readonly status: "stable";
+};
+export declare const revokeWorkspaceServiceCredentialOperation: {
+    readonly authorization: "session-or-workspace-service";
+    readonly method: "POST";
+    readonly path: "/workspaces/{workspaceId}/service-principals/{principalId}/credentials/{credentialId}/revoke";
+    readonly retrySafety: "unsafe";
+    readonly status: "stable";
+};
+export declare const getAuthenticationPolicyOperation: {
+    readonly authorization: "session-or-workspace-service";
+    readonly method: "GET";
+    readonly path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/policy";
+    readonly retrySafety: "safe";
+    readonly status: "stable";
+};
+export declare const saveAuthenticationPolicyDraftOperation: {
+    readonly authorization: "session-or-workspace-service";
+    readonly method: "PUT";
+    readonly path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/policy";
+    readonly retrySafety: "unsafe";
+    readonly status: "stable";
+};
+export declare const activateAuthenticationPolicyOperation: {
+    readonly authorization: "session-or-workspace-service";
+    readonly method: "POST";
+    readonly path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/policy/activate";
+    readonly retrySafety: "unsafe";
+    readonly status: "stable";
+};
+export declare const listAuthenticationPolicyHistoryOperation: {
+    readonly authorization: "session-or-workspace-service";
+    readonly method: "GET";
+    readonly path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/policy/history";
+    readonly retrySafety: "safe";
+    readonly status: "stable";
+};
+export declare const getAuthenticationPolicyRevisionOperation: {
+    readonly authorization: "session-or-workspace-service";
+    readonly method: "GET";
+    readonly path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/policy/history/{version}";
+    readonly retrySafety: "safe";
+    readonly status: "stable";
+};
+export declare const restoreAuthenticationPolicyRevisionOperation: {
+    readonly authorization: "session-or-workspace-service";
+    readonly method: "POST";
+    readonly path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/policy/history/{version}/restore";
+    readonly retrySafety: "unsafe";
+    readonly status: "stable";
+};
+export declare const replaceAppEnvironmentEndpointsOperation: {
+    readonly authorization: "session-or-workspace-service";
+    readonly method: "PUT";
+    readonly path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/endpoints";
+    readonly retrySafety: "unsafe";
+    readonly status: "stable";
+};
+export declare const replaceAppEnvironmentOidcProfileOperation: {
+    readonly authorization: "session-or-workspace-service";
+    readonly method: "PUT";
+    readonly path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/oidc-profile";
+    readonly retrySafety: "unsafe";
+    readonly status: "stable";
+};
+export declare const validateAppSessionOnlineOperation: {
+    readonly authorization: "app-credential";
+    readonly method: "POST";
+    readonly path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/sessions/validate";
+    readonly retrySafety: "safe";
+    readonly status: "stable";
+};
+export declare const getWorkspaceServicePrincipalOperation: {
+    readonly authorization: "session-or-workspace-service";
+    readonly method: "GET";
+    readonly path: "/workspaces/{workspaceId}/service-principals/{principalId}";
+    readonly retrySafety: "safe";
+    readonly status: "stable";
+};
+export declare const changeWorkspaceServicePrincipalStatusOperation: {
+    readonly authorization: "session-or-workspace-service";
+    readonly method: "POST";
+    readonly path: "/workspaces/{workspaceId}/service-principals/{principalId}/status";
+    readonly retrySafety: "unsafe";
+    readonly status: "stable";
+};
+export declare const updateAppMetadataOperation: {
+    readonly authorization: "session-or-workspace-service";
+    readonly method: "PATCH";
+    readonly path: "/workspaces/{workspaceId}/apps/{appId}";
     readonly retrySafety: "unsafe";
     readonly status: "stable";
 };

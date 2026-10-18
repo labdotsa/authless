@@ -111,6 +111,12 @@
       "schemaVersion": "1.0",
       "resource": "identity claim",
       "payloadBoundary": "Opaque person/claim references and resource version; sensitive claim values are omitted."
+    },
+    {
+      "name": "policy.activated",
+      "schemaVersion": "1.0",
+      "resource": "authentication policy",
+      "payloadBoundary": "App/environment IDs, old and new policy revisions, and impact summary; no claims or secrets."
     }
   ],
   "ordering": {

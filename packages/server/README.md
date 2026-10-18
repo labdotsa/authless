@@ -20,7 +20,9 @@ const workspaces = await authless.workspaces.list({
 ```
 
 Use Node.js 24 or newer. Configure exactly one server-side `sessionToken`,
-`appCredentialToken`, or `managementAccessToken`. The management access token
+`appCredentialToken`, `workspaceServiceCredentialToken`, or
+`managementAccessToken`. A workspace service credential is a named, scoped
+workspace key for unattended app and policy automation. The management access token
 is the bearer credential issued by the management OAuth flow for unattended
 agents and automation. Keep credentials out of browser bundles, browser
 storage, logs, and client-visible responses.

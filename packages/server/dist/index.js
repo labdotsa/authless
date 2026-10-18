@@ -259,24 +259,31 @@ var listAuditEventsOperation = {
   status: "stable"
 };
 var createAppOperation = {
-  authorization: "session",
+  authorization: "session-or-workspace-service",
   method: "POST",
   path: "/workspaces/{workspaceId}/apps",
   retrySafety: "unsafe",
   status: "stable"
 };
 var listAppsOperation = {
-  authorization: "session",
+  authorization: "session-or-workspace-service",
   method: "GET",
   path: "/workspaces/{workspaceId}/apps",
   retrySafety: "safe",
   status: "stable"
 };
 var getAppEnvironmentOperation = {
-  authorization: "session",
+  authorization: "session-or-workspace-service",
   method: "GET",
   path: "/workspaces/{workspaceId}/apps/{appId}/{environment}",
   retrySafety: "safe",
+  status: "stable"
+};
+var changeAppEnvironmentStatusOperation = {
+  authorization: "session-or-workspace-service",
+  method: "PATCH",
+  path: "/workspaces/{workspaceId}/apps/{appId}/{environment}",
+  retrySafety: "unsafe",
   status: "stable"
 };
 var listAppMembershipsOperation = {
@@ -384,6 +391,34 @@ var listBulkAccessResultsOperation = {
   retrySafety: "safe",
   status: "stable"
 };
+var inspectWorkspaceCapabilitiesOperation = {
+  authorization: "workspace-service",
+  method: "GET",
+  path: "/workspaces/{workspaceId}/capabilities",
+  retrySafety: "safe",
+  status: "stable"
+};
+var replaceAppEnvironmentEndpointsOperation = {
+  authorization: "session-or-workspace-service",
+  method: "PUT",
+  path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/endpoints",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var replaceAppEnvironmentOidcProfileOperation = {
+  authorization: "session-or-workspace-service",
+  method: "PUT",
+  path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/oidc-profile",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var updateAppMetadataOperation = {
+  authorization: "session-or-workspace-service",
+  method: "PATCH",
+  path: "/workspaces/{workspaceId}/apps/{appId}",
+  retrySafety: "unsafe",
+  status: "stable"
+};
 
 // src/apps.ts
 function createAppClient(transport) {
@@ -425,6 +460,67 @@ function createAppClient(transport) {
         operation: listAppsOperation,
         path: `${path}${suffix}`
       });
+    },
+    async updateMetadata(input) {
+      const path = updateAppMetadataOperation.path.replace("{workspaceId}", encodeURIComponent(input.workspaceId)).replace("{appId}", encodeURIComponent(input.appId));
+      const body = await transport.execute({
+        body: JSON.stringify({
+          description: input.description,
+          expectedVersion: input.expectedVersion,
+          name: input.name,
+          ownerContactEmail: input.ownerContactEmail
+        }),
+        correlationId: input.correlationId,
+        headers: { "if-match": `"${input.expectedVersion}"` },
+        operation: updateAppMetadataOperation,
+        path
+      });
+      return body.app;
+    },
+    async replaceEndpoints(input) {
+      const path = replaceAppEnvironmentEndpointsOperation.path.replace("{workspaceId}", encodeURIComponent(input.workspaceId)).replace("{appId}", encodeURIComponent(input.appId)).replace("{environment}", encodeURIComponent(input.environment));
+      const body = await transport.execute({
+        body: JSON.stringify({
+          ...input.endpoints,
+          confirmed: true,
+          expectedVersion: input.expectedVersion
+        }),
+        correlationId: input.correlationId,
+        headers: { "if-match": `"${input.expectedVersion}"` },
+        operation: replaceAppEnvironmentEndpointsOperation,
+        path
+      });
+      return body.environment;
+    },
+    async replaceOidcProfile(input) {
+      const path = replaceAppEnvironmentOidcProfileOperation.path.replace("{workspaceId}", encodeURIComponent(input.workspaceId)).replace("{appId}", encodeURIComponent(input.appId)).replace("{environment}", encodeURIComponent(input.environment));
+      const body = await transport.execute({
+        body: JSON.stringify({
+          ...input.profile,
+          confirmed: true,
+          expectedVersion: input.expectedVersion
+        }),
+        correlationId: input.correlationId,
+        headers: { "if-match": `"${input.expectedVersion}"` },
+        operation: replaceAppEnvironmentOidcProfileOperation,
+        path
+      });
+      return body.environment;
+    },
+    async activateEnvironment(input) {
+      const path = changeAppEnvironmentStatusOperation.path.replace("{workspaceId}", encodeURIComponent(input.workspaceId)).replace("{appId}", encodeURIComponent(input.appId)).replace("{environment}", "production");
+      const body = await transport.execute({
+        body: JSON.stringify({
+          action: "activate",
+          confirmed: true,
+          expectedVersion: input.expectedVersion
+        }),
+        correlationId: input.correlationId,
+        headers: { "if-match": `"${input.expectedVersion}"` },
+        operation: changeAppEnvironmentStatusOperation,
+        path
+      });
+      return body.environment;
     }
   };
 }
@@ -504,8 +600,6 @@ function hasCode(code, ...values) {
 function classifyApiFailure(input) {
   const code = typeof input.code === "string" && input.code.length > 0 ? input.code : "request_failed";
   const status = input.status;
-  if (hasCode(code, "fresh_authentication_required", "recent_authentication_required"))
-    return { action: "reauthenticate", code, kind: "fresh-auth", status };
   if (hasCode(code, "unauthorized", "session_required") || status === 401)
     return { action: "sign-in", code, kind: "session", status };
   if (hasCode(code, "resource_not_found", "not_found") || code.endsWith("_not_found") || status === 404)
@@ -575,15 +669,24 @@ function classifyApiFailure(input) {
 
 // src/transport.ts
 var knownErrorCodes = new Set([
+  "action_not_permitted",
   "app_environment_not_found",
   "app_membership_not_found",
   "app_access_grant_not_found",
   "audit_resource_not_found",
+  "body_too_large",
   "bulk_access_operation_not_found",
   "bulk_access_preview_not_found",
   "confirmation_required",
+  "commercial_dunning_suspended",
+  "production_app_allowance_exhausted",
   "customer_reference_conflict",
   "definition_unavailable",
+  "forbidden",
+  "insufficient_scope",
+  "invalid_lifecycle_transition",
+  "invalid_oidc_profile",
+  "insufficient_permission",
   "idempotency_conflict",
   "idempotency_required",
   "idempotency_key_required",
@@ -597,18 +700,40 @@ var knownErrorCodes = new Set([
   "operation_busy",
   "operation_not_cancellable",
   "preview_expired",
-  "fresh_authentication_required",
-  "recent_authentication_required",
+  "provider_error",
+  "provider_failure",
+  "provider_unavailable",
+  "rate_limited",
+  "resource_not_found",
   "results_expired",
   "results_unavailable",
-  "terms_required",
+  "session_required",
+  "temporary_unavailable",
+  "temporarily_unavailable",
   "unauthorized",
+  "version_required",
   "version_conflict",
   "version_or_idempotency_required",
   "version_precondition_required",
+  "not_found",
+  "policy_required",
+  "invalid_endpoints",
+  "environment_retired",
   "workspace_not_found"
 ]);
 var transientStatuses = new Set([408, 500, 502, 503, 504]);
+var workspaceServiceScopes = new Set([
+  "app:read",
+  "app:create",
+  "app:write",
+  "app:activate",
+  "policy:read",
+  "policy:write",
+  "policy:activate",
+  "endpoint:write",
+  "oidc-profile:write",
+  "credential:write"
+]);
 function record(value) {
   return value !== null && typeof value === "object" ? value : null;
 }
@@ -663,6 +788,7 @@ class AuthlessApiError extends Error {
   retryAt;
   retrySafety;
   status;
+  requiredScope;
   constructor(input) {
     super(`Authless API request failed with status ${input.status}.`);
     this.name = "AuthlessApiError";
@@ -677,6 +803,7 @@ class AuthlessApiError extends Error {
     this.retryAt = input.retryAt;
     this.retrySafety = input.retrySafety;
     this.status = input.status;
+    this.requiredScope = input.requiredScope;
   }
 }
 function validateBaseUrl(value) {
@@ -698,17 +825,20 @@ function createAuthlessTransport(options) {
   const sessionToken = typeof options.sessionToken === "string" && options.sessionToken.length > 0 ? options.sessionToken : undefined;
   const appCredentialToken = typeof options.appCredentialToken === "string" && options.appCredentialToken.length > 0 ? options.appCredentialToken : undefined;
   const managementAccessToken = typeof options.managementAccessToken === "string" && options.managementAccessToken.length > 0 ? options.managementAccessToken : undefined;
+  const workspaceServiceCredentialToken = typeof options.workspaceServiceCredentialToken === "string" && options.workspaceServiceCredentialToken.length > 0 ? options.workspaceServiceCredentialToken : undefined;
   const credentials = [
     sessionToken,
     appCredentialToken,
-    managementAccessToken
+    managementAccessToken,
+    workspaceServiceCredentialToken
   ].filter((value) => value !== undefined);
   if (credentials.length !== 1)
     throw new TypeError("Exactly one server-side session, app credential, or management access token is required.");
   for (const [name, value] of [
     ["sessionToken", sessionToken],
     ["appCredentialToken", appCredentialToken],
-    ["managementAccessToken", managementAccessToken]
+    ["managementAccessToken", managementAccessToken],
+    ["workspaceServiceCredentialToken", workspaceServiceCredentialToken]
   ])
     if (value && /[\r\n]/u.test(value))
       throw new TypeError(`${name} must not contain CR or LF characters.`);
@@ -725,12 +855,13 @@ function createAuthlessTransport(options) {
   return {
     async execute(input) {
       const requestCorrelationId = normalizeCorrelationId(input.correlationId);
-      if (appCredentialToken && input.operation.authorization !== "session-or-app-credential")
-        throw new TypeError("This Authless API operation requires a platform session.");
+      const bearerAuthorization = input.operation.authorization === "app-credential" ? appCredentialToken : input.operation.authorization === "session-or-app-credential" ? appCredentialToken || managementAccessToken : input.operation.authorization === "session-or-workspace-service" ? workspaceServiceCredentialToken || managementAccessToken : input.operation.authorization === "workspace-service" ? workspaceServiceCredentialToken : undefined;
+      if ((appCredentialToken || workspaceServiceCredentialToken) && !bearerAuthorization)
+        throw new TypeError(input.operation.authorization === "session" || input.operation.authorization === "session-or-management-oauth" ? "This Authless API operation requires a platform session." : "This Authless API operation does not accept the configured credential.");
       if (input.headers && Object.keys(input.headers).some((name) => /^(authorization|cookie|proxy-authorization|x-authless-client)$/iu.test(name)))
         throw new TypeError("Request headers cannot override server credentials or client identity.");
-      const authorityHeaders = appCredentialToken || managementAccessToken ? {
-        authorization: `Bearer ${appCredentialToken ?? managementAccessToken}`
+      const authorityHeaders = appCredentialToken || managementAccessToken || workspaceServiceCredentialToken ? {
+        authorization: `Bearer ${appCredentialToken ?? managementAccessToken ?? workspaceServiceCredentialToken}`
       } : { cookie: `__Host-authless_session=${sessionToken}` };
       let attempt = 1;
       let response;
@@ -796,7 +927,8 @@ function createAuthlessTransport(options) {
           preserveEdits: classification.preserveEdits,
           retryAt: classification.retryAt,
           retrySafety: input.operation.retrySafety,
-          status: response.status
+          status: response.status,
+          ...code === "insufficient_scope" && typeof body?.requiredScope === "string" && workspaceServiceScopes.has(body.requiredScope) ? { requiredScope: body.requiredScope } : {}
         });
       }
       return input.decode ? input.decode(response) : await response.json();
@@ -811,7 +943,8 @@ function createBulkAccessClient(transport) {
     async cancelOperation(input) {
       return transport.execute({
         body: JSON.stringify({
-          confirmed: input.confirmed
+          confirmed: input.confirmed,
+          expectedVersion: input.expectedVersion
         }),
         correlationId: input.correlationId,
         headers: {
@@ -919,6 +1052,7 @@ function createAppMembershipClient(transport) {
         body: JSON.stringify({
           action: input.action,
           confirmed: input.confirmed,
+          expectedVersion: input.expectedVersion,
           reason: input.reason
         }),
         correlationId: input.correlationId,
@@ -986,6 +1120,7 @@ function createAppAccessClient(transport) {
       return transport.execute({
         body: JSON.stringify({
           confirmed: input.confirmed,
+          expectedDefinitionVersion: input.expectedDefinitionVersion,
           key: input.key,
           source: input.source
         }),
@@ -1002,6 +1137,7 @@ function createAppAccessClient(transport) {
       return transport.execute({
         body: JSON.stringify({
           confirmed: input.confirmed,
+          expectedDefinitionVersion: input.expectedDefinitionVersion,
           expiresAt: input.expiresAt,
           key: input.key,
           source: input.source
@@ -1018,7 +1154,8 @@ function createAppAccessClient(transport) {
     async revokeEntitlement(input) {
       return transport.execute({
         body: JSON.stringify({
-          confirmed: input.confirmed
+          confirmed: input.confirmed,
+          expectedGrantVersion: input.expectedGrantVersion
         }),
         correlationId: input.correlationId,
         headers: {
@@ -1032,7 +1169,8 @@ function createAppAccessClient(transport) {
     async revokeRole(input) {
       return transport.execute({
         body: JSON.stringify({
-          confirmed: input.confirmed
+          confirmed: input.confirmed,
+          expectedGrantVersion: input.expectedGrantVersion
         }),
         correlationId: input.correlationId,
         headers: {
@@ -1046,6 +1184,273 @@ function createAppAccessClient(transport) {
   };
 }
 
+// src/online-sessions.ts
+var operation = {
+  authorization: "app-credential",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/sessions/validate",
+  retrySafety: "safe"
+};
+function createOnlineSessionClient(transport) {
+  return {
+    validate: async (input) => {
+      if (!input.sessionReference)
+        throw new TypeError("sessionReference is required.");
+      const path = operation.path.replace("{workspaceId}", encodeURIComponent(input.workspaceId)).replace("{appId}", encodeURIComponent(input.appId)).replace("{environment}", encodeURIComponent(input.environment));
+      const result = await transport.execute({
+        body: JSON.stringify({ sessionReference: input.sessionReference }),
+        correlationId: input.correlationId,
+        operation,
+        path
+      });
+      if (!result || typeof result !== "object" || Array.isArray(result))
+        throw new Error("Online session response was invalid.");
+      const record2 = result;
+      const status = record2.status;
+      if (status === "compliant") {
+        if (typeof record2.sessionId !== "string" || typeof record2.policyVersion !== "number" || !Number.isSafeInteger(record2.policyVersion))
+          throw new Error("Online session response was invalid.");
+        return {
+          status,
+          sessionId: record2.sessionId,
+          policyVersion: record2.policyVersion
+        };
+      }
+      if (status === "interaction_required") {
+        if (typeof record2.sessionId !== "string" || typeof record2.policyVersion !== "number" || !Number.isSafeInteger(record2.policyVersion) || record2.reason !== "consent" && record2.reason !== "proof")
+          throw new Error("Online session response was invalid.");
+        return {
+          status,
+          sessionId: record2.sessionId,
+          policyVersion: record2.policyVersion,
+          reason: record2.reason
+        };
+      }
+      if (status === "denied" || status === "expired") {
+        if (record2.sessionId !== null && typeof record2.sessionId !== "string" || record2.policyVersion !== null || typeof record2.reason !== "string" || record2.reason.length === 0)
+          throw new Error("Online session response was invalid.");
+        const sessionId = typeof record2.sessionId === "string" ? record2.sessionId : null;
+        return {
+          status,
+          sessionId,
+          policyVersion: null,
+          reason: record2.reason
+        };
+      }
+      throw new Error("Online session response was invalid.");
+    }
+  };
+}
+
+// src/policies.ts
+var operation2 = (method, path, retrySafety) => ({
+  authorization: "session-or-workspace-service",
+  method,
+  path,
+  retrySafety
+});
+var paths = {
+  base: "/workspaces/{workspaceId}/apps/{appId}/{environment}/policy",
+  history: "/workspaces/{workspaceId}/apps/{appId}/{environment}/policy/history"
+};
+var replace = (path, input) => path.replace("{workspaceId}", encodeURIComponent(input.workspaceId)).replace("{appId}", encodeURIComponent(input.appId)).replace("{environment}", encodeURIComponent(input.environment));
+function createPolicyClient(transport) {
+  return {
+    async get(input) {
+      const response = await transport.execute({
+        correlationId: input.correlationId,
+        operation: operation2("GET", paths.base, "safe"),
+        path: replace(paths.base, input)
+      });
+      return response.policy;
+    },
+    async history(input) {
+      const query = new URLSearchParams;
+      if (input.cursor !== undefined)
+        query.set("cursor", input.cursor);
+      if (input.limit !== undefined)
+        query.set("limit", String(input.limit));
+      const suffix = query.size ? `?${query}` : "";
+      const response = await transport.execute({
+        correlationId: input.correlationId,
+        operation: operation2("GET", paths.history, "safe"),
+        path: `${replace(paths.history, input)}${suffix}`
+      });
+      if ("history" in response && response.history)
+        return response.history;
+      if (!("items" in response) || !Array.isArray(response.items))
+        throw new Error("Policy history response was invalid.");
+      return response;
+    },
+    async revision(input) {
+      const response = await transport.execute({
+        correlationId: input.correlationId,
+        operation: operation2("GET", `${paths.history}/{version}`, "safe"),
+        path: `${replace(paths.history, input)}/${encodeURIComponent(String(input.version))}`
+      });
+      return "found" in response && response.found && response.version ? response.version : response;
+    },
+    async saveDraft(input) {
+      const body = await transport.execute({
+        body: JSON.stringify({
+          definition: input.definition,
+          expectedDraftVersion: input.expectedDraftVersion
+        }),
+        correlationId: input.correlationId,
+        headers: {
+          "idempotency-key": input.idempotencyKey,
+          "if-match": `"${input.expectedDraftVersion}"`
+        },
+        operation: operation2("PUT", paths.base, "unsafe"),
+        path: replace(paths.base, input)
+      });
+      return body.policy;
+    },
+    async activate(input) {
+      const path = `${replace(paths.base, input)}/activate`;
+      const body = await transport.execute({
+        body: JSON.stringify({
+          confirmed: true,
+          expectedDraftVersion: input.expectedDraftVersion
+        }),
+        correlationId: input.correlationId,
+        headers: {
+          "idempotency-key": input.idempotencyKey,
+          "if-match": `"${input.expectedDraftVersion}"`
+        },
+        operation: operation2("POST", path, "unsafe"),
+        path
+      });
+      return body.policy;
+    },
+    async restore(input) {
+      const path = `${replace(paths.history, input)}/${encodeURIComponent(String(input.version))}/restore`;
+      const body = await transport.execute({
+        body: JSON.stringify({
+          expectedDraftVersion: input.expectedDraftVersion
+        }),
+        correlationId: input.correlationId,
+        headers: {
+          "idempotency-key": input.idempotencyKey,
+          "if-match": `"${input.expectedDraftVersion}"`
+        },
+        operation: operation2("POST", path, "unsafe"),
+        path
+      });
+      return body.policy;
+    }
+  };
+}
+
+// src/workspace-credentials.ts
+var authOperation = (method, path, retrySafety) => ({
+  authorization: "session-or-workspace-service",
+  method,
+  path,
+  retrySafety
+});
+var root = (workspaceId) => `/workspaces/${encodeURIComponent(workspaceId)}`;
+var principalPath = (workspaceId) => `${root(workspaceId)}/service-principals`;
+var credentialsPath = (workspaceId, principalId) => `${principalPath(workspaceId)}/${encodeURIComponent(principalId)}/credentials`;
+function createWorkspaceCredentialClient(transport) {
+  return {
+    async listPrincipals(input) {
+      const path = principalPath(input.workspaceId);
+      return transport.execute({
+        correlationId: input.correlationId,
+        operation: authOperation("GET", path, "safe"),
+        path
+      });
+    },
+    async getPrincipal(input) {
+      const path = `${principalPath(input.workspaceId)}/${encodeURIComponent(input.principalId)}`;
+      const response = await transport.execute({
+        correlationId: input.correlationId,
+        operation: authOperation("GET", path, "safe"),
+        path
+      });
+      return "principal" in response ? response.principal : response;
+    },
+    async createPrincipal(input) {
+      const path = principalPath(input.workspaceId);
+      const response = await transport.execute({
+        body: JSON.stringify({
+          name: input.name,
+          restrictions: input.restrictions,
+          scopes: input.scopes
+        }),
+        correlationId: input.correlationId,
+        operation: authOperation("POST", path, "unsafe"),
+        path
+      });
+      return "principal" in response ? response.principal : response;
+    },
+    async changePrincipalStatus(input) {
+      const path = `${principalPath(input.workspaceId)}/${encodeURIComponent(input.principalId)}/status`;
+      const response = await transport.execute({
+        body: JSON.stringify({
+          expectedVersion: input.expectedVersion,
+          status: input.status
+        }),
+        correlationId: input.correlationId,
+        operation: authOperation("POST", path, "unsafe"),
+        path
+      });
+      return "principal" in response ? response.principal : response;
+    },
+    async issue(input) {
+      const path = credentialsPath(input.workspaceId, input.principalId);
+      return transport.execute({
+        body: JSON.stringify({
+          expiresAt: input.expiresAt ?? null,
+          name: input.name,
+          restrictions: input.restrictions,
+          scopes: input.scopes
+        }),
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: authOperation("POST", path, "unsafe"),
+        path
+      });
+    },
+    async list(input) {
+      const path = credentialsPath(input.workspaceId, input.principalId);
+      return transport.execute({
+        correlationId: input.correlationId,
+        operation: authOperation("GET", path, "safe"),
+        path
+      });
+    },
+    async rotate(input) {
+      const path = `${credentialsPath(input.workspaceId, input.principalId)}/${encodeURIComponent(input.credentialId)}/rotate`;
+      return transport.execute({
+        body: JSON.stringify({
+          expiresAt: input.expiresAt ?? null,
+          expectedVersion: input.expectedVersion,
+          overlapSeconds: input.overlapSeconds
+        }),
+        correlationId: input.correlationId,
+        headers: {
+          "idempotency-key": input.idempotencyKey,
+          "if-match": `"${input.expectedVersion}"`
+        },
+        operation: authOperation("POST", path, "unsafe"),
+        path
+      });
+    },
+    async revoke(input) {
+      const path = `${credentialsPath(input.workspaceId, input.principalId)}/${encodeURIComponent(input.credentialId)}/revoke`;
+      const response = await transport.execute({
+        body: JSON.stringify({ expectedVersion: input.expectedVersion }),
+        correlationId: input.correlationId,
+        operation: authOperation("POST", path, "unsafe"),
+        path
+      });
+      return "credential" in response ? response.credential : response;
+    }
+  };
+}
+
 // src/workspaces.ts
 function createWorkspaceClient(transport) {
   return {
@@ -1053,7 +1458,7 @@ function createWorkspaceClient(transport) {
       const body = await transport.execute({
         body: JSON.stringify({
           name: input.name,
-          termsAccepted: input.termsAccepted
+          ...input.termsAccepted === true ? { termsAccepted: true } : {}
         }),
         correlationId: input.correlationId,
         headers: { "idempotency-key": input.idempotencyKey },
@@ -1070,6 +1475,15 @@ function createWorkspaceClient(transport) {
         path
       });
       return body.workspace;
+    },
+    async getCapabilities(input) {
+      const path = inspectWorkspaceCapabilitiesOperation.path.replace("{workspaceId}", encodeURIComponent(input.workspaceId));
+      const body = await transport.execute({
+        correlationId: input.correlationId,
+        operation: inspectWorkspaceCapabilitiesOperation,
+        path
+      });
+      return body.capabilities;
     },
     async list(input) {
       const query = new URLSearchParams;
@@ -1476,8 +1890,8 @@ function createCommerceClient(transport) {
 }
 
 // src/billing.ts
-function workspacePath(operation, workspaceId) {
-  return operation.path.replace("{workspaceId}", encodeURIComponent(workspaceId));
+function workspacePath(operation3, workspaceId) {
+  return operation3.path.replace("{workspaceId}", encodeURIComponent(workspaceId));
 }
 function createBillingClient(transport) {
   return {
@@ -1565,11 +1979,17 @@ function createAuthlessServerClient(options) {
     apps: createAppClient(transport),
     billing: createBillingClient(transport),
     commerce: createCommerceClient(transport),
-    workspaces: createWorkspaceClient(transport)
+    workspaces: createWorkspaceClient(transport),
+    policies: createPolicyClient(transport),
+    workspaceCredentials: createWorkspaceCredentialClient(transport),
+    onlineSessions: createOnlineSessionClient(transport)
   };
 }
 export {
+  createWorkspaceCredentialClient,
   createWorkspaceClient,
+  createPolicyClient,
+  createOnlineSessionClient,
   createCommerceClient,
   createBulkAccessClient,
   createBillingClient,

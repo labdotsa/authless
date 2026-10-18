@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "kind": "authless-public-developer-repo-export",
-  "sourceRevision": "42397992596bdcc9963a65505d8ebadd559a3804",
+  "sourceRevision": "8e615279d787048e6dbad5122f339d820cdc909d",
   "publicRepositoryUrl": "https://github.com/labdotsa/authless/tree/master",
   "licensePolicy": "MIT; Copyright (c) 2026 LabDotSA.",
   "excluded": [
@@ -49,11 +49,11 @@
     },
     {
       "path": "packages/cli/dist/cli.js",
-      "bytes": 129195
+      "bytes": 159730
     },
     {
       "path": "packages/server/README.md",
-      "bytes": 3117
+      "bytes": 3258
     },
     {
       "path": "packages/server/package.json",
@@ -65,7 +65,11 @@
     },
     {
       "path": "packages/server/dist/generated.d.ts",
-      "bytes": 63715
+      "bytes": 78258
+    },
+    {
+      "path": "packages/server/dist/policies.d.ts",
+      "bytes": 1617
     },
     {
       "path": "packages/server/dist/commerce.d.ts",
@@ -77,7 +81,11 @@
     },
     {
       "path": "packages/server/dist/index.js",
-      "bytes": 55928
+      "bytes": 72925
+    },
+    {
+      "path": "packages/server/dist/online-sessions.d.ts",
+      "bytes": 825
     },
     {
       "path": "packages/server/dist/memberships.d.ts",
@@ -85,11 +93,15 @@
     },
     {
       "path": "packages/server/dist/workspaces.d.ts",
-      "bytes": 792
+      "bytes": 978
+    },
+    {
+      "path": "packages/server/dist/workspace-credentials.d.ts",
+      "bytes": 3362
     },
     {
       "path": "packages/server/dist/transport.d.ts",
-      "bytes": 2651
+      "bytes": 3018
     },
     {
       "path": "packages/server/dist/billing.d.ts",
@@ -97,11 +109,11 @@
     },
     {
       "path": "packages/server/dist/index.d.ts",
-      "bytes": 6010
+      "bytes": 6995
     },
     {
       "path": "packages/server/dist/apps.d.ts",
-      "bytes": 866
+      "bytes": 2108
     },
     {
       "path": "packages/server/dist/browser.js",
@@ -273,7 +285,7 @@
     },
     {
       "path": "examples/sveltekit-hosted-sign-in/vendor/browser/index.ts",
-      "bytes": 4660
+      "bytes": 5943
     },
     {
       "path": "examples/sveltekit-hosted-sign-in/vendor/sveltekit/package.json",
@@ -281,11 +293,11 @@
     },
     {
       "path": "examples/sveltekit-hosted-sign-in/vendor/sveltekit/index.ts",
-      "bytes": 12377
+      "bytes": 14090
     },
     {
       "path": "schemas/authless.openapi.json",
-      "bytes": 385149
+      "bytes": 563073
     },
     {
       "path": "docs/README.md",
@@ -309,7 +321,7 @@
     },
     {
       "path": "docs/machine-readable/rest-reference.json",
-      "bytes": 297126
+      "bytes": 372173
     },
     {
       "path": "docs/machine-readable/developer-documentation.json",
@@ -317,15 +329,15 @@
     },
     {
       "path": "docs/machine-readable/machine-docs.json",
-      "bytes": 15885
+      "bytes": 15892
     },
     {
       "path": "docs/machine-readable/llms-full.txt",
-      "bytes": 674022
+      "bytes": 773731
     },
     {
       "path": "docs/machine-readable/rest-management-guide.json",
-      "bytes": 13660
+      "bytes": 13779
     },
     {
       "path": "docs/machine-readable/crawler-policy.json",
@@ -333,15 +345,15 @@
     },
     {
       "path": "docs/machine-readable/llms-full.ar.txt",
-      "bytes": 684074
+      "bytes": 783783
     },
     {
       "path": "docs/machine-readable/webhook-catalog.json",
-      "bytes": 6172
+      "bytes": 6412
     },
     {
       "path": "docs/machine-readable/openapi.json",
-      "bytes": 385149
+      "bytes": 289872
     },
     {
       "path": "docs/markdown/en/trust.md",
@@ -369,7 +381,7 @@
     },
     {
       "path": "docs/markdown/en/changes.md",
-      "bytes": 154522
+      "bytes": 178825
     },
     {
       "path": "docs/markdown/en/agents.md",
@@ -389,7 +401,7 @@
     },
     {
       "path": "docs/markdown/en/reference/rest.md",
-      "bytes": 298939
+      "bytes": 373986
     },
     {
       "path": "docs/markdown/ar/trust.md",
@@ -417,7 +429,7 @@
     },
     {
       "path": "docs/markdown/ar/changes.md",
-      "bytes": 154975
+      "bytes": 179278
     },
     {
       "path": "docs/markdown/ar/agents.md",
@@ -437,7 +449,7 @@
     },
     {
       "path": "docs/markdown/ar/reference/rest.md",
-      "bytes": 299600
+      "bytes": 374647
     },
     {
       "path": "sdk-source/browser/src/side-effects.ts",
@@ -445,7 +457,7 @@
     },
     {
       "path": "sdk-source/browser/src/failures.ts",
-      "bytes": 3011
+      "bytes": 2942
     },
     {
       "path": "sdk-source/browser/src/authorization.ts",
@@ -465,7 +477,7 @@
     },
     {
       "path": "sdk-source/sveltekit/src/session.ts",
-      "bytes": 1821
+      "bytes": 7122
     },
     {
       "path": "sdk-source/sveltekit/src/webhook.ts",
@@ -473,7 +485,7 @@
     },
     {
       "path": "sdk-source/sveltekit/src/index.ts",
-      "bytes": 394
+      "bytes": 456
     },
     {
       "path": "sdk-source/sveltekit/src/oidc.ts",
@@ -481,7 +493,7 @@
     },
     {
       "path": "docs-mcp/corpus.generated.json",
-      "bytes": 2016438
+      "bytes": 2358351
     },
     {
       "path": "docs-mcp/docs-mcp.config.json",
@@ -493,7 +505,7 @@
     },
     {
       "path": "docs-mcp/stdio.js",
-      "bytes": 1911330
+      "bytes": 2230877
     },
     {
       "path": "docs-mcp/package.json",

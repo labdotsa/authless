@@ -11,7 +11,7 @@ var corpus_generated_default = {
   generatedAt: "2026-10-09",
   manifest: {
     canonical: "https://docs.authle.ss/machine-docs.json",
-    digest: "2981f32334221c7c2a860ff20616c661fbcc4d48aefe6e8385e85d41d37eb2e8",
+    digest: "514bdf871a132608b8d28a2d35cacaad3d692379ca9a32219b4bafa9dd98e391",
     authority: "read-only-public-documentation",
     exclusions: [
       "authenticated-content",
@@ -4386,7 +4386,7 @@ The following checked projection is shared with the human-rendered guide and pre
     "rules": [
       "Create a server-only app credential restricted to the single test app; a platform session is broader and is not required.",
       "Load it from an approved secret store into AUTHLESS_APP_CREDENTIAL; never expose it to browser code, source, logs, screenshots, tickets, or chat.",
-      "Rotate it before expiry or immediately after suspected exposure, revoke it after the exercise, and redact Authorization, Cookie, and environment values."
+      "Workspace keys do not expire by default. Rotate on a planned schedule or immediately after suspected exposure, revoke them after the exercise, and redact Authorization, Cookie, and environment values. Set an explicit expiry only when the automation needs a temporary key."
     ]
   },
   "operationIds": [
@@ -4540,7 +4540,7 @@ Source attribution: Developer documentation (https://docs.authle.ss/build/rest).
       title: "Manage app access with the REST API",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "a5e9f03cb389cec21c3e799ae82fce15327594bf599fee3882c19252e29f6906"
+      contentDigest: "e54bad34b894c98452c3c85c941afe7d1d8b788257edae52a29a9face2d0603d"
     },
     {
       canonical: "https://docs.authle.ss/build/rest?lang=ar",
@@ -4605,7 +4605,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
     "rules": [
       "Create a server-only app credential restricted to the single test app; a platform session is broader and is not required.",
       "Load it from an approved secret store into AUTHLESS_APP_CREDENTIAL; never expose it to browser code, source, logs, screenshots, tickets, or chat.",
-      "Rotate it before expiry or immediately after suspected exposure, revoke it after the exercise, and redact Authorization, Cookie, and environment values."
+      "Workspace keys do not expire by default. Rotate on a planned schedule or immediately after suspected exposure, revoke them after the exercise, and redact Authorization, Cookie, and environment values. Set an explicit expiry only when the automation needs a temporary key."
     ]
   },
   "operationIds": [
@@ -4759,7 +4759,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       title: "إدارة وصول التطبيق عبر واجهة REST",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "ab2dfe42c94802201a9459fae382c3e9af6109f94e8f95194696b9a7830ee28b"
+      contentDigest: "8ee34a1a168624cb01316ef3e9c98d754303dd3110940d323312f81b2977ffc3"
     },
     {
       canonical: "https://docs.authle.ss/build/webhooks",
@@ -4929,6 +4929,12 @@ The following checked projection is shared with the human-rendered guide and pre
       "schemaVersion": "1.0",
       "resource": "identity claim",
       "payloadBoundary": "Opaque person/claim references and resource version; sensitive claim values are omitted."
+    },
+    {
+      "name": "policy.activated",
+      "schemaVersion": "1.0",
+      "resource": "authentication policy",
+      "payloadBoundary": "App/environment IDs, old and new policy revisions, and impact summary; no claims or secrets."
     }
   ],
   "ordering": {
@@ -4991,7 +4997,7 @@ Source attribution: Developer documentation (https://docs.authle.ss/build/webhoo
       title: "Receive signed webhooks",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "86d72ac404632ca3d387ccb1985fdba449ac899f3a0a3469228384b83827e263"
+      contentDigest: "177c0c2182b1b01f7678d1aabed73450d07b5edfe41b99b5bc6918063edfb907"
     },
     {
       canonical: "https://docs.authle.ss/build/webhooks?lang=ar",
@@ -5161,6 +5167,12 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       "schemaVersion": "1.0",
       "resource": "identity claim",
       "payloadBoundary": "Opaque person/claim references and resource version; sensitive claim values are omitted."
+    },
+    {
+      "name": "policy.activated",
+      "schemaVersion": "1.0",
+      "resource": "authentication policy",
+      "payloadBoundary": "App/environment IDs, old and new policy revisions, and impact summary; no claims or secrets."
     }
   ],
   "ordering": {
@@ -5223,7 +5235,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       title: "استقبل Webhooks موقّعة",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "78afe8e488a442c7509f528aa1b0537a17bab80c1e8ccb31dab4cad51a860b0a"
+      contentDigest: "e03eb90cd2db861b6fa327c677b96748e8f19205a45a4f857311af15fc81a62f"
     },
     {
       canonical: "https://docs.authle.ss/test",
@@ -11053,7 +11065,7 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         },
         {
-          "description": "Recent authentication is required",
+          "description": "The authenticated session lacks permission for this operation",
           "status": 403,
           "success": false
         },
@@ -11165,7 +11177,7 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         },
         {
-          "description": "Recent authentication or current-session reauthentication is required",
+          "description": "The authenticated session is not authorized for this operation",
           "status": 403,
           "success": false
         },
@@ -11247,7 +11259,7 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         },
         {
-          "description": "Recent authentication or current-session reauthentication is required",
+          "description": "The authenticated session is not authorized for this operation",
           "status": 403,
           "success": false
         },
@@ -11365,7 +11377,7 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         },
         {
-          "description": "Recent authentication is required",
+          "description": "The authenticated session lacks permission for this operation",
           "status": 403,
           "success": false
         },
@@ -11439,7 +11451,7 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         },
         {
-          "description": "Recent authentication is required",
+          "description": "The authenticated session lacks permission for this operation",
           "status": 403,
           "success": false
         },
@@ -11514,7 +11526,7 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         },
         {
-          "description": "Recent authentication is required",
+          "description": "The authenticated session lacks permission for this operation",
           "status": 403,
           "success": false
         },
@@ -11624,7 +11636,7 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         },
         {
-          "description": "Recent authentication is required",
+          "description": "The authenticated session lacks permission for this operation",
           "status": 403,
           "success": false
         },
@@ -11802,14 +11814,13 @@ The following checked projection is shared with the human-rendered guide and pre
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/CreateWorkspaceRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"name\\":\\"Example workspace\\",\\"termsAccepted\\":true}' 'https://api.authle.ss/workspaces'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"name\\":\\"Example workspace\\"}' 'https://api.authle.ss/workspaces'",
       "exampleParameters": {
         "idempotency-key": "request-example-001",
         "x-correlation-id": "request_example_001"
       },
       "exampleRequestBody": {
-        "name": "Example workspace",
-        "termsAccepted": true
+        "name": "Example workspace"
       },
       "method": "POST",
       "operationId": "createWorkspace",
@@ -11830,7 +11841,7 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         },
         {
-          "description": "Recent authentication is required",
+          "description": "The authenticated session lacks permission for this operation",
           "status": 403,
           "success": false
         },
@@ -11868,9 +11879,8 @@ The following checked projection is shared with the human-rendered guide and pre
           "validation": "minLength 1, maxLength 80"
         },
         {
-          "example": true,
           "name": "termsAccepted",
-          "required": true,
+          "required": false,
           "type": "boolean",
           "validation": "—"
         }
@@ -11940,6 +11950,121 @@ The following checked projection is shared with the human-rendered guide and pre
     {
       "authority": [
         "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
+      "constraints": [
+        "path workspaceId (required): string, minLength 3, maxLength 128",
+        "path delegationId (required): string, minLength 3, maxLength 128",
+        "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
+        "header x-correlation-id (optional): string, minLength 8, maxLength 128",
+        "JSON request body (required): #/components/schemas/AgentDelegationKeyRotationPreviewRequest"
+      ],
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"publicJwks\\":{}}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/agent-delegations/%7BdelegationId%7D/key-rotation-previews'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "delegationId": "{delegationId}",
+        "x-correlation-id": "request_example_001"
+      },
+      "exampleRequestBody": {
+        "publicJwks": {}
+      },
+      "method": "POST",
+      "operationId": "previewAgentDelegationKeyRotation",
+      "outcomes": [
+        {
+          "description": "Key rotation preview created",
+          "status": 201,
+          "success": true
+        },
+        {
+          "description": "The request is invalid",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "The session is not authenticated",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "The authenticated session lacks permission for this operation",
+          "status": 403,
+          "success": false
+        },
+        {
+          "description": "The delegation is unavailable",
+          "status": 404,
+          "success": false
+        },
+        {
+          "description": "A preview cannot be created in the current state",
+          "status": 409,
+          "success": false
+        },
+        {
+          "description": "The key version is stale",
+          "status": 412,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/agent-delegations/{delegationId}/key-rotation-previews",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{delegationId}",
+          "location": "path",
+          "name": "delegationId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "location": "header",
+          "name": "if-match",
+          "required": false,
+          "type": "string",
+          "validation": "pattern ^\\"[1-9]\\\\d*\\"$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": {},
+          "name": "publicJwks",
+          "required": true,
+          "type": "object",
+          "validation": "—"
+        },
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/AgentDelegationKeyRotationPreviewRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Preview an agent delegation key rotation"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
       ],
       "constraints": [
         "path workspaceId (required): string, minLength 3, maxLength 128",
@@ -12015,7 +12140,8 @@ The following checked projection is shared with the human-rendered guide and pre
     },
     {
       "authority": [
-        "Server-side platform session. Never expose this value to browser bundles or logs."
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
       ],
       "constraints": [
         "path workspaceId (required): string, minLength 3, maxLength 128",
@@ -12121,7 +12247,139 @@ The following checked projection is shared with the human-rendered guide and pre
     },
     {
       "authority": [
-        "Server-side platform session. Never expose this value to browser bundles or logs."
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "path workspaceId (required): string, minLength 3, maxLength 128",
+        "path appId (required): string",
+        "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
+        "header x-correlation-id (optional): string, minLength 8, maxLength 128",
+        "JSON request body (required): #/components/schemas/UpdateAppMetadataRequest"
+      ],
+      "example": "curl --request PATCH -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"name\\":\\"Example\\",\\"description\\":\\"{description}\\",\\"ownerContactEmail\\":\\"person@example.test\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "x-correlation-id": "request_example_001"
+      },
+      "exampleRequestBody": {
+        "name": "Example",
+        "description": "{description}",
+        "ownerContactEmail": "person@example.test"
+      },
+      "method": "PATCH",
+      "operationId": "updateAppMetadata",
+      "outcomes": [
+        {
+          "description": "Updated app metadata and version",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "The request or resource is invalid",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "The request or resource is invalid",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "The request or resource is invalid",
+          "status": 403,
+          "success": false
+        },
+        {
+          "description": "The request or resource is invalid",
+          "status": 404,
+          "success": false
+        },
+        {
+          "description": "The request or resource is invalid",
+          "status": 412,
+          "success": false
+        },
+        {
+          "description": "The request or resource is invalid",
+          "status": 422,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "location": "header",
+          "name": "if-match",
+          "required": false,
+          "type": "string",
+          "validation": "pattern ^\\"[1-9]\\\\d*\\"$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "Example",
+          "name": "name",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1, maxLength 80"
+        },
+        {
+          "example": "{description}",
+          "name": "description",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1, maxLength 500"
+        },
+        {
+          "example": "person@example.test",
+          "name": "ownerContactEmail",
+          "required": true,
+          "type": "string",
+          "validation": "maxLength 254, format email"
+        },
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/UpdateAppMetadataRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Update app metadata"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
       ],
       "constraints": [
         "path workspaceId (required): string, minLength 3, maxLength 128",
@@ -12193,6 +12451,125 @@ The following checked projection is shared with the human-rendered guide and pre
       "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "Read one versioned app environment"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
+        "header x-correlation-id (optional): string, minLength 8, maxLength 128",
+        "JSON request body (required): #/components/schemas/ChangeAppEnvironmentStatusRequest"
+      ],
+      "example": "curl --request PATCH -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '\\"{value}\\"' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "x-correlation-id": "request_example_001"
+      },
+      "exampleRequestBody": "{value}",
+      "method": "PATCH",
+      "operationId": "changeAppEnvironmentStatus",
+      "outcomes": [
+        {
+          "description": "The environment was updated",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "The request is invalid",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Authentication is unavailable",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Missing app:activate returns insufficient_scope with requiredScope. Suspended commercial operations return commercial_dunning_suspended.",
+          "status": 403,
+          "success": false
+        },
+        {
+          "description": "The resource is unavailable",
+          "status": 404,
+          "success": false
+        },
+        {
+          "description": "The environment is retired (environment_retired), or production app capacity is exhausted (production_app_allowance_exhausted).",
+          "status": 409,
+          "success": false
+        },
+        {
+          "description": "The environment version is stale",
+          "status": 412,
+          "success": false
+        },
+        {
+          "description": "Confirmation, lifecycle, active-policy, HTTPS registration, or OIDC-profile readiness failed: confirmation_required, invalid_lifecycle_transition, policy_required, invalid_endpoints, or invalid_oidc_profile.",
+          "status": 422,
+          "success": false
+        },
+        {
+          "description": "A current environment version precondition is required.",
+          "status": 428,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "location": "header",
+          "name": "if-match",
+          "required": false,
+          "type": "string",
+          "validation": "pattern ^\\"[1-9]\\\\d*\\"$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [],
+      "requestSchema": {
+        "$ref": "#/components/schemas/ChangeAppEnvironmentStatusRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Change environment status"
     },
     {
       "authority": [
@@ -12425,18 +12802,17 @@ The following checked projection is shared with the human-rendered guide and pre
         "path appId (required): string",
         "path environment (required): string, one of production | test",
         "path credentialId (required): string",
-        "header if-match (required): string, pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$",
+        "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RevokeIntegrationCredentialRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/credentials/%7BcredentialId%7D/revoke'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/credentials/%7BcredentialId%7D/revoke'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
         "environment": "production",
         "credentialId": "{credentialId}",
-        "if-match": "\\"1\\"",
         "idempotency-key": "request-example-001",
         "x-correlation-id": "request_example_001"
       },
@@ -12520,12 +12896,11 @@ The following checked projection is shared with the human-rendered guide and pre
           "validation": "—"
         },
         {
-          "example": "\\"1\\"",
           "location": "header",
           "name": "if-match",
-          "required": true,
+          "required": false,
           "type": "string",
-          "validation": "pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$"
+          "validation": "pattern ^\\"[1-9]\\\\d*\\"$"
         },
         {
           "example": "request-example-001",
@@ -12556,6 +12931,12 @@ The following checked projection is shared with the human-rendered guide and pre
           "required": false,
           "type": "boolean",
           "validation": "—"
+        },
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1"
         }
       ],
       "requestSchema": {
@@ -12573,18 +12954,17 @@ The following checked projection is shared with the human-rendered guide and pre
         "path appId (required): string",
         "path environment (required): string, one of production | test",
         "path credentialId (required): string",
-        "header if-match (required): string, pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$",
+        "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RotateIntegrationCredentialRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"overlapSeconds\\":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/credentials/%7BcredentialId%7D/rotate'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"overlapSeconds\\":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/credentials/%7BcredentialId%7D/rotate'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
         "environment": "production",
         "credentialId": "{credentialId}",
-        "if-match": "\\"1\\"",
         "idempotency-key": "request-example-001",
         "x-correlation-id": "request_example_001"
       },
@@ -12670,12 +13050,11 @@ The following checked projection is shared with the human-rendered guide and pre
           "validation": "—"
         },
         {
-          "example": "\\"1\\"",
           "location": "header",
           "name": "if-match",
-          "required": true,
+          "required": false,
           "type": "string",
-          "validation": "pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$"
+          "validation": "pattern ^\\"[1-9]\\\\d*\\"$"
         },
         {
           "example": "request-example-001",
@@ -12707,6 +13086,12 @@ The following checked projection is shared with the human-rendered guide and pre
           "required": true,
           "type": "number",
           "validation": "—"
+        },
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1"
         }
       ],
       "requestSchema": {
@@ -12714,6 +13099,1115 @@ The following checked projection is shared with the human-rendered guide and pre
       },
       "retrySafety": "unsafe",
       "summary": "Rotate an app-environment credential with bounded secret overlap"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
+        "header x-correlation-id (optional): string, minLength 8, maxLength 128",
+        "JSON request body (required): #/components/schemas/EndpointSetMutationRequest"
+      ],
+      "example": "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"postLogoutUris\\":[],\\"redirectUris\\":[],\\"trustedOrigins\\":[]}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/endpoints'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "x-correlation-id": "request_example_001"
+      },
+      "exampleRequestBody": {
+        "postLogoutUris": [],
+        "redirectUris": [],
+        "trustedOrigins": []
+      },
+      "method": "PUT",
+      "operationId": "replaceAppEnvironmentEndpoints",
+      "outcomes": [
+        {
+          "description": "The environment was updated",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "The request is invalid",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Authentication is unavailable",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "The caller lacks the required authority",
+          "status": 403,
+          "success": false
+        },
+        {
+          "description": "The resource is unavailable",
+          "status": 404,
+          "success": false
+        },
+        {
+          "description": "The environment is unavailable",
+          "status": 409,
+          "success": false
+        },
+        {
+          "description": "The environment version is stale",
+          "status": 412,
+          "success": false
+        },
+        {
+          "description": "The configuration is invalid",
+          "status": 422,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/endpoints",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "location": "header",
+          "name": "if-match",
+          "required": false,
+          "type": "string",
+          "validation": "pattern ^\\"[1-9]\\\\d*\\"$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": [],
+          "name": "postLogoutUris",
+          "required": true,
+          "type": "array",
+          "validation": "—"
+        },
+        {
+          "example": [],
+          "name": "redirectUris",
+          "required": true,
+          "type": "array",
+          "validation": "—"
+        },
+        {
+          "example": [],
+          "name": "trustedOrigins",
+          "required": true,
+          "type": "array",
+          "validation": "—"
+        },
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/EndpointSetMutationRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Replace environment endpoints"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
+        "header x-correlation-id (optional): string, minLength 8, maxLength 128",
+        "JSON request body (required): #/components/schemas/OidcClientProfileMutationRequest"
+      ],
+      "example": "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"dpopBoundAccessTokens\\":true,\\"publicJwks\\":{\\"keys\\":[]},\\"refreshEligible\\":true,\\"tokenEndpointAuthMethod\\":\\"none\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/oidc-profile'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "x-correlation-id": "request_example_001"
+      },
+      "exampleRequestBody": {
+        "dpopBoundAccessTokens": true,
+        "publicJwks": {
+          "keys": []
+        },
+        "refreshEligible": true,
+        "tokenEndpointAuthMethod": "none"
+      },
+      "method": "PUT",
+      "operationId": "replaceAppEnvironmentOidcProfile",
+      "outcomes": [
+        {
+          "description": "The environment was updated",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "The request is invalid",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Authentication is unavailable",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "The caller lacks the required authority",
+          "status": 403,
+          "success": false
+        },
+        {
+          "description": "The resource is unavailable",
+          "status": 404,
+          "success": false
+        },
+        {
+          "description": "The environment is unavailable",
+          "status": 409,
+          "success": false
+        },
+        {
+          "description": "The environment version is stale",
+          "status": 412,
+          "success": false
+        },
+        {
+          "description": "The configuration is invalid",
+          "status": 422,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/oidc-profile",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "location": "header",
+          "name": "if-match",
+          "required": false,
+          "type": "string",
+          "validation": "pattern ^\\"[1-9]\\\\d*\\"$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "backchannelLogoutUri",
+          "required": false,
+          "type": "value",
+          "validation": "—"
+        },
+        {
+          "example": true,
+          "name": "dpopBoundAccessTokens",
+          "required": true,
+          "type": "boolean",
+          "validation": "—"
+        },
+        {
+          "name": "jwtAccessTokenResources",
+          "required": false,
+          "type": "array",
+          "validation": "—"
+        },
+        {
+          "example": {
+            "keys": []
+          },
+          "name": "publicJwks",
+          "required": true,
+          "type": "value",
+          "validation": "—"
+        },
+        {
+          "example": true,
+          "name": "refreshEligible",
+          "required": true,
+          "type": "boolean",
+          "validation": "—"
+        },
+        {
+          "example": "none",
+          "name": "tokenEndpointAuthMethod",
+          "required": true,
+          "type": "string",
+          "validation": "one of none | private_key_jwt"
+        },
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/OidcClientProfileMutationRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Replace environment OIDC profile"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production"
+      ],
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/policy'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test"
+      },
+      "method": "GET",
+      "operationId": "getAuthenticationPolicy",
+      "outcomes": [
+        {
+          "description": "The policy view",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "The request is invalid",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Authentication is unavailable",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "The caller lacks the required authority",
+          "status": 403,
+          "success": false
+        },
+        {
+          "description": "The resource is unavailable",
+          "status": 404,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/policy",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "Read the active policy and draft"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "header if-match (optional): string, pattern ^\\"(0|[1-9]\\\\d*)\\"$",
+        "header x-correlation-id (optional): string, minLength 8, maxLength 128",
+        "JSON request body (required): #/components/schemas/PolicyDefinitionRequest"
+      ],
+      "example": "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"definition\\":{\\"appIdentity\\":{\\"description\\":\\"{description}\\",\\"name\\":\\"Example\\",\\"ownerContactEmail\\":\\"person@example.test\\"},\\"consentPurpose\\":\\"{consentPurpose}\\",\\"correlation\\":{\\"boundary\\":\\"app\\",\\"essential\\":true,\\"purpose\\":\\"{purpose}\\"},\\"eligibleMethods\\":[\\"M-01\\"],\\"enrollmentMode\\":\\"administrator_approval\\",\\"recovery\\":{\\"verifiedEmailRequired\\":true},\\"requestedClaims\\":[],\\"session\\":{\\"absoluteSeconds\\":1,\\"idleSeconds\\":1}}}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/policy'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "x-correlation-id": "request_example_001"
+      },
+      "exampleRequestBody": {
+        "definition": {
+          "appIdentity": {
+            "description": "{description}",
+            "name": "Example",
+            "ownerContactEmail": "person@example.test"
+          },
+          "consentPurpose": "{consentPurpose}",
+          "correlation": {
+            "boundary": "app",
+            "essential": true,
+            "purpose": "{purpose}"
+          },
+          "eligibleMethods": [
+            "M-01"
+          ],
+          "enrollmentMode": "administrator_approval",
+          "recovery": {
+            "verifiedEmailRequired": true
+          },
+          "requestedClaims": [],
+          "session": {
+            "absoluteSeconds": 1,
+            "idleSeconds": 1
+          }
+        }
+      },
+      "method": "PUT",
+      "operationId": "saveAuthenticationPolicyDraft",
+      "outcomes": [
+        {
+          "description": "The policy view",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "The request is invalid",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Authentication is unavailable",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "The caller lacks the required authority",
+          "status": 403,
+          "success": false
+        },
+        {
+          "description": "The resource is unavailable",
+          "status": 404,
+          "success": false
+        },
+        {
+          "description": "The environment is unavailable",
+          "status": 409,
+          "success": false
+        },
+        {
+          "description": "The version is stale",
+          "status": 412,
+          "success": false
+        },
+        {
+          "description": "The policy is invalid",
+          "status": 422,
+          "success": false
+        },
+        {
+          "description": "A version precondition is required",
+          "status": 428,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/policy",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "location": "header",
+          "name": "if-match",
+          "required": false,
+          "type": "string",
+          "validation": "pattern ^\\"(0|[1-9]\\\\d*)\\"$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": {
+            "appIdentity": {
+              "description": "{description}",
+              "name": "Example",
+              "ownerContactEmail": "person@example.test"
+            },
+            "consentPurpose": "{consentPurpose}",
+            "correlation": {
+              "boundary": "app",
+              "essential": true,
+              "purpose": "{purpose}"
+            },
+            "eligibleMethods": [
+              "M-01"
+            ],
+            "enrollmentMode": "administrator_approval",
+            "recovery": {
+              "verifiedEmailRequired": true
+            },
+            "requestedClaims": [],
+            "session": {
+              "absoluteSeconds": 1,
+              "idleSeconds": 1
+            }
+          },
+          "name": "definition",
+          "required": true,
+          "type": "object",
+          "validation": "—"
+        },
+        {
+          "name": "expectedDraftVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 0"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/PolicyDefinitionRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Replace the policy draft"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "header if-match (optional): string, pattern ^\\"(0|[1-9]\\\\d*)\\"$",
+        "header x-correlation-id (optional): string, minLength 8, maxLength 128",
+        "JSON request body (required): #/components/schemas/ActivatePolicyRequest"
+      ],
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/policy/activate'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "x-correlation-id": "request_example_001"
+      },
+      "exampleRequestBody": {
+        "confirmed": true
+      },
+      "method": "POST",
+      "operationId": "activateAuthenticationPolicy",
+      "outcomes": [
+        {
+          "description": "The policy view",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "The request is invalid",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Authentication is unavailable",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "The caller lacks the required authority",
+          "status": 403,
+          "success": false
+        },
+        {
+          "description": "The resource is unavailable",
+          "status": 404,
+          "success": false
+        },
+        {
+          "description": "The environment is unavailable",
+          "status": 409,
+          "success": false
+        },
+        {
+          "description": "The version is stale",
+          "status": 412,
+          "success": false
+        },
+        {
+          "description": "The policy is invalid",
+          "status": 422,
+          "success": false
+        },
+        {
+          "description": "A version precondition is required",
+          "status": 428,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/policy/activate",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "location": "header",
+          "name": "if-match",
+          "required": false,
+          "type": "string",
+          "validation": "pattern ^\\"(0|[1-9]\\\\d*)\\"$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": true,
+          "name": "confirmed",
+          "required": true,
+          "type": "boolean",
+          "validation": "one of true"
+        },
+        {
+          "name": "expectedDraftVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 0"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/ActivatePolicyRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Publish the policy draft"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "query limit (optional): integer, min 1, max 100",
+        "query cursor (optional): integer, min 0"
+      ],
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/policy/history'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test"
+      },
+      "method": "GET",
+      "operationId": "listAuthenticationPolicyHistory",
+      "outcomes": [
+        {
+          "description": "A page of immutable revisions",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "The request is invalid",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Authentication is unavailable",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "The caller lacks the required authority",
+          "status": 403,
+          "success": false
+        },
+        {
+          "description": "The resource is unavailable",
+          "status": 404,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/policy/history",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "location": "query",
+          "name": "limit",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1, max 100"
+        },
+        {
+          "location": "query",
+          "name": "cursor",
+          "required": false,
+          "type": "integer",
+          "validation": "min 0"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "List immutable policy revisions"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path version (required): integer, min 1"
+      ],
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/policy/history/1'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "version": 1
+      },
+      "method": "GET",
+      "operationId": "getAuthenticationPolicyRevision",
+      "outcomes": [
+        {
+          "description": "The immutable revision",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "The request is invalid",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Authentication is unavailable",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "The caller lacks the required authority",
+          "status": 403,
+          "success": false
+        },
+        {
+          "description": "The resource is unavailable",
+          "status": 404,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/policy/history/{version}",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": 1,
+          "location": "path",
+          "name": "version",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "Read one immutable policy revision"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path version (required): integer, min 1",
+        "header if-match (optional): string, pattern ^\\"(0|[1-9]\\\\d*)\\"$",
+        "header x-correlation-id (optional): string, minLength 8, maxLength 128",
+        "JSON request body (required): #/components/schemas/RestorePolicyRequest"
+      ],
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/policy/history/1/restore'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "version": 1,
+        "x-correlation-id": "request_example_001"
+      },
+      "exampleRequestBody": {},
+      "method": "POST",
+      "operationId": "restoreAuthenticationPolicyRevision",
+      "outcomes": [
+        {
+          "description": "The policy view",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "The request is invalid",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Authentication is unavailable",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "The caller lacks the required authority",
+          "status": 403,
+          "success": false
+        },
+        {
+          "description": "The resource is unavailable",
+          "status": 404,
+          "success": false
+        },
+        {
+          "description": "The environment is unavailable",
+          "status": 409,
+          "success": false
+        },
+        {
+          "description": "The version is stale",
+          "status": 412,
+          "success": false
+        },
+        {
+          "description": "The policy is invalid",
+          "status": 422,
+          "success": false
+        },
+        {
+          "description": "A version precondition is required",
+          "status": 428,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/policy/history/{version}/restore",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": 1,
+          "location": "path",
+          "name": "version",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1"
+        },
+        {
+          "location": "header",
+          "name": "if-match",
+          "required": false,
+          "type": "string",
+          "validation": "pattern ^\\"(0|[1-9]\\\\d*)\\"$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "expectedDraftVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 0"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/RestorePolicyRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Restore a revision into the draft"
+    },
+    {
+      "authority": [
+        "Server-side credential scoped to one exact app environment. Never expose this value to browser bundles, logs, examples, or diagnostics."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "JSON request body (required): #/components/schemas/ValidateAppSessionRequest"
+      ],
+      "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'content-type: application/json' --data '{\\"sessionReference\\":\\"session_reference_example_01\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/sessions/validate'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test"
+      },
+      "exampleRequestBody": {
+        "sessionReference": "session_reference_example_01"
+      },
+      "method": "POST",
+      "operationId": "validateAppSessionOnline",
+      "outcomes": [
+        {
+          "description": "The current online session decision",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "The session reference is invalid",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "The app credential is unavailable",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "The app environment is unavailable",
+          "status": 404,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/sessions/validate",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "session_reference_example_01",
+          "name": "sessionReference",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 16, maxLength 16384, pattern ^[A-Za-z0-9_.-]+$"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/ValidateAppSessionRequest"
+      },
+      "retrySafety": "safe",
+      "summary": "Validate an app session against the current policy"
     },
     {
       "authority": [
@@ -13187,18 +14681,17 @@ The following checked projection is shared with the human-rendered guide and pre
         "path appId (required): string",
         "path environment (required): string, one of production | test",
         "path webhookId (required): string",
-        "header if-match (required): string, pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$",
+        "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/DisableIntegrationWebhookRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/disable'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/disable'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
         "environment": "production",
         "webhookId": "{webhookId}",
-        "if-match": "\\"1\\"",
         "idempotency-key": "request-example-001",
         "x-correlation-id": "request_example_001"
       },
@@ -13282,12 +14775,11 @@ The following checked projection is shared with the human-rendered guide and pre
           "validation": "—"
         },
         {
-          "example": "\\"1\\"",
           "location": "header",
           "name": "if-match",
-          "required": true,
+          "required": false,
           "type": "string",
-          "validation": "pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$"
+          "validation": "pattern ^\\"[1-9]\\\\d*\\"$"
         },
         {
           "example": "request-example-001",
@@ -13312,6 +14804,12 @@ The following checked projection is shared with the human-rendered guide and pre
           "required": false,
           "type": "boolean",
           "validation": "—"
+        },
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1"
         }
       ],
       "requestSchema": {
@@ -13329,18 +14827,17 @@ The following checked projection is shared with the human-rendered guide and pre
         "path appId (required): string",
         "path environment (required): string, one of production | test",
         "path webhookId (required): string",
-        "header if-match (required): string, pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$",
+        "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RotateIntegrationWebhookSecretRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"overlapSeconds\\":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/rotate'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"overlapSeconds\\":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/rotate'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
         "environment": "production",
         "webhookId": "{webhookId}",
-        "if-match": "\\"1\\"",
         "idempotency-key": "request-example-001",
         "x-correlation-id": "request_example_001"
       },
@@ -13426,12 +14923,11 @@ The following checked projection is shared with the human-rendered guide and pre
           "validation": "—"
         },
         {
-          "example": "\\"1\\"",
           "location": "header",
           "name": "if-match",
-          "required": true,
+          "required": false,
           "type": "string",
-          "validation": "pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$"
+          "validation": "pattern ^\\"[1-9]\\\\d*\\"$"
         },
         {
           "example": "request-example-001",
@@ -13463,6 +14959,12 @@ The following checked projection is shared with the human-rendered guide and pre
           "required": true,
           "type": "number",
           "validation": "—"
+        },
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1"
         }
       ],
       "requestSchema": {
@@ -13480,18 +14982,17 @@ The following checked projection is shared with the human-rendered guide and pre
         "path appId (required): string",
         "path environment (required): string, one of production | test",
         "path webhookId (required): string",
-        "header if-match (required): string, pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$",
+        "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/ReplaceIntegrationWebhookSubscriptionsRequest"
       ],
-      "example": "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"subscriptions\\":[]}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/subscriptions'",
+      "example": "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"subscriptions\\":[]}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/subscriptions'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
         "environment": "production",
         "webhookId": "{webhookId}",
-        "if-match": "\\"1\\"",
         "idempotency-key": "request-example-001",
         "x-correlation-id": "request_example_001"
       },
@@ -13577,12 +15078,11 @@ The following checked projection is shared with the human-rendered guide and pre
           "validation": "—"
         },
         {
-          "example": "\\"1\\"",
           "location": "header",
           "name": "if-match",
-          "required": true,
+          "required": false,
           "type": "string",
-          "validation": "pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$"
+          "validation": "pattern ^\\"[1-9]\\\\d*\\"$"
         },
         {
           "example": "request-example-001",
@@ -13614,6 +15114,12 @@ The following checked projection is shared with the human-rendered guide and pre
           "required": true,
           "type": "array",
           "validation": "—"
+        },
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1"
         }
       ],
       "requestSchema": {
@@ -13832,17 +15338,16 @@ The following checked projection is shared with the human-rendered guide and pre
         "path workspaceId (required): string",
         "path appId (required): string",
         "path operationId (required): string",
-        "header if-match (required): string, pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$",
+        "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/ConfirmBulkAccessRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/operations/%7BoperationId%7D/cancellation'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/operations/%7BoperationId%7D/cancellation'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
         "operationId": "{operationId}",
-        "if-match": "\\"1\\"",
         "idempotency-key": "request-example-001",
         "x-correlation-id": "request_example_001"
       },
@@ -13925,12 +15430,11 @@ The following checked projection is shared with the human-rendered guide and pre
           "validation": "—"
         },
         {
-          "example": "\\"1\\"",
           "location": "header",
           "name": "if-match",
-          "required": true,
+          "required": false,
           "type": "string",
-          "validation": "pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$"
+          "validation": "pattern ^\\"[1-9]\\\\d*\\"$"
         },
         {
           "example": "request-example-001",
@@ -13956,6 +15460,12 @@ The following checked projection is shared with the human-rendered guide and pre
           "required": true,
           "type": "boolean",
           "validation": "—"
+        },
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1"
         }
       ],
       "requestSchema": {
@@ -15948,7 +17458,7 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         },
         {
-          "description": "Recent authentication is required",
+          "description": "The authenticated session lacks permission for this operation",
           "status": 403,
           "success": false
         }
@@ -16054,7 +17564,7 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         },
         {
-          "description": "Recent authentication is required",
+          "description": "The authenticated session lacks permission for this operation",
           "status": 403,
           "success": false
         },
@@ -16174,7 +17684,7 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         },
         {
-          "description": "Recent authentication is required",
+          "description": "The authenticated session lacks permission for this operation",
           "status": 403,
           "success": false
         },
@@ -16313,17 +17823,16 @@ The following checked projection is shared with the human-rendered guide and pre
         "path workspaceId (required): string, minLength 3, maxLength 128",
         "path appId (required): string, minLength 3, maxLength 128",
         "path membershipId (required): string, minLength 3, maxLength 128",
-        "header if-match (required): string, pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$",
+        "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/GrantAppEntitlementRequest"
       ],
-      "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"key\\":\\"{key}\\",\\"source\\":\\"{source}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/entitlements'",
+      "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"key\\":\\"{key}\\",\\"source\\":\\"{source}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/entitlements'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
         "membershipId": "{membershipId}",
-        "if-match": "\\"1\\"",
         "idempotency-key": "request-example-001",
         "x-correlation-id": "request_example_001"
       },
@@ -16356,7 +17865,7 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         },
         {
-          "description": "Recent authentication is required",
+          "description": "The authenticated session lacks permission for this operation",
           "status": 403,
           "success": false
         },
@@ -16398,12 +17907,11 @@ The following checked projection is shared with the human-rendered guide and pre
           "validation": "minLength 3, maxLength 128"
         },
         {
-          "example": "\\"1\\"",
           "location": "header",
           "name": "if-match",
-          "required": true,
+          "required": false,
           "type": "string",
-          "validation": "pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$"
+          "validation": "pattern ^\\"[1-9]\\\\d*\\"$"
         },
         {
           "example": "request-example-001",
@@ -16449,6 +17957,12 @@ The following checked projection is shared with the human-rendered guide and pre
           "required": true,
           "type": "string",
           "validation": "maxLength 200"
+        },
+        {
+          "name": "expectedDefinitionVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1"
         }
       ],
       "requestSchema": {
@@ -16467,18 +17981,17 @@ The following checked projection is shared with the human-rendered guide and pre
         "path appId (required): string, minLength 3, maxLength 128",
         "path membershipId (required): string, minLength 3, maxLength 128",
         "path grantId (required): string, minLength 3, maxLength 128",
-        "header if-match (required): string, pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$",
+        "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RevokeAppEntitlementRequest"
       ],
-      "example": "curl --request DELETE -H 'authorization: Bearer {app_credential}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/entitlements/%7BgrantId%7D'",
+      "example": "curl --request DELETE -H 'authorization: Bearer {app_credential}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/entitlements/%7BgrantId%7D'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
         "membershipId": "{membershipId}",
         "grantId": "{grantId}",
-        "if-match": "\\"1\\"",
         "idempotency-key": "request-example-001",
         "x-correlation-id": "request_example_001"
       },
@@ -16504,7 +18017,7 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         },
         {
-          "description": "Recent authentication is required",
+          "description": "The authenticated session lacks permission for this operation",
           "status": 403,
           "success": false
         },
@@ -16569,12 +18082,11 @@ The following checked projection is shared with the human-rendered guide and pre
           "validation": "minLength 3, maxLength 128"
         },
         {
-          "example": "\\"1\\"",
           "location": "header",
           "name": "if-match",
-          "required": true,
+          "required": false,
           "type": "string",
-          "validation": "pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$"
+          "validation": "pattern ^\\"[1-9]\\\\d*\\"$"
         },
         {
           "example": "request-example-001",
@@ -16600,6 +18112,12 @@ The following checked projection is shared with the human-rendered guide and pre
           "required": true,
           "type": "boolean",
           "validation": "—"
+        },
+        {
+          "name": "expectedGrantVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1"
         }
       ],
       "requestSchema": {
@@ -16617,17 +18135,16 @@ The following checked projection is shared with the human-rendered guide and pre
         "path workspaceId (required): string, minLength 3, maxLength 128",
         "path appId (required): string, minLength 3, maxLength 128",
         "path membershipId (required): string, minLength 3, maxLength 128",
-        "header if-match (required): string, pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$",
+        "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/ChangeAppMembershipStatusRequest"
       ],
-      "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"action\\":\\"activate\\",\\"confirmed\\":true,\\"reason\\":\\"access_ended\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/lifecycle'",
+      "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"action\\":\\"activate\\",\\"confirmed\\":true,\\"reason\\":\\"access_ended\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/lifecycle'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
         "membershipId": "{membershipId}",
-        "if-match": "\\"1\\"",
         "idempotency-key": "request-example-001",
         "x-correlation-id": "request_example_001"
       },
@@ -16655,7 +18172,7 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         },
         {
-          "description": "Recent authentication is required",
+          "description": "The authenticated session lacks permission for this operation",
           "status": 403,
           "success": false
         },
@@ -16712,12 +18229,11 @@ The following checked projection is shared with the human-rendered guide and pre
           "validation": "minLength 3, maxLength 128"
         },
         {
-          "example": "\\"1\\"",
           "location": "header",
           "name": "if-match",
-          "required": true,
+          "required": false,
           "type": "string",
-          "validation": "pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$"
+          "validation": "pattern ^\\"[1-9]\\\\d*\\"$"
         },
         {
           "example": "request-example-001",
@@ -16757,6 +18273,12 @@ The following checked projection is shared with the human-rendered guide and pre
           "required": true,
           "type": "string",
           "validation": "one of access_ended | administrator_action | approval_granted | data_retention_complete | policy_violation | security_review"
+        },
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1"
         }
       ],
       "requestSchema": {
@@ -16774,17 +18296,16 @@ The following checked projection is shared with the human-rendered guide and pre
         "path workspaceId (required): string, minLength 3, maxLength 128",
         "path appId (required): string, minLength 3, maxLength 128",
         "path membershipId (required): string, minLength 3, maxLength 128",
-        "header if-match (required): string, pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$",
+        "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/GrantAppRoleRequest"
       ],
-      "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"key\\":\\"{key}\\",\\"source\\":\\"{source}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/roles'",
+      "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"key\\":\\"{key}\\",\\"source\\":\\"{source}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/roles'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
         "membershipId": "{membershipId}",
-        "if-match": "\\"1\\"",
         "idempotency-key": "request-example-001",
         "x-correlation-id": "request_example_001"
       },
@@ -16817,7 +18338,7 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         },
         {
-          "description": "Recent authentication is required",
+          "description": "The authenticated session lacks permission for this operation",
           "status": 403,
           "success": false
         },
@@ -16859,12 +18380,11 @@ The following checked projection is shared with the human-rendered guide and pre
           "validation": "minLength 3, maxLength 128"
         },
         {
-          "example": "\\"1\\"",
           "location": "header",
           "name": "if-match",
-          "required": true,
+          "required": false,
           "type": "string",
-          "validation": "pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$"
+          "validation": "pattern ^\\"[1-9]\\\\d*\\"$"
         },
         {
           "example": "request-example-001",
@@ -16904,6 +18424,12 @@ The following checked projection is shared with the human-rendered guide and pre
           "required": true,
           "type": "string",
           "validation": "maxLength 200"
+        },
+        {
+          "name": "expectedDefinitionVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1"
         }
       ],
       "requestSchema": {
@@ -16922,18 +18448,17 @@ The following checked projection is shared with the human-rendered guide and pre
         "path appId (required): string, minLength 3, maxLength 128",
         "path membershipId (required): string, minLength 3, maxLength 128",
         "path grantId (required): string, minLength 3, maxLength 128",
-        "header if-match (required): string, pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$",
+        "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RevokeAppRoleRequest"
       ],
-      "example": "curl --request DELETE -H 'authorization: Bearer {app_credential}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/roles/%7BgrantId%7D'",
+      "example": "curl --request DELETE -H 'authorization: Bearer {app_credential}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/roles/%7BgrantId%7D'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
         "membershipId": "{membershipId}",
         "grantId": "{grantId}",
-        "if-match": "\\"1\\"",
         "idempotency-key": "request-example-001",
         "x-correlation-id": "request_example_001"
       },
@@ -16959,7 +18484,7 @@ The following checked projection is shared with the human-rendered guide and pre
           "success": false
         },
         {
-          "description": "Recent authentication is required",
+          "description": "The authenticated session lacks permission for this operation",
           "status": 403,
           "success": false
         },
@@ -17024,12 +18549,11 @@ The following checked projection is shared with the human-rendered guide and pre
           "validation": "minLength 3, maxLength 128"
         },
         {
-          "example": "\\"1\\"",
           "location": "header",
           "name": "if-match",
-          "required": true,
+          "required": false,
           "type": "string",
-          "validation": "pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$"
+          "validation": "pattern ^\\"[1-9]\\\\d*\\"$"
         },
         {
           "example": "request-example-001",
@@ -17055,6 +18579,12 @@ The following checked projection is shared with the human-rendered guide and pre
           "required": true,
           "type": "boolean",
           "validation": "—"
+        },
+        {
+          "name": "expectedGrantVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1"
         }
       ],
       "requestSchema": {
@@ -17696,6 +19226,51 @@ The following checked projection is shared with the human-rendered guide and pre
     },
     {
       "authority": [
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "path workspaceId (required): string"
+      ],
+      "example": "curl --request GET 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/capabilities'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}"
+      },
+      "method": "GET",
+      "operationId": "inspectWorkspaceCapabilities",
+      "outcomes": [
+        {
+          "description": "Effective capabilities",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "The credential is invalid",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "The workspace is not available to this credential",
+          "status": 404,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/capabilities",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "Inspect the caller's effective workspace capabilities"
+    },
+    {
+      "authority": [
         "Server-side platform session. Never expose this value to browser bundles or logs."
       ],
       "constraints": [
@@ -18261,6 +19836,796 @@ The following checked projection is shared with the human-rendered guide and pre
       },
       "retrySafety": "unsafe",
       "summary": "Review commercial overage rates and a monthly spend cap"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "path workspaceId (required): string"
+      ],
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/service-principals'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}"
+      },
+      "method": "GET",
+      "operationId": "listWorkspaceServicePrincipals",
+      "outcomes": [
+        {
+          "description": "Workspace service principals",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "The request or resource is invalid",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "The request or resource is invalid",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "The request or resource is invalid",
+          "status": 403,
+          "success": false
+        },
+        {
+          "description": "The request or resource is invalid",
+          "status": 404,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/service-principals",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "List workspace service principals"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "JSON request body (required): #/components/schemas/CreateWorkspaceServicePrincipalRequest"
+      ],
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"name\\":\\"Example\\",\\"scopes\\":[\\"app:read\\"],\\"restrictions\\":{\\"appIds\\":[],\\"environments\\":[\\"test\\"]}}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/service-principals'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}"
+      },
+      "exampleRequestBody": {
+        "name": "Example",
+        "scopes": [
+          "app:read"
+        ],
+        "restrictions": {
+          "appIds": [],
+          "environments": [
+            "test"
+          ]
+        }
+      },
+      "method": "POST",
+      "operationId": "createWorkspaceServicePrincipal",
+      "outcomes": [
+        {
+          "description": "The service principal was created",
+          "status": 201,
+          "success": true
+        },
+        {
+          "description": "The request is invalid",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Authentication is unavailable",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "The caller lacks the required authority",
+          "status": 403,
+          "success": false
+        },
+        {
+          "description": "The resource is unavailable",
+          "status": 404,
+          "success": false
+        },
+        {
+          "description": "The scope or restriction is invalid",
+          "status": 422,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/service-principals",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "Example",
+          "name": "name",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1, maxLength 80"
+        },
+        {
+          "example": [
+            "app:read"
+          ],
+          "name": "scopes",
+          "required": true,
+          "type": "array",
+          "validation": "—"
+        },
+        {
+          "example": {
+            "appIds": [],
+            "environments": [
+              "test"
+            ]
+          },
+          "name": "restrictions",
+          "required": true,
+          "type": "object",
+          "validation": "—"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/CreateWorkspaceServicePrincipalRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Create a workspace service principal"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path principalId (required): string"
+      ],
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/service-principals/%7BprincipalId%7D'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "principalId": "{principalId}"
+      },
+      "method": "GET",
+      "operationId": "getWorkspaceServicePrincipal",
+      "outcomes": [
+        {
+          "description": "Workspace service principal",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "The request or resource is invalid",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "The request or resource is invalid",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "The request or resource is invalid",
+          "status": 403,
+          "success": false
+        },
+        {
+          "description": "The request or resource is invalid",
+          "status": 404,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/service-principals/{principalId}",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{principalId}",
+          "location": "path",
+          "name": "principalId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "Get a workspace service principal"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path principalId (required): string"
+      ],
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/service-principals/%7BprincipalId%7D/credentials'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "principalId": "{principalId}"
+      },
+      "method": "GET",
+      "operationId": "listWorkspaceServiceCredentials",
+      "outcomes": [
+        {
+          "description": "Secret-free credentials",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "The request is invalid",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Authentication is unavailable",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "The caller lacks the required authority",
+          "status": 403,
+          "success": false
+        },
+        {
+          "description": "The resource is unavailable",
+          "status": 404,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/service-principals/{principalId}/credentials",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{principalId}",
+          "location": "path",
+          "name": "principalId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "List secret-free workspace service credentials"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path principalId (required): string",
+        "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
+        "JSON request body (required): #/components/schemas/IssueWorkspaceServiceCredentialRequest"
+      ],
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'content-type: application/json' --data '{\\"name\\":\\"Example\\",\\"scopes\\":[\\"app:read\\"],\\"restrictions\\":{\\"appIds\\":[],\\"environments\\":[\\"test\\"]}}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/service-principals/%7BprincipalId%7D/credentials'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "principalId": "{principalId}",
+        "idempotency-key": "request-example-001"
+      },
+      "exampleRequestBody": {
+        "name": "Example",
+        "scopes": [
+          "app:read"
+        ],
+        "restrictions": {
+          "appIds": [],
+          "environments": [
+            "test"
+          ]
+        }
+      },
+      "method": "POST",
+      "operationId": "issueWorkspaceServiceCredential",
+      "outcomes": [
+        {
+          "description": "The idempotency key replayed a previous credential operation",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "The credential and one-time secret were issued",
+          "status": 201,
+          "success": true
+        },
+        {
+          "description": "The request is invalid",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Authentication is unavailable",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "The caller lacks the required authority",
+          "status": 403,
+          "success": false
+        },
+        {
+          "description": "The resource is unavailable",
+          "status": 404,
+          "success": false
+        },
+        {
+          "description": "The idempotency key conflicts",
+          "status": 409,
+          "success": false
+        },
+        {
+          "description": "The scope or restriction is invalid",
+          "status": 422,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/service-principals/{principalId}/credentials",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{principalId}",
+          "location": "path",
+          "name": "principalId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "Example",
+          "name": "name",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1, maxLength 80"
+        },
+        {
+          "example": [
+            "app:read"
+          ],
+          "name": "scopes",
+          "required": true,
+          "type": "array",
+          "validation": "—"
+        },
+        {
+          "example": {
+            "appIds": [],
+            "environments": [
+              "test"
+            ]
+          },
+          "name": "restrictions",
+          "required": true,
+          "type": "object",
+          "validation": "—"
+        },
+        {
+          "name": "expiresAt",
+          "required": false,
+          "type": "value",
+          "validation": "format date-time"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/IssueWorkspaceServiceCredentialRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Issue a workspace service credential with one-time secret disclosure"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path principalId (required): string",
+        "path credentialId (required): string",
+        "header idempotency-key (optional): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
+        "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
+        "JSON request body (required): #/components/schemas/RevokeWorkspaceServiceCredentialRequest"
+      ],
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/service-principals/%7BprincipalId%7D/credentials/%7BcredentialId%7D/revoke'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "principalId": "{principalId}",
+        "credentialId": "{credentialId}"
+      },
+      "exampleRequestBody": {},
+      "method": "POST",
+      "operationId": "revokeWorkspaceServiceCredential",
+      "outcomes": [
+        {
+          "description": "The credential was changed",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "The request is invalid",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Authentication is unavailable",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "The caller lacks the required authority",
+          "status": 403,
+          "success": false
+        },
+        {
+          "description": "The resource is unavailable",
+          "status": 404,
+          "success": false
+        },
+        {
+          "description": "The idempotency key conflicts",
+          "status": 409,
+          "success": false
+        },
+        {
+          "description": "The credential version is stale",
+          "status": 412,
+          "success": false
+        },
+        {
+          "description": "The request is invalid",
+          "status": 422,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/service-principals/{principalId}/credentials/{credentialId}/revoke",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{principalId}",
+          "location": "path",
+          "name": "principalId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{credentialId}",
+          "location": "path",
+          "name": "credentialId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "location": "header",
+          "name": "idempotency-key",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          "location": "header",
+          "name": "if-match",
+          "required": false,
+          "type": "string",
+          "validation": "pattern ^\\"[1-9]\\\\d*\\"$"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/RevokeWorkspaceServiceCredentialRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Revoke a workspace service credential"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path principalId (required): string",
+        "path credentialId (required): string",
+        "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
+        "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
+        "JSON request body (required): #/components/schemas/RotateWorkspaceServiceCredentialRequest"
+      ],
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'content-type: application/json' --data '{\\"overlapSeconds\\":0}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/service-principals/%7BprincipalId%7D/credentials/%7BcredentialId%7D/rotate'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "principalId": "{principalId}",
+        "credentialId": "{credentialId}",
+        "idempotency-key": "request-example-001"
+      },
+      "exampleRequestBody": {
+        "overlapSeconds": 0
+      },
+      "method": "POST",
+      "operationId": "rotateWorkspaceServiceCredential",
+      "outcomes": [
+        {
+          "description": "The idempotency key replayed a previous credential operation",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "The request is invalid",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Authentication is unavailable",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "The caller lacks the required authority",
+          "status": 403,
+          "success": false
+        },
+        {
+          "description": "The resource is unavailable",
+          "status": 404,
+          "success": false
+        },
+        {
+          "description": "The idempotency key conflicts",
+          "status": 409,
+          "success": false
+        },
+        {
+          "description": "The credential version is stale",
+          "status": 412,
+          "success": false
+        },
+        {
+          "description": "The request is invalid",
+          "status": 422,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/service-principals/{principalId}/credentials/{credentialId}/rotate",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{principalId}",
+          "location": "path",
+          "name": "principalId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{credentialId}",
+          "location": "path",
+          "name": "credentialId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          "location": "header",
+          "name": "if-match",
+          "required": false,
+          "type": "string",
+          "validation": "pattern ^\\"[1-9]\\\\d*\\"$"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": 0,
+          "name": "overlapSeconds",
+          "required": true,
+          "type": "integer",
+          "validation": "min 0, max 3600"
+        },
+        {
+          "name": "expiresAt",
+          "required": false,
+          "type": "value",
+          "validation": "format date-time"
+        },
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/RotateWorkspaceServiceCredentialRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Rotate a workspace service credential"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path principalId (required): string",
+        "JSON request body (required): #/components/schemas/ChangeWorkspaceServicePrincipalStatusRequest"
+      ],
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"status\\":\\"active\\",\\"expectedVersion\\":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/service-principals/%7BprincipalId%7D/status'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "principalId": "{principalId}"
+      },
+      "exampleRequestBody": {
+        "status": "active",
+        "expectedVersion": 1
+      },
+      "method": "POST",
+      "operationId": "changeWorkspaceServicePrincipalStatus",
+      "outcomes": [
+        {
+          "description": "Updated workspace service principal",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "The request or resource is invalid",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "The request or resource is invalid",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "The request or resource is invalid",
+          "status": 403,
+          "success": false
+        },
+        {
+          "description": "The request or resource is invalid",
+          "status": 404,
+          "success": false
+        },
+        {
+          "description": "The request or resource is invalid",
+          "status": 409,
+          "success": false
+        },
+        {
+          "description": "The request or resource is invalid",
+          "status": 412,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/service-principals/{principalId}/status",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{principalId}",
+          "location": "path",
+          "name": "principalId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "active",
+          "name": "status",
+          "required": true,
+          "type": "string",
+          "validation": "one of active | suspended | revoked"
+        },
+        {
+          "example": 1,
+          "name": "expectedVersion",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/ChangeWorkspaceServicePrincipalStatusRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Change a workspace service principal status"
     }
   ],
   "walkthrough": {
@@ -18297,7 +20662,7 @@ Source attribution: Developer documentation (https://docs.authle.ss/reference/re
       title: "REST API reference",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "4b4c4cb3f7550cd401f52ff53d162343b589195680918d970a531158082a4296"
+      contentDigest: "38d8a969bbbd580c3703678e12a20ef78d85a072b862feb8bcd3f13cb2f60c2c"
     },
     {
       canonical: "https://docs.authle.ss/reference/rest?lang=ar",
@@ -20039,7 +22404,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         },
         {
-          "description": "Recent authentication is required",
+          "description": "The authenticated session lacks permission for this operation",
           "status": 403,
           "success": false
         },
@@ -20151,7 +22516,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         },
         {
-          "description": "Recent authentication or current-session reauthentication is required",
+          "description": "The authenticated session is not authorized for this operation",
           "status": 403,
           "success": false
         },
@@ -20233,7 +22598,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         },
         {
-          "description": "Recent authentication or current-session reauthentication is required",
+          "description": "The authenticated session is not authorized for this operation",
           "status": 403,
           "success": false
         },
@@ -20351,7 +22716,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         },
         {
-          "description": "Recent authentication is required",
+          "description": "The authenticated session lacks permission for this operation",
           "status": 403,
           "success": false
         },
@@ -20425,7 +22790,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         },
         {
-          "description": "Recent authentication is required",
+          "description": "The authenticated session lacks permission for this operation",
           "status": 403,
           "success": false
         },
@@ -20500,7 +22865,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         },
         {
-          "description": "Recent authentication is required",
+          "description": "The authenticated session lacks permission for this operation",
           "status": 403,
           "success": false
         },
@@ -20610,7 +22975,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         },
         {
-          "description": "Recent authentication is required",
+          "description": "The authenticated session lacks permission for this operation",
           "status": 403,
           "success": false
         },
@@ -20788,14 +23153,13 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/CreateWorkspaceRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"name\\":\\"Example workspace\\",\\"termsAccepted\\":true}' 'https://api.authle.ss/workspaces'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"name\\":\\"Example workspace\\"}' 'https://api.authle.ss/workspaces'",
       "exampleParameters": {
         "idempotency-key": "request-example-001",
         "x-correlation-id": "request_example_001"
       },
       "exampleRequestBody": {
-        "name": "Example workspace",
-        "termsAccepted": true
+        "name": "Example workspace"
       },
       "method": "POST",
       "operationId": "createWorkspace",
@@ -20816,7 +23180,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         },
         {
-          "description": "Recent authentication is required",
+          "description": "The authenticated session lacks permission for this operation",
           "status": 403,
           "success": false
         },
@@ -20854,9 +23218,8 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "validation": "minLength 1, maxLength 80"
         },
         {
-          "example": true,
           "name": "termsAccepted",
-          "required": true,
+          "required": false,
           "type": "boolean",
           "validation": "—"
         }
@@ -20926,6 +23289,121 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
     {
       "authority": [
         "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
+      "constraints": [
+        "path workspaceId (required): string, minLength 3, maxLength 128",
+        "path delegationId (required): string, minLength 3, maxLength 128",
+        "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
+        "header x-correlation-id (optional): string, minLength 8, maxLength 128",
+        "JSON request body (required): #/components/schemas/AgentDelegationKeyRotationPreviewRequest"
+      ],
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"publicJwks\\":{}}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/agent-delegations/%7BdelegationId%7D/key-rotation-previews'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "delegationId": "{delegationId}",
+        "x-correlation-id": "request_example_001"
+      },
+      "exampleRequestBody": {
+        "publicJwks": {}
+      },
+      "method": "POST",
+      "operationId": "previewAgentDelegationKeyRotation",
+      "outcomes": [
+        {
+          "description": "Key rotation preview created",
+          "status": 201,
+          "success": true
+        },
+        {
+          "description": "The request is invalid",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "The session is not authenticated",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "The authenticated session lacks permission for this operation",
+          "status": 403,
+          "success": false
+        },
+        {
+          "description": "The delegation is unavailable",
+          "status": 404,
+          "success": false
+        },
+        {
+          "description": "A preview cannot be created in the current state",
+          "status": 409,
+          "success": false
+        },
+        {
+          "description": "The key version is stale",
+          "status": 412,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/agent-delegations/{delegationId}/key-rotation-previews",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{delegationId}",
+          "location": "path",
+          "name": "delegationId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "location": "header",
+          "name": "if-match",
+          "required": false,
+          "type": "string",
+          "validation": "pattern ^\\"[1-9]\\\\d*\\"$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": {},
+          "name": "publicJwks",
+          "required": true,
+          "type": "object",
+          "validation": "—"
+        },
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/AgentDelegationKeyRotationPreviewRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Preview an agent delegation key rotation"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
       ],
       "constraints": [
         "path workspaceId (required): string, minLength 3, maxLength 128",
@@ -21001,7 +23479,8 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
     },
     {
       "authority": [
-        "Server-side platform session. Never expose this value to browser bundles or logs."
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
       ],
       "constraints": [
         "path workspaceId (required): string, minLength 3, maxLength 128",
@@ -21107,7 +23586,139 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
     },
     {
       "authority": [
-        "Server-side platform session. Never expose this value to browser bundles or logs."
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "path workspaceId (required): string, minLength 3, maxLength 128",
+        "path appId (required): string",
+        "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
+        "header x-correlation-id (optional): string, minLength 8, maxLength 128",
+        "JSON request body (required): #/components/schemas/UpdateAppMetadataRequest"
+      ],
+      "example": "curl --request PATCH -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"name\\":\\"Example\\",\\"description\\":\\"{description}\\",\\"ownerContactEmail\\":\\"person@example.test\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "x-correlation-id": "request_example_001"
+      },
+      "exampleRequestBody": {
+        "name": "Example",
+        "description": "{description}",
+        "ownerContactEmail": "person@example.test"
+      },
+      "method": "PATCH",
+      "operationId": "updateAppMetadata",
+      "outcomes": [
+        {
+          "description": "Updated app metadata and version",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "The request or resource is invalid",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "The request or resource is invalid",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "The request or resource is invalid",
+          "status": 403,
+          "success": false
+        },
+        {
+          "description": "The request or resource is invalid",
+          "status": 404,
+          "success": false
+        },
+        {
+          "description": "The request or resource is invalid",
+          "status": 412,
+          "success": false
+        },
+        {
+          "description": "The request or resource is invalid",
+          "status": 422,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "location": "header",
+          "name": "if-match",
+          "required": false,
+          "type": "string",
+          "validation": "pattern ^\\"[1-9]\\\\d*\\"$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "Example",
+          "name": "name",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1, maxLength 80"
+        },
+        {
+          "example": "{description}",
+          "name": "description",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1, maxLength 500"
+        },
+        {
+          "example": "person@example.test",
+          "name": "ownerContactEmail",
+          "required": true,
+          "type": "string",
+          "validation": "maxLength 254, format email"
+        },
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/UpdateAppMetadataRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Update app metadata"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
       ],
       "constraints": [
         "path workspaceId (required): string, minLength 3, maxLength 128",
@@ -21179,6 +23790,125 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       "requestBodyFields": [],
       "retrySafety": "safe",
       "summary": "Read one versioned app environment"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
+        "header x-correlation-id (optional): string, minLength 8, maxLength 128",
+        "JSON request body (required): #/components/schemas/ChangeAppEnvironmentStatusRequest"
+      ],
+      "example": "curl --request PATCH -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '\\"{value}\\"' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "x-correlation-id": "request_example_001"
+      },
+      "exampleRequestBody": "{value}",
+      "method": "PATCH",
+      "operationId": "changeAppEnvironmentStatus",
+      "outcomes": [
+        {
+          "description": "The environment was updated",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "The request is invalid",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Authentication is unavailable",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Missing app:activate returns insufficient_scope with requiredScope. Suspended commercial operations return commercial_dunning_suspended.",
+          "status": 403,
+          "success": false
+        },
+        {
+          "description": "The resource is unavailable",
+          "status": 404,
+          "success": false
+        },
+        {
+          "description": "The environment is retired (environment_retired), or production app capacity is exhausted (production_app_allowance_exhausted).",
+          "status": 409,
+          "success": false
+        },
+        {
+          "description": "The environment version is stale",
+          "status": 412,
+          "success": false
+        },
+        {
+          "description": "Confirmation, lifecycle, active-policy, HTTPS registration, or OIDC-profile readiness failed: confirmation_required, invalid_lifecycle_transition, policy_required, invalid_endpoints, or invalid_oidc_profile.",
+          "status": 422,
+          "success": false
+        },
+        {
+          "description": "A current environment version precondition is required.",
+          "status": 428,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "location": "header",
+          "name": "if-match",
+          "required": false,
+          "type": "string",
+          "validation": "pattern ^\\"[1-9]\\\\d*\\"$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [],
+      "requestSchema": {
+        "$ref": "#/components/schemas/ChangeAppEnvironmentStatusRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Change environment status"
     },
     {
       "authority": [
@@ -21411,18 +24141,17 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path appId (required): string",
         "path environment (required): string, one of production | test",
         "path credentialId (required): string",
-        "header if-match (required): string, pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$",
+        "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RevokeIntegrationCredentialRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/credentials/%7BcredentialId%7D/revoke'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/credentials/%7BcredentialId%7D/revoke'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
         "environment": "production",
         "credentialId": "{credentialId}",
-        "if-match": "\\"1\\"",
         "idempotency-key": "request-example-001",
         "x-correlation-id": "request_example_001"
       },
@@ -21506,12 +24235,11 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "validation": "—"
         },
         {
-          "example": "\\"1\\"",
           "location": "header",
           "name": "if-match",
-          "required": true,
+          "required": false,
           "type": "string",
-          "validation": "pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$"
+          "validation": "pattern ^\\"[1-9]\\\\d*\\"$"
         },
         {
           "example": "request-example-001",
@@ -21542,6 +24270,12 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "required": false,
           "type": "boolean",
           "validation": "—"
+        },
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1"
         }
       ],
       "requestSchema": {
@@ -21559,18 +24293,17 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path appId (required): string",
         "path environment (required): string, one of production | test",
         "path credentialId (required): string",
-        "header if-match (required): string, pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$",
+        "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RotateIntegrationCredentialRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"overlapSeconds\\":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/credentials/%7BcredentialId%7D/rotate'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"overlapSeconds\\":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/credentials/%7BcredentialId%7D/rotate'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
         "environment": "production",
         "credentialId": "{credentialId}",
-        "if-match": "\\"1\\"",
         "idempotency-key": "request-example-001",
         "x-correlation-id": "request_example_001"
       },
@@ -21656,12 +24389,11 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "validation": "—"
         },
         {
-          "example": "\\"1\\"",
           "location": "header",
           "name": "if-match",
-          "required": true,
+          "required": false,
           "type": "string",
-          "validation": "pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$"
+          "validation": "pattern ^\\"[1-9]\\\\d*\\"$"
         },
         {
           "example": "request-example-001",
@@ -21693,6 +24425,12 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "required": true,
           "type": "number",
           "validation": "—"
+        },
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1"
         }
       ],
       "requestSchema": {
@@ -21700,6 +24438,1115 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       },
       "retrySafety": "unsafe",
       "summary": "Rotate an app-environment credential with bounded secret overlap"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
+        "header x-correlation-id (optional): string, minLength 8, maxLength 128",
+        "JSON request body (required): #/components/schemas/EndpointSetMutationRequest"
+      ],
+      "example": "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"postLogoutUris\\":[],\\"redirectUris\\":[],\\"trustedOrigins\\":[]}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/endpoints'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "x-correlation-id": "request_example_001"
+      },
+      "exampleRequestBody": {
+        "postLogoutUris": [],
+        "redirectUris": [],
+        "trustedOrigins": []
+      },
+      "method": "PUT",
+      "operationId": "replaceAppEnvironmentEndpoints",
+      "outcomes": [
+        {
+          "description": "The environment was updated",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "The request is invalid",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Authentication is unavailable",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "The caller lacks the required authority",
+          "status": 403,
+          "success": false
+        },
+        {
+          "description": "The resource is unavailable",
+          "status": 404,
+          "success": false
+        },
+        {
+          "description": "The environment is unavailable",
+          "status": 409,
+          "success": false
+        },
+        {
+          "description": "The environment version is stale",
+          "status": 412,
+          "success": false
+        },
+        {
+          "description": "The configuration is invalid",
+          "status": 422,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/endpoints",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "location": "header",
+          "name": "if-match",
+          "required": false,
+          "type": "string",
+          "validation": "pattern ^\\"[1-9]\\\\d*\\"$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": [],
+          "name": "postLogoutUris",
+          "required": true,
+          "type": "array",
+          "validation": "—"
+        },
+        {
+          "example": [],
+          "name": "redirectUris",
+          "required": true,
+          "type": "array",
+          "validation": "—"
+        },
+        {
+          "example": [],
+          "name": "trustedOrigins",
+          "required": true,
+          "type": "array",
+          "validation": "—"
+        },
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/EndpointSetMutationRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Replace environment endpoints"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
+        "header x-correlation-id (optional): string, minLength 8, maxLength 128",
+        "JSON request body (required): #/components/schemas/OidcClientProfileMutationRequest"
+      ],
+      "example": "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"dpopBoundAccessTokens\\":true,\\"publicJwks\\":{\\"keys\\":[]},\\"refreshEligible\\":true,\\"tokenEndpointAuthMethod\\":\\"none\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/oidc-profile'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "x-correlation-id": "request_example_001"
+      },
+      "exampleRequestBody": {
+        "dpopBoundAccessTokens": true,
+        "publicJwks": {
+          "keys": []
+        },
+        "refreshEligible": true,
+        "tokenEndpointAuthMethod": "none"
+      },
+      "method": "PUT",
+      "operationId": "replaceAppEnvironmentOidcProfile",
+      "outcomes": [
+        {
+          "description": "The environment was updated",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "The request is invalid",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Authentication is unavailable",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "The caller lacks the required authority",
+          "status": 403,
+          "success": false
+        },
+        {
+          "description": "The resource is unavailable",
+          "status": 404,
+          "success": false
+        },
+        {
+          "description": "The environment is unavailable",
+          "status": 409,
+          "success": false
+        },
+        {
+          "description": "The environment version is stale",
+          "status": 412,
+          "success": false
+        },
+        {
+          "description": "The configuration is invalid",
+          "status": 422,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/oidc-profile",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "location": "header",
+          "name": "if-match",
+          "required": false,
+          "type": "string",
+          "validation": "pattern ^\\"[1-9]\\\\d*\\"$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "backchannelLogoutUri",
+          "required": false,
+          "type": "value",
+          "validation": "—"
+        },
+        {
+          "example": true,
+          "name": "dpopBoundAccessTokens",
+          "required": true,
+          "type": "boolean",
+          "validation": "—"
+        },
+        {
+          "name": "jwtAccessTokenResources",
+          "required": false,
+          "type": "array",
+          "validation": "—"
+        },
+        {
+          "example": {
+            "keys": []
+          },
+          "name": "publicJwks",
+          "required": true,
+          "type": "value",
+          "validation": "—"
+        },
+        {
+          "example": true,
+          "name": "refreshEligible",
+          "required": true,
+          "type": "boolean",
+          "validation": "—"
+        },
+        {
+          "example": "none",
+          "name": "tokenEndpointAuthMethod",
+          "required": true,
+          "type": "string",
+          "validation": "one of none | private_key_jwt"
+        },
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/OidcClientProfileMutationRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Replace environment OIDC profile"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production"
+      ],
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/policy'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test"
+      },
+      "method": "GET",
+      "operationId": "getAuthenticationPolicy",
+      "outcomes": [
+        {
+          "description": "The policy view",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "The request is invalid",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Authentication is unavailable",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "The caller lacks the required authority",
+          "status": 403,
+          "success": false
+        },
+        {
+          "description": "The resource is unavailable",
+          "status": 404,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/policy",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "Read the active policy and draft"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "header if-match (optional): string, pattern ^\\"(0|[1-9]\\\\d*)\\"$",
+        "header x-correlation-id (optional): string, minLength 8, maxLength 128",
+        "JSON request body (required): #/components/schemas/PolicyDefinitionRequest"
+      ],
+      "example": "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"definition\\":{\\"appIdentity\\":{\\"description\\":\\"{description}\\",\\"name\\":\\"Example\\",\\"ownerContactEmail\\":\\"person@example.test\\"},\\"consentPurpose\\":\\"{consentPurpose}\\",\\"correlation\\":{\\"boundary\\":\\"app\\",\\"essential\\":true,\\"purpose\\":\\"{purpose}\\"},\\"eligibleMethods\\":[\\"M-01\\"],\\"enrollmentMode\\":\\"administrator_approval\\",\\"recovery\\":{\\"verifiedEmailRequired\\":true},\\"requestedClaims\\":[],\\"session\\":{\\"absoluteSeconds\\":1,\\"idleSeconds\\":1}}}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/policy'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "x-correlation-id": "request_example_001"
+      },
+      "exampleRequestBody": {
+        "definition": {
+          "appIdentity": {
+            "description": "{description}",
+            "name": "Example",
+            "ownerContactEmail": "person@example.test"
+          },
+          "consentPurpose": "{consentPurpose}",
+          "correlation": {
+            "boundary": "app",
+            "essential": true,
+            "purpose": "{purpose}"
+          },
+          "eligibleMethods": [
+            "M-01"
+          ],
+          "enrollmentMode": "administrator_approval",
+          "recovery": {
+            "verifiedEmailRequired": true
+          },
+          "requestedClaims": [],
+          "session": {
+            "absoluteSeconds": 1,
+            "idleSeconds": 1
+          }
+        }
+      },
+      "method": "PUT",
+      "operationId": "saveAuthenticationPolicyDraft",
+      "outcomes": [
+        {
+          "description": "The policy view",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "The request is invalid",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Authentication is unavailable",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "The caller lacks the required authority",
+          "status": 403,
+          "success": false
+        },
+        {
+          "description": "The resource is unavailable",
+          "status": 404,
+          "success": false
+        },
+        {
+          "description": "The environment is unavailable",
+          "status": 409,
+          "success": false
+        },
+        {
+          "description": "The version is stale",
+          "status": 412,
+          "success": false
+        },
+        {
+          "description": "The policy is invalid",
+          "status": 422,
+          "success": false
+        },
+        {
+          "description": "A version precondition is required",
+          "status": 428,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/policy",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "location": "header",
+          "name": "if-match",
+          "required": false,
+          "type": "string",
+          "validation": "pattern ^\\"(0|[1-9]\\\\d*)\\"$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": {
+            "appIdentity": {
+              "description": "{description}",
+              "name": "Example",
+              "ownerContactEmail": "person@example.test"
+            },
+            "consentPurpose": "{consentPurpose}",
+            "correlation": {
+              "boundary": "app",
+              "essential": true,
+              "purpose": "{purpose}"
+            },
+            "eligibleMethods": [
+              "M-01"
+            ],
+            "enrollmentMode": "administrator_approval",
+            "recovery": {
+              "verifiedEmailRequired": true
+            },
+            "requestedClaims": [],
+            "session": {
+              "absoluteSeconds": 1,
+              "idleSeconds": 1
+            }
+          },
+          "name": "definition",
+          "required": true,
+          "type": "object",
+          "validation": "—"
+        },
+        {
+          "name": "expectedDraftVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 0"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/PolicyDefinitionRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Replace the policy draft"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "header if-match (optional): string, pattern ^\\"(0|[1-9]\\\\d*)\\"$",
+        "header x-correlation-id (optional): string, minLength 8, maxLength 128",
+        "JSON request body (required): #/components/schemas/ActivatePolicyRequest"
+      ],
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/policy/activate'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "x-correlation-id": "request_example_001"
+      },
+      "exampleRequestBody": {
+        "confirmed": true
+      },
+      "method": "POST",
+      "operationId": "activateAuthenticationPolicy",
+      "outcomes": [
+        {
+          "description": "The policy view",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "The request is invalid",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Authentication is unavailable",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "The caller lacks the required authority",
+          "status": 403,
+          "success": false
+        },
+        {
+          "description": "The resource is unavailable",
+          "status": 404,
+          "success": false
+        },
+        {
+          "description": "The environment is unavailable",
+          "status": 409,
+          "success": false
+        },
+        {
+          "description": "The version is stale",
+          "status": 412,
+          "success": false
+        },
+        {
+          "description": "The policy is invalid",
+          "status": 422,
+          "success": false
+        },
+        {
+          "description": "A version precondition is required",
+          "status": 428,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/policy/activate",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "location": "header",
+          "name": "if-match",
+          "required": false,
+          "type": "string",
+          "validation": "pattern ^\\"(0|[1-9]\\\\d*)\\"$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": true,
+          "name": "confirmed",
+          "required": true,
+          "type": "boolean",
+          "validation": "one of true"
+        },
+        {
+          "name": "expectedDraftVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 0"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/ActivatePolicyRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Publish the policy draft"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "query limit (optional): integer, min 1, max 100",
+        "query cursor (optional): integer, min 0"
+      ],
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/policy/history'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test"
+      },
+      "method": "GET",
+      "operationId": "listAuthenticationPolicyHistory",
+      "outcomes": [
+        {
+          "description": "A page of immutable revisions",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "The request is invalid",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Authentication is unavailable",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "The caller lacks the required authority",
+          "status": 403,
+          "success": false
+        },
+        {
+          "description": "The resource is unavailable",
+          "status": 404,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/policy/history",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "location": "query",
+          "name": "limit",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1, max 100"
+        },
+        {
+          "location": "query",
+          "name": "cursor",
+          "required": false,
+          "type": "integer",
+          "validation": "min 0"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "List immutable policy revisions"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path version (required): integer, min 1"
+      ],
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/policy/history/1'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "version": 1
+      },
+      "method": "GET",
+      "operationId": "getAuthenticationPolicyRevision",
+      "outcomes": [
+        {
+          "description": "The immutable revision",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "The request is invalid",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Authentication is unavailable",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "The caller lacks the required authority",
+          "status": 403,
+          "success": false
+        },
+        {
+          "description": "The resource is unavailable",
+          "status": 404,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/policy/history/{version}",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": 1,
+          "location": "path",
+          "name": "version",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "Read one immutable policy revision"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path version (required): integer, min 1",
+        "header if-match (optional): string, pattern ^\\"(0|[1-9]\\\\d*)\\"$",
+        "header x-correlation-id (optional): string, minLength 8, maxLength 128",
+        "JSON request body (required): #/components/schemas/RestorePolicyRequest"
+      ],
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/policy/history/1/restore'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "version": 1,
+        "x-correlation-id": "request_example_001"
+      },
+      "exampleRequestBody": {},
+      "method": "POST",
+      "operationId": "restoreAuthenticationPolicyRevision",
+      "outcomes": [
+        {
+          "description": "The policy view",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "The request is invalid",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Authentication is unavailable",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "The caller lacks the required authority",
+          "status": 403,
+          "success": false
+        },
+        {
+          "description": "The resource is unavailable",
+          "status": 404,
+          "success": false
+        },
+        {
+          "description": "The environment is unavailable",
+          "status": 409,
+          "success": false
+        },
+        {
+          "description": "The version is stale",
+          "status": 412,
+          "success": false
+        },
+        {
+          "description": "The policy is invalid",
+          "status": 422,
+          "success": false
+        },
+        {
+          "description": "A version precondition is required",
+          "status": 428,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/policy/history/{version}/restore",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": 1,
+          "location": "path",
+          "name": "version",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1"
+        },
+        {
+          "location": "header",
+          "name": "if-match",
+          "required": false,
+          "type": "string",
+          "validation": "pattern ^\\"(0|[1-9]\\\\d*)\\"$"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "expectedDraftVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 0"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/RestorePolicyRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Restore a revision into the draft"
+    },
+    {
+      "authority": [
+        "Server-side credential scoped to one exact app environment. Never expose this value to browser bundles, logs, examples, or diagnostics."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "JSON request body (required): #/components/schemas/ValidateAppSessionRequest"
+      ],
+      "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'content-type: application/json' --data '{\\"sessionReference\\":\\"session_reference_example_01\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/sessions/validate'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test"
+      },
+      "exampleRequestBody": {
+        "sessionReference": "session_reference_example_01"
+      },
+      "method": "POST",
+      "operationId": "validateAppSessionOnline",
+      "outcomes": [
+        {
+          "description": "The current online session decision",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "The session reference is invalid",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "The app credential is unavailable",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "The app environment is unavailable",
+          "status": 404,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/sessions/validate",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "session_reference_example_01",
+          "name": "sessionReference",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 16, maxLength 16384, pattern ^[A-Za-z0-9_.-]+$"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/ValidateAppSessionRequest"
+      },
+      "retrySafety": "safe",
+      "summary": "Validate an app session against the current policy"
     },
     {
       "authority": [
@@ -22173,18 +26020,17 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path appId (required): string",
         "path environment (required): string, one of production | test",
         "path webhookId (required): string",
-        "header if-match (required): string, pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$",
+        "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/DisableIntegrationWebhookRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/disable'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/disable'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
         "environment": "production",
         "webhookId": "{webhookId}",
-        "if-match": "\\"1\\"",
         "idempotency-key": "request-example-001",
         "x-correlation-id": "request_example_001"
       },
@@ -22268,12 +26114,11 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "validation": "—"
         },
         {
-          "example": "\\"1\\"",
           "location": "header",
           "name": "if-match",
-          "required": true,
+          "required": false,
           "type": "string",
-          "validation": "pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$"
+          "validation": "pattern ^\\"[1-9]\\\\d*\\"$"
         },
         {
           "example": "request-example-001",
@@ -22298,6 +26143,12 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "required": false,
           "type": "boolean",
           "validation": "—"
+        },
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1"
         }
       ],
       "requestSchema": {
@@ -22315,18 +26166,17 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path appId (required): string",
         "path environment (required): string, one of production | test",
         "path webhookId (required): string",
-        "header if-match (required): string, pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$",
+        "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RotateIntegrationWebhookSecretRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"overlapSeconds\\":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/rotate'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"overlapSeconds\\":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/rotate'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
         "environment": "production",
         "webhookId": "{webhookId}",
-        "if-match": "\\"1\\"",
         "idempotency-key": "request-example-001",
         "x-correlation-id": "request_example_001"
       },
@@ -22412,12 +26262,11 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "validation": "—"
         },
         {
-          "example": "\\"1\\"",
           "location": "header",
           "name": "if-match",
-          "required": true,
+          "required": false,
           "type": "string",
-          "validation": "pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$"
+          "validation": "pattern ^\\"[1-9]\\\\d*\\"$"
         },
         {
           "example": "request-example-001",
@@ -22449,6 +26298,12 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "required": true,
           "type": "number",
           "validation": "—"
+        },
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1"
         }
       ],
       "requestSchema": {
@@ -22466,18 +26321,17 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path appId (required): string",
         "path environment (required): string, one of production | test",
         "path webhookId (required): string",
-        "header if-match (required): string, pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$",
+        "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/ReplaceIntegrationWebhookSubscriptionsRequest"
       ],
-      "example": "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"subscriptions\\":[]}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/subscriptions'",
+      "example": "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"subscriptions\\":[]}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/subscriptions'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
         "environment": "production",
         "webhookId": "{webhookId}",
-        "if-match": "\\"1\\"",
         "idempotency-key": "request-example-001",
         "x-correlation-id": "request_example_001"
       },
@@ -22563,12 +26417,11 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "validation": "—"
         },
         {
-          "example": "\\"1\\"",
           "location": "header",
           "name": "if-match",
-          "required": true,
+          "required": false,
           "type": "string",
-          "validation": "pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$"
+          "validation": "pattern ^\\"[1-9]\\\\d*\\"$"
         },
         {
           "example": "request-example-001",
@@ -22600,6 +26453,12 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "required": true,
           "type": "array",
           "validation": "—"
+        },
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1"
         }
       ],
       "requestSchema": {
@@ -22818,17 +26677,16 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path workspaceId (required): string",
         "path appId (required): string",
         "path operationId (required): string",
-        "header if-match (required): string, pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$",
+        "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/ConfirmBulkAccessRequest"
       ],
-      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/operations/%7BoperationId%7D/cancellation'",
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/operations/%7BoperationId%7D/cancellation'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
         "operationId": "{operationId}",
-        "if-match": "\\"1\\"",
         "idempotency-key": "request-example-001",
         "x-correlation-id": "request_example_001"
       },
@@ -22911,12 +26769,11 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "validation": "—"
         },
         {
-          "example": "\\"1\\"",
           "location": "header",
           "name": "if-match",
-          "required": true,
+          "required": false,
           "type": "string",
-          "validation": "pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$"
+          "validation": "pattern ^\\"[1-9]\\\\d*\\"$"
         },
         {
           "example": "request-example-001",
@@ -22942,6 +26799,12 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "required": true,
           "type": "boolean",
           "validation": "—"
+        },
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1"
         }
       ],
       "requestSchema": {
@@ -24934,7 +28797,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         },
         {
-          "description": "Recent authentication is required",
+          "description": "The authenticated session lacks permission for this operation",
           "status": 403,
           "success": false
         }
@@ -25040,7 +28903,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         },
         {
-          "description": "Recent authentication is required",
+          "description": "The authenticated session lacks permission for this operation",
           "status": 403,
           "success": false
         },
@@ -25160,7 +29023,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         },
         {
-          "description": "Recent authentication is required",
+          "description": "The authenticated session lacks permission for this operation",
           "status": 403,
           "success": false
         },
@@ -25299,17 +29162,16 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path workspaceId (required): string, minLength 3, maxLength 128",
         "path appId (required): string, minLength 3, maxLength 128",
         "path membershipId (required): string, minLength 3, maxLength 128",
-        "header if-match (required): string, pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$",
+        "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/GrantAppEntitlementRequest"
       ],
-      "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"key\\":\\"{key}\\",\\"source\\":\\"{source}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/entitlements'",
+      "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"key\\":\\"{key}\\",\\"source\\":\\"{source}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/entitlements'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
         "membershipId": "{membershipId}",
-        "if-match": "\\"1\\"",
         "idempotency-key": "request-example-001",
         "x-correlation-id": "request_example_001"
       },
@@ -25342,7 +29204,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         },
         {
-          "description": "Recent authentication is required",
+          "description": "The authenticated session lacks permission for this operation",
           "status": 403,
           "success": false
         },
@@ -25384,12 +29246,11 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "validation": "minLength 3, maxLength 128"
         },
         {
-          "example": "\\"1\\"",
           "location": "header",
           "name": "if-match",
-          "required": true,
+          "required": false,
           "type": "string",
-          "validation": "pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$"
+          "validation": "pattern ^\\"[1-9]\\\\d*\\"$"
         },
         {
           "example": "request-example-001",
@@ -25435,6 +29296,12 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "required": true,
           "type": "string",
           "validation": "maxLength 200"
+        },
+        {
+          "name": "expectedDefinitionVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1"
         }
       ],
       "requestSchema": {
@@ -25453,18 +29320,17 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path appId (required): string, minLength 3, maxLength 128",
         "path membershipId (required): string, minLength 3, maxLength 128",
         "path grantId (required): string, minLength 3, maxLength 128",
-        "header if-match (required): string, pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$",
+        "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RevokeAppEntitlementRequest"
       ],
-      "example": "curl --request DELETE -H 'authorization: Bearer {app_credential}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/entitlements/%7BgrantId%7D'",
+      "example": "curl --request DELETE -H 'authorization: Bearer {app_credential}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/entitlements/%7BgrantId%7D'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
         "membershipId": "{membershipId}",
         "grantId": "{grantId}",
-        "if-match": "\\"1\\"",
         "idempotency-key": "request-example-001",
         "x-correlation-id": "request_example_001"
       },
@@ -25490,7 +29356,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         },
         {
-          "description": "Recent authentication is required",
+          "description": "The authenticated session lacks permission for this operation",
           "status": 403,
           "success": false
         },
@@ -25555,12 +29421,11 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "validation": "minLength 3, maxLength 128"
         },
         {
-          "example": "\\"1\\"",
           "location": "header",
           "name": "if-match",
-          "required": true,
+          "required": false,
           "type": "string",
-          "validation": "pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$"
+          "validation": "pattern ^\\"[1-9]\\\\d*\\"$"
         },
         {
           "example": "request-example-001",
@@ -25586,6 +29451,12 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "required": true,
           "type": "boolean",
           "validation": "—"
+        },
+        {
+          "name": "expectedGrantVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1"
         }
       ],
       "requestSchema": {
@@ -25603,17 +29474,16 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path workspaceId (required): string, minLength 3, maxLength 128",
         "path appId (required): string, minLength 3, maxLength 128",
         "path membershipId (required): string, minLength 3, maxLength 128",
-        "header if-match (required): string, pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$",
+        "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/ChangeAppMembershipStatusRequest"
       ],
-      "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"action\\":\\"activate\\",\\"confirmed\\":true,\\"reason\\":\\"access_ended\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/lifecycle'",
+      "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"action\\":\\"activate\\",\\"confirmed\\":true,\\"reason\\":\\"access_ended\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/lifecycle'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
         "membershipId": "{membershipId}",
-        "if-match": "\\"1\\"",
         "idempotency-key": "request-example-001",
         "x-correlation-id": "request_example_001"
       },
@@ -25641,7 +29511,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         },
         {
-          "description": "Recent authentication is required",
+          "description": "The authenticated session lacks permission for this operation",
           "status": 403,
           "success": false
         },
@@ -25698,12 +29568,11 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "validation": "minLength 3, maxLength 128"
         },
         {
-          "example": "\\"1\\"",
           "location": "header",
           "name": "if-match",
-          "required": true,
+          "required": false,
           "type": "string",
-          "validation": "pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$"
+          "validation": "pattern ^\\"[1-9]\\\\d*\\"$"
         },
         {
           "example": "request-example-001",
@@ -25743,6 +29612,12 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "required": true,
           "type": "string",
           "validation": "one of access_ended | administrator_action | approval_granted | data_retention_complete | policy_violation | security_review"
+        },
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1"
         }
       ],
       "requestSchema": {
@@ -25760,17 +29635,16 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path workspaceId (required): string, minLength 3, maxLength 128",
         "path appId (required): string, minLength 3, maxLength 128",
         "path membershipId (required): string, minLength 3, maxLength 128",
-        "header if-match (required): string, pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$",
+        "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/GrantAppRoleRequest"
       ],
-      "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"key\\":\\"{key}\\",\\"source\\":\\"{source}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/roles'",
+      "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"key\\":\\"{key}\\",\\"source\\":\\"{source}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/roles'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
         "membershipId": "{membershipId}",
-        "if-match": "\\"1\\"",
         "idempotency-key": "request-example-001",
         "x-correlation-id": "request_example_001"
       },
@@ -25803,7 +29677,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         },
         {
-          "description": "Recent authentication is required",
+          "description": "The authenticated session lacks permission for this operation",
           "status": 403,
           "success": false
         },
@@ -25845,12 +29719,11 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "validation": "minLength 3, maxLength 128"
         },
         {
-          "example": "\\"1\\"",
           "location": "header",
           "name": "if-match",
-          "required": true,
+          "required": false,
           "type": "string",
-          "validation": "pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$"
+          "validation": "pattern ^\\"[1-9]\\\\d*\\"$"
         },
         {
           "example": "request-example-001",
@@ -25890,6 +29763,12 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "required": true,
           "type": "string",
           "validation": "maxLength 200"
+        },
+        {
+          "name": "expectedDefinitionVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1"
         }
       ],
       "requestSchema": {
@@ -25908,18 +29787,17 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path appId (required): string, minLength 3, maxLength 128",
         "path membershipId (required): string, minLength 3, maxLength 128",
         "path grantId (required): string, minLength 3, maxLength 128",
-        "header if-match (required): string, pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$",
+        "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RevokeAppRoleRequest"
       ],
-      "example": "curl --request DELETE -H 'authorization: Bearer {app_credential}' -H 'if-match: \\"1\\"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/roles/%7BgrantId%7D'",
+      "example": "curl --request DELETE -H 'authorization: Bearer {app_credential}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/roles/%7BgrantId%7D'",
       "exampleParameters": {
         "workspaceId": "{workspaceId}",
         "appId": "{appId}",
         "membershipId": "{membershipId}",
         "grantId": "{grantId}",
-        "if-match": "\\"1\\"",
         "idempotency-key": "request-example-001",
         "x-correlation-id": "request_example_001"
       },
@@ -25945,7 +29823,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "success": false
         },
         {
-          "description": "Recent authentication is required",
+          "description": "The authenticated session lacks permission for this operation",
           "status": 403,
           "success": false
         },
@@ -26010,12 +29888,11 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "validation": "minLength 3, maxLength 128"
         },
         {
-          "example": "\\"1\\"",
           "location": "header",
           "name": "if-match",
-          "required": true,
+          "required": false,
           "type": "string",
-          "validation": "pattern ^\\\\\\"[1-9][0-9]*\\\\\\"$"
+          "validation": "pattern ^\\"[1-9]\\\\d*\\"$"
         },
         {
           "example": "request-example-001",
@@ -26041,6 +29918,12 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "required": true,
           "type": "boolean",
           "validation": "—"
+        },
+        {
+          "name": "expectedGrantVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1"
         }
       ],
       "requestSchema": {
@@ -26682,6 +30565,51 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
     },
     {
       "authority": [
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "path workspaceId (required): string"
+      ],
+      "example": "curl --request GET 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/capabilities'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}"
+      },
+      "method": "GET",
+      "operationId": "inspectWorkspaceCapabilities",
+      "outcomes": [
+        {
+          "description": "Effective capabilities",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "The credential is invalid",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "The workspace is not available to this credential",
+          "status": 404,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/capabilities",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "Inspect the caller's effective workspace capabilities"
+    },
+    {
+      "authority": [
         "Server-side platform session. Never expose this value to browser bundles or logs."
       ],
       "constraints": [
@@ -27247,6 +31175,796 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       },
       "retrySafety": "unsafe",
       "summary": "Review commercial overage rates and a monthly spend cap"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "path workspaceId (required): string"
+      ],
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/service-principals'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}"
+      },
+      "method": "GET",
+      "operationId": "listWorkspaceServicePrincipals",
+      "outcomes": [
+        {
+          "description": "Workspace service principals",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "The request or resource is invalid",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "The request or resource is invalid",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "The request or resource is invalid",
+          "status": 403,
+          "success": false
+        },
+        {
+          "description": "The request or resource is invalid",
+          "status": 404,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/service-principals",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "List workspace service principals"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "JSON request body (required): #/components/schemas/CreateWorkspaceServicePrincipalRequest"
+      ],
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"name\\":\\"Example\\",\\"scopes\\":[\\"app:read\\"],\\"restrictions\\":{\\"appIds\\":[],\\"environments\\":[\\"test\\"]}}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/service-principals'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}"
+      },
+      "exampleRequestBody": {
+        "name": "Example",
+        "scopes": [
+          "app:read"
+        ],
+        "restrictions": {
+          "appIds": [],
+          "environments": [
+            "test"
+          ]
+        }
+      },
+      "method": "POST",
+      "operationId": "createWorkspaceServicePrincipal",
+      "outcomes": [
+        {
+          "description": "The service principal was created",
+          "status": 201,
+          "success": true
+        },
+        {
+          "description": "The request is invalid",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Authentication is unavailable",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "The caller lacks the required authority",
+          "status": 403,
+          "success": false
+        },
+        {
+          "description": "The resource is unavailable",
+          "status": 404,
+          "success": false
+        },
+        {
+          "description": "The scope or restriction is invalid",
+          "status": 422,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/service-principals",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "Example",
+          "name": "name",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1, maxLength 80"
+        },
+        {
+          "example": [
+            "app:read"
+          ],
+          "name": "scopes",
+          "required": true,
+          "type": "array",
+          "validation": "—"
+        },
+        {
+          "example": {
+            "appIds": [],
+            "environments": [
+              "test"
+            ]
+          },
+          "name": "restrictions",
+          "required": true,
+          "type": "object",
+          "validation": "—"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/CreateWorkspaceServicePrincipalRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Create a workspace service principal"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path principalId (required): string"
+      ],
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/service-principals/%7BprincipalId%7D'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "principalId": "{principalId}"
+      },
+      "method": "GET",
+      "operationId": "getWorkspaceServicePrincipal",
+      "outcomes": [
+        {
+          "description": "Workspace service principal",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "The request or resource is invalid",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "The request or resource is invalid",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "The request or resource is invalid",
+          "status": 403,
+          "success": false
+        },
+        {
+          "description": "The request or resource is invalid",
+          "status": 404,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/service-principals/{principalId}",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{principalId}",
+          "location": "path",
+          "name": "principalId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "Get a workspace service principal"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path principalId (required): string"
+      ],
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/service-principals/%7BprincipalId%7D/credentials'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "principalId": "{principalId}"
+      },
+      "method": "GET",
+      "operationId": "listWorkspaceServiceCredentials",
+      "outcomes": [
+        {
+          "description": "Secret-free credentials",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "The request is invalid",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Authentication is unavailable",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "The caller lacks the required authority",
+          "status": 403,
+          "success": false
+        },
+        {
+          "description": "The resource is unavailable",
+          "status": 404,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/service-principals/{principalId}/credentials",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{principalId}",
+          "location": "path",
+          "name": "principalId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "List secret-free workspace service credentials"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path principalId (required): string",
+        "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
+        "JSON request body (required): #/components/schemas/IssueWorkspaceServiceCredentialRequest"
+      ],
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'content-type: application/json' --data '{\\"name\\":\\"Example\\",\\"scopes\\":[\\"app:read\\"],\\"restrictions\\":{\\"appIds\\":[],\\"environments\\":[\\"test\\"]}}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/service-principals/%7BprincipalId%7D/credentials'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "principalId": "{principalId}",
+        "idempotency-key": "request-example-001"
+      },
+      "exampleRequestBody": {
+        "name": "Example",
+        "scopes": [
+          "app:read"
+        ],
+        "restrictions": {
+          "appIds": [],
+          "environments": [
+            "test"
+          ]
+        }
+      },
+      "method": "POST",
+      "operationId": "issueWorkspaceServiceCredential",
+      "outcomes": [
+        {
+          "description": "The idempotency key replayed a previous credential operation",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "The credential and one-time secret were issued",
+          "status": 201,
+          "success": true
+        },
+        {
+          "description": "The request is invalid",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Authentication is unavailable",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "The caller lacks the required authority",
+          "status": 403,
+          "success": false
+        },
+        {
+          "description": "The resource is unavailable",
+          "status": 404,
+          "success": false
+        },
+        {
+          "description": "The idempotency key conflicts",
+          "status": 409,
+          "success": false
+        },
+        {
+          "description": "The scope or restriction is invalid",
+          "status": 422,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/service-principals/{principalId}/credentials",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{principalId}",
+          "location": "path",
+          "name": "principalId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "Example",
+          "name": "name",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1, maxLength 80"
+        },
+        {
+          "example": [
+            "app:read"
+          ],
+          "name": "scopes",
+          "required": true,
+          "type": "array",
+          "validation": "—"
+        },
+        {
+          "example": {
+            "appIds": [],
+            "environments": [
+              "test"
+            ]
+          },
+          "name": "restrictions",
+          "required": true,
+          "type": "object",
+          "validation": "—"
+        },
+        {
+          "name": "expiresAt",
+          "required": false,
+          "type": "value",
+          "validation": "format date-time"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/IssueWorkspaceServiceCredentialRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Issue a workspace service credential with one-time secret disclosure"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path principalId (required): string",
+        "path credentialId (required): string",
+        "header idempotency-key (optional): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
+        "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
+        "JSON request body (required): #/components/schemas/RevokeWorkspaceServiceCredentialRequest"
+      ],
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/service-principals/%7BprincipalId%7D/credentials/%7BcredentialId%7D/revoke'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "principalId": "{principalId}",
+        "credentialId": "{credentialId}"
+      },
+      "exampleRequestBody": {},
+      "method": "POST",
+      "operationId": "revokeWorkspaceServiceCredential",
+      "outcomes": [
+        {
+          "description": "The credential was changed",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "The request is invalid",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Authentication is unavailable",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "The caller lacks the required authority",
+          "status": 403,
+          "success": false
+        },
+        {
+          "description": "The resource is unavailable",
+          "status": 404,
+          "success": false
+        },
+        {
+          "description": "The idempotency key conflicts",
+          "status": 409,
+          "success": false
+        },
+        {
+          "description": "The credential version is stale",
+          "status": 412,
+          "success": false
+        },
+        {
+          "description": "The request is invalid",
+          "status": 422,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/service-principals/{principalId}/credentials/{credentialId}/revoke",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{principalId}",
+          "location": "path",
+          "name": "principalId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{credentialId}",
+          "location": "path",
+          "name": "credentialId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "location": "header",
+          "name": "idempotency-key",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          "location": "header",
+          "name": "if-match",
+          "required": false,
+          "type": "string",
+          "validation": "pattern ^\\"[1-9]\\\\d*\\"$"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/RevokeWorkspaceServiceCredentialRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Revoke a workspace service credential"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path principalId (required): string",
+        "path credentialId (required): string",
+        "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
+        "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
+        "JSON request body (required): #/components/schemas/RotateWorkspaceServiceCredentialRequest"
+      ],
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'content-type: application/json' --data '{\\"overlapSeconds\\":0}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/service-principals/%7BprincipalId%7D/credentials/%7BcredentialId%7D/rotate'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "principalId": "{principalId}",
+        "credentialId": "{credentialId}",
+        "idempotency-key": "request-example-001"
+      },
+      "exampleRequestBody": {
+        "overlapSeconds": 0
+      },
+      "method": "POST",
+      "operationId": "rotateWorkspaceServiceCredential",
+      "outcomes": [
+        {
+          "description": "The idempotency key replayed a previous credential operation",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "The request is invalid",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Authentication is unavailable",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "The caller lacks the required authority",
+          "status": 403,
+          "success": false
+        },
+        {
+          "description": "The resource is unavailable",
+          "status": 404,
+          "success": false
+        },
+        {
+          "description": "The idempotency key conflicts",
+          "status": 409,
+          "success": false
+        },
+        {
+          "description": "The credential version is stale",
+          "status": 412,
+          "success": false
+        },
+        {
+          "description": "The request is invalid",
+          "status": 422,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/service-principals/{principalId}/credentials/{credentialId}/rotate",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{principalId}",
+          "location": "path",
+          "name": "principalId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{credentialId}",
+          "location": "path",
+          "name": "credentialId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          "location": "header",
+          "name": "if-match",
+          "required": false,
+          "type": "string",
+          "validation": "pattern ^\\"[1-9]\\\\d*\\"$"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": 0,
+          "name": "overlapSeconds",
+          "required": true,
+          "type": "integer",
+          "validation": "min 0, max 3600"
+        },
+        {
+          "name": "expiresAt",
+          "required": false,
+          "type": "value",
+          "validation": "format date-time"
+        },
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 1"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/RotateWorkspaceServiceCredentialRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Rotate a workspace service credential"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path principalId (required): string",
+        "JSON request body (required): #/components/schemas/ChangeWorkspaceServicePrincipalStatusRequest"
+      ],
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"status\\":\\"active\\",\\"expectedVersion\\":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/service-principals/%7BprincipalId%7D/status'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "principalId": "{principalId}"
+      },
+      "exampleRequestBody": {
+        "status": "active",
+        "expectedVersion": 1
+      },
+      "method": "POST",
+      "operationId": "changeWorkspaceServicePrincipalStatus",
+      "outcomes": [
+        {
+          "description": "Updated workspace service principal",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "The request or resource is invalid",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "The request or resource is invalid",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "The request or resource is invalid",
+          "status": 403,
+          "success": false
+        },
+        {
+          "description": "The request or resource is invalid",
+          "status": 404,
+          "success": false
+        },
+        {
+          "description": "The request or resource is invalid",
+          "status": 409,
+          "success": false
+        },
+        {
+          "description": "The request or resource is invalid",
+          "status": 412,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/service-principals/{principalId}/status",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{principalId}",
+          "location": "path",
+          "name": "principalId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "active",
+          "name": "status",
+          "required": true,
+          "type": "string",
+          "validation": "one of active | suspended | revoked"
+        },
+        {
+          "example": 1,
+          "name": "expectedVersion",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/ChangeWorkspaceServicePrincipalStatusRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Change a workspace service principal status"
     }
   ],
   "walkthrough": {
@@ -27283,7 +32001,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       title: "مرجع واجهة REST",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "99530601449a3c9716391cd079349b00438ab5a52ea2a68b825671ec24b604db"
+      contentDigest: "41e4f35ed7a702fd60025269e1384d00a143b8a19b4a2eff3aab2e517a8d06aa"
     },
     {
       canonical: "https://docs.authle.ss/changes",
@@ -27338,33 +32056,35 @@ The following checked projection is shared with the human-rendered guide and pre
 \`\`\`json
 {
   "schema": "authless.release-center/v1",
-  "updatedAt": "2026-10-12",
+  "updatedAt": "2026-10-17",
   "compatibility": [
     {
       "component": "REST API",
       "deprecation": "current",
-      "releaseNotes": "/changes#2026-10-11-six-digit-authentication",
+      "releaseNotes": "/changes#2026-10-14-version-precondition-transport-fallback",
       "version": "0.1.0",
       "stability": "stable",
       "contract": "unversioned default (0.1.0)",
-      "testedAt": "2026-10-11",
+      "testedAt": "2026-10-14",
       "evidence": [
         "packages/contracts/openapi/authless.openapi.json",
+        "tests/app-routes.test.ts",
+        "tests/policy-draft-routes.test.ts",
         "tests/rest-api-reference.test.ts"
       ]
     },
     {
       "component": "@authless/browser",
       "deprecation": "current",
-      "releaseNotes": "/changes#2026-09-07-sdk-callback-query",
+      "releaseNotes": "/changes#2026-10-17-valid-session-actions",
       "version": "0.0.0",
       "stability": "source-only",
       "contract": "0.1.0",
-      "browser": "Chromium via Playwright 1.62.0",
-      "testedAt": "2026-09-07",
+      "browser": "Codex built-in browser",
+      "testedAt": "2026-10-17",
       "evidence": [
         "packages/browser/package.json",
-        "tests/sdk-callback-query.test.ts",
+        "packages/browser/src/index.test.ts",
         "tests/oidc-core.test.ts",
         "tests/browser-capability-entrypoints.test.ts",
         "tests/relying-app-helpers.test.ts",
@@ -27374,27 +32094,29 @@ The following checked projection is shared with the human-rendered guide and pre
     {
       "component": "@authless/server",
       "deprecation": "current",
-      "releaseNotes": "/changes#2026-10-11-six-digit-authentication",
+      "releaseNotes": "/changes#2026-10-14-version-precondition-transport-fallback",
       "version": "0.1.0",
       "stability": "source-only",
       "contract": "0.1.0",
       "runtime": "Node 24.x",
-      "testedAt": "2026-10-11",
+      "testedAt": "2026-10-14",
       "evidence": [
         "packages/server/package.json",
         "packages/server/src/index.ts",
+        "packages/server/src/apps.ts",
+        "packages/server/src/policies.ts",
         "packages/server/tests/server.node.mjs"
       ]
     },
     {
       "component": "@authless/cli",
       "deprecation": "current",
-      "releaseNotes": "/changes#2026-10-10-native-cli-and-docs-navigation",
+      "releaseNotes": "/changes#2026-10-14-workspace-creation-terms-removal",
       "version": "0.1.0",
       "stability": "source-only",
       "contract": "0.1.0",
       "runtime": "Bun 1.3.10",
-      "testedAt": "2026-10-10",
+      "testedAt": "2026-10-14",
       "evidence": [
         "packages/cli/package.json",
         "packages/cli/src/cli.ts",
@@ -27404,15 +32126,17 @@ The following checked projection is shared with the human-rendered guide and pre
     {
       "component": "@authless/sveltekit",
       "deprecation": "current",
-      "releaseNotes": "/changes#2026-09-07-sdk-callback-query",
+      "releaseNotes": "/changes#2026-10-14-workspace-creation-terms-removal",
       "version": "0.0.0",
       "stability": "source-only",
       "contract": "0.1.0",
       "runtime": "SvelteKit 2.70.2 / Node 24.x",
       "framework": "Svelte 5.56.8",
-      "testedAt": "2026-09-07",
+      "testedAt": "2026-10-14",
       "evidence": [
         "packages/sveltekit/package.json",
+        "packages/sveltekit/src/index.test.ts",
+        "docs/evidence/2026-10-16-sveltekit-jwt-claim-fixture.md",
         "tests/sdk-callback-query.test.ts",
         "tests/oidc-core.test.ts",
         "packages/sveltekit/src/oidc.ts",
@@ -27425,15 +32149,478 @@ The following checked projection is shared with the human-rendered guide and pre
   ],
   "changes": [
     {
-      "id": "2026-10-12-monthly-authless-platform-billing",
-      "publishedAt": "2026-10-12",
+      "id": "2026-10-17-valid-session-actions",
+      "publishedAt": "2026-10-17",
       "title": {
-        "en": "Monthly Authless workspace billing contract",
-        "ar": "عقد الفوترة الشهرية لمساحة عمل Authless"
+        "en": "Valid sessions authorize permitted actions",
+        "ar": "الجلسات الصالحة تتيح الإجراءات المسموح بها"
       },
       "summary": {
-        "en": "Authless workspace billing now publishes a monthly-only plan, review, authorization, cancellation, refund, and usage contract with matching server, CLI, and documentation exports. App-defined plans and profile-owned app subscriptions remain separate products.",
-        "ar": "تنشر فوترة مساحة عمل Authless الآن عقداً شهرياً فقط للخطة والمراجعة والتفويض والإلغاء والاسترداد والاستخدام مع صادرات متطابقة للخادم وCLI والوثائق. تبقى خطط التطبيقات المعرّفة من المطور واشتراكات التطبيقات المملوكة للملف الشخصي منتجات منفصلة."
+        "en": "A valid session can perform actions allowed by its role and scopes. Actions no longer require an additional sign-in based on authentication age.",
+        "ar": "تتيح الجلسة الصالحة تنفيذ الإجراءات التي يسمح بها دور المستخدم ونطاقات صلاحياته. لم تعد الإجراءات تتطلب تسجيل دخول إضافيًا بسبب وقت التحقق السابق."
+      },
+      "categories": [
+        "product",
+        "api",
+        "sdk",
+        "security"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "breaking",
+      "migration": {
+        "en": "Remove creationReadiness, sensitiveMutationReadiness, sensitiveActionSeconds, and reauthentication failure handling from clients. Keep normal unauthorized and permission-denied handling. Existing sessions retain their expiry, revocation, and permission checks.",
+        "ar": "أزل creationReadiness وsensitiveMutationReadiness وsensitiveActionSeconds ومعالجة أخطاء إعادة التحقق من العملاء. احتفظ بمعالجة عدم تسجيل الدخول ورفض الصلاحيات المعتادة. تبقى فحوصات انتهاء الجلسات وإلغائها وصلاحياتها سارية."
+      },
+      "announcement": {
+        "en": "Workspace, account, policy, billing, and credential actions use the current valid session and granted permissions.",
+        "ar": "تعتمد إجراءات مساحات العمل والحساب والسياسات والفوترة والمفاتيح على الجلسة الصالحة الحالية والصلاحيات الممنوحة."
+      },
+      "replacement": "/reference/rest",
+      "supportWindow": "Existing valid sessions continue until expiry or revocation.",
+      "sunsetAt": "2026-10-17",
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/contracts/openapi/authless.openapi.json",
+        "packages/browser/package.json",
+        "packages/browser/src/index.test.ts",
+        "tests/integration/identity-postgres.integration.ts",
+        "tests/integration/workspace-credentials-postgres.integration.ts",
+        "tests/integration/policy-postgres.integration.ts"
+      ],
+      "permalink": "/changes#2026-10-17-valid-session-actions"
+    },
+    {
+      "id": "2026-10-16-explicit-production-activation",
+      "publishedAt": "2026-10-16",
+      "title": {
+        "en": "Explicit production activation for workspace automation",
+        "ar": "تفعيل الإنتاج الصريح لأتمتة مساحة العمل"
+      },
+      "summary": {
+        "en": "A workspace key with the separately granted app:activate scope can activate a configured production draft. Activation requires confirmation, the current environment version, an active policy, a usable HTTPS redirect, and a valid OIDC profile. Production app allowance and commercial suspension rules apply.",
+        "ar": "يمكن لمفتاح مساحة العمل الذي مُنح نطاق app:activate بشكل مستقل تفعيل مسودة إنتاج مهيأة. يتطلب التفعيل التأكيد وإصدار البيئة الحالي وسياسة نشطة وعنوان إعادة توجيه HTTPS صالحًا وملف OIDC صالحًا. تسري حدود تطبيقات الإنتاج وقواعد التعليق التجاري."
+      },
+      "categories": [
+        "api",
+        "sdk",
+        "product",
+        "security"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Issue a new principal and key with the complete provisioning grant and explicitly enable production activation. Rotation preserves existing grants. Send action activate with confirmed true, expectedVersion, and matching If-Match. Reconcile uncertain delivery with an environment read.",
+        "ar": "أنشئ كيان خدمة ومفتاحًا جديدين بصلاحيات التهيئة الكاملة وفعّل صلاحية تفعيل الإنتاج صراحة. يحافظ التدوير على الصلاحيات الحالية. أرسل action بقيمة activate مع confirmed بقيمة true وexpectedVersion وترويسة If-Match المطابقة. تحقّق من النتيجة غير المؤكدة بقراءة البيئة."
+      },
+      "announcement": {
+        "en": "Human activation and resume remain separate operations. A valid authenticated session can perform each operation when its permissions, confirmation, and current-version checks pass. Service keys can activate permitted production drafts and cannot resume suspended environments.",
+        "ar": "يبقى تفعيل الإنسان واستئناف البيئة عمليتين منفصلتين. يمكن للجلسة الموثقة الصالحة تنفيذ كل عملية عند اجتياز الصلاحيات والتأكيد وفحوصات الإصدار الحالي. يمكن لمفاتيح الخدمة تفعيل مسودات الإنتاج المسموح بها ولا يمكنها استئناف البيئات المعلّقة."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/contracts/openapi/authless.openapi.json",
+        "packages/core/src/app/environment-service.ts",
+        "packages/db/src/app-store.ts",
+        "tests/app-service.test.ts",
+        "tests/integration/machine-app-postgres.integration.ts",
+        "tests/server-app-family.test.ts"
+      ],
+      "permalink": "/changes#2026-10-16-explicit-production-activation"
+    },
+    {
+      "id": "2026-10-16-workspace-capability-diagnostics",
+      "publishedAt": "2026-10-16",
+      "title": {
+        "en": "Inspect effective workspace-key capabilities",
+        "ar": "فحص الصلاحيات الفعلية لمفتاح مساحة العمل"
+      },
+      "summary": {
+        "en": "Workspace keys can inspect their own effective scopes and app and environment restrictions without credential:write. Authentication intersects the principal and credential grants and denies disjoint restrictions.",
+        "ar": "يمكن لمفاتيح مساحة العمل فحص نطاقاتها الفعلية وقيود التطبيقات والبيئات دون credential:write. تستخدم المصادقة تقاطع صلاحيات كيان الخدمة والمفتاح وترفض القيود التي لا تتقاطع."
+      },
+      "categories": [
+        "api",
+        "sdk",
+        "security"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Read GET /workspaces/{workspaceId}/capabilities when connecting a provisioning key. Treat invalid authentication, insufficient_scope, concealed inaccessible targets, readiness errors, and version conflicts separately. The response contains no credential secret.",
+        "ar": "اقرأ GET /workspaces/{workspaceId}/capabilities عند ربط مفتاح التهيئة. تعامل مع المصادقة غير الصالحة وinsufficient_scope والأهداف غير المتاحة وأخطاء الجاهزية وتعارض الإصدارات بشكل منفصل. لا تتضمن الاستجابة سر المفتاح."
+      },
+      "announcement": {
+        "en": "Capability inspection requires a valid key for the requested workspace and reports only that caller's authority. Provisioning grants now include endpoint:write and oidc-profile:write.",
+        "ar": "يتطلب فحص الصلاحيات مفتاحًا صالحًا لمساحة العمل المطلوبة ويعرض صلاحيات المتصل فقط. تتضمن صلاحيات التهيئة الآن endpoint:write وoidc-profile:write."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "apps/api/src/capability-routes.ts",
+        "packages/db/src/workspace-service-credential-store.ts",
+        "tests/integration/workspace-credentials-postgres.integration.ts",
+        "tests/server-workspace-family.test.ts"
+      ],
+      "permalink": "/changes#2026-10-16-workspace-capability-diagnostics"
+    },
+    {
+      "id": "2026-10-16-production-lifecycle-retained-sessions",
+      "publishedAt": "2026-10-16",
+      "title": {
+        "en": "Production lifecycle guards and retained OIDC sessions",
+        "ar": "ضوابط دورة حياة الإنتاج وجلسات OIDC المحتفظ بها"
+      },
+      "summary": {
+        "en": "Production environments expose separate activate, resume, suspend, and retire commands with explicit confirmation and version checks. Retained Authless sessions can complete a new OIDC consent transaction, while persisted transaction and grant-expiry boundaries remain authoritative.",
+        "ar": "تعرض بيئات الإنتاج أوامر منفصلة للتفعيل والاستئناف والتعليق والتقاعد مع تأكيد صريح وفحوص للإصدار. يمكن لجلسات Authless المحتفظ بها إكمال معاملة موافقة OIDC جديدة، بينما تظل حدود انتهاء صلاحية المعاملة والمنحة المحفوظة هي المرجع المعتمد."
+      },
+      "categories": [
+        "api",
+        "product",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Send activate and resume as separate lifecycle actions with confirmed true, expectedVersion, and a matching If-Match value. Keep retained-session clients on the existing consent flow and treat persisted transaction or grant expiry as authoritative. Verify the returned state after an uncertain lifecycle response.",
+        "ar": "أرسل التفعيل والاستئناف كإجرائي دورة حياة منفصلين مع confirmed بقيمة true وexpectedVersion وقيمة If-Match مطابقة. أبقِ عملاء الجلسات المحتفظ بها على مسار الموافقة الحالي وتعامل مع انتهاء صلاحية المعاملة أو المنحة المحفوظة باعتباره المرجع المعتمد. تحقّق من الحالة المعادة بعد استجابة غير مؤكدة لدورة الحياة."
+      },
+      "announcement": {
+        "en": "Operators can activate a ready production draft and resume suspended authorization with version-bound confirmation. Relying parties can continue through consent using a retained Authless session, with each transaction and grant subject to its persisted expiry.",
+        "ar": "يمكن للمشغلين تفعيل مسودة إنتاج جاهزة واستئناف التفويض المعلق مع تأكيد مرتبط بالإصدار. ويمكن للأطراف المعتمدة متابعة الموافقة باستخدام جلسة Authless محتفظ بها، مع خضوع كل معاملة ومنحة لتاريخ انتهاء صلاحيتها المحفوظ."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/contracts/openapi/authless.openapi.json",
+        "packages/server/src/generated.ts",
+        "apps/dash/src/routes/workspaces/[workspace]/apps/[app]/[environment]/endpoints/+page.svelte",
+        "tests/environment-lifecycle-contract.test.ts",
+        "tests/integration/oidc-postgres.integration.ts",
+        "tests/oidc-core.test.ts",
+        "docs/evidence/auth05-qa-retest.md",
+        "docs/evidence/auth06-provider-qa.md"
+      ],
+      "permalink": "/changes#2026-10-16-production-lifecycle-retained-sessions"
+    },
+    {
+      "id": "2026-10-14-workspace-auth-experience-audit",
+      "publishedAt": "2026-10-14",
+      "title": {
+        "en": "Workspace authentication experience audit",
+        "ar": "تدقيق تجربة مصادقة مساحة العمل"
+      },
+      "summary": {
+        "en": "The source audit records workspace key, app, environment, policy, access, audit, profile, session, and error-flow findings. It standardizes reuse of the existing shell, fields, resource rows, status, dialog, secret, and async-state components. Workspace keys default to manual revocation with optional temporary expiry in the candidate source.",
+        "ar": "يسجل تدقيق المصدر نتائج مسارات مفاتيح مساحة العمل والتطبيق والبيئة والسياسة والوصول والتدقيق والملف الشخصي والجلسة والخطأ. ويوحد إعادة استخدام مكونات الغلاف والحقول وصفوف الموارد والحالة والحوار والسر والعمليات غير المتزامنة الموجودة. تعتمد مفاتيح مساحة العمل على الإلغاء اليدوي مع مدة مؤقتة اختيارية في المصدر المرشح."
+      },
+      "categories": [
+        "product",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "operator",
+        "reference",
+        "evaluator"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Source-only audit. Add Workspace keys to canonical workspace navigation, use shared field and resource-state components, and verify nullable key expiry and next-request or refresh policy enforcement before deployment.",
+        "ar": "تدقيق مصدري فقط. أضف مفاتيح مساحة العمل إلى تنقل مساحة العمل المعياري، واستخدم مكونات الحقول وحالات الموارد المشتركة، وتحقق من مدة صلاحية المفتاح القابلة للقيمة الفارغة ومن فرض السياسة عند الطلب التالي أو تحديث الرمز قبل النشر."
+      },
+      "announcement": {
+        "en": "The audit separates supplied screenshots, current Zen production observations, candidate source, and browser-pending states. It makes no hosted deployment or full accessibility claim.",
+        "ar": "يفصل التدقيق بين لقطات الشاشة المقدمة وملاحظات Zen الحالية في الإنتاج والمصدر المرشح والحالات المعلقة في المتصفح. ولا يقدم ادعاءً عن نشر مستضاف أو امتثال كامل لإمكانية الوصول."
+      },
+      "replacement": null,
+      "supportWindow": "Source-only audit pending release and live verification.",
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "docs/audits/2026-10-14-workspace-auth-experience.md",
+        "apps/dash/src/routes/workspaces/[workspace]/credentials/+page.svelte",
+        "apps/dash/src/routes/workspaces/[workspace]/+page.svelte",
+        "packages/ui/src/dash-navigation.ts",
+        "packages/ui/src/components/Field.svelte",
+        "packages/ui/src/components/ResourceRow.svelte",
+        "packages/ui/src/components/StatePanel.svelte",
+        "packages/ui/src/components/TaskDialog.svelte",
+        "packages/ui/src/tokens.ts"
+      ],
+      "permalink": "/changes#2026-10-14-workspace-auth-experience-audit"
+    },
+    {
+      "id": "2026-10-14-credential-confirmation-ux",
+      "publishedAt": "2026-10-14",
+      "title": {
+        "en": "Credential creation removes duplicate confirmation gates",
+        "ar": "إزالة بوابات التأكيد المكررة من إنشاء بيانات الاعتماد"
+      },
+      "summary": {
+        "en": "The candidate credential flow removes duplicate prechecks before one-time secret disclosure while retaining the API authorization, one-time secret, and storage acknowledgement semantics.",
+        "ar": "يزيل مسار بيانات الاعتماد المرشح التأكيدات المسبقة المكررة قبل عرض السر لمرة واحدة مع الحفاظ على صلاحيات API وسر المرة الواحدة وإقرار التخزين."
+      },
+      "categories": [
+        "product",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "operator",
+        "reference",
+        "evaluator"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Source-only UX change. Review credential scope before creation and keep one-time secret storage acknowledgement. No hosted deployment is claimed.",
+        "ar": "تغيير تجربة مستخدم في المصدر فقط. راجع نطاق بيانات الاعتماد قبل الإنشاء وحافظ على إقرار تخزين السر لمرة واحدة. لا يُدّعى وجود نشر مستضاف."
+      },
+      "announcement": {
+        "en": "Source pages and UI tests cover the streamlined creation confirmation and preserved secret acknowledgement. Release verification remains pending.",
+        "ar": "تغطي صفحات المصدر واختبارات واجهة المستخدم تأكيد الإنشاء المبسط وإقرار تخزين السر المحفوظ. ولا يزال تحقق الإصدار معلقاً."
+      },
+      "replacement": null,
+      "supportWindow": "Source-only UX change pending release verification.",
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "apps/dash/src/routes/workspaces/[workspace]/credentials/+page.svelte",
+        "tests/ui/workspace-credentials.ui.ts",
+        "apps/api/src/workspace-credential-routes.ts"
+      ],
+      "permalink": "/changes#2026-10-14-credential-confirmation-ux"
+    },
+    {
+      "id": "2026-10-14-auth-experience-followups",
+      "publishedAt": "2026-10-14",
+      "title": {
+        "en": "Workspace auth experience follow-ups",
+        "ar": "متابعات تجربة مصادقة مساحة العمل"
+      },
+      "summary": {
+        "en": "Records candidate-only responsive form, dashboard bridge, and bodyless OIDC preflight fixes while deployed b3d6 remains the current receipt.",
+        "ar": "يسجل إصلاحات مرشحة فقط لتخطيط النموذج وجسر لوحة التحكم وفحص OIDC التمهيدي بلا جسم، بينما يظل b3d6 المنشور هو الإيصال الحالي."
+      },
+      "categories": [
+        "product",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "operator",
+        "reference",
+        "evaluator"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "No migration. Verify the candidate at 320px, 768px, and 1280px in English and Arabic, then rerun hosted OIDC policy-migration checks before release.",
+        "ar": "لا يلزم ترحيل. تحقق من المرشح عند 320 و768 و1280 بكسل بالإنجليزية والعربية، ثم أعد فحوص ترحيل سياسة OIDC المستضافة قبل الإصدار."
+      },
+      "announcement": {
+        "en": "Candidate source only; deployed b3d6 does not include these follow-ups.",
+        "ar": "المصدر المرشح فقط؛ لا يتضمن b3d6 المنشور هذه المتابعات."
+      },
+      "replacement": null,
+      "supportWindow": "Candidate follow-up pending canonical release receipt.",
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "docs/audits/2026-10-14-workspace-auth-experience.md",
+        "apps/dash/src/lib/AuthenticationPolicyFields.svelte",
+        "apps/dash/src/lib/PolicyEditor.svelte"
+      ],
+      "permalink": "/changes#2026-10-14-auth-experience-followups"
+    },
+    {
+      "id": "2026-10-14-auth-proof-reuse-and-relay",
+      "publishedAt": "2026-10-14",
+      "title": {
+        "en": "Workspace auth proof reuse and relay repairs",
+        "ar": "إصلاحات إعادة استخدام إثبات المصادقة وترحيل وظائف مساحة العمل"
+      },
+      "summary": {
+        "en": "Adds candidate workspace parent/child navigation, eligible-session proof reuse, expired-proof restart, authorize resume routing, and a 12-job auth relay from the shared registry.",
+        "ar": "يضيف المرشح تنقل مساحة العمل الأب والفرع وإعادة استخدام إثبات الجلسة المؤهلة وإعادة تشغيل الإثبات المنتهي وتوجيه استئناف التفويض وترحيل مصادقة من 12 وظيفة من السجل المشترك."
+      },
+      "categories": [
+        "product",
+        "security",
+        "operations"
+      ],
+      "audiences": [
+        "operator",
+        "integrator",
+        "evaluator"
+      ],
+      "impact": "security",
+      "migration": {
+        "en": "No DDL migration. Reuse the original proof within its allowed time, honor explicit prompt and max_age, restart expired proof, and verify authorize resume before deployment.",
+        "ar": "لا يوجد ترحيل DDL. أعد استخدام الإثبات الأصلي ضمن مدته المسموحة، واحترم prompt وmax_age الصريحين، وأعد تشغيل الإثبات المنتهي، وتحقق من استئناف التفويض قبل النشر."
+      },
+      "announcement": {
+        "en": "Candidate source only; these follow-ups await a new 23-gate receipt. Bee391 already covers non-expiring keys, full-width forms, and OAuth 204 transport.",
+        "ar": "المصدر المرشح فقط؛ تنتظر هذه المتابعات إيصالاً جديداً من 23 فحصاً. يغطي bee391 بالفعل المفاتيح بلا انتهاء والنماذج بعرض كامل ونقل OAuth 204."
+      },
+      "replacement": null,
+      "supportWindow": "Candidate auth repairs pending release receipt and resume verification.",
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/core/src/identity/transaction-authentication-service.ts",
+        "packages/db/src/identity/transaction-authentication-store.ts",
+        "apps/sign/src/oidc/interaction-adapters.ts",
+        "apps/sign/netlify/functions/oidc.ts",
+        "packages/config/src/scheduled-job-registry.ts",
+        "apps/api/src/scheduled-job-runner.ts",
+        "tests/website-scheduled-relay.test.ts"
+      ],
+      "permalink": "/changes#2026-10-14-auth-proof-reuse-and-relay"
+    },
+    {
+      "id": "2026-10-14-workspace-creation-terms-removal",
+      "publishedAt": "2026-10-14",
+      "title": {
+        "en": "Workspace creation removes duplicate terms acceptance",
+        "ar": "إزالة قبول الشروط المكرر من إنشاء مساحة العمل"
+      },
+      "summary": {
+        "en": "Workspace creation now relies on the valid authenticated session instead of a second terms checkbox. Legacy input remains optional for compatibility, and historical timestamps stay nullable without fabricated values.",
+        "ar": "يعتمد إنشاء مساحة العمل الآن على الجلسة الموثقة الحاكمة بدلاً من مربع قبول شروط ثانٍ. يظل الإدخال القديم اختيارياً للتوافق، وتبقى الطوابع الزمنية التاريخية قابلة للقيمة الفارغة دون اصطناع قيم."
+      },
+      "categories": [
+        "product",
+        "api",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference",
+        "evaluator"
+      ],
+      "impact": "security",
+      "migration": {
+        "en": "Migrate clients to omit duplicate terms acceptance and rely on the authenticated session flow. Review migration 0112 before deployment; preserve NULL historical timestamps and rollback guards.",
+        "ar": "رحّل العملاء لحذف قبول الشروط المكرر والاعتماد على مسار الجلسة الموثقة. راجع الترحيل 0112 قبل النشر، وحافظ على الطوابع الزمنية التاريخية NULL وحواجز التراجع."
+      },
+      "announcement": {
+        "en": "Source checks cover valid session creation, optional legacy input, actual timestamps only, nullable historical fields, and rollback safety. This entry describes source state only; no hosted deployment is claimed.",
+        "ar": "تغطي فحوص المصدر إنشاء الجلسة الصحيح والإدخال القديم الاختياري والطوابع الزمنية الفعلية فقط والحقول التاريخية القابلة للقيمة الفارغة وسلامة التراجع. يصف هذا الإدخال حالة المصدر فقط، ولا يُدّعى نشر مستضاف."
+      },
+      "replacement": "/reference/rest",
+      "supportWindow": "Source-only migration 0112 pending deployment review.",
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/db/drizzle/0112_workspace_terms_nullable_up.sql",
+        "packages/db/drizzle/0112_workspace_terms_nullable_down.sql",
+        "packages/db/src/schema/workspace.ts",
+        "packages/db/src/workspace-store.ts",
+        "packages/core/src/workspace/service.ts",
+        "tests/workspace-terms-migration.test.ts",
+        "tests/workspace-service.test.ts"
+      ],
+      "permalink": "/changes#2026-10-14-workspace-creation-terms-removal"
+    },
+    {
+      "id": "2026-10-14-version-precondition-transport-fallback",
+      "publishedAt": "2026-10-14",
+      "title": {
+        "en": "Version preconditions survive hosted transport",
+        "ar": "استمرار شروط الإصدار عبر النقل المستضاف"
+      },
+      "summary": {
+        "en": "Versioned management mutations accept a validated JSON version when the hosted forwarding path drops If-Match. App, policy, membership, access, and credential updates retain mandatory concurrency checks and reject mismatches.",
+        "ar": "تقبل عمليات الإدارة ذات الإصدار نسخة JSON متحققة عندما يسقط مسار التوجيه المستضاف If-Match. تحافظ تحديثات التطبيق والسياسة والعضوية والوصول وبيانات الاعتماد على فحوص التزامن الإلزامية وترفض حالات عدم التطابق."
+      },
+      "categories": [
+        "api",
+        "sdk",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "security",
+      "migration": {
+        "en": "Source-only compatibility improvement. Continue sending If-Match and the operation's documented JSON version field. Missing, malformed, conflicting, and stale versions remain rejected. Policy drafts also support version zero.",
+        "ar": "تحسين توافق متاح في المصدر فقط. استمر في إرسال If-Match وحقل إصدار JSON الموثق للعملية. تظل الإصدارات المفقودة وغير الصالحة والمتعارضة والقديمة مرفوضة. تدعم مسودات السياسة الإصدار صفر أيضاً."
+      },
+      "announcement": {
+        "en": "The API routes, server client, dashboard commands, OpenAPI contract, REST reference, and machine-readable documentation now describe the same bounded fallback. No hosted deployment is claimed.",
+        "ar": "تصف مسارات API وعميل الخادم وأوامر لوحة التحكم وعقد OpenAPI ومرجع REST والوثائق المقروءة آلياً نفس البديل المحدود. لا يُدّعى وجود نشر مستضاف."
+      },
+      "replacement": "/reference/rest",
+      "supportWindow": "Source-only compatibility capability pending hosted release.",
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "apps/api/src/api-contract.ts",
+        "apps/api/src/app-routes.ts",
+        "apps/api/src/app-membership-transport.ts",
+        "apps/api/src/policy-transport.ts",
+        "apps/api/src/policy-draft-routes.ts",
+        "apps/dash/src/lib/environment-resource-commands.ts",
+        "apps/dash/src/lib/policy-resource.ts",
+        "packages/contracts/openapi/authless.openapi.json",
+        "packages/server/src/apps.ts",
+        "packages/server/src/policies.ts",
+        "tests/app-routes.test.ts",
+        "tests/api-transport-codec.test.ts",
+        "tests/policy-draft-routes.test.ts",
+        "tests/environment-resource-commands.test.ts"
+      ],
+      "permalink": "/changes#2026-10-14-version-precondition-transport-fallback"
+    },
+    {
+      "id": "2026-10-13-workspace-keys-active-policy",
+      "publishedAt": "2026-10-13",
+      "title": {
+        "en": "Workspace service keys and active policy migration",
+        "ar": "مفاتيح خدمة مساحة العمل وترحيل السياسة النشطة"
+      },
+      "summary": {
+        "en": "The source contract now covers workspace service credentials, environment isolation, app metadata administration, policy history, and online session validation. Existing users are re-evaluated on the next authenticated request or token refresh.",
+        "ar": "يغطي عقد المصدر الآن بيانات اعتماد خدمة مساحة العمل وعزل البيئات وإدارة بيانات التطبيق وسجل السياسات والتحقق الفوري من الجلسات. يُعاد تقييم المستخدمين الحاليين عند أول طلب موثق أو تحديث للرمز."
       },
       "categories": [
         "api",
@@ -27448,108 +32635,36 @@ The following checked projection is shared with the human-rendered guide and pre
         "reference",
         "evaluator"
       ],
-      "impact": "breaking",
+      "impact": "security",
       "migration": {
-        "en": "Authless platform billing accepts monthly periods only; update integrations that send annual billing periods. This applies to the Authless workspace product only and does not change developer app plan intervals or personal app subscriptions. Verify the generated REST, server, CLI, and Docs MCP projections before publishing an integration.",
-        "ar": "تقبل فوترة منصة Authless الفترات الشهرية فقط؛ حدّث التكاملات التي ترسل فترات سنوية. ينطبق ذلك على منتج مساحة عمل Authless فقط ولا يغيّر فترات خطط تطبيقات المطور أو اشتراكات التطبيقات الشخصية. تحقق من إسقاطات REST والخادم وCLI وDocs MCP المولّدة قبل نشر التكامل."
+        "en": "Migrations 0102 through 0107 remain source-only and require legacy review before deployment. Integrators must handle policy status, consent or proof interaction, bounded service-key scopes, revision history, and online validation on every protected request or token refresh.",
+        "ar": "تبقى الترحيلات من 0106 إلى 0111 في المصدر فقط وتحتاج إلى مراجعة قديمة قبل النشر. يجب على المدمجين التعامل مع حالة السياسة وتفاعل الموافقة أو الإثبات ونطاقات مفاتيح الخدمة المحددة وسجل المراجعات والتحقق الفوري في كل طلب محمي أو تحديث للرمز."
       },
       "announcement": {
-        "en": "The public contract and generated exports now agree on monthly Authless workspace billing, credential separation, and the independent app-commerce model. This release does not enable live payment collection, worldwide coverage, or MCP GA.",
-        "ar": "يتفق العقد العام والصادرات المولّدة الآن على فوترة مساحة عمل Authless الشهرية وفصل بيانات الاعتماد ونموذج تجارة التطبيقات المستقل. لا يفعّل هذا الإصدار تحصيل مدفوعات حية أو تغطية عالمية أو الإصدار العام لـ MCP."
+        "en": "The checked OpenAPI contract, generated server client, CLI-facing metadata, SvelteKit evidence, REST reference, machine documentation, and Docs MCP describe the same source-only capability. No hosted deployment is claimed.",
+        "ar": "يصف عقد OpenAPI المتحقق منه والعميل المولّد للخادم وبيانات CLI وأدلة SvelteKit ومرجع REST والوثائق المقروءة آلياً وDocs MCP القدرة المصدرية نفسها. لا يُدّعى وجود نشر مستضاف."
       },
       "replacement": "/reference/rest",
-      "supportWindow": "Current monthly-only Authless workspace billing contract.",
-      "sunsetAt": "2026-10-12",
-      "status": "available",
-      "support": "/support",
-      "evidence": [
-        "packages/contracts/src/commercial-wire.generated.ts",
-        "packages/contracts/openapi/authless.openapi.json",
-        "packages/server/src/billing.ts",
-        "packages/server/src/commerce.ts",
-        "packages/server/README.md",
-        "packages/cli/src/cli.ts",
-        "packages/cli/README.md",
-        "packages/docs-mcp/src/corpus.generated.json",
-        "apps/docs/static/openapi.json",
-        "apps/docs/static/rest-reference.json",
-        "apps/docs/machine-readable/llms-full.txt",
-        "tests/commercial-billing-api.test.ts",
-        "tests/commercial-billing.test.ts",
-        "tests/docs-mcp.test.ts"
-      ],
-      "permalink": "/changes#2026-10-12-monthly-authless-platform-billing"
-    },
-    {
-      "id": "2026-10-11-profile-workspace-app-commerce-boundaries",
-      "publishedAt": "2026-10-11",
-      "title": {
-        "en": "Profile and developer workspace commerce boundaries",
-        "ar": "حدود التجارة بين الملف الشخصي ومساحة عمل المطور"
-      },
-      "summary": {
-        "en": "A personal profile can upgrade to developer capability through workspace membership and switch views without a second identity. App subscriptions remain profile-owned, while app catalog administration and Authless platform billing remain workspace-scoped. The local mock provider, CLI, and delegated MCP preview/apply flow now preserve these boundaries across the API, database, and operator tooling.",
-        "ar": "يمكن للملف الشخصي الترقية إلى إمكانات المطور عبر عضوية مساحة العمل والتنقل بين العرضين دون هوية ثانية. تبقى اشتراكات التطبيقات مملوكة للملف الشخصي، بينما تبقى إدارة كتالوج التطبيقات وفوترة Authless للمنصة ضمن نطاق مساحة العمل. يحافظ موفر الدفع الوهمي المحلي وCLI وتدفق المعاينة والتنفيذ المفوض عبر MCP على هذه الحدود عبر واجهة API وقاعدة البيانات وأدوات التشغيل."
-      },
-      "categories": [
-        "product",
-        "api",
-        "security",
-        "operations",
-        "docs"
-      ],
-      "audiences": [
-        "operator",
-        "integrator",
-        "reference",
-        "evaluator"
-      ],
-      "impact": "additive",
-      "migration": {
-        "en": "No live-payment migration is implied. Treat developer account as a product label for an existing profile with workspace capability. Migrations 0102–0105 add local app-commerce, scope-integrity, and durable management approval state; verify the intended database with the read-only status check before any deployment migration.",
-        "ar": "لا يعني ذلك ترحيلاً لمدفوعات حية. تعامل مع حساب المطور كتسمية منتج لملف شخصي قائم يملك إمكانات مساحة العمل. تضيف الترحيلات 0102–0105 حالة تجارة التطبيقات وسلامة النطاق والموافقات الإدارية الدائمة محلياً؛ تحقق من قاعدة البيانات المقصودة بفحص الحالة للقراءة فقط قبل أي ترحيل للنشر."
-      },
-      "announcement": {
-        "en": "Personal subscriptions, developer workspace administration, app commerce, and Authless platform billing now have separate UI contexts, API authorities, and database scopes. The mock provider remains local-only and does not claim live worldwide payment support.",
-        "ar": "أصبحت الاشتراكات الشخصية وإدارة مساحة عمل المطور وتجارة التطبيقات وفوترة Authless للمنصة تملك سياقات واجهة وصلاحيات API ونطاقات قاعدة بيانات منفصلة. يبقى موفر الدفع الوهمي محلياً ولا يدعي دعم مدفوعات عالمية حية."
-      },
-      "replacement": null,
-      "supportWindow": null,
+      "supportWindow": "Source-only capability pending legacy migration review.",
       "sunsetAt": null,
       "status": "available",
       "support": "/support",
       "evidence": [
-        "CONTEXT.md",
-        "docs/adr/0001-profile-workspace-and-commerce-boundaries.md",
-        "docs/operations/mock-managed-payments.md",
-        "apps/dash/src/routes/+layout.svelte",
-        "apps/dash/src/routes/personal/subscriptions/+page.svelte",
-        "apps/dash/src/routes/workspaces/+page.svelte",
-        "apps/api/src/app-commerce-routes.ts",
-        "apps/api/src/runtime/commerce-authority.ts",
-        "apps/api/src/management-mcp/catalog.ts",
-        "apps/api/src/management-mcp/tool-routes/commerce.ts",
-        "apps/api/src/runtime/management-commerce-input.ts",
-        "apps/api/src/runtime/management-commerce.ts",
-        "apps/api/src/runtime/management-mcp-attestation.ts",
-        "packages/cli/README.md",
-        "packages/cli/src/cli.ts",
-        "packages/cli/test/cli.test.ts",
-        "packages/server/src/commerce.ts",
-        "packages/server/src/billing.ts",
-        "packages/core/src/app-commerce/service.ts",
-        "packages/core/src/agent-management/management-scopes.ts",
-        "packages/db/src/agent-management/commerce-mutation-store.ts",
-        "packages/db/src/migration-status-cli.ts",
-        "packages/db/drizzle/0105_management_agent_commerce_billing_scopes_up.sql",
-        "packages/db/drizzle/0104_app_commerce_scope_integrity_up.sql",
-        "packages/db/drizzle/0104_app_commerce_scope_integrity_down.sql",
-        "tests/integration/commerce-authority-postgres.integration.ts",
-        "tests/integration/management-commerce-runtime-postgres.integration.ts",
-        "apps/api/src/runtime/management-commerce-input.test.ts",
-        "tests/ui/workspace-context.ui.ts"
+        "packages/contracts/openapi/authless.openapi.json",
+        "packages/contracts/openapi/authless.compatibility.json",
+        "packages/server/src/generated.ts",
+        "packages/server/src/online-sessions.ts",
+        "packages/sveltekit/package.json",
+        "packages/db/drizzle/0106_environment_customer_authority_up.sql",
+        "packages/db/drizzle/0107_oidc_grant_policy_authority_up.sql",
+        "packages/db/drizzle/0108_workspace_service_credentials_up.sql",
+        "packages/db/drizzle/0109_policy_publication_service_actor_up.sql",
+        "packages/db/drizzle/0110_app_machine_idempotency_up.sql",
+        "packages/db/drizzle/0111_app_metadata_version_up.sql",
+        "tests/server-generation.test.ts",
+        "tests/server-contract-compatibility.test.ts"
       ],
-      "permalink": "/changes#2026-10-11-profile-workspace-app-commerce-boundaries"
+      "permalink": "/changes#2026-10-13-workspace-keys-active-policy"
     },
     {
       "id": "2026-10-11-six-digit-authentication",
@@ -27595,8 +32710,8 @@ The following checked projection is shared with the human-rendered guide and pre
         "packages/identity-node/src/secret-protection.ts",
         "packages/jobs/src/identity-verification.ts",
         "packages/oidc/src/interactions.ts",
-        "apps/docs/static/openapi.json",
-        "apps/docs/static/rest-reference.json",
+        "apps/docs/src/lib/machine-assets/openapi.json",
+        "apps/docs/src/lib/machine-assets/rest-reference.json",
         "apps/docs/machine-readable/llms-full.txt",
         "packages/docs-mcp/src/corpus.generated.json",
         "tests/identity-contract-codec.test.ts",
@@ -27842,8 +32957,8 @@ The following checked projection is shared with the human-rendered guide and pre
         "ar": "إسقاط جاهزية التعديلات الحساسة"
       },
       "summary": {
-        "en": "Adds compatible readiness fields for personal username and workspace creation so clients can reveal reauthentication before submission.",
-        "ar": "يضيف حقول جاهزية متوافقة لاسم المستخدم الشخصي وإنشاء مساحة العمل كي تعرض التطبيقات إعادة المصادقة قبل الإرسال."
+        "en": "Retires action-level authentication readiness fields so clients rely on the authenticated session and its permissions.",
+        "ar": "يلغي حقول جاهزية المصادقة على مستوى الإجراء كي تعتمد التطبيقات على الجلسة الموثقة وصلاحياتها."
       },
       "categories": [
         "api",
@@ -27856,12 +32971,12 @@ The following checked projection is shared with the human-rendered guide and pre
       ],
       "impact": "additive",
       "migration": {
-        "en": "No migration is required. Clients may consume the optional readiness fields; existing clients that ignore additive response fields remain compatible.",
-        "ar": "لا يلزم ترحيل. يمكن للتطبيقات استخدام حقول الجاهزية الاختيارية؛ وتظل التطبيقات الحالية التي تتجاهل حقول الاستجابة الإضافية متوافقة."
+        "en": "Clients should stop reading the retired readiness fields and submit authorized actions with the valid session token.",
+        "ar": "ينبغي للتطبيقات التوقف عن قراءة حقول الجاهزية الملغاة وإرسال الإجراءات المسموح بها باستخدام رمز الجلسة الصالح."
       },
       "announcement": {
-        "en": "Username and workspace creation readiness is now projected from authoritative authentication time and preserved by the generated TypeScript client contract.",
-        "ar": "تُسقط جاهزية اسم المستخدم وإنشاء مساحة العمل الآن من وقت المصادقة الموثوق ويحفظها عقد عميل TypeScript المولد."
+        "en": "Username and workspace creation now use the authenticated session and permission contract without a product-level recent-auth precheck.",
+        "ar": "يعتمد إنشاء اسم المستخدم ومساحة العمل الآن على عقد الجلسة الموثقة والصلاحيات من دون فحص مصادقة حديثة على مستوى المنتج."
       },
       "replacement": null,
       "supportWindow": null,
@@ -28549,7 +33664,7 @@ The following checked projection is shared with the human-rendered guide and pre
       ],
       "impact": "additive",
       "migration": {
-        "en": "No migration is required. The path, confirmation and expected-version input, correlation header, 200 split/version response, private not-found, authorization, recent-authentication, confirmation, and version-conflict outcomes remain unchanged.",
+        "en": "No migration is required. The path, confirmation and expected-version input, correlation header, 200 split/version response, private not-found, authorization, confirmation, and version-conflict outcomes remain unchanged.",
         "ar": "لا يلزم ترحيل. يظل المسار ومدخلا التأكيد والإصدار المتوقع وترويسة الارتباط واستجابة الفصل والإصدار 200 ونتائج الإخفاء وعدم التفويض والمصادقة الحديثة والتأكيد وتعارض الإصدار دون تغيير."
       },
       "announcement": {
@@ -28644,8 +33759,8 @@ The following checked projection is shared with the human-rendered guide and pre
       ],
       "impact": "additive",
       "migration": {
-        "en": "No migration is required. The path, confirmation input, 200 reservation response, correlation header, and authorization, recent-authentication, confirmation, conflict, and availability outcomes remain unchanged.",
-        "ar": "لا يلزم ترحيل. يظل المسار ومدخل التأكيد واستجابة الحجز 200 وترويسة الارتباط ونتائج التفويض والمصادقة الحديثة والتأكيد والتعارض والتوفر دون تغيير."
+        "en": "No migration is required. The path, confirmation input, 200 reservation response, correlation header, and authorization, confirmation, conflict, and availability outcomes remain unchanged.",
+        "ar": "لا يلزم ترحيل. يظل المسار ومدخل التأكيد واستجابة الحجز 200 وترويسة الارتباط ونتائج التفويض والتأكيد والتعارض والتوفر دون تغيير."
       },
       "announcement": {
         "en": "Username removal now uses canonical generated confirmation decoding and fails closed before publishing a malformed reservation projection.",
@@ -30264,7 +35379,7 @@ Source attribution: Developer documentation (https://docs.authle.ss/changes).
       title: "Changes and migration",
       updatedAt: "2026-08-21",
       contentType: "text/markdown",
-      contentDigest: "0176d511f39343863f988d082a324bb42a583fa363f14cf15a0d9c14bd7a3e04"
+      contentDigest: "9374b28602e12515801a47f0a2a3952870a016b5d89b95747247e268dc86047b"
     },
     {
       canonical: "https://docs.authle.ss/changes?lang=ar",
@@ -30319,33 +35434,35 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
 \`\`\`json
 {
   "schema": "authless.release-center/v1",
-  "updatedAt": "2026-10-12",
+  "updatedAt": "2026-10-17",
   "compatibility": [
     {
       "component": "REST API",
       "deprecation": "current",
-      "releaseNotes": "/changes#2026-10-11-six-digit-authentication",
+      "releaseNotes": "/changes#2026-10-14-version-precondition-transport-fallback",
       "version": "0.1.0",
       "stability": "stable",
       "contract": "unversioned default (0.1.0)",
-      "testedAt": "2026-10-11",
+      "testedAt": "2026-10-14",
       "evidence": [
         "packages/contracts/openapi/authless.openapi.json",
+        "tests/app-routes.test.ts",
+        "tests/policy-draft-routes.test.ts",
         "tests/rest-api-reference.test.ts"
       ]
     },
     {
       "component": "@authless/browser",
       "deprecation": "current",
-      "releaseNotes": "/changes#2026-09-07-sdk-callback-query",
+      "releaseNotes": "/changes#2026-10-17-valid-session-actions",
       "version": "0.0.0",
       "stability": "source-only",
       "contract": "0.1.0",
-      "browser": "Chromium via Playwright 1.62.0",
-      "testedAt": "2026-09-07",
+      "browser": "Codex built-in browser",
+      "testedAt": "2026-10-17",
       "evidence": [
         "packages/browser/package.json",
-        "tests/sdk-callback-query.test.ts",
+        "packages/browser/src/index.test.ts",
         "tests/oidc-core.test.ts",
         "tests/browser-capability-entrypoints.test.ts",
         "tests/relying-app-helpers.test.ts",
@@ -30355,27 +35472,29 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
     {
       "component": "@authless/server",
       "deprecation": "current",
-      "releaseNotes": "/changes#2026-10-11-six-digit-authentication",
+      "releaseNotes": "/changes#2026-10-14-version-precondition-transport-fallback",
       "version": "0.1.0",
       "stability": "source-only",
       "contract": "0.1.0",
       "runtime": "Node 24.x",
-      "testedAt": "2026-10-11",
+      "testedAt": "2026-10-14",
       "evidence": [
         "packages/server/package.json",
         "packages/server/src/index.ts",
+        "packages/server/src/apps.ts",
+        "packages/server/src/policies.ts",
         "packages/server/tests/server.node.mjs"
       ]
     },
     {
       "component": "@authless/cli",
       "deprecation": "current",
-      "releaseNotes": "/changes#2026-10-10-native-cli-and-docs-navigation",
+      "releaseNotes": "/changes#2026-10-14-workspace-creation-terms-removal",
       "version": "0.1.0",
       "stability": "source-only",
       "contract": "0.1.0",
       "runtime": "Bun 1.3.10",
-      "testedAt": "2026-10-10",
+      "testedAt": "2026-10-14",
       "evidence": [
         "packages/cli/package.json",
         "packages/cli/src/cli.ts",
@@ -30385,15 +35504,17 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
     {
       "component": "@authless/sveltekit",
       "deprecation": "current",
-      "releaseNotes": "/changes#2026-09-07-sdk-callback-query",
+      "releaseNotes": "/changes#2026-10-14-workspace-creation-terms-removal",
       "version": "0.0.0",
       "stability": "source-only",
       "contract": "0.1.0",
       "runtime": "SvelteKit 2.70.2 / Node 24.x",
       "framework": "Svelte 5.56.8",
-      "testedAt": "2026-09-07",
+      "testedAt": "2026-10-14",
       "evidence": [
         "packages/sveltekit/package.json",
+        "packages/sveltekit/src/index.test.ts",
+        "docs/evidence/2026-10-16-sveltekit-jwt-claim-fixture.md",
         "tests/sdk-callback-query.test.ts",
         "tests/oidc-core.test.ts",
         "packages/sveltekit/src/oidc.ts",
@@ -30406,15 +35527,478 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
   ],
   "changes": [
     {
-      "id": "2026-10-12-monthly-authless-platform-billing",
-      "publishedAt": "2026-10-12",
+      "id": "2026-10-17-valid-session-actions",
+      "publishedAt": "2026-10-17",
       "title": {
-        "en": "Monthly Authless workspace billing contract",
-        "ar": "عقد الفوترة الشهرية لمساحة عمل Authless"
+        "en": "Valid sessions authorize permitted actions",
+        "ar": "الجلسات الصالحة تتيح الإجراءات المسموح بها"
       },
       "summary": {
-        "en": "Authless workspace billing now publishes a monthly-only plan, review, authorization, cancellation, refund, and usage contract with matching server, CLI, and documentation exports. App-defined plans and profile-owned app subscriptions remain separate products.",
-        "ar": "تنشر فوترة مساحة عمل Authless الآن عقداً شهرياً فقط للخطة والمراجعة والتفويض والإلغاء والاسترداد والاستخدام مع صادرات متطابقة للخادم وCLI والوثائق. تبقى خطط التطبيقات المعرّفة من المطور واشتراكات التطبيقات المملوكة للملف الشخصي منتجات منفصلة."
+        "en": "A valid session can perform actions allowed by its role and scopes. Actions no longer require an additional sign-in based on authentication age.",
+        "ar": "تتيح الجلسة الصالحة تنفيذ الإجراءات التي يسمح بها دور المستخدم ونطاقات صلاحياته. لم تعد الإجراءات تتطلب تسجيل دخول إضافيًا بسبب وقت التحقق السابق."
+      },
+      "categories": [
+        "product",
+        "api",
+        "sdk",
+        "security"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "breaking",
+      "migration": {
+        "en": "Remove creationReadiness, sensitiveMutationReadiness, sensitiveActionSeconds, and reauthentication failure handling from clients. Keep normal unauthorized and permission-denied handling. Existing sessions retain their expiry, revocation, and permission checks.",
+        "ar": "أزل creationReadiness وsensitiveMutationReadiness وsensitiveActionSeconds ومعالجة أخطاء إعادة التحقق من العملاء. احتفظ بمعالجة عدم تسجيل الدخول ورفض الصلاحيات المعتادة. تبقى فحوصات انتهاء الجلسات وإلغائها وصلاحياتها سارية."
+      },
+      "announcement": {
+        "en": "Workspace, account, policy, billing, and credential actions use the current valid session and granted permissions.",
+        "ar": "تعتمد إجراءات مساحات العمل والحساب والسياسات والفوترة والمفاتيح على الجلسة الصالحة الحالية والصلاحيات الممنوحة."
+      },
+      "replacement": "/reference/rest",
+      "supportWindow": "Existing valid sessions continue until expiry or revocation.",
+      "sunsetAt": "2026-10-17",
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/contracts/openapi/authless.openapi.json",
+        "packages/browser/package.json",
+        "packages/browser/src/index.test.ts",
+        "tests/integration/identity-postgres.integration.ts",
+        "tests/integration/workspace-credentials-postgres.integration.ts",
+        "tests/integration/policy-postgres.integration.ts"
+      ],
+      "permalink": "/changes#2026-10-17-valid-session-actions"
+    },
+    {
+      "id": "2026-10-16-explicit-production-activation",
+      "publishedAt": "2026-10-16",
+      "title": {
+        "en": "Explicit production activation for workspace automation",
+        "ar": "تفعيل الإنتاج الصريح لأتمتة مساحة العمل"
+      },
+      "summary": {
+        "en": "A workspace key with the separately granted app:activate scope can activate a configured production draft. Activation requires confirmation, the current environment version, an active policy, a usable HTTPS redirect, and a valid OIDC profile. Production app allowance and commercial suspension rules apply.",
+        "ar": "يمكن لمفتاح مساحة العمل الذي مُنح نطاق app:activate بشكل مستقل تفعيل مسودة إنتاج مهيأة. يتطلب التفعيل التأكيد وإصدار البيئة الحالي وسياسة نشطة وعنوان إعادة توجيه HTTPS صالحًا وملف OIDC صالحًا. تسري حدود تطبيقات الإنتاج وقواعد التعليق التجاري."
+      },
+      "categories": [
+        "api",
+        "sdk",
+        "product",
+        "security"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Issue a new principal and key with the complete provisioning grant and explicitly enable production activation. Rotation preserves existing grants. Send action activate with confirmed true, expectedVersion, and matching If-Match. Reconcile uncertain delivery with an environment read.",
+        "ar": "أنشئ كيان خدمة ومفتاحًا جديدين بصلاحيات التهيئة الكاملة وفعّل صلاحية تفعيل الإنتاج صراحة. يحافظ التدوير على الصلاحيات الحالية. أرسل action بقيمة activate مع confirmed بقيمة true وexpectedVersion وترويسة If-Match المطابقة. تحقّق من النتيجة غير المؤكدة بقراءة البيئة."
+      },
+      "announcement": {
+        "en": "Human activation and resume remain separate operations. A valid authenticated session can perform each operation when its permissions, confirmation, and current-version checks pass. Service keys can activate permitted production drafts and cannot resume suspended environments.",
+        "ar": "يبقى تفعيل الإنسان واستئناف البيئة عمليتين منفصلتين. يمكن للجلسة الموثقة الصالحة تنفيذ كل عملية عند اجتياز الصلاحيات والتأكيد وفحوصات الإصدار الحالي. يمكن لمفاتيح الخدمة تفعيل مسودات الإنتاج المسموح بها ولا يمكنها استئناف البيئات المعلّقة."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/contracts/openapi/authless.openapi.json",
+        "packages/core/src/app/environment-service.ts",
+        "packages/db/src/app-store.ts",
+        "tests/app-service.test.ts",
+        "tests/integration/machine-app-postgres.integration.ts",
+        "tests/server-app-family.test.ts"
+      ],
+      "permalink": "/changes#2026-10-16-explicit-production-activation"
+    },
+    {
+      "id": "2026-10-16-workspace-capability-diagnostics",
+      "publishedAt": "2026-10-16",
+      "title": {
+        "en": "Inspect effective workspace-key capabilities",
+        "ar": "فحص الصلاحيات الفعلية لمفتاح مساحة العمل"
+      },
+      "summary": {
+        "en": "Workspace keys can inspect their own effective scopes and app and environment restrictions without credential:write. Authentication intersects the principal and credential grants and denies disjoint restrictions.",
+        "ar": "يمكن لمفاتيح مساحة العمل فحص نطاقاتها الفعلية وقيود التطبيقات والبيئات دون credential:write. تستخدم المصادقة تقاطع صلاحيات كيان الخدمة والمفتاح وترفض القيود التي لا تتقاطع."
+      },
+      "categories": [
+        "api",
+        "sdk",
+        "security"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Read GET /workspaces/{workspaceId}/capabilities when connecting a provisioning key. Treat invalid authentication, insufficient_scope, concealed inaccessible targets, readiness errors, and version conflicts separately. The response contains no credential secret.",
+        "ar": "اقرأ GET /workspaces/{workspaceId}/capabilities عند ربط مفتاح التهيئة. تعامل مع المصادقة غير الصالحة وinsufficient_scope والأهداف غير المتاحة وأخطاء الجاهزية وتعارض الإصدارات بشكل منفصل. لا تتضمن الاستجابة سر المفتاح."
+      },
+      "announcement": {
+        "en": "Capability inspection requires a valid key for the requested workspace and reports only that caller's authority. Provisioning grants now include endpoint:write and oidc-profile:write.",
+        "ar": "يتطلب فحص الصلاحيات مفتاحًا صالحًا لمساحة العمل المطلوبة ويعرض صلاحيات المتصل فقط. تتضمن صلاحيات التهيئة الآن endpoint:write وoidc-profile:write."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "apps/api/src/capability-routes.ts",
+        "packages/db/src/workspace-service-credential-store.ts",
+        "tests/integration/workspace-credentials-postgres.integration.ts",
+        "tests/server-workspace-family.test.ts"
+      ],
+      "permalink": "/changes#2026-10-16-workspace-capability-diagnostics"
+    },
+    {
+      "id": "2026-10-16-production-lifecycle-retained-sessions",
+      "publishedAt": "2026-10-16",
+      "title": {
+        "en": "Production lifecycle guards and retained OIDC sessions",
+        "ar": "ضوابط دورة حياة الإنتاج وجلسات OIDC المحتفظ بها"
+      },
+      "summary": {
+        "en": "Production environments expose separate activate, resume, suspend, and retire commands with explicit confirmation and version checks. Retained Authless sessions can complete a new OIDC consent transaction, while persisted transaction and grant-expiry boundaries remain authoritative.",
+        "ar": "تعرض بيئات الإنتاج أوامر منفصلة للتفعيل والاستئناف والتعليق والتقاعد مع تأكيد صريح وفحوص للإصدار. يمكن لجلسات Authless المحتفظ بها إكمال معاملة موافقة OIDC جديدة، بينما تظل حدود انتهاء صلاحية المعاملة والمنحة المحفوظة هي المرجع المعتمد."
+      },
+      "categories": [
+        "api",
+        "product",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Send activate and resume as separate lifecycle actions with confirmed true, expectedVersion, and a matching If-Match value. Keep retained-session clients on the existing consent flow and treat persisted transaction or grant expiry as authoritative. Verify the returned state after an uncertain lifecycle response.",
+        "ar": "أرسل التفعيل والاستئناف كإجرائي دورة حياة منفصلين مع confirmed بقيمة true وexpectedVersion وقيمة If-Match مطابقة. أبقِ عملاء الجلسات المحتفظ بها على مسار الموافقة الحالي وتعامل مع انتهاء صلاحية المعاملة أو المنحة المحفوظة باعتباره المرجع المعتمد. تحقّق من الحالة المعادة بعد استجابة غير مؤكدة لدورة الحياة."
+      },
+      "announcement": {
+        "en": "Operators can activate a ready production draft and resume suspended authorization with version-bound confirmation. Relying parties can continue through consent using a retained Authless session, with each transaction and grant subject to its persisted expiry.",
+        "ar": "يمكن للمشغلين تفعيل مسودة إنتاج جاهزة واستئناف التفويض المعلق مع تأكيد مرتبط بالإصدار. ويمكن للأطراف المعتمدة متابعة الموافقة باستخدام جلسة Authless محتفظ بها، مع خضوع كل معاملة ومنحة لتاريخ انتهاء صلاحيتها المحفوظ."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/contracts/openapi/authless.openapi.json",
+        "packages/server/src/generated.ts",
+        "apps/dash/src/routes/workspaces/[workspace]/apps/[app]/[environment]/endpoints/+page.svelte",
+        "tests/environment-lifecycle-contract.test.ts",
+        "tests/integration/oidc-postgres.integration.ts",
+        "tests/oidc-core.test.ts",
+        "docs/evidence/auth05-qa-retest.md",
+        "docs/evidence/auth06-provider-qa.md"
+      ],
+      "permalink": "/changes#2026-10-16-production-lifecycle-retained-sessions"
+    },
+    {
+      "id": "2026-10-14-workspace-auth-experience-audit",
+      "publishedAt": "2026-10-14",
+      "title": {
+        "en": "Workspace authentication experience audit",
+        "ar": "تدقيق تجربة مصادقة مساحة العمل"
+      },
+      "summary": {
+        "en": "The source audit records workspace key, app, environment, policy, access, audit, profile, session, and error-flow findings. It standardizes reuse of the existing shell, fields, resource rows, status, dialog, secret, and async-state components. Workspace keys default to manual revocation with optional temporary expiry in the candidate source.",
+        "ar": "يسجل تدقيق المصدر نتائج مسارات مفاتيح مساحة العمل والتطبيق والبيئة والسياسة والوصول والتدقيق والملف الشخصي والجلسة والخطأ. ويوحد إعادة استخدام مكونات الغلاف والحقول وصفوف الموارد والحالة والحوار والسر والعمليات غير المتزامنة الموجودة. تعتمد مفاتيح مساحة العمل على الإلغاء اليدوي مع مدة مؤقتة اختيارية في المصدر المرشح."
+      },
+      "categories": [
+        "product",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "operator",
+        "reference",
+        "evaluator"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Source-only audit. Add Workspace keys to canonical workspace navigation, use shared field and resource-state components, and verify nullable key expiry and next-request or refresh policy enforcement before deployment.",
+        "ar": "تدقيق مصدري فقط. أضف مفاتيح مساحة العمل إلى تنقل مساحة العمل المعياري، واستخدم مكونات الحقول وحالات الموارد المشتركة، وتحقق من مدة صلاحية المفتاح القابلة للقيمة الفارغة ومن فرض السياسة عند الطلب التالي أو تحديث الرمز قبل النشر."
+      },
+      "announcement": {
+        "en": "The audit separates supplied screenshots, current Zen production observations, candidate source, and browser-pending states. It makes no hosted deployment or full accessibility claim.",
+        "ar": "يفصل التدقيق بين لقطات الشاشة المقدمة وملاحظات Zen الحالية في الإنتاج والمصدر المرشح والحالات المعلقة في المتصفح. ولا يقدم ادعاءً عن نشر مستضاف أو امتثال كامل لإمكانية الوصول."
+      },
+      "replacement": null,
+      "supportWindow": "Source-only audit pending release and live verification.",
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "docs/audits/2026-10-14-workspace-auth-experience.md",
+        "apps/dash/src/routes/workspaces/[workspace]/credentials/+page.svelte",
+        "apps/dash/src/routes/workspaces/[workspace]/+page.svelte",
+        "packages/ui/src/dash-navigation.ts",
+        "packages/ui/src/components/Field.svelte",
+        "packages/ui/src/components/ResourceRow.svelte",
+        "packages/ui/src/components/StatePanel.svelte",
+        "packages/ui/src/components/TaskDialog.svelte",
+        "packages/ui/src/tokens.ts"
+      ],
+      "permalink": "/changes#2026-10-14-workspace-auth-experience-audit"
+    },
+    {
+      "id": "2026-10-14-credential-confirmation-ux",
+      "publishedAt": "2026-10-14",
+      "title": {
+        "en": "Credential creation removes duplicate confirmation gates",
+        "ar": "إزالة بوابات التأكيد المكررة من إنشاء بيانات الاعتماد"
+      },
+      "summary": {
+        "en": "The candidate credential flow removes duplicate prechecks before one-time secret disclosure while retaining the API authorization, one-time secret, and storage acknowledgement semantics.",
+        "ar": "يزيل مسار بيانات الاعتماد المرشح التأكيدات المسبقة المكررة قبل عرض السر لمرة واحدة مع الحفاظ على صلاحيات API وسر المرة الواحدة وإقرار التخزين."
+      },
+      "categories": [
+        "product",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "operator",
+        "reference",
+        "evaluator"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Source-only UX change. Review credential scope before creation and keep one-time secret storage acknowledgement. No hosted deployment is claimed.",
+        "ar": "تغيير تجربة مستخدم في المصدر فقط. راجع نطاق بيانات الاعتماد قبل الإنشاء وحافظ على إقرار تخزين السر لمرة واحدة. لا يُدّعى وجود نشر مستضاف."
+      },
+      "announcement": {
+        "en": "Source pages and UI tests cover the streamlined creation confirmation and preserved secret acknowledgement. Release verification remains pending.",
+        "ar": "تغطي صفحات المصدر واختبارات واجهة المستخدم تأكيد الإنشاء المبسط وإقرار تخزين السر المحفوظ. ولا يزال تحقق الإصدار معلقاً."
+      },
+      "replacement": null,
+      "supportWindow": "Source-only UX change pending release verification.",
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "apps/dash/src/routes/workspaces/[workspace]/credentials/+page.svelte",
+        "tests/ui/workspace-credentials.ui.ts",
+        "apps/api/src/workspace-credential-routes.ts"
+      ],
+      "permalink": "/changes#2026-10-14-credential-confirmation-ux"
+    },
+    {
+      "id": "2026-10-14-auth-experience-followups",
+      "publishedAt": "2026-10-14",
+      "title": {
+        "en": "Workspace auth experience follow-ups",
+        "ar": "متابعات تجربة مصادقة مساحة العمل"
+      },
+      "summary": {
+        "en": "Records candidate-only responsive form, dashboard bridge, and bodyless OIDC preflight fixes while deployed b3d6 remains the current receipt.",
+        "ar": "يسجل إصلاحات مرشحة فقط لتخطيط النموذج وجسر لوحة التحكم وفحص OIDC التمهيدي بلا جسم، بينما يظل b3d6 المنشور هو الإيصال الحالي."
+      },
+      "categories": [
+        "product",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "operator",
+        "reference",
+        "evaluator"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "No migration. Verify the candidate at 320px, 768px, and 1280px in English and Arabic, then rerun hosted OIDC policy-migration checks before release.",
+        "ar": "لا يلزم ترحيل. تحقق من المرشح عند 320 و768 و1280 بكسل بالإنجليزية والعربية، ثم أعد فحوص ترحيل سياسة OIDC المستضافة قبل الإصدار."
+      },
+      "announcement": {
+        "en": "Candidate source only; deployed b3d6 does not include these follow-ups.",
+        "ar": "المصدر المرشح فقط؛ لا يتضمن b3d6 المنشور هذه المتابعات."
+      },
+      "replacement": null,
+      "supportWindow": "Candidate follow-up pending canonical release receipt.",
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "docs/audits/2026-10-14-workspace-auth-experience.md",
+        "apps/dash/src/lib/AuthenticationPolicyFields.svelte",
+        "apps/dash/src/lib/PolicyEditor.svelte"
+      ],
+      "permalink": "/changes#2026-10-14-auth-experience-followups"
+    },
+    {
+      "id": "2026-10-14-auth-proof-reuse-and-relay",
+      "publishedAt": "2026-10-14",
+      "title": {
+        "en": "Workspace auth proof reuse and relay repairs",
+        "ar": "إصلاحات إعادة استخدام إثبات المصادقة وترحيل وظائف مساحة العمل"
+      },
+      "summary": {
+        "en": "Adds candidate workspace parent/child navigation, eligible-session proof reuse, expired-proof restart, authorize resume routing, and a 12-job auth relay from the shared registry.",
+        "ar": "يضيف المرشح تنقل مساحة العمل الأب والفرع وإعادة استخدام إثبات الجلسة المؤهلة وإعادة تشغيل الإثبات المنتهي وتوجيه استئناف التفويض وترحيل مصادقة من 12 وظيفة من السجل المشترك."
+      },
+      "categories": [
+        "product",
+        "security",
+        "operations"
+      ],
+      "audiences": [
+        "operator",
+        "integrator",
+        "evaluator"
+      ],
+      "impact": "security",
+      "migration": {
+        "en": "No DDL migration. Reuse the original proof within its allowed time, honor explicit prompt and max_age, restart expired proof, and verify authorize resume before deployment.",
+        "ar": "لا يوجد ترحيل DDL. أعد استخدام الإثبات الأصلي ضمن مدته المسموحة، واحترم prompt وmax_age الصريحين، وأعد تشغيل الإثبات المنتهي، وتحقق من استئناف التفويض قبل النشر."
+      },
+      "announcement": {
+        "en": "Candidate source only; these follow-ups await a new 23-gate receipt. Bee391 already covers non-expiring keys, full-width forms, and OAuth 204 transport.",
+        "ar": "المصدر المرشح فقط؛ تنتظر هذه المتابعات إيصالاً جديداً من 23 فحصاً. يغطي bee391 بالفعل المفاتيح بلا انتهاء والنماذج بعرض كامل ونقل OAuth 204."
+      },
+      "replacement": null,
+      "supportWindow": "Candidate auth repairs pending release receipt and resume verification.",
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/core/src/identity/transaction-authentication-service.ts",
+        "packages/db/src/identity/transaction-authentication-store.ts",
+        "apps/sign/src/oidc/interaction-adapters.ts",
+        "apps/sign/netlify/functions/oidc.ts",
+        "packages/config/src/scheduled-job-registry.ts",
+        "apps/api/src/scheduled-job-runner.ts",
+        "tests/website-scheduled-relay.test.ts"
+      ],
+      "permalink": "/changes#2026-10-14-auth-proof-reuse-and-relay"
+    },
+    {
+      "id": "2026-10-14-workspace-creation-terms-removal",
+      "publishedAt": "2026-10-14",
+      "title": {
+        "en": "Workspace creation removes duplicate terms acceptance",
+        "ar": "إزالة قبول الشروط المكرر من إنشاء مساحة العمل"
+      },
+      "summary": {
+        "en": "Workspace creation now relies on the valid authenticated session instead of a second terms checkbox. Legacy input remains optional for compatibility, and historical timestamps stay nullable without fabricated values.",
+        "ar": "يعتمد إنشاء مساحة العمل الآن على الجلسة الموثقة الحاكمة بدلاً من مربع قبول شروط ثانٍ. يظل الإدخال القديم اختيارياً للتوافق، وتبقى الطوابع الزمنية التاريخية قابلة للقيمة الفارغة دون اصطناع قيم."
+      },
+      "categories": [
+        "product",
+        "api",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference",
+        "evaluator"
+      ],
+      "impact": "security",
+      "migration": {
+        "en": "Migrate clients to omit duplicate terms acceptance and rely on the authenticated session flow. Review migration 0112 before deployment; preserve NULL historical timestamps and rollback guards.",
+        "ar": "رحّل العملاء لحذف قبول الشروط المكرر والاعتماد على مسار الجلسة الموثقة. راجع الترحيل 0112 قبل النشر، وحافظ على الطوابع الزمنية التاريخية NULL وحواجز التراجع."
+      },
+      "announcement": {
+        "en": "Source checks cover valid session creation, optional legacy input, actual timestamps only, nullable historical fields, and rollback safety. This entry describes source state only; no hosted deployment is claimed.",
+        "ar": "تغطي فحوص المصدر إنشاء الجلسة الصحيح والإدخال القديم الاختياري والطوابع الزمنية الفعلية فقط والحقول التاريخية القابلة للقيمة الفارغة وسلامة التراجع. يصف هذا الإدخال حالة المصدر فقط، ولا يُدّعى نشر مستضاف."
+      },
+      "replacement": "/reference/rest",
+      "supportWindow": "Source-only migration 0112 pending deployment review.",
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/db/drizzle/0112_workspace_terms_nullable_up.sql",
+        "packages/db/drizzle/0112_workspace_terms_nullable_down.sql",
+        "packages/db/src/schema/workspace.ts",
+        "packages/db/src/workspace-store.ts",
+        "packages/core/src/workspace/service.ts",
+        "tests/workspace-terms-migration.test.ts",
+        "tests/workspace-service.test.ts"
+      ],
+      "permalink": "/changes#2026-10-14-workspace-creation-terms-removal"
+    },
+    {
+      "id": "2026-10-14-version-precondition-transport-fallback",
+      "publishedAt": "2026-10-14",
+      "title": {
+        "en": "Version preconditions survive hosted transport",
+        "ar": "استمرار شروط الإصدار عبر النقل المستضاف"
+      },
+      "summary": {
+        "en": "Versioned management mutations accept a validated JSON version when the hosted forwarding path drops If-Match. App, policy, membership, access, and credential updates retain mandatory concurrency checks and reject mismatches.",
+        "ar": "تقبل عمليات الإدارة ذات الإصدار نسخة JSON متحققة عندما يسقط مسار التوجيه المستضاف If-Match. تحافظ تحديثات التطبيق والسياسة والعضوية والوصول وبيانات الاعتماد على فحوص التزامن الإلزامية وترفض حالات عدم التطابق."
+      },
+      "categories": [
+        "api",
+        "sdk",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "security",
+      "migration": {
+        "en": "Source-only compatibility improvement. Continue sending If-Match and the operation's documented JSON version field. Missing, malformed, conflicting, and stale versions remain rejected. Policy drafts also support version zero.",
+        "ar": "تحسين توافق متاح في المصدر فقط. استمر في إرسال If-Match وحقل إصدار JSON الموثق للعملية. تظل الإصدارات المفقودة وغير الصالحة والمتعارضة والقديمة مرفوضة. تدعم مسودات السياسة الإصدار صفر أيضاً."
+      },
+      "announcement": {
+        "en": "The API routes, server client, dashboard commands, OpenAPI contract, REST reference, and machine-readable documentation now describe the same bounded fallback. No hosted deployment is claimed.",
+        "ar": "تصف مسارات API وعميل الخادم وأوامر لوحة التحكم وعقد OpenAPI ومرجع REST والوثائق المقروءة آلياً نفس البديل المحدود. لا يُدّعى وجود نشر مستضاف."
+      },
+      "replacement": "/reference/rest",
+      "supportWindow": "Source-only compatibility capability pending hosted release.",
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "apps/api/src/api-contract.ts",
+        "apps/api/src/app-routes.ts",
+        "apps/api/src/app-membership-transport.ts",
+        "apps/api/src/policy-transport.ts",
+        "apps/api/src/policy-draft-routes.ts",
+        "apps/dash/src/lib/environment-resource-commands.ts",
+        "apps/dash/src/lib/policy-resource.ts",
+        "packages/contracts/openapi/authless.openapi.json",
+        "packages/server/src/apps.ts",
+        "packages/server/src/policies.ts",
+        "tests/app-routes.test.ts",
+        "tests/api-transport-codec.test.ts",
+        "tests/policy-draft-routes.test.ts",
+        "tests/environment-resource-commands.test.ts"
+      ],
+      "permalink": "/changes#2026-10-14-version-precondition-transport-fallback"
+    },
+    {
+      "id": "2026-10-13-workspace-keys-active-policy",
+      "publishedAt": "2026-10-13",
+      "title": {
+        "en": "Workspace service keys and active policy migration",
+        "ar": "مفاتيح خدمة مساحة العمل وترحيل السياسة النشطة"
+      },
+      "summary": {
+        "en": "The source contract now covers workspace service credentials, environment isolation, app metadata administration, policy history, and online session validation. Existing users are re-evaluated on the next authenticated request or token refresh.",
+        "ar": "يغطي عقد المصدر الآن بيانات اعتماد خدمة مساحة العمل وعزل البيئات وإدارة بيانات التطبيق وسجل السياسات والتحقق الفوري من الجلسات. يُعاد تقييم المستخدمين الحاليين عند أول طلب موثق أو تحديث للرمز."
       },
       "categories": [
         "api",
@@ -30429,108 +36013,36 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "reference",
         "evaluator"
       ],
-      "impact": "breaking",
+      "impact": "security",
       "migration": {
-        "en": "Authless platform billing accepts monthly periods only; update integrations that send annual billing periods. This applies to the Authless workspace product only and does not change developer app plan intervals or personal app subscriptions. Verify the generated REST, server, CLI, and Docs MCP projections before publishing an integration.",
-        "ar": "تقبل فوترة منصة Authless الفترات الشهرية فقط؛ حدّث التكاملات التي ترسل فترات سنوية. ينطبق ذلك على منتج مساحة عمل Authless فقط ولا يغيّر فترات خطط تطبيقات المطور أو اشتراكات التطبيقات الشخصية. تحقق من إسقاطات REST والخادم وCLI وDocs MCP المولّدة قبل نشر التكامل."
+        "en": "Migrations 0102 through 0107 remain source-only and require legacy review before deployment. Integrators must handle policy status, consent or proof interaction, bounded service-key scopes, revision history, and online validation on every protected request or token refresh.",
+        "ar": "تبقى الترحيلات من 0106 إلى 0111 في المصدر فقط وتحتاج إلى مراجعة قديمة قبل النشر. يجب على المدمجين التعامل مع حالة السياسة وتفاعل الموافقة أو الإثبات ونطاقات مفاتيح الخدمة المحددة وسجل المراجعات والتحقق الفوري في كل طلب محمي أو تحديث للرمز."
       },
       "announcement": {
-        "en": "The public contract and generated exports now agree on monthly Authless workspace billing, credential separation, and the independent app-commerce model. This release does not enable live payment collection, worldwide coverage, or MCP GA.",
-        "ar": "يتفق العقد العام والصادرات المولّدة الآن على فوترة مساحة عمل Authless الشهرية وفصل بيانات الاعتماد ونموذج تجارة التطبيقات المستقل. لا يفعّل هذا الإصدار تحصيل مدفوعات حية أو تغطية عالمية أو الإصدار العام لـ MCP."
+        "en": "The checked OpenAPI contract, generated server client, CLI-facing metadata, SvelteKit evidence, REST reference, machine documentation, and Docs MCP describe the same source-only capability. No hosted deployment is claimed.",
+        "ar": "يصف عقد OpenAPI المتحقق منه والعميل المولّد للخادم وبيانات CLI وأدلة SvelteKit ومرجع REST والوثائق المقروءة آلياً وDocs MCP القدرة المصدرية نفسها. لا يُدّعى وجود نشر مستضاف."
       },
       "replacement": "/reference/rest",
-      "supportWindow": "Current monthly-only Authless workspace billing contract.",
-      "sunsetAt": "2026-10-12",
-      "status": "available",
-      "support": "/support",
-      "evidence": [
-        "packages/contracts/src/commercial-wire.generated.ts",
-        "packages/contracts/openapi/authless.openapi.json",
-        "packages/server/src/billing.ts",
-        "packages/server/src/commerce.ts",
-        "packages/server/README.md",
-        "packages/cli/src/cli.ts",
-        "packages/cli/README.md",
-        "packages/docs-mcp/src/corpus.generated.json",
-        "apps/docs/static/openapi.json",
-        "apps/docs/static/rest-reference.json",
-        "apps/docs/machine-readable/llms-full.txt",
-        "tests/commercial-billing-api.test.ts",
-        "tests/commercial-billing.test.ts",
-        "tests/docs-mcp.test.ts"
-      ],
-      "permalink": "/changes#2026-10-12-monthly-authless-platform-billing"
-    },
-    {
-      "id": "2026-10-11-profile-workspace-app-commerce-boundaries",
-      "publishedAt": "2026-10-11",
-      "title": {
-        "en": "Profile and developer workspace commerce boundaries",
-        "ar": "حدود التجارة بين الملف الشخصي ومساحة عمل المطور"
-      },
-      "summary": {
-        "en": "A personal profile can upgrade to developer capability through workspace membership and switch views without a second identity. App subscriptions remain profile-owned, while app catalog administration and Authless platform billing remain workspace-scoped. The local mock provider, CLI, and delegated MCP preview/apply flow now preserve these boundaries across the API, database, and operator tooling.",
-        "ar": "يمكن للملف الشخصي الترقية إلى إمكانات المطور عبر عضوية مساحة العمل والتنقل بين العرضين دون هوية ثانية. تبقى اشتراكات التطبيقات مملوكة للملف الشخصي، بينما تبقى إدارة كتالوج التطبيقات وفوترة Authless للمنصة ضمن نطاق مساحة العمل. يحافظ موفر الدفع الوهمي المحلي وCLI وتدفق المعاينة والتنفيذ المفوض عبر MCP على هذه الحدود عبر واجهة API وقاعدة البيانات وأدوات التشغيل."
-      },
-      "categories": [
-        "product",
-        "api",
-        "security",
-        "operations",
-        "docs"
-      ],
-      "audiences": [
-        "operator",
-        "integrator",
-        "reference",
-        "evaluator"
-      ],
-      "impact": "additive",
-      "migration": {
-        "en": "No live-payment migration is implied. Treat developer account as a product label for an existing profile with workspace capability. Migrations 0102–0105 add local app-commerce, scope-integrity, and durable management approval state; verify the intended database with the read-only status check before any deployment migration.",
-        "ar": "لا يعني ذلك ترحيلاً لمدفوعات حية. تعامل مع حساب المطور كتسمية منتج لملف شخصي قائم يملك إمكانات مساحة العمل. تضيف الترحيلات 0102–0105 حالة تجارة التطبيقات وسلامة النطاق والموافقات الإدارية الدائمة محلياً؛ تحقق من قاعدة البيانات المقصودة بفحص الحالة للقراءة فقط قبل أي ترحيل للنشر."
-      },
-      "announcement": {
-        "en": "Personal subscriptions, developer workspace administration, app commerce, and Authless platform billing now have separate UI contexts, API authorities, and database scopes. The mock provider remains local-only and does not claim live worldwide payment support.",
-        "ar": "أصبحت الاشتراكات الشخصية وإدارة مساحة عمل المطور وتجارة التطبيقات وفوترة Authless للمنصة تملك سياقات واجهة وصلاحيات API ونطاقات قاعدة بيانات منفصلة. يبقى موفر الدفع الوهمي محلياً ولا يدعي دعم مدفوعات عالمية حية."
-      },
-      "replacement": null,
-      "supportWindow": null,
+      "supportWindow": "Source-only capability pending legacy migration review.",
       "sunsetAt": null,
       "status": "available",
       "support": "/support",
       "evidence": [
-        "CONTEXT.md",
-        "docs/adr/0001-profile-workspace-and-commerce-boundaries.md",
-        "docs/operations/mock-managed-payments.md",
-        "apps/dash/src/routes/+layout.svelte",
-        "apps/dash/src/routes/personal/subscriptions/+page.svelte",
-        "apps/dash/src/routes/workspaces/+page.svelte",
-        "apps/api/src/app-commerce-routes.ts",
-        "apps/api/src/runtime/commerce-authority.ts",
-        "apps/api/src/management-mcp/catalog.ts",
-        "apps/api/src/management-mcp/tool-routes/commerce.ts",
-        "apps/api/src/runtime/management-commerce-input.ts",
-        "apps/api/src/runtime/management-commerce.ts",
-        "apps/api/src/runtime/management-mcp-attestation.ts",
-        "packages/cli/README.md",
-        "packages/cli/src/cli.ts",
-        "packages/cli/test/cli.test.ts",
-        "packages/server/src/commerce.ts",
-        "packages/server/src/billing.ts",
-        "packages/core/src/app-commerce/service.ts",
-        "packages/core/src/agent-management/management-scopes.ts",
-        "packages/db/src/agent-management/commerce-mutation-store.ts",
-        "packages/db/src/migration-status-cli.ts",
-        "packages/db/drizzle/0105_management_agent_commerce_billing_scopes_up.sql",
-        "packages/db/drizzle/0104_app_commerce_scope_integrity_up.sql",
-        "packages/db/drizzle/0104_app_commerce_scope_integrity_down.sql",
-        "tests/integration/commerce-authority-postgres.integration.ts",
-        "tests/integration/management-commerce-runtime-postgres.integration.ts",
-        "apps/api/src/runtime/management-commerce-input.test.ts",
-        "tests/ui/workspace-context.ui.ts"
+        "packages/contracts/openapi/authless.openapi.json",
+        "packages/contracts/openapi/authless.compatibility.json",
+        "packages/server/src/generated.ts",
+        "packages/server/src/online-sessions.ts",
+        "packages/sveltekit/package.json",
+        "packages/db/drizzle/0106_environment_customer_authority_up.sql",
+        "packages/db/drizzle/0107_oidc_grant_policy_authority_up.sql",
+        "packages/db/drizzle/0108_workspace_service_credentials_up.sql",
+        "packages/db/drizzle/0109_policy_publication_service_actor_up.sql",
+        "packages/db/drizzle/0110_app_machine_idempotency_up.sql",
+        "packages/db/drizzle/0111_app_metadata_version_up.sql",
+        "tests/server-generation.test.ts",
+        "tests/server-contract-compatibility.test.ts"
       ],
-      "permalink": "/changes#2026-10-11-profile-workspace-app-commerce-boundaries"
+      "permalink": "/changes#2026-10-13-workspace-keys-active-policy"
     },
     {
       "id": "2026-10-11-six-digit-authentication",
@@ -30576,8 +36088,8 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "packages/identity-node/src/secret-protection.ts",
         "packages/jobs/src/identity-verification.ts",
         "packages/oidc/src/interactions.ts",
-        "apps/docs/static/openapi.json",
-        "apps/docs/static/rest-reference.json",
+        "apps/docs/src/lib/machine-assets/openapi.json",
+        "apps/docs/src/lib/machine-assets/rest-reference.json",
         "apps/docs/machine-readable/llms-full.txt",
         "packages/docs-mcp/src/corpus.generated.json",
         "tests/identity-contract-codec.test.ts",
@@ -30823,8 +36335,8 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "ar": "إسقاط جاهزية التعديلات الحساسة"
       },
       "summary": {
-        "en": "Adds compatible readiness fields for personal username and workspace creation so clients can reveal reauthentication before submission.",
-        "ar": "يضيف حقول جاهزية متوافقة لاسم المستخدم الشخصي وإنشاء مساحة العمل كي تعرض التطبيقات إعادة المصادقة قبل الإرسال."
+        "en": "Retires action-level authentication readiness fields so clients rely on the authenticated session and its permissions.",
+        "ar": "يلغي حقول جاهزية المصادقة على مستوى الإجراء كي تعتمد التطبيقات على الجلسة الموثقة وصلاحياتها."
       },
       "categories": [
         "api",
@@ -30837,12 +36349,12 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       "impact": "additive",
       "migration": {
-        "en": "No migration is required. Clients may consume the optional readiness fields; existing clients that ignore additive response fields remain compatible.",
-        "ar": "لا يلزم ترحيل. يمكن للتطبيقات استخدام حقول الجاهزية الاختيارية؛ وتظل التطبيقات الحالية التي تتجاهل حقول الاستجابة الإضافية متوافقة."
+        "en": "Clients should stop reading the retired readiness fields and submit authorized actions with the valid session token.",
+        "ar": "ينبغي للتطبيقات التوقف عن قراءة حقول الجاهزية الملغاة وإرسال الإجراءات المسموح بها باستخدام رمز الجلسة الصالح."
       },
       "announcement": {
-        "en": "Username and workspace creation readiness is now projected from authoritative authentication time and preserved by the generated TypeScript client contract.",
-        "ar": "تُسقط جاهزية اسم المستخدم وإنشاء مساحة العمل الآن من وقت المصادقة الموثوق ويحفظها عقد عميل TypeScript المولد."
+        "en": "Username and workspace creation now use the authenticated session and permission contract without a product-level recent-auth precheck.",
+        "ar": "يعتمد إنشاء اسم المستخدم ومساحة العمل الآن على عقد الجلسة الموثقة والصلاحيات من دون فحص مصادقة حديثة على مستوى المنتج."
       },
       "replacement": null,
       "supportWindow": null,
@@ -31530,7 +37042,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       "impact": "additive",
       "migration": {
-        "en": "No migration is required. The path, confirmation and expected-version input, correlation header, 200 split/version response, private not-found, authorization, recent-authentication, confirmation, and version-conflict outcomes remain unchanged.",
+        "en": "No migration is required. The path, confirmation and expected-version input, correlation header, 200 split/version response, private not-found, authorization, confirmation, and version-conflict outcomes remain unchanged.",
         "ar": "لا يلزم ترحيل. يظل المسار ومدخلا التأكيد والإصدار المتوقع وترويسة الارتباط واستجابة الفصل والإصدار 200 ونتائج الإخفاء وعدم التفويض والمصادقة الحديثة والتأكيد وتعارض الإصدار دون تغيير."
       },
       "announcement": {
@@ -31625,8 +37137,8 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       "impact": "additive",
       "migration": {
-        "en": "No migration is required. The path, confirmation input, 200 reservation response, correlation header, and authorization, recent-authentication, confirmation, conflict, and availability outcomes remain unchanged.",
-        "ar": "لا يلزم ترحيل. يظل المسار ومدخل التأكيد واستجابة الحجز 200 وترويسة الارتباط ونتائج التفويض والمصادقة الحديثة والتأكيد والتعارض والتوفر دون تغيير."
+        "en": "No migration is required. The path, confirmation input, 200 reservation response, correlation header, and authorization, confirmation, conflict, and availability outcomes remain unchanged.",
+        "ar": "لا يلزم ترحيل. يظل المسار ومدخل التأكيد واستجابة الحجز 200 وترويسة الارتباط ونتائج التفويض والتأكيد والتعارض والتوفر دون تغيير."
       },
       "announcement": {
         "en": "Username removal now uses canonical generated confirmation decoding and fails closed before publishing a malformed reservation projection.",
@@ -33245,7 +38757,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       title: "التغييرات والترحيل",
       updatedAt: "2026-08-21",
       contentType: "text/markdown",
-      contentDigest: "ae4c6cac7b6b783da2e1a6f3c3b0e37f7e62142345e9e3f5f196814808d24983"
+      contentDigest: "312fc17068383ab1d9099e170affe222b9d69692570b88a422796d610cc5a9e6"
     },
     {
       canonical: "https://docs.authle.ss/agents",
@@ -35718,7 +41230,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         },
         {
-          description: "Recent authentication is required",
+          description: "The authenticated session lacks permission for this operation",
           status: 403,
           success: false
         },
@@ -35830,7 +41342,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         },
         {
-          description: "Recent authentication or current-session reauthentication is required",
+          description: "The authenticated session is not authorized for this operation",
           status: 403,
           success: false
         },
@@ -35912,7 +41424,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         },
         {
-          description: "Recent authentication or current-session reauthentication is required",
+          description: "The authenticated session is not authorized for this operation",
           status: 403,
           success: false
         },
@@ -36030,7 +41542,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         },
         {
-          description: "Recent authentication is required",
+          description: "The authenticated session lacks permission for this operation",
           status: 403,
           success: false
         },
@@ -36104,7 +41616,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         },
         {
-          description: "Recent authentication is required",
+          description: "The authenticated session lacks permission for this operation",
           status: 403,
           success: false
         },
@@ -36179,7 +41691,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         },
         {
-          description: "Recent authentication is required",
+          description: "The authenticated session lacks permission for this operation",
           status: 403,
           success: false
         },
@@ -36289,7 +41801,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         },
         {
-          description: "Recent authentication is required",
+          description: "The authenticated session lacks permission for this operation",
           status: 403,
           success: false
         },
@@ -36467,14 +41979,13 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/CreateWorkspaceRequest"
       ],
-      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"name":"Example workspace","termsAccepted":true}' 'https://api.authle.ss/workspaces'`,
+      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"name":"Example workspace"}' 'https://api.authle.ss/workspaces'`,
       exampleParameters: {
         "idempotency-key": "request-example-001",
         "x-correlation-id": "request_example_001"
       },
       exampleRequestBody: {
-        name: "Example workspace",
-        termsAccepted: true
+        name: "Example workspace"
       },
       method: "POST",
       operationId: "createWorkspace",
@@ -36495,7 +42006,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         },
         {
-          description: "Recent authentication is required",
+          description: "The authenticated session lacks permission for this operation",
           status: 403,
           success: false
         },
@@ -36533,9 +42044,8 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           validation: "minLength 1, maxLength 80"
         },
         {
-          example: true,
           name: "termsAccepted",
-          required: true,
+          required: false,
           type: "boolean",
           validation: "—"
         }
@@ -36605,6 +42115,121 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
     {
       authority: [
         "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
+      constraints: [
+        "path workspaceId (required): string, minLength 3, maxLength 128",
+        "path delegationId (required): string, minLength 3, maxLength 128",
+        'header if-match (optional): string, pattern ^"[1-9]\\d*"$',
+        "header x-correlation-id (optional): string, minLength 8, maxLength 128",
+        "JSON request body (required): #/components/schemas/AgentDelegationKeyRotationPreviewRequest"
+      ],
+      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"publicJwks":{}}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/agent-delegations/%7BdelegationId%7D/key-rotation-previews'`,
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        delegationId: "{delegationId}",
+        "x-correlation-id": "request_example_001"
+      },
+      exampleRequestBody: {
+        publicJwks: {}
+      },
+      method: "POST",
+      operationId: "previewAgentDelegationKeyRotation",
+      outcomes: [
+        {
+          description: "Key rotation preview created",
+          status: 201,
+          success: true
+        },
+        {
+          description: "The request is invalid",
+          status: 400,
+          success: false
+        },
+        {
+          description: "The session is not authenticated",
+          status: 401,
+          success: false
+        },
+        {
+          description: "The authenticated session lacks permission for this operation",
+          status: 403,
+          success: false
+        },
+        {
+          description: "The delegation is unavailable",
+          status: 404,
+          success: false
+        },
+        {
+          description: "A preview cannot be created in the current state",
+          status: 409,
+          success: false
+        },
+        {
+          description: "The key version is stale",
+          status: 412,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/agent-delegations/{delegationId}/key-rotation-previews",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 128"
+        },
+        {
+          example: "{delegationId}",
+          location: "path",
+          name: "delegationId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 128"
+        },
+        {
+          location: "header",
+          name: "if-match",
+          required: false,
+          type: "string",
+          validation: 'pattern ^"[1-9]\\d*"$'
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: {},
+          name: "publicJwks",
+          required: true,
+          type: "object",
+          validation: "—"
+        },
+        {
+          name: "expectedVersion",
+          required: false,
+          type: "integer",
+          validation: "min 1"
+        }
+      ],
+      requestSchema: {
+        $ref: "#/components/schemas/AgentDelegationKeyRotationPreviewRequest"
+      },
+      retrySafety: "unsafe",
+      summary: "Preview an agent delegation key rotation"
+    },
+    {
+      authority: [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
       ],
       constraints: [
         "path workspaceId (required): string, minLength 3, maxLength 128",
@@ -36680,7 +42305,8 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
     },
     {
       authority: [
-        "Server-side platform session. Never expose this value to browser bundles or logs."
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
       ],
       constraints: [
         "path workspaceId (required): string, minLength 3, maxLength 128",
@@ -36786,7 +42412,139 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
     },
     {
       authority: [
-        "Server-side platform session. Never expose this value to browser bundles or logs."
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      constraints: [
+        "path workspaceId (required): string, minLength 3, maxLength 128",
+        "path appId (required): string",
+        'header if-match (optional): string, pattern ^"[1-9]\\d*"$',
+        "header x-correlation-id (optional): string, minLength 8, maxLength 128",
+        "JSON request body (required): #/components/schemas/UpdateAppMetadataRequest"
+      ],
+      example: `curl --request PATCH -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"name":"Example","description":"{description}","ownerContactEmail":"person@example.test"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D'`,
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        appId: "{appId}",
+        "x-correlation-id": "request_example_001"
+      },
+      exampleRequestBody: {
+        name: "Example",
+        description: "{description}",
+        ownerContactEmail: "person@example.test"
+      },
+      method: "PATCH",
+      operationId: "updateAppMetadata",
+      outcomes: [
+        {
+          description: "Updated app metadata and version",
+          status: 200,
+          success: true
+        },
+        {
+          description: "The request or resource is invalid",
+          status: 400,
+          success: false
+        },
+        {
+          description: "The request or resource is invalid",
+          status: 401,
+          success: false
+        },
+        {
+          description: "The request or resource is invalid",
+          status: 403,
+          success: false
+        },
+        {
+          description: "The request or resource is invalid",
+          status: 404,
+          success: false
+        },
+        {
+          description: "The request or resource is invalid",
+          status: 412,
+          success: false
+        },
+        {
+          description: "The request or resource is invalid",
+          status: 422,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/apps/{appId}",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 128"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          location: "header",
+          name: "if-match",
+          required: false,
+          type: "string",
+          validation: 'pattern ^"[1-9]\\d*"$'
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: "Example",
+          name: "name",
+          required: true,
+          type: "string",
+          validation: "minLength 1, maxLength 80"
+        },
+        {
+          example: "{description}",
+          name: "description",
+          required: true,
+          type: "string",
+          validation: "minLength 1, maxLength 500"
+        },
+        {
+          example: "person@example.test",
+          name: "ownerContactEmail",
+          required: true,
+          type: "string",
+          validation: "maxLength 254, format email"
+        },
+        {
+          name: "expectedVersion",
+          required: false,
+          type: "integer",
+          validation: "min 1"
+        }
+      ],
+      requestSchema: {
+        $ref: "#/components/schemas/UpdateAppMetadataRequest"
+      },
+      retrySafety: "unsafe",
+      summary: "Update app metadata"
+    },
+    {
+      authority: [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
       ],
       constraints: [
         "path workspaceId (required): string, minLength 3, maxLength 128",
@@ -36858,6 +42616,125 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       requestBodyFields: [],
       retrySafety: "safe",
       summary: "Read one versioned app environment"
+    },
+    {
+      authority: [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        'header if-match (optional): string, pattern ^"[1-9]\\d*"$',
+        "header x-correlation-id (optional): string, minLength 8, maxLength 128",
+        "JSON request body (required): #/components/schemas/ChangeAppEnvironmentStatusRequest"
+      ],
+      example: `curl --request PATCH -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '"{value}"' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test'`,
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        appId: "{appId}",
+        environment: "test",
+        "x-correlation-id": "request_example_001"
+      },
+      exampleRequestBody: "{value}",
+      method: "PATCH",
+      operationId: "changeAppEnvironmentStatus",
+      outcomes: [
+        {
+          description: "The environment was updated",
+          status: 200,
+          success: true
+        },
+        {
+          description: "The request is invalid",
+          status: 400,
+          success: false
+        },
+        {
+          description: "Authentication is unavailable",
+          status: 401,
+          success: false
+        },
+        {
+          description: "Missing app:activate returns insufficient_scope with requiredScope. Suspended commercial operations return commercial_dunning_suspended.",
+          status: 403,
+          success: false
+        },
+        {
+          description: "The resource is unavailable",
+          status: 404,
+          success: false
+        },
+        {
+          description: "The environment is retired (environment_retired), or production app capacity is exhausted (production_app_allowance_exhausted).",
+          status: 409,
+          success: false
+        },
+        {
+          description: "The environment version is stale",
+          status: 412,
+          success: false
+        },
+        {
+          description: "Confirmation, lifecycle, active-policy, HTTPS registration, or OIDC-profile readiness failed: confirmation_required, invalid_lifecycle_transition, policy_required, invalid_endpoints, or invalid_oidc_profile.",
+          status: 422,
+          success: false
+        },
+        {
+          description: "A current environment version precondition is required.",
+          status: 428,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "test",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of test | production"
+        },
+        {
+          location: "header",
+          name: "if-match",
+          required: false,
+          type: "string",
+          validation: 'pattern ^"[1-9]\\d*"$'
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [],
+      requestSchema: {
+        $ref: "#/components/schemas/ChangeAppEnvironmentStatusRequest"
+      },
+      retrySafety: "unsafe",
+      summary: "Change environment status"
     },
     {
       authority: [
@@ -37090,18 +42967,17 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path appId (required): string",
         "path environment (required): string, one of production | test",
         "path credentialId (required): string",
-        "header if-match (required): string, pattern ^\\\"[1-9][0-9]*\\\"$",
+        'header if-match (optional): string, pattern ^"[1-9]\\d*"$',
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RevokeIntegrationCredentialRequest"
       ],
-      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: "1"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/credentials/%7BcredentialId%7D/revoke'`,
+      example: "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/credentials/%7BcredentialId%7D/revoke'",
       exampleParameters: {
         workspaceId: "{workspaceId}",
         appId: "{appId}",
         environment: "production",
         credentialId: "{credentialId}",
-        "if-match": '"1"',
         "idempotency-key": "request-example-001",
         "x-correlation-id": "request_example_001"
       },
@@ -37185,12 +43061,11 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           validation: "—"
         },
         {
-          example: '"1"',
           location: "header",
           name: "if-match",
-          required: true,
+          required: false,
           type: "string",
-          validation: "pattern ^\\\"[1-9][0-9]*\\\"$"
+          validation: 'pattern ^"[1-9]\\d*"$'
         },
         {
           example: "request-example-001",
@@ -37221,6 +43096,12 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           required: false,
           type: "boolean",
           validation: "—"
+        },
+        {
+          name: "expectedVersion",
+          required: false,
+          type: "integer",
+          validation: "min 1"
         }
       ],
       requestSchema: {
@@ -37238,18 +43119,17 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path appId (required): string",
         "path environment (required): string, one of production | test",
         "path credentialId (required): string",
-        "header if-match (required): string, pattern ^\\\"[1-9][0-9]*\\\"$",
+        'header if-match (optional): string, pattern ^"[1-9]\\d*"$',
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RotateIntegrationCredentialRequest"
       ],
-      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: "1"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"overlapSeconds":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/credentials/%7BcredentialId%7D/rotate'`,
+      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"overlapSeconds":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/credentials/%7BcredentialId%7D/rotate'`,
       exampleParameters: {
         workspaceId: "{workspaceId}",
         appId: "{appId}",
         environment: "production",
         credentialId: "{credentialId}",
-        "if-match": '"1"',
         "idempotency-key": "request-example-001",
         "x-correlation-id": "request_example_001"
       },
@@ -37335,12 +43215,11 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           validation: "—"
         },
         {
-          example: '"1"',
           location: "header",
           name: "if-match",
-          required: true,
+          required: false,
           type: "string",
-          validation: "pattern ^\\\"[1-9][0-9]*\\\"$"
+          validation: 'pattern ^"[1-9]\\d*"$'
         },
         {
           example: "request-example-001",
@@ -37372,6 +43251,12 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           required: true,
           type: "number",
           validation: "—"
+        },
+        {
+          name: "expectedVersion",
+          required: false,
+          type: "integer",
+          validation: "min 1"
         }
       ],
       requestSchema: {
@@ -37379,6 +43264,1115 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       },
       retrySafety: "unsafe",
       summary: "Rotate an app-environment credential with bounded secret overlap"
+    },
+    {
+      authority: [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        'header if-match (optional): string, pattern ^"[1-9]\\d*"$',
+        "header x-correlation-id (optional): string, minLength 8, maxLength 128",
+        "JSON request body (required): #/components/schemas/EndpointSetMutationRequest"
+      ],
+      example: `curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"postLogoutUris":[],"redirectUris":[],"trustedOrigins":[]}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/endpoints'`,
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        appId: "{appId}",
+        environment: "test",
+        "x-correlation-id": "request_example_001"
+      },
+      exampleRequestBody: {
+        postLogoutUris: [],
+        redirectUris: [],
+        trustedOrigins: []
+      },
+      method: "PUT",
+      operationId: "replaceAppEnvironmentEndpoints",
+      outcomes: [
+        {
+          description: "The environment was updated",
+          status: 200,
+          success: true
+        },
+        {
+          description: "The request is invalid",
+          status: 400,
+          success: false
+        },
+        {
+          description: "Authentication is unavailable",
+          status: 401,
+          success: false
+        },
+        {
+          description: "The caller lacks the required authority",
+          status: 403,
+          success: false
+        },
+        {
+          description: "The resource is unavailable",
+          status: 404,
+          success: false
+        },
+        {
+          description: "The environment is unavailable",
+          status: 409,
+          success: false
+        },
+        {
+          description: "The environment version is stale",
+          status: 412,
+          success: false
+        },
+        {
+          description: "The configuration is invalid",
+          status: 422,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/endpoints",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "test",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of test | production"
+        },
+        {
+          location: "header",
+          name: "if-match",
+          required: false,
+          type: "string",
+          validation: 'pattern ^"[1-9]\\d*"$'
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: [],
+          name: "postLogoutUris",
+          required: true,
+          type: "array",
+          validation: "—"
+        },
+        {
+          example: [],
+          name: "redirectUris",
+          required: true,
+          type: "array",
+          validation: "—"
+        },
+        {
+          example: [],
+          name: "trustedOrigins",
+          required: true,
+          type: "array",
+          validation: "—"
+        },
+        {
+          name: "expectedVersion",
+          required: false,
+          type: "integer",
+          validation: "min 1"
+        }
+      ],
+      requestSchema: {
+        $ref: "#/components/schemas/EndpointSetMutationRequest"
+      },
+      retrySafety: "unsafe",
+      summary: "Replace environment endpoints"
+    },
+    {
+      authority: [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        'header if-match (optional): string, pattern ^"[1-9]\\d*"$',
+        "header x-correlation-id (optional): string, minLength 8, maxLength 128",
+        "JSON request body (required): #/components/schemas/OidcClientProfileMutationRequest"
+      ],
+      example: `curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"dpopBoundAccessTokens":true,"publicJwks":{"keys":[]},"refreshEligible":true,"tokenEndpointAuthMethod":"none"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/oidc-profile'`,
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        appId: "{appId}",
+        environment: "test",
+        "x-correlation-id": "request_example_001"
+      },
+      exampleRequestBody: {
+        dpopBoundAccessTokens: true,
+        publicJwks: {
+          keys: []
+        },
+        refreshEligible: true,
+        tokenEndpointAuthMethod: "none"
+      },
+      method: "PUT",
+      operationId: "replaceAppEnvironmentOidcProfile",
+      outcomes: [
+        {
+          description: "The environment was updated",
+          status: 200,
+          success: true
+        },
+        {
+          description: "The request is invalid",
+          status: 400,
+          success: false
+        },
+        {
+          description: "Authentication is unavailable",
+          status: 401,
+          success: false
+        },
+        {
+          description: "The caller lacks the required authority",
+          status: 403,
+          success: false
+        },
+        {
+          description: "The resource is unavailable",
+          status: 404,
+          success: false
+        },
+        {
+          description: "The environment is unavailable",
+          status: 409,
+          success: false
+        },
+        {
+          description: "The environment version is stale",
+          status: 412,
+          success: false
+        },
+        {
+          description: "The configuration is invalid",
+          status: 422,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/oidc-profile",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "test",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of test | production"
+        },
+        {
+          location: "header",
+          name: "if-match",
+          required: false,
+          type: "string",
+          validation: 'pattern ^"[1-9]\\d*"$'
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          name: "backchannelLogoutUri",
+          required: false,
+          type: "value",
+          validation: "—"
+        },
+        {
+          example: true,
+          name: "dpopBoundAccessTokens",
+          required: true,
+          type: "boolean",
+          validation: "—"
+        },
+        {
+          name: "jwtAccessTokenResources",
+          required: false,
+          type: "array",
+          validation: "—"
+        },
+        {
+          example: {
+            keys: []
+          },
+          name: "publicJwks",
+          required: true,
+          type: "value",
+          validation: "—"
+        },
+        {
+          example: true,
+          name: "refreshEligible",
+          required: true,
+          type: "boolean",
+          validation: "—"
+        },
+        {
+          example: "none",
+          name: "tokenEndpointAuthMethod",
+          required: true,
+          type: "string",
+          validation: "one of none | private_key_jwt"
+        },
+        {
+          name: "expectedVersion",
+          required: false,
+          type: "integer",
+          validation: "min 1"
+        }
+      ],
+      requestSchema: {
+        $ref: "#/components/schemas/OidcClientProfileMutationRequest"
+      },
+      retrySafety: "unsafe",
+      summary: "Replace environment OIDC profile"
+    },
+    {
+      authority: [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production"
+      ],
+      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/policy'",
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        appId: "{appId}",
+        environment: "test"
+      },
+      method: "GET",
+      operationId: "getAuthenticationPolicy",
+      outcomes: [
+        {
+          description: "The policy view",
+          status: 200,
+          success: true
+        },
+        {
+          description: "The request is invalid",
+          status: 400,
+          success: false
+        },
+        {
+          description: "Authentication is unavailable",
+          status: 401,
+          success: false
+        },
+        {
+          description: "The caller lacks the required authority",
+          status: 403,
+          success: false
+        },
+        {
+          description: "The resource is unavailable",
+          status: 404,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/policy",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "test",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of test | production"
+        }
+      ],
+      requestBodyFields: [],
+      retrySafety: "safe",
+      summary: "Read the active policy and draft"
+    },
+    {
+      authority: [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        'header if-match (optional): string, pattern ^"(0|[1-9]\\d*)"$',
+        "header x-correlation-id (optional): string, minLength 8, maxLength 128",
+        "JSON request body (required): #/components/schemas/PolicyDefinitionRequest"
+      ],
+      example: `curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"definition":{"appIdentity":{"description":"{description}","name":"Example","ownerContactEmail":"person@example.test"},"consentPurpose":"{consentPurpose}","correlation":{"boundary":"app","essential":true,"purpose":"{purpose}"},"eligibleMethods":["M-01"],"enrollmentMode":"administrator_approval","recovery":{"verifiedEmailRequired":true},"requestedClaims":[],"session":{"absoluteSeconds":1,"idleSeconds":1}}}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/policy'`,
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        appId: "{appId}",
+        environment: "test",
+        "x-correlation-id": "request_example_001"
+      },
+      exampleRequestBody: {
+        definition: {
+          appIdentity: {
+            description: "{description}",
+            name: "Example",
+            ownerContactEmail: "person@example.test"
+          },
+          consentPurpose: "{consentPurpose}",
+          correlation: {
+            boundary: "app",
+            essential: true,
+            purpose: "{purpose}"
+          },
+          eligibleMethods: [
+            "M-01"
+          ],
+          enrollmentMode: "administrator_approval",
+          recovery: {
+            verifiedEmailRequired: true
+          },
+          requestedClaims: [],
+          session: {
+            absoluteSeconds: 1,
+            idleSeconds: 1
+          }
+        }
+      },
+      method: "PUT",
+      operationId: "saveAuthenticationPolicyDraft",
+      outcomes: [
+        {
+          description: "The policy view",
+          status: 200,
+          success: true
+        },
+        {
+          description: "The request is invalid",
+          status: 400,
+          success: false
+        },
+        {
+          description: "Authentication is unavailable",
+          status: 401,
+          success: false
+        },
+        {
+          description: "The caller lacks the required authority",
+          status: 403,
+          success: false
+        },
+        {
+          description: "The resource is unavailable",
+          status: 404,
+          success: false
+        },
+        {
+          description: "The environment is unavailable",
+          status: 409,
+          success: false
+        },
+        {
+          description: "The version is stale",
+          status: 412,
+          success: false
+        },
+        {
+          description: "The policy is invalid",
+          status: 422,
+          success: false
+        },
+        {
+          description: "A version precondition is required",
+          status: 428,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/policy",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "test",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of test | production"
+        },
+        {
+          location: "header",
+          name: "if-match",
+          required: false,
+          type: "string",
+          validation: 'pattern ^"(0|[1-9]\\d*)"$'
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: {
+            appIdentity: {
+              description: "{description}",
+              name: "Example",
+              ownerContactEmail: "person@example.test"
+            },
+            consentPurpose: "{consentPurpose}",
+            correlation: {
+              boundary: "app",
+              essential: true,
+              purpose: "{purpose}"
+            },
+            eligibleMethods: [
+              "M-01"
+            ],
+            enrollmentMode: "administrator_approval",
+            recovery: {
+              verifiedEmailRequired: true
+            },
+            requestedClaims: [],
+            session: {
+              absoluteSeconds: 1,
+              idleSeconds: 1
+            }
+          },
+          name: "definition",
+          required: true,
+          type: "object",
+          validation: "—"
+        },
+        {
+          name: "expectedDraftVersion",
+          required: false,
+          type: "integer",
+          validation: "min 0"
+        }
+      ],
+      requestSchema: {
+        $ref: "#/components/schemas/PolicyDefinitionRequest"
+      },
+      retrySafety: "unsafe",
+      summary: "Replace the policy draft"
+    },
+    {
+      authority: [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        'header if-match (optional): string, pattern ^"(0|[1-9]\\d*)"$',
+        "header x-correlation-id (optional): string, minLength 8, maxLength 128",
+        "JSON request body (required): #/components/schemas/ActivatePolicyRequest"
+      ],
+      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"confirmed":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/policy/activate'`,
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        appId: "{appId}",
+        environment: "test",
+        "x-correlation-id": "request_example_001"
+      },
+      exampleRequestBody: {
+        confirmed: true
+      },
+      method: "POST",
+      operationId: "activateAuthenticationPolicy",
+      outcomes: [
+        {
+          description: "The policy view",
+          status: 200,
+          success: true
+        },
+        {
+          description: "The request is invalid",
+          status: 400,
+          success: false
+        },
+        {
+          description: "Authentication is unavailable",
+          status: 401,
+          success: false
+        },
+        {
+          description: "The caller lacks the required authority",
+          status: 403,
+          success: false
+        },
+        {
+          description: "The resource is unavailable",
+          status: 404,
+          success: false
+        },
+        {
+          description: "The environment is unavailable",
+          status: 409,
+          success: false
+        },
+        {
+          description: "The version is stale",
+          status: 412,
+          success: false
+        },
+        {
+          description: "The policy is invalid",
+          status: 422,
+          success: false
+        },
+        {
+          description: "A version precondition is required",
+          status: 428,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/policy/activate",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "test",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of test | production"
+        },
+        {
+          location: "header",
+          name: "if-match",
+          required: false,
+          type: "string",
+          validation: 'pattern ^"(0|[1-9]\\d*)"$'
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: true,
+          name: "confirmed",
+          required: true,
+          type: "boolean",
+          validation: "one of true"
+        },
+        {
+          name: "expectedDraftVersion",
+          required: false,
+          type: "integer",
+          validation: "min 0"
+        }
+      ],
+      requestSchema: {
+        $ref: "#/components/schemas/ActivatePolicyRequest"
+      },
+      retrySafety: "unsafe",
+      summary: "Publish the policy draft"
+    },
+    {
+      authority: [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "query limit (optional): integer, min 1, max 100",
+        "query cursor (optional): integer, min 0"
+      ],
+      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/policy/history'",
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        appId: "{appId}",
+        environment: "test"
+      },
+      method: "GET",
+      operationId: "listAuthenticationPolicyHistory",
+      outcomes: [
+        {
+          description: "A page of immutable revisions",
+          status: 200,
+          success: true
+        },
+        {
+          description: "The request is invalid",
+          status: 400,
+          success: false
+        },
+        {
+          description: "Authentication is unavailable",
+          status: 401,
+          success: false
+        },
+        {
+          description: "The caller lacks the required authority",
+          status: 403,
+          success: false
+        },
+        {
+          description: "The resource is unavailable",
+          status: 404,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/policy/history",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "test",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of test | production"
+        },
+        {
+          location: "query",
+          name: "limit",
+          required: false,
+          type: "integer",
+          validation: "min 1, max 100"
+        },
+        {
+          location: "query",
+          name: "cursor",
+          required: false,
+          type: "integer",
+          validation: "min 0"
+        }
+      ],
+      requestBodyFields: [],
+      retrySafety: "safe",
+      summary: "List immutable policy revisions"
+    },
+    {
+      authority: [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path version (required): integer, min 1"
+      ],
+      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/policy/history/1'",
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        appId: "{appId}",
+        environment: "test",
+        version: 1
+      },
+      method: "GET",
+      operationId: "getAuthenticationPolicyRevision",
+      outcomes: [
+        {
+          description: "The immutable revision",
+          status: 200,
+          success: true
+        },
+        {
+          description: "The request is invalid",
+          status: 400,
+          success: false
+        },
+        {
+          description: "Authentication is unavailable",
+          status: 401,
+          success: false
+        },
+        {
+          description: "The caller lacks the required authority",
+          status: 403,
+          success: false
+        },
+        {
+          description: "The resource is unavailable",
+          status: 404,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/policy/history/{version}",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "test",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of test | production"
+        },
+        {
+          example: 1,
+          location: "path",
+          name: "version",
+          required: true,
+          type: "integer",
+          validation: "min 1"
+        }
+      ],
+      requestBodyFields: [],
+      retrySafety: "safe",
+      summary: "Read one immutable policy revision"
+    },
+    {
+      authority: [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path version (required): integer, min 1",
+        'header if-match (optional): string, pattern ^"(0|[1-9]\\d*)"$',
+        "header x-correlation-id (optional): string, minLength 8, maxLength 128",
+        "JSON request body (required): #/components/schemas/RestorePolicyRequest"
+      ],
+      example: "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/policy/history/1/restore'",
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        appId: "{appId}",
+        environment: "test",
+        version: 1,
+        "x-correlation-id": "request_example_001"
+      },
+      exampleRequestBody: {},
+      method: "POST",
+      operationId: "restoreAuthenticationPolicyRevision",
+      outcomes: [
+        {
+          description: "The policy view",
+          status: 200,
+          success: true
+        },
+        {
+          description: "The request is invalid",
+          status: 400,
+          success: false
+        },
+        {
+          description: "Authentication is unavailable",
+          status: 401,
+          success: false
+        },
+        {
+          description: "The caller lacks the required authority",
+          status: 403,
+          success: false
+        },
+        {
+          description: "The resource is unavailable",
+          status: 404,
+          success: false
+        },
+        {
+          description: "The environment is unavailable",
+          status: 409,
+          success: false
+        },
+        {
+          description: "The version is stale",
+          status: 412,
+          success: false
+        },
+        {
+          description: "The policy is invalid",
+          status: 422,
+          success: false
+        },
+        {
+          description: "A version precondition is required",
+          status: 428,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/policy/history/{version}/restore",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "test",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of test | production"
+        },
+        {
+          example: 1,
+          location: "path",
+          name: "version",
+          required: true,
+          type: "integer",
+          validation: "min 1"
+        },
+        {
+          location: "header",
+          name: "if-match",
+          required: false,
+          type: "string",
+          validation: 'pattern ^"(0|[1-9]\\d*)"$'
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          name: "expectedDraftVersion",
+          required: false,
+          type: "integer",
+          validation: "min 0"
+        }
+      ],
+      requestSchema: {
+        $ref: "#/components/schemas/RestorePolicyRequest"
+      },
+      retrySafety: "unsafe",
+      summary: "Restore a revision into the draft"
+    },
+    {
+      authority: [
+        "Server-side credential scoped to one exact app environment. Never expose this value to browser bundles, logs, examples, or diagnostics."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "JSON request body (required): #/components/schemas/ValidateAppSessionRequest"
+      ],
+      example: `curl --request POST -H 'authorization: Bearer {app_credential}' -H 'content-type: application/json' --data '{"sessionReference":"session_reference_example_01"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/sessions/validate'`,
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        appId: "{appId}",
+        environment: "test"
+      },
+      exampleRequestBody: {
+        sessionReference: "session_reference_example_01"
+      },
+      method: "POST",
+      operationId: "validateAppSessionOnline",
+      outcomes: [
+        {
+          description: "The current online session decision",
+          status: 200,
+          success: true
+        },
+        {
+          description: "The session reference is invalid",
+          status: 400,
+          success: false
+        },
+        {
+          description: "The app credential is unavailable",
+          status: 401,
+          success: false
+        },
+        {
+          description: "The app environment is unavailable",
+          status: 404,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/sessions/validate",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "test",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of test | production"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: "session_reference_example_01",
+          name: "sessionReference",
+          required: true,
+          type: "string",
+          validation: "minLength 16, maxLength 16384, pattern ^[A-Za-z0-9_.-]+$"
+        }
+      ],
+      requestSchema: {
+        $ref: "#/components/schemas/ValidateAppSessionRequest"
+      },
+      retrySafety: "safe",
+      summary: "Validate an app session against the current policy"
     },
     {
       authority: [
@@ -37852,18 +44846,17 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path appId (required): string",
         "path environment (required): string, one of production | test",
         "path webhookId (required): string",
-        "header if-match (required): string, pattern ^\\\"[1-9][0-9]*\\\"$",
+        'header if-match (optional): string, pattern ^"[1-9]\\d*"$',
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/DisableIntegrationWebhookRequest"
       ],
-      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: "1"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/disable'`,
+      example: "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/disable'",
       exampleParameters: {
         workspaceId: "{workspaceId}",
         appId: "{appId}",
         environment: "production",
         webhookId: "{webhookId}",
-        "if-match": '"1"',
         "idempotency-key": "request-example-001",
         "x-correlation-id": "request_example_001"
       },
@@ -37947,12 +44940,11 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           validation: "—"
         },
         {
-          example: '"1"',
           location: "header",
           name: "if-match",
-          required: true,
+          required: false,
           type: "string",
-          validation: "pattern ^\\\"[1-9][0-9]*\\\"$"
+          validation: 'pattern ^"[1-9]\\d*"$'
         },
         {
           example: "request-example-001",
@@ -37977,6 +44969,12 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           required: false,
           type: "boolean",
           validation: "—"
+        },
+        {
+          name: "expectedVersion",
+          required: false,
+          type: "integer",
+          validation: "min 1"
         }
       ],
       requestSchema: {
@@ -37994,18 +44992,17 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path appId (required): string",
         "path environment (required): string, one of production | test",
         "path webhookId (required): string",
-        "header if-match (required): string, pattern ^\\\"[1-9][0-9]*\\\"$",
+        'header if-match (optional): string, pattern ^"[1-9]\\d*"$',
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RotateIntegrationWebhookSecretRequest"
       ],
-      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: "1"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"overlapSeconds":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/rotate'`,
+      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"overlapSeconds":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/rotate'`,
       exampleParameters: {
         workspaceId: "{workspaceId}",
         appId: "{appId}",
         environment: "production",
         webhookId: "{webhookId}",
-        "if-match": '"1"',
         "idempotency-key": "request-example-001",
         "x-correlation-id": "request_example_001"
       },
@@ -38091,12 +45088,11 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           validation: "—"
         },
         {
-          example: '"1"',
           location: "header",
           name: "if-match",
-          required: true,
+          required: false,
           type: "string",
-          validation: "pattern ^\\\"[1-9][0-9]*\\\"$"
+          validation: 'pattern ^"[1-9]\\d*"$'
         },
         {
           example: "request-example-001",
@@ -38128,6 +45124,12 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           required: true,
           type: "number",
           validation: "—"
+        },
+        {
+          name: "expectedVersion",
+          required: false,
+          type: "integer",
+          validation: "min 1"
         }
       ],
       requestSchema: {
@@ -38145,18 +45147,17 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path appId (required): string",
         "path environment (required): string, one of production | test",
         "path webhookId (required): string",
-        "header if-match (required): string, pattern ^\\\"[1-9][0-9]*\\\"$",
+        'header if-match (optional): string, pattern ^"[1-9]\\d*"$',
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/ReplaceIntegrationWebhookSubscriptionsRequest"
       ],
-      example: `curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: "1"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"subscriptions":[]}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/subscriptions'`,
+      example: `curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"subscriptions":[]}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/subscriptions'`,
       exampleParameters: {
         workspaceId: "{workspaceId}",
         appId: "{appId}",
         environment: "production",
         webhookId: "{webhookId}",
-        "if-match": '"1"',
         "idempotency-key": "request-example-001",
         "x-correlation-id": "request_example_001"
       },
@@ -38242,12 +45243,11 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           validation: "—"
         },
         {
-          example: '"1"',
           location: "header",
           name: "if-match",
-          required: true,
+          required: false,
           type: "string",
-          validation: "pattern ^\\\"[1-9][0-9]*\\\"$"
+          validation: 'pattern ^"[1-9]\\d*"$'
         },
         {
           example: "request-example-001",
@@ -38279,6 +45279,12 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           required: true,
           type: "array",
           validation: "—"
+        },
+        {
+          name: "expectedVersion",
+          required: false,
+          type: "integer",
+          validation: "min 1"
         }
       ],
       requestSchema: {
@@ -38497,17 +45503,16 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path workspaceId (required): string",
         "path appId (required): string",
         "path operationId (required): string",
-        "header if-match (required): string, pattern ^\\\"[1-9][0-9]*\\\"$",
+        'header if-match (optional): string, pattern ^"[1-9]\\d*"$',
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/ConfirmBulkAccessRequest"
       ],
-      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: "1"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"confirmed":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/operations/%7BoperationId%7D/cancellation'`,
+      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"confirmed":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/operations/%7BoperationId%7D/cancellation'`,
       exampleParameters: {
         workspaceId: "{workspaceId}",
         appId: "{appId}",
         operationId: "{operationId}",
-        "if-match": '"1"',
         "idempotency-key": "request-example-001",
         "x-correlation-id": "request_example_001"
       },
@@ -38590,12 +45595,11 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           validation: "—"
         },
         {
-          example: '"1"',
           location: "header",
           name: "if-match",
-          required: true,
+          required: false,
           type: "string",
-          validation: "pattern ^\\\"[1-9][0-9]*\\\"$"
+          validation: 'pattern ^"[1-9]\\d*"$'
         },
         {
           example: "request-example-001",
@@ -38621,6 +45625,12 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           required: true,
           type: "boolean",
           validation: "—"
+        },
+        {
+          name: "expectedVersion",
+          required: false,
+          type: "integer",
+          validation: "min 1"
         }
       ],
       requestSchema: {
@@ -40613,7 +47623,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         },
         {
-          description: "Recent authentication is required",
+          description: "The authenticated session lacks permission for this operation",
           status: 403,
           success: false
         }
@@ -40719,7 +47729,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         },
         {
-          description: "Recent authentication is required",
+          description: "The authenticated session lacks permission for this operation",
           status: 403,
           success: false
         },
@@ -40839,7 +47849,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         },
         {
-          description: "Recent authentication is required",
+          description: "The authenticated session lacks permission for this operation",
           status: 403,
           success: false
         },
@@ -40978,17 +47988,16 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path workspaceId (required): string, minLength 3, maxLength 128",
         "path appId (required): string, minLength 3, maxLength 128",
         "path membershipId (required): string, minLength 3, maxLength 128",
-        "header if-match (required): string, pattern ^\\\"[1-9][0-9]*\\\"$",
+        'header if-match (optional): string, pattern ^"[1-9]\\d*"$',
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/GrantAppEntitlementRequest"
       ],
-      example: `curl --request POST -H 'authorization: Bearer {app_credential}' -H 'if-match: "1"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"confirmed":true,"key":"{key}","source":"{source}"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/entitlements'`,
+      example: `curl --request POST -H 'authorization: Bearer {app_credential}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"confirmed":true,"key":"{key}","source":"{source}"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/entitlements'`,
       exampleParameters: {
         workspaceId: "{workspaceId}",
         appId: "{appId}",
         membershipId: "{membershipId}",
-        "if-match": '"1"',
         "idempotency-key": "request-example-001",
         "x-correlation-id": "request_example_001"
       },
@@ -41021,7 +48030,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         },
         {
-          description: "Recent authentication is required",
+          description: "The authenticated session lacks permission for this operation",
           status: 403,
           success: false
         },
@@ -41063,12 +48072,11 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           validation: "minLength 3, maxLength 128"
         },
         {
-          example: '"1"',
           location: "header",
           name: "if-match",
-          required: true,
+          required: false,
           type: "string",
-          validation: "pattern ^\\\"[1-9][0-9]*\\\"$"
+          validation: 'pattern ^"[1-9]\\d*"$'
         },
         {
           example: "request-example-001",
@@ -41114,6 +48122,12 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           required: true,
           type: "string",
           validation: "maxLength 200"
+        },
+        {
+          name: "expectedDefinitionVersion",
+          required: false,
+          type: "integer",
+          validation: "min 1"
         }
       ],
       requestSchema: {
@@ -41132,18 +48146,17 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path appId (required): string, minLength 3, maxLength 128",
         "path membershipId (required): string, minLength 3, maxLength 128",
         "path grantId (required): string, minLength 3, maxLength 128",
-        "header if-match (required): string, pattern ^\\\"[1-9][0-9]*\\\"$",
+        'header if-match (optional): string, pattern ^"[1-9]\\d*"$',
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RevokeAppEntitlementRequest"
       ],
-      example: `curl --request DELETE -H 'authorization: Bearer {app_credential}' -H 'if-match: "1"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"confirmed":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/entitlements/%7BgrantId%7D'`,
+      example: `curl --request DELETE -H 'authorization: Bearer {app_credential}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"confirmed":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/entitlements/%7BgrantId%7D'`,
       exampleParameters: {
         workspaceId: "{workspaceId}",
         appId: "{appId}",
         membershipId: "{membershipId}",
         grantId: "{grantId}",
-        "if-match": '"1"',
         "idempotency-key": "request-example-001",
         "x-correlation-id": "request_example_001"
       },
@@ -41169,7 +48182,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         },
         {
-          description: "Recent authentication is required",
+          description: "The authenticated session lacks permission for this operation",
           status: 403,
           success: false
         },
@@ -41234,12 +48247,11 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           validation: "minLength 3, maxLength 128"
         },
         {
-          example: '"1"',
           location: "header",
           name: "if-match",
-          required: true,
+          required: false,
           type: "string",
-          validation: "pattern ^\\\"[1-9][0-9]*\\\"$"
+          validation: 'pattern ^"[1-9]\\d*"$'
         },
         {
           example: "request-example-001",
@@ -41265,6 +48277,12 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           required: true,
           type: "boolean",
           validation: "—"
+        },
+        {
+          name: "expectedGrantVersion",
+          required: false,
+          type: "integer",
+          validation: "min 1"
         }
       ],
       requestSchema: {
@@ -41282,17 +48300,16 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path workspaceId (required): string, minLength 3, maxLength 128",
         "path appId (required): string, minLength 3, maxLength 128",
         "path membershipId (required): string, minLength 3, maxLength 128",
-        "header if-match (required): string, pattern ^\\\"[1-9][0-9]*\\\"$",
+        'header if-match (optional): string, pattern ^"[1-9]\\d*"$',
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/ChangeAppMembershipStatusRequest"
       ],
-      example: `curl --request POST -H 'authorization: Bearer {app_credential}' -H 'if-match: "1"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"action":"activate","confirmed":true,"reason":"access_ended"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/lifecycle'`,
+      example: `curl --request POST -H 'authorization: Bearer {app_credential}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"action":"activate","confirmed":true,"reason":"access_ended"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/lifecycle'`,
       exampleParameters: {
         workspaceId: "{workspaceId}",
         appId: "{appId}",
         membershipId: "{membershipId}",
-        "if-match": '"1"',
         "idempotency-key": "request-example-001",
         "x-correlation-id": "request_example_001"
       },
@@ -41320,7 +48337,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         },
         {
-          description: "Recent authentication is required",
+          description: "The authenticated session lacks permission for this operation",
           status: 403,
           success: false
         },
@@ -41377,12 +48394,11 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           validation: "minLength 3, maxLength 128"
         },
         {
-          example: '"1"',
           location: "header",
           name: "if-match",
-          required: true,
+          required: false,
           type: "string",
-          validation: "pattern ^\\\"[1-9][0-9]*\\\"$"
+          validation: 'pattern ^"[1-9]\\d*"$'
         },
         {
           example: "request-example-001",
@@ -41422,6 +48438,12 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           required: true,
           type: "string",
           validation: "one of access_ended | administrator_action | approval_granted | data_retention_complete | policy_violation | security_review"
+        },
+        {
+          name: "expectedVersion",
+          required: false,
+          type: "integer",
+          validation: "min 1"
         }
       ],
       requestSchema: {
@@ -41439,17 +48461,16 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path workspaceId (required): string, minLength 3, maxLength 128",
         "path appId (required): string, minLength 3, maxLength 128",
         "path membershipId (required): string, minLength 3, maxLength 128",
-        "header if-match (required): string, pattern ^\\\"[1-9][0-9]*\\\"$",
+        'header if-match (optional): string, pattern ^"[1-9]\\d*"$',
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/GrantAppRoleRequest"
       ],
-      example: `curl --request POST -H 'authorization: Bearer {app_credential}' -H 'if-match: "1"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"confirmed":true,"key":"{key}","source":"{source}"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/roles'`,
+      example: `curl --request POST -H 'authorization: Bearer {app_credential}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"confirmed":true,"key":"{key}","source":"{source}"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/roles'`,
       exampleParameters: {
         workspaceId: "{workspaceId}",
         appId: "{appId}",
         membershipId: "{membershipId}",
-        "if-match": '"1"',
         "idempotency-key": "request-example-001",
         "x-correlation-id": "request_example_001"
       },
@@ -41482,7 +48503,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         },
         {
-          description: "Recent authentication is required",
+          description: "The authenticated session lacks permission for this operation",
           status: 403,
           success: false
         },
@@ -41524,12 +48545,11 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           validation: "minLength 3, maxLength 128"
         },
         {
-          example: '"1"',
           location: "header",
           name: "if-match",
-          required: true,
+          required: false,
           type: "string",
-          validation: "pattern ^\\\"[1-9][0-9]*\\\"$"
+          validation: 'pattern ^"[1-9]\\d*"$'
         },
         {
           example: "request-example-001",
@@ -41569,6 +48589,12 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           required: true,
           type: "string",
           validation: "maxLength 200"
+        },
+        {
+          name: "expectedDefinitionVersion",
+          required: false,
+          type: "integer",
+          validation: "min 1"
         }
       ],
       requestSchema: {
@@ -41587,18 +48613,17 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path appId (required): string, minLength 3, maxLength 128",
         "path membershipId (required): string, minLength 3, maxLength 128",
         "path grantId (required): string, minLength 3, maxLength 128",
-        "header if-match (required): string, pattern ^\\\"[1-9][0-9]*\\\"$",
+        'header if-match (optional): string, pattern ^"[1-9]\\d*"$',
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
         "JSON request body (required): #/components/schemas/RevokeAppRoleRequest"
       ],
-      example: `curl --request DELETE -H 'authorization: Bearer {app_credential}' -H 'if-match: "1"' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"confirmed":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/roles/%7BgrantId%7D'`,
+      example: `curl --request DELETE -H 'authorization: Bearer {app_credential}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"confirmed":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/roles/%7BgrantId%7D'`,
       exampleParameters: {
         workspaceId: "{workspaceId}",
         appId: "{appId}",
         membershipId: "{membershipId}",
         grantId: "{grantId}",
-        "if-match": '"1"',
         "idempotency-key": "request-example-001",
         "x-correlation-id": "request_example_001"
       },
@@ -41624,7 +48649,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           success: false
         },
         {
-          description: "Recent authentication is required",
+          description: "The authenticated session lacks permission for this operation",
           status: 403,
           success: false
         },
@@ -41689,12 +48714,11 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           validation: "minLength 3, maxLength 128"
         },
         {
-          example: '"1"',
           location: "header",
           name: "if-match",
-          required: true,
+          required: false,
           type: "string",
-          validation: "pattern ^\\\"[1-9][0-9]*\\\"$"
+          validation: 'pattern ^"[1-9]\\d*"$'
         },
         {
           example: "request-example-001",
@@ -41720,6 +48744,12 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           required: true,
           type: "boolean",
           validation: "—"
+        },
+        {
+          name: "expectedGrantVersion",
+          required: false,
+          type: "integer",
+          validation: "min 1"
         }
       ],
       requestSchema: {
@@ -42361,6 +49391,51 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
     },
     {
       authority: [
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      constraints: [
+        "path workspaceId (required): string"
+      ],
+      example: "curl --request GET 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/capabilities'",
+      exampleParameters: {
+        workspaceId: "{workspaceId}"
+      },
+      method: "GET",
+      operationId: "inspectWorkspaceCapabilities",
+      outcomes: [
+        {
+          description: "Effective capabilities",
+          status: 200,
+          success: true
+        },
+        {
+          description: "The credential is invalid",
+          status: 401,
+          success: false
+        },
+        {
+          description: "The workspace is not available to this credential",
+          status: 404,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/capabilities",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        }
+      ],
+      requestBodyFields: [],
+      retrySafety: "safe",
+      summary: "Inspect the caller's effective workspace capabilities"
+    },
+    {
+      authority: [
         "Server-side platform session. Never expose this value to browser bundles or logs."
       ],
       constraints: [
@@ -42926,6 +50001,796 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       },
       retrySafety: "unsafe",
       summary: "Review commercial overage rates and a monthly spend cap"
+    },
+    {
+      authority: [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      constraints: [
+        "path workspaceId (required): string"
+      ],
+      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/service-principals'",
+      exampleParameters: {
+        workspaceId: "{workspaceId}"
+      },
+      method: "GET",
+      operationId: "listWorkspaceServicePrincipals",
+      outcomes: [
+        {
+          description: "Workspace service principals",
+          status: 200,
+          success: true
+        },
+        {
+          description: "The request or resource is invalid",
+          status: 400,
+          success: false
+        },
+        {
+          description: "The request or resource is invalid",
+          status: 401,
+          success: false
+        },
+        {
+          description: "The request or resource is invalid",
+          status: 403,
+          success: false
+        },
+        {
+          description: "The request or resource is invalid",
+          status: 404,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/service-principals",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        }
+      ],
+      requestBodyFields: [],
+      retrySafety: "safe",
+      summary: "List workspace service principals"
+    },
+    {
+      authority: [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "JSON request body (required): #/components/schemas/CreateWorkspaceServicePrincipalRequest"
+      ],
+      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{"name":"Example","scopes":["app:read"],"restrictions":{"appIds":[],"environments":["test"]}}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/service-principals'`,
+      exampleParameters: {
+        workspaceId: "{workspaceId}"
+      },
+      exampleRequestBody: {
+        name: "Example",
+        scopes: [
+          "app:read"
+        ],
+        restrictions: {
+          appIds: [],
+          environments: [
+            "test"
+          ]
+        }
+      },
+      method: "POST",
+      operationId: "createWorkspaceServicePrincipal",
+      outcomes: [
+        {
+          description: "The service principal was created",
+          status: 201,
+          success: true
+        },
+        {
+          description: "The request is invalid",
+          status: 400,
+          success: false
+        },
+        {
+          description: "Authentication is unavailable",
+          status: 401,
+          success: false
+        },
+        {
+          description: "The caller lacks the required authority",
+          status: 403,
+          success: false
+        },
+        {
+          description: "The resource is unavailable",
+          status: 404,
+          success: false
+        },
+        {
+          description: "The scope or restriction is invalid",
+          status: 422,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/service-principals",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: "Example",
+          name: "name",
+          required: true,
+          type: "string",
+          validation: "minLength 1, maxLength 80"
+        },
+        {
+          example: [
+            "app:read"
+          ],
+          name: "scopes",
+          required: true,
+          type: "array",
+          validation: "—"
+        },
+        {
+          example: {
+            appIds: [],
+            environments: [
+              "test"
+            ]
+          },
+          name: "restrictions",
+          required: true,
+          type: "object",
+          validation: "—"
+        }
+      ],
+      requestSchema: {
+        $ref: "#/components/schemas/CreateWorkspaceServicePrincipalRequest"
+      },
+      retrySafety: "unsafe",
+      summary: "Create a workspace service principal"
+    },
+    {
+      authority: [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "path principalId (required): string"
+      ],
+      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/service-principals/%7BprincipalId%7D'",
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        principalId: "{principalId}"
+      },
+      method: "GET",
+      operationId: "getWorkspaceServicePrincipal",
+      outcomes: [
+        {
+          description: "Workspace service principal",
+          status: 200,
+          success: true
+        },
+        {
+          description: "The request or resource is invalid",
+          status: 400,
+          success: false
+        },
+        {
+          description: "The request or resource is invalid",
+          status: 401,
+          success: false
+        },
+        {
+          description: "The request or resource is invalid",
+          status: 403,
+          success: false
+        },
+        {
+          description: "The request or resource is invalid",
+          status: 404,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/service-principals/{principalId}",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{principalId}",
+          location: "path",
+          name: "principalId",
+          required: true,
+          type: "string",
+          validation: "—"
+        }
+      ],
+      requestBodyFields: [],
+      retrySafety: "safe",
+      summary: "Get a workspace service principal"
+    },
+    {
+      authority: [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "path principalId (required): string"
+      ],
+      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/service-principals/%7BprincipalId%7D/credentials'",
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        principalId: "{principalId}"
+      },
+      method: "GET",
+      operationId: "listWorkspaceServiceCredentials",
+      outcomes: [
+        {
+          description: "Secret-free credentials",
+          status: 200,
+          success: true
+        },
+        {
+          description: "The request is invalid",
+          status: 400,
+          success: false
+        },
+        {
+          description: "Authentication is unavailable",
+          status: 401,
+          success: false
+        },
+        {
+          description: "The caller lacks the required authority",
+          status: 403,
+          success: false
+        },
+        {
+          description: "The resource is unavailable",
+          status: 404,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/service-principals/{principalId}/credentials",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{principalId}",
+          location: "path",
+          name: "principalId",
+          required: true,
+          type: "string",
+          validation: "—"
+        }
+      ],
+      requestBodyFields: [],
+      retrySafety: "safe",
+      summary: "List secret-free workspace service credentials"
+    },
+    {
+      authority: [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "path principalId (required): string",
+        "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
+        "JSON request body (required): #/components/schemas/IssueWorkspaceServiceCredentialRequest"
+      ],
+      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'content-type: application/json' --data '{"name":"Example","scopes":["app:read"],"restrictions":{"appIds":[],"environments":["test"]}}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/service-principals/%7BprincipalId%7D/credentials'`,
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        principalId: "{principalId}",
+        "idempotency-key": "request-example-001"
+      },
+      exampleRequestBody: {
+        name: "Example",
+        scopes: [
+          "app:read"
+        ],
+        restrictions: {
+          appIds: [],
+          environments: [
+            "test"
+          ]
+        }
+      },
+      method: "POST",
+      operationId: "issueWorkspaceServiceCredential",
+      outcomes: [
+        {
+          description: "The idempotency key replayed a previous credential operation",
+          status: 200,
+          success: true
+        },
+        {
+          description: "The credential and one-time secret were issued",
+          status: 201,
+          success: true
+        },
+        {
+          description: "The request is invalid",
+          status: 400,
+          success: false
+        },
+        {
+          description: "Authentication is unavailable",
+          status: 401,
+          success: false
+        },
+        {
+          description: "The caller lacks the required authority",
+          status: 403,
+          success: false
+        },
+        {
+          description: "The resource is unavailable",
+          status: 404,
+          success: false
+        },
+        {
+          description: "The idempotency key conflicts",
+          status: 409,
+          success: false
+        },
+        {
+          description: "The scope or restriction is invalid",
+          status: 422,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/service-principals/{principalId}/credentials",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{principalId}",
+          location: "path",
+          name: "principalId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "request-example-001",
+          location: "header",
+          name: "idempotency-key",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: "Example",
+          name: "name",
+          required: true,
+          type: "string",
+          validation: "minLength 1, maxLength 80"
+        },
+        {
+          example: [
+            "app:read"
+          ],
+          name: "scopes",
+          required: true,
+          type: "array",
+          validation: "—"
+        },
+        {
+          example: {
+            appIds: [],
+            environments: [
+              "test"
+            ]
+          },
+          name: "restrictions",
+          required: true,
+          type: "object",
+          validation: "—"
+        },
+        {
+          name: "expiresAt",
+          required: false,
+          type: "value",
+          validation: "format date-time"
+        }
+      ],
+      requestSchema: {
+        $ref: "#/components/schemas/IssueWorkspaceServiceCredentialRequest"
+      },
+      retrySafety: "unsafe",
+      summary: "Issue a workspace service credential with one-time secret disclosure"
+    },
+    {
+      authority: [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "path principalId (required): string",
+        "path credentialId (required): string",
+        "header idempotency-key (optional): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
+        'header if-match (optional): string, pattern ^"[1-9]\\d*"$',
+        "JSON request body (required): #/components/schemas/RevokeWorkspaceServiceCredentialRequest"
+      ],
+      example: "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/service-principals/%7BprincipalId%7D/credentials/%7BcredentialId%7D/revoke'",
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        principalId: "{principalId}",
+        credentialId: "{credentialId}"
+      },
+      exampleRequestBody: {},
+      method: "POST",
+      operationId: "revokeWorkspaceServiceCredential",
+      outcomes: [
+        {
+          description: "The credential was changed",
+          status: 200,
+          success: true
+        },
+        {
+          description: "The request is invalid",
+          status: 400,
+          success: false
+        },
+        {
+          description: "Authentication is unavailable",
+          status: 401,
+          success: false
+        },
+        {
+          description: "The caller lacks the required authority",
+          status: 403,
+          success: false
+        },
+        {
+          description: "The resource is unavailable",
+          status: 404,
+          success: false
+        },
+        {
+          description: "The idempotency key conflicts",
+          status: 409,
+          success: false
+        },
+        {
+          description: "The credential version is stale",
+          status: 412,
+          success: false
+        },
+        {
+          description: "The request is invalid",
+          status: 422,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/service-principals/{principalId}/credentials/{credentialId}/revoke",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{principalId}",
+          location: "path",
+          name: "principalId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{credentialId}",
+          location: "path",
+          name: "credentialId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          location: "header",
+          name: "idempotency-key",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          location: "header",
+          name: "if-match",
+          required: false,
+          type: "string",
+          validation: 'pattern ^"[1-9]\\d*"$'
+        }
+      ],
+      requestBodyFields: [
+        {
+          name: "expectedVersion",
+          required: false,
+          type: "integer",
+          validation: "min 1"
+        }
+      ],
+      requestSchema: {
+        $ref: "#/components/schemas/RevokeWorkspaceServiceCredentialRequest"
+      },
+      retrySafety: "unsafe",
+      summary: "Revoke a workspace service credential"
+    },
+    {
+      authority: [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "path principalId (required): string",
+        "path credentialId (required): string",
+        "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
+        'header if-match (optional): string, pattern ^"[1-9]\\d*"$',
+        "JSON request body (required): #/components/schemas/RotateWorkspaceServiceCredentialRequest"
+      ],
+      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'content-type: application/json' --data '{"overlapSeconds":0}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/service-principals/%7BprincipalId%7D/credentials/%7BcredentialId%7D/rotate'`,
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        principalId: "{principalId}",
+        credentialId: "{credentialId}",
+        "idempotency-key": "request-example-001"
+      },
+      exampleRequestBody: {
+        overlapSeconds: 0
+      },
+      method: "POST",
+      operationId: "rotateWorkspaceServiceCredential",
+      outcomes: [
+        {
+          description: "The idempotency key replayed a previous credential operation",
+          status: 200,
+          success: true
+        },
+        {
+          description: "The request is invalid",
+          status: 400,
+          success: false
+        },
+        {
+          description: "Authentication is unavailable",
+          status: 401,
+          success: false
+        },
+        {
+          description: "The caller lacks the required authority",
+          status: 403,
+          success: false
+        },
+        {
+          description: "The resource is unavailable",
+          status: 404,
+          success: false
+        },
+        {
+          description: "The idempotency key conflicts",
+          status: 409,
+          success: false
+        },
+        {
+          description: "The credential version is stale",
+          status: 412,
+          success: false
+        },
+        {
+          description: "The request is invalid",
+          status: 422,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/service-principals/{principalId}/credentials/{credentialId}/rotate",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{principalId}",
+          location: "path",
+          name: "principalId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{credentialId}",
+          location: "path",
+          name: "credentialId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "request-example-001",
+          location: "header",
+          name: "idempotency-key",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$"
+        },
+        {
+          location: "header",
+          name: "if-match",
+          required: false,
+          type: "string",
+          validation: 'pattern ^"[1-9]\\d*"$'
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: 0,
+          name: "overlapSeconds",
+          required: true,
+          type: "integer",
+          validation: "min 0, max 3600"
+        },
+        {
+          name: "expiresAt",
+          required: false,
+          type: "value",
+          validation: "format date-time"
+        },
+        {
+          name: "expectedVersion",
+          required: false,
+          type: "integer",
+          validation: "min 1"
+        }
+      ],
+      requestSchema: {
+        $ref: "#/components/schemas/RotateWorkspaceServiceCredentialRequest"
+      },
+      retrySafety: "unsafe",
+      summary: "Rotate a workspace service credential"
+    },
+    {
+      authority: [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "path principalId (required): string",
+        "JSON request body (required): #/components/schemas/ChangeWorkspaceServicePrincipalStatusRequest"
+      ],
+      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{"status":"active","expectedVersion":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/service-principals/%7BprincipalId%7D/status'`,
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        principalId: "{principalId}"
+      },
+      exampleRequestBody: {
+        status: "active",
+        expectedVersion: 1
+      },
+      method: "POST",
+      operationId: "changeWorkspaceServicePrincipalStatus",
+      outcomes: [
+        {
+          description: "Updated workspace service principal",
+          status: 200,
+          success: true
+        },
+        {
+          description: "The request or resource is invalid",
+          status: 400,
+          success: false
+        },
+        {
+          description: "The request or resource is invalid",
+          status: 401,
+          success: false
+        },
+        {
+          description: "The request or resource is invalid",
+          status: 403,
+          success: false
+        },
+        {
+          description: "The request or resource is invalid",
+          status: 404,
+          success: false
+        },
+        {
+          description: "The request or resource is invalid",
+          status: 409,
+          success: false
+        },
+        {
+          description: "The request or resource is invalid",
+          status: 412,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/service-principals/{principalId}/status",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{principalId}",
+          location: "path",
+          name: "principalId",
+          required: true,
+          type: "string",
+          validation: "—"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: "active",
+          name: "status",
+          required: true,
+          type: "string",
+          validation: "one of active | suspended | revoked"
+        },
+        {
+          example: 1,
+          name: "expectedVersion",
+          required: true,
+          type: "integer",
+          validation: "min 1"
+        }
+      ],
+      requestSchema: {
+        $ref: "#/components/schemas/ChangeWorkspaceServicePrincipalStatusRequest"
+      },
+      retrySafety: "unsafe",
+      summary: "Change a workspace service principal status"
     }
   ],
   schemas: {
@@ -45055,7 +52920,101 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       properties: {
         billing: {
-          $ref: "#/components/schemas/CommercialBillingView"
+          $ref: "#/components/schemas/CommercialBillingNullableView"
+        }
+      }
+    },
+    CommercialBillingNullableView: {
+      type: [
+        "object",
+        "null"
+      ],
+      additionalProperties: false,
+      required: [
+        "accruedOverageMicros",
+        "cancelledAt",
+        "catalogueDigest",
+        "catalogueVersion",
+        "contractualVersion",
+        "creditsMicros",
+        "financialRecords",
+        "pendingInvoiceItemsMicros",
+        "period",
+        "planId",
+        "quantity",
+        "renewalDate",
+        "upcomingInvoice"
+      ],
+      properties: {
+        accruedOverageMicros: {
+          type: "integer"
+        },
+        cancelledAt: {
+          type: [
+            "string",
+            "null"
+          ],
+          format: "date-time"
+        },
+        catalogueDigest: {
+          type: "string"
+        },
+        catalogueVersion: {
+          type: "string"
+        },
+        contractualVersion: {
+          type: "string"
+        },
+        creditsMicros: {
+          type: "integer"
+        },
+        financialRecords: {
+          type: "array",
+          items: {
+            $ref: "#/components/schemas/CommercialBillingFinancialRecord"
+          }
+        },
+        pendingInvoiceItemsMicros: {
+          type: "integer"
+        },
+        period: {
+          type: "string",
+          enum: [
+            "monthly"
+          ]
+        },
+        planId: {
+          type: "string",
+          enum: [
+            "launch",
+            "growth",
+            "scale"
+          ]
+        },
+        quantity: {
+          type: "integer",
+          minimum: 1,
+          maximum: 100
+        },
+        renewalDate: {
+          type: "string",
+          format: "date-time"
+        },
+        upcomingInvoice: {
+          type: "object",
+          additionalProperties: false,
+          required: [
+            "projectedTotalMicros",
+            "taxMicros"
+          ],
+          properties: {
+            projectedTotalMicros: {
+              type: "integer"
+            },
+            taxMicros: {
+              type: "integer"
+            }
+          }
         }
       }
     },
@@ -45750,13 +53709,6 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         security: {
           $ref: "#/components/schemas/PersonalOverviewSecurity"
         },
-        sensitiveMutationReadiness: {
-          type: "string",
-          enum: [
-            "ready",
-            "reauthentication_required"
-          ]
-        },
         username: {
           type: [
             "string",
@@ -46064,14 +54016,12 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       type: "object",
       additionalProperties: false,
       required: [
-        "name",
-        "termsAccepted"
+        "name"
       ],
       description: "Creates a workspace with a normalized name. Names are 1–80 characters, may contain Unicode letters or numbers plus spaces, periods, ampersands, apostrophes, parentheses, underscores, and hyphens, and cannot use reserved names such as admin, authless, personal, root, support, or system.",
       examples: [
         {
-          name: "Example workspace",
-          termsAccepted: true
+          name: "Example workspace"
         }
       ],
       properties: {
@@ -46428,6 +54378,11 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         },
         overlapSeconds: {
           type: "number"
+        },
+        expectedVersion: {
+          type: "integer",
+          minimum: 1,
+          description: "Optional numeric version precondition. Supply this field or the If-Match header; exactly one version channel is required."
         }
       }
     },
@@ -46482,6 +54437,11 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         },
         confirmed: {
           type: "boolean"
+        },
+        expectedVersion: {
+          type: "integer",
+          minimum: 1,
+          description: "Optional numeric version precondition. Supply this field or the If-Match header; exactly one version channel is required."
         }
       }
     },
@@ -46664,6 +54624,11 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           items: {
             type: "string"
           }
+        },
+        expectedVersion: {
+          type: "integer",
+          minimum: 1,
+          description: "Optional numeric version precondition. Supply this field or the If-Match header; exactly one version channel is required."
         }
       }
     },
@@ -46695,6 +54660,11 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         },
         overlapSeconds: {
           type: "number"
+        },
+        expectedVersion: {
+          type: "integer",
+          minimum: 1,
+          description: "Optional numeric version precondition. Supply this field or the If-Match header; exactly one version channel is required."
         }
       }
     },
@@ -46723,6 +54693,11 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       properties: {
         confirmed: {
           type: "boolean"
+        },
+        expectedVersion: {
+          type: "integer",
+          minimum: 1,
+          description: "Optional numeric version precondition. Supply this field or the If-Match header; exactly one version channel is required."
         }
       }
     },
@@ -46945,7 +54920,6 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
             "acknowledge_secret",
             "contact_support",
             "inspect",
-            "reauthenticate",
             "refresh",
             "retry"
           ]
@@ -47552,6 +55526,10 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           description: "Stable machine-readable Authless error code.",
           type: "string"
         },
+        requiredScope: {
+          description: "Scope required when error is insufficient_scope.",
+          $ref: "#/components/schemas/WorkspaceServiceScope"
+        },
         type: {
           description: "Problem type URI; defaults to about:blank when omitted.",
           type: "string",
@@ -47750,6 +55728,83 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
             "string",
             "null"
           ]
+        }
+      }
+    },
+    AgentDelegationKeyRotationPreviewRequest: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "publicJwks"
+      ],
+      properties: {
+        publicJwks: {
+          type: "object",
+          additionalProperties: true,
+          description: "Replacement public JWK set. Private key material is never accepted or returned."
+        },
+        expectedVersion: {
+          type: "integer",
+          minimum: 1,
+          description: "Optional numeric key-version precondition. Supply this field or the If-Match header; exactly one version channel is required."
+        }
+      }
+    },
+    AgentDelegationKeyRotationPreviewResponse: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "preview"
+      ],
+      properties: {
+        preview: {
+          $ref: "#/components/schemas/AgentDelegationKeyRotationPreview"
+        }
+      }
+    },
+    AgentDelegationKeyRotationPreview: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "currentKeyCount",
+        "delegationId",
+        "effectSummary",
+        "expectedKeyVersion",
+        "expiresAt",
+        "id",
+        "replacementKeyIds",
+        "workspaceId"
+      ],
+      properties: {
+        currentKeyCount: {
+          type: "integer",
+          minimum: 0
+        },
+        delegationId: {
+          type: "string"
+        },
+        effectSummary: {
+          type: "string"
+        },
+        expectedKeyVersion: {
+          type: "integer",
+          minimum: 1
+        },
+        expiresAt: {
+          type: "string",
+          format: "date-time"
+        },
+        id: {
+          type: "string"
+        },
+        replacementKeyIds: {
+          type: "array",
+          items: {
+            type: "string"
+          }
+        },
+        workspaceId: {
+          type: "string"
         }
       }
     },
@@ -47985,7 +56040,8 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "environments",
         "id",
         "name",
-        "ownerContactEmail"
+        "ownerContactEmail",
+        "version"
       ],
       properties: {
         description: {
@@ -48005,6 +56061,10 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         },
         ownerContactEmail: {
           type: "string"
+        },
+        version: {
+          type: "integer",
+          minimum: 1
         }
       }
     },
@@ -48304,6 +56364,10 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
             "policy_violation",
             "security_review"
           ]
+        },
+        expectedVersion: {
+          type: "integer",
+          minimum: 1
         }
       }
     },
@@ -48567,6 +56631,10 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         source: {
           type: "string",
           maxLength: 200
+        },
+        expectedDefinitionVersion: {
+          type: "integer",
+          minimum: 1
         }
       }
     },
@@ -48593,6 +56661,10 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         source: {
           type: "string",
           maxLength: 200
+        },
+        expectedDefinitionVersion: {
+          type: "integer",
+          minimum: 1
         }
       }
     },
@@ -48621,6 +56693,10 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       properties: {
         confirmed: {
           type: "boolean"
+        },
+        expectedGrantVersion: {
+          type: "integer",
+          minimum: 1
         }
       }
     },
@@ -48633,6 +56709,10 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       properties: {
         confirmed: {
           type: "boolean"
+        },
+        expectedGrantVersion: {
+          type: "integer",
+          minimum: 1
         }
       }
     },
@@ -48913,6 +56993,10 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       properties: {
         confirmed: {
           type: "boolean"
+        },
+        expectedVersion: {
+          type: "integer",
+          minimum: 1
         }
       }
     },
@@ -49176,13 +57260,6 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "workspaces"
       ],
       properties: {
-        creationReadiness: {
-          type: "string",
-          enum: [
-            "ready",
-            "reauthentication_required"
-          ]
-        },
         nextCursor: {
           type: [
             "string",
@@ -49194,6 +57271,1183 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           items: {
             $ref: "#/components/schemas/Workspace"
           }
+        }
+      }
+    },
+    WorkspaceEnvironment: {
+      type: "string",
+      enum: [
+        "test",
+        "production"
+      ]
+    },
+    WorkspaceServiceScope: {
+      type: "string",
+      enum: [
+        "app:read",
+        "app:create",
+        "app:write",
+        "app:activate",
+        "policy:read",
+        "policy:write",
+        "policy:activate",
+        "endpoint:write",
+        "oidc-profile:write",
+        "credential:write"
+      ]
+    },
+    WorkspaceServiceRestrictions: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "appIds",
+        "environments"
+      ],
+      properties: {
+        appIds: {
+          type: "array",
+          items: {
+            type: "string"
+          }
+        },
+        environments: {
+          type: "array",
+          minItems: 1,
+          items: {
+            $ref: "#/components/schemas/WorkspaceEnvironment"
+          }
+        }
+      }
+    },
+    WorkspaceCapability: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "workspaceId",
+        "credentialId",
+        "principalId",
+        "scopes",
+        "restrictions"
+      ],
+      properties: {
+        workspaceId: {
+          type: "string"
+        },
+        credentialId: {
+          type: "string"
+        },
+        principalId: {
+          type: "string"
+        },
+        scopes: {
+          type: "array",
+          items: {
+            $ref: "#/components/schemas/WorkspaceServiceScope"
+          }
+        },
+        restrictions: {
+          $ref: "#/components/schemas/WorkspaceServiceRestrictions"
+        }
+      }
+    },
+    WorkspaceCapabilitiesEnvelope: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "capabilities"
+      ],
+      properties: {
+        capabilities: {
+          $ref: "#/components/schemas/WorkspaceCapability"
+        }
+      }
+    },
+    CreateWorkspaceServicePrincipalRequest: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "name",
+        "scopes",
+        "restrictions"
+      ],
+      properties: {
+        name: {
+          type: "string",
+          minLength: 1,
+          maxLength: 80
+        },
+        scopes: {
+          type: "array",
+          minItems: 1,
+          items: {
+            $ref: "#/components/schemas/WorkspaceServiceScope"
+          }
+        },
+        restrictions: {
+          $ref: "#/components/schemas/WorkspaceServiceRestrictions"
+        }
+      }
+    },
+    IssueWorkspaceServiceCredentialRequest: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "name",
+        "scopes",
+        "restrictions"
+      ],
+      properties: {
+        name: {
+          type: "string",
+          minLength: 1,
+          maxLength: 80
+        },
+        scopes: {
+          type: "array",
+          minItems: 1,
+          items: {
+            $ref: "#/components/schemas/WorkspaceServiceScope"
+          }
+        },
+        restrictions: {
+          $ref: "#/components/schemas/WorkspaceServiceRestrictions"
+        },
+        expiresAt: {
+          type: [
+            "string",
+            "null"
+          ],
+          format: "date-time",
+          description: "Optional expiration. Omit or send null for a credential that does not expire; an explicit date creates a temporary credential."
+        }
+      }
+    },
+    RotateWorkspaceServiceCredentialRequest: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "overlapSeconds"
+      ],
+      properties: {
+        overlapSeconds: {
+          type: "integer",
+          minimum: 0,
+          maximum: 3600
+        },
+        expiresAt: {
+          type: [
+            "string",
+            "null"
+          ],
+          format: "date-time",
+          description: "Optional expiration. Omit or send null to preserve a non-expiring credential; an explicit date creates a temporary credential."
+        },
+        expectedVersion: {
+          type: "integer",
+          minimum: 1
+        }
+      }
+    },
+    RevokeWorkspaceServiceCredentialRequest: {
+      type: "object",
+      additionalProperties: false,
+      required: [],
+      properties: {
+        expectedVersion: {
+          type: "integer",
+          minimum: 1
+        }
+      }
+    },
+    WorkspaceServicePrincipal: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "id",
+        "workspaceId",
+        "name",
+        "status",
+        "scopes",
+        "restrictions",
+        "version",
+        "createdAt",
+        "revokedAt"
+      ],
+      properties: {
+        id: {
+          type: "string"
+        },
+        workspaceId: {
+          type: "string"
+        },
+        name: {
+          type: "string"
+        },
+        status: {
+          type: "string",
+          enum: [
+            "active",
+            "suspended",
+            "revoked"
+          ]
+        },
+        scopes: {
+          type: "array",
+          items: {
+            $ref: "#/components/schemas/WorkspaceServiceScope"
+          }
+        },
+        restrictions: {
+          $ref: "#/components/schemas/WorkspaceServiceRestrictions"
+        },
+        version: {
+          type: "integer",
+          minimum: 1
+        },
+        createdAt: {
+          type: "string",
+          format: "date-time"
+        },
+        revokedAt: {
+          type: [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    WorkspaceServiceCredential: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "id",
+        "principalId",
+        "workspaceId",
+        "name",
+        "scopes",
+        "restrictions",
+        "status",
+        "version",
+        "createdAt",
+        "expiresAt",
+        "revokedAt",
+        "overlapExpiresAt",
+        "lastUsedAt"
+      ],
+      properties: {
+        id: {
+          type: "string"
+        },
+        principalId: {
+          type: "string"
+        },
+        workspaceId: {
+          type: "string"
+        },
+        name: {
+          type: "string"
+        },
+        scopes: {
+          type: "array",
+          items: {
+            $ref: "#/components/schemas/WorkspaceServiceScope"
+          }
+        },
+        restrictions: {
+          $ref: "#/components/schemas/WorkspaceServiceRestrictions"
+        },
+        status: {
+          type: "string",
+          enum: [
+            "active",
+            "expiring",
+            "revoked"
+          ]
+        },
+        version: {
+          type: "integer",
+          minimum: 1
+        },
+        createdAt: {
+          type: "string",
+          format: "date-time"
+        },
+        expiresAt: {
+          type: [
+            "string",
+            "null"
+          ],
+          format: "date-time",
+          description: "Null means this credential does not expire."
+        },
+        revokedAt: {
+          type: [
+            "string",
+            "null"
+          ]
+        },
+        overlapExpiresAt: {
+          type: [
+            "string",
+            "null"
+          ]
+        },
+        lastUsedAt: {
+          type: [
+            "string",
+            "null"
+          ]
+        },
+        createdBy: {
+          $ref: "#/components/schemas/WorkspaceServiceActor"
+        }
+      }
+    },
+    WorkspaceServicePrincipalResponse: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "principal"
+      ],
+      properties: {
+        principal: {
+          $ref: "#/components/schemas/WorkspaceServicePrincipal"
+        }
+      }
+    },
+    WorkspaceServiceCredentialResponse: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "credential"
+      ],
+      properties: {
+        credential: {
+          $ref: "#/components/schemas/WorkspaceServiceCredential"
+        }
+      }
+    },
+    WorkspaceServiceCredentialListResponse: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "credentials"
+      ],
+      properties: {
+        credentials: {
+          type: "array",
+          items: {
+            $ref: "#/components/schemas/WorkspaceServiceCredential"
+          }
+        }
+      }
+    },
+    IssueWorkspaceServiceCredentialResponse: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "credential",
+        "secret"
+      ],
+      properties: {
+        credential: {
+          $ref: "#/components/schemas/WorkspaceServiceCredential"
+        },
+        secret: {
+          type: "string"
+        }
+      }
+    },
+    AuthenticationMethod: {
+      type: "string",
+      enum: [
+        "M-01",
+        "M-02",
+        "M-04",
+        "M-06",
+        "M-08",
+        "M-10"
+      ]
+    },
+    AuthenticationPolicyDefinition: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "appIdentity",
+        "consentPurpose",
+        "correlation",
+        "eligibleMethods",
+        "enrollmentMode",
+        "recovery",
+        "requestedClaims",
+        "session"
+      ],
+      properties: {
+        appIdentity: {
+          type: "object",
+          additionalProperties: false,
+          required: [
+            "description",
+            "name",
+            "ownerContactEmail"
+          ],
+          properties: {
+            description: {
+              type: "string"
+            },
+            name: {
+              type: "string"
+            },
+            ownerContactEmail: {
+              type: "string",
+              format: "email"
+            }
+          }
+        },
+        consentPurpose: {
+          type: "string"
+        },
+        correlation: {
+          type: "object",
+          additionalProperties: false,
+          required: [
+            "boundary",
+            "essential",
+            "purpose"
+          ],
+          properties: {
+            boundary: {
+              type: "string",
+              enum: [
+                "app",
+                "workspace"
+              ]
+            },
+            essential: {
+              type: "boolean"
+            },
+            purpose: {
+              type: "string"
+            }
+          }
+        },
+        eligibleMethods: {
+          type: "array",
+          minItems: 1,
+          items: {
+            $ref: "#/components/schemas/AuthenticationMethod"
+          }
+        },
+        emailAuthentication: {
+          type: "object",
+          additionalProperties: false,
+          required: [
+            "emailCode",
+            "emailLink"
+          ],
+          properties: {
+            emailCode: {
+              type: "object",
+              additionalProperties: false,
+              required: [
+                "attemptLimit",
+                "lifetimeSeconds"
+              ],
+              properties: {
+                attemptLimit: {
+                  type: "integer",
+                  minimum: 1
+                },
+                lifetimeSeconds: {
+                  type: "integer",
+                  minimum: 1
+                }
+              }
+            },
+            emailLink: {
+              type: "object",
+              additionalProperties: false,
+              required: [
+                "attemptLimit",
+                "lifetimeSeconds"
+              ],
+              properties: {
+                attemptLimit: {
+                  type: "integer",
+                  minimum: 1
+                },
+                lifetimeSeconds: {
+                  type: "integer",
+                  minimum: 1
+                }
+              }
+            }
+          }
+        },
+        enrollmentMode: {
+          type: "string",
+          enum: [
+            "administrator_approval",
+            "invitation_only",
+            "open"
+          ]
+        },
+        recovery: {
+          type: "object",
+          additionalProperties: false,
+          required: [
+            "verifiedEmailRequired"
+          ],
+          properties: {
+            verifiedEmailRequired: {
+              type: "boolean"
+            }
+          }
+        },
+        requiredAssurance: {
+          type: "string",
+          enum: [
+            "single_factor",
+            "multi_factor"
+          ]
+        },
+        requestedClaims: {
+          type: "array",
+          items: {
+            type: "string",
+            enum: [
+              "email",
+              "email_verified",
+              "preferred_username",
+              "workspace_subject"
+            ]
+          }
+        },
+        session: {
+          type: "object",
+          additionalProperties: false,
+          required: [
+            "absoluteSeconds",
+            "idleSeconds"
+          ],
+          properties: {
+            absoluteSeconds: {
+              type: "integer",
+              minimum: 1
+            },
+            idleSeconds: {
+              type: "integer",
+              minimum: 1
+            }
+          }
+        }
+      }
+    },
+    PolicyDefinitionRequest: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "definition"
+      ],
+      properties: {
+        definition: {
+          $ref: "#/components/schemas/AuthenticationPolicyDefinition"
+        },
+        expectedDraftVersion: {
+          type: "integer",
+          minimum: 0
+        }
+      }
+    },
+    ActivatePolicyRequest: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "confirmed"
+      ],
+      properties: {
+        confirmed: {
+          type: "boolean",
+          enum: [
+            true
+          ]
+        },
+        expectedDraftVersion: {
+          type: "integer",
+          minimum: 0
+        }
+      }
+    },
+    RestorePolicyRequest: {
+      type: "object",
+      additionalProperties: false,
+      properties: {
+        expectedDraftVersion: {
+          type: "integer",
+          minimum: 0
+        }
+      }
+    },
+    PolicyVersion: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "version",
+        "activatedAt",
+        "definition"
+      ],
+      properties: {
+        version: {
+          type: "integer",
+          minimum: 1
+        },
+        activatedAt: {
+          type: "string",
+          format: "date-time"
+        },
+        activatedBy: {
+          $ref: "#/components/schemas/WorkspaceServiceActor"
+        },
+        definition: {
+          $ref: "#/components/schemas/AuthenticationPolicyDefinition"
+        }
+      }
+    },
+    PolicyView: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "active",
+        "comparison",
+        "draft",
+        "draftVersion",
+        "environmentStatus"
+      ],
+      properties: {
+        active: {
+          type: [
+            "object",
+            "null"
+          ],
+          properties: {
+            version: {
+              type: "integer",
+              minimum: 1
+            },
+            activatedAt: {
+              type: "string",
+              format: "date-time"
+            },
+            definition: {
+              $ref: "#/components/schemas/AuthenticationPolicyDefinition"
+            }
+          },
+          required: [
+            "version",
+            "activatedAt",
+            "definition"
+          ]
+        },
+        comparison: {
+          type: "object",
+          additionalProperties: false,
+          required: [
+            "changed",
+            "claimsAdded",
+            "correlationExpanded",
+            "renewedConsentRequired"
+          ],
+          properties: {
+            changed: {
+              type: "boolean"
+            },
+            claimsAdded: {
+              type: "array",
+              items: {
+                type: "string"
+              }
+            },
+            correlationExpanded: {
+              type: "boolean"
+            },
+            renewedConsentRequired: {
+              type: "boolean"
+            }
+          }
+        },
+        draft: {
+          type: [
+            "object",
+            "null"
+          ],
+          properties: {},
+          additionalProperties: true
+        },
+        draftVersion: {
+          type: "integer",
+          minimum: 0
+        },
+        environmentStatus: {
+          type: "string",
+          enum: [
+            "active",
+            "suspended",
+            "retired"
+          ]
+        }
+      }
+    },
+    PolicyHistoryResponse: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "history"
+      ],
+      properties: {
+        history: {
+          type: "object",
+          additionalProperties: false,
+          required: [
+            "items",
+            "nextCursor"
+          ],
+          properties: {
+            items: {
+              type: "array",
+              items: {
+                $ref: "#/components/schemas/PolicyVersion"
+              }
+            },
+            nextCursor: {
+              type: [
+                "string",
+                "null"
+              ]
+            }
+          }
+        }
+      }
+    },
+    PolicyViewEnvelope: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "policy"
+      ],
+      properties: {
+        policy: {
+          $ref: "#/components/schemas/PolicyView"
+        }
+      }
+    },
+    ChangeAppEnvironmentStatusRequest: {
+      oneOf: [
+        {
+          type: "object",
+          additionalProperties: false,
+          required: [
+            "status"
+          ],
+          properties: {
+            status: {
+              type: "string",
+              enum: [
+                "suspended",
+                "retired"
+              ]
+            },
+            confirmed: {
+              type: "boolean"
+            },
+            expectedVersion: {
+              type: "integer",
+              minimum: 1
+            }
+          }
+        },
+        {
+          type: "object",
+          additionalProperties: false,
+          required: [
+            "action"
+          ],
+          properties: {
+            action: {
+              type: "string",
+              enum: [
+                "resume"
+              ]
+            },
+            confirmed: {
+              type: "boolean"
+            },
+            expectedVersion: {
+              type: "integer",
+              minimum: 1
+            }
+          }
+        },
+        {
+          type: "object",
+          additionalProperties: false,
+          required: [
+            "action"
+          ],
+          properties: {
+            action: {
+              type: "string",
+              enum: [
+                "activate"
+              ]
+            },
+            confirmed: {
+              type: "boolean"
+            },
+            expectedVersion: {
+              type: "integer",
+              minimum: 1
+            }
+          }
+        }
+      ]
+    },
+    ValidateAppSessionRequest: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "sessionReference"
+      ],
+      properties: {
+        sessionReference: {
+          type: "string",
+          minLength: 16,
+          maxLength: 16384,
+          pattern: "^[A-Za-z0-9_.-]+$",
+          examples: [
+            "session_reference_example_01"
+          ]
+        }
+      }
+    },
+    ValidateAppSessionResponse: {
+      oneOf: [
+        {
+          type: "object",
+          additionalProperties: false,
+          required: [
+            "status",
+            "sessionId",
+            "policyVersion"
+          ],
+          properties: {
+            status: {
+              type: "string",
+              enum: [
+                "compliant"
+              ]
+            },
+            sessionId: {
+              type: "string"
+            },
+            policyVersion: {
+              type: "integer",
+              minimum: 0
+            }
+          }
+        },
+        {
+          type: "object",
+          additionalProperties: false,
+          required: [
+            "status",
+            "sessionId",
+            "policyVersion",
+            "reason"
+          ],
+          properties: {
+            status: {
+              type: "string",
+              enum: [
+                "interaction_required"
+              ]
+            },
+            sessionId: {
+              type: "string"
+            },
+            policyVersion: {
+              type: "integer",
+              minimum: 0
+            },
+            reason: {
+              type: "string",
+              enum: [
+                "consent",
+                "proof"
+              ]
+            }
+          }
+        },
+        {
+          type: "object",
+          additionalProperties: false,
+          required: [
+            "status",
+            "sessionId",
+            "policyVersion",
+            "reason"
+          ],
+          properties: {
+            status: {
+              type: "string",
+              enum: [
+                "denied"
+              ]
+            },
+            sessionId: {
+              type: [
+                "string",
+                "null"
+              ]
+            },
+            policyVersion: {
+              type: "null"
+            },
+            reason: {
+              type: "string",
+              minLength: 1
+            }
+          }
+        },
+        {
+          type: "object",
+          additionalProperties: false,
+          required: [
+            "status",
+            "sessionId",
+            "policyVersion",
+            "reason"
+          ],
+          properties: {
+            status: {
+              type: "string",
+              enum: [
+                "expired"
+              ]
+            },
+            sessionId: {
+              type: [
+                "string",
+                "null"
+              ]
+            },
+            policyVersion: {
+              type: "null"
+            },
+            reason: {
+              type: "string",
+              minLength: 1
+            }
+          }
+        }
+      ],
+      discriminator: {
+        propertyName: "status"
+      }
+    },
+    WorkspaceServiceActor: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "kind",
+        "ref"
+      ],
+      properties: {
+        kind: {
+          type: "string",
+          enum: [
+            "person",
+            "service"
+          ]
+        },
+        ref: {
+          type: "string"
+        }
+      }
+    },
+    WorkspaceServicePrincipalListResponse: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "principals"
+      ],
+      properties: {
+        principals: {
+          type: "array",
+          items: {
+            $ref: "#/components/schemas/WorkspaceServicePrincipal"
+          }
+        }
+      }
+    },
+    ChangeWorkspaceServicePrincipalStatusRequest: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "status",
+        "expectedVersion"
+      ],
+      properties: {
+        status: {
+          type: "string",
+          enum: [
+            "active",
+            "suspended",
+            "revoked"
+          ]
+        },
+        expectedVersion: {
+          type: "integer",
+          minimum: 1
+        }
+      }
+    },
+    UpdateAppMetadataRequest: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "name",
+        "description",
+        "ownerContactEmail"
+      ],
+      properties: {
+        name: {
+          type: "string",
+          minLength: 1,
+          maxLength: 80
+        },
+        description: {
+          type: "string",
+          minLength: 1,
+          maxLength: 500
+        },
+        ownerContactEmail: {
+          type: "string",
+          format: "email",
+          maxLength: 254
+        },
+        expectedVersion: {
+          type: "integer",
+          minimum: 1
+        }
+      }
+    },
+    WorkspaceServiceCredentialReplayResponse: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "credential",
+        "replayed"
+      ],
+      properties: {
+        credential: {
+          $ref: "#/components/schemas/WorkspaceServiceCredential"
+        },
+        replayed: {
+          type: "boolean",
+          enum: [
+            true
+          ]
+        }
+      }
+    },
+    EndpointSetMutationRequest: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "postLogoutUris",
+        "redirectUris",
+        "trustedOrigins"
+      ],
+      properties: {
+        postLogoutUris: {
+          type: "array",
+          items: {
+            type: "string"
+          }
+        },
+        redirectUris: {
+          type: "array",
+          items: {
+            type: "string"
+          }
+        },
+        trustedOrigins: {
+          type: "array",
+          items: {
+            type: "string"
+          }
+        },
+        expectedVersion: {
+          type: "integer",
+          minimum: 1
+        }
+      }
+    },
+    OidcClientProfileMutationRequest: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "dpopBoundAccessTokens",
+        "publicJwks",
+        "refreshEligible",
+        "tokenEndpointAuthMethod"
+      ],
+      properties: {
+        backchannelLogoutUri: {
+          type: [
+            "string",
+            "null"
+          ]
+        },
+        dpopBoundAccessTokens: {
+          type: "boolean"
+        },
+        jwtAccessTokenResources: {
+          type: "array",
+          items: {
+            $ref: "#/components/schemas/OidcJwtAccessTokenResource"
+          }
+        },
+        publicJwks: {
+          type: [
+            "object",
+            "null"
+          ],
+          required: [
+            "keys"
+          ],
+          properties: {
+            keys: {
+              type: "array",
+              items: {
+                $ref: "#/components/schemas/OidcPublicJwk"
+              }
+            }
+          }
+        },
+        refreshEligible: {
+          type: "boolean"
+        },
+        tokenEndpointAuthMethod: {
+          type: "string",
+          enum: [
+            "none",
+            "private_key_jwt"
+          ]
+        },
+        expectedVersion: {
+          type: "integer",
+          minimum: 1
         }
       }
     }
@@ -49294,6 +58548,12 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       schemaVersion: "1.0",
       resource: "identity claim",
       payloadBoundary: "Opaque person/claim references and resource version; sensitive claim values are omitted."
+    },
+    {
+      name: "policy.activated",
+      schemaVersion: "1.0",
+      resource: "authentication policy",
+      payloadBoundary: "App/environment IDs, old and new policy revisions, and impact summary; no claims or secrets."
     }
   ],
   eventContext: {
@@ -49326,28 +58586,30 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       {
         component: "REST API",
         deprecation: "current",
-        releaseNotes: "/changes#2026-10-11-six-digit-authentication",
+        releaseNotes: "/changes#2026-10-14-version-precondition-transport-fallback",
         version: "0.1.0",
         stability: "stable",
         contract: "unversioned default (0.1.0)",
-        testedAt: "2026-10-11",
+        testedAt: "2026-10-14",
         evidence: [
           "packages/contracts/openapi/authless.openapi.json",
+          "tests/app-routes.test.ts",
+          "tests/policy-draft-routes.test.ts",
           "tests/rest-api-reference.test.ts"
         ]
       },
       {
         component: "@authless/browser",
         deprecation: "current",
-        releaseNotes: "/changes#2026-09-07-sdk-callback-query",
+        releaseNotes: "/changes#2026-10-17-valid-session-actions",
         version: "0.0.0",
         stability: "source-only",
         contract: "0.1.0",
-        browser: "Chromium via Playwright 1.62.0",
-        testedAt: "2026-09-07",
+        browser: "Codex built-in browser",
+        testedAt: "2026-10-17",
         evidence: [
           "packages/browser/package.json",
-          "tests/sdk-callback-query.test.ts",
+          "packages/browser/src/index.test.ts",
           "tests/oidc-core.test.ts",
           "tests/browser-capability-entrypoints.test.ts",
           "tests/relying-app-helpers.test.ts",
@@ -49357,27 +58619,29 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       {
         component: "@authless/server",
         deprecation: "current",
-        releaseNotes: "/changes#2026-10-11-six-digit-authentication",
+        releaseNotes: "/changes#2026-10-14-version-precondition-transport-fallback",
         version: "0.1.0",
         stability: "source-only",
         contract: "0.1.0",
         runtime: "Node 24.x",
-        testedAt: "2026-10-11",
+        testedAt: "2026-10-14",
         evidence: [
           "packages/server/package.json",
           "packages/server/src/index.ts",
+          "packages/server/src/apps.ts",
+          "packages/server/src/policies.ts",
           "packages/server/tests/server.node.mjs"
         ]
       },
       {
         component: "@authless/cli",
         deprecation: "current",
-        releaseNotes: "/changes#2026-10-10-native-cli-and-docs-navigation",
+        releaseNotes: "/changes#2026-10-14-workspace-creation-terms-removal",
         version: "0.1.0",
         stability: "source-only",
         contract: "0.1.0",
         runtime: "Bun 1.3.10",
-        testedAt: "2026-10-10",
+        testedAt: "2026-10-14",
         evidence: [
           "packages/cli/package.json",
           "packages/cli/src/cli.ts",
@@ -49387,15 +58651,17 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       {
         component: "@authless/sveltekit",
         deprecation: "current",
-        releaseNotes: "/changes#2026-09-07-sdk-callback-query",
+        releaseNotes: "/changes#2026-10-14-workspace-creation-terms-removal",
         version: "0.0.0",
         stability: "source-only",
         contract: "0.1.0",
         runtime: "SvelteKit 2.70.2 / Node 24.x",
         framework: "Svelte 5.56.8",
-        testedAt: "2026-09-07",
+        testedAt: "2026-10-14",
         evidence: [
           "packages/sveltekit/package.json",
+          "packages/sveltekit/src/index.test.ts",
+          "docs/evidence/2026-10-16-sveltekit-jwt-claim-fixture.md",
           "tests/sdk-callback-query.test.ts",
           "tests/oidc-core.test.ts",
           "packages/sveltekit/src/oidc.ts",
@@ -49408,15 +58674,280 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
     ],
     changes: [
       {
-        id: "2026-10-12-monthly-authless-platform-billing",
-        publishedAt: "2026-10-12",
+        id: "2026-10-17-valid-session-actions",
+        publishedAt: "2026-10-17",
         title: {
-          en: "Monthly Authless workspace billing contract",
-          ar: "عقد الفوترة الشهرية لمساحة عمل Authless"
+          en: "Valid sessions authorize permitted actions",
+          ar: "الجلسات الصالحة تتيح الإجراءات المسموح بها"
         },
         summary: {
-          en: "Authless workspace billing now publishes a monthly-only plan, review, authorization, cancellation, refund, and usage contract with matching server, CLI, and documentation exports. App-defined plans and profile-owned app subscriptions remain separate products.",
-          ar: "تنشر فوترة مساحة عمل Authless الآن عقداً شهرياً فقط للخطة والمراجعة والتفويض والإلغاء والاسترداد والاستخدام مع صادرات متطابقة للخادم وCLI والوثائق. تبقى خطط التطبيقات المعرّفة من المطور واشتراكات التطبيقات المملوكة للملف الشخصي منتجات منفصلة."
+          en: "A valid session can perform actions allowed by its role and scopes. Actions no longer require an additional sign-in based on authentication age.",
+          ar: "تتيح الجلسة الصالحة تنفيذ الإجراءات التي يسمح بها دور المستخدم ونطاقات صلاحياته. لم تعد الإجراءات تتطلب تسجيل دخول إضافيًا بسبب وقت التحقق السابق."
+        },
+        categories: [
+          "product",
+          "api",
+          "sdk",
+          "security"
+        ],
+        impact: "breaking",
+        migration: {
+          en: "Remove creationReadiness, sensitiveMutationReadiness, sensitiveActionSeconds, and reauthentication failure handling from clients. Keep normal unauthorized and permission-denied handling. Existing sessions retain their expiry, revocation, and permission checks.",
+          ar: "أزل creationReadiness وsensitiveMutationReadiness وsensitiveActionSeconds ومعالجة أخطاء إعادة التحقق من العملاء. احتفظ بمعالجة عدم تسجيل الدخول ورفض الصلاحيات المعتادة. تبقى فحوصات انتهاء الجلسات وإلغائها وصلاحياتها سارية."
+        },
+        supportWindow: "Existing valid sessions continue until expiry or revocation.",
+        sunsetAt: "2026-10-17",
+        status: "available",
+        permalink: "/changes#2026-10-17-valid-session-actions"
+      },
+      {
+        id: "2026-10-16-explicit-production-activation",
+        publishedAt: "2026-10-16",
+        title: {
+          en: "Explicit production activation for workspace automation",
+          ar: "تفعيل الإنتاج الصريح لأتمتة مساحة العمل"
+        },
+        summary: {
+          en: "A workspace key with the separately granted app:activate scope can activate a configured production draft. Activation requires confirmation, the current environment version, an active policy, a usable HTTPS redirect, and a valid OIDC profile. Production app allowance and commercial suspension rules apply.",
+          ar: "يمكن لمفتاح مساحة العمل الذي مُنح نطاق app:activate بشكل مستقل تفعيل مسودة إنتاج مهيأة. يتطلب التفعيل التأكيد وإصدار البيئة الحالي وسياسة نشطة وعنوان إعادة توجيه HTTPS صالحًا وملف OIDC صالحًا. تسري حدود تطبيقات الإنتاج وقواعد التعليق التجاري."
+        },
+        categories: [
+          "api",
+          "sdk",
+          "product",
+          "security"
+        ],
+        impact: "additive",
+        migration: {
+          en: "Issue a new principal and key with the complete provisioning grant and explicitly enable production activation. Rotation preserves existing grants. Send action activate with confirmed true, expectedVersion, and matching If-Match. Reconcile uncertain delivery with an environment read.",
+          ar: "أنشئ كيان خدمة ومفتاحًا جديدين بصلاحيات التهيئة الكاملة وفعّل صلاحية تفعيل الإنتاج صراحة. يحافظ التدوير على الصلاحيات الحالية. أرسل action بقيمة activate مع confirmed بقيمة true وexpectedVersion وترويسة If-Match المطابقة. تحقّق من النتيجة غير المؤكدة بقراءة البيئة."
+        },
+        supportWindow: null,
+        sunsetAt: null,
+        status: "available",
+        permalink: "/changes#2026-10-16-explicit-production-activation"
+      },
+      {
+        id: "2026-10-16-workspace-capability-diagnostics",
+        publishedAt: "2026-10-16",
+        title: {
+          en: "Inspect effective workspace-key capabilities",
+          ar: "فحص الصلاحيات الفعلية لمفتاح مساحة العمل"
+        },
+        summary: {
+          en: "Workspace keys can inspect their own effective scopes and app and environment restrictions without credential:write. Authentication intersects the principal and credential grants and denies disjoint restrictions.",
+          ar: "يمكن لمفاتيح مساحة العمل فحص نطاقاتها الفعلية وقيود التطبيقات والبيئات دون credential:write. تستخدم المصادقة تقاطع صلاحيات كيان الخدمة والمفتاح وترفض القيود التي لا تتقاطع."
+        },
+        categories: [
+          "api",
+          "sdk",
+          "security"
+        ],
+        impact: "additive",
+        migration: {
+          en: "Read GET /workspaces/{workspaceId}/capabilities when connecting a provisioning key. Treat invalid authentication, insufficient_scope, concealed inaccessible targets, readiness errors, and version conflicts separately. The response contains no credential secret.",
+          ar: "اقرأ GET /workspaces/{workspaceId}/capabilities عند ربط مفتاح التهيئة. تعامل مع المصادقة غير الصالحة وinsufficient_scope والأهداف غير المتاحة وأخطاء الجاهزية وتعارض الإصدارات بشكل منفصل. لا تتضمن الاستجابة سر المفتاح."
+        },
+        supportWindow: null,
+        sunsetAt: null,
+        status: "available",
+        permalink: "/changes#2026-10-16-workspace-capability-diagnostics"
+      },
+      {
+        id: "2026-10-16-production-lifecycle-retained-sessions",
+        publishedAt: "2026-10-16",
+        title: {
+          en: "Production lifecycle guards and retained OIDC sessions",
+          ar: "ضوابط دورة حياة الإنتاج وجلسات OIDC المحتفظ بها"
+        },
+        summary: {
+          en: "Production environments expose separate activate, resume, suspend, and retire commands with explicit confirmation and version checks. Retained Authless sessions can complete a new OIDC consent transaction, while persisted transaction and grant-expiry boundaries remain authoritative.",
+          ar: "تعرض بيئات الإنتاج أوامر منفصلة للتفعيل والاستئناف والتعليق والتقاعد مع تأكيد صريح وفحوص للإصدار. يمكن لجلسات Authless المحتفظ بها إكمال معاملة موافقة OIDC جديدة، بينما تظل حدود انتهاء صلاحية المعاملة والمنحة المحفوظة هي المرجع المعتمد."
+        },
+        categories: [
+          "api",
+          "product",
+          "security",
+          "docs"
+        ],
+        impact: "additive",
+        migration: {
+          en: "Send activate and resume as separate lifecycle actions with confirmed true, expectedVersion, and a matching If-Match value. Keep retained-session clients on the existing consent flow and treat persisted transaction or grant expiry as authoritative. Verify the returned state after an uncertain lifecycle response.",
+          ar: "أرسل التفعيل والاستئناف كإجرائي دورة حياة منفصلين مع confirmed بقيمة true وexpectedVersion وقيمة If-Match مطابقة. أبقِ عملاء الجلسات المحتفظ بها على مسار الموافقة الحالي وتعامل مع انتهاء صلاحية المعاملة أو المنحة المحفوظة باعتباره المرجع المعتمد. تحقّق من الحالة المعادة بعد استجابة غير مؤكدة لدورة الحياة."
+        },
+        supportWindow: null,
+        sunsetAt: null,
+        status: "available",
+        permalink: "/changes#2026-10-16-production-lifecycle-retained-sessions"
+      },
+      {
+        id: "2026-10-14-workspace-auth-experience-audit",
+        publishedAt: "2026-10-14",
+        title: {
+          en: "Workspace authentication experience audit",
+          ar: "تدقيق تجربة مصادقة مساحة العمل"
+        },
+        summary: {
+          en: "The source audit records workspace key, app, environment, policy, access, audit, profile, session, and error-flow findings. It standardizes reuse of the existing shell, fields, resource rows, status, dialog, secret, and async-state components. Workspace keys default to manual revocation with optional temporary expiry in the candidate source.",
+          ar: "يسجل تدقيق المصدر نتائج مسارات مفاتيح مساحة العمل والتطبيق والبيئة والسياسة والوصول والتدقيق والملف الشخصي والجلسة والخطأ. ويوحد إعادة استخدام مكونات الغلاف والحقول وصفوف الموارد والحالة والحوار والسر والعمليات غير المتزامنة الموجودة. تعتمد مفاتيح مساحة العمل على الإلغاء اليدوي مع مدة مؤقتة اختيارية في المصدر المرشح."
+        },
+        categories: [
+          "product",
+          "security",
+          "docs"
+        ],
+        impact: "additive",
+        migration: {
+          en: "Source-only audit. Add Workspace keys to canonical workspace navigation, use shared field and resource-state components, and verify nullable key expiry and next-request or refresh policy enforcement before deployment.",
+          ar: "تدقيق مصدري فقط. أضف مفاتيح مساحة العمل إلى تنقل مساحة العمل المعياري، واستخدم مكونات الحقول وحالات الموارد المشتركة، وتحقق من مدة صلاحية المفتاح القابلة للقيمة الفارغة ومن فرض السياسة عند الطلب التالي أو تحديث الرمز قبل النشر."
+        },
+        supportWindow: "Source-only audit pending release and live verification.",
+        sunsetAt: null,
+        status: "available",
+        permalink: "/changes#2026-10-14-workspace-auth-experience-audit"
+      },
+      {
+        id: "2026-10-14-credential-confirmation-ux",
+        publishedAt: "2026-10-14",
+        title: {
+          en: "Credential creation removes duplicate confirmation gates",
+          ar: "إزالة بوابات التأكيد المكررة من إنشاء بيانات الاعتماد"
+        },
+        summary: {
+          en: "The candidate credential flow removes duplicate prechecks before one-time secret disclosure while retaining the API authorization, one-time secret, and storage acknowledgement semantics.",
+          ar: "يزيل مسار بيانات الاعتماد المرشح التأكيدات المسبقة المكررة قبل عرض السر لمرة واحدة مع الحفاظ على صلاحيات API وسر المرة الواحدة وإقرار التخزين."
+        },
+        categories: [
+          "product",
+          "security",
+          "docs"
+        ],
+        impact: "additive",
+        migration: {
+          en: "Source-only UX change. Review credential scope before creation and keep one-time secret storage acknowledgement. No hosted deployment is claimed.",
+          ar: "تغيير تجربة مستخدم في المصدر فقط. راجع نطاق بيانات الاعتماد قبل الإنشاء وحافظ على إقرار تخزين السر لمرة واحدة. لا يُدّعى وجود نشر مستضاف."
+        },
+        supportWindow: "Source-only UX change pending release verification.",
+        sunsetAt: null,
+        status: "available",
+        permalink: "/changes#2026-10-14-credential-confirmation-ux"
+      },
+      {
+        id: "2026-10-14-auth-experience-followups",
+        publishedAt: "2026-10-14",
+        title: {
+          en: "Workspace auth experience follow-ups",
+          ar: "متابعات تجربة مصادقة مساحة العمل"
+        },
+        summary: {
+          en: "Records candidate-only responsive form, dashboard bridge, and bodyless OIDC preflight fixes while deployed b3d6 remains the current receipt.",
+          ar: "يسجل إصلاحات مرشحة فقط لتخطيط النموذج وجسر لوحة التحكم وفحص OIDC التمهيدي بلا جسم، بينما يظل b3d6 المنشور هو الإيصال الحالي."
+        },
+        categories: [
+          "product",
+          "security",
+          "docs"
+        ],
+        impact: "additive",
+        migration: {
+          en: "No migration. Verify the candidate at 320px, 768px, and 1280px in English and Arabic, then rerun hosted OIDC policy-migration checks before release.",
+          ar: "لا يلزم ترحيل. تحقق من المرشح عند 320 و768 و1280 بكسل بالإنجليزية والعربية، ثم أعد فحوص ترحيل سياسة OIDC المستضافة قبل الإصدار."
+        },
+        supportWindow: "Candidate follow-up pending canonical release receipt.",
+        sunsetAt: null,
+        status: "available",
+        permalink: "/changes#2026-10-14-auth-experience-followups"
+      },
+      {
+        id: "2026-10-14-auth-proof-reuse-and-relay",
+        publishedAt: "2026-10-14",
+        title: {
+          en: "Workspace auth proof reuse and relay repairs",
+          ar: "إصلاحات إعادة استخدام إثبات المصادقة وترحيل وظائف مساحة العمل"
+        },
+        summary: {
+          en: "Adds candidate workspace parent/child navigation, eligible-session proof reuse, expired-proof restart, authorize resume routing, and a 12-job auth relay from the shared registry.",
+          ar: "يضيف المرشح تنقل مساحة العمل الأب والفرع وإعادة استخدام إثبات الجلسة المؤهلة وإعادة تشغيل الإثبات المنتهي وتوجيه استئناف التفويض وترحيل مصادقة من 12 وظيفة من السجل المشترك."
+        },
+        categories: [
+          "product",
+          "security",
+          "operations"
+        ],
+        impact: "security",
+        migration: {
+          en: "No DDL migration. Reuse the original proof within its allowed time, honor explicit prompt and max_age, restart expired proof, and verify authorize resume before deployment.",
+          ar: "لا يوجد ترحيل DDL. أعد استخدام الإثبات الأصلي ضمن مدته المسموحة، واحترم prompt وmax_age الصريحين، وأعد تشغيل الإثبات المنتهي، وتحقق من استئناف التفويض قبل النشر."
+        },
+        supportWindow: "Candidate auth repairs pending release receipt and resume verification.",
+        sunsetAt: null,
+        status: "available",
+        permalink: "/changes#2026-10-14-auth-proof-reuse-and-relay"
+      },
+      {
+        id: "2026-10-14-workspace-creation-terms-removal",
+        publishedAt: "2026-10-14",
+        title: {
+          en: "Workspace creation removes duplicate terms acceptance",
+          ar: "إزالة قبول الشروط المكرر من إنشاء مساحة العمل"
+        },
+        summary: {
+          en: "Workspace creation now relies on the valid authenticated session instead of a second terms checkbox. Legacy input remains optional for compatibility, and historical timestamps stay nullable without fabricated values.",
+          ar: "يعتمد إنشاء مساحة العمل الآن على الجلسة الموثقة الحاكمة بدلاً من مربع قبول شروط ثانٍ. يظل الإدخال القديم اختيارياً للتوافق، وتبقى الطوابع الزمنية التاريخية قابلة للقيمة الفارغة دون اصطناع قيم."
+        },
+        categories: [
+          "product",
+          "api",
+          "security",
+          "docs"
+        ],
+        impact: "security",
+        migration: {
+          en: "Migrate clients to omit duplicate terms acceptance and rely on the authenticated session flow. Review migration 0112 before deployment; preserve NULL historical timestamps and rollback guards.",
+          ar: "رحّل العملاء لحذف قبول الشروط المكرر والاعتماد على مسار الجلسة الموثقة. راجع الترحيل 0112 قبل النشر، وحافظ على الطوابع الزمنية التاريخية NULL وحواجز التراجع."
+        },
+        supportWindow: "Source-only migration 0112 pending deployment review.",
+        sunsetAt: null,
+        status: "available",
+        permalink: "/changes#2026-10-14-workspace-creation-terms-removal"
+      },
+      {
+        id: "2026-10-14-version-precondition-transport-fallback",
+        publishedAt: "2026-10-14",
+        title: {
+          en: "Version preconditions survive hosted transport",
+          ar: "استمرار شروط الإصدار عبر النقل المستضاف"
+        },
+        summary: {
+          en: "Versioned management mutations accept a validated JSON version when the hosted forwarding path drops If-Match. App, policy, membership, access, and credential updates retain mandatory concurrency checks and reject mismatches.",
+          ar: "تقبل عمليات الإدارة ذات الإصدار نسخة JSON متحققة عندما يسقط مسار التوجيه المستضاف If-Match. تحافظ تحديثات التطبيق والسياسة والعضوية والوصول وبيانات الاعتماد على فحوص التزامن الإلزامية وترفض حالات عدم التطابق."
+        },
+        categories: [
+          "api",
+          "sdk",
+          "security",
+          "docs"
+        ],
+        impact: "security",
+        migration: {
+          en: "Source-only compatibility improvement. Continue sending If-Match and the operation's documented JSON version field. Missing, malformed, conflicting, and stale versions remain rejected. Policy drafts also support version zero.",
+          ar: "تحسين توافق متاح في المصدر فقط. استمر في إرسال If-Match وحقل إصدار JSON الموثق للعملية. تظل الإصدارات المفقودة وغير الصالحة والمتعارضة والقديمة مرفوضة. تدعم مسودات السياسة الإصدار صفر أيضاً."
+        },
+        supportWindow: "Source-only compatibility capability pending hosted release.",
+        sunsetAt: null,
+        status: "available",
+        permalink: "/changes#2026-10-14-version-precondition-transport-fallback"
+      },
+      {
+        id: "2026-10-13-workspace-keys-active-policy",
+        publishedAt: "2026-10-13",
+        title: {
+          en: "Workspace service keys and active policy migration",
+          ar: "مفاتيح خدمة مساحة العمل وترحيل السياسة النشطة"
+        },
+        summary: {
+          en: "The source contract now covers workspace service credentials, environment isolation, app metadata administration, policy history, and online session validation. Existing users are re-evaluated on the next authenticated request or token refresh.",
+          ar: "يغطي عقد المصدر الآن بيانات اعتماد خدمة مساحة العمل وعزل البيئات وإدارة بيانات التطبيق وسجل السياسات والتحقق الفوري من الجلسات. يُعاد تقييم المستخدمين الحاليين عند أول طلب موثق أو تحديث للرمز."
         },
         categories: [
           "api",
@@ -49425,43 +58956,15 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "docs",
           "operations"
         ],
-        impact: "breaking",
+        impact: "security",
         migration: {
-          en: "Authless platform billing accepts monthly periods only; update integrations that send annual billing periods. This applies to the Authless workspace product only and does not change developer app plan intervals or personal app subscriptions. Verify the generated REST, server, CLI, and Docs MCP projections before publishing an integration.",
-          ar: "تقبل فوترة منصة Authless الفترات الشهرية فقط؛ حدّث التكاملات التي ترسل فترات سنوية. ينطبق ذلك على منتج مساحة عمل Authless فقط ولا يغيّر فترات خطط تطبيقات المطور أو اشتراكات التطبيقات الشخصية. تحقق من إسقاطات REST والخادم وCLI وDocs MCP المولّدة قبل نشر التكامل."
+          en: "Migrations 0102 through 0107 remain source-only and require legacy review before deployment. Integrators must handle policy status, consent or proof interaction, bounded service-key scopes, revision history, and online validation on every protected request or token refresh.",
+          ar: "تبقى الترحيلات من 0106 إلى 0111 في المصدر فقط وتحتاج إلى مراجعة قديمة قبل النشر. يجب على المدمجين التعامل مع حالة السياسة وتفاعل الموافقة أو الإثبات ونطاقات مفاتيح الخدمة المحددة وسجل المراجعات والتحقق الفوري في كل طلب محمي أو تحديث للرمز."
         },
-        supportWindow: "Current monthly-only Authless workspace billing contract.",
-        sunsetAt: "2026-10-12",
-        status: "available",
-        permalink: "/changes#2026-10-12-monthly-authless-platform-billing"
-      },
-      {
-        id: "2026-10-11-profile-workspace-app-commerce-boundaries",
-        publishedAt: "2026-10-11",
-        title: {
-          en: "Profile and developer workspace commerce boundaries",
-          ar: "حدود التجارة بين الملف الشخصي ومساحة عمل المطور"
-        },
-        summary: {
-          en: "A personal profile can upgrade to developer capability through workspace membership and switch views without a second identity. App subscriptions remain profile-owned, while app catalog administration and Authless platform billing remain workspace-scoped. The local mock provider, CLI, and delegated MCP preview/apply flow now preserve these boundaries across the API, database, and operator tooling.",
-          ar: "يمكن للملف الشخصي الترقية إلى إمكانات المطور عبر عضوية مساحة العمل والتنقل بين العرضين دون هوية ثانية. تبقى اشتراكات التطبيقات مملوكة للملف الشخصي، بينما تبقى إدارة كتالوج التطبيقات وفوترة Authless للمنصة ضمن نطاق مساحة العمل. يحافظ موفر الدفع الوهمي المحلي وCLI وتدفق المعاينة والتنفيذ المفوض عبر MCP على هذه الحدود عبر واجهة API وقاعدة البيانات وأدوات التشغيل."
-        },
-        categories: [
-          "product",
-          "api",
-          "security",
-          "operations",
-          "docs"
-        ],
-        impact: "additive",
-        migration: {
-          en: "No live-payment migration is implied. Treat developer account as a product label for an existing profile with workspace capability. Migrations 0102–0105 add local app-commerce, scope-integrity, and durable management approval state; verify the intended database with the read-only status check before any deployment migration.",
-          ar: "لا يعني ذلك ترحيلاً لمدفوعات حية. تعامل مع حساب المطور كتسمية منتج لملف شخصي قائم يملك إمكانات مساحة العمل. تضيف الترحيلات 0102–0105 حالة تجارة التطبيقات وسلامة النطاق والموافقات الإدارية الدائمة محلياً؛ تحقق من قاعدة البيانات المقصودة بفحص الحالة للقراءة فقط قبل أي ترحيل للنشر."
-        },
-        supportWindow: null,
+        supportWindow: "Source-only capability pending legacy migration review.",
         sunsetAt: null,
         status: "available",
-        permalink: "/changes#2026-10-11-profile-workspace-app-commerce-boundaries"
+        permalink: "/changes#2026-10-13-workspace-keys-active-policy"
       },
       {
         id: "2026-10-11-six-digit-authentication",
@@ -49629,8 +59132,8 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           ar: "إسقاط جاهزية التعديلات الحساسة"
         },
         summary: {
-          en: "Adds compatible readiness fields for personal username and workspace creation so clients can reveal reauthentication before submission.",
-          ar: "يضيف حقول جاهزية متوافقة لاسم المستخدم الشخصي وإنشاء مساحة العمل كي تعرض التطبيقات إعادة المصادقة قبل الإرسال."
+          en: "Retires action-level authentication readiness fields so clients rely on the authenticated session and its permissions.",
+          ar: "يلغي حقول جاهزية المصادقة على مستوى الإجراء كي تعتمد التطبيقات على الجلسة الموثقة وصلاحياتها."
         },
         categories: [
           "api",
@@ -49639,8 +59142,8 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         ],
         impact: "additive",
         migration: {
-          en: "No migration is required. Clients may consume the optional readiness fields; existing clients that ignore additive response fields remain compatible.",
-          ar: "لا يلزم ترحيل. يمكن للتطبيقات استخدام حقول الجاهزية الاختيارية؛ وتظل التطبيقات الحالية التي تتجاهل حقول الاستجابة الإضافية متوافقة."
+          en: "Clients should stop reading the retired readiness fields and submit authorized actions with the valid session token.",
+          ar: "ينبغي للتطبيقات التوقف عن قراءة حقول الجاهزية الملغاة وإرسال الإجراءات المسموح بها باستخدام رمز الجلسة الصالح."
         },
         supportWindow: null,
         sunsetAt: null,
@@ -50044,7 +59547,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         ],
         impact: "additive",
         migration: {
-          en: "No migration is required. The path, confirmation and expected-version input, correlation header, 200 split/version response, private not-found, authorization, recent-authentication, confirmation, and version-conflict outcomes remain unchanged.",
+          en: "No migration is required. The path, confirmation and expected-version input, correlation header, 200 split/version response, private not-found, authorization, confirmation, and version-conflict outcomes remain unchanged.",
           ar: "لا يلزم ترحيل. يظل المسار ومدخلا التأكيد والإصدار المتوقع وترويسة الارتباط واستجابة الفصل والإصدار 200 ونتائج الإخفاء وعدم التفويض والمصادقة الحديثة والتأكيد وتعارض الإصدار دون تغيير."
         },
         supportWindow: null,
@@ -50098,8 +59601,8 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         ],
         impact: "additive",
         migration: {
-          en: "No migration is required. The path, confirmation input, 200 reservation response, correlation header, and authorization, recent-authentication, confirmation, conflict, and availability outcomes remain unchanged.",
-          ar: "لا يلزم ترحيل. يظل المسار ومدخل التأكيد واستجابة الحجز 200 وترويسة الارتباط ونتائج التفويض والمصادقة الحديثة والتأكيد والتعارض والتوفر دون تغيير."
+          en: "No migration is required. The path, confirmation input, 200 reservation response, correlation header, and authorization, confirmation, conflict, and availability outcomes remain unchanged.",
+          ar: "لا يلزم ترحيل. يظل المسار ومدخل التأكيد واستجابة الحجز 200 وترويسة الارتباط ونتائج التفويض والتأكيد والتعارض والتوفر دون تغيير."
         },
         supportWindow: null,
         sunsetAt: null,
@@ -51031,13 +60534,13 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       kind: "openapi",
       url: "/openapi.json",
       updatedAt: "2026-10-09",
-      sha256: "6520b5c362af7b19f2f740a9de94a68b8c3e2d1e5b6a4b565ccc11626a6ee37e"
+      sha256: "881dcf3d8aeaab7fd73f1e81bce9c1d065fef6d8ead7b99a69a4b5e6c7ddfde0"
     },
     {
-      kind: "openapi",
+      kind: "rest-reference",
       url: "/rest-reference.json",
       updatedAt: "2026-10-09",
-      sha256: "2bfb3b8367cd2581de97f577670864f5f112c0e114fb47332bf15bd53081fe62"
+      sha256: "d7e84c25ac92f905c54de82ff3b2492f01fa5f9f5353dabeb870ff665de1a541"
     },
     {
       kind: "discovery",
@@ -51049,33 +60552,33 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       kind: "event-schema",
       url: "/webhook-catalog.json",
       updatedAt: "2026-10-09",
-      sha256: "31337d6103c196589c8aa8ae075cdb7a70ba4b6705f7294cfacfb684bfba0303"
+      sha256: "4d4110d423a81143f67ca31c536b8562de0c1c3d6ca0fe3b334b4eae9390fa8d"
     },
     {
       kind: "compatibility",
       url: "/release-center.json",
       updatedAt: "2026-10-09",
-      sha256: "99dfcbe96a4b27558522b5dd639b8aca8649b5f983e2234094d8050460b73ab8"
+      sha256: "324cd0bf5203c868b4c8c3c3dcd67862834a0289e3e3bf1763e316af3b5219ae"
     },
     {
       kind: "compatibility",
       url: "/compatibility.json",
       updatedAt: "2026-10-09",
-      sha256: "1b2c9a9e3a0c5e8a8a179396f683ed812ae2d11dc7486a894c8e2a2081b168ed"
+      sha256: "bf20c82bccda5337f30794f0afec3db6d223c0d30fabb43eefc3de23303e2115"
     },
     {
       kind: "changelog",
       url: "/changes.json?lang=en",
       locale: "en",
       updatedAt: "2026-10-09",
-      sha256: "e02f64b037de8b2300b6c1d7068450734a428293788e6d4ac9e268f83a47bfe7"
+      sha256: "b6869a6975f033a758a3297df6fd05cc66768ca132dce3210626f4701a34c427"
     },
     {
       kind: "changelog",
       url: "/changes.json?lang=ar",
       locale: "ar",
       updatedAt: "2026-10-09",
-      sha256: "e6c155d83aef88df735dcca261a46b3fc85985c7a21d61b080ccc54dd0910dd2"
+      sha256: "e40c84e7c48b5fd73c846f84e29a010f1a9c9641e90d075f14f3b4b79da3354a"
     },
     {
       kind: "operations",
@@ -51087,7 +60590,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       kind: "documentation-index",
       url: "/rest-management-guide.json",
       updatedAt: "2026-10-09",
-      sha256: "cbe847781748cfa0d54f45b46094044ffb36d99fa57652d164b0723b61a3a566"
+      sha256: "93420f30e8b612c0213a80e706f8dc0eb8dfeb84c57bd10cf89a493e2ead93e0"
     },
     {
       kind: "documentation-index",
@@ -51099,7 +60602,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       kind: "sitemap",
       url: "/sitemap.xml",
       updatedAt: "2026-10-09",
-      sha256: "640308d2fdb3c10361adba8d900c20f4302b1ab3321fbe2ee3d082a952b7fc3e"
+      sha256: "ddeb56934f5354c1edddf9036e6f86e3c1f1b26b62b01fc6456eef58e58d3828"
     },
     {
       kind: "security-contact",

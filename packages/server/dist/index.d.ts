@@ -2,19 +2,25 @@ import { type AppClient } from "./apps";
 import { type AuditClient } from "./audit";
 import { type BulkAccessClient } from "./bulk-access";
 import { type AppAccessClient, type AppMembershipClient } from "./memberships";
+import { type OnlineSessionClient } from "./online-sessions";
+import { type PolicyClient } from "./policies";
 import { type AuthlessApiClientOptions } from "./transport";
+import { type WorkspaceCredentialClient } from "./workspace-credentials";
 import { type WorkspaceClient } from "./workspaces";
 import { type CommerceClient } from "./commerce";
 import { type BillingClient } from "./billing";
-export { type AppClient, type CreateAppInput, createAppClient, type GetAppEnvironmentInput, type ListAppsInput, } from "./apps";
+export { type ActivateAppEnvironmentInput, type AppClient, type CreateAppInput, createAppClient, type GetAppEnvironmentInput, type ListAppsInput, } from "./apps";
 export { type AppCommercePathInput, type ChangePersonalCommerceSubscriptionInput, type CommerceClient, type CommerceEnvironment, type CreateAppCommerceFeatureInput, type CreateAppCommerceAddonInput, type RecordAppCommerceUsageInput, type RequestAppCommerceRefundInput, type CreateAppCommercePlanInput, type CreatePersonalCommerceCheckoutInput, type CreatePersonalCommercePortalSessionInput, type CreatePersonalCommerceQuoteInput, type AcceptPersonalCommerceQuoteInput, type GetAppCommerceEntitlementsInput, type ListPersonalCommerceInput, createCommerceClient, } from "./commerce";
 export { type AuthorizeWorkspaceBillingChangeInput, type BillingClient, type ConfirmWorkspaceBillingCancellationInput, createBillingClient, type RequestWorkspaceBillingRefundInput, type ReviewWorkspaceBillingCancellationInput, type ReviewWorkspaceBillingChangeInput, type WorkspaceBillingPathInput, } from "./billing";
 export { type AuditClient, createAuditClient, type ListAuditEventsInput, } from "./audit";
 export { type BulkAccessClient, type BulkAccessResultArtifact, type CancelBulkAccessOperationInput, type CreateBulkAccessPreviewInput, createBulkAccessClient, type DownloadBulkAccessResultsInput, type ExecuteBulkAccessPreviewInput, type GetBulkAccessOperationInput, type GetBulkAccessPreviewInput, type ListBulkAccessResultsInput, } from "./bulk-access";
 export type { App, AppCommerceCommandEnvelope, AppCommerceCatalogEnvelope, AppCommerceQuoteEnvelope, AppCommerceEntitlement, AppCommerceEntitlementListEnvelope, AppCommerceFeature, AppCommerceAddon, AppCommerceInvoice, AppCommerceInvoiceListEnvelope, AppCommerceMoney, AppCommercePlan, AppCommercePlanEnvelope, AppCommercePlanListEnvelope, AppCommerceSubscription, AppCommerceSubscriptionListEnvelope, AppCommercePublisherAccounting, AppCommercePublisherAccountingEnvelope, AppCommercePublisherLiability, AppCommerceSettlement, AppCommercePayout, AppCommerceViewEnvelope, AppAccessActor, AppAccessGrant, AppAccessGrantEnvelope, AppAccessGrantState, AppAccessGrantVersionConflictEnvelope, AppAccessKind, AppEnvelope, AppEnvironment, AppEnvironmentEnvelope, AppListEnvelope, CommercialBillingCancellation, CommercialBillingCancellationConfirmationRequest, CommercialBillingCancellationEnvelope, CommercialBillingCancellationReview, CommercialBillingCancellationReviewEnvelope, CommercialBillingCancellationReviewRequest, CommercialBillingChangeAuthorization, CommercialBillingChangeAuthorizationRequest, CommercialBillingChangeReview, CommercialBillingChangeReviewEnvelope, CommercialBillingChangeReviewRequest, CommercialBillingEnvelope, CommercialBillingFinancialRecord, CommercialBillingRefund, CommercialBillingRefundEnvelope, CommercialBillingRefundRequest, CommercialBillingView, AppMembership, AppMembershipAccess, AppMembershipAccessEnvelope, AppMembershipDetail, AppMembershipEnvelope, AppMembershipInvitationAccepted, AppMembershipLifecycleEnvelope, AppMembershipListEnvelope, AppMembershipStatus, AppMembershipVersionConflictEnvelope, AuditAuthority, AuditEvent, AuditEventActor, AuditEventListEnvelope, AuditEventReason, AuditEventScope, AuditEventTarget, AuditOutcome, BulkAccessAction, BulkAccessExecutableAction, BulkAccessItemResult, BulkAccessOperation, BulkAccessOperationEnvelope, BulkAccessOperationReadEnvelope, BulkAccessOperationStatus, BulkAccessPreview, BulkAccessPreviewEnvelope, BulkAccessReason, BulkAccessResultListEnvelope, BulkAccessWarning, ChangeAppMembershipStatusRequest, ChangePersonalCommerceSubscriptionRequest, CreateAppCommerceFeatureRequest, CreateAppCommerceAddonRequest, RecordAppCommerceUsageRequest, RequestAppCommerceRefundRequest, ConfirmBulkAccessRequest, CreateAppRequest, CreateAppCommercePlanRequest, CreateBulkAccessPreviewRequest, CreateWorkspaceRequest, CreatePersonalCommerceCheckoutRequest, CreatePersonalCommercePortalSessionRequest, CreatePersonalCommerceQuoteRequest, AcceptPersonalCommerceQuoteRequest, EndpointSet, ErrorEnvelope, ExecuteBulkAccessPreviewRequest, GrantAppEntitlementRequest, GrantAppRoleRequest, InviteAppMembershipRequest, OidcClientProfile, OidcJwtAccessTokenResource, OidcPublicJwk, RevokeAppEntitlementRequest, RevokeAppRoleRequest, Workspace, WorkspaceEnvelope, WorkspaceListEnvelope, } from "./generated";
 export { type AppAccessClient, type AppMembershipClient, type ChangeAppMembershipStatusInput, createAppAccessClient, createAppMembershipClient, type GetAppMembershipAccessInput, type GetAppMembershipInput, type GrantAppEntitlementInput, type GrantAppRoleInput, type InviteAppMembershipInput, type ListAppMembershipsInput, type RevokeAppEntitlementInput, type RevokeAppRoleInput, } from "./memberships";
+export { createOnlineSessionClient, type OnlineSessionClient, type OnlineSessionValidation, type ValidateOnlineSessionInput, } from "./online-sessions";
+export { createPolicyClient, type PolicyClient, type PolicyClientInput, type PolicyHistoryEnvelope, type PolicyRevision, } from "./policies";
 export { type AuthlessApiClientOptions, AuthlessApiError, type AuthlessFetch, type AuthlessRetryOptions, type AuthlessTransport, createAuthlessTransport, } from "./transport";
-export { type CreateWorkspaceInput, createWorkspaceClient, type GetWorkspaceInput, type ListWorkspacesInput, type WorkspaceClient, } from "./workspaces";
+export { createWorkspaceCredentialClient, type IssuedWorkspaceServiceCredential, type ReplayedWorkspaceServiceCredential, type WorkspaceCredentialClient, type WorkspaceServiceCredential, type WorkspaceServicePrincipal, type WorkspaceServiceRestrictions, } from "./workspace-credentials";
+export { type CreateWorkspaceInput, createWorkspaceClient, type GetWorkspaceInput, type ListWorkspacesInput, type WorkspaceClient, type WorkspaceCapabilitiesEnvelope, type WorkspaceCapability, } from "./workspaces";
 export interface AuthlessServerClient {
     auditEvents: AuditClient;
     appAccess: AppAccessClient;
@@ -25,5 +31,8 @@ export interface AuthlessServerClient {
     billing: BillingClient;
     commerce: CommerceClient;
     workspaces: WorkspaceClient;
+    policies: PolicyClient;
+    workspaceCredentials: WorkspaceCredentialClient;
+    onlineSessions: OnlineSessionClient;
 }
 export declare function createAuthlessServerClient(options: AuthlessApiClientOptions): AuthlessServerClient;

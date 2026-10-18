@@ -20,7 +20,6 @@ type FailureBase = {
 export type BrowserFailure =
   | (FailureBase & { kind: "session"; action: "sign-in" })
   | (FailureBase & { kind: "permission"; action: "switch-context" | "return" })
-  | (FailureBase & { kind: "fresh-auth"; action: "reauthenticate" })
   | (FailureBase & { kind: "missing"; action: "return" })
   | (FailureBase & { kind: "conflict"; action: "retry"; preserveEdits: true })
   | (FailureBase & {

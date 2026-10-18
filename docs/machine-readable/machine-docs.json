@@ -354,13 +354,13 @@
       "kind": "openapi",
       "url": "/openapi.json",
       "updatedAt": "2026-10-09",
-      "sha256": "6520b5c362af7b19f2f740a9de94a68b8c3e2d1e5b6a4b565ccc11626a6ee37e"
+      "sha256": "881dcf3d8aeaab7fd73f1e81bce9c1d065fef6d8ead7b99a69a4b5e6c7ddfde0"
     },
     {
-      "kind": "openapi",
+      "kind": "rest-reference",
       "url": "/rest-reference.json",
       "updatedAt": "2026-10-09",
-      "sha256": "2bfb3b8367cd2581de97f577670864f5f112c0e114fb47332bf15bd53081fe62"
+      "sha256": "d7e84c25ac92f905c54de82ff3b2492f01fa5f9f5353dabeb870ff665de1a541"
     },
     {
       "kind": "discovery",
@@ -372,33 +372,33 @@
       "kind": "event-schema",
       "url": "/webhook-catalog.json",
       "updatedAt": "2026-10-09",
-      "sha256": "31337d6103c196589c8aa8ae075cdb7a70ba4b6705f7294cfacfb684bfba0303"
+      "sha256": "4d4110d423a81143f67ca31c536b8562de0c1c3d6ca0fe3b334b4eae9390fa8d"
     },
     {
       "kind": "compatibility",
       "url": "/release-center.json",
       "updatedAt": "2026-10-09",
-      "sha256": "99dfcbe96a4b27558522b5dd639b8aca8649b5f983e2234094d8050460b73ab8"
+      "sha256": "324cd0bf5203c868b4c8c3c3dcd67862834a0289e3e3bf1763e316af3b5219ae"
     },
     {
       "kind": "compatibility",
       "url": "/compatibility.json",
       "updatedAt": "2026-10-09",
-      "sha256": "1b2c9a9e3a0c5e8a8a179396f683ed812ae2d11dc7486a894c8e2a2081b168ed"
+      "sha256": "bf20c82bccda5337f30794f0afec3db6d223c0d30fabb43eefc3de23303e2115"
     },
     {
       "kind": "changelog",
       "url": "/changes.json?lang=en",
       "locale": "en",
       "updatedAt": "2026-10-09",
-      "sha256": "e02f64b037de8b2300b6c1d7068450734a428293788e6d4ac9e268f83a47bfe7"
+      "sha256": "b6869a6975f033a758a3297df6fd05cc66768ca132dce3210626f4701a34c427"
     },
     {
       "kind": "changelog",
       "url": "/changes.json?lang=ar",
       "locale": "ar",
       "updatedAt": "2026-10-09",
-      "sha256": "e6c155d83aef88df735dcca261a46b3fc85985c7a21d61b080ccc54dd0910dd2"
+      "sha256": "e40c84e7c48b5fd73c846f84e29a010f1a9c9641e90d075f14f3b4b79da3354a"
     },
     {
       "kind": "operations",
@@ -410,7 +410,7 @@
       "kind": "documentation-index",
       "url": "/rest-management-guide.json",
       "updatedAt": "2026-10-09",
-      "sha256": "cbe847781748cfa0d54f45b46094044ffb36d99fa57652d164b0723b61a3a566"
+      "sha256": "93420f30e8b612c0213a80e706f8dc0eb8dfeb84c57bd10cf89a493e2ead93e0"
     },
     {
       "kind": "documentation-index",
@@ -422,7 +422,7 @@
       "kind": "sitemap",
       "url": "/sitemap.xml",
       "updatedAt": "2026-10-09",
-      "sha256": "640308d2fdb3c10361adba8d900c20f4302b1ab3321fbe2ee3d082a952b7fc3e"
+      "sha256": "ddeb56934f5354c1edddf9036e6f86e3c1f1b26b62b01fc6456eef58e58d3828"
     },
     {
       "kind": "security-contact",

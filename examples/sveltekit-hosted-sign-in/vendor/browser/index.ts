@@ -21,6 +21,54 @@ export type PendingAuthorization = {
 
 const prefix = "authless:authorization:";
 
+const responseParameters = new Set([
+  "code",
+  "state",
+  "error",
+  "error_description",
+  "error_uri",
+  "iss",
+  "session_state",
+]);
+
+function matchesRegisteredRedirect(
+  callback: URL,
+  redirectUri: string,
+): boolean {
+  try {
+    const registered = new URL(redirectUri);
+    if (
+      !["http:", "https:"].includes(registered.protocol) ||
+      registered.username ||
+      registered.password ||
+      registered.hash ||
+      callback.username ||
+      callback.password ||
+      callback.hash ||
+      callback.origin !== registered.origin ||
+      callback.pathname !== registered.pathname
+    )
+      return false;
+    const query = new URLSearchParams(callback.search);
+    for (const name of responseParameters) {
+      if (registered.searchParams.has(name) || query.getAll(name).length > 1)
+        return false;
+      query.delete(name);
+    }
+    if (callback.searchParams.has("code") && callback.searchParams.has("error"))
+      return false;
+    for (const name of ["code", "error", "state"]) {
+      if (callback.searchParams.has(name) && !callback.searchParams.get(name))
+        return false;
+    }
+    query.sort();
+    registered.searchParams.sort();
+    return query.toString() === registered.searchParams.toString();
+  } catch {
+    return false;
+  }
+}
+
 function randomValue(): string {
   const bytes = crypto.getRandomValues(new Uint8Array(32));
   return btoa(String.fromCharCode(...bytes))
@@ -125,7 +173,7 @@ export function consumeAuthorizationResponse(options: {
   if (
     !Number.isFinite(pending.expiresAt) ||
     pending.expiresAt <= (options.now?.() ?? Date.now()) ||
-    pending.redirectUri !== `${url.origin}${url.pathname}` ||
+    !matchesRegisteredRedirect(url, pending.redirectUri) ||
     !pending.nonce ||
     !pending.verifier
   )

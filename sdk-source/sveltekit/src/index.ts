@@ -9,7 +9,9 @@ export {
 } from "./oidc";
 export {
   type AppSessionProjection,
+  createOnlineSessionValidator,
   createSessionHandle,
+  type OnlineSessionDecision,
   logoutResponse,
 } from "./session";
 export {

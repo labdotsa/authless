@@ -1,11 +1,11 @@
-import type { AppAccessGrant } from "./generated";
+import type { AppAccessGrant, WorkspaceServiceScope } from "./generated";
 export interface AuthlessApiOperation {
     authorization: string;
     method: string;
     retrySafety: "safe" | "unsafe";
 }
-type ApiFailureAction = "sign-in" | "reauthenticate" | "retry" | "switch-context" | "return" | "inspect-status" | "contact-support";
-type ApiFailureKind = "session" | "permission" | "fresh-auth" | "missing" | "conflict" | "validation" | "rate-limit" | "network" | "provider" | "unavailable";
+type ApiFailureAction = "sign-in" | "retry" | "switch-context" | "return" | "inspect-status" | "contact-support";
+type ApiFailureKind = "session" | "permission" | "missing" | "conflict" | "validation" | "rate-limit" | "network" | "provider" | "unavailable";
 type ApiFailureOutcome = "unknown" | "not-applied";
 export declare class AuthlessApiError extends Error {
     readonly action: ApiFailureAction;
@@ -19,6 +19,7 @@ export declare class AuthlessApiError extends Error {
     readonly retryAt?: number;
     readonly retrySafety: AuthlessApiOperation["retrySafety"];
     readonly status: number;
+    readonly requiredScope?: WorkspaceServiceScope;
     constructor(input: {
         action: ApiFailureAction;
         code: string;
@@ -31,6 +32,7 @@ export declare class AuthlessApiError extends Error {
         retryAt?: number;
         retrySafety: AuthlessApiOperation["retrySafety"];
         status: number;
+        requiredScope?: WorkspaceServiceScope;
     });
 }
 export type AuthlessFetch = (input: RequestInfo | URL, init?: RequestInit) => Promise<Response>;
@@ -42,14 +44,22 @@ interface AuthlessApiClientCommonOptions {
 export type AuthlessApiClientOptions = AuthlessApiClientCommonOptions & ({
     managementAccessToken: string;
     appCredentialToken?: never;
+    workspaceServiceCredentialToken?: never;
     sessionToken?: never;
 } | {
     appCredentialToken: string;
+    managementAccessToken?: never;
+    workspaceServiceCredentialToken?: never;
+    sessionToken?: never;
+} | {
+    workspaceServiceCredentialToken: string;
+    appCredentialToken?: never;
     managementAccessToken?: never;
     sessionToken?: never;
 } | {
     appCredentialToken?: never;
     managementAccessToken?: never;
+    workspaceServiceCredentialToken?: never;
     sessionToken: string;
 });
 export interface AuthlessRetryOptions {

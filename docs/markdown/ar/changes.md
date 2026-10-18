@@ -48,33 +48,35 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
 ```json
 {
   "schema": "authless.release-center/v1",
-  "updatedAt": "2026-10-12",
+  "updatedAt": "2026-10-17",
   "compatibility": [
     {
       "component": "REST API",
       "deprecation": "current",
-      "releaseNotes": "/changes#2026-10-11-six-digit-authentication",
+      "releaseNotes": "/changes#2026-10-14-version-precondition-transport-fallback",
       "version": "0.1.0",
       "stability": "stable",
       "contract": "unversioned default (0.1.0)",
-      "testedAt": "2026-10-11",
+      "testedAt": "2026-10-14",
       "evidence": [
         "packages/contracts/openapi/authless.openapi.json",
+        "tests/app-routes.test.ts",
+        "tests/policy-draft-routes.test.ts",
         "tests/rest-api-reference.test.ts"
       ]
     },
     {
       "component": "@authless/browser",
       "deprecation": "current",
-      "releaseNotes": "/changes#2026-09-07-sdk-callback-query",
+      "releaseNotes": "/changes#2026-10-17-valid-session-actions",
       "version": "0.0.0",
       "stability": "source-only",
       "contract": "0.1.0",
-      "browser": "Chromium via Playwright 1.62.0",
-      "testedAt": "2026-09-07",
+      "browser": "Codex built-in browser",
+      "testedAt": "2026-10-17",
       "evidence": [
         "packages/browser/package.json",
-        "tests/sdk-callback-query.test.ts",
+        "packages/browser/src/index.test.ts",
         "tests/oidc-core.test.ts",
         "tests/browser-capability-entrypoints.test.ts",
         "tests/relying-app-helpers.test.ts",
@@ -84,27 +86,29 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
     {
       "component": "@authless/server",
       "deprecation": "current",
-      "releaseNotes": "/changes#2026-10-11-six-digit-authentication",
+      "releaseNotes": "/changes#2026-10-14-version-precondition-transport-fallback",
       "version": "0.1.0",
       "stability": "source-only",
       "contract": "0.1.0",
       "runtime": "Node 24.x",
-      "testedAt": "2026-10-11",
+      "testedAt": "2026-10-14",
       "evidence": [
         "packages/server/package.json",
         "packages/server/src/index.ts",
+        "packages/server/src/apps.ts",
+        "packages/server/src/policies.ts",
         "packages/server/tests/server.node.mjs"
       ]
     },
     {
       "component": "@authless/cli",
       "deprecation": "current",
-      "releaseNotes": "/changes#2026-10-10-native-cli-and-docs-navigation",
+      "releaseNotes": "/changes#2026-10-14-workspace-creation-terms-removal",
       "version": "0.1.0",
       "stability": "source-only",
       "contract": "0.1.0",
       "runtime": "Bun 1.3.10",
-      "testedAt": "2026-10-10",
+      "testedAt": "2026-10-14",
       "evidence": [
         "packages/cli/package.json",
         "packages/cli/src/cli.ts",
@@ -114,15 +118,17 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
     {
       "component": "@authless/sveltekit",
       "deprecation": "current",
-      "releaseNotes": "/changes#2026-09-07-sdk-callback-query",
+      "releaseNotes": "/changes#2026-10-14-workspace-creation-terms-removal",
       "version": "0.0.0",
       "stability": "source-only",
       "contract": "0.1.0",
       "runtime": "SvelteKit 2.70.2 / Node 24.x",
       "framework": "Svelte 5.56.8",
-      "testedAt": "2026-09-07",
+      "testedAt": "2026-10-14",
       "evidence": [
         "packages/sveltekit/package.json",
+        "packages/sveltekit/src/index.test.ts",
+        "docs/evidence/2026-10-16-sveltekit-jwt-claim-fixture.md",
         "tests/sdk-callback-query.test.ts",
         "tests/oidc-core.test.ts",
         "packages/sveltekit/src/oidc.ts",
@@ -135,15 +141,478 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
   ],
   "changes": [
     {
-      "id": "2026-10-12-monthly-authless-platform-billing",
-      "publishedAt": "2026-10-12",
+      "id": "2026-10-17-valid-session-actions",
+      "publishedAt": "2026-10-17",
       "title": {
-        "en": "Monthly Authless workspace billing contract",
-        "ar": "عقد الفوترة الشهرية لمساحة عمل Authless"
+        "en": "Valid sessions authorize permitted actions",
+        "ar": "الجلسات الصالحة تتيح الإجراءات المسموح بها"
       },
       "summary": {
-        "en": "Authless workspace billing now publishes a monthly-only plan, review, authorization, cancellation, refund, and usage contract with matching server, CLI, and documentation exports. App-defined plans and profile-owned app subscriptions remain separate products.",
-        "ar": "تنشر فوترة مساحة عمل Authless الآن عقداً شهرياً فقط للخطة والمراجعة والتفويض والإلغاء والاسترداد والاستخدام مع صادرات متطابقة للخادم وCLI والوثائق. تبقى خطط التطبيقات المعرّفة من المطور واشتراكات التطبيقات المملوكة للملف الشخصي منتجات منفصلة."
+        "en": "A valid session can perform actions allowed by its role and scopes. Actions no longer require an additional sign-in based on authentication age.",
+        "ar": "تتيح الجلسة الصالحة تنفيذ الإجراءات التي يسمح بها دور المستخدم ونطاقات صلاحياته. لم تعد الإجراءات تتطلب تسجيل دخول إضافيًا بسبب وقت التحقق السابق."
+      },
+      "categories": [
+        "product",
+        "api",
+        "sdk",
+        "security"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "breaking",
+      "migration": {
+        "en": "Remove creationReadiness, sensitiveMutationReadiness, sensitiveActionSeconds, and reauthentication failure handling from clients. Keep normal unauthorized and permission-denied handling. Existing sessions retain their expiry, revocation, and permission checks.",
+        "ar": "أزل creationReadiness وsensitiveMutationReadiness وsensitiveActionSeconds ومعالجة أخطاء إعادة التحقق من العملاء. احتفظ بمعالجة عدم تسجيل الدخول ورفض الصلاحيات المعتادة. تبقى فحوصات انتهاء الجلسات وإلغائها وصلاحياتها سارية."
+      },
+      "announcement": {
+        "en": "Workspace, account, policy, billing, and credential actions use the current valid session and granted permissions.",
+        "ar": "تعتمد إجراءات مساحات العمل والحساب والسياسات والفوترة والمفاتيح على الجلسة الصالحة الحالية والصلاحيات الممنوحة."
+      },
+      "replacement": "/reference/rest",
+      "supportWindow": "Existing valid sessions continue until expiry or revocation.",
+      "sunsetAt": "2026-10-17",
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/contracts/openapi/authless.openapi.json",
+        "packages/browser/package.json",
+        "packages/browser/src/index.test.ts",
+        "tests/integration/identity-postgres.integration.ts",
+        "tests/integration/workspace-credentials-postgres.integration.ts",
+        "tests/integration/policy-postgres.integration.ts"
+      ],
+      "permalink": "/changes#2026-10-17-valid-session-actions"
+    },
+    {
+      "id": "2026-10-16-explicit-production-activation",
+      "publishedAt": "2026-10-16",
+      "title": {
+        "en": "Explicit production activation for workspace automation",
+        "ar": "تفعيل الإنتاج الصريح لأتمتة مساحة العمل"
+      },
+      "summary": {
+        "en": "A workspace key with the separately granted app:activate scope can activate a configured production draft. Activation requires confirmation, the current environment version, an active policy, a usable HTTPS redirect, and a valid OIDC profile. Production app allowance and commercial suspension rules apply.",
+        "ar": "يمكن لمفتاح مساحة العمل الذي مُنح نطاق app:activate بشكل مستقل تفعيل مسودة إنتاج مهيأة. يتطلب التفعيل التأكيد وإصدار البيئة الحالي وسياسة نشطة وعنوان إعادة توجيه HTTPS صالحًا وملف OIDC صالحًا. تسري حدود تطبيقات الإنتاج وقواعد التعليق التجاري."
+      },
+      "categories": [
+        "api",
+        "sdk",
+        "product",
+        "security"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Issue a new principal and key with the complete provisioning grant and explicitly enable production activation. Rotation preserves existing grants. Send action activate with confirmed true, expectedVersion, and matching If-Match. Reconcile uncertain delivery with an environment read.",
+        "ar": "أنشئ كيان خدمة ومفتاحًا جديدين بصلاحيات التهيئة الكاملة وفعّل صلاحية تفعيل الإنتاج صراحة. يحافظ التدوير على الصلاحيات الحالية. أرسل action بقيمة activate مع confirmed بقيمة true وexpectedVersion وترويسة If-Match المطابقة. تحقّق من النتيجة غير المؤكدة بقراءة البيئة."
+      },
+      "announcement": {
+        "en": "Human activation and resume remain separate operations. A valid authenticated session can perform each operation when its permissions, confirmation, and current-version checks pass. Service keys can activate permitted production drafts and cannot resume suspended environments.",
+        "ar": "يبقى تفعيل الإنسان واستئناف البيئة عمليتين منفصلتين. يمكن للجلسة الموثقة الصالحة تنفيذ كل عملية عند اجتياز الصلاحيات والتأكيد وفحوصات الإصدار الحالي. يمكن لمفاتيح الخدمة تفعيل مسودات الإنتاج المسموح بها ولا يمكنها استئناف البيئات المعلّقة."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/contracts/openapi/authless.openapi.json",
+        "packages/core/src/app/environment-service.ts",
+        "packages/db/src/app-store.ts",
+        "tests/app-service.test.ts",
+        "tests/integration/machine-app-postgres.integration.ts",
+        "tests/server-app-family.test.ts"
+      ],
+      "permalink": "/changes#2026-10-16-explicit-production-activation"
+    },
+    {
+      "id": "2026-10-16-workspace-capability-diagnostics",
+      "publishedAt": "2026-10-16",
+      "title": {
+        "en": "Inspect effective workspace-key capabilities",
+        "ar": "فحص الصلاحيات الفعلية لمفتاح مساحة العمل"
+      },
+      "summary": {
+        "en": "Workspace keys can inspect their own effective scopes and app and environment restrictions without credential:write. Authentication intersects the principal and credential grants and denies disjoint restrictions.",
+        "ar": "يمكن لمفاتيح مساحة العمل فحص نطاقاتها الفعلية وقيود التطبيقات والبيئات دون credential:write. تستخدم المصادقة تقاطع صلاحيات كيان الخدمة والمفتاح وترفض القيود التي لا تتقاطع."
+      },
+      "categories": [
+        "api",
+        "sdk",
+        "security"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Read GET /workspaces/{workspaceId}/capabilities when connecting a provisioning key. Treat invalid authentication, insufficient_scope, concealed inaccessible targets, readiness errors, and version conflicts separately. The response contains no credential secret.",
+        "ar": "اقرأ GET /workspaces/{workspaceId}/capabilities عند ربط مفتاح التهيئة. تعامل مع المصادقة غير الصالحة وinsufficient_scope والأهداف غير المتاحة وأخطاء الجاهزية وتعارض الإصدارات بشكل منفصل. لا تتضمن الاستجابة سر المفتاح."
+      },
+      "announcement": {
+        "en": "Capability inspection requires a valid key for the requested workspace and reports only that caller's authority. Provisioning grants now include endpoint:write and oidc-profile:write.",
+        "ar": "يتطلب فحص الصلاحيات مفتاحًا صالحًا لمساحة العمل المطلوبة ويعرض صلاحيات المتصل فقط. تتضمن صلاحيات التهيئة الآن endpoint:write وoidc-profile:write."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "apps/api/src/capability-routes.ts",
+        "packages/db/src/workspace-service-credential-store.ts",
+        "tests/integration/workspace-credentials-postgres.integration.ts",
+        "tests/server-workspace-family.test.ts"
+      ],
+      "permalink": "/changes#2026-10-16-workspace-capability-diagnostics"
+    },
+    {
+      "id": "2026-10-16-production-lifecycle-retained-sessions",
+      "publishedAt": "2026-10-16",
+      "title": {
+        "en": "Production lifecycle guards and retained OIDC sessions",
+        "ar": "ضوابط دورة حياة الإنتاج وجلسات OIDC المحتفظ بها"
+      },
+      "summary": {
+        "en": "Production environments expose separate activate, resume, suspend, and retire commands with explicit confirmation and version checks. Retained Authless sessions can complete a new OIDC consent transaction, while persisted transaction and grant-expiry boundaries remain authoritative.",
+        "ar": "تعرض بيئات الإنتاج أوامر منفصلة للتفعيل والاستئناف والتعليق والتقاعد مع تأكيد صريح وفحوص للإصدار. يمكن لجلسات Authless المحتفظ بها إكمال معاملة موافقة OIDC جديدة، بينما تظل حدود انتهاء صلاحية المعاملة والمنحة المحفوظة هي المرجع المعتمد."
+      },
+      "categories": [
+        "api",
+        "product",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Send activate and resume as separate lifecycle actions with confirmed true, expectedVersion, and a matching If-Match value. Keep retained-session clients on the existing consent flow and treat persisted transaction or grant expiry as authoritative. Verify the returned state after an uncertain lifecycle response.",
+        "ar": "أرسل التفعيل والاستئناف كإجرائي دورة حياة منفصلين مع confirmed بقيمة true وexpectedVersion وقيمة If-Match مطابقة. أبقِ عملاء الجلسات المحتفظ بها على مسار الموافقة الحالي وتعامل مع انتهاء صلاحية المعاملة أو المنحة المحفوظة باعتباره المرجع المعتمد. تحقّق من الحالة المعادة بعد استجابة غير مؤكدة لدورة الحياة."
+      },
+      "announcement": {
+        "en": "Operators can activate a ready production draft and resume suspended authorization with version-bound confirmation. Relying parties can continue through consent using a retained Authless session, with each transaction and grant subject to its persisted expiry.",
+        "ar": "يمكن للمشغلين تفعيل مسودة إنتاج جاهزة واستئناف التفويض المعلق مع تأكيد مرتبط بالإصدار. ويمكن للأطراف المعتمدة متابعة الموافقة باستخدام جلسة Authless محتفظ بها، مع خضوع كل معاملة ومنحة لتاريخ انتهاء صلاحيتها المحفوظ."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/contracts/openapi/authless.openapi.json",
+        "packages/server/src/generated.ts",
+        "apps/dash/src/routes/workspaces/[workspace]/apps/[app]/[environment]/endpoints/+page.svelte",
+        "tests/environment-lifecycle-contract.test.ts",
+        "tests/integration/oidc-postgres.integration.ts",
+        "tests/oidc-core.test.ts",
+        "docs/evidence/auth05-qa-retest.md",
+        "docs/evidence/auth06-provider-qa.md"
+      ],
+      "permalink": "/changes#2026-10-16-production-lifecycle-retained-sessions"
+    },
+    {
+      "id": "2026-10-14-workspace-auth-experience-audit",
+      "publishedAt": "2026-10-14",
+      "title": {
+        "en": "Workspace authentication experience audit",
+        "ar": "تدقيق تجربة مصادقة مساحة العمل"
+      },
+      "summary": {
+        "en": "The source audit records workspace key, app, environment, policy, access, audit, profile, session, and error-flow findings. It standardizes reuse of the existing shell, fields, resource rows, status, dialog, secret, and async-state components. Workspace keys default to manual revocation with optional temporary expiry in the candidate source.",
+        "ar": "يسجل تدقيق المصدر نتائج مسارات مفاتيح مساحة العمل والتطبيق والبيئة والسياسة والوصول والتدقيق والملف الشخصي والجلسة والخطأ. ويوحد إعادة استخدام مكونات الغلاف والحقول وصفوف الموارد والحالة والحوار والسر والعمليات غير المتزامنة الموجودة. تعتمد مفاتيح مساحة العمل على الإلغاء اليدوي مع مدة مؤقتة اختيارية في المصدر المرشح."
+      },
+      "categories": [
+        "product",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "operator",
+        "reference",
+        "evaluator"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Source-only audit. Add Workspace keys to canonical workspace navigation, use shared field and resource-state components, and verify nullable key expiry and next-request or refresh policy enforcement before deployment.",
+        "ar": "تدقيق مصدري فقط. أضف مفاتيح مساحة العمل إلى تنقل مساحة العمل المعياري، واستخدم مكونات الحقول وحالات الموارد المشتركة، وتحقق من مدة صلاحية المفتاح القابلة للقيمة الفارغة ومن فرض السياسة عند الطلب التالي أو تحديث الرمز قبل النشر."
+      },
+      "announcement": {
+        "en": "The audit separates supplied screenshots, current Zen production observations, candidate source, and browser-pending states. It makes no hosted deployment or full accessibility claim.",
+        "ar": "يفصل التدقيق بين لقطات الشاشة المقدمة وملاحظات Zen الحالية في الإنتاج والمصدر المرشح والحالات المعلقة في المتصفح. ولا يقدم ادعاءً عن نشر مستضاف أو امتثال كامل لإمكانية الوصول."
+      },
+      "replacement": null,
+      "supportWindow": "Source-only audit pending release and live verification.",
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "docs/audits/2026-10-14-workspace-auth-experience.md",
+        "apps/dash/src/routes/workspaces/[workspace]/credentials/+page.svelte",
+        "apps/dash/src/routes/workspaces/[workspace]/+page.svelte",
+        "packages/ui/src/dash-navigation.ts",
+        "packages/ui/src/components/Field.svelte",
+        "packages/ui/src/components/ResourceRow.svelte",
+        "packages/ui/src/components/StatePanel.svelte",
+        "packages/ui/src/components/TaskDialog.svelte",
+        "packages/ui/src/tokens.ts"
+      ],
+      "permalink": "/changes#2026-10-14-workspace-auth-experience-audit"
+    },
+    {
+      "id": "2026-10-14-credential-confirmation-ux",
+      "publishedAt": "2026-10-14",
+      "title": {
+        "en": "Credential creation removes duplicate confirmation gates",
+        "ar": "إزالة بوابات التأكيد المكررة من إنشاء بيانات الاعتماد"
+      },
+      "summary": {
+        "en": "The candidate credential flow removes duplicate prechecks before one-time secret disclosure while retaining the API authorization, one-time secret, and storage acknowledgement semantics.",
+        "ar": "يزيل مسار بيانات الاعتماد المرشح التأكيدات المسبقة المكررة قبل عرض السر لمرة واحدة مع الحفاظ على صلاحيات API وسر المرة الواحدة وإقرار التخزين."
+      },
+      "categories": [
+        "product",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "operator",
+        "reference",
+        "evaluator"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Source-only UX change. Review credential scope before creation and keep one-time secret storage acknowledgement. No hosted deployment is claimed.",
+        "ar": "تغيير تجربة مستخدم في المصدر فقط. راجع نطاق بيانات الاعتماد قبل الإنشاء وحافظ على إقرار تخزين السر لمرة واحدة. لا يُدّعى وجود نشر مستضاف."
+      },
+      "announcement": {
+        "en": "Source pages and UI tests cover the streamlined creation confirmation and preserved secret acknowledgement. Release verification remains pending.",
+        "ar": "تغطي صفحات المصدر واختبارات واجهة المستخدم تأكيد الإنشاء المبسط وإقرار تخزين السر المحفوظ. ولا يزال تحقق الإصدار معلقاً."
+      },
+      "replacement": null,
+      "supportWindow": "Source-only UX change pending release verification.",
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "apps/dash/src/routes/workspaces/[workspace]/credentials/+page.svelte",
+        "tests/ui/workspace-credentials.ui.ts",
+        "apps/api/src/workspace-credential-routes.ts"
+      ],
+      "permalink": "/changes#2026-10-14-credential-confirmation-ux"
+    },
+    {
+      "id": "2026-10-14-auth-experience-followups",
+      "publishedAt": "2026-10-14",
+      "title": {
+        "en": "Workspace auth experience follow-ups",
+        "ar": "متابعات تجربة مصادقة مساحة العمل"
+      },
+      "summary": {
+        "en": "Records candidate-only responsive form, dashboard bridge, and bodyless OIDC preflight fixes while deployed b3d6 remains the current receipt.",
+        "ar": "يسجل إصلاحات مرشحة فقط لتخطيط النموذج وجسر لوحة التحكم وفحص OIDC التمهيدي بلا جسم، بينما يظل b3d6 المنشور هو الإيصال الحالي."
+      },
+      "categories": [
+        "product",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "operator",
+        "reference",
+        "evaluator"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "No migration. Verify the candidate at 320px, 768px, and 1280px in English and Arabic, then rerun hosted OIDC policy-migration checks before release.",
+        "ar": "لا يلزم ترحيل. تحقق من المرشح عند 320 و768 و1280 بكسل بالإنجليزية والعربية، ثم أعد فحوص ترحيل سياسة OIDC المستضافة قبل الإصدار."
+      },
+      "announcement": {
+        "en": "Candidate source only; deployed b3d6 does not include these follow-ups.",
+        "ar": "المصدر المرشح فقط؛ لا يتضمن b3d6 المنشور هذه المتابعات."
+      },
+      "replacement": null,
+      "supportWindow": "Candidate follow-up pending canonical release receipt.",
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "docs/audits/2026-10-14-workspace-auth-experience.md",
+        "apps/dash/src/lib/AuthenticationPolicyFields.svelte",
+        "apps/dash/src/lib/PolicyEditor.svelte"
+      ],
+      "permalink": "/changes#2026-10-14-auth-experience-followups"
+    },
+    {
+      "id": "2026-10-14-auth-proof-reuse-and-relay",
+      "publishedAt": "2026-10-14",
+      "title": {
+        "en": "Workspace auth proof reuse and relay repairs",
+        "ar": "إصلاحات إعادة استخدام إثبات المصادقة وترحيل وظائف مساحة العمل"
+      },
+      "summary": {
+        "en": "Adds candidate workspace parent/child navigation, eligible-session proof reuse, expired-proof restart, authorize resume routing, and a 12-job auth relay from the shared registry.",
+        "ar": "يضيف المرشح تنقل مساحة العمل الأب والفرع وإعادة استخدام إثبات الجلسة المؤهلة وإعادة تشغيل الإثبات المنتهي وتوجيه استئناف التفويض وترحيل مصادقة من 12 وظيفة من السجل المشترك."
+      },
+      "categories": [
+        "product",
+        "security",
+        "operations"
+      ],
+      "audiences": [
+        "operator",
+        "integrator",
+        "evaluator"
+      ],
+      "impact": "security",
+      "migration": {
+        "en": "No DDL migration. Reuse the original proof within its allowed time, honor explicit prompt and max_age, restart expired proof, and verify authorize resume before deployment.",
+        "ar": "لا يوجد ترحيل DDL. أعد استخدام الإثبات الأصلي ضمن مدته المسموحة، واحترم prompt وmax_age الصريحين، وأعد تشغيل الإثبات المنتهي، وتحقق من استئناف التفويض قبل النشر."
+      },
+      "announcement": {
+        "en": "Candidate source only; these follow-ups await a new 23-gate receipt. Bee391 already covers non-expiring keys, full-width forms, and OAuth 204 transport.",
+        "ar": "المصدر المرشح فقط؛ تنتظر هذه المتابعات إيصالاً جديداً من 23 فحصاً. يغطي bee391 بالفعل المفاتيح بلا انتهاء والنماذج بعرض كامل ونقل OAuth 204."
+      },
+      "replacement": null,
+      "supportWindow": "Candidate auth repairs pending release receipt and resume verification.",
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/core/src/identity/transaction-authentication-service.ts",
+        "packages/db/src/identity/transaction-authentication-store.ts",
+        "apps/sign/src/oidc/interaction-adapters.ts",
+        "apps/sign/netlify/functions/oidc.ts",
+        "packages/config/src/scheduled-job-registry.ts",
+        "apps/api/src/scheduled-job-runner.ts",
+        "tests/website-scheduled-relay.test.ts"
+      ],
+      "permalink": "/changes#2026-10-14-auth-proof-reuse-and-relay"
+    },
+    {
+      "id": "2026-10-14-workspace-creation-terms-removal",
+      "publishedAt": "2026-10-14",
+      "title": {
+        "en": "Workspace creation removes duplicate terms acceptance",
+        "ar": "إزالة قبول الشروط المكرر من إنشاء مساحة العمل"
+      },
+      "summary": {
+        "en": "Workspace creation now relies on the valid authenticated session instead of a second terms checkbox. Legacy input remains optional for compatibility, and historical timestamps stay nullable without fabricated values.",
+        "ar": "يعتمد إنشاء مساحة العمل الآن على الجلسة الموثقة الحاكمة بدلاً من مربع قبول شروط ثانٍ. يظل الإدخال القديم اختيارياً للتوافق، وتبقى الطوابع الزمنية التاريخية قابلة للقيمة الفارغة دون اصطناع قيم."
+      },
+      "categories": [
+        "product",
+        "api",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference",
+        "evaluator"
+      ],
+      "impact": "security",
+      "migration": {
+        "en": "Migrate clients to omit duplicate terms acceptance and rely on the authenticated session flow. Review migration 0112 before deployment; preserve NULL historical timestamps and rollback guards.",
+        "ar": "رحّل العملاء لحذف قبول الشروط المكرر والاعتماد على مسار الجلسة الموثقة. راجع الترحيل 0112 قبل النشر، وحافظ على الطوابع الزمنية التاريخية NULL وحواجز التراجع."
+      },
+      "announcement": {
+        "en": "Source checks cover valid session creation, optional legacy input, actual timestamps only, nullable historical fields, and rollback safety. This entry describes source state only; no hosted deployment is claimed.",
+        "ar": "تغطي فحوص المصدر إنشاء الجلسة الصحيح والإدخال القديم الاختياري والطوابع الزمنية الفعلية فقط والحقول التاريخية القابلة للقيمة الفارغة وسلامة التراجع. يصف هذا الإدخال حالة المصدر فقط، ولا يُدّعى نشر مستضاف."
+      },
+      "replacement": "/reference/rest",
+      "supportWindow": "Source-only migration 0112 pending deployment review.",
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/db/drizzle/0112_workspace_terms_nullable_up.sql",
+        "packages/db/drizzle/0112_workspace_terms_nullable_down.sql",
+        "packages/db/src/schema/workspace.ts",
+        "packages/db/src/workspace-store.ts",
+        "packages/core/src/workspace/service.ts",
+        "tests/workspace-terms-migration.test.ts",
+        "tests/workspace-service.test.ts"
+      ],
+      "permalink": "/changes#2026-10-14-workspace-creation-terms-removal"
+    },
+    {
+      "id": "2026-10-14-version-precondition-transport-fallback",
+      "publishedAt": "2026-10-14",
+      "title": {
+        "en": "Version preconditions survive hosted transport",
+        "ar": "استمرار شروط الإصدار عبر النقل المستضاف"
+      },
+      "summary": {
+        "en": "Versioned management mutations accept a validated JSON version when the hosted forwarding path drops If-Match. App, policy, membership, access, and credential updates retain mandatory concurrency checks and reject mismatches.",
+        "ar": "تقبل عمليات الإدارة ذات الإصدار نسخة JSON متحققة عندما يسقط مسار التوجيه المستضاف If-Match. تحافظ تحديثات التطبيق والسياسة والعضوية والوصول وبيانات الاعتماد على فحوص التزامن الإلزامية وترفض حالات عدم التطابق."
+      },
+      "categories": [
+        "api",
+        "sdk",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "security",
+      "migration": {
+        "en": "Source-only compatibility improvement. Continue sending If-Match and the operation's documented JSON version field. Missing, malformed, conflicting, and stale versions remain rejected. Policy drafts also support version zero.",
+        "ar": "تحسين توافق متاح في المصدر فقط. استمر في إرسال If-Match وحقل إصدار JSON الموثق للعملية. تظل الإصدارات المفقودة وغير الصالحة والمتعارضة والقديمة مرفوضة. تدعم مسودات السياسة الإصدار صفر أيضاً."
+      },
+      "announcement": {
+        "en": "The API routes, server client, dashboard commands, OpenAPI contract, REST reference, and machine-readable documentation now describe the same bounded fallback. No hosted deployment is claimed.",
+        "ar": "تصف مسارات API وعميل الخادم وأوامر لوحة التحكم وعقد OpenAPI ومرجع REST والوثائق المقروءة آلياً نفس البديل المحدود. لا يُدّعى وجود نشر مستضاف."
+      },
+      "replacement": "/reference/rest",
+      "supportWindow": "Source-only compatibility capability pending hosted release.",
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "apps/api/src/api-contract.ts",
+        "apps/api/src/app-routes.ts",
+        "apps/api/src/app-membership-transport.ts",
+        "apps/api/src/policy-transport.ts",
+        "apps/api/src/policy-draft-routes.ts",
+        "apps/dash/src/lib/environment-resource-commands.ts",
+        "apps/dash/src/lib/policy-resource.ts",
+        "packages/contracts/openapi/authless.openapi.json",
+        "packages/server/src/apps.ts",
+        "packages/server/src/policies.ts",
+        "tests/app-routes.test.ts",
+        "tests/api-transport-codec.test.ts",
+        "tests/policy-draft-routes.test.ts",
+        "tests/environment-resource-commands.test.ts"
+      ],
+      "permalink": "/changes#2026-10-14-version-precondition-transport-fallback"
+    },
+    {
+      "id": "2026-10-13-workspace-keys-active-policy",
+      "publishedAt": "2026-10-13",
+      "title": {
+        "en": "Workspace service keys and active policy migration",
+        "ar": "مفاتيح خدمة مساحة العمل وترحيل السياسة النشطة"
+      },
+      "summary": {
+        "en": "The source contract now covers workspace service credentials, environment isolation, app metadata administration, policy history, and online session validation. Existing users are re-evaluated on the next authenticated request or token refresh.",
+        "ar": "يغطي عقد المصدر الآن بيانات اعتماد خدمة مساحة العمل وعزل البيئات وإدارة بيانات التطبيق وسجل السياسات والتحقق الفوري من الجلسات. يُعاد تقييم المستخدمين الحاليين عند أول طلب موثق أو تحديث للرمز."
       },
       "categories": [
         "api",
@@ -158,108 +627,36 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "reference",
         "evaluator"
       ],
-      "impact": "breaking",
+      "impact": "security",
       "migration": {
-        "en": "Authless platform billing accepts monthly periods only; update integrations that send annual billing periods. This applies to the Authless workspace product only and does not change developer app plan intervals or personal app subscriptions. Verify the generated REST, server, CLI, and Docs MCP projections before publishing an integration.",
-        "ar": "تقبل فوترة منصة Authless الفترات الشهرية فقط؛ حدّث التكاملات التي ترسل فترات سنوية. ينطبق ذلك على منتج مساحة عمل Authless فقط ولا يغيّر فترات خطط تطبيقات المطور أو اشتراكات التطبيقات الشخصية. تحقق من إسقاطات REST والخادم وCLI وDocs MCP المولّدة قبل نشر التكامل."
+        "en": "Migrations 0102 through 0107 remain source-only and require legacy review before deployment. Integrators must handle policy status, consent or proof interaction, bounded service-key scopes, revision history, and online validation on every protected request or token refresh.",
+        "ar": "تبقى الترحيلات من 0106 إلى 0111 في المصدر فقط وتحتاج إلى مراجعة قديمة قبل النشر. يجب على المدمجين التعامل مع حالة السياسة وتفاعل الموافقة أو الإثبات ونطاقات مفاتيح الخدمة المحددة وسجل المراجعات والتحقق الفوري في كل طلب محمي أو تحديث للرمز."
       },
       "announcement": {
-        "en": "The public contract and generated exports now agree on monthly Authless workspace billing, credential separation, and the independent app-commerce model. This release does not enable live payment collection, worldwide coverage, or MCP GA.",
-        "ar": "يتفق العقد العام والصادرات المولّدة الآن على فوترة مساحة عمل Authless الشهرية وفصل بيانات الاعتماد ونموذج تجارة التطبيقات المستقل. لا يفعّل هذا الإصدار تحصيل مدفوعات حية أو تغطية عالمية أو الإصدار العام لـ MCP."
+        "en": "The checked OpenAPI contract, generated server client, CLI-facing metadata, SvelteKit evidence, REST reference, machine documentation, and Docs MCP describe the same source-only capability. No hosted deployment is claimed.",
+        "ar": "يصف عقد OpenAPI المتحقق منه والعميل المولّد للخادم وبيانات CLI وأدلة SvelteKit ومرجع REST والوثائق المقروءة آلياً وDocs MCP القدرة المصدرية نفسها. لا يُدّعى وجود نشر مستضاف."
       },
       "replacement": "/reference/rest",
-      "supportWindow": "Current monthly-only Authless workspace billing contract.",
-      "sunsetAt": "2026-10-12",
-      "status": "available",
-      "support": "/support",
-      "evidence": [
-        "packages/contracts/src/commercial-wire.generated.ts",
-        "packages/contracts/openapi/authless.openapi.json",
-        "packages/server/src/billing.ts",
-        "packages/server/src/commerce.ts",
-        "packages/server/README.md",
-        "packages/cli/src/cli.ts",
-        "packages/cli/README.md",
-        "packages/docs-mcp/src/corpus.generated.json",
-        "apps/docs/static/openapi.json",
-        "apps/docs/static/rest-reference.json",
-        "apps/docs/machine-readable/llms-full.txt",
-        "tests/commercial-billing-api.test.ts",
-        "tests/commercial-billing.test.ts",
-        "tests/docs-mcp.test.ts"
-      ],
-      "permalink": "/changes#2026-10-12-monthly-authless-platform-billing"
-    },
-    {
-      "id": "2026-10-11-profile-workspace-app-commerce-boundaries",
-      "publishedAt": "2026-10-11",
-      "title": {
-        "en": "Profile and developer workspace commerce boundaries",
-        "ar": "حدود التجارة بين الملف الشخصي ومساحة عمل المطور"
-      },
-      "summary": {
-        "en": "A personal profile can upgrade to developer capability through workspace membership and switch views without a second identity. App subscriptions remain profile-owned, while app catalog administration and Authless platform billing remain workspace-scoped. The local mock provider, CLI, and delegated MCP preview/apply flow now preserve these boundaries across the API, database, and operator tooling.",
-        "ar": "يمكن للملف الشخصي الترقية إلى إمكانات المطور عبر عضوية مساحة العمل والتنقل بين العرضين دون هوية ثانية. تبقى اشتراكات التطبيقات مملوكة للملف الشخصي، بينما تبقى إدارة كتالوج التطبيقات وفوترة Authless للمنصة ضمن نطاق مساحة العمل. يحافظ موفر الدفع الوهمي المحلي وCLI وتدفق المعاينة والتنفيذ المفوض عبر MCP على هذه الحدود عبر واجهة API وقاعدة البيانات وأدوات التشغيل."
-      },
-      "categories": [
-        "product",
-        "api",
-        "security",
-        "operations",
-        "docs"
-      ],
-      "audiences": [
-        "operator",
-        "integrator",
-        "reference",
-        "evaluator"
-      ],
-      "impact": "additive",
-      "migration": {
-        "en": "No live-payment migration is implied. Treat developer account as a product label for an existing profile with workspace capability. Migrations 0102–0105 add local app-commerce, scope-integrity, and durable management approval state; verify the intended database with the read-only status check before any deployment migration.",
-        "ar": "لا يعني ذلك ترحيلاً لمدفوعات حية. تعامل مع حساب المطور كتسمية منتج لملف شخصي قائم يملك إمكانات مساحة العمل. تضيف الترحيلات 0102–0105 حالة تجارة التطبيقات وسلامة النطاق والموافقات الإدارية الدائمة محلياً؛ تحقق من قاعدة البيانات المقصودة بفحص الحالة للقراءة فقط قبل أي ترحيل للنشر."
-      },
-      "announcement": {
-        "en": "Personal subscriptions, developer workspace administration, app commerce, and Authless platform billing now have separate UI contexts, API authorities, and database scopes. The mock provider remains local-only and does not claim live worldwide payment support.",
-        "ar": "أصبحت الاشتراكات الشخصية وإدارة مساحة عمل المطور وتجارة التطبيقات وفوترة Authless للمنصة تملك سياقات واجهة وصلاحيات API ونطاقات قاعدة بيانات منفصلة. يبقى موفر الدفع الوهمي محلياً ولا يدعي دعم مدفوعات عالمية حية."
-      },
-      "replacement": null,
-      "supportWindow": null,
+      "supportWindow": "Source-only capability pending legacy migration review.",
       "sunsetAt": null,
       "status": "available",
       "support": "/support",
       "evidence": [
-        "CONTEXT.md",
-        "docs/adr/0001-profile-workspace-and-commerce-boundaries.md",
-        "docs/operations/mock-managed-payments.md",
-        "apps/dash/src/routes/+layout.svelte",
-        "apps/dash/src/routes/personal/subscriptions/+page.svelte",
-        "apps/dash/src/routes/workspaces/+page.svelte",
-        "apps/api/src/app-commerce-routes.ts",
-        "apps/api/src/runtime/commerce-authority.ts",
-        "apps/api/src/management-mcp/catalog.ts",
-        "apps/api/src/management-mcp/tool-routes/commerce.ts",
-        "apps/api/src/runtime/management-commerce-input.ts",
-        "apps/api/src/runtime/management-commerce.ts",
-        "apps/api/src/runtime/management-mcp-attestation.ts",
-        "packages/cli/README.md",
-        "packages/cli/src/cli.ts",
-        "packages/cli/test/cli.test.ts",
-        "packages/server/src/commerce.ts",
-        "packages/server/src/billing.ts",
-        "packages/core/src/app-commerce/service.ts",
-        "packages/core/src/agent-management/management-scopes.ts",
-        "packages/db/src/agent-management/commerce-mutation-store.ts",
-        "packages/db/src/migration-status-cli.ts",
-        "packages/db/drizzle/0105_management_agent_commerce_billing_scopes_up.sql",
-        "packages/db/drizzle/0104_app_commerce_scope_integrity_up.sql",
-        "packages/db/drizzle/0104_app_commerce_scope_integrity_down.sql",
-        "tests/integration/commerce-authority-postgres.integration.ts",
-        "tests/integration/management-commerce-runtime-postgres.integration.ts",
-        "apps/api/src/runtime/management-commerce-input.test.ts",
-        "tests/ui/workspace-context.ui.ts"
+        "packages/contracts/openapi/authless.openapi.json",
+        "packages/contracts/openapi/authless.compatibility.json",
+        "packages/server/src/generated.ts",
+        "packages/server/src/online-sessions.ts",
+        "packages/sveltekit/package.json",
+        "packages/db/drizzle/0106_environment_customer_authority_up.sql",
+        "packages/db/drizzle/0107_oidc_grant_policy_authority_up.sql",
+        "packages/db/drizzle/0108_workspace_service_credentials_up.sql",
+        "packages/db/drizzle/0109_policy_publication_service_actor_up.sql",
+        "packages/db/drizzle/0110_app_machine_idempotency_up.sql",
+        "packages/db/drizzle/0111_app_metadata_version_up.sql",
+        "tests/server-generation.test.ts",
+        "tests/server-contract-compatibility.test.ts"
       ],
-      "permalink": "/changes#2026-10-11-profile-workspace-app-commerce-boundaries"
+      "permalink": "/changes#2026-10-13-workspace-keys-active-policy"
     },
     {
       "id": "2026-10-11-six-digit-authentication",
@@ -305,8 +702,8 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "packages/identity-node/src/secret-protection.ts",
         "packages/jobs/src/identity-verification.ts",
         "packages/oidc/src/interactions.ts",
-        "apps/docs/static/openapi.json",
-        "apps/docs/static/rest-reference.json",
+        "apps/docs/src/lib/machine-assets/openapi.json",
+        "apps/docs/src/lib/machine-assets/rest-reference.json",
         "apps/docs/machine-readable/llms-full.txt",
         "packages/docs-mcp/src/corpus.generated.json",
         "tests/identity-contract-codec.test.ts",
@@ -552,8 +949,8 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "ar": "إسقاط جاهزية التعديلات الحساسة"
       },
       "summary": {
-        "en": "Adds compatible readiness fields for personal username and workspace creation so clients can reveal reauthentication before submission.",
-        "ar": "يضيف حقول جاهزية متوافقة لاسم المستخدم الشخصي وإنشاء مساحة العمل كي تعرض التطبيقات إعادة المصادقة قبل الإرسال."
+        "en": "Retires action-level authentication readiness fields so clients rely on the authenticated session and its permissions.",
+        "ar": "يلغي حقول جاهزية المصادقة على مستوى الإجراء كي تعتمد التطبيقات على الجلسة الموثقة وصلاحياتها."
       },
       "categories": [
         "api",
@@ -566,12 +963,12 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       "impact": "additive",
       "migration": {
-        "en": "No migration is required. Clients may consume the optional readiness fields; existing clients that ignore additive response fields remain compatible.",
-        "ar": "لا يلزم ترحيل. يمكن للتطبيقات استخدام حقول الجاهزية الاختيارية؛ وتظل التطبيقات الحالية التي تتجاهل حقول الاستجابة الإضافية متوافقة."
+        "en": "Clients should stop reading the retired readiness fields and submit authorized actions with the valid session token.",
+        "ar": "ينبغي للتطبيقات التوقف عن قراءة حقول الجاهزية الملغاة وإرسال الإجراءات المسموح بها باستخدام رمز الجلسة الصالح."
       },
       "announcement": {
-        "en": "Username and workspace creation readiness is now projected from authoritative authentication time and preserved by the generated TypeScript client contract.",
-        "ar": "تُسقط جاهزية اسم المستخدم وإنشاء مساحة العمل الآن من وقت المصادقة الموثوق ويحفظها عقد عميل TypeScript المولد."
+        "en": "Username and workspace creation now use the authenticated session and permission contract without a product-level recent-auth precheck.",
+        "ar": "يعتمد إنشاء اسم المستخدم ومساحة العمل الآن على عقد الجلسة الموثقة والصلاحيات من دون فحص مصادقة حديثة على مستوى المنتج."
       },
       "replacement": null,
       "supportWindow": null,
@@ -1259,7 +1656,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       "impact": "additive",
       "migration": {
-        "en": "No migration is required. The path, confirmation and expected-version input, correlation header, 200 split/version response, private not-found, authorization, recent-authentication, confirmation, and version-conflict outcomes remain unchanged.",
+        "en": "No migration is required. The path, confirmation and expected-version input, correlation header, 200 split/version response, private not-found, authorization, confirmation, and version-conflict outcomes remain unchanged.",
         "ar": "لا يلزم ترحيل. يظل المسار ومدخلا التأكيد والإصدار المتوقع وترويسة الارتباط واستجابة الفصل والإصدار 200 ونتائج الإخفاء وعدم التفويض والمصادقة الحديثة والتأكيد وتعارض الإصدار دون تغيير."
       },
       "announcement": {
@@ -1354,8 +1751,8 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       "impact": "additive",
       "migration": {
-        "en": "No migration is required. The path, confirmation input, 200 reservation response, correlation header, and authorization, recent-authentication, confirmation, conflict, and availability outcomes remain unchanged.",
-        "ar": "لا يلزم ترحيل. يظل المسار ومدخل التأكيد واستجابة الحجز 200 وترويسة الارتباط ونتائج التفويض والمصادقة الحديثة والتأكيد والتعارض والتوفر دون تغيير."
+        "en": "No migration is required. The path, confirmation input, 200 reservation response, correlation header, and authorization, confirmation, conflict, and availability outcomes remain unchanged.",
+        "ar": "لا يلزم ترحيل. يظل المسار ومدخل التأكيد واستجابة الحجز 200 وترويسة الارتباط ونتائج التفويض والتأكيد والتعارض والتوفر دون تغيير."
       },
       "announcement": {
         "en": "Username removal now uses canonical generated confirmation decoding and fails closed before publishing a malformed reservation projection.",

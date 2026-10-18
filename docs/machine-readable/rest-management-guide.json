@@ -6,7 +6,7 @@
     "rules": [
       "Create a server-only app credential restricted to the single test app; a platform session is broader and is not required.",
       "Load it from an approved secret store into AUTHLESS_APP_CREDENTIAL; never expose it to browser code, source, logs, screenshots, tickets, or chat.",
-      "Rotate it before expiry or immediately after suspected exposure, revoke it after the exercise, and redact Authorization, Cookie, and environment values."
+      "Workspace keys do not expire by default. Rotate on a planned schedule or immediately after suspected exposure, revoke them after the exercise, and redact Authorization, Cookie, and environment values. Set an explicit expiry only when the automation needs a temporary key."
     ]
   },
   "operationIds": [
