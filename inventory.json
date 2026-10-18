@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "kind": "authless-public-developer-repo-export",
-  "sourceRevision": "8e615279d787048e6dbad5122f339d820cdc909d",
+  "sourceRevision": "7b0aea9ef3bf49d702942025ad71e531bdc278ec",
   "publicRepositoryUrl": "https://github.com/labdotsa/authless/tree/master",
   "licensePolicy": "MIT; Copyright (c) 2026 LabDotSA.",
   "excluded": [
