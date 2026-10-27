@@ -419,6 +419,374 @@ var updateAppMetadataOperation = {
   retrySafety: "unsafe",
   status: "stable"
 };
+var issueWorkspaceAvatarIntentOperation = {
+  authorization: "session",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/avatar/intents",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var uploadWorkspaceAvatarOperation = {
+  authorization: "session",
+  method: "PUT",
+  path: "/workspaces/{workspaceId}/avatar/intents/{intentId}",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var attachWorkspaceAvatarOperation = {
+  authorization: "session",
+  method: "PUT",
+  path: "/workspaces/{workspaceId}/avatar",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var removeWorkspaceAvatarOperation = {
+  authorization: "session",
+  method: "DELETE",
+  path: "/workspaces/{workspaceId}/avatar",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var createAppIconUploadIntentOperation = {
+  authorization: "session-or-workspace-service",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/apps/{appId}/icon/intents",
+  retrySafety: "safe",
+  status: "stable"
+};
+var uploadAppIconOperation = {
+  authorization: "session-or-workspace-service",
+  method: "PUT",
+  path: "/workspaces/{workspaceId}/apps/{appId}/icon/intents/{intentId}",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var publishAppIconOperation = {
+  authorization: "session-or-workspace-service",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/apps/{appId}/icon",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var clearAppIconOperation = {
+  authorization: "session-or-workspace-service",
+  method: "DELETE",
+  path: "/workspaces/{workspaceId}/apps/{appId}/icon",
+  retrySafety: "unsafe",
+  status: "stable"
+};
+var beginGuestConversionIntentOperation = {
+  authorization: "guest",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/guest-conversion/intents",
+  retrySafety: "unsafe",
+  status: "experimental"
+};
+var getGuestConversionIntentOperation = {
+  authorization: "public",
+  method: "GET",
+  path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/guest-conversion/intents/{intent}",
+  retrySafety: "safe",
+  status: "experimental"
+};
+var confirmGuestConversionOperation = {
+  authorization: "public",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/guest-conversion",
+  retrySafety: "unsafe",
+  status: "experimental"
+};
+var getAppProfileMeOperation = {
+  authorization: "public",
+  method: "GET",
+  path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/me",
+  retrySafety: "safe",
+  status: "experimental"
+};
+var updateAppProfileMeOperation = {
+  authorization: "public",
+  method: "PATCH",
+  path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/me",
+  retrySafety: "unsafe",
+  status: "experimental"
+};
+var getAppProfileSubjectOperation = {
+  authorization: "public",
+  method: "GET",
+  path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}",
+  retrySafety: "safe",
+  status: "experimental"
+};
+var updateAppProfileSubjectOperation = {
+  authorization: "public",
+  method: "PATCH",
+  path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}",
+  retrySafety: "unsafe",
+  status: "experimental"
+};
+var createAppProfileUserAvatarIntentOperation = {
+  authorization: "public",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/user/avatar-intents",
+  retrySafety: "unsafe",
+  status: "experimental"
+};
+var createAppProfileSubjectUserAvatarIntentOperation = {
+  authorization: "public",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}/user/avatar-intents",
+  retrySafety: "unsafe",
+  status: "experimental"
+};
+var createAppProfileAppAvatarIntentOperation = {
+  authorization: "public",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/app/avatar-intents",
+  retrySafety: "unsafe",
+  status: "experimental"
+};
+var createAppProfileSubjectAppAvatarIntentOperation = {
+  authorization: "public",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}/app/avatar-intents",
+  retrySafety: "unsafe",
+  status: "experimental"
+};
+var uploadAppProfileUserAvatarOperation = {
+  authorization: "public",
+  method: "PUT",
+  path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/user/avatar/{intentId}",
+  retrySafety: "unsafe",
+  status: "experimental"
+};
+var uploadAppProfileSubjectUserAvatarOperation = {
+  authorization: "public",
+  method: "PUT",
+  path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}/user/avatar/{intentId}",
+  retrySafety: "unsafe",
+  status: "experimental"
+};
+var uploadAppProfileAppAvatarOperation = {
+  authorization: "public",
+  method: "PUT",
+  path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/app/avatar/{intentId}",
+  retrySafety: "unsafe",
+  status: "experimental"
+};
+var uploadAppProfileSubjectAppAvatarOperation = {
+  authorization: "public",
+  method: "PUT",
+  path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}/app/avatar/{intentId}",
+  retrySafety: "unsafe",
+  status: "experimental"
+};
+var publishAppProfileUserAvatarOperation = {
+  authorization: "public",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/user/avatar",
+  retrySafety: "unsafe",
+  status: "experimental"
+};
+var removeAppProfileUserAvatarOperation = {
+  authorization: "public",
+  method: "DELETE",
+  path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/user/avatar",
+  retrySafety: "unsafe",
+  status: "experimental"
+};
+var publishAppProfileSubjectUserAvatarOperation = {
+  authorization: "public",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}/user/avatar",
+  retrySafety: "unsafe",
+  status: "experimental"
+};
+var removeAppProfileSubjectUserAvatarOperation = {
+  authorization: "public",
+  method: "DELETE",
+  path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}/user/avatar",
+  retrySafety: "unsafe",
+  status: "experimental"
+};
+var publishAppProfileAppAvatarOperation = {
+  authorization: "public",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/app/avatar",
+  retrySafety: "unsafe",
+  status: "experimental"
+};
+var removeAppProfileAppAvatarOperation = {
+  authorization: "public",
+  method: "DELETE",
+  path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/app/avatar",
+  retrySafety: "unsafe",
+  status: "experimental"
+};
+var publishAppProfileSubjectAppAvatarOperation = {
+  authorization: "public",
+  method: "POST",
+  path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}/app/avatar",
+  retrySafety: "unsafe",
+  status: "experimental"
+};
+var removeAppProfileSubjectAppAvatarOperation = {
+  authorization: "public",
+  method: "DELETE",
+  path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}/app/avatar",
+  retrySafety: "unsafe",
+  status: "experimental"
+};
+
+// src/app-profiles.ts
+function avatarOperation(input, action) {
+  const subject = input.subjectId !== undefined;
+  if (action === "intent") {
+    return {
+      ...subject ? input.side === "user" ? createAppProfileSubjectUserAvatarIntentOperation : createAppProfileSubjectAppAvatarIntentOperation : input.side === "user" ? createAppProfileUserAvatarIntentOperation : createAppProfileAppAvatarIntentOperation,
+      authorization: "app-credential"
+    };
+  }
+  if (action === "upload") {
+    return {
+      ...subject ? input.side === "user" ? uploadAppProfileSubjectUserAvatarOperation : uploadAppProfileSubjectAppAvatarOperation : input.side === "user" ? uploadAppProfileUserAvatarOperation : uploadAppProfileAppAvatarOperation,
+      authorization: "app-credential"
+    };
+  }
+  if (action === "publish") {
+    return {
+      ...subject ? input.side === "user" ? publishAppProfileSubjectUserAvatarOperation : publishAppProfileSubjectAppAvatarOperation : input.side === "user" ? publishAppProfileUserAvatarOperation : publishAppProfileAppAvatarOperation,
+      authorization: "app-credential"
+    };
+  }
+  return {
+    ...subject ? input.side === "user" ? removeAppProfileSubjectUserAvatarOperation : removeAppProfileSubjectAppAvatarOperation : input.side === "user" ? removeAppProfileUserAvatarOperation : removeAppProfileAppAvatarOperation,
+    authorization: "app-credential"
+  };
+}
+function profilePath(input, suffix) {
+  return "/workspaces/" + encodeURIComponent(input.workspaceId) + "/apps/" + encodeURIComponent(input.appId) + "/" + encodeURIComponent(input.environment) + suffix;
+}
+function avatarPath(input, suffix) {
+  const target = input.subjectId ? `/profiles/${encodeURIComponent(input.subjectId)}/${input.side}` : `/profile/${input.side}`;
+  return profilePath(input, `${target}/avatar${suffix}`);
+}
+function profileHeaders(input) {
+  return {
+    ...input.expectedVersion === undefined ? {} : { "if-match": `"${input.expectedVersion}"` },
+    ...input.idempotencyKey === undefined ? {} : { "idempotency-key": input.idempotencyKey },
+    ...input.sessionReference === undefined ? {} : { "x-session-reference": input.sessionReference }
+  };
+}
+function createAppProfilesClient(transport) {
+  return {
+    async getApp(input) {
+      const path = profilePath(input, `/profiles/${encodeURIComponent(input.subjectId)}`);
+      return transport.execute({
+        correlationId: input.correlationId,
+        operation: {
+          ...getAppProfileSubjectOperation,
+          authorization: "app-credential"
+        },
+        path
+      });
+    },
+    async updateApp(input) {
+      const path = profilePath(input, `/profiles/${encodeURIComponent(input.subjectId)}`);
+      const body = {
+        ...input.displayName !== undefined ? { displayName: input.displayName } : {},
+        expectedVersion: input.expectedVersion
+      };
+      return transport.execute({
+        body: JSON.stringify(body),
+        correlationId: input.correlationId,
+        headers: profileHeaders(input),
+        operation: {
+          ...updateAppProfileSubjectOperation,
+          authorization: "app-credential"
+        },
+        path
+      });
+    },
+    async getUser(input) {
+      return transport.execute({
+        correlationId: input.correlationId,
+        headers: profileHeaders(input),
+        operation: {
+          ...getAppProfileMeOperation,
+          authorization: "app-credential"
+        },
+        path: profilePath(input, "/profile/me")
+      });
+    },
+    async updateUser(input) {
+      if (input.displayName !== undefined && input.resetFields !== undefined)
+        throw new TypeError("displayName and resetFields cannot be used together.");
+      const body = input.resetFields === undefined ? {
+        ...input.displayName !== undefined ? { displayName: input.displayName } : {},
+        expectedVersion: input.expectedVersion
+      } : {
+        expectedVersion: input.expectedVersion,
+        resetFields: [...input.resetFields]
+      };
+      return transport.execute({
+        body: JSON.stringify(body),
+        correlationId: input.correlationId,
+        headers: profileHeaders(input),
+        operation: {
+          ...updateAppProfileMeOperation,
+          authorization: "app-credential"
+        },
+        path: profilePath(input, "/profile/me")
+      });
+    },
+    async resetUser(input) {
+      return this.updateUser({
+        ...input,
+        resetFields: input.resetFields ?? ["avatar", "displayName"]
+      });
+    },
+    async issueAvatarIntent(input) {
+      return transport.execute({
+        correlationId: input.correlationId,
+        operation: avatarOperation(input, "intent"),
+        path: avatarPath(input, "-intents")
+      });
+    },
+    async uploadAvatar(input) {
+      return transport.execute({
+        body: input.body,
+        correlationId: input.correlationId,
+        headers: {
+          ...profileHeaders(input),
+          "content-type": input.contentType
+        },
+        operation: avatarOperation(input, "upload"),
+        path: avatarPath(input, `/${encodeURIComponent(input.intentId)}`)
+      });
+    },
+    async publishAvatar(input) {
+      return transport.execute({
+        body: JSON.stringify({
+          assetId: input.assetId,
+          revision: input.revision
+        }),
+        correlationId: input.correlationId,
+        headers: profileHeaders(input),
+        operation: avatarOperation(input, "publish"),
+        path: avatarPath(input, "")
+      });
+    },
+    async removeAvatar(input) {
+      return transport.execute({
+        body: JSON.stringify({ expectedVersion: input.expectedVersion }),
+        correlationId: input.correlationId,
+        headers: profileHeaders(input),
+        operation: avatarOperation(input, "remove"),
+        path: avatarPath(input, "")
+      });
+    }
+  };
+}
 
 // src/apps.ts
 function createAppClient(transport) {
@@ -521,6 +889,49 @@ function createAppClient(transport) {
         path
       });
       return body.environment;
+    },
+    async issueIconIntent(input) {
+      const path = createAppIconUploadIntentOperation.path.replace("{workspaceId}", encodeURIComponent(input.workspaceId)).replace("{appId}", encodeURIComponent(input.appId));
+      const body = await transport.execute({
+        correlationId: input.correlationId ?? crypto.randomUUID(),
+        operation: createAppIconUploadIntentOperation,
+        path
+      });
+      return body.value;
+    },
+    async uploadIcon(input) {
+      const path = uploadAppIconOperation.path.replace("{workspaceId}", encodeURIComponent(input.workspaceId)).replace("{appId}", encodeURIComponent(input.appId)).replace("{intentId}", encodeURIComponent(input.intentId));
+      const body = await transport.execute({
+        body: input.body,
+        correlationId: input.correlationId ?? crypto.randomUUID(),
+        headers: { "content-type": input.contentType },
+        operation: uploadAppIconOperation,
+        path
+      });
+      return body.value;
+    },
+    async publishIcon(input) {
+      const path = publishAppIconOperation.path.replace("{workspaceId}", encodeURIComponent(input.workspaceId)).replace("{appId}", encodeURIComponent(input.appId));
+      const body = await transport.execute({
+        body: JSON.stringify({
+          assetId: input.assetId,
+          expected: input.expected,
+          revision: input.revision
+        }),
+        correlationId: input.correlationId ?? crypto.randomUUID(),
+        operation: publishAppIconOperation,
+        path
+      });
+      return body.value;
+    },
+    async clearIcon(input) {
+      const path = clearAppIconOperation.path.replace("{workspaceId}", encodeURIComponent(input.workspaceId)).replace("{appId}", encodeURIComponent(input.appId));
+      await transport.execute({
+        body: JSON.stringify({ expected: input.expected }),
+        correlationId: input.correlationId ?? crypto.randomUUID(),
+        operation: clearAppIconOperation,
+        path
+      });
     }
   };
 }
@@ -556,6 +967,82 @@ function createAuditClient(transport) {
         correlationId: input.correlationId,
         operation: listAuditEventsOperation,
         path: `${path}${suffix}`
+      });
+    }
+  };
+}
+
+// src/billing.ts
+function workspacePath(operation, workspaceId) {
+  return operation.path.replace("{workspaceId}", encodeURIComponent(workspaceId));
+}
+function createBillingClient(transport) {
+  return {
+    async inspect(input) {
+      return transport.execute({
+        correlationId: input.correlationId,
+        operation: inspectCommercialBillingOperation,
+        path: workspacePath(inspectCommercialBillingOperation, input.workspaceId)
+      });
+    },
+    async reviewChange(input) {
+      return transport.execute({
+        body: JSON.stringify({
+          idempotencyKey: input.idempotencyKey,
+          period: input.period,
+          planId: input.planId,
+          quantity: input.quantity
+        }),
+        correlationId: input.correlationId,
+        operation: reviewCommercialBillingChangeOperation,
+        path: workspacePath(reviewCommercialBillingChangeOperation, input.workspaceId)
+      });
+    },
+    async authorizeChange(input) {
+      return transport.execute({
+        body: JSON.stringify({
+          changeId: input.changeId
+        }),
+        correlationId: input.correlationId,
+        operation: authorizeCommercialBillingChangeOperation,
+        path: workspacePath(authorizeCommercialBillingChangeOperation, input.workspaceId)
+      });
+    },
+    async reviewCancellation(input) {
+      return transport.execute({
+        body: JSON.stringify({
+          idempotencyKey: input.idempotencyKey,
+          mode: input.mode
+        }),
+        correlationId: input.correlationId,
+        operation: reviewCommercialBillingCancellationOperation,
+        path: workspacePath(reviewCommercialBillingCancellationOperation, input.workspaceId)
+      });
+    },
+    async confirmCancellation(input) {
+      return transport.execute({
+        body: JSON.stringify({
+          confirmationToken: input.confirmationToken,
+          idempotencyKey: input.idempotencyKey
+        }),
+        correlationId: input.correlationId,
+        operation: confirmCommercialBillingCancellationOperation,
+        path: workspacePath(confirmCommercialBillingCancellationOperation, input.workspaceId)
+      });
+    },
+    async requestRefund(input) {
+      return transport.execute({
+        body: JSON.stringify({
+          amountMicros: input.amountMicros,
+          category: input.category,
+          consumedOverageMicros: input.consumedOverageMicros,
+          idempotencyKey: input.idempotencyKey,
+          invoiceRef: input.invoiceRef,
+          verifiedCorrection: input.verifiedCorrection
+        }),
+        correlationId: input.correlationId,
+        operation: requestCommercialBillingRefundOperation,
+        path: workspacePath(requestCommercialBillingRefundOperation, input.workspaceId)
       });
     }
   };
@@ -855,12 +1342,13 @@ function createAuthlessTransport(options) {
   return {
     async execute(input) {
       const requestCorrelationId = normalizeCorrelationId(input.correlationId);
-      const bearerAuthorization = input.operation.authorization === "app-credential" ? appCredentialToken : input.operation.authorization === "session-or-app-credential" ? appCredentialToken || managementAccessToken : input.operation.authorization === "session-or-workspace-service" ? workspaceServiceCredentialToken || managementAccessToken : input.operation.authorization === "workspace-service" ? workspaceServiceCredentialToken : undefined;
-      if ((appCredentialToken || workspaceServiceCredentialToken) && !bearerAuthorization)
+      const bearerAuthorization = input.operation.authorization === "guest" ? undefined : input.operation.authorization === "app-credential" ? appCredentialToken : input.operation.authorization === "session-or-app-credential" ? appCredentialToken || managementAccessToken : input.operation.authorization === "session-or-workspace-service" ? workspaceServiceCredentialToken || managementAccessToken : input.operation.authorization === "workspace-service" ? workspaceServiceCredentialToken : undefined;
+      const guestAuthorization = input.operation.authorization === "guest";
+      if ((appCredentialToken || workspaceServiceCredentialToken) && !bearerAuthorization && !guestAuthorization)
         throw new TypeError(input.operation.authorization === "session" || input.operation.authorization === "session-or-management-oauth" ? "This Authless API operation requires a platform session." : "This Authless API operation does not accept the configured credential.");
-      if (input.headers && Object.keys(input.headers).some((name) => /^(authorization|cookie|proxy-authorization|x-authless-client)$/iu.test(name)))
+      if (input.headers && Object.keys(input.headers).some((name) => /^(authorization|cookie|proxy-authorization|x-authless-client)$/iu.test(name)) && !guestAuthorization)
         throw new TypeError("Request headers cannot override server credentials or client identity.");
-      const authorityHeaders = appCredentialToken || managementAccessToken || workspaceServiceCredentialToken ? {
+      const authorityHeaders = guestAuthorization ? {} : appCredentialToken || managementAccessToken || workspaceServiceCredentialToken ? {
         authorization: `Bearer ${appCredentialToken ?? managementAccessToken ?? workspaceServiceCredentialToken}`
       } : { cookie: `__Host-authless_session=${sessionToken}` };
       let attempt = 1;
@@ -1038,6 +1526,394 @@ function createBulkAccessClient(transport) {
         correlationId: input.correlationId,
         operation: listBulkAccessResultsOperation,
         path: `${operationPath(listBulkAccessResultsOperation.path, input)}${suffix}`
+      });
+    }
+  };
+}
+
+// src/commerce.ts
+function replacePath(path, values) {
+  return Object.entries(values).reduce((result, [key, value]) => result.replace(`{${key}}`, encodeURIComponent(value)), path);
+}
+function pageQuery(input) {
+  const query = new URLSearchParams;
+  if (input.appId !== undefined)
+    query.set("appId", input.appId);
+  if (input.cursor !== undefined)
+    query.set("cursor", input.cursor);
+  if (input.limit !== undefined)
+    query.set("limit", String(input.limit));
+  return query.size === 0 ? "" : `?${query.toString()}`;
+}
+function createCommerceClient(transport) {
+  return {
+    async createCatalog(input) {
+      const path = replacePath(createAppCommerceCatalogOperation.path, {
+        appId: input.appId,
+        environment: input.environment,
+        workspaceId: input.workspaceId
+      });
+      return transport.execute({
+        body: JSON.stringify({
+          defaultCurrency: input.defaultCurrency,
+          name: input.name
+        }),
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: createAppCommerceCatalogOperation,
+        path
+      });
+    },
+    async getAppView(input) {
+      const path = replacePath(getAppCommerceViewOperation.path, input);
+      return transport.execute({
+        correlationId: input.correlationId,
+        operation: getAppCommerceViewOperation,
+        path
+      });
+    },
+    async getAppEnvironmentView(input) {
+      const path = replacePath(getAppCommerceEnvironmentViewOperation.path, {
+        appId: input.appId,
+        environment: input.environment,
+        workspaceId: input.workspaceId
+      });
+      return transport.execute({
+        correlationId: input.correlationId,
+        operation: getAppCommerceEnvironmentViewOperation,
+        path
+      });
+    },
+    async simulateMockRenewal(input) {
+      const path = replacePath(simulateMockCommerceRenewalOperation.path, input);
+      return transport.execute({
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: simulateMockCommerceRenewalOperation,
+        path
+      });
+    },
+    async listPlans(input) {
+      const path = replacePath(listAppCommercePlansOperation.path, {
+        appId: input.appId,
+        environment: input.environment,
+        workspaceId: input.workspaceId
+      });
+      return transport.execute({
+        correlationId: input.correlationId,
+        operation: listAppCommercePlansOperation,
+        path
+      });
+    },
+    async createPlan(input) {
+      const path = replacePath(createAppCommercePlanOperation.path, {
+        appId: input.appId,
+        environment: input.environment,
+        workspaceId: input.workspaceId
+      });
+      const body = await transport.execute({
+        body: JSON.stringify({
+          addOns: input.addOns,
+          amountMicros: input.amountMicros,
+          currency: input.currency,
+          description: input.description,
+          features: input.features,
+          includedMeters: input.includedMeters,
+          interval: input.interval,
+          key: input.key,
+          name: input.name,
+          trialDays: input.trialDays
+        }),
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: createAppCommercePlanOperation,
+        path
+      });
+      return body.data;
+    },
+    async createFeature(input) {
+      const path = replacePath(createAppCommerceFeatureOperation.path, {
+        appId: input.appId,
+        environment: input.environment,
+        workspaceId: input.workspaceId
+      });
+      return transport.execute({
+        body: JSON.stringify({
+          description: input.description,
+          key: input.key,
+          metered: input.metered,
+          name: input.name
+        }),
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: createAppCommerceFeatureOperation,
+        path
+      });
+    },
+    async createAddon(input) {
+      const path = replacePath(createAppCommerceAddonOperation.path, {
+        appId: input.appId,
+        environment: input.environment,
+        workspaceId: input.workspaceId
+      });
+      return transport.execute({
+        body: JSON.stringify({
+          amountMicros: input.amountMicros,
+          currency: input.currency,
+          description: input.description,
+          entitlementDuration: input.entitlementDuration,
+          features: input.features,
+          interval: input.interval,
+          key: input.key,
+          name: input.name
+        }),
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: createAppCommerceAddonOperation,
+        path
+      });
+    },
+    async publishPlan(input) {
+      const path = replacePath(publishAppCommercePlanOperation.path, {
+        appId: input.appId,
+        environment: input.environment,
+        planId: input.planId,
+        workspaceId: input.workspaceId
+      });
+      return transport.execute({
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: publishAppCommercePlanOperation,
+        path
+      });
+    },
+    async getPublisherAccounting(input) {
+      const path = replacePath(getAppCommercePublisherAccountingOperation.path, {
+        appId: input.appId,
+        environment: input.environment,
+        workspaceId: input.workspaceId
+      });
+      return transport.execute({
+        correlationId: input.correlationId,
+        operation: getAppCommercePublisherAccountingOperation,
+        path
+      });
+    },
+    async releasePublisherReserves(input) {
+      const path = replacePath(releaseAppCommercePublisherReservesOperation.path, {
+        appId: input.appId,
+        environment: input.environment,
+        workspaceId: input.workspaceId
+      });
+      return transport.execute({
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: releaseAppCommercePublisherReservesOperation,
+        path
+      });
+    },
+    async createSettlement(input) {
+      const path = replacePath(createAppCommerceSettlementOperation.path, {
+        appId: input.appId,
+        environment: input.environment,
+        workspaceId: input.workspaceId
+      });
+      return transport.execute({
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: createAppCommerceSettlementOperation,
+        path
+      });
+    },
+    async simulatePayout(input) {
+      const path = replacePath(simulateAppCommercePayoutOperation.path, {
+        appId: input.appId,
+        environment: input.environment,
+        settlementId: input.settlementId,
+        workspaceId: input.workspaceId
+      });
+      return transport.execute({
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: simulateAppCommercePayoutOperation,
+        path
+      });
+    },
+    async recordUsage(input) {
+      const path = replacePath(recordAppCommerceUsageOperation.path, {
+        appId: input.appId,
+        customerRef: input.customerRef,
+        environment: input.environment,
+        workspaceId: input.workspaceId
+      });
+      return transport.execute({
+        body: JSON.stringify({
+          meterKey: input.meterKey,
+          quantity: input.quantity
+        }),
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: recordAppCommerceUsageOperation,
+        path
+      });
+    },
+    async requestRefund(input) {
+      const path = replacePath(requestAppCommerceRefundOperation.path, {
+        appId: input.appId,
+        environment: input.environment,
+        invoiceId: input.invoiceId,
+        workspaceId: input.workspaceId
+      });
+      return transport.execute({
+        body: JSON.stringify({
+          amountMinor: input.amountMinor,
+          currency: input.currency,
+          paymentId: input.paymentId
+        }),
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: requestAppCommerceRefundOperation,
+        path
+      });
+    },
+    async listCatalog(input) {
+      const path = replacePath(listPersonalCommerceCatalogOperation.path, {
+        appId: input.appId
+      });
+      const query = input.environment ? `?environment=${encodeURIComponent(input.environment)}` : "";
+      return transport.execute({
+        correlationId: input.correlationId,
+        operation: listPersonalCommerceCatalogOperation,
+        path: `${path}${query}`
+      });
+    },
+    async getEntitlements(input) {
+      const path = replacePath(getAppCommerceEntitlementsOperation.path, {
+        appId: input.appId,
+        customerRef: input.customerRef,
+        environment: input.environment,
+        workspaceId: input.workspaceId
+      });
+      return transport.execute({
+        correlationId: input.correlationId,
+        operation: getAppCommerceEntitlementsOperation,
+        path
+      });
+    },
+    async listSubscriptions(input) {
+      return transport.execute({
+        correlationId: input.correlationId,
+        operation: listPersonalCommerceSubscriptionsOperation,
+        path: `${listPersonalCommerceSubscriptionsOperation.path}${pageQuery(input)}`
+      });
+    },
+    async createCheckout(input) {
+      return transport.execute({
+        body: JSON.stringify({
+          acceptedTermsDigest: input.acceptedTermsDigest,
+          addOns: input.addOns,
+          appId: input.appId,
+          environment: input.environment,
+          planKey: input.planKey,
+          quantity: input.quantity,
+          returnUrl: input.returnUrl
+        }),
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: createPersonalCommerceCheckoutOperation,
+        path: createPersonalCommerceCheckoutOperation.path
+      });
+    },
+    async createQuote(input) {
+      return transport.execute({
+        body: JSON.stringify({
+          appId: input.appId,
+          addOns: input.addOns,
+          discountCode: input.discountCode,
+          environment: input.environment,
+          planKey: input.planKey,
+          quantity: input.quantity
+        }),
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: createPersonalCommerceQuoteOperation,
+        path: createPersonalCommerceQuoteOperation.path
+      });
+    },
+    async acceptQuote(input) {
+      const path = replacePath(acceptPersonalCommerceQuoteOperation.path, {
+        quoteId: input.quoteId
+      });
+      return transport.execute({
+        body: JSON.stringify({
+          termsDigest: input.termsDigest
+        }),
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: acceptPersonalCommerceQuoteOperation,
+        path
+      });
+    },
+    async completeCheckout(input) {
+      const path = replacePath(completePersonalCommerceCheckoutOperation.path, input);
+      return transport.execute({
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: completePersonalCommerceCheckoutOperation,
+        path
+      });
+    },
+    async changeSubscription(input) {
+      const path = replacePath(changePersonalCommerceSubscriptionOperation.path, {
+        subscriptionRef: input.subscriptionRef
+      });
+      return transport.execute({
+        body: JSON.stringify({
+          addOns: input.addOns,
+          effectiveAt: input.effectiveAt,
+          planKey: input.planKey,
+          quantity: input.quantity
+        }),
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: changePersonalCommerceSubscriptionOperation,
+        path
+      });
+    },
+    async cancelSubscription(input) {
+      const path = replacePath(cancelPersonalCommerceSubscriptionOperation.path, input);
+      return transport.execute({
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: cancelPersonalCommerceSubscriptionOperation,
+        path
+      });
+    },
+    async resumeSubscription(input) {
+      const path = replacePath(resumePersonalCommerceSubscriptionOperation.path, input);
+      return transport.execute({
+        correlationId: input.correlationId,
+        headers: { "idempotency-key": input.idempotencyKey },
+        operation: resumePersonalCommerceSubscriptionOperation,
+        path
+      });
+    },
+    async listInvoices(input) {
+      return transport.execute({
+        correlationId: input.correlationId,
+        operation: listPersonalCommerceInvoicesOperation,
+        path: `${listPersonalCommerceInvoicesOperation.path}${pageQuery(input)}`
+      });
+    },
+    async createPortalSession(input) {
+      return transport.execute({
+        body: JSON.stringify({
+          appId: input.appId,
+          returnUrl: input.returnUrl
+        }),
+        correlationId: input.correlationId,
+        operation: createPersonalCommercePortalSessionOperation,
+        path: createPersonalCommercePortalSessionOperation.path
       });
     }
   };
@@ -1497,470 +2373,377 @@ function createWorkspaceClient(transport) {
         operation: listWorkspacesOperation,
         path: `${listWorkspacesOperation.path}${suffix}`
       });
-    }
-  };
-}
-
-// src/commerce.ts
-function replacePath(path, values) {
-  return Object.entries(values).reduce((result, [key, value]) => result.replace(`{${key}}`, encodeURIComponent(value)), path);
-}
-function pageQuery(input) {
-  const query = new URLSearchParams;
-  if (input.appId !== undefined)
-    query.set("appId", input.appId);
-  if (input.cursor !== undefined)
-    query.set("cursor", input.cursor);
-  if (input.limit !== undefined)
-    query.set("limit", String(input.limit));
-  return query.size === 0 ? "" : `?${query.toString()}`;
-}
-function createCommerceClient(transport) {
-  return {
-    async createCatalog(input) {
-      const path = replacePath(createAppCommerceCatalogOperation.path, {
-        appId: input.appId,
-        environment: input.environment,
-        workspaceId: input.workspaceId
-      });
+    },
+    async issueAvatarIntent(input) {
+      const path = issueWorkspaceAvatarIntentOperation.path.replace("{workspaceId}", encodeURIComponent(input.workspaceId));
       return transport.execute({
-        body: JSON.stringify({
-          defaultCurrency: input.defaultCurrency,
-          name: input.name
-        }),
-        correlationId: input.correlationId,
-        headers: { "idempotency-key": input.idempotencyKey },
-        operation: createAppCommerceCatalogOperation,
+        correlationId: crypto.randomUUID(),
+        operation: issueWorkspaceAvatarIntentOperation,
         path
       });
     },
-    async getAppView(input) {
-      const path = replacePath(getAppCommerceViewOperation.path, input);
+    async uploadAvatar(input) {
+      const path = uploadWorkspaceAvatarOperation.path.replace("{workspaceId}", encodeURIComponent(input.workspaceId)).replace("{intentId}", encodeURIComponent(input.intentId));
       return transport.execute({
-        correlationId: input.correlationId,
-        operation: getAppCommerceViewOperation,
+        body: input.body,
+        correlationId: crypto.randomUUID(),
+        headers: { "content-type": input.contentType },
+        operation: uploadWorkspaceAvatarOperation,
         path
       });
     },
-    async getAppEnvironmentView(input) {
-      const path = replacePath(getAppCommerceEnvironmentViewOperation.path, {
-        appId: input.appId,
-        environment: input.environment,
-        workspaceId: input.workspaceId
-      });
-      return transport.execute({
-        correlationId: input.correlationId,
-        operation: getAppCommerceEnvironmentViewOperation,
-        path
-      });
-    },
-    async simulateMockRenewal(input) {
-      const path = replacePath(simulateMockCommerceRenewalOperation.path, input);
-      return transport.execute({
-        correlationId: input.correlationId,
-        headers: { "idempotency-key": input.idempotencyKey },
-        operation: simulateMockCommerceRenewalOperation,
-        path
-      });
-    },
-    async listPlans(input) {
-      const path = replacePath(listAppCommercePlansOperation.path, {
-        appId: input.appId,
-        environment: input.environment,
-        workspaceId: input.workspaceId
-      });
-      return transport.execute({
-        correlationId: input.correlationId,
-        operation: listAppCommercePlansOperation,
-        path
-      });
-    },
-    async createPlan(input) {
-      const path = replacePath(createAppCommercePlanOperation.path, {
-        appId: input.appId,
-        environment: input.environment,
-        workspaceId: input.workspaceId
-      });
+    async attachAvatar(input) {
+      const path = attachWorkspaceAvatarOperation.path.replace("{workspaceId}", encodeURIComponent(input.workspaceId));
       const body = await transport.execute({
         body: JSON.stringify({
-          addOns: input.addOns,
-          amountMicros: input.amountMicros,
-          currency: input.currency,
-          description: input.description,
-          features: input.features,
-          includedMeters: input.includedMeters,
-          interval: input.interval,
-          key: input.key,
-          name: input.name,
-          trialDays: input.trialDays
+          assetId: input.assetId,
+          assetRevision: input.assetRevision,
+          expected: input.expected
         }),
-        correlationId: input.correlationId,
-        headers: { "idempotency-key": input.idempotencyKey },
-        operation: createAppCommercePlanOperation,
+        correlationId: crypto.randomUUID(),
+        operation: attachWorkspaceAvatarOperation,
         path
       });
-      return body.data;
+      return body.avatar;
     },
-    async createFeature(input) {
-      const path = replacePath(createAppCommerceFeatureOperation.path, {
-        appId: input.appId,
-        environment: input.environment,
-        workspaceId: input.workspaceId
-      });
-      return transport.execute({
-        body: JSON.stringify({
-          description: input.description,
-          key: input.key,
-          metered: input.metered,
-          name: input.name
-        }),
-        correlationId: input.correlationId,
-        headers: { "idempotency-key": input.idempotencyKey },
-        operation: createAppCommerceFeatureOperation,
+    async removeAvatar(input) {
+      const path = removeWorkspaceAvatarOperation.path.replace("{workspaceId}", encodeURIComponent(input.workspaceId));
+      const body = await transport.execute({
+        body: JSON.stringify({ expected: input.expected }),
+        correlationId: crypto.randomUUID(),
+        operation: removeWorkspaceAvatarOperation,
         path
       });
-    },
-    async createAddon(input) {
-      const path = replacePath(createAppCommerceAddonOperation.path, {
-        appId: input.appId,
-        environment: input.environment,
-        workspaceId: input.workspaceId
-      });
-      return transport.execute({
-        body: JSON.stringify({
-          amountMicros: input.amountMicros,
-          currency: input.currency,
-          description: input.description,
-          entitlementDuration: input.entitlementDuration,
-          features: input.features,
-          interval: input.interval,
-          key: input.key,
-          name: input.name
-        }),
-        correlationId: input.correlationId,
-        headers: { "idempotency-key": input.idempotencyKey },
-        operation: createAppCommerceAddonOperation,
-        path
-      });
-    },
-    async publishPlan(input) {
-      const path = replacePath(publishAppCommercePlanOperation.path, {
-        appId: input.appId,
-        environment: input.environment,
-        planId: input.planId,
-        workspaceId: input.workspaceId
-      });
-      return transport.execute({
-        correlationId: input.correlationId,
-        headers: { "idempotency-key": input.idempotencyKey },
-        operation: publishAppCommercePlanOperation,
-        path
-      });
-    },
-    async getPublisherAccounting(input) {
-      const path = replacePath(getAppCommercePublisherAccountingOperation.path, {
-        appId: input.appId,
-        environment: input.environment,
-        workspaceId: input.workspaceId
-      });
-      return transport.execute({
-        correlationId: input.correlationId,
-        operation: getAppCommercePublisherAccountingOperation,
-        path
-      });
-    },
-    async releasePublisherReserves(input) {
-      const path = replacePath(releaseAppCommercePublisherReservesOperation.path, {
-        appId: input.appId,
-        environment: input.environment,
-        workspaceId: input.workspaceId
-      });
-      return transport.execute({
-        correlationId: input.correlationId,
-        headers: { "idempotency-key": input.idempotencyKey },
-        operation: releaseAppCommercePublisherReservesOperation,
-        path
-      });
-    },
-    async createSettlement(input) {
-      const path = replacePath(createAppCommerceSettlementOperation.path, {
-        appId: input.appId,
-        environment: input.environment,
-        workspaceId: input.workspaceId
-      });
-      return transport.execute({
-        correlationId: input.correlationId,
-        headers: { "idempotency-key": input.idempotencyKey },
-        operation: createAppCommerceSettlementOperation,
-        path
-      });
-    },
-    async simulatePayout(input) {
-      const path = replacePath(simulateAppCommercePayoutOperation.path, {
-        appId: input.appId,
-        environment: input.environment,
-        settlementId: input.settlementId,
-        workspaceId: input.workspaceId
-      });
-      return transport.execute({
-        correlationId: input.correlationId,
-        headers: { "idempotency-key": input.idempotencyKey },
-        operation: simulateAppCommercePayoutOperation,
-        path
-      });
-    },
-    async recordUsage(input) {
-      const path = replacePath(recordAppCommerceUsageOperation.path, {
-        appId: input.appId,
-        customerRef: input.customerRef,
-        environment: input.environment,
-        workspaceId: input.workspaceId
-      });
-      return transport.execute({
-        body: JSON.stringify({
-          meterKey: input.meterKey,
-          quantity: input.quantity
-        }),
-        correlationId: input.correlationId,
-        headers: { "idempotency-key": input.idempotencyKey },
-        operation: recordAppCommerceUsageOperation,
-        path
-      });
-    },
-    async requestRefund(input) {
-      const path = replacePath(requestAppCommerceRefundOperation.path, {
-        appId: input.appId,
-        environment: input.environment,
-        invoiceId: input.invoiceId,
-        workspaceId: input.workspaceId
-      });
-      return transport.execute({
-        body: JSON.stringify({
-          amountMinor: input.amountMinor,
-          currency: input.currency,
-          paymentId: input.paymentId
-        }),
-        correlationId: input.correlationId,
-        headers: { "idempotency-key": input.idempotencyKey },
-        operation: requestAppCommerceRefundOperation,
-        path
-      });
-    },
-    async listCatalog(input) {
-      const path = replacePath(listPersonalCommerceCatalogOperation.path, {
-        appId: input.appId
-      });
-      const query = input.environment ? `?environment=${encodeURIComponent(input.environment)}` : "";
-      return transport.execute({
-        correlationId: input.correlationId,
-        operation: listPersonalCommerceCatalogOperation,
-        path: `${path}${query}`
-      });
-    },
-    async getEntitlements(input) {
-      const path = replacePath(getAppCommerceEntitlementsOperation.path, {
-        appId: input.appId,
-        customerRef: input.customerRef,
-        environment: input.environment,
-        workspaceId: input.workspaceId
-      });
-      return transport.execute({
-        correlationId: input.correlationId,
-        operation: getAppCommerceEntitlementsOperation,
-        path
-      });
-    },
-    async listSubscriptions(input) {
-      return transport.execute({
-        correlationId: input.correlationId,
-        operation: listPersonalCommerceSubscriptionsOperation,
-        path: `${listPersonalCommerceSubscriptionsOperation.path}${pageQuery(input)}`
-      });
-    },
-    async createCheckout(input) {
-      return transport.execute({
-        body: JSON.stringify({
-          acceptedTermsDigest: input.acceptedTermsDigest,
-          addOns: input.addOns,
-          appId: input.appId,
-          environment: input.environment,
-          planKey: input.planKey,
-          quantity: input.quantity,
-          returnUrl: input.returnUrl
-        }),
-        correlationId: input.correlationId,
-        headers: { "idempotency-key": input.idempotencyKey },
-        operation: createPersonalCommerceCheckoutOperation,
-        path: createPersonalCommerceCheckoutOperation.path
-      });
-    },
-    async createQuote(input) {
-      return transport.execute({
-        body: JSON.stringify({
-          appId: input.appId,
-          addOns: input.addOns,
-          discountCode: input.discountCode,
-          environment: input.environment,
-          planKey: input.planKey,
-          quantity: input.quantity
-        }),
-        correlationId: input.correlationId,
-        headers: { "idempotency-key": input.idempotencyKey },
-        operation: createPersonalCommerceQuoteOperation,
-        path: createPersonalCommerceQuoteOperation.path
-      });
-    },
-    async acceptQuote(input) {
-      const path = replacePath(acceptPersonalCommerceQuoteOperation.path, {
-        quoteId: input.quoteId
-      });
-      return transport.execute({
-        body: JSON.stringify({
-          termsDigest: input.termsDigest
-        }),
-        correlationId: input.correlationId,
-        headers: { "idempotency-key": input.idempotencyKey },
-        operation: acceptPersonalCommerceQuoteOperation,
-        path
-      });
-    },
-    async completeCheckout(input) {
-      const path = replacePath(completePersonalCommerceCheckoutOperation.path, input);
-      return transport.execute({
-        correlationId: input.correlationId,
-        headers: { "idempotency-key": input.idempotencyKey },
-        operation: completePersonalCommerceCheckoutOperation,
-        path
-      });
-    },
-    async changeSubscription(input) {
-      const path = replacePath(changePersonalCommerceSubscriptionOperation.path, {
-        subscriptionRef: input.subscriptionRef
-      });
-      return transport.execute({
-        body: JSON.stringify({
-          addOns: input.addOns,
-          effectiveAt: input.effectiveAt,
-          planKey: input.planKey,
-          quantity: input.quantity
-        }),
-        correlationId: input.correlationId,
-        headers: { "idempotency-key": input.idempotencyKey },
-        operation: changePersonalCommerceSubscriptionOperation,
-        path
-      });
-    },
-    async cancelSubscription(input) {
-      const path = replacePath(cancelPersonalCommerceSubscriptionOperation.path, input);
-      return transport.execute({
-        correlationId: input.correlationId,
-        headers: { "idempotency-key": input.idempotencyKey },
-        operation: cancelPersonalCommerceSubscriptionOperation,
-        path
-      });
-    },
-    async resumeSubscription(input) {
-      const path = replacePath(resumePersonalCommerceSubscriptionOperation.path, input);
-      return transport.execute({
-        correlationId: input.correlationId,
-        headers: { "idempotency-key": input.idempotencyKey },
-        operation: resumePersonalCommerceSubscriptionOperation,
-        path
-      });
-    },
-    async listInvoices(input) {
-      return transport.execute({
-        correlationId: input.correlationId,
-        operation: listPersonalCommerceInvoicesOperation,
-        path: `${listPersonalCommerceInvoicesOperation.path}${pageQuery(input)}`
-      });
-    },
-    async createPortalSession(input) {
-      return transport.execute({
-        body: JSON.stringify({
-          appId: input.appId,
-          returnUrl: input.returnUrl
-        }),
-        correlationId: input.correlationId,
-        operation: createPersonalCommercePortalSessionOperation,
-        path: createPersonalCommercePortalSessionOperation.path
-      });
+      return body.avatar;
     }
   };
 }
 
-// src/billing.ts
-function workspacePath(operation3, workspaceId) {
-  return operation3.path.replace("{workspaceId}", encodeURIComponent(workspaceId));
+// src/guest-admission.ts
+import { createPublicKey, verify as verifySignature } from "node:crypto";
+async function requireGuestCapability(input) {
+  const principal = await input.verifier.verifySignedPrincipal(input.token);
+  if (principal?.principalKind !== "anonymous")
+    throw new GuestActionDeniedError("invalid_principal");
+  if (principal.audience !== input.audience || principal.appId !== input.appId || principal.environmentId !== input.environmentId || principal.expiresAt <= Date.now() / 1000)
+    throw new GuestActionDeniedError("authority_mismatch");
+  if (!principal.capabilities.includes(input.capability))
+    throw new GuestActionDeniedError("capability_denied");
+  if (!await input.verifier.verifyOnlineAuthority({
+    token: input.token,
+    jti: principal.jti,
+    subject: principal.subject,
+    appId: input.appId,
+    environmentId: input.environmentId
+  }))
+    throw new GuestActionDeniedError("authority_revoked");
+  return principal;
 }
-function createBillingClient(transport) {
+
+class GuestActionDeniedError extends Error {
+  code;
+  constructor(code) {
+    super(`Guest action denied: ${code}`);
+    this.name = "GuestActionDeniedError";
+    this.code = code;
+  }
+}
+async function createGuestDraft(input) {
+  const principal = await requireGuestCapability({
+    ...input,
+    capability: "app:draft"
+  });
+  return input.create(principal);
+}
+function createGuestJwtVerifier(input) {
   return {
-    async inspect(input) {
-      return transport.execute({
+    verifySignedPrincipal: async (token) => {
+      const [encodedHeader, encodedPayload, encodedSignature, ...remaining] = token.split(".");
+      if (!encodedHeader || !encodedPayload || !encodedSignature || remaining.length)
+        return null;
+      try {
+        const header = JSON.parse(Buffer.from(encodedHeader, "base64url").toString("utf8"));
+        if (header.alg !== "RS256" || !header.kid)
+          return null;
+        const key = input.jwks.find((candidate) => candidate.kid === header.kid && candidate.alg === "RS256");
+        if (!key)
+          return null;
+        const signingKey = createPublicKey({
+          key: { kty: key.kty, n: key.n, e: key.e },
+          format: "jwk"
+        });
+        if (!verifySignature("RSA-SHA256", Buffer.from(`${encodedHeader}.${encodedPayload}`), signingKey, Buffer.from(encodedSignature, "base64url")))
+          return null;
+        const claims = JSON.parse(Buffer.from(encodedPayload, "base64url").toString("utf8"));
+        const audience = Array.isArray(claims.aud) ? claims.aud : [claims.aud];
+        if (claims.iss !== input.issuer || !audience.includes(input.audience) || typeof claims.exp !== "number" || claims.exp <= Date.now() / 1000 || typeof claims.sub !== "string" || claims.principal_kind !== "anonymous" || typeof claims.app_id !== "string" || typeof claims.environment_id !== "string" || !Array.isArray(claims.guest_capabilities) || !claims.guest_capabilities.every((value) => typeof value === "string"))
+          return null;
+        return {
+          principalKind: "anonymous",
+          subject: claims.sub,
+          audience: input.audience,
+          appId: claims.app_id,
+          environmentId: claims.environment_id,
+          capabilities: claims.guest_capabilities,
+          expiresAt: claims.exp,
+          ...typeof claims.jti === "string" ? { jti: claims.jti } : {}
+        };
+      } catch {
+        return null;
+      }
+    },
+    verifyOnlineAuthority: ({ token, ...request }) => input.authority({ token, ...request })
+  };
+}
+// src/app-session.ts
+import { randomBytes, timingSafeEqual } from "node:crypto";
+var token = () => randomBytes(32).toString("base64url");
+function createAppSessionAdapter(store, now = () => Date.now()) {
+  const create = async (accountSubject, ttlSeconds = 3600) => {
+    if (!accountSubject || !Number.isSafeInteger(ttlSeconds) || ttlSeconds < 60 || ttlSeconds > 86400)
+      throw new TypeError("Invalid app session input");
+    const record2 = {
+      accountSubject,
+      csrfToken: token(),
+      id: token(),
+      expiresAt: now() + ttlSeconds * 1000
+    };
+    await store.create(record2);
+    return record2;
+  };
+  const read = async (id) => {
+    if (!id)
+      return null;
+    const record2 = await store.read(id);
+    if (!record2 || record2.expiresAt <= now()) {
+      if (record2)
+        await store.delete(record2.id);
+      return null;
+    }
+    return record2;
+  };
+  const rotate = async (id, accountSubject, ttlSeconds = 3600) => {
+    const current = await read(id);
+    if (!current)
+      return null;
+    const next = await create(accountSubject, ttlSeconds);
+    await store.delete(current.id);
+    return next;
+  };
+  return {
+    create,
+    read,
+    rotate,
+    clear: (id) => store.delete(id),
+    switchAccount: rotate,
+    verifyCsrf: (record2, candidate) => {
+      const expected = Buffer.from(record2.csrfToken);
+      const actual = Buffer.from(candidate);
+      return expected.length === actual.length && timingSafeEqual(expected, actual);
+    }
+  };
+}
+var appSessionCookie = Object.freeze({
+  name: "__Host-custom_app_session",
+  httpOnly: true,
+  path: "/",
+  sameSite: "lax",
+  secure: true
+});
+function requireSameOrigin(request, expectedOrigin) {
+  if (request.headers.get("origin") !== expectedOrigin)
+    throw new Error("origin_forbidden");
+}
+function requireCsrf(session, request, adapter) {
+  const candidate = request.headers.get("x-csrf-token");
+  if (!candidate || !adapter.verifyCsrf(session, candidate))
+    throw new Error("csrf_failed");
+}
+// src/custom-authentication.ts
+function binding(input) {
+  return {
+    appId: input.appId,
+    browserSessionBinding: input.browserSessionBinding,
+    clientId: input.clientId,
+    codeChallenge: input.codeChallenge,
+    environmentId: input.environmentId,
+    method: input.method,
+    mode: input.mode,
+    nonce: input.nonce,
+    origin: input.origin,
+    policyVersion: input.policyVersion,
+    principalMode: input.principalMode,
+    redirectUri: input.redirectUri,
+    requestedScopes: input.requestedScopes,
+    state: input.state,
+    workspaceId: input.workspaceId
+  };
+}
+function path(transactionId, operation3) {
+  return `/v1/custom-auth/transactions/${encodeURIComponent(transactionId)}${operation3 ? `/${operation3}` : ""}`;
+}
+function createCustomAuthenticationClient(transport, registration) {
+  const execute = async (input, retrySafety) => {
+    const transactionPath = input.transactionId ? path(input.transactionId, input.operation) : "/v1/custom-auth/transactions";
+    const body = { ...binding(input), ...input.body };
+    const response = await transport.execute({
+      body: JSON.stringify(body),
+      correlationId: input.correlationId,
+      headers: { "x-authless-client-id": registration.clientId },
+      operation: {
+        authorization: "app-credential",
+        method: "POST",
+        retrySafety
+      },
+      path: transactionPath
+    });
+    return response;
+  };
+  const validate = (input) => {
+    for (const [key, expected] of Object.entries(registration)) {
+      if (input[key] !== expected)
+        throw new TypeError(`custom-auth binding ${key} does not match registration`);
+    }
+  };
+  return {
+    begin: async (input) => {
+      validate(input);
+      const result = await execute(input, "unsafe");
+      return result.transaction;
+    },
+    read: async (input) => {
+      validate(input);
+      const result = await execute(input, "safe");
+      return result.transaction;
+    },
+    challengeEmail: async (input) => {
+      validate(input);
+      return execute({
+        ...input,
+        operation: "challenge",
+        body: input.email ? { email: input.email } : undefined
+      }, "unsafe");
+    },
+    verifyEmail: async (input) => {
+      validate(input);
+      return execute({ ...input, operation: "verify", body: { code: input.code } }, "unsafe");
+    },
+    acceptGuest: async (input) => {
+      validate(input);
+      return execute({ ...input, operation: "verify" }, "unsafe");
+    },
+    complete: async (input) => {
+      validate(input);
+      return execute({ ...input, operation: "complete" }, "unsafe");
+    },
+    cancel: async (input) => {
+      validate(input);
+      return execute({ ...input, operation: "cancel" }, "unsafe");
+    }
+  };
+}
+// src/guest-admission-client.ts
+function path2(input, suffix = "") {
+  return `/workspaces/${encodeURIComponent(input.workspaceId)}/apps/${encodeURIComponent(input.appId)}/${input.environment}/guest-admission${suffix}`;
+}
+function createGuestAdmissionClient(transport) {
+  return {
+    get: async (input) => {
+      const body = await transport.execute({
+        operation: {
+          authorization: "workspace",
+          method: "GET",
+          retrySafety: "safe"
+        },
+        path: path2(input),
+        correlationId: input.correlationId
+      });
+      return body.policy;
+    },
+    update: async (input) => {
+      const body = await transport.execute({
+        operation: {
+          authorization: "workspace",
+          method: "PUT",
+          retrySafety: "unsafe"
+        },
+        path: path2(input),
         correlationId: input.correlationId,
-        operation: inspectCommercialBillingOperation,
-        path: workspacePath(inspectCommercialBillingOperation, input.workspaceId)
+        body: JSON.stringify({
+          ...input.policy,
+          expectedPolicyVersion: input.policy.policyVersion
+        })
+      });
+      return body.policy;
+    },
+    usage: async (input) => {
+      const body = await transport.execute({
+        operation: {
+          authorization: "workspace",
+          method: "GET",
+          retrySafety: "safe"
+        },
+        path: path2(input, "/usage"),
+        correlationId: input.correlationId
+      });
+      return body.usage;
+    }
+  };
+}
+// src/guest-conversion.ts
+function path3(input, suffix) {
+  return `/workspaces/${encodeURIComponent(input.workspaceId)}/apps/${encodeURIComponent(input.appId)}/${encodeURIComponent(input.environment)}/guest-conversion${suffix}`;
+}
+function assertBearer(value) {
+  if (!value.startsWith("Bearer ") || value.length <= "Bearer ".length)
+    throw new TypeError("authorization must be a Bearer guest access token.");
+  return value;
+}
+function createGuestConversionClient(transport) {
+  return {
+    async begin(input) {
+      return transport.execute({
+        operation: beginGuestConversionIntentOperation,
+        path: path3(input, "/intents"),
+        correlationId: input.correlationId,
+        headers: {
+          authorization: assertBearer(input.authorization),
+          dpop: input.dpop,
+          origin: input.origin,
+          "x-authless-browser-binding": input.browserBinding,
+          "x-csrf-token": input.csrfToken
+        },
+        body: JSON.stringify({ requestedScopes: input.requestedScopes })
       });
     },
-    async reviewChange(input) {
+    async read(input) {
       return transport.execute({
-        body: JSON.stringify({
-          idempotencyKey: input.idempotencyKey,
-          period: input.period,
-          planId: input.planId,
-          quantity: input.quantity
-        }),
-        correlationId: input.correlationId,
-        operation: reviewCommercialBillingChangeOperation,
-        path: workspacePath(reviewCommercialBillingChangeOperation, input.workspaceId)
+        operation: {
+          ...getGuestConversionIntentOperation,
+          authorization: "guest"
+        },
+        path: path3(input, `/intents/${encodeURIComponent(input.intent)}`),
+        correlationId: input.correlationId
       });
     },
-    async authorizeChange(input) {
-      return transport.execute({
-        body: JSON.stringify({
-          changeId: input.changeId
-        }),
+    async confirm(input) {
+      const body = await transport.execute({
+        operation: {
+          ...confirmGuestConversionOperation,
+          authorization: "guest"
+        },
+        path: path3(input, ""),
         correlationId: input.correlationId,
-        operation: authorizeCommercialBillingChangeOperation,
-        path: workspacePath(authorizeCommercialBillingChangeOperation, input.workspaceId)
-      });
-    },
-    async reviewCancellation(input) {
-      return transport.execute({
+        headers: {
+          "x-authless-conversion-intent": input.intent,
+          "idempotency-key": input.idempotencyKey
+        },
         body: JSON.stringify({
-          idempotencyKey: input.idempotencyKey,
-          mode: input.mode
-        }),
-        correlationId: input.correlationId,
-        operation: reviewCommercialBillingCancellationOperation,
-        path: workspacePath(reviewCommercialBillingCancellationOperation, input.workspaceId)
+          confirmation: input.confirmation,
+          ...input.mergeProfile === undefined ? {} : { mergeProfile: input.mergeProfile }
+        })
       });
-    },
-    async confirmCancellation(input) {
-      return transport.execute({
-        body: JSON.stringify({
-          confirmationToken: input.confirmationToken,
-          idempotencyKey: input.idempotencyKey
-        }),
-        correlationId: input.correlationId,
-        operation: confirmCommercialBillingCancellationOperation,
-        path: workspacePath(confirmCommercialBillingCancellationOperation, input.workspaceId)
-      });
-    },
-    async requestRefund(input) {
-      return transport.execute({
-        body: JSON.stringify({
-          amountMicros: input.amountMicros,
-          category: input.category,
-          consumedOverageMicros: input.consumedOverageMicros,
-          idempotencyKey: input.idempotencyKey,
-          invoiceRef: input.invoiceRef,
-          verifiedCorrection: input.verifiedCorrection
-        }),
-        correlationId: input.correlationId,
-        operation: requestCommercialBillingRefundOperation,
-        path: workspacePath(requestCommercialBillingRefundOperation, input.workspaceId)
-      });
+      return body.conversion;
     }
   };
 }
@@ -1977,6 +2760,7 @@ function createAuthlessServerClient(options) {
     appMemberships: createAppMembershipClient(transport),
     bulkAccess: createBulkAccessClient(transport),
     apps: createAppClient(transport),
+    appProfiles: createAppProfilesClient(transport),
     billing: createBillingClient(transport),
     commerce: createCommerceClient(transport),
     workspaces: createWorkspaceClient(transport),
@@ -1986,18 +2770,30 @@ function createAuthlessServerClient(options) {
   };
 }
 export {
+  requireSameOrigin,
+  requireGuestCapability,
+  requireCsrf,
   createWorkspaceCredentialClient,
   createWorkspaceClient,
   createPolicyClient,
   createOnlineSessionClient,
+  createGuestJwtVerifier,
+  createGuestDraft,
+  createGuestConversionClient,
+  createGuestAdmissionClient,
+  createCustomAuthenticationClient,
   createCommerceClient,
   createBulkAccessClient,
   createBillingClient,
   createAuthlessTransport,
   createAuthlessServerClient,
   createAuditClient,
+  createAppSessionAdapter,
+  createAppProfilesClient,
   createAppMembershipClient,
   createAppClient,
   createAppAccessClient,
+  appSessionCookie,
+  GuestActionDeniedError,
   AuthlessApiError
 };

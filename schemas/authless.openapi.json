@@ -12,6 +12,305 @@
     }
   ],
   "paths": {
+    "/v1/custom-auth/transactions": {
+      "post": {
+        "operationId": "beginCustomAuthenticationTransaction",
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "unsafe",
+        "summary": "Begin a registered custom authentication transaction",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomAuthenticationBinding"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Transaction created"
+          },
+          "400": {
+            "description": "Invalid or unavailable custom authentication request"
+          },
+          "403": {
+            "description": "Registered origin rejected"
+          }
+        }
+      }
+    },
+    "/v1/custom-auth/transactions/{transactionId}/read": {
+      "post": {
+        "operationId": "readCustomAuthenticationTransaction",
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "safe",
+        "summary": "Read a bound custom authentication transaction",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "transactionId",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 512
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomAuthenticationBinding"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Transaction state"
+          },
+          "400": {
+            "description": "Invalid or unavailable custom authentication request"
+          }
+        }
+      }
+    },
+    "/v1/custom-auth/transactions/{transactionId}/challenge": {
+      "post": {
+        "operationId": "requestCustomAuthenticationEmailCode",
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "unsafe",
+        "summary": "Request or resend a transaction-bound email code",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "transactionId",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 512
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomAuthenticationChallengeRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "202": {
+            "description": "Challenge accepted"
+          },
+          "400": {
+            "description": "Invalid or unavailable custom authentication request"
+          }
+        }
+      }
+    },
+    "/v1/custom-auth/transactions/{transactionId}/verify": {
+      "post": {
+        "operationId": "verifyCustomAuthenticationProof",
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "unsafe",
+        "summary": "Verify a guest or email proof",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "transactionId",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 512
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomAuthenticationVerifyRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Proof accepted"
+          },
+          "400": {
+            "description": "Invalid or unavailable custom authentication request"
+          }
+        }
+      }
+    },
+    "/v1/custom-auth/transactions/{transactionId}/complete": {
+      "post": {
+        "operationId": "completeCustomAuthenticationTransaction",
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "safe",
+        "summary": "Consume one custom proof for authorization-code binding",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "transactionId",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 512
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomAuthenticationBinding"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Proof consumed"
+          },
+          "400": {
+            "description": "Invalid or unavailable custom authentication request"
+          }
+        }
+      }
+    },
+    "/v1/custom-auth/transactions/{transactionId}/cancel": {
+      "post": {
+        "operationId": "cancelCustomAuthenticationTransaction",
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "safe",
+        "summary": "Cancel a custom authentication transaction",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "transactionId",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 512
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomAuthenticationBinding"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Transaction cancelled"
+          },
+          "400": {
+            "description": "Invalid or unavailable custom authentication request"
+          }
+        }
+      }
+    },
+    "/workspaces/{workspaceId}/apps/{appId}/{environment}/custom-auth": {
+      "get": {
+        "operationId": "listCustomAuthenticationRegistrations",
+        "summary": "List custom authentication registrations",
+        "security": [
+          { "sessionCookie": [] },
+          { "appCredential": [] }
+        ],
+        "parameters": [
+          { "in": "path", "name": "workspaceId", "required": true, "schema": { "type": "string", "minLength": 3, "maxLength": 128 } },
+          { "in": "path", "name": "appId", "required": true, "schema": { "type": "string", "minLength": 3, "maxLength": 128 } },
+          { "in": "path", "name": "environment", "required": true, "schema": { "type": "string", "minLength": 1, "maxLength": 64 } }
+        ],
+        "responses": {
+          "200": {
+            "description": "Registered custom authentication configuration",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CustomAuthenticationRegistrationListResponse" } } }
+          },
+          "401": { "description": "Authentication required", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } }
+        },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "safe"
+      },
+      "put": {
+        "operationId": "replaceCustomAuthenticationRegistration",
+        "summary": "Register or replace custom authentication configuration",
+        "security": [
+          { "sessionCookie": [] },
+          { "appCredential": [] }
+        ],
+        "parameters": [
+          { "in": "path", "name": "workspaceId", "required": true, "schema": { "type": "string", "minLength": 3, "maxLength": 128 } },
+          { "in": "path", "name": "appId", "required": true, "schema": { "type": "string", "minLength": 3, "maxLength": 128 } },
+          { "in": "path", "name": "environment", "required": true, "schema": { "type": "string", "minLength": 1, "maxLength": 64 } }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CustomAuthenticationRegistrationInput" } } }
+        },
+        "responses": {
+          "200": {
+            "description": "Registered custom authentication configuration",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CustomAuthenticationRegistrationResponse" } } }
+          },
+          "400": { "description": "Invalid registration", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } },
+          "401": { "description": "Authentication required", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } },
+          "412": { "description": "Registration version conflict", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } }
+        },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "unsafe"
+      },
+      "delete": {
+        "operationId": "revokeCustomAuthenticationRegistration",
+        "summary": "Revoke custom authentication configuration",
+        "security": [
+          { "sessionCookie": [] },
+          { "appCredential": [] }
+        ],
+        "parameters": [
+          { "in": "path", "name": "workspaceId", "required": true, "schema": { "type": "string", "minLength": 3, "maxLength": 128 } },
+          { "in": "path", "name": "appId", "required": true, "schema": { "type": "string", "minLength": 3, "maxLength": 128 } },
+          { "in": "path", "name": "environment", "required": true, "schema": { "type": "string", "minLength": 1, "maxLength": 64 } }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CustomAuthenticationRegistrationInput" } } }
+        },
+        "responses": {
+          "200": {
+            "description": "Registration revoked",
+            "content": { "application/json": { "schema": { "$ref": "#/components/schemas/CustomAuthenticationRevocationResponse" } } }
+          },
+          "400": { "description": "Invalid registration", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } },
+          "401": { "description": "Authentication required", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } },
+          "404": { "description": "Registration not found", "content": { "application/json": { "schema": { "$ref": "#/components/schemas/ErrorEnvelope" } } } }
+        },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "unsafe"
+      }
+    },
     "/workspaces/{workspaceId}/agent-delegations/{delegationId}/key-rotation-previews": {
       "post": {
         "operationId": "previewAgentDelegationKeyRotation",
@@ -13093,6 +13392,3100 @@
         "x-authless-operation-status": "stable",
         "x-authless-retry-safety": "unsafe"
       }
+    },
+    "/workspaces/{workspaceId}/avatar/intents": {
+      "post": {
+        "operationId": "issueWorkspaceAvatarIntent",
+        "summary": "Issue a workspace avatar upload intent",
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-correlation-id",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Upload intent issued",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Session unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Workspace unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          }
+        },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "unsafe"
+      }
+    },
+    "/workspaces/{workspaceId}/avatar/intents/{intentId}": {
+      "put": {
+        "operationId": "uploadWorkspaceAvatar",
+        "summary": "Upload workspace avatar bytes",
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-correlation-id",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128
+            }
+          },
+          {
+            "in": "path",
+            "name": "intentId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "content-type",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/octet-stream": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            },
+            "image/jpeg": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            },
+            "image/png": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            },
+            "image/webp": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "string",
+                "description": "Binary image bytes are accepted with the upload content type."
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Avatar asset uploaded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": true
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid upload",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Session unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "The image exceeds the 5 MiB encoded upload limit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          }
+        },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "unsafe"
+      }
+    },
+    "/workspaces/{workspaceId}/avatar": {
+      "put": {
+        "operationId": "attachWorkspaceAvatar",
+        "summary": "Attach a workspace avatar asset",
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-correlation-id",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "assetId",
+                  "assetRevision",
+                  "expected"
+                ],
+                "properties": {
+                  "assetId": {
+                    "type": "string"
+                  },
+                  "assetRevision": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "expected": {
+                    "oneOf": [
+                      {
+                        "$ref": "#/components/schemas/WorkspaceAvatar"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Avatar attached",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "avatar"
+                  ],
+                  "properties": {
+                    "avatar": {
+                      "$ref": "#/components/schemas/WorkspaceAvatar"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid avatar request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Session unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Workspace or avatar asset unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Avatar changed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          }
+        },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "unsafe"
+      },
+      "delete": {
+        "operationId": "removeWorkspaceAvatar",
+        "summary": "Remove a workspace avatar",
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-correlation-id",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128
+            }
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "expected"
+                ],
+                "properties": {
+                  "expected": {
+                    "oneOf": [
+                      {
+                        "$ref": "#/components/schemas/WorkspaceAvatar"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Avatar removed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "avatar"
+                  ],
+                  "properties": {
+                    "avatar": {
+                      "type": "null"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid avatar request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Session unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Workspace or avatar asset unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Avatar changed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          }
+        },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "unsafe"
+      }
+    },
+    "/workspaces/{workspaceId}/avatar/{size}": {
+      "get": {
+        "operationId": "getWorkspaceAvatar",
+        "summary": "Deliver a private workspace avatar variant",
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "x-correlation-id",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 128
+            }
+          },
+          {
+            "in": "path",
+            "name": "size",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "enum": [
+                24,
+                64,
+                256
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Private avatar image",
+            "content": {
+              "image/webp": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Session unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Avatar unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          }
+        },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "safe"
+      }
+    },
+    "/workspaces/{workspaceId}/apps/{appId}/icon/intents": {
+      "post": {
+        "operationId": "createAppIconUploadIntent",
+        "summary": "Create an app icon upload intent",
+        "security": [
+          {
+            "sessionCookie": []
+          },
+          {
+            "workspaceServiceBearer": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Upload intent created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppIconUploadIntentEnvelope"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "App or asset not found"
+          },
+          "500": {
+            "description": "Unexpected service failure"
+          },
+          "503": {
+            "description": "Temporarily unavailable"
+          }
+        },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "safe"
+      }
+    },
+    "/workspaces/{workspaceId}/apps/{appId}/icon/intents/{intentId}": {
+      "put": {
+        "operationId": "uploadAppIcon",
+        "summary": "Upload a processed app icon",
+        "security": [
+          {
+            "sessionCookie": []
+          },
+          {
+            "workspaceServiceBearer": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "image/png": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            },
+            "image/jpeg": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            },
+            "image/webp": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Icon uploaded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppIconAssetEnvelope"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "App or asset not found"
+          },
+          "413": {
+            "description": "Image upload exceeds the 5 MiB encoded limit"
+          },
+          "500": {
+            "description": "Unexpected service failure"
+          },
+          "503": {
+            "description": "Temporarily unavailable"
+          }
+        },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "unsafe"
+      }
+    },
+    "/workspaces/{workspaceId}/apps/{appId}/icon": {
+      "post": {
+        "operationId": "publishAppIcon",
+        "summary": "Publish an app icon",
+        "security": [
+          {
+            "sessionCookie": []
+          },
+          {
+            "workspaceServiceBearer": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "assetId",
+                  "revision",
+                  "expected"
+                ],
+                "properties": {
+                  "assetId": {
+                    "type": "string"
+                  },
+                  "revision": {
+                    "type": "integer",
+                    "minimum": 1
+                  },
+                  "expected": {
+                    "anyOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "$ref": "#/components/schemas/AppIconBinding"
+                      }
+                    ]
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Icon published",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppIconBindingEnvelope"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "App or asset not found"
+          },
+          "409": {
+            "description": "Revision conflict"
+          },
+          "500": {
+            "description": "Unexpected service failure"
+          },
+          "503": {
+            "description": "Temporarily unavailable"
+          }
+        },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "unsafe"
+      },
+      "delete": {
+        "operationId": "clearAppIcon",
+        "summary": "Clear an app icon",
+        "security": [
+          {
+            "sessionCookie": []
+          },
+          {
+            "workspaceServiceBearer": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "expected"
+                ],
+                "properties": {
+                  "expected": {
+                    "anyOf": [
+                      {
+                        "type": "null"
+                      },
+                      {
+                        "$ref": "#/components/schemas/AppIconBinding"
+                      }
+                    ]
+                  }
+                },
+                "additionalProperties": false
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Icon cleared",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppIconClearEnvelope"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "404": {
+            "description": "App or asset not found"
+          },
+          "409": {
+            "description": "Revision conflict"
+          },
+          "500": {
+            "description": "Unexpected service failure"
+          },
+          "503": {
+            "description": "Temporarily unavailable"
+          }
+        },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "unsafe"
+      }
+    },
+    "/media/public/app-icons/{appId}/{assetId}/{size}": {
+      "get": {
+        "operationId": "getPublicAppIcon",
+        "summary": "Get a public app icon",
+        "description": "Returns the published app icon, or an icon captured for the supplied live sign-in transaction. The optional transaction reference is valid only for that transaction and is never a general preview capability.",
+        "security": [],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "appId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "assetId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "size",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "enum": [
+                24,
+                64,
+                256
+              ]
+            }
+          },
+          {
+            "in": "query",
+            "name": "transaction",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "WebP app icon bytes",
+            "headers": {
+              "cache-control": {
+                "description": "Public cache lifetime, bounded to 60 seconds or less.",
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "x-content-type-options": {
+                "description": "MIME sniffing protection.",
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "nosniff"
+                  ]
+                }
+              },
+              "cross-origin-resource-policy": {
+                "description": "Resource is only embeddable by the same origin.",
+                "schema": {
+                  "type": "string",
+                  "enum": [
+                    "same-origin"
+                  ]
+                }
+              }
+            },
+            "content": {
+              "image/webp": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Icon unavailable, unpublished, or transaction reference invalid",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          }
+        },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "safe"
+      }
+    },
+    "/personal/profile": {
+      "get": {
+        "operationId": "getPersonalProfile",
+        "summary": "Get the current person's profile",
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Personal profile",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PersonalProfile"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          }
+        },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "safe"
+      },
+      "patch": {
+        "operationId": "updatePersonalProfile",
+        "summary": "Update the current person's display name",
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PersonalProfileDisplayNameRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated profile",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PersonalProfile"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          }
+        },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "unsafe"
+      }
+    },
+    "/personal/profile/avatar-intents": {
+      "post": {
+        "operationId": "createPersonalAvatarIntent",
+        "summary": "Create a single-use personal avatar upload intent",
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Upload intent",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PersonalAvatarIntent"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          }
+        },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "safe"
+      }
+    },
+    "/personal/profile/avatar/{intentId}": {
+      "put": {
+        "operationId": "uploadPersonalAvatar",
+        "summary": "Upload a personal avatar",
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "intentId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "header",
+            "name": "if-match",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated profile",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PersonalProfile"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "413": {
+            "description": "Image upload exceeds the 5 MiB encoded limit",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          }
+        },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "unsafe",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "image/png": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            },
+            "image/jpeg": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            },
+            "image/webp": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/personal/profile/avatar": {
+      "delete": {
+        "operationId": "removePersonalAvatar",
+        "summary": "Remove the current person's avatar",
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "if-match",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated profile",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PersonalProfile"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          }
+        },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "unsafe"
+      }
+    },
+    "/personal/profile/avatar/{assetId}/{size}": {
+      "get": {
+        "operationId": "getPersonalAvatar",
+        "summary": "Fetch the current person's private avatar",
+        "security": [
+          {
+            "sessionCookie": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "assetId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "size",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "enum": [
+                24,
+                64,
+                256
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "WebP avatar",
+            "content": {
+              "image/webp": {}
+            }
+          },
+          "401": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          }
+        },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "safe"
+      }
+    },
+    "/workspaces/{workspaceId}/apps/{appId}/{environment}/guest-conversion/intents": {
+      "post": {
+        "operationId": "beginGuestConversionIntent",
+        "summary": "Begin a hosted guest conversion intent",
+        "security": [{"guestBearer": []}],
+        "parameters": [
+          {"in":"path","name":"workspaceId","required":true,"schema":{"type":"string"}},
+          {"in":"path","name":"appId","required":true,"schema":{"type":"string"}},
+          {"in":"path","name":"environment","required":true,"schema":{"type":"string","enum":["test","production"]}},
+          {"in":"header","name":"authorization","required":true,"schema":{"type":"string","minLength":8}},
+          {"in":"header","name":"dpop","required":true,"schema":{"type":"string","minLength":8}},
+          {"in":"header","name":"origin","required":true,"schema":{"type":"string","format":"uri"}},
+          {"in":"header","name":"x-authless-browser-binding","required":true,"schema":{"type":"string","minLength":8}},
+          {"in":"header","name":"x-csrf-token","required":true,"schema":{"type":"string","minLength":8}}
+        ],
+        "requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/GuestConversionIntentRequest"}}}},
+        "responses":{
+          "201":{"description":"Hosted conversion intent created","content":{"application/json":{"schema":{"$ref":"#/components/schemas/GuestConversionIntentCreated"}}}},
+          "400":{"description":"Invalid conversion request","content":{"application/json":{"schema":{"$ref":"#/components/schemas/ErrorEnvelope"}}}},
+          "401":{"description":"Guest authority rejected","content":{"application/json":{"schema":{"$ref":"#/components/schemas/ErrorEnvelope"}}}}
+        },
+        "x-authless-operation-status":"experimental",
+        "x-authless-operation-group":"identity",
+        "x-authless-retry-safety":"unsafe"
+      }
+    },
+    "/workspaces/{workspaceId}/apps/{appId}/{environment}/guest-conversion/intents/{intent}": {
+      "get": {
+        "operationId":"getGuestConversionIntent",
+        "summary":"Read a hosted guest conversion intent",
+        "parameters":[
+          {"in":"path","name":"workspaceId","required":true,"schema":{"type":"string"}},
+          {"in":"path","name":"appId","required":true,"schema":{"type":"string"}},
+          {"in":"path","name":"environment","required":true,"schema":{"type":"string","enum":["test","production"]}},
+          {"in":"path","name":"intent","required":true,"schema":{"type":"string","minLength":16,"maxLength":512}}
+        ],
+        "responses":{
+          "200":{"description":"Conversion intent","content":{"application/json":{"schema":{"$ref":"#/components/schemas/GuestConversionIntent"}}}},
+          "404":{"description":"Conversion intent not found","content":{"application/json":{"schema":{"$ref":"#/components/schemas/ErrorEnvelope"}}}}
+        },
+        "x-authless-operation-status":"experimental",
+        "x-authless-operation-group":"identity",
+        "x-authless-retry-safety":"safe"
+      }
+    },
+    "/workspaces/{workspaceId}/apps/{appId}/{environment}/guest-conversion": {
+      "post": {
+        "operationId":"confirmGuestConversion",
+        "summary":"Confirm a hosted guest conversion",
+        "parameters":[
+          {"in":"path","name":"workspaceId","required":true,"schema":{"type":"string"}},
+          {"in":"path","name":"appId","required":true,"schema":{"type":"string"}},
+          {"in":"path","name":"environment","required":true,"schema":{"type":"string","enum":["test","production"]}},
+          {"in":"header","name":"x-authless-conversion-intent","required":true,"schema":{"type":"string","minLength":16,"maxLength":512}},
+          {"in":"header","name":"idempotency-key","required":true,"schema":{"type":"string","minLength":8,"maxLength":128}}
+        ],
+        "requestBody":{"required":true,"content":{"application/json":{"schema":{"$ref":"#/components/schemas/GuestConversionConfirmationRequest"}}}},
+        "responses":{
+          "200":{"description":"Previously applied conversion","content":{"application/json":{"schema":{"$ref":"#/components/schemas/GuestConversionResponse"}}}},
+          "201":{"description":"Conversion completed","content":{"application/json":{"schema":{"$ref":"#/components/schemas/GuestConversionResponse"}}}},
+          "400":{"description":"Invalid conversion request","content":{"application/json":{"schema":{"$ref":"#/components/schemas/ErrorEnvelope"}}}},
+          "401":{"description":"Conversion authority rejected","content":{"application/json":{"schema":{"$ref":"#/components/schemas/ErrorEnvelope"}}}},
+          "409":{"description":"Conversion conflict or idempotency mismatch","content":{"application/json":{"schema":{"$ref":"#/components/schemas/ErrorEnvelope"}}}}
+        },
+        "x-authless-operation-status":"experimental",
+        "x-authless-operation-group":"identity",
+        "x-authless-retry-safety":"unsafe"
+      }
+    },
+    "/workspaces/{workspaceId}/apps/{appId}/{environment}/guest-admission": {
+      "get": {
+        "operationId": "getGuestAdmissionPolicy",
+        "summary": "Read the environment guest admission policy",
+        "security": [
+          {
+            "sessionCookie": []
+          },
+          {
+            "workspaceServiceBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "appId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "environment",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "test",
+                "production"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Guest admission policy",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuestAdmissionPolicyResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          }
+        },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "safe"
+      },
+      "put": {
+        "operationId": "updateGuestAdmissionPolicy",
+        "summary": "Update the environment guest admission policy",
+        "security": [
+          {
+            "sessionCookie": []
+          },
+          {
+            "workspaceServiceBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "appId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "environment",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "test",
+                "production"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GuestAdmissionPolicyUpdate"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated guest admission policy",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuestAdmissionPolicyResponse"
+                }
+              }
+            }
+          },
+          "412": {
+            "description": "Policy version conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Invalid policy",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          }
+        },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "unsafe"
+      }
+    },
+    "/workspaces/{workspaceId}/apps/{appId}/{environment}/guest-admission/usage": {
+      "get": {
+        "operationId": "getGuestAdmissionUsage",
+        "summary": "Read safe guest admission usage",
+        "security": [
+          {
+            "sessionCookie": []
+          },
+          {
+            "workspaceServiceBearer": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "workspaceId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "appId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "environment",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "test",
+                "production"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Guest usage",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GuestAdmissionUsageResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorEnvelope"
+                }
+              }
+            }
+          }
+        },
+        "x-authless-operation-status": "stable",
+        "x-authless-retry-safety": "safe"
+      }
+    },
+    "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/me": {
+      "get": {
+        "operationId": "getAppProfileMe",
+        "summary": "Read an app-local user profile",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "environment",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "test",
+                "production"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Profile",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "app",
+                    "effective",
+                    "source",
+                    "subjectKind",
+                    "updatedAt",
+                    "user",
+                    "version"
+                  ],
+                  "properties": {
+                    "app": {
+                      "type": "object"
+                    },
+                    "effective": {
+                      "type": "object"
+                    },
+                    "source": {
+                      "type": "object"
+                    },
+                    "subjectKind": {
+                      "type": "string",
+                      "enum": [
+                        "person",
+                        "anonymous"
+                      ]
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "user": {
+                      "type": "object"
+                    },
+                    "version": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "x-authless-operation-status": "experimental",
+        "x-authless-operation-group": "identity",
+        "x-authless-retry-safety": "safe"
+      },
+      "patch": {
+        "operationId": "updateAppProfileMe",
+        "summary": "Update an app-local user profile",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "environment",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "test",
+                "production"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "displayName": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "maxLength": 80
+                  },
+                  "expectedVersion": {
+                    "type": "integer",
+                    "minimum": 0
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Profile",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "app",
+                    "effective",
+                    "source",
+                    "subjectKind",
+                    "updatedAt",
+                    "user",
+                    "version"
+                  ],
+                  "properties": {
+                    "app": {
+                      "type": "object"
+                    },
+                    "effective": {
+                      "type": "object"
+                    },
+                    "source": {
+                      "type": "object"
+                    },
+                    "subjectKind": {
+                      "type": "string",
+                      "enum": [
+                        "person",
+                        "anonymous"
+                      ]
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "user": {
+                      "type": "object"
+                    },
+                    "version": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "409": {
+            "description": "Version conflict"
+          }
+        },
+        "x-authless-operation-status": "experimental",
+        "x-authless-operation-group": "identity",
+        "x-authless-retry-safety": "unsafe"
+      }
+    },
+    "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}": {
+      "get": {
+        "operationId": "getAppProfileSubject",
+        "summary": "Read an app-local user profile",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "environment",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "test",
+                "production"
+              ]
+            }
+          },
+          {
+            "name": "subjectId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Profile",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "app",
+                    "effective",
+                    "source",
+                    "subjectKind",
+                    "updatedAt",
+                    "user",
+                    "version"
+                  ],
+                  "properties": {
+                    "app": {
+                      "type": "object"
+                    },
+                    "effective": {
+                      "type": "object"
+                    },
+                    "source": {
+                      "type": "object"
+                    },
+                    "subjectKind": {
+                      "type": "string",
+                      "enum": [
+                        "person",
+                        "anonymous"
+                      ]
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "user": {
+                      "type": "object"
+                    },
+                    "version": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "x-authless-operation-status": "experimental",
+        "x-authless-operation-group": "identity",
+        "x-authless-retry-safety": "safe"
+      },
+      "patch": {
+        "operationId": "updateAppProfileSubject",
+        "summary": "Update an app-local user profile",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "environment",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "test",
+                "production"
+              ]
+            }
+          },
+          {
+            "name": "subjectId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "displayName": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "maxLength": 80
+                  },
+                  "expectedVersion": {
+                    "type": "integer",
+                    "minimum": 0
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Profile",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "app",
+                    "effective",
+                    "source",
+                    "subjectKind",
+                    "updatedAt",
+                    "user",
+                    "version"
+                  ],
+                  "properties": {
+                    "app": {
+                      "type": "object"
+                    },
+                    "effective": {
+                      "type": "object"
+                    },
+                    "source": {
+                      "type": "object"
+                    },
+                    "subjectKind": {
+                      "type": "string",
+                      "enum": [
+                        "person",
+                        "anonymous"
+                      ]
+                    },
+                    "updatedAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "user": {
+                      "type": "object"
+                    },
+                    "version": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "409": {
+            "description": "Version conflict"
+          }
+        },
+        "x-authless-operation-status": "experimental",
+        "x-authless-operation-group": "identity",
+        "x-authless-retry-safety": "unsafe"
+      }
+    },
+    "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/user/avatar-intents": {
+      "post": {
+        "operationId": "createAppProfileUserAvatarIntent",
+        "summary": "Issue an app-profile avatar upload intent",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "environment",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "test",
+                "production"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Upload intent"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "x-authless-operation-status": "experimental",
+        "x-authless-retry-safety": "unsafe"
+      }
+    },
+    "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}/user/avatar-intents": {
+      "post": {
+        "operationId": "createAppProfileSubjectUserAvatarIntent",
+        "summary": "Issue an app-profile avatar upload intent",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "environment",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "test",
+                "production"
+              ]
+            }
+          },
+          {
+            "name": "subjectId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Upload intent"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "x-authless-operation-status": "experimental",
+        "x-authless-retry-safety": "unsafe"
+      }
+    },
+    "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/app/avatar-intents": {
+      "post": {
+        "operationId": "createAppProfileAppAvatarIntent",
+        "summary": "Issue an app-profile avatar upload intent",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "environment",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "test",
+                "production"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Upload intent"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "x-authless-operation-status": "experimental",
+        "x-authless-retry-safety": "unsafe"
+      }
+    },
+    "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}/app/avatar-intents": {
+      "post": {
+        "operationId": "createAppProfileSubjectAppAvatarIntent",
+        "summary": "Issue an app-profile avatar upload intent",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "environment",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "test",
+                "production"
+              ]
+            }
+          },
+          {
+            "name": "subjectId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Upload intent"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "x-authless-operation-status": "experimental",
+        "x-authless-retry-safety": "unsafe"
+      }
+    },
+    "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/user/avatar/{intentId}": {
+      "put": {
+        "operationId": "uploadAppProfileUserAvatar",
+        "summary": "Upload an app-profile avatar",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "environment",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "test",
+                "production"
+              ]
+            }
+          },
+          {
+            "name": "intentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "image/png": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            },
+            "image/jpeg": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            },
+            "image/webp": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated profile"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "409": {
+            "description": "Version conflict"
+          }
+        },
+        "x-authless-operation-status": "experimental",
+        "x-authless-retry-safety": "unsafe"
+      }
+    },
+    "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}/user/avatar/{intentId}": {
+      "put": {
+        "operationId": "uploadAppProfileSubjectUserAvatar",
+        "summary": "Upload an app-profile avatar",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "environment",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "test",
+                "production"
+              ]
+            }
+          },
+          {
+            "name": "intentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "subjectId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "image/png": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            },
+            "image/jpeg": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            },
+            "image/webp": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated profile"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "409": {
+            "description": "Version conflict"
+          }
+        },
+        "x-authless-operation-status": "experimental",
+        "x-authless-retry-safety": "unsafe"
+      }
+    },
+    "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/app/avatar/{intentId}": {
+      "put": {
+        "operationId": "uploadAppProfileAppAvatar",
+        "summary": "Upload an app-profile avatar",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "environment",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "test",
+                "production"
+              ]
+            }
+          },
+          {
+            "name": "intentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "image/png": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            },
+            "image/jpeg": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            },
+            "image/webp": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated profile"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "409": {
+            "description": "Version conflict"
+          }
+        },
+        "x-authless-operation-status": "experimental",
+        "x-authless-retry-safety": "unsafe"
+      }
+    },
+    "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}/app/avatar/{intentId}": {
+      "put": {
+        "operationId": "uploadAppProfileSubjectAppAvatar",
+        "summary": "Upload an app-profile avatar",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "environment",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "test",
+                "production"
+              ]
+            }
+          },
+          {
+            "name": "intentId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "subjectId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "image/png": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            },
+            "image/jpeg": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            },
+            "image/webp": {
+              "schema": {
+                "type": "string",
+                "format": "binary"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated profile"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "409": {
+            "description": "Version conflict"
+          }
+        },
+        "x-authless-operation-status": "experimental",
+        "x-authless-retry-safety": "unsafe"
+      }
+    },
+    "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/user/avatar": {
+      "post": {
+        "summary": "Update an app-profile avatar binding",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "environment",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "test",
+                "production"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AppProfileAvatarPublishRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated profile"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "409": {
+            "description": "Version conflict"
+          }
+        },
+        "x-authless-operation-status": "experimental",
+        "x-authless-retry-safety": "unsafe",
+        "operationId": "publishAppProfileUserAvatar"
+      },
+      "delete": {
+        "summary": "Update an app-profile avatar binding",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "environment",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "test",
+                "production"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "expectedVersion": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated profile"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "409": {
+            "description": "Version conflict"
+          }
+        },
+        "x-authless-operation-status": "experimental",
+        "x-authless-retry-safety": "unsafe",
+        "operationId": "removeAppProfileUserAvatar"
+      }
+    },
+    "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}/user/avatar": {
+      "post": {
+        "summary": "Update an app-profile avatar binding",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "environment",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "test",
+                "production"
+              ]
+            }
+          },
+          {
+            "name": "subjectId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AppProfileAvatarPublishRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated profile"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "409": {
+            "description": "Version conflict"
+          }
+        },
+        "x-authless-operation-status": "experimental",
+        "x-authless-retry-safety": "unsafe",
+        "operationId": "publishAppProfileSubjectUserAvatar"
+      },
+      "delete": {
+        "summary": "Update an app-profile avatar binding",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "environment",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "test",
+                "production"
+              ]
+            }
+          },
+          {
+            "name": "subjectId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "expectedVersion": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated profile"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "409": {
+            "description": "Version conflict"
+          }
+        },
+        "x-authless-operation-status": "experimental",
+        "x-authless-retry-safety": "unsafe",
+        "operationId": "removeAppProfileSubjectUserAvatar"
+      }
+    },
+    "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/app/avatar": {
+      "post": {
+        "summary": "Update an app-profile avatar binding",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "environment",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "test",
+                "production"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AppProfileAvatarPublishRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated profile"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "409": {
+            "description": "Version conflict"
+          }
+        },
+        "x-authless-operation-status": "experimental",
+        "x-authless-retry-safety": "unsafe",
+        "operationId": "publishAppProfileAppAvatar"
+      },
+      "delete": {
+        "summary": "Update an app-profile avatar binding",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "environment",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "test",
+                "production"
+              ]
+            }
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "expectedVersion": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated profile"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "409": {
+            "description": "Version conflict"
+          }
+        },
+        "x-authless-operation-status": "experimental",
+        "x-authless-retry-safety": "unsafe",
+        "operationId": "removeAppProfileAppAvatar"
+      }
+    },
+    "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}/app/avatar": {
+      "post": {
+        "summary": "Update an app-profile avatar binding",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "environment",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "test",
+                "production"
+              ]
+            }
+          },
+          {
+            "name": "subjectId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AppProfileAvatarPublishRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated profile"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "409": {
+            "description": "Version conflict"
+          }
+        },
+        "x-authless-operation-status": "experimental",
+        "x-authless-retry-safety": "unsafe",
+        "operationId": "publishAppProfileSubjectAppAvatar"
+      },
+      "delete": {
+        "summary": "Update an app-profile avatar binding",
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "appId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "environment",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "test",
+                "production"
+              ]
+            }
+          },
+          {
+            "name": "subjectId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "expectedVersion": {
+                    "type": "integer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Updated profile"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "409": {
+            "description": "Version conflict"
+          }
+        },
+        "x-authless-operation-status": "experimental",
+        "x-authless-retry-safety": "unsafe",
+        "operationId": "removeAppProfileSubjectAppAvatar"
+      }
     }
   },
   "components": {
@@ -13133,9 +16526,396 @@
         "scheme": "bearer",
         "bearerFormat": "Authless workspace service key",
         "description": "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      },
+      "guestBearer": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "Authless guest access token",
+        "description": "A browser-held guest access token. Pair it with the required DPoP, origin, CSRF, and browser-binding headers. Never store it as a server credential or expose it in logs."
+      }
+    },
+    "parameters": {
+      "TransactionId": {
+        "in": "path",
+        "name": "transactionId",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "minLength": 8,
+          "maxLength": 512
+        }
+      }
+    },
+    "responses": {
+      "BadRequest": {
+        "description": "Invalid or unavailable custom authentication request"
       }
     },
     "schemas": {
+      "CustomAuthenticationRegistrationInput": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["clientId", "method", "mode", "origin", "redirectUri"],
+        "properties": {
+          "clientId": { "type": "string", "minLength": 8, "maxLength": 512 },
+          "method": { "enum": ["guest", "email_code"] },
+          "mode": { "enum": ["backend", "public"] },
+          "origin": { "type": "string", "format": "uri" },
+          "redirectUri": { "type": "string", "format": "uri" },
+          "expectedUpdatedAt": { "type": "string", "format": "date-time" }
+        }
+      },
+      "CustomAuthenticationRegistrationView": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["appId", "clientId", "environmentId", "method", "mode", "origin", "redirectUri", "status", "updatedAt", "workspaceId"],
+        "properties": {
+          "appId": { "type": "string", "minLength": 3, "maxLength": 128 },
+          "clientId": { "type": "string", "minLength": 8, "maxLength": 512 },
+          "environmentId": { "type": "string", "minLength": 3, "maxLength": 128 },
+          "method": { "enum": ["guest", "email_code"] },
+          "mode": { "enum": ["backend", "public"] },
+          "origin": { "type": "string", "format": "uri" },
+          "redirectUri": { "type": "string", "format": "uri" },
+          "status": { "enum": ["active", "revoked"] },
+          "updatedAt": { "type": "string", "format": "date-time" },
+          "workspaceId": { "type": "string", "minLength": 3, "maxLength": 128 }
+        }
+      },
+      "CustomAuthenticationRegistrationListResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["registrations"],
+        "properties": { "registrations": { "type": "array", "items": { "$ref": "#/components/schemas/CustomAuthenticationRegistrationView" } } }
+      },
+      "CustomAuthenticationRegistrationResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["registration"],
+        "properties": { "registration": { "$ref": "#/components/schemas/CustomAuthenticationRegistrationView" } }
+      },
+      "CustomAuthenticationRevocationResponse": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["revoked"],
+        "properties": { "revoked": { "type": "boolean" } }
+      },
+      "CustomAuthenticationBinding": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "appId",
+          "clientId",
+          "environmentId",
+          "method",
+          "mode",
+          "nonce",
+          "origin",
+          "policyVersion",
+          "principalMode",
+          "redirectUri",
+          "state",
+          "workspaceId"
+        ],
+        "properties": {
+          "appId": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 512
+          },
+          "browserSessionBinding": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 8,
+            "maxLength": 512
+          },
+          "clientId": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 512
+          },
+          "codeChallenge": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^[A-Za-z0-9_-]{43}$"
+          },
+          "environmentId": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 512
+          },
+          "method": {
+            "enum": [
+              "guest",
+              "email_code"
+            ]
+          },
+          "mode": {
+            "enum": [
+              "backend",
+              "public"
+            ]
+          },
+          "nonce": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 512
+          },
+          "origin": {
+            "type": "string",
+            "format": "uri"
+          },
+          "policyVersion": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "principalMode": {
+            "enum": [
+              "person",
+              "guest"
+            ]
+          },
+          "redirectUri": {
+            "type": "string",
+            "format": "uri"
+          },
+          "requestedScopes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 10
+          },
+          "state": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 512
+          },
+          "workspaceId": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 512
+          }
+        }
+      },
+      "CustomAuthenticationChallengeRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "appId",
+          "clientId",
+          "environmentId",
+          "method",
+          "mode",
+          "nonce",
+          "origin",
+          "policyVersion",
+          "principalMode",
+          "redirectUri",
+          "state",
+          "workspaceId",
+          "email"
+        ],
+        "properties": {
+          "appId": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 512
+          },
+          "browserSessionBinding": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 8,
+            "maxLength": 512
+          },
+          "clientId": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 512
+          },
+          "codeChallenge": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^[A-Za-z0-9_-]{43}$"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "environmentId": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 512
+          },
+          "method": {
+            "enum": [
+              "guest",
+              "email_code"
+            ]
+          },
+          "mode": {
+            "enum": [
+              "backend",
+              "public"
+            ]
+          },
+          "nonce": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 512
+          },
+          "origin": {
+            "type": "string",
+            "format": "uri"
+          },
+          "policyVersion": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "principalMode": {
+            "enum": [
+              "person",
+              "guest"
+            ]
+          },
+          "redirectUri": {
+            "type": "string",
+            "format": "uri"
+          },
+          "requestedScopes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 10
+          },
+          "state": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 512
+          },
+          "workspaceId": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 512
+          }
+        }
+      },
+      "CustomAuthenticationVerifyRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "appId",
+          "clientId",
+          "environmentId",
+          "method",
+          "mode",
+          "nonce",
+          "origin",
+          "policyVersion",
+          "principalMode",
+          "redirectUri",
+          "state",
+          "workspaceId"
+        ],
+        "properties": {
+          "appId": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 512
+          },
+          "browserSessionBinding": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "minLength": 8,
+            "maxLength": 512
+          },
+          "clientId": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 512
+          },
+          "code": {
+            "type": "string",
+            "minLength": 6,
+            "maxLength": 6
+          },
+          "codeChallenge": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^[A-Za-z0-9_-]{43}$"
+          },
+          "environmentId": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 512
+          },
+          "method": {
+            "enum": [
+              "guest",
+              "email_code"
+            ]
+          },
+          "mode": {
+            "enum": [
+              "backend",
+              "public"
+            ]
+          },
+          "nonce": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 512
+          },
+          "origin": {
+            "type": "string",
+            "format": "uri"
+          },
+          "policyVersion": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "principalMode": {
+            "enum": [
+              "person",
+              "guest"
+            ]
+          },
+          "redirectUri": {
+            "type": "string",
+            "format": "uri"
+          },
+          "requestedScopes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 10
+          },
+          "state": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 512
+          },
+          "workspaceId": {
+            "type": "string",
+            "minLength": 8,
+            "maxLength": 512
+          }
+        }
+      },
       "AppCommerceMoney": {
         "type": "object",
         "additionalProperties": false,
@@ -16360,7 +20140,7 @@
         "required": [
           "name"
         ],
-        "description": "Creates a workspace with a normalized name. Names are 1\u201380 characters, may contain Unicode letters or numbers plus spaces, periods, ampersands, apostrophes, parentheses, underscores, and hyphens, and cannot use reserved names such as admin, authless, personal, root, support, or system.",
+        "description": "Creates a workspace with a normalized name. Names are 1–80 characters, may contain Unicode letters or numbers plus spaces, periods, ampersands, apostrophes, parentheses, underscores, and hyphens, and cannot use reserved names such as admin, authless, personal, root, support, or system.",
         "examples": [
           {
             "name": "Example workspace"
@@ -16669,6 +20449,17 @@
           },
           "name": {
             "type": "string"
+          },
+          "capabilities": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "app-profile:write"
+              ]
+            },
+            "uniqueItems": true,
+            "maxItems": 1
           }
         }
       },
@@ -18407,6 +22198,19 @@
           "version": {
             "type": "integer",
             "minimum": 1
+          },
+          "iconAssetId": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "iconRevision": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 1
           }
         }
       },
@@ -19567,6 +23371,9 @@
               "full"
             ]
           },
+          "canManageAvatar": {
+            "type": "boolean"
+          },
           "id": {
             "type": "string"
           },
@@ -19579,6 +23386,9 @@
               "active",
               "suspended"
             ]
+          },
+          "avatar": {
+            "$ref": "#/components/schemas/WorkspaceAvatar"
           }
         }
       },
@@ -20008,7 +23818,8 @@
           "M-04",
           "M-06",
           "M-08",
-          "M-10"
+          "M-10",
+          "M-12"
         ]
       },
       "AuthenticationPolicyDefinition": {
@@ -20790,6 +24601,670 @@
           "expectedVersion": {
             "type": "integer",
             "minimum": 1
+          }
+        }
+      },
+      "WorkspaceAvatar": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "assetId",
+          "assetRevision",
+          "version"
+        ],
+        "properties": {
+          "assetId": {
+            "type": "string"
+          },
+          "assetRevision": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      },
+      "AppIconBinding": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "assetId",
+          "revision"
+        ],
+        "properties": {
+          "assetId": {
+            "type": "string"
+          },
+          "revision": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      },
+      "AppIconUploadIntentEnvelope": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "ok",
+          "value"
+        ],
+        "properties": {
+          "ok": {
+            "type": "boolean",
+            "enum": [
+              true
+            ]
+          },
+          "value": {
+            "type": "object",
+            "required": [
+              "id",
+              "assetId",
+              "owner",
+              "purpose",
+              "expiresAt"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "assetId": {
+                "type": "string"
+              },
+              "owner": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "kind",
+                  "appId",
+                  "workspaceId"
+                ],
+                "properties": {
+                  "kind": {
+                    "type": "string",
+                    "enum": [
+                      "app"
+                    ]
+                  },
+                  "appId": {
+                    "type": "string"
+                  },
+                  "workspaceId": {
+                    "type": "string"
+                  }
+                }
+              },
+              "purpose": {
+                "type": "string",
+                "enum": [
+                  "app_icon"
+                ]
+              },
+              "expiresAt": {
+                "type": "string",
+                "format": "date-time"
+              }
+            },
+            "additionalProperties": true
+          }
+        }
+      },
+      "AppIconAssetEnvelope": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "ok",
+          "value"
+        ],
+        "properties": {
+          "ok": {
+            "type": "boolean",
+            "enum": [
+              true
+            ]
+          },
+          "value": {
+            "type": "object",
+            "required": [
+              "id",
+              "revision",
+              "status"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "revision": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "ready"
+                ]
+              }
+            },
+            "additionalProperties": true
+          }
+        }
+      },
+      "AppIconBindingEnvelope": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "ok",
+          "value"
+        ],
+        "properties": {
+          "ok": {
+            "type": "boolean",
+            "enum": [
+              true
+            ]
+          },
+          "value": {
+            "$ref": "#/components/schemas/AppIconBinding"
+          }
+        }
+      },
+      "AppIconClearEnvelope": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "ok"
+        ],
+        "properties": {
+          "ok": {
+            "type": "boolean",
+            "enum": [
+              true
+            ]
+          }
+        }
+      },
+      "PersonalProfile": {
+        "type": "object",
+        "required": [
+          "avatar",
+          "displayName",
+          "updatedAt",
+          "version"
+        ],
+        "properties": {
+          "avatar": {
+            "type": [
+              "null",
+              "object"
+            ],
+            "required": [
+              "assetId",
+              "revision"
+            ],
+            "properties": {
+              "assetId": {
+                "type": "string"
+              },
+              "revision": {
+                "type": "integer",
+                "minimum": 1
+              }
+            },
+            "additionalProperties": false
+          },
+          "displayName": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "additionalProperties": false
+      },
+      "PersonalProfileDisplayNameRequest": {
+        "type": "object",
+        "required": [
+          "displayName",
+          "expectedVersion"
+        ],
+        "properties": {
+          "displayName": {
+            "type": [
+              "null",
+              "string"
+            ],
+            "minLength": 1,
+            "maxLength": 80
+          },
+          "expectedVersion": {
+            "type": "integer",
+            "minimum": 1
+          }
+        },
+        "additionalProperties": false
+      },
+      "PersonalAvatarIntent": {
+        "type": "object",
+        "required": [
+          "id",
+          "assetId",
+          "purpose",
+          "expiresAt"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "assetId": {
+            "type": "string"
+          },
+          "purpose": {
+            "type": "string",
+            "enum": [
+              "person_avatar"
+            ]
+          },
+          "expiresAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": true
+      },
+      "GuestConversionIntentRequest": {
+        "type":"object",
+        "additionalProperties":false,
+        "required":["requestedScopes"],
+        "properties":{"requestedScopes":{"type":"array","items":{"type":"string"},"minItems":1,"maxItems":10,"uniqueItems":true}}
+      },
+      "GuestConversionIntentCreated": {
+        "type":"object",
+        "additionalProperties":false,
+        "required":["expiresAt","hostedUrl","intent","state"],
+        "properties":{
+          "expiresAt":{"type":"string","format":"date-time"},
+          "hostedUrl":{"type":"string","format":"uri"},
+          "intent":{"type":"string","minLength":16,"maxLength":512},
+          "state":{"type":"string","enum":["pending","ready","consumed","cancelled","expired"]}
+        }
+      },
+      "GuestConversionIntent": {
+        "type":"object",
+        "additionalProperties":false,
+        "required":["expiresAt","intent","policyVersion","requestedScopes","state"],
+        "properties":{
+          "expiresAt":{"type":"string","format":"date-time"},
+          "intent":{"type":"string","minLength":16,"maxLength":512},
+          "policyVersion":{"type":"integer","minimum":1},
+          "requestedScopes":{"type":"array","items":{"type":"string"},"minItems":1,"maxItems":10,"uniqueItems":true},
+          "state":{"type":"string","enum":["pending","ready","consumed","cancelled","expired"]}
+        }
+      },
+      "GuestConversionConfirmationRequest": {
+        "type":"object",
+        "additionalProperties":false,
+        "required":["confirmation"],
+        "properties":{"confirmation":{"type":"string","enum":["convert_guest"]},"mergeProfile":{"type":"string","enum":["keep_person","keep_guest"]}}
+      },
+      "GuestConversionResponse": {
+        "type":"object",
+        "additionalProperties":false,
+        "required":["conversion"],
+        "properties":{"conversion":{"type":"object","additionalProperties":false,"required":["appMembershipId","appSubject","conversionId","replayed"],"properties":{"appMembershipId":{"type":"string"},"appSubject":{"type":"string"},"conversionId":{"type":"string"},"replayed":{"type":"boolean"}}}}
+      },
+      "GuestAdmissionPolicy": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "accessSeconds",
+          "absoluteSeconds",
+          "capabilities",
+          "enabled",
+          "idleSeconds",
+          "maxCreationsPerSource",
+          "maxRequestsPerSource",
+          "maxWorkspaceGuests",
+          "mode",
+          "policyVersion",
+          "requiredAssurance"
+        ],
+        "properties": {
+          "accessSeconds": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 600
+          },
+          "absoluteSeconds": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 86400
+          },
+          "capabilities": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "app:read",
+                "app:draft"
+              ]
+            },
+            "minItems": 1,
+            "maxItems": 2,
+            "uniqueItems": true
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "idleSeconds": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 3600
+          },
+          "maxCreationsPerSource": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "maxRequestsPerSource": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          },
+          "maxWorkspaceGuests": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10000
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "open",
+              "invitation_only",
+              "administrator_approval"
+            ]
+          },
+          "policyVersion": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Zero denotes an unconfigured disabled policy; the first successful update creates version one."
+          },
+          "requiredAssurance": {
+            "type": "string",
+            "enum": [
+              "anonymous",
+              "single_factor",
+              "multi_factor"
+            ]
+          }
+        }
+      },
+      "GuestAdmissionPolicyResponse": {
+        "type": "object",
+        "required": [
+          "policy"
+        ],
+        "properties": {
+          "policy": {
+            "$ref": "#/components/schemas/GuestAdmissionPolicy"
+          }
+        }
+      },
+      "GuestAdmissionUsageResponse": {
+        "type": "object",
+        "required": [
+          "usage"
+        ],
+        "properties": {
+          "usage": {
+            "type": "object",
+            "required": [
+              "activeGuests",
+              "creationsToday",
+              "maxCreationsPerSource",
+              "maxRequestsPerSource",
+              "maxWorkspaceGuests",
+              "requestsToday"
+            ],
+            "properties": {
+              "activeGuests": {
+                "type": "integer"
+              },
+              "creationsToday": {
+                "type": "integer"
+              },
+              "maxCreationsPerSource": {
+                "type": "integer"
+              },
+              "maxRequestsPerSource": {
+                "type": "integer"
+              },
+              "maxWorkspaceGuests": {
+                "type": "integer"
+              },
+              "requestsToday": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      },
+      "GuestAdmissionPolicyUpdate": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "accessSeconds",
+          "absoluteSeconds",
+          "capabilities",
+          "enabled",
+          "idleSeconds",
+          "maxCreationsPerSource",
+          "maxRequestsPerSource",
+          "maxWorkspaceGuests",
+          "mode",
+          "policyVersion",
+          "requiredAssurance",
+          "expectedPolicyVersion"
+        ],
+        "properties": {
+          "accessSeconds": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 600
+          },
+          "absoluteSeconds": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 86400
+          },
+          "capabilities": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "app:read",
+                "app:draft"
+              ]
+            },
+            "minItems": 1,
+            "maxItems": 2,
+            "uniqueItems": true
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "idleSeconds": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 3600
+          },
+          "maxCreationsPerSource": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "maxRequestsPerSource": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 1000
+          },
+          "maxWorkspaceGuests": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10000
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "open",
+              "invitation_only",
+              "administrator_approval"
+            ]
+          },
+          "policyVersion": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "requiredAssurance": {
+            "type": "string",
+            "enum": [
+              "anonymous",
+              "single_factor",
+              "multi_factor"
+            ]
+          },
+          "expectedPolicyVersion": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      },
+      "AppProfilePatch": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "displayName": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 80
+          },
+          "expectedVersion": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "resetFields": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "avatar",
+                "displayName"
+              ]
+            },
+            "uniqueItems": true,
+            "maxItems": 2
+          }
+        }
+      },
+      "AppProfileView": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "app",
+          "effective",
+          "source",
+          "subjectKind",
+          "updatedAt",
+          "user",
+          "version"
+        ],
+        "properties": {
+          "app": {
+            "type": "object"
+          },
+          "effective": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "avatar",
+              "avatarUrl",
+              "displayName"
+            ],
+            "properties": {
+              "avatar": {
+                "type": [
+                  "object",
+                  "null"
+                ]
+              },
+              "avatarUrl": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "uri-reference"
+              },
+              "displayName": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          },
+          "source": {
+            "type": "object"
+          },
+          "subjectKind": {
+            "type": "string",
+            "enum": [
+              "person",
+              "anonymous"
+            ]
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "user": {
+            "type": "object"
+          },
+          "version": {
+            "type": "integer"
+          }
+        }
+      },
+      "AppProfileAvatarPublishRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "assetId",
+          "revision"
+        ],
+        "properties": {
+          "assetId": {
+            "type": "string"
+          },
+          "revision": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "expectedVersion": {
+            "type": "integer",
+            "minimum": 0
           }
         }
       }

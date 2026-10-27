@@ -48,7 +48,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
 ```json
 {
   "schema": "authless.release-center/v1",
-  "updatedAt": "2026-10-17",
+  "updatedAt": "2026-10-25",
   "compatibility": [
     {
       "component": "REST API",
@@ -140,6 +140,615 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
     }
   ],
   "changes": [
+    {
+      "id": "2026-10-25-authless-m12-passkey-sign-in",
+      "publishedAt": "2026-10-25",
+      "title": {
+        "en": "Authless M-12 passkey sign-in policy",
+        "ar": "سياسة تسجيل الدخول بمفتاح المرور M-12 في Authless"
+      },
+      "summary": {
+        "en": "Authless now models passkeys as the M-12 sign-in method. A relying app can opt into a signed OAuth handoff while M-06 email-code sign-in remains available for email-only policies.",
+        "ar": "تمثل Authless الآن مفاتيح المرور كطريقة تسجيل الدخول M-12. ويمكن للتطبيق المعتمد تفعيل تسليم OAuth موقع، بينما يظل تسجيل الدخول برمز البريد M-06 متاحاً للسياسات المعتمدة على البريد فقط."
+      },
+      "categories": [
+        "api",
+        "product",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference",
+        "evaluator"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Private preview, source-only. Authless owns passkey credentials, ceremonies, and sign-in UX; relying apps select M-12 in their policy and handle the signed callback. Keep M-06 for email-code sign-in, and verify the local Node 24 and PostgreSQL proof before any hosted rollout.",
+        "ar": "معاينة خاصة ومصدر فقط. تملك Authless بيانات اعتماد مفاتيح المرور وطقوسها وتجربة تسجيل الدخول؛ وتختار التطبيقات المعتمدة M-12 في سياستها وتعالج الاستدعاء الموقع. حافظ على M-06 لتسجيل الدخول برمز البريد، وتحقق من إثبات Node 24 وPostgreSQL المحلي قبل أي طرح مستضاف."
+      },
+      "announcement": {
+        "en": "The checked policy contract, database migration, passkey verifier, OAuth interaction snapshot, Sign handoff, dashboard policy fields, and CLI or machine-readable projections agree on M-12. Local tests cover registration, authentication, origin and challenge binding, counter replay, signed OAuth handoff, and Arabic locale continuity. No hosted deployment or GA availability is claimed.",
+        "ar": "يتوافق عقد السياسة والتحقق من ترحيل قاعدة البيانات ومدقق مفتاح المرور ولقطة تفاعل OAuth وتسليم Sign وحقول سياسة لوحة التحكم وإسقاطات CLI والوثائق المقروءة آلياً على M-12. تغطي الاختبارات المحلية التسجيل والمصادقة وربط الأصل والتحدي وإعادة استخدام العداد وتسليم OAuth الموقع واستمرارية اللغة العربية. لا يُدّعى وجود نشر مستضاف أو إتاحة عامة."
+      },
+      "replacement": null,
+      "supportWindow": "Private preview pending hosted provider verification and release approval.",
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/core/src/policy/domain.ts",
+        "packages/db/drizzle/0124_passkey_policy_method_up.sql",
+        "packages/identity-node/src/passkey-verifier.ts",
+        "packages/oidc/src/interactions.ts",
+        "apps/sign/src/routes/+page.svelte",
+        "apps/dash/src/lib/AuthenticationPolicyFields.svelte",
+        "tests/passkey-verifier.test.ts",
+        "tests/oidc-passkey.test.ts",
+        "tests/integration/policy-active-use-postgres.integration.ts",
+        "docs/plans/external-accounts-spec.md"
+      ],
+      "permalink": "/changes#2026-10-25-authless-m12-passkey-sign-in"
+    },
+    {
+      "id": "2026-10-21-managed-media-pipeline",
+      "publishedAt": "2026-10-21",
+      "title": {
+        "en": "Bounded managed media pipeline",
+        "ar": "مسار الوسائط المُدارة المقيّدة"
+      },
+      "summary": {
+        "en": "Authless processes bounded PNG, JPEG, and WebP uploads into owner-scoped WebP variants for private profile, workspace, and app assets.",
+        "ar": "تعالج Authless عمليات رفع PNG وJPEG وWebP المقيّدة إلى نسخ WebP ضمن نطاق المالك لملفات التعريف ومساحات العمل وموارد التطبيقات الخاصة."
+      },
+      "categories": [
+        "api",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Create a single-use media intent, upload a supported raster within the size limits, and use only the processed variants returned by the media contract.",
+        "ar": "أنشئ نية وسائط أحادية الاستخدام، وارفع صورة نقطية مدعومة ضمن حدود الحجم، واستخدم النسخ المعالجة التي يعيدها عقد الوسائط فقط."
+      },
+      "announcement": {
+        "en": "The processor strips metadata, applies orientation, and refuses unsupported, oversized, animated, malformed, expired, or revoked assets.",
+        "ar": "يزيل المعالج البيانات الوصفية ويطبق الاتجاه ويرفض الموارد غير المدعومة أو الكبيرة أو المتحركة أو التالفة أو المنتهية أو الملغاة."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/core/src/media/service.ts",
+        "packages/db/src/media-store.ts",
+        "apps/api/src/media-processor.ts",
+        "tests/integration/media-postgres.integration.ts",
+        "docs/plans/identity-slices/H-M01-qa.md"
+      ],
+      "permalink": "/changes#2026-10-21-managed-media-pipeline"
+    },
+    {
+      "id": "2026-10-21-anonymous-guest-authority",
+      "publishedAt": "2026-10-21",
+      "title": {
+        "en": "Bounded anonymous guest authority",
+        "ar": "صلاحية الضيف المجهول المقيّدة"
+      },
+      "summary": {
+        "en": "Guest authority uses a separate anonymous principal with bounded capabilities, app and environment audience checks, and finite session lifetimes.",
+        "ar": "تستخدم صلاحية الضيف مبدأً مجهولاً منفصلاً مع إمكانات مقيّدة وفحوصات لجمهور التطبيق والبيئة وأعمار جلسات محدودة."
+      },
+      "categories": [
+        "api",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Treat guest grants as app-scoped anonymous authority. Request only the permitted guest capabilities and never rely on person claims, refresh tokens, or offline access.",
+        "ar": "تعامل مع منح الضيف باعتبارها صلاحية مجهولة ضمن نطاق التطبيق. اطلب إمكانات الضيف المسموحة فقط ولا تعتمد على مطالبات الشخص أو رموز التحديث أو الوصول دون اتصال."
+      },
+      "announcement": {
+        "en": "Authority validation checks the active visitor, app guest, session, generation, audience, policy version, and bounded expiry before issuing anonymous claims.",
+        "ar": "يتحقق فحص الصلاحية من الزائر والضيف والتطبيق والجلسة والجيل والجمهور ونسخة السياسة والانتهاء المقيّد قبل إصدار المطالبات المجهولة."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/core/src/policy/guest-authority.ts",
+        "packages/db/src/guest-authority-store.ts",
+        "packages/oidc/src/claim-projection.ts",
+        "tests/integration/guest-authority-qa.integration.ts",
+        "docs/plans/identity-slices/H-G01-qa.md"
+      ],
+      "permalink": "/changes#2026-10-21-anonymous-guest-authority"
+    },
+    {
+      "id": "2026-10-21-workspace-avatar",
+      "publishedAt": "2026-10-21",
+      "title": {
+        "en": "Workspace avatar management",
+        "ar": "إدارة الصورة الرمزية لمساحة العمل"
+      },
+      "summary": {
+        "en": "Workspace owners and admins can attach processed avatars with versioned writes, while members receive private same-origin variants when they have current view access.",
+        "ar": "يمكن لمالكي مساحات العمل ومديريها إرفاق صور رمزية معالجة بكتابات ذات إصدارات، بينما يتلقى الأعضاء نسخاً خاصة من الأصل نفسه عند امتلاكهم صلاحية العرض الحالية."
+      },
+      "categories": [
+        "api",
+        "product",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Use the workspace avatar operations from the canonical contract. Send the expected workspace version for replacement or removal and render only the private processed variant returned for the current viewer.",
+        "ar": "استخدم عمليات الصورة الرمزية لمساحة العمل من العقد الأساسي. أرسل إصدار مساحة العمل المتوقع عند الاستبدال أو الإزالة واعرض النسخة المعالجة الخاصة التي تعاد للمشاهد الحالي فقط."
+      },
+      "announcement": {
+        "en": "Workspace list, switcher, shell, overview, API projections, and SDKs expose safe avatar metadata with initials or an icon fallback when media is unavailable.",
+        "ar": "تعرض قائمة مساحات العمل ومبدّلها والغلاف والنظرة العامة وإسقاطات API وحزم SDK بيانات الصورة الرمزية الآمنة مع بديل الأحرف الأولى أو الأيقونة عند عدم توفر الوسائط."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/contracts/openapi/authless.openapi.json",
+        "apps/api/src/workspace-routes.ts",
+        "packages/core/src/workspace/avatar-service.ts",
+        "packages/db/src/workspace-store.ts",
+        "packages/server/src/workspaces.ts",
+        "tests/integration/workspace-avatar-postgres.integration.ts",
+        "docs/plans/identity-slices/V-W01-qa.md"
+      ],
+      "permalink": "/changes#2026-10-21-workspace-avatar"
+    },
+    {
+      "id": "2026-10-21-backend-custom-sign-in",
+      "publishedAt": "2026-10-21",
+      "title": {
+        "en": "Backend custom sign-in client",
+        "ar": "عميل تسجيل الدخول المخصص من الخادم"
+      },
+      "summary": {
+        "en": "Server applications can run guest and email-code sign-in through a typed client that keeps backend credentials, OAuth tokens, PKCE material, and app sessions on the server.",
+        "ar": "يمكن لتطبيقات الخادم تشغيل تسجيل دخول الضيف ورمز البريد عبر عميل موجه يحافظ على بيانات اعتماد الخادم ورموز OAuth ومواد PKCE وجلسات التطبيق على الخادم."
+      },
+      "categories": [
+        "api",
+        "sdk",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Use the server custom-auth client for transaction start, challenge, verification, completion, cancellation, logout, and account switching. Keep the backend credential and token state server-side.",
+        "ar": "استخدم عميل المصادقة المخصصة من الخادم لبدء المعاملة والتحدي والتحقق والإكمال والإلغاء وتسجيل الخروج وتبديل الحساب. حافظ على بيانات اعتماد الخادم وحالة الرموز على الخادم."
+      },
+      "announcement": {
+        "en": "The runnable SvelteKit example keeps the browser on an app-owned session boundary and rejects origin, CSRF, state, binding, callback, and replay mismatches.",
+        "ar": "يحافظ مثال SvelteKit القابل للتشغيل على المتصفح ضمن حدود جلسة يملكها التطبيق ويرفض حالات عدم تطابق الأصل وCSRF والحالة والربط والاستدعاء وإعادة الاستخدام."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/server/src/custom-authentication.ts",
+        "apps/api/src/custom-authentication-management-routes.ts",
+        "examples/sveltekit-custom-sign-in/src/lib/server/custom-auth.ts",
+        "tests/integration/custom-authentication-postgres.integration.ts",
+        "docs/plans/identity-slices/V-C01-runtime-qa.md"
+      ],
+      "permalink": "/changes#2026-10-21-backend-custom-sign-in"
+    },
+    {
+      "id": "2026-10-21-browser-custom-sign-in",
+      "publishedAt": "2026-10-21",
+      "title": {
+        "en": "Browser custom sign-in SDK",
+        "ar": "حزمة تسجيل الدخول المخصص للمتصفح"
+      },
+      "summary": {
+        "en": "Registered browser apps can start guest or email-code sign-in, validate the callback, exchange a PKCE code, use DPoP-bound tokens, and call UserInfo without exposing private transaction material.",
+        "ar": "يمكن لتطبيقات المتصفح المسجلة بدء تسجيل دخول الضيف أو رمز البريد والتحقق من الاستدعاء وتبادل رمز PKCE واستخدام رموز مرتبطة بـ DPoP واستدعاء UserInfo دون كشف مواد المعاملة الخاصة."
+      },
+      "categories": [
+        "api",
+        "sdk",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Install the browser package and provide the registered HTTPS origin, redirect, client, app, environment, and endpoint metadata. Keep guest refresh disabled and handle logout or account-switch uncertainty as a recoverable state.",
+        "ar": "ثبّت حزمة المتصفح وقدم بيانات الأصل HTTPS وعنوان إعادة التوجيه والعميل والتطبيق والبيئة ونقاط النهاية المسجلة. أبقِ تحديث الضيف معطلاً وتعامل مع عدم اليقين عند تسجيل الخروج أو تبديل الحساب كحالة قابلة للاسترداد."
+      },
+      "announcement": {
+        "en": "The public example provides a custom sign-in popup flow for guest and email-code methods with origin binding, one-use continuation, callback validation, and safe recovery states.",
+        "ar": "يوفر المثال العام مسار نافذة منبثقة لتسجيل الدخول المخصص بطريقتي الضيف ورمز البريد مع ربط الأصل والاستمرار أحادي الاستخدام والتحقق من الاستدعاء وحالات استرداد آمنة."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/browser/src/custom-auth.ts",
+        "packages/browser/package.json",
+        "examples/custom-browser-sign-in/src/sign-in.ts",
+        "tests/integration/public-custom-browser.integration.ts",
+        "docs/plans/identity-slices/V-C02-runtime-qa.md"
+      ],
+      "permalink": "/changes#2026-10-21-browser-custom-sign-in"
+    },
+    {
+      "id": "2026-10-20-app-icon-delivery",
+      "publishedAt": "2026-10-20",
+      "title": {
+        "en": "App icon delivery and captured sign-in branding",
+        "ar": "تسليم أيقونة التطبيق والعلامة الملتقطة لتسجيل الدخول"
+      },
+      "summary": {
+        "en": "Apps can publish bounded WebP icons for dashboard and hosted sign-in surfaces. Public delivery accepts only the current published binding or an exact live transaction snapshot.",
+        "ar": "يمكن للتطبيقات نشر أيقونات WebP محدودة لواجهات لوحة التحكم وتسجيل الدخول المستضاف. لا يقبل التسليم العام إلا الربط المنشور الحالي أو لقطة المعاملة الحية المطابقة."
+      },
+      "categories": [
+        "api",
+        "product",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Use GET /media/public/app-icons/{appId}/{assetId}/{size}. Treat 404 as unavailable or unpublished, pass transaction only for the exact live sign-in request, and keep clients prepared for a bounded 60-second public cache.",
+        "ar": "استخدم GET /media/public/app-icons/{appId}/{assetId}/{size}. تعامل مع 404 باعتباره غير متاح أو غير منشور، وأرسل transaction فقط لطلب تسجيل الدخول الحي المطابق، وجهز العملاء لذاكرة تخزين عامة محدودة بستين ثانية."
+      },
+      "announcement": {
+        "en": "Dashboard and Sign render the same published or transaction-captured app icon through same-origin, no-cookie, MIME-sniffing-protected delivery.",
+        "ar": "تعرض لوحة التحكم وSign أيقونة التطبيق المنشورة أو الملتقطة للمعاملة نفسها عبر تسليم من الأصل نفسه وبدون ملفات تعريف ارتباط ومع حماية من تخمين نوع MIME."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/contracts/openapi/authless.openapi.json",
+        "apps/api/src/app-routes.ts",
+        "apps/sign/src/routes/media/public/app-icons/[appId]/[assetId]/[size]/+server.ts",
+        "packages/core/src/app/branding-service.ts",
+        "packages/db/src/app-branding-store.ts",
+        "tests/integration/app-branding-postgres.integration.ts"
+      ],
+      "permalink": "/changes#2026-10-20-app-icon-delivery"
+    },
+    {
+      "id": "2026-10-20-personal-profile-and-picture-claims",
+      "publishedAt": "2026-10-20",
+      "title": {
+        "en": "Personal profile and consented picture claims",
+        "ar": "الملف الشخصي ومطالبات الصورة بموافقة المستخدم"
+      },
+      "summary": {
+        "en": "People can manage their display name and avatar. Registered apps can request consented name and picture claims; picture delivery uses a short-lived opaque capability bound to the current grant and avatar.",
+        "ar": "يمكن للأشخاص إدارة اسم العرض والصورة الرمزية. ويمكن للتطبيقات المسجلة طلب مطالبات الاسم والصورة بموافقة المستخدم، مع تسليم الصورة عبر قدرة مبهمة قصيرة العمر مرتبطة بالمنحة والصورة الحالية."
+      },
+      "categories": [
+        "api",
+        "product",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Add the six personal profile operations from the canonical OpenAPI contract. Request name and picture only after profile consent; treat picture URLs as short-lived private capabilities and do not persist or share them.",
+        "ar": "أضف عمليات الملف الشخصي الست من عقد OpenAPI canonical. اطلب الاسم والصورة بعد موافقة الملف الشخصي فقط، وتعامل مع روابط الصورة كقدرات خاصة قصيرة العمر ولا تخزنها أو تشاركها."
+      },
+      "announcement": {
+        "en": "The dashboard shows the current personal name and avatar, while UserInfo emits only consented profile claims and a current-avatar picture capability.",
+        "ar": "تعرض لوحة التحكم الاسم والصورة الحاليين، بينما تصدر UserInfo مطالبات الملف الشخصي التي وافق عليها المستخدم فقط وقدرة صورة مرتبطة بالصورة الحالية."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/contracts/openapi/authless.openapi.json",
+        "apps/api/src/personal-routes.ts",
+        "apps/sign/src/oidc/claims.ts",
+        "packages/oidc/src/interactions.ts",
+        "packages/core/src/identity/personal-profile-service.ts",
+        "packages/db/src/identity/personal-profile-store.ts",
+        "tests/integration/personal-picture-oidc.integration.ts",
+        "tests/integration/personal-profile-postgres.integration.ts",
+        "tests/oidc-core.test.ts",
+        "apps/docs/src/lib/release-catalogue.ts"
+      ],
+      "permalink": "/changes#2026-10-20-personal-profile-and-picture-claims"
+    },
+    {
+      "id": "2026-10-20-custom-authentication-transactions",
+      "publishedAt": "2026-10-20",
+      "title": {
+        "en": "Bound custom sign-in transactions",
+        "ar": "معاملات تسجيل الدخول المخصص المقيدة"
+      },
+      "summary": {
+        "en": "Explicitly registered clients can create guest and email-code transactions bound to their app, environment, origin, redirect, policy, and browser proof. Completion issues no personal platform session.",
+        "ar": "يمكن للعملاء المسجلين صراحة إنشاء معاملات للضيف ورمز البريد مرتبطة بالتطبيق والبيئة والأصل وإعادة التوجيه والسياسة وإثبات المتصفح. لا ينشئ الإكمال جلسة شخصية على المنصة."
+      },
+      "categories": [
+        "api",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Keep custom authentication disabled until the client has an explicit mode, method allowlist, origin, and redirect registration. Use the six custom transaction operations and preserve their exact state, nonce, PKCE, and browser bindings.",
+        "ar": "أبقِ المصادقة المخصصة معطلة حتى يُسجل للعميل وضع صريح وقائمة بالطرق المسموحة وأصل وعنوان لإعادة التوجيه. استخدم عمليات المعاملات المخصصة الست وحافظ على الارتباط الدقيق للحالة والرمز العشوائي وPKCE والمتصفح."
+      },
+      "announcement": {
+        "en": "The shared protocol checks current authority, one-use proof, consent, and code exchange. App-owned forms and session custody are configured by their separate integrations.",
+        "ar": "يفحص البروتوكول المشترك الصلاحية الحالية والإثبات أحادي الاستخدام والموافقة وتبادل الرمز. تُهيأ النماذج التي يملكها التطبيق وحفظ الجلسات من خلال تكاملاتها المنفصلة."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/contracts/openapi/authless.openapi.json",
+        "apps/api/src/custom-authentication-routes.ts",
+        "packages/core/src/identity/custom-authentication.ts",
+        "packages/db/src/custom-authentication-store.ts",
+        "packages/oidc/src/authorization-code-binder.ts",
+        "tests/integration/custom-oidc-handoff.integration.ts",
+        "docs/reference/custom-authentication.md"
+      ],
+      "permalink": "/changes#2026-10-20-custom-authentication-transactions"
+    },
+    {
+      "id": "2026-10-20-hosted-guest-admission",
+      "publishedAt": "2026-10-20",
+      "title": {
+        "en": "Explicit hosted guest admission",
+        "ar": "دخول الزوار الصريح عبر صفحة تسجيل الدخول"
+      },
+      "summary": {
+        "en": "An environment can explicitly enable bounded guest access and show Continue as guest on hosted sign-in. Guest sessions remain separate from registered personal sign-in.",
+        "ar": "يمكن للبيئة تفعيل دخول الزوار المحدود صراحة وإظهار المتابعة كضيف في صفحة تسجيل الدخول. تبقى جلسات الزوار منفصلة عن تسجيل الدخول الشخصي المسجل."
+      },
+      "categories": [
+        "api",
+        "product",
+        "sdk",
+        "security"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Guest admission is disabled by default. Configure each environment's admission policy and limits before enabling it. Validate current guest authority and enforce the app's permitted guest capabilities.",
+        "ar": "دخول الزوار معطل افتراضيًا. اضبط سياسة الدخول وحدوده لكل بيئة قبل تفعيله. تحقق من صلاحية الضيف الحالية وطبّق إمكانات الضيف المسموحة داخل التطبيق."
+      },
+      "announcement": {
+        "en": "Guest authorization uses PKCE, DPoP, bounded token and session lifetimes, and current policy checks. It does not create a personal platform session or issue a refresh token.",
+        "ar": "يستخدم تفويض الزائر PKCE وDPoP وأعمارًا محدودة للرموز والجلسات وفحص السياسة الحالية. ولا ينشئ جلسة شخصية على المنصة أو يصدر رمز تحديث."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/contracts/openapi/authless.openapi.json",
+        "apps/api/src/guest-admission-routes.ts",
+        "packages/core/src/policy/guest-admission.ts",
+        "packages/db/src/guest-admission-store.ts",
+        "packages/server/src/guest-admission.ts",
+        "tests/hosted-guest-admission.node.test.mjs",
+        "docs/plans/identity-slices/V-A01-qa.md"
+      ],
+      "permalink": "/changes#2026-10-20-hosted-guest-admission"
+    },
+    {
+      "id": "2026-10-21-returning-guest-continuity",
+      "publishedAt": "2026-10-21",
+      "title": {
+        "en": "Returning-browser guest continuity",
+        "ar": "استمرارية ضيف المتصفح العائد"
+      },
+      "summary": {
+        "en": "Authless can retain a bounded browser guest relationship, reuse the app-scoped guest across tabs and visits, and require explicit consent before network continuity joins another app.",
+        "ar": "يمكن لـ Authless الاحتفاظ بعلاقة ضيف محدودة للمتصفح وإعادة استخدام ضيف التطبيق عبر علامات التبويب والزيارات، مع طلب موافقة صريحة قبل انضمام تطبيق آخر إلى الاستمرارية الشبكية."
+      },
+      "categories": [
+        "api",
+        "product",
+        "sdk",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Use the browser continuity helper with an Authless issuer and registered guest transaction. Keep isolated app-only mode as the default, treat network mode as an explicit user choice, and never persist or expose the visitor secret or visitor ID.",
+        "ar": "استخدم مساعد استمرارية المتصفح مع مُصدر Authless ومعاملة ضيف مسجلة. أبقِ وضع التطبيق المعزول هو الافتراضي، وتعامل مع الوضع الشبكي كموافقة صريحة من المستخدم، ولا تخزن سر الزائر أو معرفه ولا تعرضهما."
+      },
+      "announcement": {
+        "en": "The host-only visitor cookie is rotated and revocable. App guests keep pairwise subjects, one-use browser handoffs bind origin and proof, and retention cleanup removes expired guest state without exposing cross-app activity.",
+        "ar": "يُدار ملف تعريف الزائر الخاص بالمضيف بالتدوير والإلغاء. يحتفظ ضيوف التطبيقات بمعرفات مقترنة، وترتبط عمليات التسليم أحادية الاستخدام بالأصل وإثبات المتصفح، وينظف الاحتفاظ حالة الضيوف المنتهية دون كشف نشاط بين التطبيقات."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/browser/src/guest-continuity.ts",
+        "packages/core/src/policy/guest-continuity.ts",
+        "packages/db/src/guest-continuity-store.ts",
+        "apps/sign/src/oidc-runtime.ts",
+        "packages/oidc/src/guest-continuity-renderer.ts",
+        "docs/plans/identity-slices/V-A03-qa.md"
+      ],
+      "permalink": "/changes#2026-10-21-returning-guest-continuity"
+    },
+    {
+      "id": "2026-10-21-app-local-profiles",
+      "publishedAt": "2026-10-21",
+      "title": {
+        "en": "App-local profiles for people and guests",
+        "ar": "الملفات الشخصية المحلية للتطبيق للأشخاص والزوار"
+      },
+      "summary": {
+        "en": "Apps can maintain a scoped display name and avatar for a registered person or returning guest without changing the platform profile. Profile writes, avatar uploads, publishing, removal, and effective reads are authorized by the current app grant and policy.",
+        "ar": "يمكن للتطبيقات إدارة اسم عرض وصورة رمزية ضمن نطاق التطبيق للشخص المسجل أو الزائر العائد دون تغيير الملف الشخصي للمنصة. وتخضع عمليات الكتابة ورفع الصورة ونشرها وإزالتها والقراءة الفعالة لمنحة التطبيق والسياسة الحالية."
+      },
+      "categories": [
+        "api",
+        "product",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Use the app-profile operations from the canonical OpenAPI contract. Keep profile consent and current grant checks in place for personal fallback, treat avatar URLs as short-lived opaque capabilities, and use If-Match plus idempotency keys for writes.",
+        "ar": "استخدم عمليات الملف المحلي للتطبيق من عقد OpenAPI الأساسي. حافظ على فحوصات موافقة الملف والمنحة الحالية عند استخدام بيانات الشخص الاحتياطية، وتعامل مع روابط الصور كقدرات مبهمة قصيرة العمر، واستخدم If-Match ومفاتيح منع التكرار للكتابات."
+      },
+      "announcement": {
+        "en": "The dashboard and hosted sign-in can show the effective app profile for a person or guest. Reset tombstones, stale-version conflicts, media publication, and retention cleanup keep app data isolated and reversible.",
+        "ar": "يمكن للوحة التحكم وتسجيل الدخول المستضاف عرض الملف المحلي الفعال للتطبيق للشخص أو الزائر. وتحافظ علامات إعادة الضبط وتعارض الإصدارات القديمة ونشر الوسائط وتنظيف الاحتفاظ على عزل بيانات التطبيق وقابليتها للعكس."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/contracts/openapi/authless.openapi.json",
+        "apps/api/src/app-profile-routes.ts",
+        "packages/core/src/identity/app-profile-service.ts",
+        "packages/db/src/app-profile-store.ts",
+        "packages/db/src/app-profile-authority.ts",
+        "apps/sign/src/oidc/claims.ts",
+        "tests/integration/app-profile-delivery-postgres.integration.ts",
+        "tests/integration/app-profile-lifecycle-postgres.integration.ts",
+        "tests/integration/app-profile-oidc.integration.ts",
+        "docs/plans/identity-slices/V-P02.md",
+        "docs/plans/identity-slices/V-P02-qa.md"
+      ],
+      "permalink": "/changes#2026-10-21-app-local-profiles"
+    },
+    {
+      "id": "2026-10-21-explicit-guest-conversion",
+      "publishedAt": "2026-10-21",
+      "title": {
+        "en": "Explicit hosted guest conversion",
+        "ar": "التحويل الصريح للضيف عبر الاستضافة"
+      },
+      "summary": {
+        "en": "A guest can start a one-use hosted conversion, complete fresh email verification, and explicitly confirm conversion into a person account.",
+        "ar": "يمكن للضيف بدء تحويل مستضاف أحادي الاستخدام وإكمال التحقق الجديد عبر البريد ثم تأكيد التحويل صراحة إلى حساب شخصي."
+      },
+      "categories": [
+        "api",
+        "sdk",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Use the three guest-conversion operations from the canonical REST contract. Send the guest Bearer token with its DPoP proof, origin, CSRF token, and browser binding when beginning an intent. Confirm only with convert_guest and an optional keep_person or keep_guest choice after hosted sign-in.",
+        "ar": "استخدم عمليات تحويل الضيف الثلاث من عقد REST الأساسي. أرسل رمز Bearer للضيف مع إثبات DPoP والأصل ورمز CSRF وربط المتصفح عند بدء النية. أكد باستخدام convert_guest فقط مع اختيار اختياري keep_person أو keep_guest بعد تسجيل الدخول المستضاف."
+      },
+      "announcement": {
+        "en": "The server derives guest and person identifiers from the bound, one-use intent. Exact idempotent replays return 200; a changed replay returns 409. Revoked or expired guest authority cannot convert.",
+        "ar": "يشتق الخادم معرفات الضيف والشخص من النية المقيدة أحادية الاستخدام. تعيد إعادة المحاولة المطابقة تمامًا 200، بينما تعيد إعادة المحاولة المختلفة 409. لا يمكن لصلاحية ضيف ملغاة أو منتهية تنفيذ التحويل."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/contracts/openapi/authless.openapi.json",
+        "apps/api/src/guest-conversion-routes.ts",
+        "packages/server/src/guest-conversion.ts",
+        "apps/sign/src/routes/guest-conversion/[intent]/confirm/+page.server.ts",
+        "packages/db/src/guest-conversion-intent-store.ts",
+        "tests/integration/guest-conversion-postgres.integration.ts",
+        "docs/plans/identity-slices/V-A02.md"
+      ],
+      "permalink": "/changes#2026-10-21-explicit-guest-conversion"
+    },
     {
       "id": "2026-10-17-valid-session-actions",
       "publishedAt": "2026-10-17",

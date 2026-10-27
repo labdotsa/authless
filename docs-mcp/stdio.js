@@ -11,7 +11,7 @@ var corpus_generated_default = {
   generatedAt: "2026-10-09",
   manifest: {
     canonical: "https://docs.authle.ss/machine-docs.json",
-    digest: "514bdf871a132608b8d28a2d35cacaad3d692379ca9a32219b4bafa9dd98e391",
+    digest: "2a867f7a8f06855f5264ea5d4fb5a45b3c55c39057d0eb30ed3e3317235c31a7",
     authority: "read-only-public-documentation",
     exclusions: [
       "authenticated-content",
@@ -4931,6 +4931,12 @@ The following checked projection is shared with the human-rendered guide and pre
       "payloadBoundary": "Opaque person/claim references and resource version; sensitive claim values are omitted."
     },
     {
+      "name": "guest.converted",
+      "schemaVersion": "1.0",
+      "resource": "guest conversion",
+      "payloadBoundary": "Fields conversionId, guestSubject, and appSubject only; guestSubject is app-local to the previous app and appSubject is app-local to the canonical app; no global identity or person identifiers, visitor, grant, or proof data."
+    },
+    {
       "name": "policy.activated",
       "schemaVersion": "1.0",
       "resource": "authentication policy",
@@ -4997,7 +5003,7 @@ Source attribution: Developer documentation (https://docs.authle.ss/build/webhoo
       title: "Receive signed webhooks",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "177c0c2182b1b01f7678d1aabed73450d07b5edfe41b99b5bc6918063edfb907"
+      contentDigest: "f0e122bd4c12e7100ed936509850493248926700c7c9c9d31f376bb75284a367"
     },
     {
       canonical: "https://docs.authle.ss/build/webhooks?lang=ar",
@@ -5169,6 +5175,12 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       "payloadBoundary": "Opaque person/claim references and resource version; sensitive claim values are omitted."
     },
     {
+      "name": "guest.converted",
+      "schemaVersion": "1.0",
+      "resource": "guest conversion",
+      "payloadBoundary": "Fields conversionId, guestSubject, and appSubject only; guestSubject is app-local to the previous app and appSubject is app-local to the canonical app; no global identity or person identifiers, visitor, grant, or proof data."
+    },
+    {
       "name": "policy.activated",
       "schemaVersion": "1.0",
       "resource": "authentication policy",
@@ -5235,7 +5247,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       title: "استقبل Webhooks موقّعة",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "e03eb90cd2db861b6fa327c677b96748e8f19205a45a4f857311af15fc81a62f"
+      contentDigest: "4b28016147107c432b1c67a0d1b545e0104c93e1e4182c854182b500371ceaba"
     },
     {
       canonical: "https://docs.authle.ss/test",
@@ -9395,7 +9407,8 @@ The following checked projection is shared with the human-rendered guide and pre
         "query",
         "resource",
         "status",
-        "to"
+        "to",
+        "transaction"
       ]
     },
     "sorting": {
@@ -9434,7 +9447,7 @@ The following checked projection is shared with the human-rendered guide and pre
       ],
       "constraints": [
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/RequestIdentityContinuationRequest"
+        "JSON request body (required): application/json, #/components/schemas/RequestIdentityContinuationRequest"
       ],
       "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"email\\":\\"person@example.com\\",\\"locale\\":\\"en\\"}' 'https://api.authle.ss/identity/continuations'",
       "exampleParameters": {
@@ -9502,7 +9515,7 @@ The following checked projection is shared with the human-rendered guide and pre
       ],
       "constraints": [
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/VerifyIdentityContinuationRequest"
+        "JSON request body (required): application/json, #/components/schemas/VerifyIdentityContinuationRequest"
       ],
       "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"challengeId\\":\\"identity_continuation_example\\",\\"code\\":\\"123456\\",\\"locale\\":\\"en\\"}' 'https://api.authle.ss/identity/continuations/verifications'",
       "exampleParameters": {
@@ -9583,7 +9596,7 @@ The following checked projection is shared with the human-rendered guide and pre
       ],
       "constraints": [
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/ConsumeIdentityRecoveryRequest"
+        "JSON request body (required): application/json, #/components/schemas/ConsumeIdentityRecoveryRequest"
       ],
       "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"token\\":\\"recovery-proof-token\\"}' 'https://api.authle.ss/identity/recovery-proofs'",
       "exampleParameters": {
@@ -9648,7 +9661,7 @@ The following checked projection is shared with the human-rendered guide and pre
       ],
       "constraints": [
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/RequestIdentityRecoveryRequest"
+        "JSON request body (required): application/json, #/components/schemas/RequestIdentityRecoveryRequest"
       ],
       "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"identifier\\":\\"person@example.com\\",\\"locale\\":\\"en\\"}' 'https://api.authle.ss/identity/recovery-requests'",
       "exampleParameters": {
@@ -9716,7 +9729,7 @@ The following checked projection is shared with the human-rendered guide and pre
       ],
       "constraints": [
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/RevokeIdentityRecoveryPasswordRequest"
+        "JSON request body (required): application/json, #/components/schemas/RevokeIdentityRecoveryPasswordRequest"
       ],
       "example": "curl --request DELETE -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"locale\\":\\"en\\"}' 'https://api.authle.ss/identity/recovery/authenticators/password'",
       "exampleParameters": {
@@ -9836,7 +9849,7 @@ The following checked projection is shared with the human-rendered guide and pre
       ],
       "constraints": [
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/RequestIdentityRecoveryEmailReplacementRequest"
+        "JSON request body (required): application/json, #/components/schemas/RequestIdentityRecoveryEmailReplacementRequest"
       ],
       "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"email\\":\\"new.person@example.com\\",\\"locale\\":\\"en\\"}' 'https://api.authle.ss/identity/recovery/identifier-replacements/email'",
       "exampleParameters": {
@@ -9927,7 +9940,7 @@ The following checked projection is shared with the human-rendered guide and pre
       ],
       "constraints": [
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/VerifyIdentityRecoveryEmailReplacementRequest"
+        "JSON request body (required): application/json, #/components/schemas/VerifyIdentityRecoveryEmailReplacementRequest"
       ],
       "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"locale\\":\\"en\\",\\"token\\":\\"replacement-proof-token\\"}' 'https://api.authle.ss/identity/recovery/identifier-replacements/email/verifications'",
       "exampleParameters": {
@@ -10000,7 +10013,7 @@ The following checked projection is shared with the human-rendered guide and pre
       ],
       "constraints": [
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/ReplaceIdentityRecoveryUsernameRequest"
+        "JSON request body (required): application/json, #/components/schemas/ReplaceIdentityRecoveryUsernameRequest"
       ],
       "example": "curl --request PUT -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"locale\\":\\"en\\",\\"username\\":\\"new_name\\"}' 'https://api.authle.ss/identity/recovery/identifiers/username'",
       "exampleParameters": {
@@ -10091,7 +10104,7 @@ The following checked projection is shared with the human-rendered guide and pre
       ],
       "constraints": [
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/RegisterIdentityRequest"
+        "JSON request body (required): application/json, #/components/schemas/RegisterIdentityRequest"
       ],
       "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"email\\":\\"person@example.com\\",\\"locale\\":\\"en\\",\\"password\\":\\"correct horse battery staple\\"}' 'https://api.authle.ss/identity/registrations'",
       "exampleParameters": {
@@ -10172,7 +10185,7 @@ The following checked projection is shared with the human-rendered guide and pre
       ],
       "constraints": [
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/VerifyIdentityRequest"
+        "JSON request body (required): application/json, #/components/schemas/VerifyIdentityRequest"
       ],
       "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"locale\\":\\"en\\",\\"token\\":\\"verification-token\\"}' 'https://api.authle.ss/identity/verifications'",
       "exampleParameters": {
@@ -10293,7 +10306,7 @@ The following checked projection is shared with the human-rendered guide and pre
       ],
       "constraints": [
         "header Idempotency-Key (required): string, minLength 1, maxLength 240",
-        "JSON request body (required): #/components/schemas/CreatePersonalCommerceCheckoutRequest"
+        "JSON request body (required): application/json, #/components/schemas/CreatePersonalCommerceCheckoutRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'Idempotency-Key: {Idempotency-Key}' -H 'content-type: application/json' --data '{\\"acceptedTermsDigest\\":\\"{acceptedTermsDigest}\\",\\"appId\\":\\"{appId}\\",\\"planKey\\":\\"{planKey}\\",\\"returnUrl\\":\\"{returnUrl}\\"}' 'https://api.authle.ss/me/commerce/checkouts'",
       "exampleParameters": {
@@ -10517,7 +10530,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "Server-side platform session. Never expose this value to browser bundles or logs."
       ],
       "constraints": [
-        "JSON request body (required): #/components/schemas/CreatePersonalCommercePortalSessionRequest"
+        "JSON request body (required): application/json, #/components/schemas/CreatePersonalCommercePortalSessionRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"appId\\":\\"{appId}\\",\\"returnUrl\\":\\"{returnUrl}\\"}' 'https://api.authle.ss/me/commerce/portal-sessions'",
       "exampleParameters": {},
@@ -10574,7 +10587,7 @@ The following checked projection is shared with the human-rendered guide and pre
       ],
       "constraints": [
         "header Idempotency-Key (required): string, minLength 1, maxLength 240",
-        "JSON request body (required): #/components/schemas/CreatePersonalCommerceQuoteRequest"
+        "JSON request body (required): application/json, #/components/schemas/CreatePersonalCommerceQuoteRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'Idempotency-Key: {Idempotency-Key}' -H 'content-type: application/json' --data '{\\"appId\\":\\"{appId}\\",\\"planKey\\":\\"{planKey}\\"}' 'https://api.authle.ss/me/commerce/quotes'",
       "exampleParameters": {
@@ -10672,7 +10685,7 @@ The following checked projection is shared with the human-rendered guide and pre
       "constraints": [
         "path quoteId (required): string",
         "header Idempotency-Key (required): string, minLength 1, maxLength 240",
-        "JSON request body (required): #/components/schemas/AcceptPersonalCommerceQuoteRequest"
+        "JSON request body (required): application/json, #/components/schemas/AcceptPersonalCommerceQuoteRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'Idempotency-Key: {Idempotency-Key}' -H 'content-type: application/json' --data '{\\"termsDigest\\":\\"{termsDigest}\\"}' 'https://api.authle.ss/me/commerce/quotes/%7BquoteId%7D/accept'",
       "exampleParameters": {
@@ -10860,7 +10873,7 @@ The following checked projection is shared with the human-rendered guide and pre
       "constraints": [
         "path subscriptionRef (required): string",
         "header Idempotency-Key (required): string, minLength 1, maxLength 240",
-        "JSON request body (required): #/components/schemas/ChangePersonalCommerceSubscriptionRequest"
+        "JSON request body (required): application/json, #/components/schemas/ChangePersonalCommerceSubscriptionRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'Idempotency-Key: {Idempotency-Key}' -H 'content-type: application/json' --data '{\\"effectiveAt\\":\\"now\\"}' 'https://api.authle.ss/me/commerce/subscriptions/%7BsubscriptionRef%7D/changes'",
       "exampleParameters": {
@@ -11039,7 +11052,7 @@ The following checked projection is shared with the human-rendered guide and pre
       ],
       "constraints": [
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (optional): #/components/schemas/SignOutOtherSessionsRequest"
+        "JSON request body (optional): application/json, #/components/schemas/SignOutOtherSessionsRequest"
       ],
       "example": "curl --request DELETE -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/me/sessions'",
       "exampleParameters": {
@@ -11150,7 +11163,7 @@ The following checked projection is shared with the human-rendered guide and pre
       "constraints": [
         "path sessionId (required): string, pattern ^session_[0-9A-HJKMNP-TV-Z]{26}$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (optional): #/components/schemas/RevokePersonalSessionRequest"
+        "JSON request body (optional): application/json, #/components/schemas/RevokePersonalSessionRequest"
       ],
       "example": "curl --request DELETE -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/me/sessions/session_01J5K6M7N8P9QRSTVWXYZABCDE'",
       "exampleParameters": {
@@ -11232,7 +11245,7 @@ The following checked projection is shared with the human-rendered guide and pre
       "constraints": [
         "path sessionId (required): string, pattern ^session_[0-9A-HJKMNP-TV-Z]{26}$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (optional): #/components/schemas/ReportPersonalSessionRiskRequest"
+        "JSON request body (optional): application/json, #/components/schemas/ReportPersonalSessionRiskRequest"
       ],
       "example": "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/me/sessions/session_01J5K6M7N8P9QRSTVWXYZABCDE/risk'",
       "exampleParameters": {
@@ -11320,6 +11333,74 @@ The following checked projection is shared with the human-rendered guide and pre
     },
     {
       "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path appId (required): string",
+        "path assetId (required): string",
+        "path size (required): integer, one of 24 | 64 | 256",
+        "query transaction (optional): string"
+      ],
+      "example": "curl --request GET 'https://api.authle.ss/media/public/app-icons/%7BappId%7D/%7BassetId%7D/24'",
+      "exampleParameters": {
+        "appId": "{appId}",
+        "assetId": "{assetId}",
+        "size": 24
+      },
+      "method": "GET",
+      "operationId": "getPublicAppIcon",
+      "outcomes": [
+        {
+          "description": "WebP app icon bytes",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Icon unavailable, unpublished, or transaction reference invalid",
+          "status": 404,
+          "success": false
+        }
+      ],
+      "path": "/media/public/app-icons/{appId}/{assetId}/{size}",
+      "parameters": [
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{assetId}",
+          "location": "path",
+          "name": "assetId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": 24,
+          "location": "path",
+          "name": "size",
+          "required": true,
+          "type": "integer",
+          "validation": "one of 24 | 64 | 256"
+        },
+        {
+          "location": "query",
+          "name": "transaction",
+          "required": false,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "Get a public app icon"
+    },
+    {
+      "authority": [
         "Server-side platform session. Never expose this value to browser bundles or logs."
       ],
       "constraints": [],
@@ -11354,9 +11435,334 @@ The following checked projection is shared with the human-rendered guide and pre
       "authority": [
         "Server-side platform session. Never expose this value to browser bundles or logs."
       ],
+      "constraints": [],
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/personal/profile'",
+      "exampleParameters": {},
+      "method": "GET",
+      "operationId": "getPersonalProfile",
+      "outcomes": [
+        {
+          "description": "Personal profile",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Error",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Error",
+          "status": 503,
+          "success": false
+        }
+      ],
+      "path": "/personal/profile",
+      "parameters": [],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "Get the current person's profile"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
+      "constraints": [
+        "JSON request body (required): application/json, #/components/schemas/PersonalProfileDisplayNameRequest"
+      ],
+      "example": "curl --request PATCH -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"displayName\\":\\"{displayName}\\",\\"expectedVersion\\":1}' 'https://api.authle.ss/personal/profile'",
+      "exampleParameters": {},
+      "exampleRequestBody": {
+        "displayName": "{displayName}",
+        "expectedVersion": 1
+      },
+      "method": "PATCH",
+      "operationId": "updatePersonalProfile",
+      "outcomes": [
+        {
+          "description": "Updated profile",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Error",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Error",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Error",
+          "status": 409,
+          "success": false
+        },
+        {
+          "description": "Error",
+          "status": 503,
+          "success": false
+        }
+      ],
+      "path": "/personal/profile",
+      "parameters": [],
+      "requestBodyFields": [
+        {
+          "example": "{displayName}",
+          "name": "displayName",
+          "required": true,
+          "type": "value",
+          "validation": "minLength 1, maxLength 80"
+        },
+        {
+          "example": 1,
+          "name": "expectedVersion",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/PersonalProfileDisplayNameRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Update the current person's display name"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
+      "constraints": [
+        "header if-match (required): integer, min 1"
+      ],
+      "example": "curl --request DELETE -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: 1' 'https://api.authle.ss/personal/profile/avatar'",
+      "exampleParameters": {
+        "if-match": 1
+      },
+      "method": "DELETE",
+      "operationId": "removePersonalAvatar",
+      "outcomes": [
+        {
+          "description": "Updated profile",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Error",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Error",
+          "status": 409,
+          "success": false
+        },
+        {
+          "description": "Error",
+          "status": 503,
+          "success": false
+        }
+      ],
+      "path": "/personal/profile/avatar",
+      "parameters": [
+        {
+          "example": 1,
+          "location": "header",
+          "name": "if-match",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "unsafe",
+      "summary": "Remove the current person's avatar"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
+      "constraints": [],
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/personal/profile/avatar-intents'",
+      "exampleParameters": {},
+      "method": "POST",
+      "operationId": "createPersonalAvatarIntent",
+      "outcomes": [
+        {
+          "description": "Upload intent",
+          "status": 201,
+          "success": true
+        },
+        {
+          "description": "Error",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Error",
+          "status": 503,
+          "success": false
+        }
+      ],
+      "path": "/personal/profile/avatar-intents",
+      "parameters": [],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "Create a single-use personal avatar upload intent"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
+      "constraints": [
+        "path assetId (required): string",
+        "path size (required): integer, one of 24 | 64 | 256"
+      ],
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/personal/profile/avatar/%7BassetId%7D/24'",
+      "exampleParameters": {
+        "assetId": "{assetId}",
+        "size": 24
+      },
+      "method": "GET",
+      "operationId": "getPersonalAvatar",
+      "outcomes": [
+        {
+          "description": "WebP avatar",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Error",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Error",
+          "status": 404,
+          "success": false
+        },
+        {
+          "description": "Error",
+          "status": 503,
+          "success": false
+        }
+      ],
+      "path": "/personal/profile/avatar/{assetId}/{size}",
+      "parameters": [
+        {
+          "example": "{assetId}",
+          "location": "path",
+          "name": "assetId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": 24,
+          "location": "path",
+          "name": "size",
+          "required": true,
+          "type": "integer",
+          "validation": "one of 24 | 64 | 256"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "Fetch the current person's private avatar"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
+      "constraints": [
+        "path intentId (required): string",
+        "header if-match (required): integer, min 1",
+        "Raw binary request body (required): image/png, image/jpeg, image/webp"
+      ],
+      "example": "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: 1' -H 'content-type: image/png' --data-binary @icon.png 'https://api.authle.ss/personal/profile/avatar/%7BintentId%7D'",
+      "exampleParameters": {
+        "intentId": "{intentId}",
+        "if-match": 1
+      },
+      "method": "PUT",
+      "operationId": "uploadPersonalAvatar",
+      "outcomes": [
+        {
+          "description": "Updated profile",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Error",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Error",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Error",
+          "status": 404,
+          "success": false
+        },
+        {
+          "description": "Error",
+          "status": 409,
+          "success": false
+        },
+        {
+          "description": "Image upload exceeds the 5 MiB encoded limit",
+          "status": 413,
+          "success": false
+        },
+        {
+          "description": "Error",
+          "status": 422,
+          "success": false
+        },
+        {
+          "description": "Error",
+          "status": 503,
+          "success": false
+        }
+      ],
+      "path": "/personal/profile/avatar/{intentId}",
+      "parameters": [
+        {
+          "example": "{intentId}",
+          "location": "path",
+          "name": "intentId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": 1,
+          "location": "header",
+          "name": "if-match",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1"
+        }
+      ],
+      "requestBodyFields": [],
+      "requestSchema": {
+        "type": "string",
+        "format": "binary"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Upload a personal avatar"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
       "constraints": [
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (optional): #/components/schemas/RemovePersonalUsernameRequest"
+        "JSON request body (optional): application/json, #/components/schemas/RemovePersonalUsernameRequest"
       ],
       "example": "curl --request DELETE -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/personal/username'",
       "exampleParameters": {
@@ -11428,7 +11834,7 @@ The following checked projection is shared with the human-rendered guide and pre
       ],
       "constraints": [
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/AddPersonalUsernameRequest"
+        "JSON request body (required): application/json, #/components/schemas/AddPersonalUsernameRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"username\\":\\"{username}\\"}' 'https://api.authle.ss/personal/username'",
       "exampleParameters": {
@@ -11503,7 +11909,7 @@ The following checked projection is shared with the human-rendered guide and pre
       ],
       "constraints": [
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/ChangePersonalUsernameRequest"
+        "JSON request body (required): application/json, #/components/schemas/ChangePersonalUsernameRequest"
       ],
       "example": "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"username\\":\\"{username}\\"}' 'https://api.authle.ss/personal/username'",
       "exampleParameters": {
@@ -11606,7 +12012,7 @@ The following checked projection is shared with the human-rendered guide and pre
       "constraints": [
         "path workspaceId (required): string",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/SplitPersonalWorkspaceCorrelationRequest"
+        "JSON request body (required): application/json, #/components/schemas/SplitPersonalWorkspaceCorrelationRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"expectedVersion\\":1}' 'https://api.authle.ss/personal/workspace-correlations/%7BworkspaceId%7D/split'",
       "exampleParameters": {
@@ -11703,7 +12109,7 @@ The following checked projection is shared with the human-rendered guide and pre
       ],
       "constraints": [
         "header merchant-signature (required): string",
-        "JSON request body (required): object"
+        "JSON request body (required): application/json, object"
       ],
       "example": "curl --request POST -H 'merchant-signature: {merchant-signature}' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/providers/merchant/billing-events'",
       "exampleParameters": {
@@ -11742,6 +12148,979 @@ The following checked projection is shared with the human-rendered guide and pre
       },
       "retrySafety": "unsafe",
       "summary": "Reconcile a signed merchant billing provider event"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "JSON request body (required): application/json, #/components/schemas/CustomAuthenticationBinding"
+      ],
+      "example": "curl --request POST -H 'content-type: application/json' --data '{\\"appId\\":\\"{appId}x\\",\\"clientId\\":\\"{clientId}\\",\\"environmentId\\":\\"{environmentId}\\",\\"method\\":\\"guest\\",\\"mode\\":\\"backend\\",\\"nonce\\":\\"{nonce}x\\",\\"origin\\":\\"{origin}\\",\\"policyVersion\\":1,\\"principalMode\\":\\"person\\",\\"redirectUri\\":\\"{redirectUri}\\",\\"state\\":\\"{state}x\\",\\"workspaceId\\":\\"{workspaceId}\\"}' 'https://api.authle.ss/v1/custom-auth/transactions'",
+      "exampleParameters": {},
+      "exampleRequestBody": {
+        "appId": "{appId}x",
+        "clientId": "{clientId}",
+        "environmentId": "{environmentId}",
+        "method": "guest",
+        "mode": "backend",
+        "nonce": "{nonce}x",
+        "origin": "{origin}",
+        "policyVersion": 1,
+        "principalMode": "person",
+        "redirectUri": "{redirectUri}",
+        "state": "{state}x",
+        "workspaceId": "{workspaceId}"
+      },
+      "method": "POST",
+      "operationId": "beginCustomAuthenticationTransaction",
+      "outcomes": [
+        {
+          "description": "Transaction created",
+          "status": 201,
+          "success": true
+        },
+        {
+          "description": "Invalid or unavailable custom authentication request",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Registered origin rejected",
+          "status": 403,
+          "success": false
+        }
+      ],
+      "path": "/v1/custom-auth/transactions",
+      "parameters": [],
+      "requestBodyFields": [
+        {
+          "example": "{appId}x",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "name": "browserSessionBinding",
+          "required": false,
+          "type": "value",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "{clientId}",
+          "name": "clientId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "name": "codeChallenge",
+          "required": false,
+          "type": "value",
+          "validation": "pattern ^[A-Za-z0-9_-]{43}$"
+        },
+        {
+          "example": "{environmentId}",
+          "name": "environmentId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "guest",
+          "name": "method",
+          "required": true,
+          "type": "value",
+          "validation": "one of guest | email_code"
+        },
+        {
+          "example": "backend",
+          "name": "mode",
+          "required": true,
+          "type": "value",
+          "validation": "one of backend | public"
+        },
+        {
+          "example": "{nonce}x",
+          "name": "nonce",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "{origin}",
+          "name": "origin",
+          "required": true,
+          "type": "string",
+          "validation": "format uri"
+        },
+        {
+          "example": 1,
+          "name": "policyVersion",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1"
+        },
+        {
+          "example": "person",
+          "name": "principalMode",
+          "required": true,
+          "type": "value",
+          "validation": "one of person | guest"
+        },
+        {
+          "example": "{redirectUri}",
+          "name": "redirectUri",
+          "required": true,
+          "type": "string",
+          "validation": "format uri"
+        },
+        {
+          "name": "requestedScopes",
+          "required": false,
+          "type": "array",
+          "validation": "—"
+        },
+        {
+          "example": "{state}x",
+          "name": "state",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "{workspaceId}",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/CustomAuthenticationBinding"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Begin a registered custom authentication transaction"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path transactionId (required): string, minLength 8, maxLength 512",
+        "JSON request body (required): application/json, #/components/schemas/CustomAuthenticationBinding"
+      ],
+      "example": "curl --request POST -H 'content-type: application/json' --data '{\\"appId\\":\\"{appId}x\\",\\"clientId\\":\\"{clientId}\\",\\"environmentId\\":\\"{environmentId}\\",\\"method\\":\\"guest\\",\\"mode\\":\\"backend\\",\\"nonce\\":\\"{nonce}x\\",\\"origin\\":\\"{origin}\\",\\"policyVersion\\":1,\\"principalMode\\":\\"person\\",\\"redirectUri\\":\\"{redirectUri}\\",\\"state\\":\\"{state}x\\",\\"workspaceId\\":\\"{workspaceId}\\"}' 'https://api.authle.ss/v1/custom-auth/transactions/%7BtransactionId%7D/cancel'",
+      "exampleParameters": {
+        "transactionId": "{transactionId}"
+      },
+      "exampleRequestBody": {
+        "appId": "{appId}x",
+        "clientId": "{clientId}",
+        "environmentId": "{environmentId}",
+        "method": "guest",
+        "mode": "backend",
+        "nonce": "{nonce}x",
+        "origin": "{origin}",
+        "policyVersion": 1,
+        "principalMode": "person",
+        "redirectUri": "{redirectUri}",
+        "state": "{state}x",
+        "workspaceId": "{workspaceId}"
+      },
+      "method": "POST",
+      "operationId": "cancelCustomAuthenticationTransaction",
+      "outcomes": [
+        {
+          "description": "Transaction cancelled",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Invalid or unavailable custom authentication request",
+          "status": 400,
+          "success": false
+        }
+      ],
+      "path": "/v1/custom-auth/transactions/{transactionId}/cancel",
+      "parameters": [
+        {
+          "example": "{transactionId}",
+          "location": "path",
+          "name": "transactionId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{appId}x",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "name": "browserSessionBinding",
+          "required": false,
+          "type": "value",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "{clientId}",
+          "name": "clientId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "name": "codeChallenge",
+          "required": false,
+          "type": "value",
+          "validation": "pattern ^[A-Za-z0-9_-]{43}$"
+        },
+        {
+          "example": "{environmentId}",
+          "name": "environmentId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "guest",
+          "name": "method",
+          "required": true,
+          "type": "value",
+          "validation": "one of guest | email_code"
+        },
+        {
+          "example": "backend",
+          "name": "mode",
+          "required": true,
+          "type": "value",
+          "validation": "one of backend | public"
+        },
+        {
+          "example": "{nonce}x",
+          "name": "nonce",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "{origin}",
+          "name": "origin",
+          "required": true,
+          "type": "string",
+          "validation": "format uri"
+        },
+        {
+          "example": 1,
+          "name": "policyVersion",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1"
+        },
+        {
+          "example": "person",
+          "name": "principalMode",
+          "required": true,
+          "type": "value",
+          "validation": "one of person | guest"
+        },
+        {
+          "example": "{redirectUri}",
+          "name": "redirectUri",
+          "required": true,
+          "type": "string",
+          "validation": "format uri"
+        },
+        {
+          "name": "requestedScopes",
+          "required": false,
+          "type": "array",
+          "validation": "—"
+        },
+        {
+          "example": "{state}x",
+          "name": "state",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "{workspaceId}",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/CustomAuthenticationBinding"
+      },
+      "retrySafety": "safe",
+      "summary": "Cancel a custom authentication transaction"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path transactionId (required): string, minLength 8, maxLength 512",
+        "JSON request body (required): application/json, #/components/schemas/CustomAuthenticationChallengeRequest"
+      ],
+      "example": "curl --request POST -H 'content-type: application/json' --data '{\\"appId\\":\\"{appId}x\\",\\"clientId\\":\\"{clientId}\\",\\"environmentId\\":\\"{environmentId}\\",\\"method\\":\\"guest\\",\\"mode\\":\\"backend\\",\\"nonce\\":\\"{nonce}x\\",\\"origin\\":\\"{origin}\\",\\"policyVersion\\":1,\\"principalMode\\":\\"person\\",\\"redirectUri\\":\\"{redirectUri}\\",\\"state\\":\\"{state}x\\",\\"workspaceId\\":\\"{workspaceId}\\",\\"email\\":\\"person@example.test\\"}' 'https://api.authle.ss/v1/custom-auth/transactions/%7BtransactionId%7D/challenge'",
+      "exampleParameters": {
+        "transactionId": "{transactionId}"
+      },
+      "exampleRequestBody": {
+        "appId": "{appId}x",
+        "clientId": "{clientId}",
+        "environmentId": "{environmentId}",
+        "method": "guest",
+        "mode": "backend",
+        "nonce": "{nonce}x",
+        "origin": "{origin}",
+        "policyVersion": 1,
+        "principalMode": "person",
+        "redirectUri": "{redirectUri}",
+        "state": "{state}x",
+        "workspaceId": "{workspaceId}",
+        "email": "person@example.test"
+      },
+      "method": "POST",
+      "operationId": "requestCustomAuthenticationEmailCode",
+      "outcomes": [
+        {
+          "description": "Challenge accepted",
+          "status": 202,
+          "success": true
+        },
+        {
+          "description": "Invalid or unavailable custom authentication request",
+          "status": 400,
+          "success": false
+        }
+      ],
+      "path": "/v1/custom-auth/transactions/{transactionId}/challenge",
+      "parameters": [
+        {
+          "example": "{transactionId}",
+          "location": "path",
+          "name": "transactionId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{appId}x",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "name": "browserSessionBinding",
+          "required": false,
+          "type": "value",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "{clientId}",
+          "name": "clientId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "name": "codeChallenge",
+          "required": false,
+          "type": "value",
+          "validation": "pattern ^[A-Za-z0-9_-]{43}$"
+        },
+        {
+          "example": "person@example.test",
+          "name": "email",
+          "required": true,
+          "type": "string",
+          "validation": "format email"
+        },
+        {
+          "example": "{environmentId}",
+          "name": "environmentId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "guest",
+          "name": "method",
+          "required": true,
+          "type": "value",
+          "validation": "one of guest | email_code"
+        },
+        {
+          "example": "backend",
+          "name": "mode",
+          "required": true,
+          "type": "value",
+          "validation": "one of backend | public"
+        },
+        {
+          "example": "{nonce}x",
+          "name": "nonce",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "{origin}",
+          "name": "origin",
+          "required": true,
+          "type": "string",
+          "validation": "format uri"
+        },
+        {
+          "example": 1,
+          "name": "policyVersion",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1"
+        },
+        {
+          "example": "person",
+          "name": "principalMode",
+          "required": true,
+          "type": "value",
+          "validation": "one of person | guest"
+        },
+        {
+          "example": "{redirectUri}",
+          "name": "redirectUri",
+          "required": true,
+          "type": "string",
+          "validation": "format uri"
+        },
+        {
+          "name": "requestedScopes",
+          "required": false,
+          "type": "array",
+          "validation": "—"
+        },
+        {
+          "example": "{state}x",
+          "name": "state",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "{workspaceId}",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/CustomAuthenticationChallengeRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Request or resend a transaction-bound email code"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path transactionId (required): string, minLength 8, maxLength 512",
+        "JSON request body (required): application/json, #/components/schemas/CustomAuthenticationBinding"
+      ],
+      "example": "curl --request POST -H 'content-type: application/json' --data '{\\"appId\\":\\"{appId}x\\",\\"clientId\\":\\"{clientId}\\",\\"environmentId\\":\\"{environmentId}\\",\\"method\\":\\"guest\\",\\"mode\\":\\"backend\\",\\"nonce\\":\\"{nonce}x\\",\\"origin\\":\\"{origin}\\",\\"policyVersion\\":1,\\"principalMode\\":\\"person\\",\\"redirectUri\\":\\"{redirectUri}\\",\\"state\\":\\"{state}x\\",\\"workspaceId\\":\\"{workspaceId}\\"}' 'https://api.authle.ss/v1/custom-auth/transactions/%7BtransactionId%7D/complete'",
+      "exampleParameters": {
+        "transactionId": "{transactionId}"
+      },
+      "exampleRequestBody": {
+        "appId": "{appId}x",
+        "clientId": "{clientId}",
+        "environmentId": "{environmentId}",
+        "method": "guest",
+        "mode": "backend",
+        "nonce": "{nonce}x",
+        "origin": "{origin}",
+        "policyVersion": 1,
+        "principalMode": "person",
+        "redirectUri": "{redirectUri}",
+        "state": "{state}x",
+        "workspaceId": "{workspaceId}"
+      },
+      "method": "POST",
+      "operationId": "completeCustomAuthenticationTransaction",
+      "outcomes": [
+        {
+          "description": "Proof consumed",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Invalid or unavailable custom authentication request",
+          "status": 400,
+          "success": false
+        }
+      ],
+      "path": "/v1/custom-auth/transactions/{transactionId}/complete",
+      "parameters": [
+        {
+          "example": "{transactionId}",
+          "location": "path",
+          "name": "transactionId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{appId}x",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "name": "browserSessionBinding",
+          "required": false,
+          "type": "value",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "{clientId}",
+          "name": "clientId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "name": "codeChallenge",
+          "required": false,
+          "type": "value",
+          "validation": "pattern ^[A-Za-z0-9_-]{43}$"
+        },
+        {
+          "example": "{environmentId}",
+          "name": "environmentId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "guest",
+          "name": "method",
+          "required": true,
+          "type": "value",
+          "validation": "one of guest | email_code"
+        },
+        {
+          "example": "backend",
+          "name": "mode",
+          "required": true,
+          "type": "value",
+          "validation": "one of backend | public"
+        },
+        {
+          "example": "{nonce}x",
+          "name": "nonce",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "{origin}",
+          "name": "origin",
+          "required": true,
+          "type": "string",
+          "validation": "format uri"
+        },
+        {
+          "example": 1,
+          "name": "policyVersion",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1"
+        },
+        {
+          "example": "person",
+          "name": "principalMode",
+          "required": true,
+          "type": "value",
+          "validation": "one of person | guest"
+        },
+        {
+          "example": "{redirectUri}",
+          "name": "redirectUri",
+          "required": true,
+          "type": "string",
+          "validation": "format uri"
+        },
+        {
+          "name": "requestedScopes",
+          "required": false,
+          "type": "array",
+          "validation": "—"
+        },
+        {
+          "example": "{state}x",
+          "name": "state",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "{workspaceId}",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/CustomAuthenticationBinding"
+      },
+      "retrySafety": "safe",
+      "summary": "Consume one custom proof for authorization-code binding"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path transactionId (required): string, minLength 8, maxLength 512",
+        "JSON request body (required): application/json, #/components/schemas/CustomAuthenticationBinding"
+      ],
+      "example": "curl --request POST -H 'content-type: application/json' --data '{\\"appId\\":\\"{appId}x\\",\\"clientId\\":\\"{clientId}\\",\\"environmentId\\":\\"{environmentId}\\",\\"method\\":\\"guest\\",\\"mode\\":\\"backend\\",\\"nonce\\":\\"{nonce}x\\",\\"origin\\":\\"{origin}\\",\\"policyVersion\\":1,\\"principalMode\\":\\"person\\",\\"redirectUri\\":\\"{redirectUri}\\",\\"state\\":\\"{state}x\\",\\"workspaceId\\":\\"{workspaceId}\\"}' 'https://api.authle.ss/v1/custom-auth/transactions/%7BtransactionId%7D/read'",
+      "exampleParameters": {
+        "transactionId": "{transactionId}"
+      },
+      "exampleRequestBody": {
+        "appId": "{appId}x",
+        "clientId": "{clientId}",
+        "environmentId": "{environmentId}",
+        "method": "guest",
+        "mode": "backend",
+        "nonce": "{nonce}x",
+        "origin": "{origin}",
+        "policyVersion": 1,
+        "principalMode": "person",
+        "redirectUri": "{redirectUri}",
+        "state": "{state}x",
+        "workspaceId": "{workspaceId}"
+      },
+      "method": "POST",
+      "operationId": "readCustomAuthenticationTransaction",
+      "outcomes": [
+        {
+          "description": "Transaction state",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Invalid or unavailable custom authentication request",
+          "status": 400,
+          "success": false
+        }
+      ],
+      "path": "/v1/custom-auth/transactions/{transactionId}/read",
+      "parameters": [
+        {
+          "example": "{transactionId}",
+          "location": "path",
+          "name": "transactionId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{appId}x",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "name": "browserSessionBinding",
+          "required": false,
+          "type": "value",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "{clientId}",
+          "name": "clientId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "name": "codeChallenge",
+          "required": false,
+          "type": "value",
+          "validation": "pattern ^[A-Za-z0-9_-]{43}$"
+        },
+        {
+          "example": "{environmentId}",
+          "name": "environmentId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "guest",
+          "name": "method",
+          "required": true,
+          "type": "value",
+          "validation": "one of guest | email_code"
+        },
+        {
+          "example": "backend",
+          "name": "mode",
+          "required": true,
+          "type": "value",
+          "validation": "one of backend | public"
+        },
+        {
+          "example": "{nonce}x",
+          "name": "nonce",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "{origin}",
+          "name": "origin",
+          "required": true,
+          "type": "string",
+          "validation": "format uri"
+        },
+        {
+          "example": 1,
+          "name": "policyVersion",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1"
+        },
+        {
+          "example": "person",
+          "name": "principalMode",
+          "required": true,
+          "type": "value",
+          "validation": "one of person | guest"
+        },
+        {
+          "example": "{redirectUri}",
+          "name": "redirectUri",
+          "required": true,
+          "type": "string",
+          "validation": "format uri"
+        },
+        {
+          "name": "requestedScopes",
+          "required": false,
+          "type": "array",
+          "validation": "—"
+        },
+        {
+          "example": "{state}x",
+          "name": "state",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "{workspaceId}",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/CustomAuthenticationBinding"
+      },
+      "retrySafety": "safe",
+      "summary": "Read a bound custom authentication transaction"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path transactionId (required): string, minLength 8, maxLength 512",
+        "JSON request body (required): application/json, #/components/schemas/CustomAuthenticationVerifyRequest"
+      ],
+      "example": "curl --request POST -H 'content-type: application/json' --data '{\\"appId\\":\\"{appId}x\\",\\"clientId\\":\\"{clientId}\\",\\"environmentId\\":\\"{environmentId}\\",\\"method\\":\\"guest\\",\\"mode\\":\\"backend\\",\\"nonce\\":\\"{nonce}x\\",\\"origin\\":\\"{origin}\\",\\"policyVersion\\":1,\\"principalMode\\":\\"person\\",\\"redirectUri\\":\\"{redirectUri}\\",\\"state\\":\\"{state}x\\",\\"workspaceId\\":\\"{workspaceId}\\"}' 'https://api.authle.ss/v1/custom-auth/transactions/%7BtransactionId%7D/verify'",
+      "exampleParameters": {
+        "transactionId": "{transactionId}"
+      },
+      "exampleRequestBody": {
+        "appId": "{appId}x",
+        "clientId": "{clientId}",
+        "environmentId": "{environmentId}",
+        "method": "guest",
+        "mode": "backend",
+        "nonce": "{nonce}x",
+        "origin": "{origin}",
+        "policyVersion": 1,
+        "principalMode": "person",
+        "redirectUri": "{redirectUri}",
+        "state": "{state}x",
+        "workspaceId": "{workspaceId}"
+      },
+      "method": "POST",
+      "operationId": "verifyCustomAuthenticationProof",
+      "outcomes": [
+        {
+          "description": "Proof accepted",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Invalid or unavailable custom authentication request",
+          "status": 400,
+          "success": false
+        }
+      ],
+      "path": "/v1/custom-auth/transactions/{transactionId}/verify",
+      "parameters": [
+        {
+          "example": "{transactionId}",
+          "location": "path",
+          "name": "transactionId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{appId}x",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "name": "browserSessionBinding",
+          "required": false,
+          "type": "value",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "{clientId}",
+          "name": "clientId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "name": "code",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 6, maxLength 6"
+        },
+        {
+          "name": "codeChallenge",
+          "required": false,
+          "type": "value",
+          "validation": "pattern ^[A-Za-z0-9_-]{43}$"
+        },
+        {
+          "example": "{environmentId}",
+          "name": "environmentId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "guest",
+          "name": "method",
+          "required": true,
+          "type": "value",
+          "validation": "one of guest | email_code"
+        },
+        {
+          "example": "backend",
+          "name": "mode",
+          "required": true,
+          "type": "value",
+          "validation": "one of backend | public"
+        },
+        {
+          "example": "{nonce}x",
+          "name": "nonce",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "{origin}",
+          "name": "origin",
+          "required": true,
+          "type": "string",
+          "validation": "format uri"
+        },
+        {
+          "example": 1,
+          "name": "policyVersion",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1"
+        },
+        {
+          "example": "person",
+          "name": "principalMode",
+          "required": true,
+          "type": "value",
+          "validation": "one of person | guest"
+        },
+        {
+          "example": "{redirectUri}",
+          "name": "redirectUri",
+          "required": true,
+          "type": "string",
+          "validation": "format uri"
+        },
+        {
+          "name": "requestedScopes",
+          "required": false,
+          "type": "array",
+          "validation": "—"
+        },
+        {
+          "example": "{state}x",
+          "name": "state",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "{workspaceId}",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/CustomAuthenticationVerifyRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Verify a guest or email proof"
     },
     {
       "authority": [
@@ -11812,7 +13191,7 @@ The following checked projection is shared with the human-rendered guide and pre
       "constraints": [
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/CreateWorkspaceRequest"
+        "JSON request body (required): application/json, #/components/schemas/CreateWorkspaceRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"name\\":\\"Example workspace\\"}' 'https://api.authle.ss/workspaces'",
       "exampleParameters": {
@@ -11956,7 +13335,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "path delegationId (required): string, minLength 3, maxLength 128",
         "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/AgentDelegationKeyRotationPreviewRequest"
+        "JSON request body (required): application/json, #/components/schemas/AgentDelegationKeyRotationPreviewRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"publicJwks\\":{}}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/agent-delegations/%7BdelegationId%7D/key-rotation-previews'",
       "exampleParameters": {
@@ -12147,7 +13526,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "path workspaceId (required): string, minLength 3, maxLength 128",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/CreateAppRequest"
+        "JSON request body (required): application/json, #/components/schemas/CreateAppRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"description\\":\\"Customer sign-in for the Example product\\",\\"name\\":\\"Example web app\\",\\"ownerContactEmail\\":\\"security@example.com\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps'",
       "exampleParameters": {
@@ -12255,7 +13634,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "path appId (required): string",
         "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/UpdateAppMetadataRequest"
+        "JSON request body (required): application/json, #/components/schemas/UpdateAppMetadataRequest"
       ],
       "example": "curl --request PATCH -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"name\\":\\"Example\\",\\"description\\":\\"{description}\\",\\"ownerContactEmail\\":\\"person@example.test\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D'",
       "exampleParameters": {
@@ -12463,7 +13842,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "path environment (required): string, one of test | production",
         "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/ChangeAppEnvironmentStatusRequest"
+        "JSON request body (required): application/json, #/components/schemas/ChangeAppEnvironmentStatusRequest"
       ],
       "example": "curl --request PATCH -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '\\"{value}\\"' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test'",
       "exampleParameters": {
@@ -12667,7 +14046,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "path environment (required): string, one of production | test",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/CreateIntegrationCredentialRequest"
+        "JSON request body (required): application/json, #/components/schemas/CreateIntegrationCredentialRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"name\\":\\"Example\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/credentials'",
       "exampleParameters": {
@@ -12785,6 +14164,12 @@ The following checked projection is shared with the human-rendered guide and pre
           "required": true,
           "type": "string",
           "validation": "—"
+        },
+        {
+          "name": "capabilities",
+          "required": false,
+          "type": "array",
+          "validation": "—"
         }
       ],
       "requestSchema": {
@@ -12805,7 +14190,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/RevokeIntegrationCredentialRequest"
+        "JSON request body (required): application/json, #/components/schemas/RevokeIntegrationCredentialRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/credentials/%7BcredentialId%7D/revoke'",
       "exampleParameters": {
@@ -12957,7 +14342,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/RotateIntegrationCredentialRequest"
+        "JSON request body (required): application/json, #/components/schemas/RotateIntegrationCredentialRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"overlapSeconds\\":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/credentials/%7BcredentialId%7D/rotate'",
       "exampleParameters": {
@@ -13103,6 +14488,315 @@ The following checked projection is shared with the human-rendered guide and pre
     {
       "authority": [
         "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "Server-side credential scoped to one exact app environment. Never expose this value to browser bundles, logs, examples, or diagnostics."
+      ],
+      "constraints": [
+        "path workspaceId (required): string, minLength 3, maxLength 128",
+        "path appId (required): string, minLength 3, maxLength 128",
+        "path environment (required): string, minLength 1, maxLength 64",
+        "JSON request body (required): application/json, #/components/schemas/CustomAuthenticationRegistrationInput"
+      ],
+      "example": "curl --request DELETE -H 'authorization: Bearer {app_credential}' -H 'content-type: application/json' --data '{\\"clientId\\":\\"{clientId}\\",\\"method\\":\\"guest\\",\\"mode\\":\\"backend\\",\\"origin\\":\\"{origin}\\",\\"redirectUri\\":\\"{redirectUri}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/%7Benvironment%7D/custom-auth'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "{environment}"
+      },
+      "exampleRequestBody": {
+        "clientId": "{clientId}",
+        "method": "guest",
+        "mode": "backend",
+        "origin": "{origin}",
+        "redirectUri": "{redirectUri}"
+      },
+      "method": "DELETE",
+      "operationId": "revokeCustomAuthenticationRegistration",
+      "outcomes": [
+        {
+          "description": "Registration revoked",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Invalid registration",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Authentication required",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Registration not found",
+          "status": 404,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/custom-auth",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{environment}",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1, maxLength 64"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{clientId}",
+          "name": "clientId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "guest",
+          "name": "method",
+          "required": true,
+          "type": "value",
+          "validation": "one of guest | email_code"
+        },
+        {
+          "example": "backend",
+          "name": "mode",
+          "required": true,
+          "type": "value",
+          "validation": "one of backend | public"
+        },
+        {
+          "example": "{origin}",
+          "name": "origin",
+          "required": true,
+          "type": "string",
+          "validation": "format uri"
+        },
+        {
+          "example": "{redirectUri}",
+          "name": "redirectUri",
+          "required": true,
+          "type": "string",
+          "validation": "format uri"
+        },
+        {
+          "name": "expectedUpdatedAt",
+          "required": false,
+          "type": "string",
+          "validation": "format date-time"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/CustomAuthenticationRegistrationInput"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Revoke custom authentication configuration"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "Server-side credential scoped to one exact app environment. Never expose this value to browser bundles, logs, examples, or diagnostics."
+      ],
+      "constraints": [
+        "path workspaceId (required): string, minLength 3, maxLength 128",
+        "path appId (required): string, minLength 3, maxLength 128",
+        "path environment (required): string, minLength 1, maxLength 64"
+      ],
+      "example": "curl --request GET -H 'authorization: Bearer {app_credential}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/%7Benvironment%7D/custom-auth'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "{environment}"
+      },
+      "method": "GET",
+      "operationId": "listCustomAuthenticationRegistrations",
+      "outcomes": [
+        {
+          "description": "Registered custom authentication configuration",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Authentication required",
+          "status": 401,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/custom-auth",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{environment}",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1, maxLength 64"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "List custom authentication registrations"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "Server-side credential scoped to one exact app environment. Never expose this value to browser bundles, logs, examples, or diagnostics."
+      ],
+      "constraints": [
+        "path workspaceId (required): string, minLength 3, maxLength 128",
+        "path appId (required): string, minLength 3, maxLength 128",
+        "path environment (required): string, minLength 1, maxLength 64",
+        "JSON request body (required): application/json, #/components/schemas/CustomAuthenticationRegistrationInput"
+      ],
+      "example": "curl --request PUT -H 'authorization: Bearer {app_credential}' -H 'content-type: application/json' --data '{\\"clientId\\":\\"{clientId}\\",\\"method\\":\\"guest\\",\\"mode\\":\\"backend\\",\\"origin\\":\\"{origin}\\",\\"redirectUri\\":\\"{redirectUri}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/%7Benvironment%7D/custom-auth'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "{environment}"
+      },
+      "exampleRequestBody": {
+        "clientId": "{clientId}",
+        "method": "guest",
+        "mode": "backend",
+        "origin": "{origin}",
+        "redirectUri": "{redirectUri}"
+      },
+      "method": "PUT",
+      "operationId": "replaceCustomAuthenticationRegistration",
+      "outcomes": [
+        {
+          "description": "Registered custom authentication configuration",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Invalid registration",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Authentication required",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Registration version conflict",
+          "status": 412,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/custom-auth",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{environment}",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1, maxLength 64"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{clientId}",
+          "name": "clientId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "guest",
+          "name": "method",
+          "required": true,
+          "type": "value",
+          "validation": "one of guest | email_code"
+        },
+        {
+          "example": "backend",
+          "name": "mode",
+          "required": true,
+          "type": "value",
+          "validation": "one of backend | public"
+        },
+        {
+          "example": "{origin}",
+          "name": "origin",
+          "required": true,
+          "type": "string",
+          "validation": "format uri"
+        },
+        {
+          "example": "{redirectUri}",
+          "name": "redirectUri",
+          "required": true,
+          "type": "string",
+          "validation": "format uri"
+        },
+        {
+          "name": "expectedUpdatedAt",
+          "required": false,
+          "type": "string",
+          "validation": "format date-time"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/CustomAuthenticationRegistrationInput"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Register or replace custom authentication configuration"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
         "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
       ],
       "constraints": [
@@ -13111,7 +14805,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "path environment (required): string, one of test | production",
         "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/EndpointSetMutationRequest"
+        "JSON request body (required): application/json, #/components/schemas/EndpointSetMutationRequest"
       ],
       "example": "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"postLogoutUris\\":[],\\"redirectUris\\":[],\\"trustedOrigins\\":[]}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/endpoints'",
       "exampleParameters": {
@@ -13254,10 +14948,625 @@ The following checked projection is shared with the human-rendered guide and pre
       "constraints": [
         "path workspaceId (required): string",
         "path appId (required): string",
+        "path environment (required): string, one of test | production"
+      ],
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/guest-admission'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test"
+      },
+      "method": "GET",
+      "operationId": "getGuestAdmissionPolicy",
+      "outcomes": [
+        {
+          "description": "Guest admission policy",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/guest-admission",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "Read the environment guest admission policy"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "JSON request body (required): application/json, #/components/schemas/GuestAdmissionPolicyUpdate"
+      ],
+      "example": "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"accessSeconds\\":1,\\"absoluteSeconds\\":1,\\"capabilities\\":[\\"app:read\\"],\\"enabled\\":true,\\"idleSeconds\\":1,\\"maxCreationsPerSource\\":1,\\"maxRequestsPerSource\\":1,\\"maxWorkspaceGuests\\":1,\\"mode\\":\\"open\\",\\"policyVersion\\":0,\\"requiredAssurance\\":\\"anonymous\\",\\"expectedPolicyVersion\\":0}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/guest-admission'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test"
+      },
+      "exampleRequestBody": {
+        "accessSeconds": 1,
+        "absoluteSeconds": 1,
+        "capabilities": [
+          "app:read"
+        ],
+        "enabled": true,
+        "idleSeconds": 1,
+        "maxCreationsPerSource": 1,
+        "maxRequestsPerSource": 1,
+        "maxWorkspaceGuests": 1,
+        "mode": "open",
+        "policyVersion": 0,
+        "requiredAssurance": "anonymous",
+        "expectedPolicyVersion": 0
+      },
+      "method": "PUT",
+      "operationId": "updateGuestAdmissionPolicy",
+      "outcomes": [
+        {
+          "description": "Updated guest admission policy",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Policy version conflict",
+          "status": 412,
+          "success": false
+        },
+        {
+          "description": "Invalid policy",
+          "status": 422,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/guest-admission",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": 1,
+          "name": "accessSeconds",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1, max 600"
+        },
+        {
+          "example": 1,
+          "name": "absoluteSeconds",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1, max 86400"
+        },
+        {
+          "example": [
+            "app:read"
+          ],
+          "name": "capabilities",
+          "required": true,
+          "type": "array",
+          "validation": "—"
+        },
+        {
+          "example": true,
+          "name": "enabled",
+          "required": true,
+          "type": "boolean",
+          "validation": "—"
+        },
+        {
+          "example": 1,
+          "name": "idleSeconds",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1, max 3600"
+        },
+        {
+          "example": 1,
+          "name": "maxCreationsPerSource",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1, max 100"
+        },
+        {
+          "example": 1,
+          "name": "maxRequestsPerSource",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1, max 1000"
+        },
+        {
+          "example": 1,
+          "name": "maxWorkspaceGuests",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1, max 10000"
+        },
+        {
+          "example": "open",
+          "name": "mode",
+          "required": true,
+          "type": "string",
+          "validation": "one of open | invitation_only | administrator_approval"
+        },
+        {
+          "example": 0,
+          "name": "policyVersion",
+          "required": true,
+          "type": "integer",
+          "validation": "min 0"
+        },
+        {
+          "example": "anonymous",
+          "name": "requiredAssurance",
+          "required": true,
+          "type": "string",
+          "validation": "one of anonymous | single_factor | multi_factor"
+        },
+        {
+          "example": 0,
+          "name": "expectedPolicyVersion",
+          "required": true,
+          "type": "integer",
+          "validation": "min 0"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/GuestAdmissionPolicyUpdate"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Update the environment guest admission policy"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production"
+      ],
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/guest-admission/usage'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test"
+      },
+      "method": "GET",
+      "operationId": "getGuestAdmissionUsage",
+      "outcomes": [
+        {
+          "description": "Guest usage",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/guest-admission/usage",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "Read safe guest admission usage"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "header x-authless-conversion-intent (required): string, minLength 16, maxLength 512",
+        "header idempotency-key (required): string, minLength 8, maxLength 128",
+        "JSON request body (required): application/json, #/components/schemas/GuestConversionConfirmationRequest"
+      ],
+      "example": "curl --request POST -H 'x-authless-conversion-intent: {x-authless-conversion-intent}' -H 'idempotency-key: request-example-001' -H 'content-type: application/json' --data '{\\"confirmation\\":\\"convert_guest\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/guest-conversion'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "x-authless-conversion-intent": "{x-authless-conversion-intent}",
+        "idempotency-key": "request-example-001"
+      },
+      "exampleRequestBody": {
+        "confirmation": "convert_guest"
+      },
+      "method": "POST",
+      "operationId": "confirmGuestConversion",
+      "outcomes": [
+        {
+          "description": "Previously applied conversion",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Conversion completed",
+          "status": 201,
+          "success": true
+        },
+        {
+          "description": "Invalid conversion request",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Conversion authority rejected",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Conversion conflict or idempotency mismatch",
+          "status": 409,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/guest-conversion",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": "{x-authless-conversion-intent}",
+          "location": "header",
+          "name": "x-authless-conversion-intent",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 16, maxLength 512"
+        },
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "convert_guest",
+          "name": "confirmation",
+          "required": true,
+          "type": "string",
+          "validation": "one of convert_guest"
+        },
+        {
+          "name": "mergeProfile",
+          "required": false,
+          "type": "string",
+          "validation": "one of keep_person | keep_guest"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/GuestConversionConfirmationRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Confirm a hosted guest conversion"
+    },
+    {
+      "authority": [
+        "A browser-held guest access token. Pair it with the required DPoP, origin, CSRF, and browser-binding headers. Never store it as a server credential or expose it in logs."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "header authorization (required): string, minLength 8",
+        "header dpop (required): string, minLength 8",
+        "header origin (required): string, format uri",
+        "header x-authless-browser-binding (required): string, minLength 8",
+        "header x-csrf-token (required): string, minLength 8",
+        "JSON request body (required): application/json, #/components/schemas/GuestConversionIntentRequest"
+      ],
+      "example": "curl --request POST -H 'authorization: {authorization}' -H 'dpop: {dpop}xx' -H 'origin: {origin}' -H 'x-authless-browser-binding: {x-authless-browser-binding}' -H 'x-csrf-token: {x-csrf-token}' -H 'content-type: application/json' --data '{\\"requestedScopes\\":[\\"{requestedScopes_1}\\"]}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/guest-conversion/intents'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "authorization": "{authorization}",
+        "dpop": "{dpop}xx",
+        "origin": "{origin}",
+        "x-authless-browser-binding": "{x-authless-browser-binding}",
+        "x-csrf-token": "{x-csrf-token}"
+      },
+      "exampleRequestBody": {
+        "requestedScopes": [
+          "{requestedScopes_1}"
+        ]
+      },
+      "method": "POST",
+      "operationId": "beginGuestConversionIntent",
+      "outcomes": [
+        {
+          "description": "Hosted conversion intent created",
+          "status": 201,
+          "success": true
+        },
+        {
+          "description": "Invalid conversion request",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Guest authority rejected",
+          "status": 401,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/guest-conversion/intents",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": "{authorization}",
+          "location": "header",
+          "name": "authorization",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8"
+        },
+        {
+          "example": "{dpop}xx",
+          "location": "header",
+          "name": "dpop",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8"
+        },
+        {
+          "example": "{origin}",
+          "location": "header",
+          "name": "origin",
+          "required": true,
+          "type": "string",
+          "validation": "format uri"
+        },
+        {
+          "example": "{x-authless-browser-binding}",
+          "location": "header",
+          "name": "x-authless-browser-binding",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8"
+        },
+        {
+          "example": "{x-csrf-token}",
+          "location": "header",
+          "name": "x-csrf-token",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": [
+            "{requestedScopes_1}"
+          ],
+          "name": "requestedScopes",
+          "required": true,
+          "type": "array",
+          "validation": "—"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/GuestConversionIntentRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Begin a hosted guest conversion intent"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path intent (required): string, minLength 16, maxLength 512"
+      ],
+      "example": "curl --request GET 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/guest-conversion/intents/%7Bintent%7Dxxxxxxxx'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "intent": "{intent}xxxxxxxx"
+      },
+      "method": "GET",
+      "operationId": "getGuestConversionIntent",
+      "outcomes": [
+        {
+          "description": "Conversion intent",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Conversion intent not found",
+          "status": 404,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/guest-conversion/intents/{intent}",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": "{intent}xxxxxxxx",
+          "location": "path",
+          "name": "intent",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 16, maxLength 512"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "Read a hosted guest conversion intent"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
         "path environment (required): string, one of test | production",
         "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/OidcClientProfileMutationRequest"
+        "JSON request body (required): application/json, #/components/schemas/OidcClientProfileMutationRequest"
       ],
       "example": "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"dpopBoundAccessTokens\\":true,\\"publicJwks\\":{\\"keys\\":[]},\\"refreshEligible\\":true,\\"tokenEndpointAuthMethod\\":\\"none\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/oidc-profile'",
       "exampleParameters": {
@@ -13503,7 +15812,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "path environment (required): string, one of test | production",
         "header if-match (optional): string, pattern ^\\"(0|[1-9]\\\\d*)\\"$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/PolicyDefinitionRequest"
+        "JSON request body (required): application/json, #/components/schemas/PolicyDefinitionRequest"
       ],
       "example": "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"definition\\":{\\"appIdentity\\":{\\"description\\":\\"{description}\\",\\"name\\":\\"Example\\",\\"ownerContactEmail\\":\\"person@example.test\\"},\\"consentPurpose\\":\\"{consentPurpose}\\",\\"correlation\\":{\\"boundary\\":\\"app\\",\\"essential\\":true,\\"purpose\\":\\"{purpose}\\"},\\"eligibleMethods\\":[\\"M-01\\"],\\"enrollmentMode\\":\\"administrator_approval\\",\\"recovery\\":{\\"verifiedEmailRequired\\":true},\\"requestedClaims\\":[],\\"session\\":{\\"absoluteSeconds\\":1,\\"idleSeconds\\":1}}}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/policy'",
       "exampleParameters": {
@@ -13686,7 +15995,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "path environment (required): string, one of test | production",
         "header if-match (optional): string, pattern ^\\"(0|[1-9]\\\\d*)\\"$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/ActivatePolicyRequest"
+        "JSON request body (required): application/json, #/components/schemas/ActivatePolicyRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/policy/activate'",
       "exampleParameters": {
@@ -14000,7 +16309,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "path version (required): integer, min 1",
         "header if-match (optional): string, pattern ^\\"(0|[1-9]\\\\d*)\\"$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/RestorePolicyRequest"
+        "JSON request body (required): application/json, #/components/schemas/RestorePolicyRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/policy/history/1/restore'",
       "exampleParameters": {
@@ -14126,13 +16435,1691 @@ The following checked projection is shared with the human-rendered guide and pre
     },
     {
       "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "JSON request body (optional): application/json, object"
+      ],
+      "example": "curl --request DELETE -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profile/app/avatar'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test"
+      },
+      "exampleRequestBody": {},
+      "method": "DELETE",
+      "operationId": "removeAppProfileAppAvatar",
+      "outcomes": [
+        {
+          "description": "Updated profile",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Version conflict",
+          "status": 409,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/app/avatar",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "—"
+        }
+      ],
+      "requestSchema": {
+        "type": "object",
+        "properties": {
+          "expectedVersion": {
+            "type": "integer"
+          }
+        }
+      },
+      "retrySafety": "unsafe",
+      "summary": "Update an app-profile avatar binding"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "JSON request body (required): application/json, #/components/schemas/AppProfileAvatarPublishRequest"
+      ],
+      "example": "curl --request POST -H 'content-type: application/json' --data '{\\"assetId\\":\\"{assetId}\\",\\"revision\\":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profile/app/avatar'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test"
+      },
+      "exampleRequestBody": {
+        "assetId": "{assetId}",
+        "revision": 1
+      },
+      "method": "POST",
+      "operationId": "publishAppProfileAppAvatar",
+      "outcomes": [
+        {
+          "description": "Updated profile",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Version conflict",
+          "status": 409,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/app/avatar",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{assetId}",
+          "name": "assetId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": 1,
+          "name": "revision",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1"
+        },
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 0"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/AppProfileAvatarPublishRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Update an app-profile avatar binding"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production"
+      ],
+      "example": "curl --request POST 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profile/app/avatar-intents'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test"
+      },
+      "method": "POST",
+      "operationId": "createAppProfileAppAvatarIntent",
+      "outcomes": [
+        {
+          "description": "Upload intent",
+          "status": 201,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/app/avatar-intents",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "unsafe",
+      "summary": "Issue an app-profile avatar upload intent"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path intentId (required): string",
+        "Raw binary request body (required): image/png, image/jpeg, image/webp"
+      ],
+      "example": "curl --request PUT -H 'content-type: image/png' --data-binary @icon.png 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profile/app/avatar/%7BintentId%7D'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "intentId": "{intentId}"
+      },
+      "method": "PUT",
+      "operationId": "uploadAppProfileAppAvatar",
+      "outcomes": [
+        {
+          "description": "Updated profile",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Version conflict",
+          "status": 409,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/app/avatar/{intentId}",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": "{intentId}",
+          "location": "path",
+          "name": "intentId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [],
+      "requestSchema": {
+        "type": "string",
+        "format": "binary"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Upload an app-profile avatar"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production"
+      ],
+      "example": "curl --request GET 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profile/me'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test"
+      },
+      "method": "GET",
+      "operationId": "getAppProfileMe",
+      "outcomes": [
+        {
+          "description": "Profile",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/me",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "Read an app-local user profile"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "JSON request body (required): application/json, object"
+      ],
+      "example": "curl --request PATCH -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profile/me'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test"
+      },
+      "exampleRequestBody": {},
+      "method": "PATCH",
+      "operationId": "updateAppProfileMe",
+      "outcomes": [
+        {
+          "description": "Profile",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Version conflict",
+          "status": 409,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/me",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "displayName",
+          "required": false,
+          "type": "value",
+          "validation": "maxLength 80"
+        },
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 0"
+        }
+      ],
+      "requestSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "displayName": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 80
+          },
+          "expectedVersion": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      },
+      "retrySafety": "unsafe",
+      "summary": "Update an app-local user profile"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "JSON request body (optional): application/json, object"
+      ],
+      "example": "curl --request DELETE -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profile/user/avatar'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test"
+      },
+      "exampleRequestBody": {},
+      "method": "DELETE",
+      "operationId": "removeAppProfileUserAvatar",
+      "outcomes": [
+        {
+          "description": "Updated profile",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Version conflict",
+          "status": 409,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/user/avatar",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "—"
+        }
+      ],
+      "requestSchema": {
+        "type": "object",
+        "properties": {
+          "expectedVersion": {
+            "type": "integer"
+          }
+        }
+      },
+      "retrySafety": "unsafe",
+      "summary": "Update an app-profile avatar binding"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "JSON request body (required): application/json, #/components/schemas/AppProfileAvatarPublishRequest"
+      ],
+      "example": "curl --request POST -H 'content-type: application/json' --data '{\\"assetId\\":\\"{assetId}\\",\\"revision\\":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profile/user/avatar'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test"
+      },
+      "exampleRequestBody": {
+        "assetId": "{assetId}",
+        "revision": 1
+      },
+      "method": "POST",
+      "operationId": "publishAppProfileUserAvatar",
+      "outcomes": [
+        {
+          "description": "Updated profile",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Version conflict",
+          "status": 409,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/user/avatar",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{assetId}",
+          "name": "assetId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": 1,
+          "name": "revision",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1"
+        },
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 0"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/AppProfileAvatarPublishRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Update an app-profile avatar binding"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production"
+      ],
+      "example": "curl --request POST 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profile/user/avatar-intents'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test"
+      },
+      "method": "POST",
+      "operationId": "createAppProfileUserAvatarIntent",
+      "outcomes": [
+        {
+          "description": "Upload intent",
+          "status": 201,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/user/avatar-intents",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "unsafe",
+      "summary": "Issue an app-profile avatar upload intent"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path intentId (required): string",
+        "Raw binary request body (required): image/png, image/jpeg, image/webp"
+      ],
+      "example": "curl --request PUT -H 'content-type: image/png' --data-binary @icon.png 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profile/user/avatar/%7BintentId%7D'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "intentId": "{intentId}"
+      },
+      "method": "PUT",
+      "operationId": "uploadAppProfileUserAvatar",
+      "outcomes": [
+        {
+          "description": "Updated profile",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Version conflict",
+          "status": 409,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/user/avatar/{intentId}",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": "{intentId}",
+          "location": "path",
+          "name": "intentId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [],
+      "requestSchema": {
+        "type": "string",
+        "format": "binary"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Upload an app-profile avatar"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path subjectId (required): string"
+      ],
+      "example": "curl --request GET 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profiles/%7BsubjectId%7D'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "subjectId": "{subjectId}"
+      },
+      "method": "GET",
+      "operationId": "getAppProfileSubject",
+      "outcomes": [
+        {
+          "description": "Profile",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": "{subjectId}",
+          "location": "path",
+          "name": "subjectId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "Read an app-local user profile"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path subjectId (required): string",
+        "JSON request body (required): application/json, object"
+      ],
+      "example": "curl --request PATCH -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profiles/%7BsubjectId%7D'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "subjectId": "{subjectId}"
+      },
+      "exampleRequestBody": {},
+      "method": "PATCH",
+      "operationId": "updateAppProfileSubject",
+      "outcomes": [
+        {
+          "description": "Profile",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Version conflict",
+          "status": 409,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": "{subjectId}",
+          "location": "path",
+          "name": "subjectId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "displayName",
+          "required": false,
+          "type": "value",
+          "validation": "maxLength 80"
+        },
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 0"
+        }
+      ],
+      "requestSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "displayName": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 80
+          },
+          "expectedVersion": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      },
+      "retrySafety": "unsafe",
+      "summary": "Update an app-local user profile"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path subjectId (required): string",
+        "JSON request body (optional): application/json, object"
+      ],
+      "example": "curl --request DELETE -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profiles/%7BsubjectId%7D/app/avatar'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "subjectId": "{subjectId}"
+      },
+      "exampleRequestBody": {},
+      "method": "DELETE",
+      "operationId": "removeAppProfileSubjectAppAvatar",
+      "outcomes": [
+        {
+          "description": "Updated profile",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Version conflict",
+          "status": 409,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}/app/avatar",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": "{subjectId}",
+          "location": "path",
+          "name": "subjectId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "—"
+        }
+      ],
+      "requestSchema": {
+        "type": "object",
+        "properties": {
+          "expectedVersion": {
+            "type": "integer"
+          }
+        }
+      },
+      "retrySafety": "unsafe",
+      "summary": "Update an app-profile avatar binding"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path subjectId (required): string",
+        "JSON request body (required): application/json, #/components/schemas/AppProfileAvatarPublishRequest"
+      ],
+      "example": "curl --request POST -H 'content-type: application/json' --data '{\\"assetId\\":\\"{assetId}\\",\\"revision\\":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profiles/%7BsubjectId%7D/app/avatar'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "subjectId": "{subjectId}"
+      },
+      "exampleRequestBody": {
+        "assetId": "{assetId}",
+        "revision": 1
+      },
+      "method": "POST",
+      "operationId": "publishAppProfileSubjectAppAvatar",
+      "outcomes": [
+        {
+          "description": "Updated profile",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Version conflict",
+          "status": 409,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}/app/avatar",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": "{subjectId}",
+          "location": "path",
+          "name": "subjectId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{assetId}",
+          "name": "assetId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": 1,
+          "name": "revision",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1"
+        },
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 0"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/AppProfileAvatarPublishRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Update an app-profile avatar binding"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path subjectId (required): string"
+      ],
+      "example": "curl --request POST 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profiles/%7BsubjectId%7D/app/avatar-intents'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "subjectId": "{subjectId}"
+      },
+      "method": "POST",
+      "operationId": "createAppProfileSubjectAppAvatarIntent",
+      "outcomes": [
+        {
+          "description": "Upload intent",
+          "status": 201,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}/app/avatar-intents",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": "{subjectId}",
+          "location": "path",
+          "name": "subjectId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "unsafe",
+      "summary": "Issue an app-profile avatar upload intent"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path intentId (required): string",
+        "path subjectId (required): string",
+        "Raw binary request body (required): image/png, image/jpeg, image/webp"
+      ],
+      "example": "curl --request PUT -H 'content-type: image/png' --data-binary @icon.png 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profiles/%7BsubjectId%7D/app/avatar/%7BintentId%7D'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "intentId": "{intentId}",
+        "subjectId": "{subjectId}"
+      },
+      "method": "PUT",
+      "operationId": "uploadAppProfileSubjectAppAvatar",
+      "outcomes": [
+        {
+          "description": "Updated profile",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Version conflict",
+          "status": 409,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}/app/avatar/{intentId}",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": "{intentId}",
+          "location": "path",
+          "name": "intentId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{subjectId}",
+          "location": "path",
+          "name": "subjectId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [],
+      "requestSchema": {
+        "type": "string",
+        "format": "binary"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Upload an app-profile avatar"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path subjectId (required): string",
+        "JSON request body (optional): application/json, object"
+      ],
+      "example": "curl --request DELETE -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profiles/%7BsubjectId%7D/user/avatar'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "subjectId": "{subjectId}"
+      },
+      "exampleRequestBody": {},
+      "method": "DELETE",
+      "operationId": "removeAppProfileSubjectUserAvatar",
+      "outcomes": [
+        {
+          "description": "Updated profile",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Version conflict",
+          "status": 409,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}/user/avatar",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": "{subjectId}",
+          "location": "path",
+          "name": "subjectId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "—"
+        }
+      ],
+      "requestSchema": {
+        "type": "object",
+        "properties": {
+          "expectedVersion": {
+            "type": "integer"
+          }
+        }
+      },
+      "retrySafety": "unsafe",
+      "summary": "Update an app-profile avatar binding"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path subjectId (required): string",
+        "JSON request body (required): application/json, #/components/schemas/AppProfileAvatarPublishRequest"
+      ],
+      "example": "curl --request POST -H 'content-type: application/json' --data '{\\"assetId\\":\\"{assetId}\\",\\"revision\\":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profiles/%7BsubjectId%7D/user/avatar'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "subjectId": "{subjectId}"
+      },
+      "exampleRequestBody": {
+        "assetId": "{assetId}",
+        "revision": 1
+      },
+      "method": "POST",
+      "operationId": "publishAppProfileSubjectUserAvatar",
+      "outcomes": [
+        {
+          "description": "Updated profile",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Version conflict",
+          "status": 409,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}/user/avatar",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": "{subjectId}",
+          "location": "path",
+          "name": "subjectId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{assetId}",
+          "name": "assetId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": 1,
+          "name": "revision",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1"
+        },
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 0"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/AppProfileAvatarPublishRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Update an app-profile avatar binding"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path subjectId (required): string"
+      ],
+      "example": "curl --request POST 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profiles/%7BsubjectId%7D/user/avatar-intents'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "subjectId": "{subjectId}"
+      },
+      "method": "POST",
+      "operationId": "createAppProfileSubjectUserAvatarIntent",
+      "outcomes": [
+        {
+          "description": "Upload intent",
+          "status": 201,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}/user/avatar-intents",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": "{subjectId}",
+          "location": "path",
+          "name": "subjectId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "unsafe",
+      "summary": "Issue an app-profile avatar upload intent"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path intentId (required): string",
+        "path subjectId (required): string",
+        "Raw binary request body (required): image/png, image/jpeg, image/webp"
+      ],
+      "example": "curl --request PUT -H 'content-type: image/png' --data-binary @icon.png 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profiles/%7BsubjectId%7D/user/avatar/%7BintentId%7D'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "intentId": "{intentId}",
+        "subjectId": "{subjectId}"
+      },
+      "method": "PUT",
+      "operationId": "uploadAppProfileSubjectUserAvatar",
+      "outcomes": [
+        {
+          "description": "Updated profile",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Version conflict",
+          "status": 409,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}/user/avatar/{intentId}",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": "{intentId}",
+          "location": "path",
+          "name": "intentId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{subjectId}",
+          "location": "path",
+          "name": "subjectId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [],
+      "requestSchema": {
+        "type": "string",
+        "format": "binary"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Upload an app-profile avatar"
+    },
+    {
+      "authority": [
         "Server-side credential scoped to one exact app environment. Never expose this value to browser bundles, logs, examples, or diagnostics."
       ],
       "constraints": [
         "path workspaceId (required): string",
         "path appId (required): string",
         "path environment (required): string, one of test | production",
-        "JSON request body (required): #/components/schemas/ValidateAppSessionRequest"
+        "JSON request body (required): application/json, #/components/schemas/ValidateAppSessionRequest"
       ],
       "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'content-type: application/json' --data '{\\"sessionReference\\":\\"session_reference_example_01\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/sessions/validate'",
       "exampleParameters": {
@@ -14305,7 +18292,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "path environment (required): string, one of production | test",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/RegisterIntegrationWebhookRequest"
+        "JSON request body (required): application/json, #/components/schemas/RegisterIntegrationWebhookRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"subscriptions\\":[],\\"url\\":\\"{url}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks'",
       "exampleParameters": {
@@ -14547,7 +18534,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "path deliveryId (required): string",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/ReplayIntegrationWebhookDeliveryRequest"
+        "JSON request body (required): application/json, #/components/schemas/ReplayIntegrationWebhookDeliveryRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/deliveries/%7BdeliveryId%7D/replay'",
       "exampleParameters": {
@@ -14684,7 +18671,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/DisableIntegrationWebhookRequest"
+        "JSON request body (required): application/json, #/components/schemas/DisableIntegrationWebhookRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/disable'",
       "exampleParameters": {
@@ -14830,7 +18817,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/RotateIntegrationWebhookSecretRequest"
+        "JSON request body (required): application/json, #/components/schemas/RotateIntegrationWebhookSecretRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"overlapSeconds\\":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/rotate'",
       "exampleParameters": {
@@ -14985,7 +18972,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/ReplaceIntegrationWebhookSubscriptionsRequest"
+        "JSON request body (required): application/json, #/components/schemas/ReplaceIntegrationWebhookSubscriptionsRequest"
       ],
       "example": "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"subscriptions\\":[]}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/subscriptions'",
       "exampleParameters": {
@@ -15138,7 +19125,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "path environment (required): string, one of production | test",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/ReconcileIntegrationWebhooksRequest"
+        "JSON request body (required): application/json, #/components/schemas/ReconcileIntegrationWebhooksRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/reconcile'",
       "exampleParameters": {
@@ -15341,7 +19328,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/ConfirmBulkAccessRequest"
+        "JSON request body (required): application/json, #/components/schemas/ConfirmBulkAccessRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/operations/%7BoperationId%7D/cancellation'",
       "exampleParameters": {
@@ -15596,7 +19583,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "path workspaceId (required): string, minLength 3, maxLength 128",
         "path appId (required): string, minLength 3, maxLength 128",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/CreateBulkAccessPreviewRequest"
+        "JSON request body (required): application/json, #/components/schemas/CreateBulkAccessPreviewRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"action\\":\\"suspend_memberships\\",\\"filter\\":{\\"membershipIds\\":[\\"{membershipIds_1}\\"]},\\"reason\\":\\"administrator_action\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/previews'",
       "exampleParameters": {
@@ -15809,7 +19796,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "path previewId (required): string",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/ExecuteBulkAccessPreviewRequest"
+        "JSON request body (required): application/json, #/components/schemas/ExecuteBulkAccessPreviewRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"previewIntegrityDigest\\":\\"sha256:0000000000000000000000000000000000000000000000000000000000000000\\",\\"previewVersion\\":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/previews/%7BpreviewId%7D/executions'",
       "exampleParameters": {
@@ -16224,7 +20211,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "path appId (required): string",
         "path environment (required): string, one of test | production",
         "header Idempotency-Key (required): string, minLength 1, maxLength 240",
-        "JSON request body (required): #/components/schemas/CreateAppCommerceAddonRequest"
+        "JSON request body (required): application/json, #/components/schemas/CreateAppCommerceAddonRequest"
       ],
       "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'Idempotency-Key: {Idempotency-Key}' -H 'content-type: application/json' --data '{\\"amountMicros\\":0,\\"currency\\":\\"{currency}\\",\\"interval\\":\\"month\\",\\"key\\":\\"{key}\\",\\"name\\":\\"Example\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/commerce/test/addons'",
       "exampleParameters": {
@@ -16365,7 +20352,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "path appId (required): string",
         "path environment (required): string, one of test | production",
         "header Idempotency-Key (required): string, minLength 1, maxLength 240",
-        "JSON request body (required): #/components/schemas/CreateAppCommerceCatalogRequest"
+        "JSON request body (required): application/json, #/components/schemas/CreateAppCommerceCatalogRequest"
       ],
       "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'Idempotency-Key: {Idempotency-Key}' -H 'content-type: application/json' --data '{\\"defaultCurrency\\":\\"USD\\",\\"name\\":\\"Example\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/commerce/test/catalog'",
       "exampleParameters": {
@@ -16546,7 +20533,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "path environment (required): string, one of test | production",
         "path customerRef (required): string",
         "header Idempotency-Key (required): string, minLength 1, maxLength 240",
-        "JSON request body (required): #/components/schemas/RecordAppCommerceUsageRequest"
+        "JSON request body (required): application/json, #/components/schemas/RecordAppCommerceUsageRequest"
       ],
       "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'Idempotency-Key: {Idempotency-Key}' -H 'content-type: application/json' --data '{\\"meterKey\\":\\"{meterKey}\\",\\"quantity\\":0}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/commerce/test/customers/%7BcustomerRef%7D/usage'",
       "exampleParameters": {
@@ -16654,7 +20641,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "path appId (required): string",
         "path environment (required): string, one of test | production",
         "header Idempotency-Key (required): string, minLength 1, maxLength 240",
-        "JSON request body (required): #/components/schemas/CreateAppCommerceFeatureRequest"
+        "JSON request body (required): application/json, #/components/schemas/CreateAppCommerceFeatureRequest"
       ],
       "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'Idempotency-Key: {Idempotency-Key}' -H 'content-type: application/json' --data '{\\"key\\":\\"{key}\\",\\"name\\":\\"Example\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/commerce/test/features'",
       "exampleParameters": {
@@ -16765,7 +20752,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "path environment (required): string, one of test | production",
         "path invoiceId (required): string",
         "header Idempotency-Key (required): string, minLength 1, maxLength 240",
-        "JSON request body (required): #/components/schemas/RequestAppCommerceRefundRequest"
+        "JSON request body (required): application/json, #/components/schemas/RequestAppCommerceRefundRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'Idempotency-Key: {Idempotency-Key}' -H 'content-type: application/json' --data '{\\"amountMinor\\":1,\\"currency\\":\\"{currency}\\",\\"paymentId\\":\\"{paymentId}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/commerce/test/invoices/%7BinvoiceId%7D/refunds'",
       "exampleParameters": {
@@ -16947,7 +20934,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "path appId (required): string",
         "path environment (required): string, one of test | production",
         "header Idempotency-Key (required): string, minLength 1, maxLength 240",
-        "JSON request body (required): #/components/schemas/CreateAppCommercePlanRequest"
+        "JSON request body (required): application/json, #/components/schemas/CreateAppCommercePlanRequest"
       ],
       "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'Idempotency-Key: {Idempotency-Key}' -H 'content-type: application/json' --data '{\\"amountMicros\\":0,\\"currency\\":\\"{currency}\\",\\"interval\\":\\"month\\",\\"key\\":\\"{key}\\",\\"name\\":\\"Example\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/commerce/test/plans'",
       "exampleParameters": {
@@ -17422,6 +21409,303 @@ The following checked projection is shared with the human-rendered guide and pre
     {
       "authority": [
         "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "JSON request body (required): application/json, object"
+      ],
+      "example": "curl --request DELETE -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"expected\\":\\"{expected}\\"}' 'https://api.authle.ss/workspaces/undefined/apps/undefined/icon'",
+      "exampleParameters": {},
+      "exampleRequestBody": {
+        "expected": "{expected}"
+      },
+      "method": "DELETE",
+      "operationId": "clearAppIcon",
+      "outcomes": [
+        {
+          "description": "Icon cleared",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Invalid input",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "App or asset not found",
+          "status": 404,
+          "success": false
+        },
+        {
+          "description": "Revision conflict",
+          "status": 409,
+          "success": false
+        },
+        {
+          "description": "Unexpected service failure",
+          "status": 500,
+          "success": false
+        },
+        {
+          "description": "Temporarily unavailable",
+          "status": 503,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/icon",
+      "parameters": [],
+      "requestBodyFields": [
+        {
+          "example": "{expected}",
+          "name": "expected",
+          "required": true,
+          "type": "value",
+          "validation": "—"
+        }
+      ],
+      "requestSchema": {
+        "type": "object",
+        "required": [
+          "expected"
+        ],
+        "properties": {
+          "expected": {
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/AppIconBinding"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "retrySafety": "unsafe",
+      "summary": "Clear an app icon"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "JSON request body (required): application/json, object"
+      ],
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"assetId\\":\\"{assetId}\\",\\"revision\\":1,\\"expected\\":\\"{expected}\\"}' 'https://api.authle.ss/workspaces/undefined/apps/undefined/icon'",
+      "exampleParameters": {},
+      "exampleRequestBody": {
+        "assetId": "{assetId}",
+        "revision": 1,
+        "expected": "{expected}"
+      },
+      "method": "POST",
+      "operationId": "publishAppIcon",
+      "outcomes": [
+        {
+          "description": "Icon published",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Invalid input",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "App or asset not found",
+          "status": 404,
+          "success": false
+        },
+        {
+          "description": "Revision conflict",
+          "status": 409,
+          "success": false
+        },
+        {
+          "description": "Unexpected service failure",
+          "status": 500,
+          "success": false
+        },
+        {
+          "description": "Temporarily unavailable",
+          "status": 503,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/icon",
+      "parameters": [],
+      "requestBodyFields": [
+        {
+          "example": "{assetId}",
+          "name": "assetId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": 1,
+          "name": "revision",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1"
+        },
+        {
+          "example": "{expected}",
+          "name": "expected",
+          "required": true,
+          "type": "value",
+          "validation": "—"
+        }
+      ],
+      "requestSchema": {
+        "type": "object",
+        "required": [
+          "assetId",
+          "revision",
+          "expected"
+        ],
+        "properties": {
+          "assetId": {
+            "type": "string"
+          },
+          "revision": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "expected": {
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/AppIconBinding"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "retrySafety": "unsafe",
+      "summary": "Publish an app icon"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [],
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/undefined/apps/undefined/icon/intents'",
+      "exampleParameters": {},
+      "method": "POST",
+      "operationId": "createAppIconUploadIntent",
+      "outcomes": [
+        {
+          "description": "Upload intent created",
+          "status": 201,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "App or asset not found",
+          "status": 404,
+          "success": false
+        },
+        {
+          "description": "Unexpected service failure",
+          "status": 500,
+          "success": false
+        },
+        {
+          "description": "Temporarily unavailable",
+          "status": 503,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/icon/intents",
+      "parameters": [],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "Create an app icon upload intent"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "Raw binary request body (required): image/png, image/jpeg, image/webp"
+      ],
+      "example": "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: image/png' --data-binary @icon.png 'https://api.authle.ss/workspaces/undefined/apps/undefined/icon/intents/undefined'",
+      "exampleParameters": {},
+      "method": "PUT",
+      "operationId": "uploadAppIcon",
+      "outcomes": [
+        {
+          "description": "Icon uploaded",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Invalid input",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "App or asset not found",
+          "status": 404,
+          "success": false
+        },
+        {
+          "description": "Image upload exceeds the 5 MiB encoded limit",
+          "status": 413,
+          "success": false
+        },
+        {
+          "description": "Unexpected service failure",
+          "status": 500,
+          "success": false
+        },
+        {
+          "description": "Temporarily unavailable",
+          "status": 503,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/icon/intents/{intentId}",
+      "parameters": [],
+      "requestBodyFields": [],
+      "requestSchema": {
+        "type": "string",
+        "format": "binary"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Upload a processed app icon"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
         "Server-side credential scoped to one exact app environment. Never expose this value to browser bundles, logs, examples, or diagnostics."
       ],
       "constraints": [
@@ -17532,7 +21816,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "path appId (required): string, minLength 3, maxLength 128",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/InviteAppMembershipRequest"
+        "JSON request body (required): application/json, #/components/schemas/InviteAppMembershipRequest"
       ],
       "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"email\\":\\"person@example.test\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships'",
       "exampleParameters": {
@@ -17826,7 +22110,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/GrantAppEntitlementRequest"
+        "JSON request body (required): application/json, #/components/schemas/GrantAppEntitlementRequest"
       ],
       "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"key\\":\\"{key}\\",\\"source\\":\\"{source}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/entitlements'",
       "exampleParameters": {
@@ -17984,7 +22268,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/RevokeAppEntitlementRequest"
+        "JSON request body (required): application/json, #/components/schemas/RevokeAppEntitlementRequest"
       ],
       "example": "curl --request DELETE -H 'authorization: Bearer {app_credential}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/entitlements/%7BgrantId%7D'",
       "exampleParameters": {
@@ -18138,7 +22422,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/ChangeAppMembershipStatusRequest"
+        "JSON request body (required): application/json, #/components/schemas/ChangeAppMembershipStatusRequest"
       ],
       "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"action\\":\\"activate\\",\\"confirmed\\":true,\\"reason\\":\\"access_ended\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/lifecycle'",
       "exampleParameters": {
@@ -18299,7 +22583,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/GrantAppRoleRequest"
+        "JSON request body (required): application/json, #/components/schemas/GrantAppRoleRequest"
       ],
       "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"key\\":\\"{key}\\",\\"source\\":\\"{source}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/roles'",
       "exampleParameters": {
@@ -18451,7 +22735,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/RevokeAppRoleRequest"
+        "JSON request body (required): application/json, #/components/schemas/RevokeAppRoleRequest"
       ],
       "example": "curl --request DELETE -H 'authorization: Bearer {app_credential}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/roles/%7BgrantId%7D'",
       "exampleParameters": {
@@ -18738,6 +23022,429 @@ The following checked projection is shared with the human-rendered guide and pre
         "Server-side platform session. Never expose this value to browser bundles or logs."
       ],
       "constraints": [
+        "path workspaceId (required): string",
+        "header x-correlation-id (optional): string, minLength 8, maxLength 128",
+        "JSON request body (optional): application/json, object"
+      ],
+      "example": "curl --request DELETE -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"expected\\":\\"{expected}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/avatar'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "x-correlation-id": "request_example_001"
+      },
+      "exampleRequestBody": {
+        "expected": "{expected}"
+      },
+      "method": "DELETE",
+      "operationId": "removeWorkspaceAvatar",
+      "outcomes": [
+        {
+          "description": "Avatar removed",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Invalid avatar request",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Session unavailable",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Workspace or avatar asset unavailable",
+          "status": 404,
+          "success": false
+        },
+        {
+          "description": "Avatar changed",
+          "status": 409,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/avatar",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{expected}",
+          "name": "expected",
+          "required": true,
+          "type": "value",
+          "validation": "—"
+        }
+      ],
+      "requestSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "expected"
+        ],
+        "properties": {
+          "expected": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/WorkspaceAvatar"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "retrySafety": "unsafe",
+      "summary": "Remove a workspace avatar"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "header x-correlation-id (optional): string, minLength 8, maxLength 128",
+        "JSON request body (required): application/json, object"
+      ],
+      "example": "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"assetId\\":\\"{assetId}\\",\\"assetRevision\\":1,\\"expected\\":\\"{expected}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/avatar'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "x-correlation-id": "request_example_001"
+      },
+      "exampleRequestBody": {
+        "assetId": "{assetId}",
+        "assetRevision": 1,
+        "expected": "{expected}"
+      },
+      "method": "PUT",
+      "operationId": "attachWorkspaceAvatar",
+      "outcomes": [
+        {
+          "description": "Avatar attached",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Invalid avatar request",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Session unavailable",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Workspace or avatar asset unavailable",
+          "status": 404,
+          "success": false
+        },
+        {
+          "description": "Avatar changed",
+          "status": 409,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/avatar",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{assetId}",
+          "name": "assetId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": 1,
+          "name": "assetRevision",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1"
+        },
+        {
+          "example": "{expected}",
+          "name": "expected",
+          "required": true,
+          "type": "value",
+          "validation": "—"
+        }
+      ],
+      "requestSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "assetId",
+          "assetRevision",
+          "expected"
+        ],
+        "properties": {
+          "assetId": {
+            "type": "string"
+          },
+          "assetRevision": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "expected": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/WorkspaceAvatar"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "retrySafety": "unsafe",
+      "summary": "Attach a workspace avatar asset"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "header x-correlation-id (optional): string, minLength 8, maxLength 128",
+        "path size (required): integer, one of 24 | 64 | 256"
+      ],
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/avatar/24'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "x-correlation-id": "request_example_001",
+        "size": 24
+      },
+      "method": "GET",
+      "operationId": "getWorkspaceAvatar",
+      "outcomes": [
+        {
+          "description": "Private avatar image",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Session unavailable",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Avatar unavailable",
+          "status": 404,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/avatar/{size}",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        },
+        {
+          "example": 24,
+          "location": "path",
+          "name": "size",
+          "required": true,
+          "type": "integer",
+          "validation": "one of 24 | 64 | 256"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "Deliver a private workspace avatar variant"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "header x-correlation-id (optional): string, minLength 8, maxLength 128"
+      ],
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/avatar/intents'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "x-correlation-id": "request_example_001"
+      },
+      "method": "POST",
+      "operationId": "issueWorkspaceAvatarIntent",
+      "outcomes": [
+        {
+          "description": "Upload intent issued",
+          "status": 201,
+          "success": true
+        },
+        {
+          "description": "Session unavailable",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Workspace unavailable",
+          "status": 404,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/avatar/intents",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "unsafe",
+      "summary": "Issue a workspace avatar upload intent"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "header x-correlation-id (optional): string, minLength 8, maxLength 128",
+        "path intentId (required): string",
+        "header content-type (required): string",
+        "JSON request body (required): application/json, string"
+      ],
+      "example": "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: {content-type}' -H 'content-type: application/json' --data '\\"{value}\\"' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/avatar/intents/%7BintentId%7D'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "x-correlation-id": "request_example_001",
+        "intentId": "{intentId}",
+        "content-type": "{content-type}"
+      },
+      "exampleRequestBody": "{value}",
+      "method": "PUT",
+      "operationId": "uploadWorkspaceAvatar",
+      "outcomes": [
+        {
+          "description": "Avatar asset uploaded",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Invalid upload",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Session unavailable",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "The image exceeds the 5 MiB encoded upload limit",
+          "status": 413,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/avatar/intents/{intentId}",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        },
+        {
+          "example": "{intentId}",
+          "location": "path",
+          "name": "intentId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{content-type}",
+          "location": "header",
+          "name": "content-type",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [],
+      "requestSchema": {
+        "type": "string",
+        "description": "Binary image bytes are accepted with the upload content type."
+      },
+      "retrySafety": "unsafe",
+      "summary": "Upload workspace avatar bytes"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
+      "constraints": [
         "path workspaceId (required): string"
       ],
       "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/billing'",
@@ -18784,7 +23491,7 @@ The following checked projection is shared with the human-rendered guide and pre
       ],
       "constraints": [
         "path workspaceId (required): string",
-        "JSON request body (required): #/components/schemas/CommercialBillingCancellationReviewRequest"
+        "JSON request body (required): application/json, #/components/schemas/CommercialBillingCancellationReviewRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"idempotencyKey\\":\\"{idempotencyKey}\\",\\"mode\\":\\"period_end\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/billing/cancellation-reviews'",
       "exampleParameters": {
@@ -18867,7 +23574,7 @@ The following checked projection is shared with the human-rendered guide and pre
       ],
       "constraints": [
         "path workspaceId (required): string",
-        "JSON request body (required): #/components/schemas/CommercialBillingCancellationConfirmationRequest"
+        "JSON request body (required): application/json, #/components/schemas/CommercialBillingCancellationConfirmationRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"confirmationToken\\":\\"{confirmationToken}\\",\\"idempotencyKey\\":\\"{idempotencyKey}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/billing/cancellations'",
       "exampleParameters": {
@@ -18950,7 +23657,7 @@ The following checked projection is shared with the human-rendered guide and pre
       ],
       "constraints": [
         "path workspaceId (required): string",
-        "JSON request body (required): #/components/schemas/CommercialBillingChangeAuthorizationRequest"
+        "JSON request body (required): application/json, #/components/schemas/CommercialBillingChangeAuthorizationRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"changeId\\":\\"{changeId}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/billing/change-authorizations'",
       "exampleParameters": {
@@ -19020,7 +23727,7 @@ The following checked projection is shared with the human-rendered guide and pre
       ],
       "constraints": [
         "path workspaceId (required): string",
-        "JSON request body (required): #/components/schemas/CommercialBillingChangeReviewRequest"
+        "JSON request body (required): application/json, #/components/schemas/CommercialBillingChangeReviewRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"idempotencyKey\\":\\"{idempotencyKey}\\",\\"period\\":\\"monthly\\",\\"planId\\":\\"launch\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/billing/change-reviews'",
       "exampleParameters": {
@@ -19112,7 +23819,7 @@ The following checked projection is shared with the human-rendered guide and pre
       ],
       "constraints": [
         "path workspaceId (required): string",
-        "JSON request body (required): #/components/schemas/CommercialBillingRefundRequest"
+        "JSON request body (required): application/json, #/components/schemas/CommercialBillingRefundRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"amountMicros\\":1,\\"category\\":\\"first_purchase_goodwill\\",\\"consumedOverageMicros\\":0,\\"idempotencyKey\\":\\"{idempotencyKey}\\",\\"invoiceRef\\":\\"{invoiceRef}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/billing/refund-requests'",
       "exampleParameters": {
@@ -19277,7 +23984,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "path workspaceId (required): string",
         "path planId (required): string, one of launch | growth | scale",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
-        "JSON request body (required): #/components/schemas/CommercialPurchaseConfirmationRequest"
+        "JSON request body (required): application/json, #/components/schemas/CommercialPurchaseConfirmationRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'content-type: application/json' --data '{\\"acceptanceToken\\":\\"acceptance-example-001\\",\\"confirmed\\":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/commercial-purchases/launch/confirmations'",
       "exampleParameters": {
@@ -19379,7 +24086,7 @@ The following checked projection is shared with the human-rendered guide and pre
       "constraints": [
         "path workspaceId (required): string",
         "path planId (required): string, one of launch | growth | scale",
-        "JSON request body (required): #/components/schemas/CommercialPurchaseReviewRequest"
+        "JSON request body (required): application/json, #/components/schemas/CommercialPurchaseReviewRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"billingPeriod\\":\\"monthly\\",\\"locale\\":\\"en\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/commercial-purchases/launch/reviews'",
       "exampleParameters": {
@@ -19572,7 +24279,7 @@ The following checked projection is shared with the human-rendered guide and pre
       ],
       "constraints": [
         "path workspaceId (required): string",
-        "JSON request body (required): #/components/schemas/CommercialOverageConfigurationRequest"
+        "JSON request body (required): application/json, #/components/schemas/CommercialOverageConfigurationRequest"
       ],
       "example": "curl --request PATCH -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"enabled\\":true,\\"idempotencyKey\\":\\"{idempotencyKey}\\",\\"monthlySpendCapMicrosSar\\":0}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/overages'",
       "exampleParameters": {
@@ -19663,7 +24370,7 @@ The following checked projection is shared with the human-rendered guide and pre
       ],
       "constraints": [
         "path workspaceId (required): string",
-        "JSON request body (required): #/components/schemas/CommercialOverageActivationRequest"
+        "JSON request body (required): application/json, #/components/schemas/CommercialOverageActivationRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"idempotencyKey\\":\\"{idempotencyKey}\\",\\"monthlySpendCapMicrosSar\\":1,\\"reviewId\\":\\"{reviewId}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/overages/activations'",
       "exampleParameters": {
@@ -19760,7 +24467,7 @@ The following checked projection is shared with the human-rendered guide and pre
       ],
       "constraints": [
         "path workspaceId (required): string",
-        "JSON request body (required): #/components/schemas/CommercialOverageReviewRequest"
+        "JSON request body (required): application/json, #/components/schemas/CommercialOverageReviewRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"idempotencyKey\\":\\"{idempotencyKey}\\",\\"monthlySpendCapMicrosSar\\":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/overages/reviews'",
       "exampleParameters": {
@@ -19900,7 +24607,7 @@ The following checked projection is shared with the human-rendered guide and pre
       ],
       "constraints": [
         "path workspaceId (required): string",
-        "JSON request body (required): #/components/schemas/CreateWorkspaceServicePrincipalRequest"
+        "JSON request body (required): application/json, #/components/schemas/CreateWorkspaceServicePrincipalRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"name\\":\\"Example\\",\\"scopes\\":[\\"app:read\\"],\\"restrictions\\":{\\"appIds\\":[],\\"environments\\":[\\"test\\"]}}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/service-principals'",
       "exampleParameters": {
@@ -20140,7 +24847,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "path workspaceId (required): string",
         "path principalId (required): string",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
-        "JSON request body (required): #/components/schemas/IssueWorkspaceServiceCredentialRequest"
+        "JSON request body (required): application/json, #/components/schemas/IssueWorkspaceServiceCredentialRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'content-type: application/json' --data '{\\"name\\":\\"Example\\",\\"scopes\\":[\\"app:read\\"],\\"restrictions\\":{\\"appIds\\":[],\\"environments\\":[\\"test\\"]}}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/service-principals/%7BprincipalId%7D/credentials'",
       "exampleParameters": {
@@ -20284,7 +24991,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "path credentialId (required): string",
         "header idempotency-key (optional): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
-        "JSON request body (required): #/components/schemas/RevokeWorkspaceServiceCredentialRequest"
+        "JSON request body (required): application/json, #/components/schemas/RevokeWorkspaceServiceCredentialRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/service-principals/%7BprincipalId%7D/credentials/%7BcredentialId%7D/revoke'",
       "exampleParameters": {
@@ -20403,7 +25110,7 @@ The following checked projection is shared with the human-rendered guide and pre
         "path credentialId (required): string",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
-        "JSON request body (required): #/components/schemas/RotateWorkspaceServiceCredentialRequest"
+        "JSON request body (required): application/json, #/components/schemas/RotateWorkspaceServiceCredentialRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'content-type: application/json' --data '{\\"overlapSeconds\\":0}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/service-principals/%7BprincipalId%7D/credentials/%7BcredentialId%7D/rotate'",
       "exampleParameters": {
@@ -20536,7 +25243,7 @@ The following checked projection is shared with the human-rendered guide and pre
       "constraints": [
         "path workspaceId (required): string",
         "path principalId (required): string",
-        "JSON request body (required): #/components/schemas/ChangeWorkspaceServicePrincipalStatusRequest"
+        "JSON request body (required): application/json, #/components/schemas/ChangeWorkspaceServicePrincipalStatusRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"status\\":\\"active\\",\\"expectedVersion\\":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/service-principals/%7BprincipalId%7D/status'",
       "exampleParameters": {
@@ -20662,7 +25369,7 @@ Source attribution: Developer documentation (https://docs.authle.ss/reference/re
       title: "REST API reference",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "38d8a969bbbd580c3703678e12a20ef78d85a072b862feb8bcd3f13cb2f60c2c"
+      contentDigest: "279382de1bc251fd66e581909c8f197d699b7a8dff47636dc2f311376f17735b"
     },
     {
       canonical: "https://docs.authle.ss/reference/rest?lang=ar",
@@ -20734,7 +25441,8 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "query",
         "resource",
         "status",
-        "to"
+        "to",
+        "transaction"
       ]
     },
     "sorting": {
@@ -20773,7 +25481,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       "constraints": [
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/RequestIdentityContinuationRequest"
+        "JSON request body (required): application/json, #/components/schemas/RequestIdentityContinuationRequest"
       ],
       "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"email\\":\\"person@example.com\\",\\"locale\\":\\"en\\"}' 'https://api.authle.ss/identity/continuations'",
       "exampleParameters": {
@@ -20841,7 +25549,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       "constraints": [
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/VerifyIdentityContinuationRequest"
+        "JSON request body (required): application/json, #/components/schemas/VerifyIdentityContinuationRequest"
       ],
       "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"challengeId\\":\\"identity_continuation_example\\",\\"code\\":\\"123456\\",\\"locale\\":\\"en\\"}' 'https://api.authle.ss/identity/continuations/verifications'",
       "exampleParameters": {
@@ -20922,7 +25630,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       "constraints": [
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/ConsumeIdentityRecoveryRequest"
+        "JSON request body (required): application/json, #/components/schemas/ConsumeIdentityRecoveryRequest"
       ],
       "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"token\\":\\"recovery-proof-token\\"}' 'https://api.authle.ss/identity/recovery-proofs'",
       "exampleParameters": {
@@ -20987,7 +25695,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       "constraints": [
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/RequestIdentityRecoveryRequest"
+        "JSON request body (required): application/json, #/components/schemas/RequestIdentityRecoveryRequest"
       ],
       "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"identifier\\":\\"person@example.com\\",\\"locale\\":\\"en\\"}' 'https://api.authle.ss/identity/recovery-requests'",
       "exampleParameters": {
@@ -21055,7 +25763,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       "constraints": [
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/RevokeIdentityRecoveryPasswordRequest"
+        "JSON request body (required): application/json, #/components/schemas/RevokeIdentityRecoveryPasswordRequest"
       ],
       "example": "curl --request DELETE -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"locale\\":\\"en\\"}' 'https://api.authle.ss/identity/recovery/authenticators/password'",
       "exampleParameters": {
@@ -21175,7 +25883,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       "constraints": [
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/RequestIdentityRecoveryEmailReplacementRequest"
+        "JSON request body (required): application/json, #/components/schemas/RequestIdentityRecoveryEmailReplacementRequest"
       ],
       "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"email\\":\\"new.person@example.com\\",\\"locale\\":\\"en\\"}' 'https://api.authle.ss/identity/recovery/identifier-replacements/email'",
       "exampleParameters": {
@@ -21266,7 +25974,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       "constraints": [
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/VerifyIdentityRecoveryEmailReplacementRequest"
+        "JSON request body (required): application/json, #/components/schemas/VerifyIdentityRecoveryEmailReplacementRequest"
       ],
       "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"locale\\":\\"en\\",\\"token\\":\\"replacement-proof-token\\"}' 'https://api.authle.ss/identity/recovery/identifier-replacements/email/verifications'",
       "exampleParameters": {
@@ -21339,7 +26047,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       "constraints": [
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/ReplaceIdentityRecoveryUsernameRequest"
+        "JSON request body (required): application/json, #/components/schemas/ReplaceIdentityRecoveryUsernameRequest"
       ],
       "example": "curl --request PUT -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"locale\\":\\"en\\",\\"username\\":\\"new_name\\"}' 'https://api.authle.ss/identity/recovery/identifiers/username'",
       "exampleParameters": {
@@ -21430,7 +26138,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       "constraints": [
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/RegisterIdentityRequest"
+        "JSON request body (required): application/json, #/components/schemas/RegisterIdentityRequest"
       ],
       "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"email\\":\\"person@example.com\\",\\"locale\\":\\"en\\",\\"password\\":\\"correct horse battery staple\\"}' 'https://api.authle.ss/identity/registrations'",
       "exampleParameters": {
@@ -21511,7 +26219,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       "constraints": [
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/VerifyIdentityRequest"
+        "JSON request body (required): application/json, #/components/schemas/VerifyIdentityRequest"
       ],
       "example": "curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"locale\\":\\"en\\",\\"token\\":\\"verification-token\\"}' 'https://api.authle.ss/identity/verifications'",
       "exampleParameters": {
@@ -21632,7 +26340,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       "constraints": [
         "header Idempotency-Key (required): string, minLength 1, maxLength 240",
-        "JSON request body (required): #/components/schemas/CreatePersonalCommerceCheckoutRequest"
+        "JSON request body (required): application/json, #/components/schemas/CreatePersonalCommerceCheckoutRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'Idempotency-Key: {Idempotency-Key}' -H 'content-type: application/json' --data '{\\"acceptedTermsDigest\\":\\"{acceptedTermsDigest}\\",\\"appId\\":\\"{appId}\\",\\"planKey\\":\\"{planKey}\\",\\"returnUrl\\":\\"{returnUrl}\\"}' 'https://api.authle.ss/me/commerce/checkouts'",
       "exampleParameters": {
@@ -21856,7 +26564,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "Server-side platform session. Never expose this value to browser bundles or logs."
       ],
       "constraints": [
-        "JSON request body (required): #/components/schemas/CreatePersonalCommercePortalSessionRequest"
+        "JSON request body (required): application/json, #/components/schemas/CreatePersonalCommercePortalSessionRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"appId\\":\\"{appId}\\",\\"returnUrl\\":\\"{returnUrl}\\"}' 'https://api.authle.ss/me/commerce/portal-sessions'",
       "exampleParameters": {},
@@ -21913,7 +26621,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       "constraints": [
         "header Idempotency-Key (required): string, minLength 1, maxLength 240",
-        "JSON request body (required): #/components/schemas/CreatePersonalCommerceQuoteRequest"
+        "JSON request body (required): application/json, #/components/schemas/CreatePersonalCommerceQuoteRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'Idempotency-Key: {Idempotency-Key}' -H 'content-type: application/json' --data '{\\"appId\\":\\"{appId}\\",\\"planKey\\":\\"{planKey}\\"}' 'https://api.authle.ss/me/commerce/quotes'",
       "exampleParameters": {
@@ -22011,7 +26719,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       "constraints": [
         "path quoteId (required): string",
         "header Idempotency-Key (required): string, minLength 1, maxLength 240",
-        "JSON request body (required): #/components/schemas/AcceptPersonalCommerceQuoteRequest"
+        "JSON request body (required): application/json, #/components/schemas/AcceptPersonalCommerceQuoteRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'Idempotency-Key: {Idempotency-Key}' -H 'content-type: application/json' --data '{\\"termsDigest\\":\\"{termsDigest}\\"}' 'https://api.authle.ss/me/commerce/quotes/%7BquoteId%7D/accept'",
       "exampleParameters": {
@@ -22199,7 +26907,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       "constraints": [
         "path subscriptionRef (required): string",
         "header Idempotency-Key (required): string, minLength 1, maxLength 240",
-        "JSON request body (required): #/components/schemas/ChangePersonalCommerceSubscriptionRequest"
+        "JSON request body (required): application/json, #/components/schemas/ChangePersonalCommerceSubscriptionRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'Idempotency-Key: {Idempotency-Key}' -H 'content-type: application/json' --data '{\\"effectiveAt\\":\\"now\\"}' 'https://api.authle.ss/me/commerce/subscriptions/%7BsubscriptionRef%7D/changes'",
       "exampleParameters": {
@@ -22378,7 +27086,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       "constraints": [
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (optional): #/components/schemas/SignOutOtherSessionsRequest"
+        "JSON request body (optional): application/json, #/components/schemas/SignOutOtherSessionsRequest"
       ],
       "example": "curl --request DELETE -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/me/sessions'",
       "exampleParameters": {
@@ -22489,7 +27197,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       "constraints": [
         "path sessionId (required): string, pattern ^session_[0-9A-HJKMNP-TV-Z]{26}$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (optional): #/components/schemas/RevokePersonalSessionRequest"
+        "JSON request body (optional): application/json, #/components/schemas/RevokePersonalSessionRequest"
       ],
       "example": "curl --request DELETE -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/me/sessions/session_01J5K6M7N8P9QRSTVWXYZABCDE'",
       "exampleParameters": {
@@ -22571,7 +27279,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       "constraints": [
         "path sessionId (required): string, pattern ^session_[0-9A-HJKMNP-TV-Z]{26}$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (optional): #/components/schemas/ReportPersonalSessionRiskRequest"
+        "JSON request body (optional): application/json, #/components/schemas/ReportPersonalSessionRiskRequest"
       ],
       "example": "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/me/sessions/session_01J5K6M7N8P9QRSTVWXYZABCDE/risk'",
       "exampleParameters": {
@@ -22659,6 +27367,74 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
     },
     {
       "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path appId (required): string",
+        "path assetId (required): string",
+        "path size (required): integer, one of 24 | 64 | 256",
+        "query transaction (optional): string"
+      ],
+      "example": "curl --request GET 'https://api.authle.ss/media/public/app-icons/%7BappId%7D/%7BassetId%7D/24'",
+      "exampleParameters": {
+        "appId": "{appId}",
+        "assetId": "{assetId}",
+        "size": 24
+      },
+      "method": "GET",
+      "operationId": "getPublicAppIcon",
+      "outcomes": [
+        {
+          "description": "WebP app icon bytes",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Icon unavailable, unpublished, or transaction reference invalid",
+          "status": 404,
+          "success": false
+        }
+      ],
+      "path": "/media/public/app-icons/{appId}/{assetId}/{size}",
+      "parameters": [
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{assetId}",
+          "location": "path",
+          "name": "assetId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": 24,
+          "location": "path",
+          "name": "size",
+          "required": true,
+          "type": "integer",
+          "validation": "one of 24 | 64 | 256"
+        },
+        {
+          "location": "query",
+          "name": "transaction",
+          "required": false,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "Get a public app icon"
+    },
+    {
+      "authority": [
         "Server-side platform session. Never expose this value to browser bundles or logs."
       ],
       "constraints": [],
@@ -22693,9 +27469,334 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       "authority": [
         "Server-side platform session. Never expose this value to browser bundles or logs."
       ],
+      "constraints": [],
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/personal/profile'",
+      "exampleParameters": {},
+      "method": "GET",
+      "operationId": "getPersonalProfile",
+      "outcomes": [
+        {
+          "description": "Personal profile",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Error",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Error",
+          "status": 503,
+          "success": false
+        }
+      ],
+      "path": "/personal/profile",
+      "parameters": [],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "Get the current person's profile"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
+      "constraints": [
+        "JSON request body (required): application/json, #/components/schemas/PersonalProfileDisplayNameRequest"
+      ],
+      "example": "curl --request PATCH -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"displayName\\":\\"{displayName}\\",\\"expectedVersion\\":1}' 'https://api.authle.ss/personal/profile'",
+      "exampleParameters": {},
+      "exampleRequestBody": {
+        "displayName": "{displayName}",
+        "expectedVersion": 1
+      },
+      "method": "PATCH",
+      "operationId": "updatePersonalProfile",
+      "outcomes": [
+        {
+          "description": "Updated profile",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Error",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Error",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Error",
+          "status": 409,
+          "success": false
+        },
+        {
+          "description": "Error",
+          "status": 503,
+          "success": false
+        }
+      ],
+      "path": "/personal/profile",
+      "parameters": [],
+      "requestBodyFields": [
+        {
+          "example": "{displayName}",
+          "name": "displayName",
+          "required": true,
+          "type": "value",
+          "validation": "minLength 1, maxLength 80"
+        },
+        {
+          "example": 1,
+          "name": "expectedVersion",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/PersonalProfileDisplayNameRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Update the current person's display name"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
+      "constraints": [
+        "header if-match (required): integer, min 1"
+      ],
+      "example": "curl --request DELETE -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: 1' 'https://api.authle.ss/personal/profile/avatar'",
+      "exampleParameters": {
+        "if-match": 1
+      },
+      "method": "DELETE",
+      "operationId": "removePersonalAvatar",
+      "outcomes": [
+        {
+          "description": "Updated profile",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Error",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Error",
+          "status": 409,
+          "success": false
+        },
+        {
+          "description": "Error",
+          "status": 503,
+          "success": false
+        }
+      ],
+      "path": "/personal/profile/avatar",
+      "parameters": [
+        {
+          "example": 1,
+          "location": "header",
+          "name": "if-match",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "unsafe",
+      "summary": "Remove the current person's avatar"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
+      "constraints": [],
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/personal/profile/avatar-intents'",
+      "exampleParameters": {},
+      "method": "POST",
+      "operationId": "createPersonalAvatarIntent",
+      "outcomes": [
+        {
+          "description": "Upload intent",
+          "status": 201,
+          "success": true
+        },
+        {
+          "description": "Error",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Error",
+          "status": 503,
+          "success": false
+        }
+      ],
+      "path": "/personal/profile/avatar-intents",
+      "parameters": [],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "Create a single-use personal avatar upload intent"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
+      "constraints": [
+        "path assetId (required): string",
+        "path size (required): integer, one of 24 | 64 | 256"
+      ],
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/personal/profile/avatar/%7BassetId%7D/24'",
+      "exampleParameters": {
+        "assetId": "{assetId}",
+        "size": 24
+      },
+      "method": "GET",
+      "operationId": "getPersonalAvatar",
+      "outcomes": [
+        {
+          "description": "WebP avatar",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Error",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Error",
+          "status": 404,
+          "success": false
+        },
+        {
+          "description": "Error",
+          "status": 503,
+          "success": false
+        }
+      ],
+      "path": "/personal/profile/avatar/{assetId}/{size}",
+      "parameters": [
+        {
+          "example": "{assetId}",
+          "location": "path",
+          "name": "assetId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": 24,
+          "location": "path",
+          "name": "size",
+          "required": true,
+          "type": "integer",
+          "validation": "one of 24 | 64 | 256"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "Fetch the current person's private avatar"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
+      "constraints": [
+        "path intentId (required): string",
+        "header if-match (required): integer, min 1",
+        "Raw binary request body (required): image/png, image/jpeg, image/webp"
+      ],
+      "example": "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: 1' -H 'content-type: image/png' --data-binary @icon.png 'https://api.authle.ss/personal/profile/avatar/%7BintentId%7D'",
+      "exampleParameters": {
+        "intentId": "{intentId}",
+        "if-match": 1
+      },
+      "method": "PUT",
+      "operationId": "uploadPersonalAvatar",
+      "outcomes": [
+        {
+          "description": "Updated profile",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Error",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Error",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Error",
+          "status": 404,
+          "success": false
+        },
+        {
+          "description": "Error",
+          "status": 409,
+          "success": false
+        },
+        {
+          "description": "Image upload exceeds the 5 MiB encoded limit",
+          "status": 413,
+          "success": false
+        },
+        {
+          "description": "Error",
+          "status": 422,
+          "success": false
+        },
+        {
+          "description": "Error",
+          "status": 503,
+          "success": false
+        }
+      ],
+      "path": "/personal/profile/avatar/{intentId}",
+      "parameters": [
+        {
+          "example": "{intentId}",
+          "location": "path",
+          "name": "intentId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": 1,
+          "location": "header",
+          "name": "if-match",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1"
+        }
+      ],
+      "requestBodyFields": [],
+      "requestSchema": {
+        "type": "string",
+        "format": "binary"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Upload a personal avatar"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
       "constraints": [
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (optional): #/components/schemas/RemovePersonalUsernameRequest"
+        "JSON request body (optional): application/json, #/components/schemas/RemovePersonalUsernameRequest"
       ],
       "example": "curl --request DELETE -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/personal/username'",
       "exampleParameters": {
@@ -22767,7 +27868,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       "constraints": [
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/AddPersonalUsernameRequest"
+        "JSON request body (required): application/json, #/components/schemas/AddPersonalUsernameRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"username\\":\\"{username}\\"}' 'https://api.authle.ss/personal/username'",
       "exampleParameters": {
@@ -22842,7 +27943,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       "constraints": [
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/ChangePersonalUsernameRequest"
+        "JSON request body (required): application/json, #/components/schemas/ChangePersonalUsernameRequest"
       ],
       "example": "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"username\\":\\"{username}\\"}' 'https://api.authle.ss/personal/username'",
       "exampleParameters": {
@@ -22945,7 +28046,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       "constraints": [
         "path workspaceId (required): string",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/SplitPersonalWorkspaceCorrelationRequest"
+        "JSON request body (required): application/json, #/components/schemas/SplitPersonalWorkspaceCorrelationRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"expectedVersion\\":1}' 'https://api.authle.ss/personal/workspace-correlations/%7BworkspaceId%7D/split'",
       "exampleParameters": {
@@ -23042,7 +28143,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       "constraints": [
         "header merchant-signature (required): string",
-        "JSON request body (required): object"
+        "JSON request body (required): application/json, object"
       ],
       "example": "curl --request POST -H 'merchant-signature: {merchant-signature}' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/providers/merchant/billing-events'",
       "exampleParameters": {
@@ -23081,6 +28182,979 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       },
       "retrySafety": "unsafe",
       "summary": "Reconcile a signed merchant billing provider event"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "JSON request body (required): application/json, #/components/schemas/CustomAuthenticationBinding"
+      ],
+      "example": "curl --request POST -H 'content-type: application/json' --data '{\\"appId\\":\\"{appId}x\\",\\"clientId\\":\\"{clientId}\\",\\"environmentId\\":\\"{environmentId}\\",\\"method\\":\\"guest\\",\\"mode\\":\\"backend\\",\\"nonce\\":\\"{nonce}x\\",\\"origin\\":\\"{origin}\\",\\"policyVersion\\":1,\\"principalMode\\":\\"person\\",\\"redirectUri\\":\\"{redirectUri}\\",\\"state\\":\\"{state}x\\",\\"workspaceId\\":\\"{workspaceId}\\"}' 'https://api.authle.ss/v1/custom-auth/transactions'",
+      "exampleParameters": {},
+      "exampleRequestBody": {
+        "appId": "{appId}x",
+        "clientId": "{clientId}",
+        "environmentId": "{environmentId}",
+        "method": "guest",
+        "mode": "backend",
+        "nonce": "{nonce}x",
+        "origin": "{origin}",
+        "policyVersion": 1,
+        "principalMode": "person",
+        "redirectUri": "{redirectUri}",
+        "state": "{state}x",
+        "workspaceId": "{workspaceId}"
+      },
+      "method": "POST",
+      "operationId": "beginCustomAuthenticationTransaction",
+      "outcomes": [
+        {
+          "description": "Transaction created",
+          "status": 201,
+          "success": true
+        },
+        {
+          "description": "Invalid or unavailable custom authentication request",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Registered origin rejected",
+          "status": 403,
+          "success": false
+        }
+      ],
+      "path": "/v1/custom-auth/transactions",
+      "parameters": [],
+      "requestBodyFields": [
+        {
+          "example": "{appId}x",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "name": "browserSessionBinding",
+          "required": false,
+          "type": "value",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "{clientId}",
+          "name": "clientId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "name": "codeChallenge",
+          "required": false,
+          "type": "value",
+          "validation": "pattern ^[A-Za-z0-9_-]{43}$"
+        },
+        {
+          "example": "{environmentId}",
+          "name": "environmentId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "guest",
+          "name": "method",
+          "required": true,
+          "type": "value",
+          "validation": "one of guest | email_code"
+        },
+        {
+          "example": "backend",
+          "name": "mode",
+          "required": true,
+          "type": "value",
+          "validation": "one of backend | public"
+        },
+        {
+          "example": "{nonce}x",
+          "name": "nonce",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "{origin}",
+          "name": "origin",
+          "required": true,
+          "type": "string",
+          "validation": "format uri"
+        },
+        {
+          "example": 1,
+          "name": "policyVersion",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1"
+        },
+        {
+          "example": "person",
+          "name": "principalMode",
+          "required": true,
+          "type": "value",
+          "validation": "one of person | guest"
+        },
+        {
+          "example": "{redirectUri}",
+          "name": "redirectUri",
+          "required": true,
+          "type": "string",
+          "validation": "format uri"
+        },
+        {
+          "name": "requestedScopes",
+          "required": false,
+          "type": "array",
+          "validation": "—"
+        },
+        {
+          "example": "{state}x",
+          "name": "state",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "{workspaceId}",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/CustomAuthenticationBinding"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Begin a registered custom authentication transaction"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path transactionId (required): string, minLength 8, maxLength 512",
+        "JSON request body (required): application/json, #/components/schemas/CustomAuthenticationBinding"
+      ],
+      "example": "curl --request POST -H 'content-type: application/json' --data '{\\"appId\\":\\"{appId}x\\",\\"clientId\\":\\"{clientId}\\",\\"environmentId\\":\\"{environmentId}\\",\\"method\\":\\"guest\\",\\"mode\\":\\"backend\\",\\"nonce\\":\\"{nonce}x\\",\\"origin\\":\\"{origin}\\",\\"policyVersion\\":1,\\"principalMode\\":\\"person\\",\\"redirectUri\\":\\"{redirectUri}\\",\\"state\\":\\"{state}x\\",\\"workspaceId\\":\\"{workspaceId}\\"}' 'https://api.authle.ss/v1/custom-auth/transactions/%7BtransactionId%7D/cancel'",
+      "exampleParameters": {
+        "transactionId": "{transactionId}"
+      },
+      "exampleRequestBody": {
+        "appId": "{appId}x",
+        "clientId": "{clientId}",
+        "environmentId": "{environmentId}",
+        "method": "guest",
+        "mode": "backend",
+        "nonce": "{nonce}x",
+        "origin": "{origin}",
+        "policyVersion": 1,
+        "principalMode": "person",
+        "redirectUri": "{redirectUri}",
+        "state": "{state}x",
+        "workspaceId": "{workspaceId}"
+      },
+      "method": "POST",
+      "operationId": "cancelCustomAuthenticationTransaction",
+      "outcomes": [
+        {
+          "description": "Transaction cancelled",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Invalid or unavailable custom authentication request",
+          "status": 400,
+          "success": false
+        }
+      ],
+      "path": "/v1/custom-auth/transactions/{transactionId}/cancel",
+      "parameters": [
+        {
+          "example": "{transactionId}",
+          "location": "path",
+          "name": "transactionId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{appId}x",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "name": "browserSessionBinding",
+          "required": false,
+          "type": "value",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "{clientId}",
+          "name": "clientId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "name": "codeChallenge",
+          "required": false,
+          "type": "value",
+          "validation": "pattern ^[A-Za-z0-9_-]{43}$"
+        },
+        {
+          "example": "{environmentId}",
+          "name": "environmentId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "guest",
+          "name": "method",
+          "required": true,
+          "type": "value",
+          "validation": "one of guest | email_code"
+        },
+        {
+          "example": "backend",
+          "name": "mode",
+          "required": true,
+          "type": "value",
+          "validation": "one of backend | public"
+        },
+        {
+          "example": "{nonce}x",
+          "name": "nonce",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "{origin}",
+          "name": "origin",
+          "required": true,
+          "type": "string",
+          "validation": "format uri"
+        },
+        {
+          "example": 1,
+          "name": "policyVersion",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1"
+        },
+        {
+          "example": "person",
+          "name": "principalMode",
+          "required": true,
+          "type": "value",
+          "validation": "one of person | guest"
+        },
+        {
+          "example": "{redirectUri}",
+          "name": "redirectUri",
+          "required": true,
+          "type": "string",
+          "validation": "format uri"
+        },
+        {
+          "name": "requestedScopes",
+          "required": false,
+          "type": "array",
+          "validation": "—"
+        },
+        {
+          "example": "{state}x",
+          "name": "state",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "{workspaceId}",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/CustomAuthenticationBinding"
+      },
+      "retrySafety": "safe",
+      "summary": "Cancel a custom authentication transaction"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path transactionId (required): string, minLength 8, maxLength 512",
+        "JSON request body (required): application/json, #/components/schemas/CustomAuthenticationChallengeRequest"
+      ],
+      "example": "curl --request POST -H 'content-type: application/json' --data '{\\"appId\\":\\"{appId}x\\",\\"clientId\\":\\"{clientId}\\",\\"environmentId\\":\\"{environmentId}\\",\\"method\\":\\"guest\\",\\"mode\\":\\"backend\\",\\"nonce\\":\\"{nonce}x\\",\\"origin\\":\\"{origin}\\",\\"policyVersion\\":1,\\"principalMode\\":\\"person\\",\\"redirectUri\\":\\"{redirectUri}\\",\\"state\\":\\"{state}x\\",\\"workspaceId\\":\\"{workspaceId}\\",\\"email\\":\\"person@example.test\\"}' 'https://api.authle.ss/v1/custom-auth/transactions/%7BtransactionId%7D/challenge'",
+      "exampleParameters": {
+        "transactionId": "{transactionId}"
+      },
+      "exampleRequestBody": {
+        "appId": "{appId}x",
+        "clientId": "{clientId}",
+        "environmentId": "{environmentId}",
+        "method": "guest",
+        "mode": "backend",
+        "nonce": "{nonce}x",
+        "origin": "{origin}",
+        "policyVersion": 1,
+        "principalMode": "person",
+        "redirectUri": "{redirectUri}",
+        "state": "{state}x",
+        "workspaceId": "{workspaceId}",
+        "email": "person@example.test"
+      },
+      "method": "POST",
+      "operationId": "requestCustomAuthenticationEmailCode",
+      "outcomes": [
+        {
+          "description": "Challenge accepted",
+          "status": 202,
+          "success": true
+        },
+        {
+          "description": "Invalid or unavailable custom authentication request",
+          "status": 400,
+          "success": false
+        }
+      ],
+      "path": "/v1/custom-auth/transactions/{transactionId}/challenge",
+      "parameters": [
+        {
+          "example": "{transactionId}",
+          "location": "path",
+          "name": "transactionId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{appId}x",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "name": "browserSessionBinding",
+          "required": false,
+          "type": "value",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "{clientId}",
+          "name": "clientId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "name": "codeChallenge",
+          "required": false,
+          "type": "value",
+          "validation": "pattern ^[A-Za-z0-9_-]{43}$"
+        },
+        {
+          "example": "person@example.test",
+          "name": "email",
+          "required": true,
+          "type": "string",
+          "validation": "format email"
+        },
+        {
+          "example": "{environmentId}",
+          "name": "environmentId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "guest",
+          "name": "method",
+          "required": true,
+          "type": "value",
+          "validation": "one of guest | email_code"
+        },
+        {
+          "example": "backend",
+          "name": "mode",
+          "required": true,
+          "type": "value",
+          "validation": "one of backend | public"
+        },
+        {
+          "example": "{nonce}x",
+          "name": "nonce",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "{origin}",
+          "name": "origin",
+          "required": true,
+          "type": "string",
+          "validation": "format uri"
+        },
+        {
+          "example": 1,
+          "name": "policyVersion",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1"
+        },
+        {
+          "example": "person",
+          "name": "principalMode",
+          "required": true,
+          "type": "value",
+          "validation": "one of person | guest"
+        },
+        {
+          "example": "{redirectUri}",
+          "name": "redirectUri",
+          "required": true,
+          "type": "string",
+          "validation": "format uri"
+        },
+        {
+          "name": "requestedScopes",
+          "required": false,
+          "type": "array",
+          "validation": "—"
+        },
+        {
+          "example": "{state}x",
+          "name": "state",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "{workspaceId}",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/CustomAuthenticationChallengeRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Request or resend a transaction-bound email code"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path transactionId (required): string, minLength 8, maxLength 512",
+        "JSON request body (required): application/json, #/components/schemas/CustomAuthenticationBinding"
+      ],
+      "example": "curl --request POST -H 'content-type: application/json' --data '{\\"appId\\":\\"{appId}x\\",\\"clientId\\":\\"{clientId}\\",\\"environmentId\\":\\"{environmentId}\\",\\"method\\":\\"guest\\",\\"mode\\":\\"backend\\",\\"nonce\\":\\"{nonce}x\\",\\"origin\\":\\"{origin}\\",\\"policyVersion\\":1,\\"principalMode\\":\\"person\\",\\"redirectUri\\":\\"{redirectUri}\\",\\"state\\":\\"{state}x\\",\\"workspaceId\\":\\"{workspaceId}\\"}' 'https://api.authle.ss/v1/custom-auth/transactions/%7BtransactionId%7D/complete'",
+      "exampleParameters": {
+        "transactionId": "{transactionId}"
+      },
+      "exampleRequestBody": {
+        "appId": "{appId}x",
+        "clientId": "{clientId}",
+        "environmentId": "{environmentId}",
+        "method": "guest",
+        "mode": "backend",
+        "nonce": "{nonce}x",
+        "origin": "{origin}",
+        "policyVersion": 1,
+        "principalMode": "person",
+        "redirectUri": "{redirectUri}",
+        "state": "{state}x",
+        "workspaceId": "{workspaceId}"
+      },
+      "method": "POST",
+      "operationId": "completeCustomAuthenticationTransaction",
+      "outcomes": [
+        {
+          "description": "Proof consumed",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Invalid or unavailable custom authentication request",
+          "status": 400,
+          "success": false
+        }
+      ],
+      "path": "/v1/custom-auth/transactions/{transactionId}/complete",
+      "parameters": [
+        {
+          "example": "{transactionId}",
+          "location": "path",
+          "name": "transactionId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{appId}x",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "name": "browserSessionBinding",
+          "required": false,
+          "type": "value",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "{clientId}",
+          "name": "clientId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "name": "codeChallenge",
+          "required": false,
+          "type": "value",
+          "validation": "pattern ^[A-Za-z0-9_-]{43}$"
+        },
+        {
+          "example": "{environmentId}",
+          "name": "environmentId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "guest",
+          "name": "method",
+          "required": true,
+          "type": "value",
+          "validation": "one of guest | email_code"
+        },
+        {
+          "example": "backend",
+          "name": "mode",
+          "required": true,
+          "type": "value",
+          "validation": "one of backend | public"
+        },
+        {
+          "example": "{nonce}x",
+          "name": "nonce",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "{origin}",
+          "name": "origin",
+          "required": true,
+          "type": "string",
+          "validation": "format uri"
+        },
+        {
+          "example": 1,
+          "name": "policyVersion",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1"
+        },
+        {
+          "example": "person",
+          "name": "principalMode",
+          "required": true,
+          "type": "value",
+          "validation": "one of person | guest"
+        },
+        {
+          "example": "{redirectUri}",
+          "name": "redirectUri",
+          "required": true,
+          "type": "string",
+          "validation": "format uri"
+        },
+        {
+          "name": "requestedScopes",
+          "required": false,
+          "type": "array",
+          "validation": "—"
+        },
+        {
+          "example": "{state}x",
+          "name": "state",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "{workspaceId}",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/CustomAuthenticationBinding"
+      },
+      "retrySafety": "safe",
+      "summary": "Consume one custom proof for authorization-code binding"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path transactionId (required): string, minLength 8, maxLength 512",
+        "JSON request body (required): application/json, #/components/schemas/CustomAuthenticationBinding"
+      ],
+      "example": "curl --request POST -H 'content-type: application/json' --data '{\\"appId\\":\\"{appId}x\\",\\"clientId\\":\\"{clientId}\\",\\"environmentId\\":\\"{environmentId}\\",\\"method\\":\\"guest\\",\\"mode\\":\\"backend\\",\\"nonce\\":\\"{nonce}x\\",\\"origin\\":\\"{origin}\\",\\"policyVersion\\":1,\\"principalMode\\":\\"person\\",\\"redirectUri\\":\\"{redirectUri}\\",\\"state\\":\\"{state}x\\",\\"workspaceId\\":\\"{workspaceId}\\"}' 'https://api.authle.ss/v1/custom-auth/transactions/%7BtransactionId%7D/read'",
+      "exampleParameters": {
+        "transactionId": "{transactionId}"
+      },
+      "exampleRequestBody": {
+        "appId": "{appId}x",
+        "clientId": "{clientId}",
+        "environmentId": "{environmentId}",
+        "method": "guest",
+        "mode": "backend",
+        "nonce": "{nonce}x",
+        "origin": "{origin}",
+        "policyVersion": 1,
+        "principalMode": "person",
+        "redirectUri": "{redirectUri}",
+        "state": "{state}x",
+        "workspaceId": "{workspaceId}"
+      },
+      "method": "POST",
+      "operationId": "readCustomAuthenticationTransaction",
+      "outcomes": [
+        {
+          "description": "Transaction state",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Invalid or unavailable custom authentication request",
+          "status": 400,
+          "success": false
+        }
+      ],
+      "path": "/v1/custom-auth/transactions/{transactionId}/read",
+      "parameters": [
+        {
+          "example": "{transactionId}",
+          "location": "path",
+          "name": "transactionId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{appId}x",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "name": "browserSessionBinding",
+          "required": false,
+          "type": "value",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "{clientId}",
+          "name": "clientId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "name": "codeChallenge",
+          "required": false,
+          "type": "value",
+          "validation": "pattern ^[A-Za-z0-9_-]{43}$"
+        },
+        {
+          "example": "{environmentId}",
+          "name": "environmentId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "guest",
+          "name": "method",
+          "required": true,
+          "type": "value",
+          "validation": "one of guest | email_code"
+        },
+        {
+          "example": "backend",
+          "name": "mode",
+          "required": true,
+          "type": "value",
+          "validation": "one of backend | public"
+        },
+        {
+          "example": "{nonce}x",
+          "name": "nonce",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "{origin}",
+          "name": "origin",
+          "required": true,
+          "type": "string",
+          "validation": "format uri"
+        },
+        {
+          "example": 1,
+          "name": "policyVersion",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1"
+        },
+        {
+          "example": "person",
+          "name": "principalMode",
+          "required": true,
+          "type": "value",
+          "validation": "one of person | guest"
+        },
+        {
+          "example": "{redirectUri}",
+          "name": "redirectUri",
+          "required": true,
+          "type": "string",
+          "validation": "format uri"
+        },
+        {
+          "name": "requestedScopes",
+          "required": false,
+          "type": "array",
+          "validation": "—"
+        },
+        {
+          "example": "{state}x",
+          "name": "state",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "{workspaceId}",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/CustomAuthenticationBinding"
+      },
+      "retrySafety": "safe",
+      "summary": "Read a bound custom authentication transaction"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path transactionId (required): string, minLength 8, maxLength 512",
+        "JSON request body (required): application/json, #/components/schemas/CustomAuthenticationVerifyRequest"
+      ],
+      "example": "curl --request POST -H 'content-type: application/json' --data '{\\"appId\\":\\"{appId}x\\",\\"clientId\\":\\"{clientId}\\",\\"environmentId\\":\\"{environmentId}\\",\\"method\\":\\"guest\\",\\"mode\\":\\"backend\\",\\"nonce\\":\\"{nonce}x\\",\\"origin\\":\\"{origin}\\",\\"policyVersion\\":1,\\"principalMode\\":\\"person\\",\\"redirectUri\\":\\"{redirectUri}\\",\\"state\\":\\"{state}x\\",\\"workspaceId\\":\\"{workspaceId}\\"}' 'https://api.authle.ss/v1/custom-auth/transactions/%7BtransactionId%7D/verify'",
+      "exampleParameters": {
+        "transactionId": "{transactionId}"
+      },
+      "exampleRequestBody": {
+        "appId": "{appId}x",
+        "clientId": "{clientId}",
+        "environmentId": "{environmentId}",
+        "method": "guest",
+        "mode": "backend",
+        "nonce": "{nonce}x",
+        "origin": "{origin}",
+        "policyVersion": 1,
+        "principalMode": "person",
+        "redirectUri": "{redirectUri}",
+        "state": "{state}x",
+        "workspaceId": "{workspaceId}"
+      },
+      "method": "POST",
+      "operationId": "verifyCustomAuthenticationProof",
+      "outcomes": [
+        {
+          "description": "Proof accepted",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Invalid or unavailable custom authentication request",
+          "status": 400,
+          "success": false
+        }
+      ],
+      "path": "/v1/custom-auth/transactions/{transactionId}/verify",
+      "parameters": [
+        {
+          "example": "{transactionId}",
+          "location": "path",
+          "name": "transactionId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{appId}x",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "name": "browserSessionBinding",
+          "required": false,
+          "type": "value",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "{clientId}",
+          "name": "clientId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "name": "code",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 6, maxLength 6"
+        },
+        {
+          "name": "codeChallenge",
+          "required": false,
+          "type": "value",
+          "validation": "pattern ^[A-Za-z0-9_-]{43}$"
+        },
+        {
+          "example": "{environmentId}",
+          "name": "environmentId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "guest",
+          "name": "method",
+          "required": true,
+          "type": "value",
+          "validation": "one of guest | email_code"
+        },
+        {
+          "example": "backend",
+          "name": "mode",
+          "required": true,
+          "type": "value",
+          "validation": "one of backend | public"
+        },
+        {
+          "example": "{nonce}x",
+          "name": "nonce",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "{origin}",
+          "name": "origin",
+          "required": true,
+          "type": "string",
+          "validation": "format uri"
+        },
+        {
+          "example": 1,
+          "name": "policyVersion",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1"
+        },
+        {
+          "example": "person",
+          "name": "principalMode",
+          "required": true,
+          "type": "value",
+          "validation": "one of person | guest"
+        },
+        {
+          "example": "{redirectUri}",
+          "name": "redirectUri",
+          "required": true,
+          "type": "string",
+          "validation": "format uri"
+        },
+        {
+          "name": "requestedScopes",
+          "required": false,
+          "type": "array",
+          "validation": "—"
+        },
+        {
+          "example": "{state}x",
+          "name": "state",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "{workspaceId}",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/CustomAuthenticationVerifyRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Verify a guest or email proof"
     },
     {
       "authority": [
@@ -23151,7 +29225,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       "constraints": [
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/CreateWorkspaceRequest"
+        "JSON request body (required): application/json, #/components/schemas/CreateWorkspaceRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"name\\":\\"Example workspace\\"}' 'https://api.authle.ss/workspaces'",
       "exampleParameters": {
@@ -23295,7 +29369,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path delegationId (required): string, minLength 3, maxLength 128",
         "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/AgentDelegationKeyRotationPreviewRequest"
+        "JSON request body (required): application/json, #/components/schemas/AgentDelegationKeyRotationPreviewRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"publicJwks\\":{}}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/agent-delegations/%7BdelegationId%7D/key-rotation-previews'",
       "exampleParameters": {
@@ -23486,7 +29560,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path workspaceId (required): string, minLength 3, maxLength 128",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/CreateAppRequest"
+        "JSON request body (required): application/json, #/components/schemas/CreateAppRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"description\\":\\"Customer sign-in for the Example product\\",\\"name\\":\\"Example web app\\",\\"ownerContactEmail\\":\\"security@example.com\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps'",
       "exampleParameters": {
@@ -23594,7 +29668,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path appId (required): string",
         "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/UpdateAppMetadataRequest"
+        "JSON request body (required): application/json, #/components/schemas/UpdateAppMetadataRequest"
       ],
       "example": "curl --request PATCH -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"name\\":\\"Example\\",\\"description\\":\\"{description}\\",\\"ownerContactEmail\\":\\"person@example.test\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D'",
       "exampleParameters": {
@@ -23802,7 +29876,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path environment (required): string, one of test | production",
         "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/ChangeAppEnvironmentStatusRequest"
+        "JSON request body (required): application/json, #/components/schemas/ChangeAppEnvironmentStatusRequest"
       ],
       "example": "curl --request PATCH -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '\\"{value}\\"' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test'",
       "exampleParameters": {
@@ -24006,7 +30080,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path environment (required): string, one of production | test",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/CreateIntegrationCredentialRequest"
+        "JSON request body (required): application/json, #/components/schemas/CreateIntegrationCredentialRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"name\\":\\"Example\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/credentials'",
       "exampleParameters": {
@@ -24124,6 +30198,12 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           "required": true,
           "type": "string",
           "validation": "—"
+        },
+        {
+          "name": "capabilities",
+          "required": false,
+          "type": "array",
+          "validation": "—"
         }
       ],
       "requestSchema": {
@@ -24144,7 +30224,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/RevokeIntegrationCredentialRequest"
+        "JSON request body (required): application/json, #/components/schemas/RevokeIntegrationCredentialRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/credentials/%7BcredentialId%7D/revoke'",
       "exampleParameters": {
@@ -24296,7 +30376,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/RotateIntegrationCredentialRequest"
+        "JSON request body (required): application/json, #/components/schemas/RotateIntegrationCredentialRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"overlapSeconds\\":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/credentials/%7BcredentialId%7D/rotate'",
       "exampleParameters": {
@@ -24442,6 +30522,315 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
     {
       "authority": [
         "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "Server-side credential scoped to one exact app environment. Never expose this value to browser bundles, logs, examples, or diagnostics."
+      ],
+      "constraints": [
+        "path workspaceId (required): string, minLength 3, maxLength 128",
+        "path appId (required): string, minLength 3, maxLength 128",
+        "path environment (required): string, minLength 1, maxLength 64",
+        "JSON request body (required): application/json, #/components/schemas/CustomAuthenticationRegistrationInput"
+      ],
+      "example": "curl --request DELETE -H 'authorization: Bearer {app_credential}' -H 'content-type: application/json' --data '{\\"clientId\\":\\"{clientId}\\",\\"method\\":\\"guest\\",\\"mode\\":\\"backend\\",\\"origin\\":\\"{origin}\\",\\"redirectUri\\":\\"{redirectUri}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/%7Benvironment%7D/custom-auth'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "{environment}"
+      },
+      "exampleRequestBody": {
+        "clientId": "{clientId}",
+        "method": "guest",
+        "mode": "backend",
+        "origin": "{origin}",
+        "redirectUri": "{redirectUri}"
+      },
+      "method": "DELETE",
+      "operationId": "revokeCustomAuthenticationRegistration",
+      "outcomes": [
+        {
+          "description": "Registration revoked",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Invalid registration",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Authentication required",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Registration not found",
+          "status": 404,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/custom-auth",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{environment}",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1, maxLength 64"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{clientId}",
+          "name": "clientId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "guest",
+          "name": "method",
+          "required": true,
+          "type": "value",
+          "validation": "one of guest | email_code"
+        },
+        {
+          "example": "backend",
+          "name": "mode",
+          "required": true,
+          "type": "value",
+          "validation": "one of backend | public"
+        },
+        {
+          "example": "{origin}",
+          "name": "origin",
+          "required": true,
+          "type": "string",
+          "validation": "format uri"
+        },
+        {
+          "example": "{redirectUri}",
+          "name": "redirectUri",
+          "required": true,
+          "type": "string",
+          "validation": "format uri"
+        },
+        {
+          "name": "expectedUpdatedAt",
+          "required": false,
+          "type": "string",
+          "validation": "format date-time"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/CustomAuthenticationRegistrationInput"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Revoke custom authentication configuration"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "Server-side credential scoped to one exact app environment. Never expose this value to browser bundles, logs, examples, or diagnostics."
+      ],
+      "constraints": [
+        "path workspaceId (required): string, minLength 3, maxLength 128",
+        "path appId (required): string, minLength 3, maxLength 128",
+        "path environment (required): string, minLength 1, maxLength 64"
+      ],
+      "example": "curl --request GET -H 'authorization: Bearer {app_credential}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/%7Benvironment%7D/custom-auth'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "{environment}"
+      },
+      "method": "GET",
+      "operationId": "listCustomAuthenticationRegistrations",
+      "outcomes": [
+        {
+          "description": "Registered custom authentication configuration",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Authentication required",
+          "status": 401,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/custom-auth",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{environment}",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1, maxLength 64"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "List custom authentication registrations"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "Server-side credential scoped to one exact app environment. Never expose this value to browser bundles, logs, examples, or diagnostics."
+      ],
+      "constraints": [
+        "path workspaceId (required): string, minLength 3, maxLength 128",
+        "path appId (required): string, minLength 3, maxLength 128",
+        "path environment (required): string, minLength 1, maxLength 64",
+        "JSON request body (required): application/json, #/components/schemas/CustomAuthenticationRegistrationInput"
+      ],
+      "example": "curl --request PUT -H 'authorization: Bearer {app_credential}' -H 'content-type: application/json' --data '{\\"clientId\\":\\"{clientId}\\",\\"method\\":\\"guest\\",\\"mode\\":\\"backend\\",\\"origin\\":\\"{origin}\\",\\"redirectUri\\":\\"{redirectUri}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/%7Benvironment%7D/custom-auth'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "{environment}"
+      },
+      "exampleRequestBody": {
+        "clientId": "{clientId}",
+        "method": "guest",
+        "mode": "backend",
+        "origin": "{origin}",
+        "redirectUri": "{redirectUri}"
+      },
+      "method": "PUT",
+      "operationId": "replaceCustomAuthenticationRegistration",
+      "outcomes": [
+        {
+          "description": "Registered custom authentication configuration",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Invalid registration",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Authentication required",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Registration version conflict",
+          "status": 412,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/custom-auth",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 3, maxLength 128"
+        },
+        {
+          "example": "{environment}",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 1, maxLength 64"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{clientId}",
+          "name": "clientId",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 512"
+        },
+        {
+          "example": "guest",
+          "name": "method",
+          "required": true,
+          "type": "value",
+          "validation": "one of guest | email_code"
+        },
+        {
+          "example": "backend",
+          "name": "mode",
+          "required": true,
+          "type": "value",
+          "validation": "one of backend | public"
+        },
+        {
+          "example": "{origin}",
+          "name": "origin",
+          "required": true,
+          "type": "string",
+          "validation": "format uri"
+        },
+        {
+          "example": "{redirectUri}",
+          "name": "redirectUri",
+          "required": true,
+          "type": "string",
+          "validation": "format uri"
+        },
+        {
+          "name": "expectedUpdatedAt",
+          "required": false,
+          "type": "string",
+          "validation": "format date-time"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/CustomAuthenticationRegistrationInput"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Register or replace custom authentication configuration"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
         "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
       ],
       "constraints": [
@@ -24450,7 +30839,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path environment (required): string, one of test | production",
         "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/EndpointSetMutationRequest"
+        "JSON request body (required): application/json, #/components/schemas/EndpointSetMutationRequest"
       ],
       "example": "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"postLogoutUris\\":[],\\"redirectUris\\":[],\\"trustedOrigins\\":[]}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/endpoints'",
       "exampleParameters": {
@@ -24593,10 +30982,625 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       "constraints": [
         "path workspaceId (required): string",
         "path appId (required): string",
+        "path environment (required): string, one of test | production"
+      ],
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/guest-admission'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test"
+      },
+      "method": "GET",
+      "operationId": "getGuestAdmissionPolicy",
+      "outcomes": [
+        {
+          "description": "Guest admission policy",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/guest-admission",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "Read the environment guest admission policy"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "JSON request body (required): application/json, #/components/schemas/GuestAdmissionPolicyUpdate"
+      ],
+      "example": "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"accessSeconds\\":1,\\"absoluteSeconds\\":1,\\"capabilities\\":[\\"app:read\\"],\\"enabled\\":true,\\"idleSeconds\\":1,\\"maxCreationsPerSource\\":1,\\"maxRequestsPerSource\\":1,\\"maxWorkspaceGuests\\":1,\\"mode\\":\\"open\\",\\"policyVersion\\":0,\\"requiredAssurance\\":\\"anonymous\\",\\"expectedPolicyVersion\\":0}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/guest-admission'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test"
+      },
+      "exampleRequestBody": {
+        "accessSeconds": 1,
+        "absoluteSeconds": 1,
+        "capabilities": [
+          "app:read"
+        ],
+        "enabled": true,
+        "idleSeconds": 1,
+        "maxCreationsPerSource": 1,
+        "maxRequestsPerSource": 1,
+        "maxWorkspaceGuests": 1,
+        "mode": "open",
+        "policyVersion": 0,
+        "requiredAssurance": "anonymous",
+        "expectedPolicyVersion": 0
+      },
+      "method": "PUT",
+      "operationId": "updateGuestAdmissionPolicy",
+      "outcomes": [
+        {
+          "description": "Updated guest admission policy",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Policy version conflict",
+          "status": 412,
+          "success": false
+        },
+        {
+          "description": "Invalid policy",
+          "status": 422,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/guest-admission",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": 1,
+          "name": "accessSeconds",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1, max 600"
+        },
+        {
+          "example": 1,
+          "name": "absoluteSeconds",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1, max 86400"
+        },
+        {
+          "example": [
+            "app:read"
+          ],
+          "name": "capabilities",
+          "required": true,
+          "type": "array",
+          "validation": "—"
+        },
+        {
+          "example": true,
+          "name": "enabled",
+          "required": true,
+          "type": "boolean",
+          "validation": "—"
+        },
+        {
+          "example": 1,
+          "name": "idleSeconds",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1, max 3600"
+        },
+        {
+          "example": 1,
+          "name": "maxCreationsPerSource",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1, max 100"
+        },
+        {
+          "example": 1,
+          "name": "maxRequestsPerSource",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1, max 1000"
+        },
+        {
+          "example": 1,
+          "name": "maxWorkspaceGuests",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1, max 10000"
+        },
+        {
+          "example": "open",
+          "name": "mode",
+          "required": true,
+          "type": "string",
+          "validation": "one of open | invitation_only | administrator_approval"
+        },
+        {
+          "example": 0,
+          "name": "policyVersion",
+          "required": true,
+          "type": "integer",
+          "validation": "min 0"
+        },
+        {
+          "example": "anonymous",
+          "name": "requiredAssurance",
+          "required": true,
+          "type": "string",
+          "validation": "one of anonymous | single_factor | multi_factor"
+        },
+        {
+          "example": 0,
+          "name": "expectedPolicyVersion",
+          "required": true,
+          "type": "integer",
+          "validation": "min 0"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/GuestAdmissionPolicyUpdate"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Update the environment guest admission policy"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production"
+      ],
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/guest-admission/usage'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test"
+      },
+      "method": "GET",
+      "operationId": "getGuestAdmissionUsage",
+      "outcomes": [
+        {
+          "description": "Guest usage",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/guest-admission/usage",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "Read safe guest admission usage"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "header x-authless-conversion-intent (required): string, minLength 16, maxLength 512",
+        "header idempotency-key (required): string, minLength 8, maxLength 128",
+        "JSON request body (required): application/json, #/components/schemas/GuestConversionConfirmationRequest"
+      ],
+      "example": "curl --request POST -H 'x-authless-conversion-intent: {x-authless-conversion-intent}' -H 'idempotency-key: request-example-001' -H 'content-type: application/json' --data '{\\"confirmation\\":\\"convert_guest\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/guest-conversion'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "x-authless-conversion-intent": "{x-authless-conversion-intent}",
+        "idempotency-key": "request-example-001"
+      },
+      "exampleRequestBody": {
+        "confirmation": "convert_guest"
+      },
+      "method": "POST",
+      "operationId": "confirmGuestConversion",
+      "outcomes": [
+        {
+          "description": "Previously applied conversion",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Conversion completed",
+          "status": 201,
+          "success": true
+        },
+        {
+          "description": "Invalid conversion request",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Conversion authority rejected",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Conversion conflict or idempotency mismatch",
+          "status": 409,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/guest-conversion",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": "{x-authless-conversion-intent}",
+          "location": "header",
+          "name": "x-authless-conversion-intent",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 16, maxLength 512"
+        },
+        {
+          "example": "request-example-001",
+          "location": "header",
+          "name": "idempotency-key",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "convert_guest",
+          "name": "confirmation",
+          "required": true,
+          "type": "string",
+          "validation": "one of convert_guest"
+        },
+        {
+          "name": "mergeProfile",
+          "required": false,
+          "type": "string",
+          "validation": "one of keep_person | keep_guest"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/GuestConversionConfirmationRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Confirm a hosted guest conversion"
+    },
+    {
+      "authority": [
+        "A browser-held guest access token. Pair it with the required DPoP, origin, CSRF, and browser-binding headers. Never store it as a server credential or expose it in logs."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "header authorization (required): string, minLength 8",
+        "header dpop (required): string, minLength 8",
+        "header origin (required): string, format uri",
+        "header x-authless-browser-binding (required): string, minLength 8",
+        "header x-csrf-token (required): string, minLength 8",
+        "JSON request body (required): application/json, #/components/schemas/GuestConversionIntentRequest"
+      ],
+      "example": "curl --request POST -H 'authorization: {authorization}' -H 'dpop: {dpop}xx' -H 'origin: {origin}' -H 'x-authless-browser-binding: {x-authless-browser-binding}' -H 'x-csrf-token: {x-csrf-token}' -H 'content-type: application/json' --data '{\\"requestedScopes\\":[\\"{requestedScopes_1}\\"]}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/guest-conversion/intents'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "authorization": "{authorization}",
+        "dpop": "{dpop}xx",
+        "origin": "{origin}",
+        "x-authless-browser-binding": "{x-authless-browser-binding}",
+        "x-csrf-token": "{x-csrf-token}"
+      },
+      "exampleRequestBody": {
+        "requestedScopes": [
+          "{requestedScopes_1}"
+        ]
+      },
+      "method": "POST",
+      "operationId": "beginGuestConversionIntent",
+      "outcomes": [
+        {
+          "description": "Hosted conversion intent created",
+          "status": 201,
+          "success": true
+        },
+        {
+          "description": "Invalid conversion request",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Guest authority rejected",
+          "status": 401,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/guest-conversion/intents",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": "{authorization}",
+          "location": "header",
+          "name": "authorization",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8"
+        },
+        {
+          "example": "{dpop}xx",
+          "location": "header",
+          "name": "dpop",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8"
+        },
+        {
+          "example": "{origin}",
+          "location": "header",
+          "name": "origin",
+          "required": true,
+          "type": "string",
+          "validation": "format uri"
+        },
+        {
+          "example": "{x-authless-browser-binding}",
+          "location": "header",
+          "name": "x-authless-browser-binding",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8"
+        },
+        {
+          "example": "{x-csrf-token}",
+          "location": "header",
+          "name": "x-csrf-token",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 8"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": [
+            "{requestedScopes_1}"
+          ],
+          "name": "requestedScopes",
+          "required": true,
+          "type": "array",
+          "validation": "—"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/GuestConversionIntentRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Begin a hosted guest conversion intent"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path intent (required): string, minLength 16, maxLength 512"
+      ],
+      "example": "curl --request GET 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/guest-conversion/intents/%7Bintent%7Dxxxxxxxx'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "intent": "{intent}xxxxxxxx"
+      },
+      "method": "GET",
+      "operationId": "getGuestConversionIntent",
+      "outcomes": [
+        {
+          "description": "Conversion intent",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Conversion intent not found",
+          "status": 404,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/guest-conversion/intents/{intent}",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": "{intent}xxxxxxxx",
+          "location": "path",
+          "name": "intent",
+          "required": true,
+          "type": "string",
+          "validation": "minLength 16, maxLength 512"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "Read a hosted guest conversion intent"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
         "path environment (required): string, one of test | production",
         "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/OidcClientProfileMutationRequest"
+        "JSON request body (required): application/json, #/components/schemas/OidcClientProfileMutationRequest"
       ],
       "example": "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"dpopBoundAccessTokens\\":true,\\"publicJwks\\":{\\"keys\\":[]},\\"refreshEligible\\":true,\\"tokenEndpointAuthMethod\\":\\"none\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/oidc-profile'",
       "exampleParameters": {
@@ -24842,7 +31846,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path environment (required): string, one of test | production",
         "header if-match (optional): string, pattern ^\\"(0|[1-9]\\\\d*)\\"$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/PolicyDefinitionRequest"
+        "JSON request body (required): application/json, #/components/schemas/PolicyDefinitionRequest"
       ],
       "example": "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"definition\\":{\\"appIdentity\\":{\\"description\\":\\"{description}\\",\\"name\\":\\"Example\\",\\"ownerContactEmail\\":\\"person@example.test\\"},\\"consentPurpose\\":\\"{consentPurpose}\\",\\"correlation\\":{\\"boundary\\":\\"app\\",\\"essential\\":true,\\"purpose\\":\\"{purpose}\\"},\\"eligibleMethods\\":[\\"M-01\\"],\\"enrollmentMode\\":\\"administrator_approval\\",\\"recovery\\":{\\"verifiedEmailRequired\\":true},\\"requestedClaims\\":[],\\"session\\":{\\"absoluteSeconds\\":1,\\"idleSeconds\\":1}}}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/policy'",
       "exampleParameters": {
@@ -25025,7 +32029,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path environment (required): string, one of test | production",
         "header if-match (optional): string, pattern ^\\"(0|[1-9]\\\\d*)\\"$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/ActivatePolicyRequest"
+        "JSON request body (required): application/json, #/components/schemas/ActivatePolicyRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/policy/activate'",
       "exampleParameters": {
@@ -25339,7 +32343,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path version (required): integer, min 1",
         "header if-match (optional): string, pattern ^\\"(0|[1-9]\\\\d*)\\"$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/RestorePolicyRequest"
+        "JSON request body (required): application/json, #/components/schemas/RestorePolicyRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/policy/history/1/restore'",
       "exampleParameters": {
@@ -25465,13 +32469,1691 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
     },
     {
       "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "JSON request body (optional): application/json, object"
+      ],
+      "example": "curl --request DELETE -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profile/app/avatar'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test"
+      },
+      "exampleRequestBody": {},
+      "method": "DELETE",
+      "operationId": "removeAppProfileAppAvatar",
+      "outcomes": [
+        {
+          "description": "Updated profile",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Version conflict",
+          "status": 409,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/app/avatar",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "—"
+        }
+      ],
+      "requestSchema": {
+        "type": "object",
+        "properties": {
+          "expectedVersion": {
+            "type": "integer"
+          }
+        }
+      },
+      "retrySafety": "unsafe",
+      "summary": "Update an app-profile avatar binding"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "JSON request body (required): application/json, #/components/schemas/AppProfileAvatarPublishRequest"
+      ],
+      "example": "curl --request POST -H 'content-type: application/json' --data '{\\"assetId\\":\\"{assetId}\\",\\"revision\\":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profile/app/avatar'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test"
+      },
+      "exampleRequestBody": {
+        "assetId": "{assetId}",
+        "revision": 1
+      },
+      "method": "POST",
+      "operationId": "publishAppProfileAppAvatar",
+      "outcomes": [
+        {
+          "description": "Updated profile",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Version conflict",
+          "status": 409,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/app/avatar",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{assetId}",
+          "name": "assetId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": 1,
+          "name": "revision",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1"
+        },
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 0"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/AppProfileAvatarPublishRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Update an app-profile avatar binding"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production"
+      ],
+      "example": "curl --request POST 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profile/app/avatar-intents'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test"
+      },
+      "method": "POST",
+      "operationId": "createAppProfileAppAvatarIntent",
+      "outcomes": [
+        {
+          "description": "Upload intent",
+          "status": 201,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/app/avatar-intents",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "unsafe",
+      "summary": "Issue an app-profile avatar upload intent"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path intentId (required): string",
+        "Raw binary request body (required): image/png, image/jpeg, image/webp"
+      ],
+      "example": "curl --request PUT -H 'content-type: image/png' --data-binary @icon.png 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profile/app/avatar/%7BintentId%7D'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "intentId": "{intentId}"
+      },
+      "method": "PUT",
+      "operationId": "uploadAppProfileAppAvatar",
+      "outcomes": [
+        {
+          "description": "Updated profile",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Version conflict",
+          "status": 409,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/app/avatar/{intentId}",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": "{intentId}",
+          "location": "path",
+          "name": "intentId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [],
+      "requestSchema": {
+        "type": "string",
+        "format": "binary"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Upload an app-profile avatar"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production"
+      ],
+      "example": "curl --request GET 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profile/me'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test"
+      },
+      "method": "GET",
+      "operationId": "getAppProfileMe",
+      "outcomes": [
+        {
+          "description": "Profile",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/me",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "Read an app-local user profile"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "JSON request body (required): application/json, object"
+      ],
+      "example": "curl --request PATCH -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profile/me'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test"
+      },
+      "exampleRequestBody": {},
+      "method": "PATCH",
+      "operationId": "updateAppProfileMe",
+      "outcomes": [
+        {
+          "description": "Profile",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Version conflict",
+          "status": 409,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/me",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "displayName",
+          "required": false,
+          "type": "value",
+          "validation": "maxLength 80"
+        },
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 0"
+        }
+      ],
+      "requestSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "displayName": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 80
+          },
+          "expectedVersion": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      },
+      "retrySafety": "unsafe",
+      "summary": "Update an app-local user profile"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "JSON request body (optional): application/json, object"
+      ],
+      "example": "curl --request DELETE -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profile/user/avatar'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test"
+      },
+      "exampleRequestBody": {},
+      "method": "DELETE",
+      "operationId": "removeAppProfileUserAvatar",
+      "outcomes": [
+        {
+          "description": "Updated profile",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Version conflict",
+          "status": 409,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/user/avatar",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "—"
+        }
+      ],
+      "requestSchema": {
+        "type": "object",
+        "properties": {
+          "expectedVersion": {
+            "type": "integer"
+          }
+        }
+      },
+      "retrySafety": "unsafe",
+      "summary": "Update an app-profile avatar binding"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "JSON request body (required): application/json, #/components/schemas/AppProfileAvatarPublishRequest"
+      ],
+      "example": "curl --request POST -H 'content-type: application/json' --data '{\\"assetId\\":\\"{assetId}\\",\\"revision\\":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profile/user/avatar'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test"
+      },
+      "exampleRequestBody": {
+        "assetId": "{assetId}",
+        "revision": 1
+      },
+      "method": "POST",
+      "operationId": "publishAppProfileUserAvatar",
+      "outcomes": [
+        {
+          "description": "Updated profile",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Version conflict",
+          "status": 409,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/user/avatar",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{assetId}",
+          "name": "assetId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": 1,
+          "name": "revision",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1"
+        },
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 0"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/AppProfileAvatarPublishRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Update an app-profile avatar binding"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production"
+      ],
+      "example": "curl --request POST 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profile/user/avatar-intents'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test"
+      },
+      "method": "POST",
+      "operationId": "createAppProfileUserAvatarIntent",
+      "outcomes": [
+        {
+          "description": "Upload intent",
+          "status": 201,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/user/avatar-intents",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "unsafe",
+      "summary": "Issue an app-profile avatar upload intent"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path intentId (required): string",
+        "Raw binary request body (required): image/png, image/jpeg, image/webp"
+      ],
+      "example": "curl --request PUT -H 'content-type: image/png' --data-binary @icon.png 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profile/user/avatar/%7BintentId%7D'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "intentId": "{intentId}"
+      },
+      "method": "PUT",
+      "operationId": "uploadAppProfileUserAvatar",
+      "outcomes": [
+        {
+          "description": "Updated profile",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Version conflict",
+          "status": 409,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/user/avatar/{intentId}",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": "{intentId}",
+          "location": "path",
+          "name": "intentId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [],
+      "requestSchema": {
+        "type": "string",
+        "format": "binary"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Upload an app-profile avatar"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path subjectId (required): string"
+      ],
+      "example": "curl --request GET 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profiles/%7BsubjectId%7D'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "subjectId": "{subjectId}"
+      },
+      "method": "GET",
+      "operationId": "getAppProfileSubject",
+      "outcomes": [
+        {
+          "description": "Profile",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": "{subjectId}",
+          "location": "path",
+          "name": "subjectId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "Read an app-local user profile"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path subjectId (required): string",
+        "JSON request body (required): application/json, object"
+      ],
+      "example": "curl --request PATCH -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profiles/%7BsubjectId%7D'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "subjectId": "{subjectId}"
+      },
+      "exampleRequestBody": {},
+      "method": "PATCH",
+      "operationId": "updateAppProfileSubject",
+      "outcomes": [
+        {
+          "description": "Profile",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Version conflict",
+          "status": 409,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": "{subjectId}",
+          "location": "path",
+          "name": "subjectId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "displayName",
+          "required": false,
+          "type": "value",
+          "validation": "maxLength 80"
+        },
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 0"
+        }
+      ],
+      "requestSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "displayName": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 80
+          },
+          "expectedVersion": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      },
+      "retrySafety": "unsafe",
+      "summary": "Update an app-local user profile"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path subjectId (required): string",
+        "JSON request body (optional): application/json, object"
+      ],
+      "example": "curl --request DELETE -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profiles/%7BsubjectId%7D/app/avatar'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "subjectId": "{subjectId}"
+      },
+      "exampleRequestBody": {},
+      "method": "DELETE",
+      "operationId": "removeAppProfileSubjectAppAvatar",
+      "outcomes": [
+        {
+          "description": "Updated profile",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Version conflict",
+          "status": 409,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}/app/avatar",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": "{subjectId}",
+          "location": "path",
+          "name": "subjectId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "—"
+        }
+      ],
+      "requestSchema": {
+        "type": "object",
+        "properties": {
+          "expectedVersion": {
+            "type": "integer"
+          }
+        }
+      },
+      "retrySafety": "unsafe",
+      "summary": "Update an app-profile avatar binding"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path subjectId (required): string",
+        "JSON request body (required): application/json, #/components/schemas/AppProfileAvatarPublishRequest"
+      ],
+      "example": "curl --request POST -H 'content-type: application/json' --data '{\\"assetId\\":\\"{assetId}\\",\\"revision\\":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profiles/%7BsubjectId%7D/app/avatar'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "subjectId": "{subjectId}"
+      },
+      "exampleRequestBody": {
+        "assetId": "{assetId}",
+        "revision": 1
+      },
+      "method": "POST",
+      "operationId": "publishAppProfileSubjectAppAvatar",
+      "outcomes": [
+        {
+          "description": "Updated profile",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Version conflict",
+          "status": 409,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}/app/avatar",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": "{subjectId}",
+          "location": "path",
+          "name": "subjectId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{assetId}",
+          "name": "assetId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": 1,
+          "name": "revision",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1"
+        },
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 0"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/AppProfileAvatarPublishRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Update an app-profile avatar binding"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path subjectId (required): string"
+      ],
+      "example": "curl --request POST 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profiles/%7BsubjectId%7D/app/avatar-intents'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "subjectId": "{subjectId}"
+      },
+      "method": "POST",
+      "operationId": "createAppProfileSubjectAppAvatarIntent",
+      "outcomes": [
+        {
+          "description": "Upload intent",
+          "status": 201,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}/app/avatar-intents",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": "{subjectId}",
+          "location": "path",
+          "name": "subjectId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "unsafe",
+      "summary": "Issue an app-profile avatar upload intent"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path intentId (required): string",
+        "path subjectId (required): string",
+        "Raw binary request body (required): image/png, image/jpeg, image/webp"
+      ],
+      "example": "curl --request PUT -H 'content-type: image/png' --data-binary @icon.png 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profiles/%7BsubjectId%7D/app/avatar/%7BintentId%7D'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "intentId": "{intentId}",
+        "subjectId": "{subjectId}"
+      },
+      "method": "PUT",
+      "operationId": "uploadAppProfileSubjectAppAvatar",
+      "outcomes": [
+        {
+          "description": "Updated profile",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Version conflict",
+          "status": 409,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}/app/avatar/{intentId}",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": "{intentId}",
+          "location": "path",
+          "name": "intentId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{subjectId}",
+          "location": "path",
+          "name": "subjectId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [],
+      "requestSchema": {
+        "type": "string",
+        "format": "binary"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Upload an app-profile avatar"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path subjectId (required): string",
+        "JSON request body (optional): application/json, object"
+      ],
+      "example": "curl --request DELETE -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profiles/%7BsubjectId%7D/user/avatar'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "subjectId": "{subjectId}"
+      },
+      "exampleRequestBody": {},
+      "method": "DELETE",
+      "operationId": "removeAppProfileSubjectUserAvatar",
+      "outcomes": [
+        {
+          "description": "Updated profile",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Version conflict",
+          "status": 409,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}/user/avatar",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": "{subjectId}",
+          "location": "path",
+          "name": "subjectId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "—"
+        }
+      ],
+      "requestSchema": {
+        "type": "object",
+        "properties": {
+          "expectedVersion": {
+            "type": "integer"
+          }
+        }
+      },
+      "retrySafety": "unsafe",
+      "summary": "Update an app-profile avatar binding"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path subjectId (required): string",
+        "JSON request body (required): application/json, #/components/schemas/AppProfileAvatarPublishRequest"
+      ],
+      "example": "curl --request POST -H 'content-type: application/json' --data '{\\"assetId\\":\\"{assetId}\\",\\"revision\\":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profiles/%7BsubjectId%7D/user/avatar'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "subjectId": "{subjectId}"
+      },
+      "exampleRequestBody": {
+        "assetId": "{assetId}",
+        "revision": 1
+      },
+      "method": "POST",
+      "operationId": "publishAppProfileSubjectUserAvatar",
+      "outcomes": [
+        {
+          "description": "Updated profile",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Version conflict",
+          "status": 409,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}/user/avatar",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": "{subjectId}",
+          "location": "path",
+          "name": "subjectId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{assetId}",
+          "name": "assetId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": 1,
+          "name": "revision",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1"
+        },
+        {
+          "name": "expectedVersion",
+          "required": false,
+          "type": "integer",
+          "validation": "min 0"
+        }
+      ],
+      "requestSchema": {
+        "$ref": "#/components/schemas/AppProfileAvatarPublishRequest"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Update an app-profile avatar binding"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path subjectId (required): string"
+      ],
+      "example": "curl --request POST 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profiles/%7BsubjectId%7D/user/avatar-intents'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "subjectId": "{subjectId}"
+      },
+      "method": "POST",
+      "operationId": "createAppProfileSubjectUserAvatarIntent",
+      "outcomes": [
+        {
+          "description": "Upload intent",
+          "status": 201,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}/user/avatar-intents",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": "{subjectId}",
+          "location": "path",
+          "name": "subjectId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "unsafe",
+      "summary": "Issue an app-profile avatar upload intent"
+    },
+    {
+      "authority": [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path intentId (required): string",
+        "path subjectId (required): string",
+        "Raw binary request body (required): image/png, image/jpeg, image/webp"
+      ],
+      "example": "curl --request PUT -H 'content-type: image/png' --data-binary @icon.png 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profiles/%7BsubjectId%7D/user/avatar/%7BintentId%7D'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "appId": "{appId}",
+        "environment": "test",
+        "intentId": "{intentId}",
+        "subjectId": "{subjectId}"
+      },
+      "method": "PUT",
+      "operationId": "uploadAppProfileSubjectUserAvatar",
+      "outcomes": [
+        {
+          "description": "Updated profile",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Version conflict",
+          "status": 409,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}/user/avatar/{intentId}",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{appId}",
+          "location": "path",
+          "name": "appId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "test",
+          "location": "path",
+          "name": "environment",
+          "required": true,
+          "type": "string",
+          "validation": "one of test | production"
+        },
+        {
+          "example": "{intentId}",
+          "location": "path",
+          "name": "intentId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{subjectId}",
+          "location": "path",
+          "name": "subjectId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [],
+      "requestSchema": {
+        "type": "string",
+        "format": "binary"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Upload an app-profile avatar"
+    },
+    {
+      "authority": [
         "Server-side credential scoped to one exact app environment. Never expose this value to browser bundles, logs, examples, or diagnostics."
       ],
       "constraints": [
         "path workspaceId (required): string",
         "path appId (required): string",
         "path environment (required): string, one of test | production",
-        "JSON request body (required): #/components/schemas/ValidateAppSessionRequest"
+        "JSON request body (required): application/json, #/components/schemas/ValidateAppSessionRequest"
       ],
       "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'content-type: application/json' --data '{\\"sessionReference\\":\\"session_reference_example_01\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/sessions/validate'",
       "exampleParameters": {
@@ -25644,7 +34326,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path environment (required): string, one of production | test",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/RegisterIntegrationWebhookRequest"
+        "JSON request body (required): application/json, #/components/schemas/RegisterIntegrationWebhookRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"subscriptions\\":[],\\"url\\":\\"{url}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks'",
       "exampleParameters": {
@@ -25886,7 +34568,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path deliveryId (required): string",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/ReplayIntegrationWebhookDeliveryRequest"
+        "JSON request body (required): application/json, #/components/schemas/ReplayIntegrationWebhookDeliveryRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/deliveries/%7BdeliveryId%7D/replay'",
       "exampleParameters": {
@@ -26023,7 +34705,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/DisableIntegrationWebhookRequest"
+        "JSON request body (required): application/json, #/components/schemas/DisableIntegrationWebhookRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/disable'",
       "exampleParameters": {
@@ -26169,7 +34851,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/RotateIntegrationWebhookSecretRequest"
+        "JSON request body (required): application/json, #/components/schemas/RotateIntegrationWebhookSecretRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"overlapSeconds\\":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/rotate'",
       "exampleParameters": {
@@ -26324,7 +35006,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/ReplaceIntegrationWebhookSubscriptionsRequest"
+        "JSON request body (required): application/json, #/components/schemas/ReplaceIntegrationWebhookSubscriptionsRequest"
       ],
       "example": "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"subscriptions\\":[]}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/subscriptions'",
       "exampleParameters": {
@@ -26477,7 +35159,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path environment (required): string, one of production | test",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/ReconcileIntegrationWebhooksRequest"
+        "JSON request body (required): application/json, #/components/schemas/ReconcileIntegrationWebhooksRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/reconcile'",
       "exampleParameters": {
@@ -26680,7 +35362,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/ConfirmBulkAccessRequest"
+        "JSON request body (required): application/json, #/components/schemas/ConfirmBulkAccessRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/operations/%7BoperationId%7D/cancellation'",
       "exampleParameters": {
@@ -26935,7 +35617,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path workspaceId (required): string, minLength 3, maxLength 128",
         "path appId (required): string, minLength 3, maxLength 128",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/CreateBulkAccessPreviewRequest"
+        "JSON request body (required): application/json, #/components/schemas/CreateBulkAccessPreviewRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"action\\":\\"suspend_memberships\\",\\"filter\\":{\\"membershipIds\\":[\\"{membershipIds_1}\\"]},\\"reason\\":\\"administrator_action\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/previews'",
       "exampleParameters": {
@@ -27148,7 +35830,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path previewId (required): string",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/ExecuteBulkAccessPreviewRequest"
+        "JSON request body (required): application/json, #/components/schemas/ExecuteBulkAccessPreviewRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"previewIntegrityDigest\\":\\"sha256:0000000000000000000000000000000000000000000000000000000000000000\\",\\"previewVersion\\":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/previews/%7BpreviewId%7D/executions'",
       "exampleParameters": {
@@ -27563,7 +36245,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path appId (required): string",
         "path environment (required): string, one of test | production",
         "header Idempotency-Key (required): string, minLength 1, maxLength 240",
-        "JSON request body (required): #/components/schemas/CreateAppCommerceAddonRequest"
+        "JSON request body (required): application/json, #/components/schemas/CreateAppCommerceAddonRequest"
       ],
       "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'Idempotency-Key: {Idempotency-Key}' -H 'content-type: application/json' --data '{\\"amountMicros\\":0,\\"currency\\":\\"{currency}\\",\\"interval\\":\\"month\\",\\"key\\":\\"{key}\\",\\"name\\":\\"Example\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/commerce/test/addons'",
       "exampleParameters": {
@@ -27704,7 +36386,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path appId (required): string",
         "path environment (required): string, one of test | production",
         "header Idempotency-Key (required): string, minLength 1, maxLength 240",
-        "JSON request body (required): #/components/schemas/CreateAppCommerceCatalogRequest"
+        "JSON request body (required): application/json, #/components/schemas/CreateAppCommerceCatalogRequest"
       ],
       "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'Idempotency-Key: {Idempotency-Key}' -H 'content-type: application/json' --data '{\\"defaultCurrency\\":\\"USD\\",\\"name\\":\\"Example\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/commerce/test/catalog'",
       "exampleParameters": {
@@ -27885,7 +36567,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path environment (required): string, one of test | production",
         "path customerRef (required): string",
         "header Idempotency-Key (required): string, minLength 1, maxLength 240",
-        "JSON request body (required): #/components/schemas/RecordAppCommerceUsageRequest"
+        "JSON request body (required): application/json, #/components/schemas/RecordAppCommerceUsageRequest"
       ],
       "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'Idempotency-Key: {Idempotency-Key}' -H 'content-type: application/json' --data '{\\"meterKey\\":\\"{meterKey}\\",\\"quantity\\":0}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/commerce/test/customers/%7BcustomerRef%7D/usage'",
       "exampleParameters": {
@@ -27993,7 +36675,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path appId (required): string",
         "path environment (required): string, one of test | production",
         "header Idempotency-Key (required): string, minLength 1, maxLength 240",
-        "JSON request body (required): #/components/schemas/CreateAppCommerceFeatureRequest"
+        "JSON request body (required): application/json, #/components/schemas/CreateAppCommerceFeatureRequest"
       ],
       "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'Idempotency-Key: {Idempotency-Key}' -H 'content-type: application/json' --data '{\\"key\\":\\"{key}\\",\\"name\\":\\"Example\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/commerce/test/features'",
       "exampleParameters": {
@@ -28104,7 +36786,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path environment (required): string, one of test | production",
         "path invoiceId (required): string",
         "header Idempotency-Key (required): string, minLength 1, maxLength 240",
-        "JSON request body (required): #/components/schemas/RequestAppCommerceRefundRequest"
+        "JSON request body (required): application/json, #/components/schemas/RequestAppCommerceRefundRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'Idempotency-Key: {Idempotency-Key}' -H 'content-type: application/json' --data '{\\"amountMinor\\":1,\\"currency\\":\\"{currency}\\",\\"paymentId\\":\\"{paymentId}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/commerce/test/invoices/%7BinvoiceId%7D/refunds'",
       "exampleParameters": {
@@ -28286,7 +36968,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path appId (required): string",
         "path environment (required): string, one of test | production",
         "header Idempotency-Key (required): string, minLength 1, maxLength 240",
-        "JSON request body (required): #/components/schemas/CreateAppCommercePlanRequest"
+        "JSON request body (required): application/json, #/components/schemas/CreateAppCommercePlanRequest"
       ],
       "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'Idempotency-Key: {Idempotency-Key}' -H 'content-type: application/json' --data '{\\"amountMicros\\":0,\\"currency\\":\\"{currency}\\",\\"interval\\":\\"month\\",\\"key\\":\\"{key}\\",\\"name\\":\\"Example\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/commerce/test/plans'",
       "exampleParameters": {
@@ -28761,6 +37443,303 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
     {
       "authority": [
         "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "JSON request body (required): application/json, object"
+      ],
+      "example": "curl --request DELETE -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"expected\\":\\"{expected}\\"}' 'https://api.authle.ss/workspaces/undefined/apps/undefined/icon'",
+      "exampleParameters": {},
+      "exampleRequestBody": {
+        "expected": "{expected}"
+      },
+      "method": "DELETE",
+      "operationId": "clearAppIcon",
+      "outcomes": [
+        {
+          "description": "Icon cleared",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Invalid input",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "App or asset not found",
+          "status": 404,
+          "success": false
+        },
+        {
+          "description": "Revision conflict",
+          "status": 409,
+          "success": false
+        },
+        {
+          "description": "Unexpected service failure",
+          "status": 500,
+          "success": false
+        },
+        {
+          "description": "Temporarily unavailable",
+          "status": 503,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/icon",
+      "parameters": [],
+      "requestBodyFields": [
+        {
+          "example": "{expected}",
+          "name": "expected",
+          "required": true,
+          "type": "value",
+          "validation": "—"
+        }
+      ],
+      "requestSchema": {
+        "type": "object",
+        "required": [
+          "expected"
+        ],
+        "properties": {
+          "expected": {
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/AppIconBinding"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "retrySafety": "unsafe",
+      "summary": "Clear an app icon"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "JSON request body (required): application/json, object"
+      ],
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"assetId\\":\\"{assetId}\\",\\"revision\\":1,\\"expected\\":\\"{expected}\\"}' 'https://api.authle.ss/workspaces/undefined/apps/undefined/icon'",
+      "exampleParameters": {},
+      "exampleRequestBody": {
+        "assetId": "{assetId}",
+        "revision": 1,
+        "expected": "{expected}"
+      },
+      "method": "POST",
+      "operationId": "publishAppIcon",
+      "outcomes": [
+        {
+          "description": "Icon published",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Invalid input",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "App or asset not found",
+          "status": 404,
+          "success": false
+        },
+        {
+          "description": "Revision conflict",
+          "status": 409,
+          "success": false
+        },
+        {
+          "description": "Unexpected service failure",
+          "status": 500,
+          "success": false
+        },
+        {
+          "description": "Temporarily unavailable",
+          "status": 503,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/icon",
+      "parameters": [],
+      "requestBodyFields": [
+        {
+          "example": "{assetId}",
+          "name": "assetId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": 1,
+          "name": "revision",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1"
+        },
+        {
+          "example": "{expected}",
+          "name": "expected",
+          "required": true,
+          "type": "value",
+          "validation": "—"
+        }
+      ],
+      "requestSchema": {
+        "type": "object",
+        "required": [
+          "assetId",
+          "revision",
+          "expected"
+        ],
+        "properties": {
+          "assetId": {
+            "type": "string"
+          },
+          "revision": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "expected": {
+            "anyOf": [
+              {
+                "type": "null"
+              },
+              {
+                "$ref": "#/components/schemas/AppIconBinding"
+              }
+            ]
+          }
+        },
+        "additionalProperties": false
+      },
+      "retrySafety": "unsafe",
+      "summary": "Publish an app icon"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [],
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/undefined/apps/undefined/icon/intents'",
+      "exampleParameters": {},
+      "method": "POST",
+      "operationId": "createAppIconUploadIntent",
+      "outcomes": [
+        {
+          "description": "Upload intent created",
+          "status": 201,
+          "success": true
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "App or asset not found",
+          "status": 404,
+          "success": false
+        },
+        {
+          "description": "Unexpected service failure",
+          "status": 500,
+          "success": false
+        },
+        {
+          "description": "Temporarily unavailable",
+          "status": 503,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/icon/intents",
+      "parameters": [],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "Create an app icon upload intent"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      "constraints": [
+        "Raw binary request body (required): image/png, image/jpeg, image/webp"
+      ],
+      "example": "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: image/png' --data-binary @icon.png 'https://api.authle.ss/workspaces/undefined/apps/undefined/icon/intents/undefined'",
+      "exampleParameters": {},
+      "method": "PUT",
+      "operationId": "uploadAppIcon",
+      "outcomes": [
+        {
+          "description": "Icon uploaded",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Invalid input",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Unauthorized",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "App or asset not found",
+          "status": 404,
+          "success": false
+        },
+        {
+          "description": "Image upload exceeds the 5 MiB encoded limit",
+          "status": 413,
+          "success": false
+        },
+        {
+          "description": "Unexpected service failure",
+          "status": 500,
+          "success": false
+        },
+        {
+          "description": "Temporarily unavailable",
+          "status": 503,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/apps/{appId}/icon/intents/{intentId}",
+      "parameters": [],
+      "requestBodyFields": [],
+      "requestSchema": {
+        "type": "string",
+        "format": "binary"
+      },
+      "retrySafety": "unsafe",
+      "summary": "Upload a processed app icon"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
         "Server-side credential scoped to one exact app environment. Never expose this value to browser bundles, logs, examples, or diagnostics."
       ],
       "constraints": [
@@ -28871,7 +37850,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path appId (required): string, minLength 3, maxLength 128",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/InviteAppMembershipRequest"
+        "JSON request body (required): application/json, #/components/schemas/InviteAppMembershipRequest"
       ],
       "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"email\\":\\"person@example.test\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships'",
       "exampleParameters": {
@@ -29165,7 +38144,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/GrantAppEntitlementRequest"
+        "JSON request body (required): application/json, #/components/schemas/GrantAppEntitlementRequest"
       ],
       "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"key\\":\\"{key}\\",\\"source\\":\\"{source}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/entitlements'",
       "exampleParameters": {
@@ -29323,7 +38302,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/RevokeAppEntitlementRequest"
+        "JSON request body (required): application/json, #/components/schemas/RevokeAppEntitlementRequest"
       ],
       "example": "curl --request DELETE -H 'authorization: Bearer {app_credential}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/entitlements/%7BgrantId%7D'",
       "exampleParameters": {
@@ -29477,7 +38456,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/ChangeAppMembershipStatusRequest"
+        "JSON request body (required): application/json, #/components/schemas/ChangeAppMembershipStatusRequest"
       ],
       "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"action\\":\\"activate\\",\\"confirmed\\":true,\\"reason\\":\\"access_ended\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/lifecycle'",
       "exampleParameters": {
@@ -29638,7 +38617,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/GrantAppRoleRequest"
+        "JSON request body (required): application/json, #/components/schemas/GrantAppRoleRequest"
       ],
       "example": "curl --request POST -H 'authorization: Bearer {app_credential}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true,\\"key\\":\\"{key}\\",\\"source\\":\\"{source}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/roles'",
       "exampleParameters": {
@@ -29790,7 +38769,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/RevokeAppRoleRequest"
+        "JSON request body (required): application/json, #/components/schemas/RevokeAppRoleRequest"
       ],
       "example": "curl --request DELETE -H 'authorization: Bearer {app_credential}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"confirmed\\":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/roles/%7BgrantId%7D'",
       "exampleParameters": {
@@ -30077,6 +39056,429 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "Server-side platform session. Never expose this value to browser bundles or logs."
       ],
       "constraints": [
+        "path workspaceId (required): string",
+        "header x-correlation-id (optional): string, minLength 8, maxLength 128",
+        "JSON request body (optional): application/json, object"
+      ],
+      "example": "curl --request DELETE -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"expected\\":\\"{expected}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/avatar'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "x-correlation-id": "request_example_001"
+      },
+      "exampleRequestBody": {
+        "expected": "{expected}"
+      },
+      "method": "DELETE",
+      "operationId": "removeWorkspaceAvatar",
+      "outcomes": [
+        {
+          "description": "Avatar removed",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Invalid avatar request",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Session unavailable",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Workspace or avatar asset unavailable",
+          "status": 404,
+          "success": false
+        },
+        {
+          "description": "Avatar changed",
+          "status": 409,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/avatar",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{expected}",
+          "name": "expected",
+          "required": true,
+          "type": "value",
+          "validation": "—"
+        }
+      ],
+      "requestSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "expected"
+        ],
+        "properties": {
+          "expected": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/WorkspaceAvatar"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "retrySafety": "unsafe",
+      "summary": "Remove a workspace avatar"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "header x-correlation-id (optional): string, minLength 8, maxLength 128",
+        "JSON request body (required): application/json, object"
+      ],
+      "example": "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{\\"assetId\\":\\"{assetId}\\",\\"assetRevision\\":1,\\"expected\\":\\"{expected}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/avatar'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "x-correlation-id": "request_example_001"
+      },
+      "exampleRequestBody": {
+        "assetId": "{assetId}",
+        "assetRevision": 1,
+        "expected": "{expected}"
+      },
+      "method": "PUT",
+      "operationId": "attachWorkspaceAvatar",
+      "outcomes": [
+        {
+          "description": "Avatar attached",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Invalid avatar request",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Session unavailable",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Workspace or avatar asset unavailable",
+          "status": 404,
+          "success": false
+        },
+        {
+          "description": "Avatar changed",
+          "status": 409,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/avatar",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [
+        {
+          "example": "{assetId}",
+          "name": "assetId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": 1,
+          "name": "assetRevision",
+          "required": true,
+          "type": "integer",
+          "validation": "min 1"
+        },
+        {
+          "example": "{expected}",
+          "name": "expected",
+          "required": true,
+          "type": "value",
+          "validation": "—"
+        }
+      ],
+      "requestSchema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "assetId",
+          "assetRevision",
+          "expected"
+        ],
+        "properties": {
+          "assetId": {
+            "type": "string"
+          },
+          "assetRevision": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "expected": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/WorkspaceAvatar"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "retrySafety": "unsafe",
+      "summary": "Attach a workspace avatar asset"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "header x-correlation-id (optional): string, minLength 8, maxLength 128",
+        "path size (required): integer, one of 24 | 64 | 256"
+      ],
+      "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/avatar/24'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "x-correlation-id": "request_example_001",
+        "size": 24
+      },
+      "method": "GET",
+      "operationId": "getWorkspaceAvatar",
+      "outcomes": [
+        {
+          "description": "Private avatar image",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Session unavailable",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Avatar unavailable",
+          "status": 404,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/avatar/{size}",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        },
+        {
+          "example": 24,
+          "location": "path",
+          "name": "size",
+          "required": true,
+          "type": "integer",
+          "validation": "one of 24 | 64 | 256"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "safe",
+      "summary": "Deliver a private workspace avatar variant"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "header x-correlation-id (optional): string, minLength 8, maxLength 128"
+      ],
+      "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/avatar/intents'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "x-correlation-id": "request_example_001"
+      },
+      "method": "POST",
+      "operationId": "issueWorkspaceAvatarIntent",
+      "outcomes": [
+        {
+          "description": "Upload intent issued",
+          "status": 201,
+          "success": true
+        },
+        {
+          "description": "Session unavailable",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "Workspace unavailable",
+          "status": 404,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/avatar/intents",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        }
+      ],
+      "requestBodyFields": [],
+      "retrySafety": "unsafe",
+      "summary": "Issue a workspace avatar upload intent"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
+      "constraints": [
+        "path workspaceId (required): string",
+        "header x-correlation-id (optional): string, minLength 8, maxLength 128",
+        "path intentId (required): string",
+        "header content-type (required): string",
+        "JSON request body (required): application/json, string"
+      ],
+      "example": "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: {content-type}' -H 'content-type: application/json' --data '\\"{value}\\"' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/avatar/intents/%7BintentId%7D'",
+      "exampleParameters": {
+        "workspaceId": "{workspaceId}",
+        "x-correlation-id": "request_example_001",
+        "intentId": "{intentId}",
+        "content-type": "{content-type}"
+      },
+      "exampleRequestBody": "{value}",
+      "method": "PUT",
+      "operationId": "uploadWorkspaceAvatar",
+      "outcomes": [
+        {
+          "description": "Avatar asset uploaded",
+          "status": 200,
+          "success": true
+        },
+        {
+          "description": "Invalid upload",
+          "status": 400,
+          "success": false
+        },
+        {
+          "description": "Session unavailable",
+          "status": 401,
+          "success": false
+        },
+        {
+          "description": "The image exceeds the 5 MiB encoded upload limit",
+          "status": 413,
+          "success": false
+        }
+      ],
+      "path": "/workspaces/{workspaceId}/avatar/intents/{intentId}",
+      "parameters": [
+        {
+          "example": "{workspaceId}",
+          "location": "path",
+          "name": "workspaceId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "request_example_001",
+          "location": "header",
+          "name": "x-correlation-id",
+          "required": false,
+          "type": "string",
+          "validation": "minLength 8, maxLength 128"
+        },
+        {
+          "example": "{intentId}",
+          "location": "path",
+          "name": "intentId",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        },
+        {
+          "example": "{content-type}",
+          "location": "header",
+          "name": "content-type",
+          "required": true,
+          "type": "string",
+          "validation": "—"
+        }
+      ],
+      "requestBodyFields": [],
+      "requestSchema": {
+        "type": "string",
+        "description": "Binary image bytes are accepted with the upload content type."
+      },
+      "retrySafety": "unsafe",
+      "summary": "Upload workspace avatar bytes"
+    },
+    {
+      "authority": [
+        "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
+      "constraints": [
         "path workspaceId (required): string"
       ],
       "example": "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/billing'",
@@ -30123,7 +39525,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       "constraints": [
         "path workspaceId (required): string",
-        "JSON request body (required): #/components/schemas/CommercialBillingCancellationReviewRequest"
+        "JSON request body (required): application/json, #/components/schemas/CommercialBillingCancellationReviewRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"idempotencyKey\\":\\"{idempotencyKey}\\",\\"mode\\":\\"period_end\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/billing/cancellation-reviews'",
       "exampleParameters": {
@@ -30206,7 +39608,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       "constraints": [
         "path workspaceId (required): string",
-        "JSON request body (required): #/components/schemas/CommercialBillingCancellationConfirmationRequest"
+        "JSON request body (required): application/json, #/components/schemas/CommercialBillingCancellationConfirmationRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"confirmationToken\\":\\"{confirmationToken}\\",\\"idempotencyKey\\":\\"{idempotencyKey}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/billing/cancellations'",
       "exampleParameters": {
@@ -30289,7 +39691,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       "constraints": [
         "path workspaceId (required): string",
-        "JSON request body (required): #/components/schemas/CommercialBillingChangeAuthorizationRequest"
+        "JSON request body (required): application/json, #/components/schemas/CommercialBillingChangeAuthorizationRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"changeId\\":\\"{changeId}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/billing/change-authorizations'",
       "exampleParameters": {
@@ -30359,7 +39761,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       "constraints": [
         "path workspaceId (required): string",
-        "JSON request body (required): #/components/schemas/CommercialBillingChangeReviewRequest"
+        "JSON request body (required): application/json, #/components/schemas/CommercialBillingChangeReviewRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"idempotencyKey\\":\\"{idempotencyKey}\\",\\"period\\":\\"monthly\\",\\"planId\\":\\"launch\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/billing/change-reviews'",
       "exampleParameters": {
@@ -30451,7 +39853,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       "constraints": [
         "path workspaceId (required): string",
-        "JSON request body (required): #/components/schemas/CommercialBillingRefundRequest"
+        "JSON request body (required): application/json, #/components/schemas/CommercialBillingRefundRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"amountMicros\\":1,\\"category\\":\\"first_purchase_goodwill\\",\\"consumedOverageMicros\\":0,\\"idempotencyKey\\":\\"{idempotencyKey}\\",\\"invoiceRef\\":\\"{invoiceRef}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/billing/refund-requests'",
       "exampleParameters": {
@@ -30616,7 +40018,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path workspaceId (required): string",
         "path planId (required): string, one of launch | growth | scale",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
-        "JSON request body (required): #/components/schemas/CommercialPurchaseConfirmationRequest"
+        "JSON request body (required): application/json, #/components/schemas/CommercialPurchaseConfirmationRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'content-type: application/json' --data '{\\"acceptanceToken\\":\\"acceptance-example-001\\",\\"confirmed\\":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/commercial-purchases/launch/confirmations'",
       "exampleParameters": {
@@ -30718,7 +40120,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       "constraints": [
         "path workspaceId (required): string",
         "path planId (required): string, one of launch | growth | scale",
-        "JSON request body (required): #/components/schemas/CommercialPurchaseReviewRequest"
+        "JSON request body (required): application/json, #/components/schemas/CommercialPurchaseReviewRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"billingPeriod\\":\\"monthly\\",\\"locale\\":\\"en\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/commercial-purchases/launch/reviews'",
       "exampleParameters": {
@@ -30911,7 +40313,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       "constraints": [
         "path workspaceId (required): string",
-        "JSON request body (required): #/components/schemas/CommercialOverageConfigurationRequest"
+        "JSON request body (required): application/json, #/components/schemas/CommercialOverageConfigurationRequest"
       ],
       "example": "curl --request PATCH -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"enabled\\":true,\\"idempotencyKey\\":\\"{idempotencyKey}\\",\\"monthlySpendCapMicrosSar\\":0}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/overages'",
       "exampleParameters": {
@@ -31002,7 +40404,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       "constraints": [
         "path workspaceId (required): string",
-        "JSON request body (required): #/components/schemas/CommercialOverageActivationRequest"
+        "JSON request body (required): application/json, #/components/schemas/CommercialOverageActivationRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"idempotencyKey\\":\\"{idempotencyKey}\\",\\"monthlySpendCapMicrosSar\\":1,\\"reviewId\\":\\"{reviewId}\\"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/overages/activations'",
       "exampleParameters": {
@@ -31099,7 +40501,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       "constraints": [
         "path workspaceId (required): string",
-        "JSON request body (required): #/components/schemas/CommercialOverageReviewRequest"
+        "JSON request body (required): application/json, #/components/schemas/CommercialOverageReviewRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"idempotencyKey\\":\\"{idempotencyKey}\\",\\"monthlySpendCapMicrosSar\\":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/overages/reviews'",
       "exampleParameters": {
@@ -31239,7 +40641,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       "constraints": [
         "path workspaceId (required): string",
-        "JSON request body (required): #/components/schemas/CreateWorkspaceServicePrincipalRequest"
+        "JSON request body (required): application/json, #/components/schemas/CreateWorkspaceServicePrincipalRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"name\\":\\"Example\\",\\"scopes\\":[\\"app:read\\"],\\"restrictions\\":{\\"appIds\\":[],\\"environments\\":[\\"test\\"]}}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/service-principals'",
       "exampleParameters": {
@@ -31479,7 +40881,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path workspaceId (required): string",
         "path principalId (required): string",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
-        "JSON request body (required): #/components/schemas/IssueWorkspaceServiceCredentialRequest"
+        "JSON request body (required): application/json, #/components/schemas/IssueWorkspaceServiceCredentialRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'content-type: application/json' --data '{\\"name\\":\\"Example\\",\\"scopes\\":[\\"app:read\\"],\\"restrictions\\":{\\"appIds\\":[],\\"environments\\":[\\"test\\"]}}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/service-principals/%7BprincipalId%7D/credentials'",
       "exampleParameters": {
@@ -31623,7 +41025,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path credentialId (required): string",
         "header idempotency-key (optional): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
-        "JSON request body (required): #/components/schemas/RevokeWorkspaceServiceCredentialRequest"
+        "JSON request body (required): application/json, #/components/schemas/RevokeWorkspaceServiceCredentialRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/service-principals/%7BprincipalId%7D/credentials/%7BcredentialId%7D/revoke'",
       "exampleParameters": {
@@ -31742,7 +41144,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path credentialId (required): string",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header if-match (optional): string, pattern ^\\"[1-9]\\\\d*\\"$",
-        "JSON request body (required): #/components/schemas/RotateWorkspaceServiceCredentialRequest"
+        "JSON request body (required): application/json, #/components/schemas/RotateWorkspaceServiceCredentialRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'content-type: application/json' --data '{\\"overlapSeconds\\":0}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/service-principals/%7BprincipalId%7D/credentials/%7BcredentialId%7D/rotate'",
       "exampleParameters": {
@@ -31875,7 +41277,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       "constraints": [
         "path workspaceId (required): string",
         "path principalId (required): string",
-        "JSON request body (required): #/components/schemas/ChangeWorkspaceServicePrincipalStatusRequest"
+        "JSON request body (required): application/json, #/components/schemas/ChangeWorkspaceServicePrincipalStatusRequest"
       ],
       "example": "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{\\"status\\":\\"active\\",\\"expectedVersion\\":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/service-principals/%7BprincipalId%7D/status'",
       "exampleParameters": {
@@ -32001,7 +41403,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       title: "مرجع واجهة REST",
       updatedAt: "2026-08-14",
       contentType: "text/markdown",
-      contentDigest: "41e4f35ed7a702fd60025269e1384d00a143b8a19b4a2eff3aab2e517a8d06aa"
+      contentDigest: "67af5b4be7c6107c02a742e6f6003045c561332b36f576ec6a0b00fa2ea7f617"
     },
     {
       canonical: "https://docs.authle.ss/changes",
@@ -32056,7 +41458,7 @@ The following checked projection is shared with the human-rendered guide and pre
 \`\`\`json
 {
   "schema": "authless.release-center/v1",
-  "updatedAt": "2026-10-17",
+  "updatedAt": "2026-10-25",
   "compatibility": [
     {
       "component": "REST API",
@@ -32148,6 +41550,615 @@ The following checked projection is shared with the human-rendered guide and pre
     }
   ],
   "changes": [
+    {
+      "id": "2026-10-25-authless-m12-passkey-sign-in",
+      "publishedAt": "2026-10-25",
+      "title": {
+        "en": "Authless M-12 passkey sign-in policy",
+        "ar": "سياسة تسجيل الدخول بمفتاح المرور M-12 في Authless"
+      },
+      "summary": {
+        "en": "Authless now models passkeys as the M-12 sign-in method. A relying app can opt into a signed OAuth handoff while M-06 email-code sign-in remains available for email-only policies.",
+        "ar": "تمثل Authless الآن مفاتيح المرور كطريقة تسجيل الدخول M-12. ويمكن للتطبيق المعتمد تفعيل تسليم OAuth موقع، بينما يظل تسجيل الدخول برمز البريد M-06 متاحاً للسياسات المعتمدة على البريد فقط."
+      },
+      "categories": [
+        "api",
+        "product",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference",
+        "evaluator"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Private preview, source-only. Authless owns passkey credentials, ceremonies, and sign-in UX; relying apps select M-12 in their policy and handle the signed callback. Keep M-06 for email-code sign-in, and verify the local Node 24 and PostgreSQL proof before any hosted rollout.",
+        "ar": "معاينة خاصة ومصدر فقط. تملك Authless بيانات اعتماد مفاتيح المرور وطقوسها وتجربة تسجيل الدخول؛ وتختار التطبيقات المعتمدة M-12 في سياستها وتعالج الاستدعاء الموقع. حافظ على M-06 لتسجيل الدخول برمز البريد، وتحقق من إثبات Node 24 وPostgreSQL المحلي قبل أي طرح مستضاف."
+      },
+      "announcement": {
+        "en": "The checked policy contract, database migration, passkey verifier, OAuth interaction snapshot, Sign handoff, dashboard policy fields, and CLI or machine-readable projections agree on M-12. Local tests cover registration, authentication, origin and challenge binding, counter replay, signed OAuth handoff, and Arabic locale continuity. No hosted deployment or GA availability is claimed.",
+        "ar": "يتوافق عقد السياسة والتحقق من ترحيل قاعدة البيانات ومدقق مفتاح المرور ولقطة تفاعل OAuth وتسليم Sign وحقول سياسة لوحة التحكم وإسقاطات CLI والوثائق المقروءة آلياً على M-12. تغطي الاختبارات المحلية التسجيل والمصادقة وربط الأصل والتحدي وإعادة استخدام العداد وتسليم OAuth الموقع واستمرارية اللغة العربية. لا يُدّعى وجود نشر مستضاف أو إتاحة عامة."
+      },
+      "replacement": null,
+      "supportWindow": "Private preview pending hosted provider verification and release approval.",
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/core/src/policy/domain.ts",
+        "packages/db/drizzle/0124_passkey_policy_method_up.sql",
+        "packages/identity-node/src/passkey-verifier.ts",
+        "packages/oidc/src/interactions.ts",
+        "apps/sign/src/routes/+page.svelte",
+        "apps/dash/src/lib/AuthenticationPolicyFields.svelte",
+        "tests/passkey-verifier.test.ts",
+        "tests/oidc-passkey.test.ts",
+        "tests/integration/policy-active-use-postgres.integration.ts",
+        "docs/plans/external-accounts-spec.md"
+      ],
+      "permalink": "/changes#2026-10-25-authless-m12-passkey-sign-in"
+    },
+    {
+      "id": "2026-10-21-managed-media-pipeline",
+      "publishedAt": "2026-10-21",
+      "title": {
+        "en": "Bounded managed media pipeline",
+        "ar": "مسار الوسائط المُدارة المقيّدة"
+      },
+      "summary": {
+        "en": "Authless processes bounded PNG, JPEG, and WebP uploads into owner-scoped WebP variants for private profile, workspace, and app assets.",
+        "ar": "تعالج Authless عمليات رفع PNG وJPEG وWebP المقيّدة إلى نسخ WebP ضمن نطاق المالك لملفات التعريف ومساحات العمل وموارد التطبيقات الخاصة."
+      },
+      "categories": [
+        "api",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Create a single-use media intent, upload a supported raster within the size limits, and use only the processed variants returned by the media contract.",
+        "ar": "أنشئ نية وسائط أحادية الاستخدام، وارفع صورة نقطية مدعومة ضمن حدود الحجم، واستخدم النسخ المعالجة التي يعيدها عقد الوسائط فقط."
+      },
+      "announcement": {
+        "en": "The processor strips metadata, applies orientation, and refuses unsupported, oversized, animated, malformed, expired, or revoked assets.",
+        "ar": "يزيل المعالج البيانات الوصفية ويطبق الاتجاه ويرفض الموارد غير المدعومة أو الكبيرة أو المتحركة أو التالفة أو المنتهية أو الملغاة."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/core/src/media/service.ts",
+        "packages/db/src/media-store.ts",
+        "apps/api/src/media-processor.ts",
+        "tests/integration/media-postgres.integration.ts",
+        "docs/plans/identity-slices/H-M01-qa.md"
+      ],
+      "permalink": "/changes#2026-10-21-managed-media-pipeline"
+    },
+    {
+      "id": "2026-10-21-anonymous-guest-authority",
+      "publishedAt": "2026-10-21",
+      "title": {
+        "en": "Bounded anonymous guest authority",
+        "ar": "صلاحية الضيف المجهول المقيّدة"
+      },
+      "summary": {
+        "en": "Guest authority uses a separate anonymous principal with bounded capabilities, app and environment audience checks, and finite session lifetimes.",
+        "ar": "تستخدم صلاحية الضيف مبدأً مجهولاً منفصلاً مع إمكانات مقيّدة وفحوصات لجمهور التطبيق والبيئة وأعمار جلسات محدودة."
+      },
+      "categories": [
+        "api",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Treat guest grants as app-scoped anonymous authority. Request only the permitted guest capabilities and never rely on person claims, refresh tokens, or offline access.",
+        "ar": "تعامل مع منح الضيف باعتبارها صلاحية مجهولة ضمن نطاق التطبيق. اطلب إمكانات الضيف المسموحة فقط ولا تعتمد على مطالبات الشخص أو رموز التحديث أو الوصول دون اتصال."
+      },
+      "announcement": {
+        "en": "Authority validation checks the active visitor, app guest, session, generation, audience, policy version, and bounded expiry before issuing anonymous claims.",
+        "ar": "يتحقق فحص الصلاحية من الزائر والضيف والتطبيق والجلسة والجيل والجمهور ونسخة السياسة والانتهاء المقيّد قبل إصدار المطالبات المجهولة."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/core/src/policy/guest-authority.ts",
+        "packages/db/src/guest-authority-store.ts",
+        "packages/oidc/src/claim-projection.ts",
+        "tests/integration/guest-authority-qa.integration.ts",
+        "docs/plans/identity-slices/H-G01-qa.md"
+      ],
+      "permalink": "/changes#2026-10-21-anonymous-guest-authority"
+    },
+    {
+      "id": "2026-10-21-workspace-avatar",
+      "publishedAt": "2026-10-21",
+      "title": {
+        "en": "Workspace avatar management",
+        "ar": "إدارة الصورة الرمزية لمساحة العمل"
+      },
+      "summary": {
+        "en": "Workspace owners and admins can attach processed avatars with versioned writes, while members receive private same-origin variants when they have current view access.",
+        "ar": "يمكن لمالكي مساحات العمل ومديريها إرفاق صور رمزية معالجة بكتابات ذات إصدارات، بينما يتلقى الأعضاء نسخاً خاصة من الأصل نفسه عند امتلاكهم صلاحية العرض الحالية."
+      },
+      "categories": [
+        "api",
+        "product",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Use the workspace avatar operations from the canonical contract. Send the expected workspace version for replacement or removal and render only the private processed variant returned for the current viewer.",
+        "ar": "استخدم عمليات الصورة الرمزية لمساحة العمل من العقد الأساسي. أرسل إصدار مساحة العمل المتوقع عند الاستبدال أو الإزالة واعرض النسخة المعالجة الخاصة التي تعاد للمشاهد الحالي فقط."
+      },
+      "announcement": {
+        "en": "Workspace list, switcher, shell, overview, API projections, and SDKs expose safe avatar metadata with initials or an icon fallback when media is unavailable.",
+        "ar": "تعرض قائمة مساحات العمل ومبدّلها والغلاف والنظرة العامة وإسقاطات API وحزم SDK بيانات الصورة الرمزية الآمنة مع بديل الأحرف الأولى أو الأيقونة عند عدم توفر الوسائط."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/contracts/openapi/authless.openapi.json",
+        "apps/api/src/workspace-routes.ts",
+        "packages/core/src/workspace/avatar-service.ts",
+        "packages/db/src/workspace-store.ts",
+        "packages/server/src/workspaces.ts",
+        "tests/integration/workspace-avatar-postgres.integration.ts",
+        "docs/plans/identity-slices/V-W01-qa.md"
+      ],
+      "permalink": "/changes#2026-10-21-workspace-avatar"
+    },
+    {
+      "id": "2026-10-21-backend-custom-sign-in",
+      "publishedAt": "2026-10-21",
+      "title": {
+        "en": "Backend custom sign-in client",
+        "ar": "عميل تسجيل الدخول المخصص من الخادم"
+      },
+      "summary": {
+        "en": "Server applications can run guest and email-code sign-in through a typed client that keeps backend credentials, OAuth tokens, PKCE material, and app sessions on the server.",
+        "ar": "يمكن لتطبيقات الخادم تشغيل تسجيل دخول الضيف ورمز البريد عبر عميل موجه يحافظ على بيانات اعتماد الخادم ورموز OAuth ومواد PKCE وجلسات التطبيق على الخادم."
+      },
+      "categories": [
+        "api",
+        "sdk",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Use the server custom-auth client for transaction start, challenge, verification, completion, cancellation, logout, and account switching. Keep the backend credential and token state server-side.",
+        "ar": "استخدم عميل المصادقة المخصصة من الخادم لبدء المعاملة والتحدي والتحقق والإكمال والإلغاء وتسجيل الخروج وتبديل الحساب. حافظ على بيانات اعتماد الخادم وحالة الرموز على الخادم."
+      },
+      "announcement": {
+        "en": "The runnable SvelteKit example keeps the browser on an app-owned session boundary and rejects origin, CSRF, state, binding, callback, and replay mismatches.",
+        "ar": "يحافظ مثال SvelteKit القابل للتشغيل على المتصفح ضمن حدود جلسة يملكها التطبيق ويرفض حالات عدم تطابق الأصل وCSRF والحالة والربط والاستدعاء وإعادة الاستخدام."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/server/src/custom-authentication.ts",
+        "apps/api/src/custom-authentication-management-routes.ts",
+        "examples/sveltekit-custom-sign-in/src/lib/server/custom-auth.ts",
+        "tests/integration/custom-authentication-postgres.integration.ts",
+        "docs/plans/identity-slices/V-C01-runtime-qa.md"
+      ],
+      "permalink": "/changes#2026-10-21-backend-custom-sign-in"
+    },
+    {
+      "id": "2026-10-21-browser-custom-sign-in",
+      "publishedAt": "2026-10-21",
+      "title": {
+        "en": "Browser custom sign-in SDK",
+        "ar": "حزمة تسجيل الدخول المخصص للمتصفح"
+      },
+      "summary": {
+        "en": "Registered browser apps can start guest or email-code sign-in, validate the callback, exchange a PKCE code, use DPoP-bound tokens, and call UserInfo without exposing private transaction material.",
+        "ar": "يمكن لتطبيقات المتصفح المسجلة بدء تسجيل دخول الضيف أو رمز البريد والتحقق من الاستدعاء وتبادل رمز PKCE واستخدام رموز مرتبطة بـ DPoP واستدعاء UserInfo دون كشف مواد المعاملة الخاصة."
+      },
+      "categories": [
+        "api",
+        "sdk",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Install the browser package and provide the registered HTTPS origin, redirect, client, app, environment, and endpoint metadata. Keep guest refresh disabled and handle logout or account-switch uncertainty as a recoverable state.",
+        "ar": "ثبّت حزمة المتصفح وقدم بيانات الأصل HTTPS وعنوان إعادة التوجيه والعميل والتطبيق والبيئة ونقاط النهاية المسجلة. أبقِ تحديث الضيف معطلاً وتعامل مع عدم اليقين عند تسجيل الخروج أو تبديل الحساب كحالة قابلة للاسترداد."
+      },
+      "announcement": {
+        "en": "The public example provides a custom sign-in popup flow for guest and email-code methods with origin binding, one-use continuation, callback validation, and safe recovery states.",
+        "ar": "يوفر المثال العام مسار نافذة منبثقة لتسجيل الدخول المخصص بطريقتي الضيف ورمز البريد مع ربط الأصل والاستمرار أحادي الاستخدام والتحقق من الاستدعاء وحالات استرداد آمنة."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/browser/src/custom-auth.ts",
+        "packages/browser/package.json",
+        "examples/custom-browser-sign-in/src/sign-in.ts",
+        "tests/integration/public-custom-browser.integration.ts",
+        "docs/plans/identity-slices/V-C02-runtime-qa.md"
+      ],
+      "permalink": "/changes#2026-10-21-browser-custom-sign-in"
+    },
+    {
+      "id": "2026-10-20-app-icon-delivery",
+      "publishedAt": "2026-10-20",
+      "title": {
+        "en": "App icon delivery and captured sign-in branding",
+        "ar": "تسليم أيقونة التطبيق والعلامة الملتقطة لتسجيل الدخول"
+      },
+      "summary": {
+        "en": "Apps can publish bounded WebP icons for dashboard and hosted sign-in surfaces. Public delivery accepts only the current published binding or an exact live transaction snapshot.",
+        "ar": "يمكن للتطبيقات نشر أيقونات WebP محدودة لواجهات لوحة التحكم وتسجيل الدخول المستضاف. لا يقبل التسليم العام إلا الربط المنشور الحالي أو لقطة المعاملة الحية المطابقة."
+      },
+      "categories": [
+        "api",
+        "product",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Use GET /media/public/app-icons/{appId}/{assetId}/{size}. Treat 404 as unavailable or unpublished, pass transaction only for the exact live sign-in request, and keep clients prepared for a bounded 60-second public cache.",
+        "ar": "استخدم GET /media/public/app-icons/{appId}/{assetId}/{size}. تعامل مع 404 باعتباره غير متاح أو غير منشور، وأرسل transaction فقط لطلب تسجيل الدخول الحي المطابق، وجهز العملاء لذاكرة تخزين عامة محدودة بستين ثانية."
+      },
+      "announcement": {
+        "en": "Dashboard and Sign render the same published or transaction-captured app icon through same-origin, no-cookie, MIME-sniffing-protected delivery.",
+        "ar": "تعرض لوحة التحكم وSign أيقونة التطبيق المنشورة أو الملتقطة للمعاملة نفسها عبر تسليم من الأصل نفسه وبدون ملفات تعريف ارتباط ومع حماية من تخمين نوع MIME."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/contracts/openapi/authless.openapi.json",
+        "apps/api/src/app-routes.ts",
+        "apps/sign/src/routes/media/public/app-icons/[appId]/[assetId]/[size]/+server.ts",
+        "packages/core/src/app/branding-service.ts",
+        "packages/db/src/app-branding-store.ts",
+        "tests/integration/app-branding-postgres.integration.ts"
+      ],
+      "permalink": "/changes#2026-10-20-app-icon-delivery"
+    },
+    {
+      "id": "2026-10-20-personal-profile-and-picture-claims",
+      "publishedAt": "2026-10-20",
+      "title": {
+        "en": "Personal profile and consented picture claims",
+        "ar": "الملف الشخصي ومطالبات الصورة بموافقة المستخدم"
+      },
+      "summary": {
+        "en": "People can manage their display name and avatar. Registered apps can request consented name and picture claims; picture delivery uses a short-lived opaque capability bound to the current grant and avatar.",
+        "ar": "يمكن للأشخاص إدارة اسم العرض والصورة الرمزية. ويمكن للتطبيقات المسجلة طلب مطالبات الاسم والصورة بموافقة المستخدم، مع تسليم الصورة عبر قدرة مبهمة قصيرة العمر مرتبطة بالمنحة والصورة الحالية."
+      },
+      "categories": [
+        "api",
+        "product",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Add the six personal profile operations from the canonical OpenAPI contract. Request name and picture only after profile consent; treat picture URLs as short-lived private capabilities and do not persist or share them.",
+        "ar": "أضف عمليات الملف الشخصي الست من عقد OpenAPI canonical. اطلب الاسم والصورة بعد موافقة الملف الشخصي فقط، وتعامل مع روابط الصورة كقدرات خاصة قصيرة العمر ولا تخزنها أو تشاركها."
+      },
+      "announcement": {
+        "en": "The dashboard shows the current personal name and avatar, while UserInfo emits only consented profile claims and a current-avatar picture capability.",
+        "ar": "تعرض لوحة التحكم الاسم والصورة الحاليين، بينما تصدر UserInfo مطالبات الملف الشخصي التي وافق عليها المستخدم فقط وقدرة صورة مرتبطة بالصورة الحالية."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/contracts/openapi/authless.openapi.json",
+        "apps/api/src/personal-routes.ts",
+        "apps/sign/src/oidc/claims.ts",
+        "packages/oidc/src/interactions.ts",
+        "packages/core/src/identity/personal-profile-service.ts",
+        "packages/db/src/identity/personal-profile-store.ts",
+        "tests/integration/personal-picture-oidc.integration.ts",
+        "tests/integration/personal-profile-postgres.integration.ts",
+        "tests/oidc-core.test.ts",
+        "apps/docs/src/lib/release-catalogue.ts"
+      ],
+      "permalink": "/changes#2026-10-20-personal-profile-and-picture-claims"
+    },
+    {
+      "id": "2026-10-20-custom-authentication-transactions",
+      "publishedAt": "2026-10-20",
+      "title": {
+        "en": "Bound custom sign-in transactions",
+        "ar": "معاملات تسجيل الدخول المخصص المقيدة"
+      },
+      "summary": {
+        "en": "Explicitly registered clients can create guest and email-code transactions bound to their app, environment, origin, redirect, policy, and browser proof. Completion issues no personal platform session.",
+        "ar": "يمكن للعملاء المسجلين صراحة إنشاء معاملات للضيف ورمز البريد مرتبطة بالتطبيق والبيئة والأصل وإعادة التوجيه والسياسة وإثبات المتصفح. لا ينشئ الإكمال جلسة شخصية على المنصة."
+      },
+      "categories": [
+        "api",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Keep custom authentication disabled until the client has an explicit mode, method allowlist, origin, and redirect registration. Use the six custom transaction operations and preserve their exact state, nonce, PKCE, and browser bindings.",
+        "ar": "أبقِ المصادقة المخصصة معطلة حتى يُسجل للعميل وضع صريح وقائمة بالطرق المسموحة وأصل وعنوان لإعادة التوجيه. استخدم عمليات المعاملات المخصصة الست وحافظ على الارتباط الدقيق للحالة والرمز العشوائي وPKCE والمتصفح."
+      },
+      "announcement": {
+        "en": "The shared protocol checks current authority, one-use proof, consent, and code exchange. App-owned forms and session custody are configured by their separate integrations.",
+        "ar": "يفحص البروتوكول المشترك الصلاحية الحالية والإثبات أحادي الاستخدام والموافقة وتبادل الرمز. تُهيأ النماذج التي يملكها التطبيق وحفظ الجلسات من خلال تكاملاتها المنفصلة."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/contracts/openapi/authless.openapi.json",
+        "apps/api/src/custom-authentication-routes.ts",
+        "packages/core/src/identity/custom-authentication.ts",
+        "packages/db/src/custom-authentication-store.ts",
+        "packages/oidc/src/authorization-code-binder.ts",
+        "tests/integration/custom-oidc-handoff.integration.ts",
+        "docs/reference/custom-authentication.md"
+      ],
+      "permalink": "/changes#2026-10-20-custom-authentication-transactions"
+    },
+    {
+      "id": "2026-10-20-hosted-guest-admission",
+      "publishedAt": "2026-10-20",
+      "title": {
+        "en": "Explicit hosted guest admission",
+        "ar": "دخول الزوار الصريح عبر صفحة تسجيل الدخول"
+      },
+      "summary": {
+        "en": "An environment can explicitly enable bounded guest access and show Continue as guest on hosted sign-in. Guest sessions remain separate from registered personal sign-in.",
+        "ar": "يمكن للبيئة تفعيل دخول الزوار المحدود صراحة وإظهار المتابعة كضيف في صفحة تسجيل الدخول. تبقى جلسات الزوار منفصلة عن تسجيل الدخول الشخصي المسجل."
+      },
+      "categories": [
+        "api",
+        "product",
+        "sdk",
+        "security"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Guest admission is disabled by default. Configure each environment's admission policy and limits before enabling it. Validate current guest authority and enforce the app's permitted guest capabilities.",
+        "ar": "دخول الزوار معطل افتراضيًا. اضبط سياسة الدخول وحدوده لكل بيئة قبل تفعيله. تحقق من صلاحية الضيف الحالية وطبّق إمكانات الضيف المسموحة داخل التطبيق."
+      },
+      "announcement": {
+        "en": "Guest authorization uses PKCE, DPoP, bounded token and session lifetimes, and current policy checks. It does not create a personal platform session or issue a refresh token.",
+        "ar": "يستخدم تفويض الزائر PKCE وDPoP وأعمارًا محدودة للرموز والجلسات وفحص السياسة الحالية. ولا ينشئ جلسة شخصية على المنصة أو يصدر رمز تحديث."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/contracts/openapi/authless.openapi.json",
+        "apps/api/src/guest-admission-routes.ts",
+        "packages/core/src/policy/guest-admission.ts",
+        "packages/db/src/guest-admission-store.ts",
+        "packages/server/src/guest-admission.ts",
+        "tests/hosted-guest-admission.node.test.mjs",
+        "docs/plans/identity-slices/V-A01-qa.md"
+      ],
+      "permalink": "/changes#2026-10-20-hosted-guest-admission"
+    },
+    {
+      "id": "2026-10-21-returning-guest-continuity",
+      "publishedAt": "2026-10-21",
+      "title": {
+        "en": "Returning-browser guest continuity",
+        "ar": "استمرارية ضيف المتصفح العائد"
+      },
+      "summary": {
+        "en": "Authless can retain a bounded browser guest relationship, reuse the app-scoped guest across tabs and visits, and require explicit consent before network continuity joins another app.",
+        "ar": "يمكن لـ Authless الاحتفاظ بعلاقة ضيف محدودة للمتصفح وإعادة استخدام ضيف التطبيق عبر علامات التبويب والزيارات، مع طلب موافقة صريحة قبل انضمام تطبيق آخر إلى الاستمرارية الشبكية."
+      },
+      "categories": [
+        "api",
+        "product",
+        "sdk",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Use the browser continuity helper with an Authless issuer and registered guest transaction. Keep isolated app-only mode as the default, treat network mode as an explicit user choice, and never persist or expose the visitor secret or visitor ID.",
+        "ar": "استخدم مساعد استمرارية المتصفح مع مُصدر Authless ومعاملة ضيف مسجلة. أبقِ وضع التطبيق المعزول هو الافتراضي، وتعامل مع الوضع الشبكي كموافقة صريحة من المستخدم، ولا تخزن سر الزائر أو معرفه ولا تعرضهما."
+      },
+      "announcement": {
+        "en": "The host-only visitor cookie is rotated and revocable. App guests keep pairwise subjects, one-use browser handoffs bind origin and proof, and retention cleanup removes expired guest state without exposing cross-app activity.",
+        "ar": "يُدار ملف تعريف الزائر الخاص بالمضيف بالتدوير والإلغاء. يحتفظ ضيوف التطبيقات بمعرفات مقترنة، وترتبط عمليات التسليم أحادية الاستخدام بالأصل وإثبات المتصفح، وينظف الاحتفاظ حالة الضيوف المنتهية دون كشف نشاط بين التطبيقات."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/browser/src/guest-continuity.ts",
+        "packages/core/src/policy/guest-continuity.ts",
+        "packages/db/src/guest-continuity-store.ts",
+        "apps/sign/src/oidc-runtime.ts",
+        "packages/oidc/src/guest-continuity-renderer.ts",
+        "docs/plans/identity-slices/V-A03-qa.md"
+      ],
+      "permalink": "/changes#2026-10-21-returning-guest-continuity"
+    },
+    {
+      "id": "2026-10-21-app-local-profiles",
+      "publishedAt": "2026-10-21",
+      "title": {
+        "en": "App-local profiles for people and guests",
+        "ar": "الملفات الشخصية المحلية للتطبيق للأشخاص والزوار"
+      },
+      "summary": {
+        "en": "Apps can maintain a scoped display name and avatar for a registered person or returning guest without changing the platform profile. Profile writes, avatar uploads, publishing, removal, and effective reads are authorized by the current app grant and policy.",
+        "ar": "يمكن للتطبيقات إدارة اسم عرض وصورة رمزية ضمن نطاق التطبيق للشخص المسجل أو الزائر العائد دون تغيير الملف الشخصي للمنصة. وتخضع عمليات الكتابة ورفع الصورة ونشرها وإزالتها والقراءة الفعالة لمنحة التطبيق والسياسة الحالية."
+      },
+      "categories": [
+        "api",
+        "product",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Use the app-profile operations from the canonical OpenAPI contract. Keep profile consent and current grant checks in place for personal fallback, treat avatar URLs as short-lived opaque capabilities, and use If-Match plus idempotency keys for writes.",
+        "ar": "استخدم عمليات الملف المحلي للتطبيق من عقد OpenAPI الأساسي. حافظ على فحوصات موافقة الملف والمنحة الحالية عند استخدام بيانات الشخص الاحتياطية، وتعامل مع روابط الصور كقدرات مبهمة قصيرة العمر، واستخدم If-Match ومفاتيح منع التكرار للكتابات."
+      },
+      "announcement": {
+        "en": "The dashboard and hosted sign-in can show the effective app profile for a person or guest. Reset tombstones, stale-version conflicts, media publication, and retention cleanup keep app data isolated and reversible.",
+        "ar": "يمكن للوحة التحكم وتسجيل الدخول المستضاف عرض الملف المحلي الفعال للتطبيق للشخص أو الزائر. وتحافظ علامات إعادة الضبط وتعارض الإصدارات القديمة ونشر الوسائط وتنظيف الاحتفاظ على عزل بيانات التطبيق وقابليتها للعكس."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/contracts/openapi/authless.openapi.json",
+        "apps/api/src/app-profile-routes.ts",
+        "packages/core/src/identity/app-profile-service.ts",
+        "packages/db/src/app-profile-store.ts",
+        "packages/db/src/app-profile-authority.ts",
+        "apps/sign/src/oidc/claims.ts",
+        "tests/integration/app-profile-delivery-postgres.integration.ts",
+        "tests/integration/app-profile-lifecycle-postgres.integration.ts",
+        "tests/integration/app-profile-oidc.integration.ts",
+        "docs/plans/identity-slices/V-P02.md",
+        "docs/plans/identity-slices/V-P02-qa.md"
+      ],
+      "permalink": "/changes#2026-10-21-app-local-profiles"
+    },
+    {
+      "id": "2026-10-21-explicit-guest-conversion",
+      "publishedAt": "2026-10-21",
+      "title": {
+        "en": "Explicit hosted guest conversion",
+        "ar": "التحويل الصريح للضيف عبر الاستضافة"
+      },
+      "summary": {
+        "en": "A guest can start a one-use hosted conversion, complete fresh email verification, and explicitly confirm conversion into a person account.",
+        "ar": "يمكن للضيف بدء تحويل مستضاف أحادي الاستخدام وإكمال التحقق الجديد عبر البريد ثم تأكيد التحويل صراحة إلى حساب شخصي."
+      },
+      "categories": [
+        "api",
+        "sdk",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Use the three guest-conversion operations from the canonical REST contract. Send the guest Bearer token with its DPoP proof, origin, CSRF token, and browser binding when beginning an intent. Confirm only with convert_guest and an optional keep_person or keep_guest choice after hosted sign-in.",
+        "ar": "استخدم عمليات تحويل الضيف الثلاث من عقد REST الأساسي. أرسل رمز Bearer للضيف مع إثبات DPoP والأصل ورمز CSRF وربط المتصفح عند بدء النية. أكد باستخدام convert_guest فقط مع اختيار اختياري keep_person أو keep_guest بعد تسجيل الدخول المستضاف."
+      },
+      "announcement": {
+        "en": "The server derives guest and person identifiers from the bound, one-use intent. Exact idempotent replays return 200; a changed replay returns 409. Revoked or expired guest authority cannot convert.",
+        "ar": "يشتق الخادم معرفات الضيف والشخص من النية المقيدة أحادية الاستخدام. تعيد إعادة المحاولة المطابقة تمامًا 200، بينما تعيد إعادة المحاولة المختلفة 409. لا يمكن لصلاحية ضيف ملغاة أو منتهية تنفيذ التحويل."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/contracts/openapi/authless.openapi.json",
+        "apps/api/src/guest-conversion-routes.ts",
+        "packages/server/src/guest-conversion.ts",
+        "apps/sign/src/routes/guest-conversion/[intent]/confirm/+page.server.ts",
+        "packages/db/src/guest-conversion-intent-store.ts",
+        "tests/integration/guest-conversion-postgres.integration.ts",
+        "docs/plans/identity-slices/V-A02.md"
+      ],
+      "permalink": "/changes#2026-10-21-explicit-guest-conversion"
+    },
     {
       "id": "2026-10-17-valid-session-actions",
       "publishedAt": "2026-10-17",
@@ -35379,7 +45390,7 @@ Source attribution: Developer documentation (https://docs.authle.ss/changes).
       title: "Changes and migration",
       updatedAt: "2026-08-21",
       contentType: "text/markdown",
-      contentDigest: "9374b28602e12515801a47f0a2a3952870a016b5d89b95747247e268dc86047b"
+      contentDigest: "db6b6bfca79e61362c1ed574dbdc2d04e6575d858a894b8abe280adea560e911"
     },
     {
       canonical: "https://docs.authle.ss/changes?lang=ar",
@@ -35434,7 +45445,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
 \`\`\`json
 {
   "schema": "authless.release-center/v1",
-  "updatedAt": "2026-10-17",
+  "updatedAt": "2026-10-25",
   "compatibility": [
     {
       "component": "REST API",
@@ -35526,6 +45537,615 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
     }
   ],
   "changes": [
+    {
+      "id": "2026-10-25-authless-m12-passkey-sign-in",
+      "publishedAt": "2026-10-25",
+      "title": {
+        "en": "Authless M-12 passkey sign-in policy",
+        "ar": "سياسة تسجيل الدخول بمفتاح المرور M-12 في Authless"
+      },
+      "summary": {
+        "en": "Authless now models passkeys as the M-12 sign-in method. A relying app can opt into a signed OAuth handoff while M-06 email-code sign-in remains available for email-only policies.",
+        "ar": "تمثل Authless الآن مفاتيح المرور كطريقة تسجيل الدخول M-12. ويمكن للتطبيق المعتمد تفعيل تسليم OAuth موقع، بينما يظل تسجيل الدخول برمز البريد M-06 متاحاً للسياسات المعتمدة على البريد فقط."
+      },
+      "categories": [
+        "api",
+        "product",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference",
+        "evaluator"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Private preview, source-only. Authless owns passkey credentials, ceremonies, and sign-in UX; relying apps select M-12 in their policy and handle the signed callback. Keep M-06 for email-code sign-in, and verify the local Node 24 and PostgreSQL proof before any hosted rollout.",
+        "ar": "معاينة خاصة ومصدر فقط. تملك Authless بيانات اعتماد مفاتيح المرور وطقوسها وتجربة تسجيل الدخول؛ وتختار التطبيقات المعتمدة M-12 في سياستها وتعالج الاستدعاء الموقع. حافظ على M-06 لتسجيل الدخول برمز البريد، وتحقق من إثبات Node 24 وPostgreSQL المحلي قبل أي طرح مستضاف."
+      },
+      "announcement": {
+        "en": "The checked policy contract, database migration, passkey verifier, OAuth interaction snapshot, Sign handoff, dashboard policy fields, and CLI or machine-readable projections agree on M-12. Local tests cover registration, authentication, origin and challenge binding, counter replay, signed OAuth handoff, and Arabic locale continuity. No hosted deployment or GA availability is claimed.",
+        "ar": "يتوافق عقد السياسة والتحقق من ترحيل قاعدة البيانات ومدقق مفتاح المرور ولقطة تفاعل OAuth وتسليم Sign وحقول سياسة لوحة التحكم وإسقاطات CLI والوثائق المقروءة آلياً على M-12. تغطي الاختبارات المحلية التسجيل والمصادقة وربط الأصل والتحدي وإعادة استخدام العداد وتسليم OAuth الموقع واستمرارية اللغة العربية. لا يُدّعى وجود نشر مستضاف أو إتاحة عامة."
+      },
+      "replacement": null,
+      "supportWindow": "Private preview pending hosted provider verification and release approval.",
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/core/src/policy/domain.ts",
+        "packages/db/drizzle/0124_passkey_policy_method_up.sql",
+        "packages/identity-node/src/passkey-verifier.ts",
+        "packages/oidc/src/interactions.ts",
+        "apps/sign/src/routes/+page.svelte",
+        "apps/dash/src/lib/AuthenticationPolicyFields.svelte",
+        "tests/passkey-verifier.test.ts",
+        "tests/oidc-passkey.test.ts",
+        "tests/integration/policy-active-use-postgres.integration.ts",
+        "docs/plans/external-accounts-spec.md"
+      ],
+      "permalink": "/changes#2026-10-25-authless-m12-passkey-sign-in"
+    },
+    {
+      "id": "2026-10-21-managed-media-pipeline",
+      "publishedAt": "2026-10-21",
+      "title": {
+        "en": "Bounded managed media pipeline",
+        "ar": "مسار الوسائط المُدارة المقيّدة"
+      },
+      "summary": {
+        "en": "Authless processes bounded PNG, JPEG, and WebP uploads into owner-scoped WebP variants for private profile, workspace, and app assets.",
+        "ar": "تعالج Authless عمليات رفع PNG وJPEG وWebP المقيّدة إلى نسخ WebP ضمن نطاق المالك لملفات التعريف ومساحات العمل وموارد التطبيقات الخاصة."
+      },
+      "categories": [
+        "api",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Create a single-use media intent, upload a supported raster within the size limits, and use only the processed variants returned by the media contract.",
+        "ar": "أنشئ نية وسائط أحادية الاستخدام، وارفع صورة نقطية مدعومة ضمن حدود الحجم، واستخدم النسخ المعالجة التي يعيدها عقد الوسائط فقط."
+      },
+      "announcement": {
+        "en": "The processor strips metadata, applies orientation, and refuses unsupported, oversized, animated, malformed, expired, or revoked assets.",
+        "ar": "يزيل المعالج البيانات الوصفية ويطبق الاتجاه ويرفض الموارد غير المدعومة أو الكبيرة أو المتحركة أو التالفة أو المنتهية أو الملغاة."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/core/src/media/service.ts",
+        "packages/db/src/media-store.ts",
+        "apps/api/src/media-processor.ts",
+        "tests/integration/media-postgres.integration.ts",
+        "docs/plans/identity-slices/H-M01-qa.md"
+      ],
+      "permalink": "/changes#2026-10-21-managed-media-pipeline"
+    },
+    {
+      "id": "2026-10-21-anonymous-guest-authority",
+      "publishedAt": "2026-10-21",
+      "title": {
+        "en": "Bounded anonymous guest authority",
+        "ar": "صلاحية الضيف المجهول المقيّدة"
+      },
+      "summary": {
+        "en": "Guest authority uses a separate anonymous principal with bounded capabilities, app and environment audience checks, and finite session lifetimes.",
+        "ar": "تستخدم صلاحية الضيف مبدأً مجهولاً منفصلاً مع إمكانات مقيّدة وفحوصات لجمهور التطبيق والبيئة وأعمار جلسات محدودة."
+      },
+      "categories": [
+        "api",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Treat guest grants as app-scoped anonymous authority. Request only the permitted guest capabilities and never rely on person claims, refresh tokens, or offline access.",
+        "ar": "تعامل مع منح الضيف باعتبارها صلاحية مجهولة ضمن نطاق التطبيق. اطلب إمكانات الضيف المسموحة فقط ولا تعتمد على مطالبات الشخص أو رموز التحديث أو الوصول دون اتصال."
+      },
+      "announcement": {
+        "en": "Authority validation checks the active visitor, app guest, session, generation, audience, policy version, and bounded expiry before issuing anonymous claims.",
+        "ar": "يتحقق فحص الصلاحية من الزائر والضيف والتطبيق والجلسة والجيل والجمهور ونسخة السياسة والانتهاء المقيّد قبل إصدار المطالبات المجهولة."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/core/src/policy/guest-authority.ts",
+        "packages/db/src/guest-authority-store.ts",
+        "packages/oidc/src/claim-projection.ts",
+        "tests/integration/guest-authority-qa.integration.ts",
+        "docs/plans/identity-slices/H-G01-qa.md"
+      ],
+      "permalink": "/changes#2026-10-21-anonymous-guest-authority"
+    },
+    {
+      "id": "2026-10-21-workspace-avatar",
+      "publishedAt": "2026-10-21",
+      "title": {
+        "en": "Workspace avatar management",
+        "ar": "إدارة الصورة الرمزية لمساحة العمل"
+      },
+      "summary": {
+        "en": "Workspace owners and admins can attach processed avatars with versioned writes, while members receive private same-origin variants when they have current view access.",
+        "ar": "يمكن لمالكي مساحات العمل ومديريها إرفاق صور رمزية معالجة بكتابات ذات إصدارات، بينما يتلقى الأعضاء نسخاً خاصة من الأصل نفسه عند امتلاكهم صلاحية العرض الحالية."
+      },
+      "categories": [
+        "api",
+        "product",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Use the workspace avatar operations from the canonical contract. Send the expected workspace version for replacement or removal and render only the private processed variant returned for the current viewer.",
+        "ar": "استخدم عمليات الصورة الرمزية لمساحة العمل من العقد الأساسي. أرسل إصدار مساحة العمل المتوقع عند الاستبدال أو الإزالة واعرض النسخة المعالجة الخاصة التي تعاد للمشاهد الحالي فقط."
+      },
+      "announcement": {
+        "en": "Workspace list, switcher, shell, overview, API projections, and SDKs expose safe avatar metadata with initials or an icon fallback when media is unavailable.",
+        "ar": "تعرض قائمة مساحات العمل ومبدّلها والغلاف والنظرة العامة وإسقاطات API وحزم SDK بيانات الصورة الرمزية الآمنة مع بديل الأحرف الأولى أو الأيقونة عند عدم توفر الوسائط."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/contracts/openapi/authless.openapi.json",
+        "apps/api/src/workspace-routes.ts",
+        "packages/core/src/workspace/avatar-service.ts",
+        "packages/db/src/workspace-store.ts",
+        "packages/server/src/workspaces.ts",
+        "tests/integration/workspace-avatar-postgres.integration.ts",
+        "docs/plans/identity-slices/V-W01-qa.md"
+      ],
+      "permalink": "/changes#2026-10-21-workspace-avatar"
+    },
+    {
+      "id": "2026-10-21-backend-custom-sign-in",
+      "publishedAt": "2026-10-21",
+      "title": {
+        "en": "Backend custom sign-in client",
+        "ar": "عميل تسجيل الدخول المخصص من الخادم"
+      },
+      "summary": {
+        "en": "Server applications can run guest and email-code sign-in through a typed client that keeps backend credentials, OAuth tokens, PKCE material, and app sessions on the server.",
+        "ar": "يمكن لتطبيقات الخادم تشغيل تسجيل دخول الضيف ورمز البريد عبر عميل موجه يحافظ على بيانات اعتماد الخادم ورموز OAuth ومواد PKCE وجلسات التطبيق على الخادم."
+      },
+      "categories": [
+        "api",
+        "sdk",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Use the server custom-auth client for transaction start, challenge, verification, completion, cancellation, logout, and account switching. Keep the backend credential and token state server-side.",
+        "ar": "استخدم عميل المصادقة المخصصة من الخادم لبدء المعاملة والتحدي والتحقق والإكمال والإلغاء وتسجيل الخروج وتبديل الحساب. حافظ على بيانات اعتماد الخادم وحالة الرموز على الخادم."
+      },
+      "announcement": {
+        "en": "The runnable SvelteKit example keeps the browser on an app-owned session boundary and rejects origin, CSRF, state, binding, callback, and replay mismatches.",
+        "ar": "يحافظ مثال SvelteKit القابل للتشغيل على المتصفح ضمن حدود جلسة يملكها التطبيق ويرفض حالات عدم تطابق الأصل وCSRF والحالة والربط والاستدعاء وإعادة الاستخدام."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/server/src/custom-authentication.ts",
+        "apps/api/src/custom-authentication-management-routes.ts",
+        "examples/sveltekit-custom-sign-in/src/lib/server/custom-auth.ts",
+        "tests/integration/custom-authentication-postgres.integration.ts",
+        "docs/plans/identity-slices/V-C01-runtime-qa.md"
+      ],
+      "permalink": "/changes#2026-10-21-backend-custom-sign-in"
+    },
+    {
+      "id": "2026-10-21-browser-custom-sign-in",
+      "publishedAt": "2026-10-21",
+      "title": {
+        "en": "Browser custom sign-in SDK",
+        "ar": "حزمة تسجيل الدخول المخصص للمتصفح"
+      },
+      "summary": {
+        "en": "Registered browser apps can start guest or email-code sign-in, validate the callback, exchange a PKCE code, use DPoP-bound tokens, and call UserInfo without exposing private transaction material.",
+        "ar": "يمكن لتطبيقات المتصفح المسجلة بدء تسجيل دخول الضيف أو رمز البريد والتحقق من الاستدعاء وتبادل رمز PKCE واستخدام رموز مرتبطة بـ DPoP واستدعاء UserInfo دون كشف مواد المعاملة الخاصة."
+      },
+      "categories": [
+        "api",
+        "sdk",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Install the browser package and provide the registered HTTPS origin, redirect, client, app, environment, and endpoint metadata. Keep guest refresh disabled and handle logout or account-switch uncertainty as a recoverable state.",
+        "ar": "ثبّت حزمة المتصفح وقدم بيانات الأصل HTTPS وعنوان إعادة التوجيه والعميل والتطبيق والبيئة ونقاط النهاية المسجلة. أبقِ تحديث الضيف معطلاً وتعامل مع عدم اليقين عند تسجيل الخروج أو تبديل الحساب كحالة قابلة للاسترداد."
+      },
+      "announcement": {
+        "en": "The public example provides a custom sign-in popup flow for guest and email-code methods with origin binding, one-use continuation, callback validation, and safe recovery states.",
+        "ar": "يوفر المثال العام مسار نافذة منبثقة لتسجيل الدخول المخصص بطريقتي الضيف ورمز البريد مع ربط الأصل والاستمرار أحادي الاستخدام والتحقق من الاستدعاء وحالات استرداد آمنة."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/browser/src/custom-auth.ts",
+        "packages/browser/package.json",
+        "examples/custom-browser-sign-in/src/sign-in.ts",
+        "tests/integration/public-custom-browser.integration.ts",
+        "docs/plans/identity-slices/V-C02-runtime-qa.md"
+      ],
+      "permalink": "/changes#2026-10-21-browser-custom-sign-in"
+    },
+    {
+      "id": "2026-10-20-app-icon-delivery",
+      "publishedAt": "2026-10-20",
+      "title": {
+        "en": "App icon delivery and captured sign-in branding",
+        "ar": "تسليم أيقونة التطبيق والعلامة الملتقطة لتسجيل الدخول"
+      },
+      "summary": {
+        "en": "Apps can publish bounded WebP icons for dashboard and hosted sign-in surfaces. Public delivery accepts only the current published binding or an exact live transaction snapshot.",
+        "ar": "يمكن للتطبيقات نشر أيقونات WebP محدودة لواجهات لوحة التحكم وتسجيل الدخول المستضاف. لا يقبل التسليم العام إلا الربط المنشور الحالي أو لقطة المعاملة الحية المطابقة."
+      },
+      "categories": [
+        "api",
+        "product",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Use GET /media/public/app-icons/{appId}/{assetId}/{size}. Treat 404 as unavailable or unpublished, pass transaction only for the exact live sign-in request, and keep clients prepared for a bounded 60-second public cache.",
+        "ar": "استخدم GET /media/public/app-icons/{appId}/{assetId}/{size}. تعامل مع 404 باعتباره غير متاح أو غير منشور، وأرسل transaction فقط لطلب تسجيل الدخول الحي المطابق، وجهز العملاء لذاكرة تخزين عامة محدودة بستين ثانية."
+      },
+      "announcement": {
+        "en": "Dashboard and Sign render the same published or transaction-captured app icon through same-origin, no-cookie, MIME-sniffing-protected delivery.",
+        "ar": "تعرض لوحة التحكم وSign أيقونة التطبيق المنشورة أو الملتقطة للمعاملة نفسها عبر تسليم من الأصل نفسه وبدون ملفات تعريف ارتباط ومع حماية من تخمين نوع MIME."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/contracts/openapi/authless.openapi.json",
+        "apps/api/src/app-routes.ts",
+        "apps/sign/src/routes/media/public/app-icons/[appId]/[assetId]/[size]/+server.ts",
+        "packages/core/src/app/branding-service.ts",
+        "packages/db/src/app-branding-store.ts",
+        "tests/integration/app-branding-postgres.integration.ts"
+      ],
+      "permalink": "/changes#2026-10-20-app-icon-delivery"
+    },
+    {
+      "id": "2026-10-20-personal-profile-and-picture-claims",
+      "publishedAt": "2026-10-20",
+      "title": {
+        "en": "Personal profile and consented picture claims",
+        "ar": "الملف الشخصي ومطالبات الصورة بموافقة المستخدم"
+      },
+      "summary": {
+        "en": "People can manage their display name and avatar. Registered apps can request consented name and picture claims; picture delivery uses a short-lived opaque capability bound to the current grant and avatar.",
+        "ar": "يمكن للأشخاص إدارة اسم العرض والصورة الرمزية. ويمكن للتطبيقات المسجلة طلب مطالبات الاسم والصورة بموافقة المستخدم، مع تسليم الصورة عبر قدرة مبهمة قصيرة العمر مرتبطة بالمنحة والصورة الحالية."
+      },
+      "categories": [
+        "api",
+        "product",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Add the six personal profile operations from the canonical OpenAPI contract. Request name and picture only after profile consent; treat picture URLs as short-lived private capabilities and do not persist or share them.",
+        "ar": "أضف عمليات الملف الشخصي الست من عقد OpenAPI canonical. اطلب الاسم والصورة بعد موافقة الملف الشخصي فقط، وتعامل مع روابط الصورة كقدرات خاصة قصيرة العمر ولا تخزنها أو تشاركها."
+      },
+      "announcement": {
+        "en": "The dashboard shows the current personal name and avatar, while UserInfo emits only consented profile claims and a current-avatar picture capability.",
+        "ar": "تعرض لوحة التحكم الاسم والصورة الحاليين، بينما تصدر UserInfo مطالبات الملف الشخصي التي وافق عليها المستخدم فقط وقدرة صورة مرتبطة بالصورة الحالية."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/contracts/openapi/authless.openapi.json",
+        "apps/api/src/personal-routes.ts",
+        "apps/sign/src/oidc/claims.ts",
+        "packages/oidc/src/interactions.ts",
+        "packages/core/src/identity/personal-profile-service.ts",
+        "packages/db/src/identity/personal-profile-store.ts",
+        "tests/integration/personal-picture-oidc.integration.ts",
+        "tests/integration/personal-profile-postgres.integration.ts",
+        "tests/oidc-core.test.ts",
+        "apps/docs/src/lib/release-catalogue.ts"
+      ],
+      "permalink": "/changes#2026-10-20-personal-profile-and-picture-claims"
+    },
+    {
+      "id": "2026-10-20-custom-authentication-transactions",
+      "publishedAt": "2026-10-20",
+      "title": {
+        "en": "Bound custom sign-in transactions",
+        "ar": "معاملات تسجيل الدخول المخصص المقيدة"
+      },
+      "summary": {
+        "en": "Explicitly registered clients can create guest and email-code transactions bound to their app, environment, origin, redirect, policy, and browser proof. Completion issues no personal platform session.",
+        "ar": "يمكن للعملاء المسجلين صراحة إنشاء معاملات للضيف ورمز البريد مرتبطة بالتطبيق والبيئة والأصل وإعادة التوجيه والسياسة وإثبات المتصفح. لا ينشئ الإكمال جلسة شخصية على المنصة."
+      },
+      "categories": [
+        "api",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Keep custom authentication disabled until the client has an explicit mode, method allowlist, origin, and redirect registration. Use the six custom transaction operations and preserve their exact state, nonce, PKCE, and browser bindings.",
+        "ar": "أبقِ المصادقة المخصصة معطلة حتى يُسجل للعميل وضع صريح وقائمة بالطرق المسموحة وأصل وعنوان لإعادة التوجيه. استخدم عمليات المعاملات المخصصة الست وحافظ على الارتباط الدقيق للحالة والرمز العشوائي وPKCE والمتصفح."
+      },
+      "announcement": {
+        "en": "The shared protocol checks current authority, one-use proof, consent, and code exchange. App-owned forms and session custody are configured by their separate integrations.",
+        "ar": "يفحص البروتوكول المشترك الصلاحية الحالية والإثبات أحادي الاستخدام والموافقة وتبادل الرمز. تُهيأ النماذج التي يملكها التطبيق وحفظ الجلسات من خلال تكاملاتها المنفصلة."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/contracts/openapi/authless.openapi.json",
+        "apps/api/src/custom-authentication-routes.ts",
+        "packages/core/src/identity/custom-authentication.ts",
+        "packages/db/src/custom-authentication-store.ts",
+        "packages/oidc/src/authorization-code-binder.ts",
+        "tests/integration/custom-oidc-handoff.integration.ts",
+        "docs/reference/custom-authentication.md"
+      ],
+      "permalink": "/changes#2026-10-20-custom-authentication-transactions"
+    },
+    {
+      "id": "2026-10-20-hosted-guest-admission",
+      "publishedAt": "2026-10-20",
+      "title": {
+        "en": "Explicit hosted guest admission",
+        "ar": "دخول الزوار الصريح عبر صفحة تسجيل الدخول"
+      },
+      "summary": {
+        "en": "An environment can explicitly enable bounded guest access and show Continue as guest on hosted sign-in. Guest sessions remain separate from registered personal sign-in.",
+        "ar": "يمكن للبيئة تفعيل دخول الزوار المحدود صراحة وإظهار المتابعة كضيف في صفحة تسجيل الدخول. تبقى جلسات الزوار منفصلة عن تسجيل الدخول الشخصي المسجل."
+      },
+      "categories": [
+        "api",
+        "product",
+        "sdk",
+        "security"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Guest admission is disabled by default. Configure each environment's admission policy and limits before enabling it. Validate current guest authority and enforce the app's permitted guest capabilities.",
+        "ar": "دخول الزوار معطل افتراضيًا. اضبط سياسة الدخول وحدوده لكل بيئة قبل تفعيله. تحقق من صلاحية الضيف الحالية وطبّق إمكانات الضيف المسموحة داخل التطبيق."
+      },
+      "announcement": {
+        "en": "Guest authorization uses PKCE, DPoP, bounded token and session lifetimes, and current policy checks. It does not create a personal platform session or issue a refresh token.",
+        "ar": "يستخدم تفويض الزائر PKCE وDPoP وأعمارًا محدودة للرموز والجلسات وفحص السياسة الحالية. ولا ينشئ جلسة شخصية على المنصة أو يصدر رمز تحديث."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/contracts/openapi/authless.openapi.json",
+        "apps/api/src/guest-admission-routes.ts",
+        "packages/core/src/policy/guest-admission.ts",
+        "packages/db/src/guest-admission-store.ts",
+        "packages/server/src/guest-admission.ts",
+        "tests/hosted-guest-admission.node.test.mjs",
+        "docs/plans/identity-slices/V-A01-qa.md"
+      ],
+      "permalink": "/changes#2026-10-20-hosted-guest-admission"
+    },
+    {
+      "id": "2026-10-21-returning-guest-continuity",
+      "publishedAt": "2026-10-21",
+      "title": {
+        "en": "Returning-browser guest continuity",
+        "ar": "استمرارية ضيف المتصفح العائد"
+      },
+      "summary": {
+        "en": "Authless can retain a bounded browser guest relationship, reuse the app-scoped guest across tabs and visits, and require explicit consent before network continuity joins another app.",
+        "ar": "يمكن لـ Authless الاحتفاظ بعلاقة ضيف محدودة للمتصفح وإعادة استخدام ضيف التطبيق عبر علامات التبويب والزيارات، مع طلب موافقة صريحة قبل انضمام تطبيق آخر إلى الاستمرارية الشبكية."
+      },
+      "categories": [
+        "api",
+        "product",
+        "sdk",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Use the browser continuity helper with an Authless issuer and registered guest transaction. Keep isolated app-only mode as the default, treat network mode as an explicit user choice, and never persist or expose the visitor secret or visitor ID.",
+        "ar": "استخدم مساعد استمرارية المتصفح مع مُصدر Authless ومعاملة ضيف مسجلة. أبقِ وضع التطبيق المعزول هو الافتراضي، وتعامل مع الوضع الشبكي كموافقة صريحة من المستخدم، ولا تخزن سر الزائر أو معرفه ولا تعرضهما."
+      },
+      "announcement": {
+        "en": "The host-only visitor cookie is rotated and revocable. App guests keep pairwise subjects, one-use browser handoffs bind origin and proof, and retention cleanup removes expired guest state without exposing cross-app activity.",
+        "ar": "يُدار ملف تعريف الزائر الخاص بالمضيف بالتدوير والإلغاء. يحتفظ ضيوف التطبيقات بمعرفات مقترنة، وترتبط عمليات التسليم أحادية الاستخدام بالأصل وإثبات المتصفح، وينظف الاحتفاظ حالة الضيوف المنتهية دون كشف نشاط بين التطبيقات."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/browser/src/guest-continuity.ts",
+        "packages/core/src/policy/guest-continuity.ts",
+        "packages/db/src/guest-continuity-store.ts",
+        "apps/sign/src/oidc-runtime.ts",
+        "packages/oidc/src/guest-continuity-renderer.ts",
+        "docs/plans/identity-slices/V-A03-qa.md"
+      ],
+      "permalink": "/changes#2026-10-21-returning-guest-continuity"
+    },
+    {
+      "id": "2026-10-21-app-local-profiles",
+      "publishedAt": "2026-10-21",
+      "title": {
+        "en": "App-local profiles for people and guests",
+        "ar": "الملفات الشخصية المحلية للتطبيق للأشخاص والزوار"
+      },
+      "summary": {
+        "en": "Apps can maintain a scoped display name and avatar for a registered person or returning guest without changing the platform profile. Profile writes, avatar uploads, publishing, removal, and effective reads are authorized by the current app grant and policy.",
+        "ar": "يمكن للتطبيقات إدارة اسم عرض وصورة رمزية ضمن نطاق التطبيق للشخص المسجل أو الزائر العائد دون تغيير الملف الشخصي للمنصة. وتخضع عمليات الكتابة ورفع الصورة ونشرها وإزالتها والقراءة الفعالة لمنحة التطبيق والسياسة الحالية."
+      },
+      "categories": [
+        "api",
+        "product",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Use the app-profile operations from the canonical OpenAPI contract. Keep profile consent and current grant checks in place for personal fallback, treat avatar URLs as short-lived opaque capabilities, and use If-Match plus idempotency keys for writes.",
+        "ar": "استخدم عمليات الملف المحلي للتطبيق من عقد OpenAPI الأساسي. حافظ على فحوصات موافقة الملف والمنحة الحالية عند استخدام بيانات الشخص الاحتياطية، وتعامل مع روابط الصور كقدرات مبهمة قصيرة العمر، واستخدم If-Match ومفاتيح منع التكرار للكتابات."
+      },
+      "announcement": {
+        "en": "The dashboard and hosted sign-in can show the effective app profile for a person or guest. Reset tombstones, stale-version conflicts, media publication, and retention cleanup keep app data isolated and reversible.",
+        "ar": "يمكن للوحة التحكم وتسجيل الدخول المستضاف عرض الملف المحلي الفعال للتطبيق للشخص أو الزائر. وتحافظ علامات إعادة الضبط وتعارض الإصدارات القديمة ونشر الوسائط وتنظيف الاحتفاظ على عزل بيانات التطبيق وقابليتها للعكس."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/contracts/openapi/authless.openapi.json",
+        "apps/api/src/app-profile-routes.ts",
+        "packages/core/src/identity/app-profile-service.ts",
+        "packages/db/src/app-profile-store.ts",
+        "packages/db/src/app-profile-authority.ts",
+        "apps/sign/src/oidc/claims.ts",
+        "tests/integration/app-profile-delivery-postgres.integration.ts",
+        "tests/integration/app-profile-lifecycle-postgres.integration.ts",
+        "tests/integration/app-profile-oidc.integration.ts",
+        "docs/plans/identity-slices/V-P02.md",
+        "docs/plans/identity-slices/V-P02-qa.md"
+      ],
+      "permalink": "/changes#2026-10-21-app-local-profiles"
+    },
+    {
+      "id": "2026-10-21-explicit-guest-conversion",
+      "publishedAt": "2026-10-21",
+      "title": {
+        "en": "Explicit hosted guest conversion",
+        "ar": "التحويل الصريح للضيف عبر الاستضافة"
+      },
+      "summary": {
+        "en": "A guest can start a one-use hosted conversion, complete fresh email verification, and explicitly confirm conversion into a person account.",
+        "ar": "يمكن للضيف بدء تحويل مستضاف أحادي الاستخدام وإكمال التحقق الجديد عبر البريد ثم تأكيد التحويل صراحة إلى حساب شخصي."
+      },
+      "categories": [
+        "api",
+        "sdk",
+        "security",
+        "docs"
+      ],
+      "audiences": [
+        "integrator",
+        "operator",
+        "reference"
+      ],
+      "impact": "additive",
+      "migration": {
+        "en": "Use the three guest-conversion operations from the canonical REST contract. Send the guest Bearer token with its DPoP proof, origin, CSRF token, and browser binding when beginning an intent. Confirm only with convert_guest and an optional keep_person or keep_guest choice after hosted sign-in.",
+        "ar": "استخدم عمليات تحويل الضيف الثلاث من عقد REST الأساسي. أرسل رمز Bearer للضيف مع إثبات DPoP والأصل ورمز CSRF وربط المتصفح عند بدء النية. أكد باستخدام convert_guest فقط مع اختيار اختياري keep_person أو keep_guest بعد تسجيل الدخول المستضاف."
+      },
+      "announcement": {
+        "en": "The server derives guest and person identifiers from the bound, one-use intent. Exact idempotent replays return 200; a changed replay returns 409. Revoked or expired guest authority cannot convert.",
+        "ar": "يشتق الخادم معرفات الضيف والشخص من النية المقيدة أحادية الاستخدام. تعيد إعادة المحاولة المطابقة تمامًا 200، بينما تعيد إعادة المحاولة المختلفة 409. لا يمكن لصلاحية ضيف ملغاة أو منتهية تنفيذ التحويل."
+      },
+      "replacement": null,
+      "supportWindow": null,
+      "sunsetAt": null,
+      "status": "available",
+      "support": "/support",
+      "evidence": [
+        "packages/contracts/openapi/authless.openapi.json",
+        "apps/api/src/guest-conversion-routes.ts",
+        "packages/server/src/guest-conversion.ts",
+        "apps/sign/src/routes/guest-conversion/[intent]/confirm/+page.server.ts",
+        "packages/db/src/guest-conversion-intent-store.ts",
+        "tests/integration/guest-conversion-postgres.integration.ts",
+        "docs/plans/identity-slices/V-A02.md"
+      ],
+      "permalink": "/changes#2026-10-21-explicit-guest-conversion"
+    },
     {
       "id": "2026-10-17-valid-session-actions",
       "publishedAt": "2026-10-17",
@@ -38757,7 +49377,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       title: "التغييرات والترحيل",
       updatedAt: "2026-08-21",
       contentType: "text/markdown",
-      contentDigest: "312fc17068383ab1d9099e170affe222b9d69692570b88a422796d610cc5a9e6"
+      contentDigest: "ed9641a763ad77f84e1ff509ce6187725f01eead3d9b52bfd1a21788379393f4"
     },
     {
       canonical: "https://docs.authle.ss/agents",
@@ -39599,7 +50219,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       constraints: [
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/RequestIdentityContinuationRequest"
+        "JSON request body (required): application/json, #/components/schemas/RequestIdentityContinuationRequest"
       ],
       example: `curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"email":"person@example.com","locale":"en"}' 'https://api.authle.ss/identity/continuations'`,
       exampleParameters: {
@@ -39667,7 +50287,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       constraints: [
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/VerifyIdentityContinuationRequest"
+        "JSON request body (required): application/json, #/components/schemas/VerifyIdentityContinuationRequest"
       ],
       example: `curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"challengeId":"identity_continuation_example","code":"123456","locale":"en"}' 'https://api.authle.ss/identity/continuations/verifications'`,
       exampleParameters: {
@@ -39748,7 +50368,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       constraints: [
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/ConsumeIdentityRecoveryRequest"
+        "JSON request body (required): application/json, #/components/schemas/ConsumeIdentityRecoveryRequest"
       ],
       example: `curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"token":"recovery-proof-token"}' 'https://api.authle.ss/identity/recovery-proofs'`,
       exampleParameters: {
@@ -39813,7 +50433,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       constraints: [
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/RequestIdentityRecoveryRequest"
+        "JSON request body (required): application/json, #/components/schemas/RequestIdentityRecoveryRequest"
       ],
       example: `curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"identifier":"person@example.com","locale":"en"}' 'https://api.authle.ss/identity/recovery-requests'`,
       exampleParameters: {
@@ -39881,7 +50501,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       constraints: [
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/RevokeIdentityRecoveryPasswordRequest"
+        "JSON request body (required): application/json, #/components/schemas/RevokeIdentityRecoveryPasswordRequest"
       ],
       example: `curl --request DELETE -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"confirmed":true,"locale":"en"}' 'https://api.authle.ss/identity/recovery/authenticators/password'`,
       exampleParameters: {
@@ -40001,7 +50621,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       constraints: [
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/RequestIdentityRecoveryEmailReplacementRequest"
+        "JSON request body (required): application/json, #/components/schemas/RequestIdentityRecoveryEmailReplacementRequest"
       ],
       example: `curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"confirmed":true,"email":"new.person@example.com","locale":"en"}' 'https://api.authle.ss/identity/recovery/identifier-replacements/email'`,
       exampleParameters: {
@@ -40092,7 +50712,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       constraints: [
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/VerifyIdentityRecoveryEmailReplacementRequest"
+        "JSON request body (required): application/json, #/components/schemas/VerifyIdentityRecoveryEmailReplacementRequest"
       ],
       example: `curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"locale":"en","token":"replacement-proof-token"}' 'https://api.authle.ss/identity/recovery/identifier-replacements/email/verifications'`,
       exampleParameters: {
@@ -40165,7 +50785,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       constraints: [
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/ReplaceIdentityRecoveryUsernameRequest"
+        "JSON request body (required): application/json, #/components/schemas/ReplaceIdentityRecoveryUsernameRequest"
       ],
       example: `curl --request PUT -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"confirmed":true,"locale":"en","username":"new_name"}' 'https://api.authle.ss/identity/recovery/identifiers/username'`,
       exampleParameters: {
@@ -40256,7 +50876,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       constraints: [
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/RegisterIdentityRequest"
+        "JSON request body (required): application/json, #/components/schemas/RegisterIdentityRequest"
       ],
       example: `curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"email":"person@example.com","locale":"en","password":"correct horse battery staple"}' 'https://api.authle.ss/identity/registrations'`,
       exampleParameters: {
@@ -40337,7 +50957,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       constraints: [
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/VerifyIdentityRequest"
+        "JSON request body (required): application/json, #/components/schemas/VerifyIdentityRequest"
       ],
       example: `curl --request POST -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"locale":"en","token":"verification-token"}' 'https://api.authle.ss/identity/verifications'`,
       exampleParameters: {
@@ -40458,7 +51078,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       constraints: [
         "header Idempotency-Key (required): string, minLength 1, maxLength 240",
-        "JSON request body (required): #/components/schemas/CreatePersonalCommerceCheckoutRequest"
+        "JSON request body (required): application/json, #/components/schemas/CreatePersonalCommerceCheckoutRequest"
       ],
       example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'Idempotency-Key: {Idempotency-Key}' -H 'content-type: application/json' --data '{"acceptedTermsDigest":"{acceptedTermsDigest}","appId":"{appId}","planKey":"{planKey}","returnUrl":"{returnUrl}"}' 'https://api.authle.ss/me/commerce/checkouts'`,
       exampleParameters: {
@@ -40682,7 +51302,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "Server-side platform session. Never expose this value to browser bundles or logs."
       ],
       constraints: [
-        "JSON request body (required): #/components/schemas/CreatePersonalCommercePortalSessionRequest"
+        "JSON request body (required): application/json, #/components/schemas/CreatePersonalCommercePortalSessionRequest"
       ],
       example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{"appId":"{appId}","returnUrl":"{returnUrl}"}' 'https://api.authle.ss/me/commerce/portal-sessions'`,
       exampleParameters: {},
@@ -40739,7 +51359,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       constraints: [
         "header Idempotency-Key (required): string, minLength 1, maxLength 240",
-        "JSON request body (required): #/components/schemas/CreatePersonalCommerceQuoteRequest"
+        "JSON request body (required): application/json, #/components/schemas/CreatePersonalCommerceQuoteRequest"
       ],
       example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'Idempotency-Key: {Idempotency-Key}' -H 'content-type: application/json' --data '{"appId":"{appId}","planKey":"{planKey}"}' 'https://api.authle.ss/me/commerce/quotes'`,
       exampleParameters: {
@@ -40837,7 +51457,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       constraints: [
         "path quoteId (required): string",
         "header Idempotency-Key (required): string, minLength 1, maxLength 240",
-        "JSON request body (required): #/components/schemas/AcceptPersonalCommerceQuoteRequest"
+        "JSON request body (required): application/json, #/components/schemas/AcceptPersonalCommerceQuoteRequest"
       ],
       example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'Idempotency-Key: {Idempotency-Key}' -H 'content-type: application/json' --data '{"termsDigest":"{termsDigest}"}' 'https://api.authle.ss/me/commerce/quotes/%7BquoteId%7D/accept'`,
       exampleParameters: {
@@ -41025,7 +51645,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       constraints: [
         "path subscriptionRef (required): string",
         "header Idempotency-Key (required): string, minLength 1, maxLength 240",
-        "JSON request body (required): #/components/schemas/ChangePersonalCommerceSubscriptionRequest"
+        "JSON request body (required): application/json, #/components/schemas/ChangePersonalCommerceSubscriptionRequest"
       ],
       example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'Idempotency-Key: {Idempotency-Key}' -H 'content-type: application/json' --data '{"effectiveAt":"now"}' 'https://api.authle.ss/me/commerce/subscriptions/%7BsubscriptionRef%7D/changes'`,
       exampleParameters: {
@@ -41204,7 +51824,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       constraints: [
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (optional): #/components/schemas/SignOutOtherSessionsRequest"
+        "JSON request body (optional): application/json, #/components/schemas/SignOutOtherSessionsRequest"
       ],
       example: "curl --request DELETE -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/me/sessions'",
       exampleParameters: {
@@ -41315,7 +51935,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       constraints: [
         "path sessionId (required): string, pattern ^session_[0-9A-HJKMNP-TV-Z]{26}$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (optional): #/components/schemas/RevokePersonalSessionRequest"
+        "JSON request body (optional): application/json, #/components/schemas/RevokePersonalSessionRequest"
       ],
       example: "curl --request DELETE -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/me/sessions/session_01J5K6M7N8P9QRSTVWXYZABCDE'",
       exampleParameters: {
@@ -41397,7 +52017,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       constraints: [
         "path sessionId (required): string, pattern ^session_[0-9A-HJKMNP-TV-Z]{26}$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (optional): #/components/schemas/ReportPersonalSessionRiskRequest"
+        "JSON request body (optional): application/json, #/components/schemas/ReportPersonalSessionRiskRequest"
       ],
       example: "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/me/sessions/session_01J5K6M7N8P9QRSTVWXYZABCDE/risk'",
       exampleParameters: {
@@ -41485,6 +52105,74 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
     },
     {
       authority: [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      constraints: [
+        "path appId (required): string",
+        "path assetId (required): string",
+        "path size (required): integer, one of 24 | 64 | 256",
+        "query transaction (optional): string"
+      ],
+      example: "curl --request GET 'https://api.authle.ss/media/public/app-icons/%7BappId%7D/%7BassetId%7D/24'",
+      exampleParameters: {
+        appId: "{appId}",
+        assetId: "{assetId}",
+        size: 24
+      },
+      method: "GET",
+      operationId: "getPublicAppIcon",
+      outcomes: [
+        {
+          description: "WebP app icon bytes",
+          status: 200,
+          success: true
+        },
+        {
+          description: "Icon unavailable, unpublished, or transaction reference invalid",
+          status: 404,
+          success: false
+        }
+      ],
+      path: "/media/public/app-icons/{appId}/{assetId}/{size}",
+      parameters: [
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{assetId}",
+          location: "path",
+          name: "assetId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: 24,
+          location: "path",
+          name: "size",
+          required: true,
+          type: "integer",
+          validation: "one of 24 | 64 | 256"
+        },
+        {
+          location: "query",
+          name: "transaction",
+          required: false,
+          type: "string",
+          validation: "—"
+        }
+      ],
+      requestBodyFields: [],
+      retrySafety: "safe",
+      summary: "Get a public app icon"
+    },
+    {
+      authority: [
         "Server-side platform session. Never expose this value to browser bundles or logs."
       ],
       constraints: [],
@@ -41519,9 +52207,334 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       authority: [
         "Server-side platform session. Never expose this value to browser bundles or logs."
       ],
+      constraints: [],
+      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/personal/profile'",
+      exampleParameters: {},
+      method: "GET",
+      operationId: "getPersonalProfile",
+      outcomes: [
+        {
+          description: "Personal profile",
+          status: 200,
+          success: true
+        },
+        {
+          description: "Error",
+          status: 401,
+          success: false
+        },
+        {
+          description: "Error",
+          status: 503,
+          success: false
+        }
+      ],
+      path: "/personal/profile",
+      parameters: [],
+      requestBodyFields: [],
+      retrySafety: "safe",
+      summary: "Get the current person's profile"
+    },
+    {
+      authority: [
+        "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
+      constraints: [
+        "JSON request body (required): application/json, #/components/schemas/PersonalProfileDisplayNameRequest"
+      ],
+      example: `curl --request PATCH -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{"displayName":"{displayName}","expectedVersion":1}' 'https://api.authle.ss/personal/profile'`,
+      exampleParameters: {},
+      exampleRequestBody: {
+        displayName: "{displayName}",
+        expectedVersion: 1
+      },
+      method: "PATCH",
+      operationId: "updatePersonalProfile",
+      outcomes: [
+        {
+          description: "Updated profile",
+          status: 200,
+          success: true
+        },
+        {
+          description: "Error",
+          status: 400,
+          success: false
+        },
+        {
+          description: "Error",
+          status: 401,
+          success: false
+        },
+        {
+          description: "Error",
+          status: 409,
+          success: false
+        },
+        {
+          description: "Error",
+          status: 503,
+          success: false
+        }
+      ],
+      path: "/personal/profile",
+      parameters: [],
+      requestBodyFields: [
+        {
+          example: "{displayName}",
+          name: "displayName",
+          required: true,
+          type: "value",
+          validation: "minLength 1, maxLength 80"
+        },
+        {
+          example: 1,
+          name: "expectedVersion",
+          required: true,
+          type: "integer",
+          validation: "min 1"
+        }
+      ],
+      requestSchema: {
+        $ref: "#/components/schemas/PersonalProfileDisplayNameRequest"
+      },
+      retrySafety: "unsafe",
+      summary: "Update the current person's display name"
+    },
+    {
+      authority: [
+        "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
+      constraints: [
+        "header if-match (required): integer, min 1"
+      ],
+      example: "curl --request DELETE -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: 1' 'https://api.authle.ss/personal/profile/avatar'",
+      exampleParameters: {
+        "if-match": 1
+      },
+      method: "DELETE",
+      operationId: "removePersonalAvatar",
+      outcomes: [
+        {
+          description: "Updated profile",
+          status: 200,
+          success: true
+        },
+        {
+          description: "Error",
+          status: 401,
+          success: false
+        },
+        {
+          description: "Error",
+          status: 409,
+          success: false
+        },
+        {
+          description: "Error",
+          status: 503,
+          success: false
+        }
+      ],
+      path: "/personal/profile/avatar",
+      parameters: [
+        {
+          example: 1,
+          location: "header",
+          name: "if-match",
+          required: true,
+          type: "integer",
+          validation: "min 1"
+        }
+      ],
+      requestBodyFields: [],
+      retrySafety: "unsafe",
+      summary: "Remove the current person's avatar"
+    },
+    {
+      authority: [
+        "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
+      constraints: [],
+      example: "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/personal/profile/avatar-intents'",
+      exampleParameters: {},
+      method: "POST",
+      operationId: "createPersonalAvatarIntent",
+      outcomes: [
+        {
+          description: "Upload intent",
+          status: 201,
+          success: true
+        },
+        {
+          description: "Error",
+          status: 401,
+          success: false
+        },
+        {
+          description: "Error",
+          status: 503,
+          success: false
+        }
+      ],
+      path: "/personal/profile/avatar-intents",
+      parameters: [],
+      requestBodyFields: [],
+      retrySafety: "safe",
+      summary: "Create a single-use personal avatar upload intent"
+    },
+    {
+      authority: [
+        "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
+      constraints: [
+        "path assetId (required): string",
+        "path size (required): integer, one of 24 | 64 | 256"
+      ],
+      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/personal/profile/avatar/%7BassetId%7D/24'",
+      exampleParameters: {
+        assetId: "{assetId}",
+        size: 24
+      },
+      method: "GET",
+      operationId: "getPersonalAvatar",
+      outcomes: [
+        {
+          description: "WebP avatar",
+          status: 200,
+          success: true
+        },
+        {
+          description: "Error",
+          status: 401,
+          success: false
+        },
+        {
+          description: "Error",
+          status: 404,
+          success: false
+        },
+        {
+          description: "Error",
+          status: 503,
+          success: false
+        }
+      ],
+      path: "/personal/profile/avatar/{assetId}/{size}",
+      parameters: [
+        {
+          example: "{assetId}",
+          location: "path",
+          name: "assetId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: 24,
+          location: "path",
+          name: "size",
+          required: true,
+          type: "integer",
+          validation: "one of 24 | 64 | 256"
+        }
+      ],
+      requestBodyFields: [],
+      retrySafety: "safe",
+      summary: "Fetch the current person's private avatar"
+    },
+    {
+      authority: [
+        "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
+      constraints: [
+        "path intentId (required): string",
+        "header if-match (required): integer, min 1",
+        "Raw binary request body (required): image/png, image/jpeg, image/webp"
+      ],
+      example: "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'if-match: 1' -H 'content-type: image/png' --data-binary @icon.png 'https://api.authle.ss/personal/profile/avatar/%7BintentId%7D'",
+      exampleParameters: {
+        intentId: "{intentId}",
+        "if-match": 1
+      },
+      method: "PUT",
+      operationId: "uploadPersonalAvatar",
+      outcomes: [
+        {
+          description: "Updated profile",
+          status: 200,
+          success: true
+        },
+        {
+          description: "Error",
+          status: 400,
+          success: false
+        },
+        {
+          description: "Error",
+          status: 401,
+          success: false
+        },
+        {
+          description: "Error",
+          status: 404,
+          success: false
+        },
+        {
+          description: "Error",
+          status: 409,
+          success: false
+        },
+        {
+          description: "Image upload exceeds the 5 MiB encoded limit",
+          status: 413,
+          success: false
+        },
+        {
+          description: "Error",
+          status: 422,
+          success: false
+        },
+        {
+          description: "Error",
+          status: 503,
+          success: false
+        }
+      ],
+      path: "/personal/profile/avatar/{intentId}",
+      parameters: [
+        {
+          example: "{intentId}",
+          location: "path",
+          name: "intentId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: 1,
+          location: "header",
+          name: "if-match",
+          required: true,
+          type: "integer",
+          validation: "min 1"
+        }
+      ],
+      requestBodyFields: [],
+      requestSchema: {
+        type: "string",
+        format: "binary"
+      },
+      retrySafety: "unsafe",
+      summary: "Upload a personal avatar"
+    },
+    {
+      authority: [
+        "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
       constraints: [
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (optional): #/components/schemas/RemovePersonalUsernameRequest"
+        "JSON request body (optional): application/json, #/components/schemas/RemovePersonalUsernameRequest"
       ],
       example: "curl --request DELETE -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/personal/username'",
       exampleParameters: {
@@ -41593,7 +52606,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       constraints: [
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/AddPersonalUsernameRequest"
+        "JSON request body (required): application/json, #/components/schemas/AddPersonalUsernameRequest"
       ],
       example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"username":"{username}"}' 'https://api.authle.ss/personal/username'`,
       exampleParameters: {
@@ -41668,7 +52681,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       constraints: [
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/ChangePersonalUsernameRequest"
+        "JSON request body (required): application/json, #/components/schemas/ChangePersonalUsernameRequest"
       ],
       example: `curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"username":"{username}"}' 'https://api.authle.ss/personal/username'`,
       exampleParameters: {
@@ -41771,7 +52784,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       constraints: [
         "path workspaceId (required): string",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/SplitPersonalWorkspaceCorrelationRequest"
+        "JSON request body (required): application/json, #/components/schemas/SplitPersonalWorkspaceCorrelationRequest"
       ],
       example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"confirmed":true,"expectedVersion":1}' 'https://api.authle.ss/personal/workspace-correlations/%7BworkspaceId%7D/split'`,
       exampleParameters: {
@@ -41868,7 +52881,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       constraints: [
         "header merchant-signature (required): string",
-        "JSON request body (required): object"
+        "JSON request body (required): application/json, object"
       ],
       example: "curl --request POST -H 'merchant-signature: {merchant-signature}' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/providers/merchant/billing-events'",
       exampleParameters: {
@@ -41907,6 +52920,979 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       },
       retrySafety: "unsafe",
       summary: "Reconcile a signed merchant billing provider event"
+    },
+    {
+      authority: [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      constraints: [
+        "JSON request body (required): application/json, #/components/schemas/CustomAuthenticationBinding"
+      ],
+      example: `curl --request POST -H 'content-type: application/json' --data '{"appId":"{appId}x","clientId":"{clientId}","environmentId":"{environmentId}","method":"guest","mode":"backend","nonce":"{nonce}x","origin":"{origin}","policyVersion":1,"principalMode":"person","redirectUri":"{redirectUri}","state":"{state}x","workspaceId":"{workspaceId}"}' 'https://api.authle.ss/v1/custom-auth/transactions'`,
+      exampleParameters: {},
+      exampleRequestBody: {
+        appId: "{appId}x",
+        clientId: "{clientId}",
+        environmentId: "{environmentId}",
+        method: "guest",
+        mode: "backend",
+        nonce: "{nonce}x",
+        origin: "{origin}",
+        policyVersion: 1,
+        principalMode: "person",
+        redirectUri: "{redirectUri}",
+        state: "{state}x",
+        workspaceId: "{workspaceId}"
+      },
+      method: "POST",
+      operationId: "beginCustomAuthenticationTransaction",
+      outcomes: [
+        {
+          description: "Transaction created",
+          status: 201,
+          success: true
+        },
+        {
+          description: "Invalid or unavailable custom authentication request",
+          status: 400,
+          success: false
+        },
+        {
+          description: "Registered origin rejected",
+          status: 403,
+          success: false
+        }
+      ],
+      path: "/v1/custom-auth/transactions",
+      parameters: [],
+      requestBodyFields: [
+        {
+          example: "{appId}x",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 512"
+        },
+        {
+          name: "browserSessionBinding",
+          required: false,
+          type: "value",
+          validation: "minLength 8, maxLength 512"
+        },
+        {
+          example: "{clientId}",
+          name: "clientId",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 512"
+        },
+        {
+          name: "codeChallenge",
+          required: false,
+          type: "value",
+          validation: "pattern ^[A-Za-z0-9_-]{43}$"
+        },
+        {
+          example: "{environmentId}",
+          name: "environmentId",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 512"
+        },
+        {
+          example: "guest",
+          name: "method",
+          required: true,
+          type: "value",
+          validation: "one of guest | email_code"
+        },
+        {
+          example: "backend",
+          name: "mode",
+          required: true,
+          type: "value",
+          validation: "one of backend | public"
+        },
+        {
+          example: "{nonce}x",
+          name: "nonce",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 512"
+        },
+        {
+          example: "{origin}",
+          name: "origin",
+          required: true,
+          type: "string",
+          validation: "format uri"
+        },
+        {
+          example: 1,
+          name: "policyVersion",
+          required: true,
+          type: "integer",
+          validation: "min 1"
+        },
+        {
+          example: "person",
+          name: "principalMode",
+          required: true,
+          type: "value",
+          validation: "one of person | guest"
+        },
+        {
+          example: "{redirectUri}",
+          name: "redirectUri",
+          required: true,
+          type: "string",
+          validation: "format uri"
+        },
+        {
+          name: "requestedScopes",
+          required: false,
+          type: "array",
+          validation: "—"
+        },
+        {
+          example: "{state}x",
+          name: "state",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 512"
+        },
+        {
+          example: "{workspaceId}",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 512"
+        }
+      ],
+      requestSchema: {
+        $ref: "#/components/schemas/CustomAuthenticationBinding"
+      },
+      retrySafety: "unsafe",
+      summary: "Begin a registered custom authentication transaction"
+    },
+    {
+      authority: [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      constraints: [
+        "path transactionId (required): string, minLength 8, maxLength 512",
+        "JSON request body (required): application/json, #/components/schemas/CustomAuthenticationBinding"
+      ],
+      example: `curl --request POST -H 'content-type: application/json' --data '{"appId":"{appId}x","clientId":"{clientId}","environmentId":"{environmentId}","method":"guest","mode":"backend","nonce":"{nonce}x","origin":"{origin}","policyVersion":1,"principalMode":"person","redirectUri":"{redirectUri}","state":"{state}x","workspaceId":"{workspaceId}"}' 'https://api.authle.ss/v1/custom-auth/transactions/%7BtransactionId%7D/cancel'`,
+      exampleParameters: {
+        transactionId: "{transactionId}"
+      },
+      exampleRequestBody: {
+        appId: "{appId}x",
+        clientId: "{clientId}",
+        environmentId: "{environmentId}",
+        method: "guest",
+        mode: "backend",
+        nonce: "{nonce}x",
+        origin: "{origin}",
+        policyVersion: 1,
+        principalMode: "person",
+        redirectUri: "{redirectUri}",
+        state: "{state}x",
+        workspaceId: "{workspaceId}"
+      },
+      method: "POST",
+      operationId: "cancelCustomAuthenticationTransaction",
+      outcomes: [
+        {
+          description: "Transaction cancelled",
+          status: 200,
+          success: true
+        },
+        {
+          description: "Invalid or unavailable custom authentication request",
+          status: 400,
+          success: false
+        }
+      ],
+      path: "/v1/custom-auth/transactions/{transactionId}/cancel",
+      parameters: [
+        {
+          example: "{transactionId}",
+          location: "path",
+          name: "transactionId",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 512"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: "{appId}x",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 512"
+        },
+        {
+          name: "browserSessionBinding",
+          required: false,
+          type: "value",
+          validation: "minLength 8, maxLength 512"
+        },
+        {
+          example: "{clientId}",
+          name: "clientId",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 512"
+        },
+        {
+          name: "codeChallenge",
+          required: false,
+          type: "value",
+          validation: "pattern ^[A-Za-z0-9_-]{43}$"
+        },
+        {
+          example: "{environmentId}",
+          name: "environmentId",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 512"
+        },
+        {
+          example: "guest",
+          name: "method",
+          required: true,
+          type: "value",
+          validation: "one of guest | email_code"
+        },
+        {
+          example: "backend",
+          name: "mode",
+          required: true,
+          type: "value",
+          validation: "one of backend | public"
+        },
+        {
+          example: "{nonce}x",
+          name: "nonce",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 512"
+        },
+        {
+          example: "{origin}",
+          name: "origin",
+          required: true,
+          type: "string",
+          validation: "format uri"
+        },
+        {
+          example: 1,
+          name: "policyVersion",
+          required: true,
+          type: "integer",
+          validation: "min 1"
+        },
+        {
+          example: "person",
+          name: "principalMode",
+          required: true,
+          type: "value",
+          validation: "one of person | guest"
+        },
+        {
+          example: "{redirectUri}",
+          name: "redirectUri",
+          required: true,
+          type: "string",
+          validation: "format uri"
+        },
+        {
+          name: "requestedScopes",
+          required: false,
+          type: "array",
+          validation: "—"
+        },
+        {
+          example: "{state}x",
+          name: "state",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 512"
+        },
+        {
+          example: "{workspaceId}",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 512"
+        }
+      ],
+      requestSchema: {
+        $ref: "#/components/schemas/CustomAuthenticationBinding"
+      },
+      retrySafety: "safe",
+      summary: "Cancel a custom authentication transaction"
+    },
+    {
+      authority: [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      constraints: [
+        "path transactionId (required): string, minLength 8, maxLength 512",
+        "JSON request body (required): application/json, #/components/schemas/CustomAuthenticationChallengeRequest"
+      ],
+      example: `curl --request POST -H 'content-type: application/json' --data '{"appId":"{appId}x","clientId":"{clientId}","environmentId":"{environmentId}","method":"guest","mode":"backend","nonce":"{nonce}x","origin":"{origin}","policyVersion":1,"principalMode":"person","redirectUri":"{redirectUri}","state":"{state}x","workspaceId":"{workspaceId}","email":"person@example.test"}' 'https://api.authle.ss/v1/custom-auth/transactions/%7BtransactionId%7D/challenge'`,
+      exampleParameters: {
+        transactionId: "{transactionId}"
+      },
+      exampleRequestBody: {
+        appId: "{appId}x",
+        clientId: "{clientId}",
+        environmentId: "{environmentId}",
+        method: "guest",
+        mode: "backend",
+        nonce: "{nonce}x",
+        origin: "{origin}",
+        policyVersion: 1,
+        principalMode: "person",
+        redirectUri: "{redirectUri}",
+        state: "{state}x",
+        workspaceId: "{workspaceId}",
+        email: "person@example.test"
+      },
+      method: "POST",
+      operationId: "requestCustomAuthenticationEmailCode",
+      outcomes: [
+        {
+          description: "Challenge accepted",
+          status: 202,
+          success: true
+        },
+        {
+          description: "Invalid or unavailable custom authentication request",
+          status: 400,
+          success: false
+        }
+      ],
+      path: "/v1/custom-auth/transactions/{transactionId}/challenge",
+      parameters: [
+        {
+          example: "{transactionId}",
+          location: "path",
+          name: "transactionId",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 512"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: "{appId}x",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 512"
+        },
+        {
+          name: "browserSessionBinding",
+          required: false,
+          type: "value",
+          validation: "minLength 8, maxLength 512"
+        },
+        {
+          example: "{clientId}",
+          name: "clientId",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 512"
+        },
+        {
+          name: "codeChallenge",
+          required: false,
+          type: "value",
+          validation: "pattern ^[A-Za-z0-9_-]{43}$"
+        },
+        {
+          example: "person@example.test",
+          name: "email",
+          required: true,
+          type: "string",
+          validation: "format email"
+        },
+        {
+          example: "{environmentId}",
+          name: "environmentId",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 512"
+        },
+        {
+          example: "guest",
+          name: "method",
+          required: true,
+          type: "value",
+          validation: "one of guest | email_code"
+        },
+        {
+          example: "backend",
+          name: "mode",
+          required: true,
+          type: "value",
+          validation: "one of backend | public"
+        },
+        {
+          example: "{nonce}x",
+          name: "nonce",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 512"
+        },
+        {
+          example: "{origin}",
+          name: "origin",
+          required: true,
+          type: "string",
+          validation: "format uri"
+        },
+        {
+          example: 1,
+          name: "policyVersion",
+          required: true,
+          type: "integer",
+          validation: "min 1"
+        },
+        {
+          example: "person",
+          name: "principalMode",
+          required: true,
+          type: "value",
+          validation: "one of person | guest"
+        },
+        {
+          example: "{redirectUri}",
+          name: "redirectUri",
+          required: true,
+          type: "string",
+          validation: "format uri"
+        },
+        {
+          name: "requestedScopes",
+          required: false,
+          type: "array",
+          validation: "—"
+        },
+        {
+          example: "{state}x",
+          name: "state",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 512"
+        },
+        {
+          example: "{workspaceId}",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 512"
+        }
+      ],
+      requestSchema: {
+        $ref: "#/components/schemas/CustomAuthenticationChallengeRequest"
+      },
+      retrySafety: "unsafe",
+      summary: "Request or resend a transaction-bound email code"
+    },
+    {
+      authority: [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      constraints: [
+        "path transactionId (required): string, minLength 8, maxLength 512",
+        "JSON request body (required): application/json, #/components/schemas/CustomAuthenticationBinding"
+      ],
+      example: `curl --request POST -H 'content-type: application/json' --data '{"appId":"{appId}x","clientId":"{clientId}","environmentId":"{environmentId}","method":"guest","mode":"backend","nonce":"{nonce}x","origin":"{origin}","policyVersion":1,"principalMode":"person","redirectUri":"{redirectUri}","state":"{state}x","workspaceId":"{workspaceId}"}' 'https://api.authle.ss/v1/custom-auth/transactions/%7BtransactionId%7D/complete'`,
+      exampleParameters: {
+        transactionId: "{transactionId}"
+      },
+      exampleRequestBody: {
+        appId: "{appId}x",
+        clientId: "{clientId}",
+        environmentId: "{environmentId}",
+        method: "guest",
+        mode: "backend",
+        nonce: "{nonce}x",
+        origin: "{origin}",
+        policyVersion: 1,
+        principalMode: "person",
+        redirectUri: "{redirectUri}",
+        state: "{state}x",
+        workspaceId: "{workspaceId}"
+      },
+      method: "POST",
+      operationId: "completeCustomAuthenticationTransaction",
+      outcomes: [
+        {
+          description: "Proof consumed",
+          status: 200,
+          success: true
+        },
+        {
+          description: "Invalid or unavailable custom authentication request",
+          status: 400,
+          success: false
+        }
+      ],
+      path: "/v1/custom-auth/transactions/{transactionId}/complete",
+      parameters: [
+        {
+          example: "{transactionId}",
+          location: "path",
+          name: "transactionId",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 512"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: "{appId}x",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 512"
+        },
+        {
+          name: "browserSessionBinding",
+          required: false,
+          type: "value",
+          validation: "minLength 8, maxLength 512"
+        },
+        {
+          example: "{clientId}",
+          name: "clientId",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 512"
+        },
+        {
+          name: "codeChallenge",
+          required: false,
+          type: "value",
+          validation: "pattern ^[A-Za-z0-9_-]{43}$"
+        },
+        {
+          example: "{environmentId}",
+          name: "environmentId",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 512"
+        },
+        {
+          example: "guest",
+          name: "method",
+          required: true,
+          type: "value",
+          validation: "one of guest | email_code"
+        },
+        {
+          example: "backend",
+          name: "mode",
+          required: true,
+          type: "value",
+          validation: "one of backend | public"
+        },
+        {
+          example: "{nonce}x",
+          name: "nonce",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 512"
+        },
+        {
+          example: "{origin}",
+          name: "origin",
+          required: true,
+          type: "string",
+          validation: "format uri"
+        },
+        {
+          example: 1,
+          name: "policyVersion",
+          required: true,
+          type: "integer",
+          validation: "min 1"
+        },
+        {
+          example: "person",
+          name: "principalMode",
+          required: true,
+          type: "value",
+          validation: "one of person | guest"
+        },
+        {
+          example: "{redirectUri}",
+          name: "redirectUri",
+          required: true,
+          type: "string",
+          validation: "format uri"
+        },
+        {
+          name: "requestedScopes",
+          required: false,
+          type: "array",
+          validation: "—"
+        },
+        {
+          example: "{state}x",
+          name: "state",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 512"
+        },
+        {
+          example: "{workspaceId}",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 512"
+        }
+      ],
+      requestSchema: {
+        $ref: "#/components/schemas/CustomAuthenticationBinding"
+      },
+      retrySafety: "safe",
+      summary: "Consume one custom proof for authorization-code binding"
+    },
+    {
+      authority: [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      constraints: [
+        "path transactionId (required): string, minLength 8, maxLength 512",
+        "JSON request body (required): application/json, #/components/schemas/CustomAuthenticationBinding"
+      ],
+      example: `curl --request POST -H 'content-type: application/json' --data '{"appId":"{appId}x","clientId":"{clientId}","environmentId":"{environmentId}","method":"guest","mode":"backend","nonce":"{nonce}x","origin":"{origin}","policyVersion":1,"principalMode":"person","redirectUri":"{redirectUri}","state":"{state}x","workspaceId":"{workspaceId}"}' 'https://api.authle.ss/v1/custom-auth/transactions/%7BtransactionId%7D/read'`,
+      exampleParameters: {
+        transactionId: "{transactionId}"
+      },
+      exampleRequestBody: {
+        appId: "{appId}x",
+        clientId: "{clientId}",
+        environmentId: "{environmentId}",
+        method: "guest",
+        mode: "backend",
+        nonce: "{nonce}x",
+        origin: "{origin}",
+        policyVersion: 1,
+        principalMode: "person",
+        redirectUri: "{redirectUri}",
+        state: "{state}x",
+        workspaceId: "{workspaceId}"
+      },
+      method: "POST",
+      operationId: "readCustomAuthenticationTransaction",
+      outcomes: [
+        {
+          description: "Transaction state",
+          status: 200,
+          success: true
+        },
+        {
+          description: "Invalid or unavailable custom authentication request",
+          status: 400,
+          success: false
+        }
+      ],
+      path: "/v1/custom-auth/transactions/{transactionId}/read",
+      parameters: [
+        {
+          example: "{transactionId}",
+          location: "path",
+          name: "transactionId",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 512"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: "{appId}x",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 512"
+        },
+        {
+          name: "browserSessionBinding",
+          required: false,
+          type: "value",
+          validation: "minLength 8, maxLength 512"
+        },
+        {
+          example: "{clientId}",
+          name: "clientId",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 512"
+        },
+        {
+          name: "codeChallenge",
+          required: false,
+          type: "value",
+          validation: "pattern ^[A-Za-z0-9_-]{43}$"
+        },
+        {
+          example: "{environmentId}",
+          name: "environmentId",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 512"
+        },
+        {
+          example: "guest",
+          name: "method",
+          required: true,
+          type: "value",
+          validation: "one of guest | email_code"
+        },
+        {
+          example: "backend",
+          name: "mode",
+          required: true,
+          type: "value",
+          validation: "one of backend | public"
+        },
+        {
+          example: "{nonce}x",
+          name: "nonce",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 512"
+        },
+        {
+          example: "{origin}",
+          name: "origin",
+          required: true,
+          type: "string",
+          validation: "format uri"
+        },
+        {
+          example: 1,
+          name: "policyVersion",
+          required: true,
+          type: "integer",
+          validation: "min 1"
+        },
+        {
+          example: "person",
+          name: "principalMode",
+          required: true,
+          type: "value",
+          validation: "one of person | guest"
+        },
+        {
+          example: "{redirectUri}",
+          name: "redirectUri",
+          required: true,
+          type: "string",
+          validation: "format uri"
+        },
+        {
+          name: "requestedScopes",
+          required: false,
+          type: "array",
+          validation: "—"
+        },
+        {
+          example: "{state}x",
+          name: "state",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 512"
+        },
+        {
+          example: "{workspaceId}",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 512"
+        }
+      ],
+      requestSchema: {
+        $ref: "#/components/schemas/CustomAuthenticationBinding"
+      },
+      retrySafety: "safe",
+      summary: "Read a bound custom authentication transaction"
+    },
+    {
+      authority: [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      constraints: [
+        "path transactionId (required): string, minLength 8, maxLength 512",
+        "JSON request body (required): application/json, #/components/schemas/CustomAuthenticationVerifyRequest"
+      ],
+      example: `curl --request POST -H 'content-type: application/json' --data '{"appId":"{appId}x","clientId":"{clientId}","environmentId":"{environmentId}","method":"guest","mode":"backend","nonce":"{nonce}x","origin":"{origin}","policyVersion":1,"principalMode":"person","redirectUri":"{redirectUri}","state":"{state}x","workspaceId":"{workspaceId}"}' 'https://api.authle.ss/v1/custom-auth/transactions/%7BtransactionId%7D/verify'`,
+      exampleParameters: {
+        transactionId: "{transactionId}"
+      },
+      exampleRequestBody: {
+        appId: "{appId}x",
+        clientId: "{clientId}",
+        environmentId: "{environmentId}",
+        method: "guest",
+        mode: "backend",
+        nonce: "{nonce}x",
+        origin: "{origin}",
+        policyVersion: 1,
+        principalMode: "person",
+        redirectUri: "{redirectUri}",
+        state: "{state}x",
+        workspaceId: "{workspaceId}"
+      },
+      method: "POST",
+      operationId: "verifyCustomAuthenticationProof",
+      outcomes: [
+        {
+          description: "Proof accepted",
+          status: 200,
+          success: true
+        },
+        {
+          description: "Invalid or unavailable custom authentication request",
+          status: 400,
+          success: false
+        }
+      ],
+      path: "/v1/custom-auth/transactions/{transactionId}/verify",
+      parameters: [
+        {
+          example: "{transactionId}",
+          location: "path",
+          name: "transactionId",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 512"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: "{appId}x",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 512"
+        },
+        {
+          name: "browserSessionBinding",
+          required: false,
+          type: "value",
+          validation: "minLength 8, maxLength 512"
+        },
+        {
+          example: "{clientId}",
+          name: "clientId",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 512"
+        },
+        {
+          name: "code",
+          required: false,
+          type: "string",
+          validation: "minLength 6, maxLength 6"
+        },
+        {
+          name: "codeChallenge",
+          required: false,
+          type: "value",
+          validation: "pattern ^[A-Za-z0-9_-]{43}$"
+        },
+        {
+          example: "{environmentId}",
+          name: "environmentId",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 512"
+        },
+        {
+          example: "guest",
+          name: "method",
+          required: true,
+          type: "value",
+          validation: "one of guest | email_code"
+        },
+        {
+          example: "backend",
+          name: "mode",
+          required: true,
+          type: "value",
+          validation: "one of backend | public"
+        },
+        {
+          example: "{nonce}x",
+          name: "nonce",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 512"
+        },
+        {
+          example: "{origin}",
+          name: "origin",
+          required: true,
+          type: "string",
+          validation: "format uri"
+        },
+        {
+          example: 1,
+          name: "policyVersion",
+          required: true,
+          type: "integer",
+          validation: "min 1"
+        },
+        {
+          example: "person",
+          name: "principalMode",
+          required: true,
+          type: "value",
+          validation: "one of person | guest"
+        },
+        {
+          example: "{redirectUri}",
+          name: "redirectUri",
+          required: true,
+          type: "string",
+          validation: "format uri"
+        },
+        {
+          name: "requestedScopes",
+          required: false,
+          type: "array",
+          validation: "—"
+        },
+        {
+          example: "{state}x",
+          name: "state",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 512"
+        },
+        {
+          example: "{workspaceId}",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 512"
+        }
+      ],
+      requestSchema: {
+        $ref: "#/components/schemas/CustomAuthenticationVerifyRequest"
+      },
+      retrySafety: "unsafe",
+      summary: "Verify a guest or email proof"
     },
     {
       authority: [
@@ -41977,7 +53963,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       constraints: [
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/CreateWorkspaceRequest"
+        "JSON request body (required): application/json, #/components/schemas/CreateWorkspaceRequest"
       ],
       example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"name":"Example workspace"}' 'https://api.authle.ss/workspaces'`,
       exampleParameters: {
@@ -42121,7 +54107,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path delegationId (required): string, minLength 3, maxLength 128",
         'header if-match (optional): string, pattern ^"[1-9]\\d*"$',
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/AgentDelegationKeyRotationPreviewRequest"
+        "JSON request body (required): application/json, #/components/schemas/AgentDelegationKeyRotationPreviewRequest"
       ],
       example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"publicJwks":{}}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/agent-delegations/%7BdelegationId%7D/key-rotation-previews'`,
       exampleParameters: {
@@ -42312,7 +54298,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path workspaceId (required): string, minLength 3, maxLength 128",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/CreateAppRequest"
+        "JSON request body (required): application/json, #/components/schemas/CreateAppRequest"
       ],
       example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"description":"Customer sign-in for the Example product","name":"Example web app","ownerContactEmail":"security@example.com"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps'`,
       exampleParameters: {
@@ -42420,7 +54406,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path appId (required): string",
         'header if-match (optional): string, pattern ^"[1-9]\\d*"$',
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/UpdateAppMetadataRequest"
+        "JSON request body (required): application/json, #/components/schemas/UpdateAppMetadataRequest"
       ],
       example: `curl --request PATCH -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"name":"Example","description":"{description}","ownerContactEmail":"person@example.test"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D'`,
       exampleParameters: {
@@ -42628,7 +54614,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path environment (required): string, one of test | production",
         'header if-match (optional): string, pattern ^"[1-9]\\d*"$',
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/ChangeAppEnvironmentStatusRequest"
+        "JSON request body (required): application/json, #/components/schemas/ChangeAppEnvironmentStatusRequest"
       ],
       example: `curl --request PATCH -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '"{value}"' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test'`,
       exampleParameters: {
@@ -42832,7 +54818,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path environment (required): string, one of production | test",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/CreateIntegrationCredentialRequest"
+        "JSON request body (required): application/json, #/components/schemas/CreateIntegrationCredentialRequest"
       ],
       example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"name":"Example"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/credentials'`,
       exampleParameters: {
@@ -42950,6 +54936,12 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           required: true,
           type: "string",
           validation: "—"
+        },
+        {
+          name: "capabilities",
+          required: false,
+          type: "array",
+          validation: "—"
         }
       ],
       requestSchema: {
@@ -42970,7 +54962,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         'header if-match (optional): string, pattern ^"[1-9]\\d*"$',
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/RevokeIntegrationCredentialRequest"
+        "JSON request body (required): application/json, #/components/schemas/RevokeIntegrationCredentialRequest"
       ],
       example: "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/credentials/%7BcredentialId%7D/revoke'",
       exampleParameters: {
@@ -43122,7 +55114,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         'header if-match (optional): string, pattern ^"[1-9]\\d*"$',
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/RotateIntegrationCredentialRequest"
+        "JSON request body (required): application/json, #/components/schemas/RotateIntegrationCredentialRequest"
       ],
       example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"overlapSeconds":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/credentials/%7BcredentialId%7D/rotate'`,
       exampleParameters: {
@@ -43268,6 +55260,315 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
     {
       authority: [
         "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "Server-side credential scoped to one exact app environment. Never expose this value to browser bundles, logs, examples, or diagnostics."
+      ],
+      constraints: [
+        "path workspaceId (required): string, minLength 3, maxLength 128",
+        "path appId (required): string, minLength 3, maxLength 128",
+        "path environment (required): string, minLength 1, maxLength 64",
+        "JSON request body (required): application/json, #/components/schemas/CustomAuthenticationRegistrationInput"
+      ],
+      example: `curl --request DELETE -H 'authorization: Bearer {app_credential}' -H 'content-type: application/json' --data '{"clientId":"{clientId}","method":"guest","mode":"backend","origin":"{origin}","redirectUri":"{redirectUri}"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/%7Benvironment%7D/custom-auth'`,
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        appId: "{appId}",
+        environment: "{environment}"
+      },
+      exampleRequestBody: {
+        clientId: "{clientId}",
+        method: "guest",
+        mode: "backend",
+        origin: "{origin}",
+        redirectUri: "{redirectUri}"
+      },
+      method: "DELETE",
+      operationId: "revokeCustomAuthenticationRegistration",
+      outcomes: [
+        {
+          description: "Registration revoked",
+          status: 200,
+          success: true
+        },
+        {
+          description: "Invalid registration",
+          status: 400,
+          success: false
+        },
+        {
+          description: "Authentication required",
+          status: 401,
+          success: false
+        },
+        {
+          description: "Registration not found",
+          status: 404,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/custom-auth",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 128"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 128"
+        },
+        {
+          example: "{environment}",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "minLength 1, maxLength 64"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: "{clientId}",
+          name: "clientId",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 512"
+        },
+        {
+          example: "guest",
+          name: "method",
+          required: true,
+          type: "value",
+          validation: "one of guest | email_code"
+        },
+        {
+          example: "backend",
+          name: "mode",
+          required: true,
+          type: "value",
+          validation: "one of backend | public"
+        },
+        {
+          example: "{origin}",
+          name: "origin",
+          required: true,
+          type: "string",
+          validation: "format uri"
+        },
+        {
+          example: "{redirectUri}",
+          name: "redirectUri",
+          required: true,
+          type: "string",
+          validation: "format uri"
+        },
+        {
+          name: "expectedUpdatedAt",
+          required: false,
+          type: "string",
+          validation: "format date-time"
+        }
+      ],
+      requestSchema: {
+        $ref: "#/components/schemas/CustomAuthenticationRegistrationInput"
+      },
+      retrySafety: "unsafe",
+      summary: "Revoke custom authentication configuration"
+    },
+    {
+      authority: [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "Server-side credential scoped to one exact app environment. Never expose this value to browser bundles, logs, examples, or diagnostics."
+      ],
+      constraints: [
+        "path workspaceId (required): string, minLength 3, maxLength 128",
+        "path appId (required): string, minLength 3, maxLength 128",
+        "path environment (required): string, minLength 1, maxLength 64"
+      ],
+      example: "curl --request GET -H 'authorization: Bearer {app_credential}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/%7Benvironment%7D/custom-auth'",
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        appId: "{appId}",
+        environment: "{environment}"
+      },
+      method: "GET",
+      operationId: "listCustomAuthenticationRegistrations",
+      outcomes: [
+        {
+          description: "Registered custom authentication configuration",
+          status: 200,
+          success: true
+        },
+        {
+          description: "Authentication required",
+          status: 401,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/custom-auth",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 128"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 128"
+        },
+        {
+          example: "{environment}",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "minLength 1, maxLength 64"
+        }
+      ],
+      requestBodyFields: [],
+      retrySafety: "safe",
+      summary: "List custom authentication registrations"
+    },
+    {
+      authority: [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "Server-side credential scoped to one exact app environment. Never expose this value to browser bundles, logs, examples, or diagnostics."
+      ],
+      constraints: [
+        "path workspaceId (required): string, minLength 3, maxLength 128",
+        "path appId (required): string, minLength 3, maxLength 128",
+        "path environment (required): string, minLength 1, maxLength 64",
+        "JSON request body (required): application/json, #/components/schemas/CustomAuthenticationRegistrationInput"
+      ],
+      example: `curl --request PUT -H 'authorization: Bearer {app_credential}' -H 'content-type: application/json' --data '{"clientId":"{clientId}","method":"guest","mode":"backend","origin":"{origin}","redirectUri":"{redirectUri}"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/%7Benvironment%7D/custom-auth'`,
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        appId: "{appId}",
+        environment: "{environment}"
+      },
+      exampleRequestBody: {
+        clientId: "{clientId}",
+        method: "guest",
+        mode: "backend",
+        origin: "{origin}",
+        redirectUri: "{redirectUri}"
+      },
+      method: "PUT",
+      operationId: "replaceCustomAuthenticationRegistration",
+      outcomes: [
+        {
+          description: "Registered custom authentication configuration",
+          status: 200,
+          success: true
+        },
+        {
+          description: "Invalid registration",
+          status: 400,
+          success: false
+        },
+        {
+          description: "Authentication required",
+          status: 401,
+          success: false
+        },
+        {
+          description: "Registration version conflict",
+          status: 412,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/custom-auth",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 128"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "minLength 3, maxLength 128"
+        },
+        {
+          example: "{environment}",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "minLength 1, maxLength 64"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: "{clientId}",
+          name: "clientId",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 512"
+        },
+        {
+          example: "guest",
+          name: "method",
+          required: true,
+          type: "value",
+          validation: "one of guest | email_code"
+        },
+        {
+          example: "backend",
+          name: "mode",
+          required: true,
+          type: "value",
+          validation: "one of backend | public"
+        },
+        {
+          example: "{origin}",
+          name: "origin",
+          required: true,
+          type: "string",
+          validation: "format uri"
+        },
+        {
+          example: "{redirectUri}",
+          name: "redirectUri",
+          required: true,
+          type: "string",
+          validation: "format uri"
+        },
+        {
+          name: "expectedUpdatedAt",
+          required: false,
+          type: "string",
+          validation: "format date-time"
+        }
+      ],
+      requestSchema: {
+        $ref: "#/components/schemas/CustomAuthenticationRegistrationInput"
+      },
+      retrySafety: "unsafe",
+      summary: "Register or replace custom authentication configuration"
+    },
+    {
+      authority: [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
         "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
       ],
       constraints: [
@@ -43276,7 +55577,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path environment (required): string, one of test | production",
         'header if-match (optional): string, pattern ^"[1-9]\\d*"$',
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/EndpointSetMutationRequest"
+        "JSON request body (required): application/json, #/components/schemas/EndpointSetMutationRequest"
       ],
       example: `curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"postLogoutUris":[],"redirectUris":[],"trustedOrigins":[]}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/endpoints'`,
       exampleParameters: {
@@ -43419,10 +55720,625 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       constraints: [
         "path workspaceId (required): string",
         "path appId (required): string",
+        "path environment (required): string, one of test | production"
+      ],
+      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/guest-admission'",
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        appId: "{appId}",
+        environment: "test"
+      },
+      method: "GET",
+      operationId: "getGuestAdmissionPolicy",
+      outcomes: [
+        {
+          description: "Guest admission policy",
+          status: 200,
+          success: true
+        },
+        {
+          description: "Unauthorized",
+          status: 401,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/guest-admission",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "test",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of test | production"
+        }
+      ],
+      requestBodyFields: [],
+      retrySafety: "safe",
+      summary: "Read the environment guest admission policy"
+    },
+    {
+      authority: [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "JSON request body (required): application/json, #/components/schemas/GuestAdmissionPolicyUpdate"
+      ],
+      example: `curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{"accessSeconds":1,"absoluteSeconds":1,"capabilities":["app:read"],"enabled":true,"idleSeconds":1,"maxCreationsPerSource":1,"maxRequestsPerSource":1,"maxWorkspaceGuests":1,"mode":"open","policyVersion":0,"requiredAssurance":"anonymous","expectedPolicyVersion":0}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/guest-admission'`,
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        appId: "{appId}",
+        environment: "test"
+      },
+      exampleRequestBody: {
+        accessSeconds: 1,
+        absoluteSeconds: 1,
+        capabilities: [
+          "app:read"
+        ],
+        enabled: true,
+        idleSeconds: 1,
+        maxCreationsPerSource: 1,
+        maxRequestsPerSource: 1,
+        maxWorkspaceGuests: 1,
+        mode: "open",
+        policyVersion: 0,
+        requiredAssurance: "anonymous",
+        expectedPolicyVersion: 0
+      },
+      method: "PUT",
+      operationId: "updateGuestAdmissionPolicy",
+      outcomes: [
+        {
+          description: "Updated guest admission policy",
+          status: 200,
+          success: true
+        },
+        {
+          description: "Policy version conflict",
+          status: 412,
+          success: false
+        },
+        {
+          description: "Invalid policy",
+          status: 422,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/guest-admission",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "test",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of test | production"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: 1,
+          name: "accessSeconds",
+          required: true,
+          type: "integer",
+          validation: "min 1, max 600"
+        },
+        {
+          example: 1,
+          name: "absoluteSeconds",
+          required: true,
+          type: "integer",
+          validation: "min 1, max 86400"
+        },
+        {
+          example: [
+            "app:read"
+          ],
+          name: "capabilities",
+          required: true,
+          type: "array",
+          validation: "—"
+        },
+        {
+          example: true,
+          name: "enabled",
+          required: true,
+          type: "boolean",
+          validation: "—"
+        },
+        {
+          example: 1,
+          name: "idleSeconds",
+          required: true,
+          type: "integer",
+          validation: "min 1, max 3600"
+        },
+        {
+          example: 1,
+          name: "maxCreationsPerSource",
+          required: true,
+          type: "integer",
+          validation: "min 1, max 100"
+        },
+        {
+          example: 1,
+          name: "maxRequestsPerSource",
+          required: true,
+          type: "integer",
+          validation: "min 1, max 1000"
+        },
+        {
+          example: 1,
+          name: "maxWorkspaceGuests",
+          required: true,
+          type: "integer",
+          validation: "min 1, max 10000"
+        },
+        {
+          example: "open",
+          name: "mode",
+          required: true,
+          type: "string",
+          validation: "one of open | invitation_only | administrator_approval"
+        },
+        {
+          example: 0,
+          name: "policyVersion",
+          required: true,
+          type: "integer",
+          validation: "min 0"
+        },
+        {
+          example: "anonymous",
+          name: "requiredAssurance",
+          required: true,
+          type: "string",
+          validation: "one of anonymous | single_factor | multi_factor"
+        },
+        {
+          example: 0,
+          name: "expectedPolicyVersion",
+          required: true,
+          type: "integer",
+          validation: "min 0"
+        }
+      ],
+      requestSchema: {
+        $ref: "#/components/schemas/GuestAdmissionPolicyUpdate"
+      },
+      retrySafety: "unsafe",
+      summary: "Update the environment guest admission policy"
+    },
+    {
+      authority: [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production"
+      ],
+      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/guest-admission/usage'",
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        appId: "{appId}",
+        environment: "test"
+      },
+      method: "GET",
+      operationId: "getGuestAdmissionUsage",
+      outcomes: [
+        {
+          description: "Guest usage",
+          status: 200,
+          success: true
+        },
+        {
+          description: "Unauthorized",
+          status: 401,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/guest-admission/usage",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "test",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of test | production"
+        }
+      ],
+      requestBodyFields: [],
+      retrySafety: "safe",
+      summary: "Read safe guest admission usage"
+    },
+    {
+      authority: [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "header x-authless-conversion-intent (required): string, minLength 16, maxLength 512",
+        "header idempotency-key (required): string, minLength 8, maxLength 128",
+        "JSON request body (required): application/json, #/components/schemas/GuestConversionConfirmationRequest"
+      ],
+      example: `curl --request POST -H 'x-authless-conversion-intent: {x-authless-conversion-intent}' -H 'idempotency-key: request-example-001' -H 'content-type: application/json' --data '{"confirmation":"convert_guest"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/guest-conversion'`,
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        appId: "{appId}",
+        environment: "test",
+        "x-authless-conversion-intent": "{x-authless-conversion-intent}",
+        "idempotency-key": "request-example-001"
+      },
+      exampleRequestBody: {
+        confirmation: "convert_guest"
+      },
+      method: "POST",
+      operationId: "confirmGuestConversion",
+      outcomes: [
+        {
+          description: "Previously applied conversion",
+          status: 200,
+          success: true
+        },
+        {
+          description: "Conversion completed",
+          status: 201,
+          success: true
+        },
+        {
+          description: "Invalid conversion request",
+          status: 400,
+          success: false
+        },
+        {
+          description: "Conversion authority rejected",
+          status: 401,
+          success: false
+        },
+        {
+          description: "Conversion conflict or idempotency mismatch",
+          status: 409,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/guest-conversion",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "test",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of test | production"
+        },
+        {
+          example: "{x-authless-conversion-intent}",
+          location: "header",
+          name: "x-authless-conversion-intent",
+          required: true,
+          type: "string",
+          validation: "minLength 16, maxLength 512"
+        },
+        {
+          example: "request-example-001",
+          location: "header",
+          name: "idempotency-key",
+          required: true,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: "convert_guest",
+          name: "confirmation",
+          required: true,
+          type: "string",
+          validation: "one of convert_guest"
+        },
+        {
+          name: "mergeProfile",
+          required: false,
+          type: "string",
+          validation: "one of keep_person | keep_guest"
+        }
+      ],
+      requestSchema: {
+        $ref: "#/components/schemas/GuestConversionConfirmationRequest"
+      },
+      retrySafety: "unsafe",
+      summary: "Confirm a hosted guest conversion"
+    },
+    {
+      authority: [
+        "A browser-held guest access token. Pair it with the required DPoP, origin, CSRF, and browser-binding headers. Never store it as a server credential or expose it in logs."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "header authorization (required): string, minLength 8",
+        "header dpop (required): string, minLength 8",
+        "header origin (required): string, format uri",
+        "header x-authless-browser-binding (required): string, minLength 8",
+        "header x-csrf-token (required): string, minLength 8",
+        "JSON request body (required): application/json, #/components/schemas/GuestConversionIntentRequest"
+      ],
+      example: `curl --request POST -H 'authorization: {authorization}' -H 'dpop: {dpop}xx' -H 'origin: {origin}' -H 'x-authless-browser-binding: {x-authless-browser-binding}' -H 'x-csrf-token: {x-csrf-token}' -H 'content-type: application/json' --data '{"requestedScopes":["{requestedScopes_1}"]}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/guest-conversion/intents'`,
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        appId: "{appId}",
+        environment: "test",
+        authorization: "{authorization}",
+        dpop: "{dpop}xx",
+        origin: "{origin}",
+        "x-authless-browser-binding": "{x-authless-browser-binding}",
+        "x-csrf-token": "{x-csrf-token}"
+      },
+      exampleRequestBody: {
+        requestedScopes: [
+          "{requestedScopes_1}"
+        ]
+      },
+      method: "POST",
+      operationId: "beginGuestConversionIntent",
+      outcomes: [
+        {
+          description: "Hosted conversion intent created",
+          status: 201,
+          success: true
+        },
+        {
+          description: "Invalid conversion request",
+          status: 400,
+          success: false
+        },
+        {
+          description: "Guest authority rejected",
+          status: 401,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/guest-conversion/intents",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "test",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of test | production"
+        },
+        {
+          example: "{authorization}",
+          location: "header",
+          name: "authorization",
+          required: true,
+          type: "string",
+          validation: "minLength 8"
+        },
+        {
+          example: "{dpop}xx",
+          location: "header",
+          name: "dpop",
+          required: true,
+          type: "string",
+          validation: "minLength 8"
+        },
+        {
+          example: "{origin}",
+          location: "header",
+          name: "origin",
+          required: true,
+          type: "string",
+          validation: "format uri"
+        },
+        {
+          example: "{x-authless-browser-binding}",
+          location: "header",
+          name: "x-authless-browser-binding",
+          required: true,
+          type: "string",
+          validation: "minLength 8"
+        },
+        {
+          example: "{x-csrf-token}",
+          location: "header",
+          name: "x-csrf-token",
+          required: true,
+          type: "string",
+          validation: "minLength 8"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: [
+            "{requestedScopes_1}"
+          ],
+          name: "requestedScopes",
+          required: true,
+          type: "array",
+          validation: "—"
+        }
+      ],
+      requestSchema: {
+        $ref: "#/components/schemas/GuestConversionIntentRequest"
+      },
+      retrySafety: "unsafe",
+      summary: "Begin a hosted guest conversion intent"
+    },
+    {
+      authority: [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path intent (required): string, minLength 16, maxLength 512"
+      ],
+      example: "curl --request GET 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/guest-conversion/intents/%7Bintent%7Dxxxxxxxx'",
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        appId: "{appId}",
+        environment: "test",
+        intent: "{intent}xxxxxxxx"
+      },
+      method: "GET",
+      operationId: "getGuestConversionIntent",
+      outcomes: [
+        {
+          description: "Conversion intent",
+          status: 200,
+          success: true
+        },
+        {
+          description: "Conversion intent not found",
+          status: 404,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/guest-conversion/intents/{intent}",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "test",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of test | production"
+        },
+        {
+          example: "{intent}xxxxxxxx",
+          location: "path",
+          name: "intent",
+          required: true,
+          type: "string",
+          validation: "minLength 16, maxLength 512"
+        }
+      ],
+      requestBodyFields: [],
+      retrySafety: "safe",
+      summary: "Read a hosted guest conversion intent"
+    },
+    {
+      authority: [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "path appId (required): string",
         "path environment (required): string, one of test | production",
         'header if-match (optional): string, pattern ^"[1-9]\\d*"$',
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/OidcClientProfileMutationRequest"
+        "JSON request body (required): application/json, #/components/schemas/OidcClientProfileMutationRequest"
       ],
       example: `curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"dpopBoundAccessTokens":true,"publicJwks":{"keys":[]},"refreshEligible":true,"tokenEndpointAuthMethod":"none"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/oidc-profile'`,
       exampleParameters: {
@@ -43668,7 +56584,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path environment (required): string, one of test | production",
         'header if-match (optional): string, pattern ^"(0|[1-9]\\d*)"$',
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/PolicyDefinitionRequest"
+        "JSON request body (required): application/json, #/components/schemas/PolicyDefinitionRequest"
       ],
       example: `curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"definition":{"appIdentity":{"description":"{description}","name":"Example","ownerContactEmail":"person@example.test"},"consentPurpose":"{consentPurpose}","correlation":{"boundary":"app","essential":true,"purpose":"{purpose}"},"eligibleMethods":["M-01"],"enrollmentMode":"administrator_approval","recovery":{"verifiedEmailRequired":true},"requestedClaims":[],"session":{"absoluteSeconds":1,"idleSeconds":1}}}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/policy'`,
       exampleParameters: {
@@ -43851,7 +56767,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path environment (required): string, one of test | production",
         'header if-match (optional): string, pattern ^"(0|[1-9]\\d*)"$',
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/ActivatePolicyRequest"
+        "JSON request body (required): application/json, #/components/schemas/ActivatePolicyRequest"
       ],
       example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"confirmed":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/policy/activate'`,
       exampleParameters: {
@@ -44165,7 +57081,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path version (required): integer, min 1",
         'header if-match (optional): string, pattern ^"(0|[1-9]\\d*)"$',
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/RestorePolicyRequest"
+        "JSON request body (required): application/json, #/components/schemas/RestorePolicyRequest"
       ],
       example: "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/policy/history/1/restore'",
       exampleParameters: {
@@ -44291,13 +57207,1691 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
     },
     {
       authority: [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "JSON request body (optional): application/json, object"
+      ],
+      example: "curl --request DELETE -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profile/app/avatar'",
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        appId: "{appId}",
+        environment: "test"
+      },
+      exampleRequestBody: {},
+      method: "DELETE",
+      operationId: "removeAppProfileAppAvatar",
+      outcomes: [
+        {
+          description: "Updated profile",
+          status: 200,
+          success: true
+        },
+        {
+          description: "Unauthorized",
+          status: 401,
+          success: false
+        },
+        {
+          description: "Version conflict",
+          status: 409,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/app/avatar",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "test",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of test | production"
+        }
+      ],
+      requestBodyFields: [
+        {
+          name: "expectedVersion",
+          required: false,
+          type: "integer",
+          validation: "—"
+        }
+      ],
+      requestSchema: {
+        type: "object",
+        properties: {
+          expectedVersion: {
+            type: "integer"
+          }
+        }
+      },
+      retrySafety: "unsafe",
+      summary: "Update an app-profile avatar binding"
+    },
+    {
+      authority: [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "JSON request body (required): application/json, #/components/schemas/AppProfileAvatarPublishRequest"
+      ],
+      example: `curl --request POST -H 'content-type: application/json' --data '{"assetId":"{assetId}","revision":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profile/app/avatar'`,
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        appId: "{appId}",
+        environment: "test"
+      },
+      exampleRequestBody: {
+        assetId: "{assetId}",
+        revision: 1
+      },
+      method: "POST",
+      operationId: "publishAppProfileAppAvatar",
+      outcomes: [
+        {
+          description: "Updated profile",
+          status: 200,
+          success: true
+        },
+        {
+          description: "Unauthorized",
+          status: 401,
+          success: false
+        },
+        {
+          description: "Version conflict",
+          status: 409,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/app/avatar",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "test",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of test | production"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: "{assetId}",
+          name: "assetId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: 1,
+          name: "revision",
+          required: true,
+          type: "integer",
+          validation: "min 1"
+        },
+        {
+          name: "expectedVersion",
+          required: false,
+          type: "integer",
+          validation: "min 0"
+        }
+      ],
+      requestSchema: {
+        $ref: "#/components/schemas/AppProfileAvatarPublishRequest"
+      },
+      retrySafety: "unsafe",
+      summary: "Update an app-profile avatar binding"
+    },
+    {
+      authority: [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production"
+      ],
+      example: "curl --request POST 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profile/app/avatar-intents'",
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        appId: "{appId}",
+        environment: "test"
+      },
+      method: "POST",
+      operationId: "createAppProfileAppAvatarIntent",
+      outcomes: [
+        {
+          description: "Upload intent",
+          status: 201,
+          success: true
+        },
+        {
+          description: "Unauthorized",
+          status: 401,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/app/avatar-intents",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "test",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of test | production"
+        }
+      ],
+      requestBodyFields: [],
+      retrySafety: "unsafe",
+      summary: "Issue an app-profile avatar upload intent"
+    },
+    {
+      authority: [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path intentId (required): string",
+        "Raw binary request body (required): image/png, image/jpeg, image/webp"
+      ],
+      example: "curl --request PUT -H 'content-type: image/png' --data-binary @icon.png 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profile/app/avatar/%7BintentId%7D'",
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        appId: "{appId}",
+        environment: "test",
+        intentId: "{intentId}"
+      },
+      method: "PUT",
+      operationId: "uploadAppProfileAppAvatar",
+      outcomes: [
+        {
+          description: "Updated profile",
+          status: 200,
+          success: true
+        },
+        {
+          description: "Unauthorized",
+          status: 401,
+          success: false
+        },
+        {
+          description: "Version conflict",
+          status: 409,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/app/avatar/{intentId}",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "test",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of test | production"
+        },
+        {
+          example: "{intentId}",
+          location: "path",
+          name: "intentId",
+          required: true,
+          type: "string",
+          validation: "—"
+        }
+      ],
+      requestBodyFields: [],
+      requestSchema: {
+        type: "string",
+        format: "binary"
+      },
+      retrySafety: "unsafe",
+      summary: "Upload an app-profile avatar"
+    },
+    {
+      authority: [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production"
+      ],
+      example: "curl --request GET 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profile/me'",
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        appId: "{appId}",
+        environment: "test"
+      },
+      method: "GET",
+      operationId: "getAppProfileMe",
+      outcomes: [
+        {
+          description: "Profile",
+          status: 200,
+          success: true
+        },
+        {
+          description: "Unauthorized",
+          status: 401,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/me",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "test",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of test | production"
+        }
+      ],
+      requestBodyFields: [],
+      retrySafety: "safe",
+      summary: "Read an app-local user profile"
+    },
+    {
+      authority: [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "JSON request body (required): application/json, object"
+      ],
+      example: "curl --request PATCH -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profile/me'",
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        appId: "{appId}",
+        environment: "test"
+      },
+      exampleRequestBody: {},
+      method: "PATCH",
+      operationId: "updateAppProfileMe",
+      outcomes: [
+        {
+          description: "Profile",
+          status: 200,
+          success: true
+        },
+        {
+          description: "Unauthorized",
+          status: 401,
+          success: false
+        },
+        {
+          description: "Version conflict",
+          status: 409,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/me",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "test",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of test | production"
+        }
+      ],
+      requestBodyFields: [
+        {
+          name: "displayName",
+          required: false,
+          type: "value",
+          validation: "maxLength 80"
+        },
+        {
+          name: "expectedVersion",
+          required: false,
+          type: "integer",
+          validation: "min 0"
+        }
+      ],
+      requestSchema: {
+        type: "object",
+        additionalProperties: false,
+        properties: {
+          displayName: {
+            type: [
+              "string",
+              "null"
+            ],
+            maxLength: 80
+          },
+          expectedVersion: {
+            type: "integer",
+            minimum: 0
+          }
+        }
+      },
+      retrySafety: "unsafe",
+      summary: "Update an app-local user profile"
+    },
+    {
+      authority: [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "JSON request body (optional): application/json, object"
+      ],
+      example: "curl --request DELETE -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profile/user/avatar'",
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        appId: "{appId}",
+        environment: "test"
+      },
+      exampleRequestBody: {},
+      method: "DELETE",
+      operationId: "removeAppProfileUserAvatar",
+      outcomes: [
+        {
+          description: "Updated profile",
+          status: 200,
+          success: true
+        },
+        {
+          description: "Unauthorized",
+          status: 401,
+          success: false
+        },
+        {
+          description: "Version conflict",
+          status: 409,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/user/avatar",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "test",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of test | production"
+        }
+      ],
+      requestBodyFields: [
+        {
+          name: "expectedVersion",
+          required: false,
+          type: "integer",
+          validation: "—"
+        }
+      ],
+      requestSchema: {
+        type: "object",
+        properties: {
+          expectedVersion: {
+            type: "integer"
+          }
+        }
+      },
+      retrySafety: "unsafe",
+      summary: "Update an app-profile avatar binding"
+    },
+    {
+      authority: [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "JSON request body (required): application/json, #/components/schemas/AppProfileAvatarPublishRequest"
+      ],
+      example: `curl --request POST -H 'content-type: application/json' --data '{"assetId":"{assetId}","revision":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profile/user/avatar'`,
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        appId: "{appId}",
+        environment: "test"
+      },
+      exampleRequestBody: {
+        assetId: "{assetId}",
+        revision: 1
+      },
+      method: "POST",
+      operationId: "publishAppProfileUserAvatar",
+      outcomes: [
+        {
+          description: "Updated profile",
+          status: 200,
+          success: true
+        },
+        {
+          description: "Unauthorized",
+          status: 401,
+          success: false
+        },
+        {
+          description: "Version conflict",
+          status: 409,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/user/avatar",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "test",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of test | production"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: "{assetId}",
+          name: "assetId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: 1,
+          name: "revision",
+          required: true,
+          type: "integer",
+          validation: "min 1"
+        },
+        {
+          name: "expectedVersion",
+          required: false,
+          type: "integer",
+          validation: "min 0"
+        }
+      ],
+      requestSchema: {
+        $ref: "#/components/schemas/AppProfileAvatarPublishRequest"
+      },
+      retrySafety: "unsafe",
+      summary: "Update an app-profile avatar binding"
+    },
+    {
+      authority: [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production"
+      ],
+      example: "curl --request POST 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profile/user/avatar-intents'",
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        appId: "{appId}",
+        environment: "test"
+      },
+      method: "POST",
+      operationId: "createAppProfileUserAvatarIntent",
+      outcomes: [
+        {
+          description: "Upload intent",
+          status: 201,
+          success: true
+        },
+        {
+          description: "Unauthorized",
+          status: 401,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/user/avatar-intents",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "test",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of test | production"
+        }
+      ],
+      requestBodyFields: [],
+      retrySafety: "unsafe",
+      summary: "Issue an app-profile avatar upload intent"
+    },
+    {
+      authority: [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path intentId (required): string",
+        "Raw binary request body (required): image/png, image/jpeg, image/webp"
+      ],
+      example: "curl --request PUT -H 'content-type: image/png' --data-binary @icon.png 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profile/user/avatar/%7BintentId%7D'",
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        appId: "{appId}",
+        environment: "test",
+        intentId: "{intentId}"
+      },
+      method: "PUT",
+      operationId: "uploadAppProfileUserAvatar",
+      outcomes: [
+        {
+          description: "Updated profile",
+          status: 200,
+          success: true
+        },
+        {
+          description: "Unauthorized",
+          status: 401,
+          success: false
+        },
+        {
+          description: "Version conflict",
+          status: 409,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/profile/user/avatar/{intentId}",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "test",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of test | production"
+        },
+        {
+          example: "{intentId}",
+          location: "path",
+          name: "intentId",
+          required: true,
+          type: "string",
+          validation: "—"
+        }
+      ],
+      requestBodyFields: [],
+      requestSchema: {
+        type: "string",
+        format: "binary"
+      },
+      retrySafety: "unsafe",
+      summary: "Upload an app-profile avatar"
+    },
+    {
+      authority: [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path subjectId (required): string"
+      ],
+      example: "curl --request GET 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profiles/%7BsubjectId%7D'",
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        appId: "{appId}",
+        environment: "test",
+        subjectId: "{subjectId}"
+      },
+      method: "GET",
+      operationId: "getAppProfileSubject",
+      outcomes: [
+        {
+          description: "Profile",
+          status: 200,
+          success: true
+        },
+        {
+          description: "Unauthorized",
+          status: 401,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "test",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of test | production"
+        },
+        {
+          example: "{subjectId}",
+          location: "path",
+          name: "subjectId",
+          required: true,
+          type: "string",
+          validation: "—"
+        }
+      ],
+      requestBodyFields: [],
+      retrySafety: "safe",
+      summary: "Read an app-local user profile"
+    },
+    {
+      authority: [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path subjectId (required): string",
+        "JSON request body (required): application/json, object"
+      ],
+      example: "curl --request PATCH -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profiles/%7BsubjectId%7D'",
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        appId: "{appId}",
+        environment: "test",
+        subjectId: "{subjectId}"
+      },
+      exampleRequestBody: {},
+      method: "PATCH",
+      operationId: "updateAppProfileSubject",
+      outcomes: [
+        {
+          description: "Profile",
+          status: 200,
+          success: true
+        },
+        {
+          description: "Unauthorized",
+          status: 401,
+          success: false
+        },
+        {
+          description: "Version conflict",
+          status: 409,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "test",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of test | production"
+        },
+        {
+          example: "{subjectId}",
+          location: "path",
+          name: "subjectId",
+          required: true,
+          type: "string",
+          validation: "—"
+        }
+      ],
+      requestBodyFields: [
+        {
+          name: "displayName",
+          required: false,
+          type: "value",
+          validation: "maxLength 80"
+        },
+        {
+          name: "expectedVersion",
+          required: false,
+          type: "integer",
+          validation: "min 0"
+        }
+      ],
+      requestSchema: {
+        type: "object",
+        additionalProperties: false,
+        properties: {
+          displayName: {
+            type: [
+              "string",
+              "null"
+            ],
+            maxLength: 80
+          },
+          expectedVersion: {
+            type: "integer",
+            minimum: 0
+          }
+        }
+      },
+      retrySafety: "unsafe",
+      summary: "Update an app-local user profile"
+    },
+    {
+      authority: [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path subjectId (required): string",
+        "JSON request body (optional): application/json, object"
+      ],
+      example: "curl --request DELETE -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profiles/%7BsubjectId%7D/app/avatar'",
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        appId: "{appId}",
+        environment: "test",
+        subjectId: "{subjectId}"
+      },
+      exampleRequestBody: {},
+      method: "DELETE",
+      operationId: "removeAppProfileSubjectAppAvatar",
+      outcomes: [
+        {
+          description: "Updated profile",
+          status: 200,
+          success: true
+        },
+        {
+          description: "Unauthorized",
+          status: 401,
+          success: false
+        },
+        {
+          description: "Version conflict",
+          status: 409,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}/app/avatar",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "test",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of test | production"
+        },
+        {
+          example: "{subjectId}",
+          location: "path",
+          name: "subjectId",
+          required: true,
+          type: "string",
+          validation: "—"
+        }
+      ],
+      requestBodyFields: [
+        {
+          name: "expectedVersion",
+          required: false,
+          type: "integer",
+          validation: "—"
+        }
+      ],
+      requestSchema: {
+        type: "object",
+        properties: {
+          expectedVersion: {
+            type: "integer"
+          }
+        }
+      },
+      retrySafety: "unsafe",
+      summary: "Update an app-profile avatar binding"
+    },
+    {
+      authority: [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path subjectId (required): string",
+        "JSON request body (required): application/json, #/components/schemas/AppProfileAvatarPublishRequest"
+      ],
+      example: `curl --request POST -H 'content-type: application/json' --data '{"assetId":"{assetId}","revision":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profiles/%7BsubjectId%7D/app/avatar'`,
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        appId: "{appId}",
+        environment: "test",
+        subjectId: "{subjectId}"
+      },
+      exampleRequestBody: {
+        assetId: "{assetId}",
+        revision: 1
+      },
+      method: "POST",
+      operationId: "publishAppProfileSubjectAppAvatar",
+      outcomes: [
+        {
+          description: "Updated profile",
+          status: 200,
+          success: true
+        },
+        {
+          description: "Unauthorized",
+          status: 401,
+          success: false
+        },
+        {
+          description: "Version conflict",
+          status: 409,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}/app/avatar",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "test",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of test | production"
+        },
+        {
+          example: "{subjectId}",
+          location: "path",
+          name: "subjectId",
+          required: true,
+          type: "string",
+          validation: "—"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: "{assetId}",
+          name: "assetId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: 1,
+          name: "revision",
+          required: true,
+          type: "integer",
+          validation: "min 1"
+        },
+        {
+          name: "expectedVersion",
+          required: false,
+          type: "integer",
+          validation: "min 0"
+        }
+      ],
+      requestSchema: {
+        $ref: "#/components/schemas/AppProfileAvatarPublishRequest"
+      },
+      retrySafety: "unsafe",
+      summary: "Update an app-profile avatar binding"
+    },
+    {
+      authority: [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path subjectId (required): string"
+      ],
+      example: "curl --request POST 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profiles/%7BsubjectId%7D/app/avatar-intents'",
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        appId: "{appId}",
+        environment: "test",
+        subjectId: "{subjectId}"
+      },
+      method: "POST",
+      operationId: "createAppProfileSubjectAppAvatarIntent",
+      outcomes: [
+        {
+          description: "Upload intent",
+          status: 201,
+          success: true
+        },
+        {
+          description: "Unauthorized",
+          status: 401,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}/app/avatar-intents",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "test",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of test | production"
+        },
+        {
+          example: "{subjectId}",
+          location: "path",
+          name: "subjectId",
+          required: true,
+          type: "string",
+          validation: "—"
+        }
+      ],
+      requestBodyFields: [],
+      retrySafety: "unsafe",
+      summary: "Issue an app-profile avatar upload intent"
+    },
+    {
+      authority: [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path intentId (required): string",
+        "path subjectId (required): string",
+        "Raw binary request body (required): image/png, image/jpeg, image/webp"
+      ],
+      example: "curl --request PUT -H 'content-type: image/png' --data-binary @icon.png 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profiles/%7BsubjectId%7D/app/avatar/%7BintentId%7D'",
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        appId: "{appId}",
+        environment: "test",
+        intentId: "{intentId}",
+        subjectId: "{subjectId}"
+      },
+      method: "PUT",
+      operationId: "uploadAppProfileSubjectAppAvatar",
+      outcomes: [
+        {
+          description: "Updated profile",
+          status: 200,
+          success: true
+        },
+        {
+          description: "Unauthorized",
+          status: 401,
+          success: false
+        },
+        {
+          description: "Version conflict",
+          status: 409,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}/app/avatar/{intentId}",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "test",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of test | production"
+        },
+        {
+          example: "{intentId}",
+          location: "path",
+          name: "intentId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{subjectId}",
+          location: "path",
+          name: "subjectId",
+          required: true,
+          type: "string",
+          validation: "—"
+        }
+      ],
+      requestBodyFields: [],
+      requestSchema: {
+        type: "string",
+        format: "binary"
+      },
+      retrySafety: "unsafe",
+      summary: "Upload an app-profile avatar"
+    },
+    {
+      authority: [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path subjectId (required): string",
+        "JSON request body (optional): application/json, object"
+      ],
+      example: "curl --request DELETE -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profiles/%7BsubjectId%7D/user/avatar'",
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        appId: "{appId}",
+        environment: "test",
+        subjectId: "{subjectId}"
+      },
+      exampleRequestBody: {},
+      method: "DELETE",
+      operationId: "removeAppProfileSubjectUserAvatar",
+      outcomes: [
+        {
+          description: "Updated profile",
+          status: 200,
+          success: true
+        },
+        {
+          description: "Unauthorized",
+          status: 401,
+          success: false
+        },
+        {
+          description: "Version conflict",
+          status: 409,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}/user/avatar",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "test",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of test | production"
+        },
+        {
+          example: "{subjectId}",
+          location: "path",
+          name: "subjectId",
+          required: true,
+          type: "string",
+          validation: "—"
+        }
+      ],
+      requestBodyFields: [
+        {
+          name: "expectedVersion",
+          required: false,
+          type: "integer",
+          validation: "—"
+        }
+      ],
+      requestSchema: {
+        type: "object",
+        properties: {
+          expectedVersion: {
+            type: "integer"
+          }
+        }
+      },
+      retrySafety: "unsafe",
+      summary: "Update an app-profile avatar binding"
+    },
+    {
+      authority: [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path subjectId (required): string",
+        "JSON request body (required): application/json, #/components/schemas/AppProfileAvatarPublishRequest"
+      ],
+      example: `curl --request POST -H 'content-type: application/json' --data '{"assetId":"{assetId}","revision":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profiles/%7BsubjectId%7D/user/avatar'`,
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        appId: "{appId}",
+        environment: "test",
+        subjectId: "{subjectId}"
+      },
+      exampleRequestBody: {
+        assetId: "{assetId}",
+        revision: 1
+      },
+      method: "POST",
+      operationId: "publishAppProfileSubjectUserAvatar",
+      outcomes: [
+        {
+          description: "Updated profile",
+          status: 200,
+          success: true
+        },
+        {
+          description: "Unauthorized",
+          status: 401,
+          success: false
+        },
+        {
+          description: "Version conflict",
+          status: 409,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}/user/avatar",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "test",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of test | production"
+        },
+        {
+          example: "{subjectId}",
+          location: "path",
+          name: "subjectId",
+          required: true,
+          type: "string",
+          validation: "—"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: "{assetId}",
+          name: "assetId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: 1,
+          name: "revision",
+          required: true,
+          type: "integer",
+          validation: "min 1"
+        },
+        {
+          name: "expectedVersion",
+          required: false,
+          type: "integer",
+          validation: "min 0"
+        }
+      ],
+      requestSchema: {
+        $ref: "#/components/schemas/AppProfileAvatarPublishRequest"
+      },
+      retrySafety: "unsafe",
+      summary: "Update an app-profile avatar binding"
+    },
+    {
+      authority: [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path subjectId (required): string"
+      ],
+      example: "curl --request POST 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profiles/%7BsubjectId%7D/user/avatar-intents'",
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        appId: "{appId}",
+        environment: "test",
+        subjectId: "{subjectId}"
+      },
+      method: "POST",
+      operationId: "createAppProfileSubjectUserAvatarIntent",
+      outcomes: [
+        {
+          description: "Upload intent",
+          status: 201,
+          success: true
+        },
+        {
+          description: "Unauthorized",
+          status: 401,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}/user/avatar-intents",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "test",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of test | production"
+        },
+        {
+          example: "{subjectId}",
+          location: "path",
+          name: "subjectId",
+          required: true,
+          type: "string",
+          validation: "—"
+        }
+      ],
+      requestBodyFields: [],
+      retrySafety: "unsafe",
+      summary: "Issue an app-profile avatar upload intent"
+    },
+    {
+      authority: [
+        "Public command. Send no credential; enumeration-safe responses do not disclose identity state."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "path appId (required): string",
+        "path environment (required): string, one of test | production",
+        "path intentId (required): string",
+        "path subjectId (required): string",
+        "Raw binary request body (required): image/png, image/jpeg, image/webp"
+      ],
+      example: "curl --request PUT -H 'content-type: image/png' --data-binary @icon.png 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/profiles/%7BsubjectId%7D/user/avatar/%7BintentId%7D'",
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        appId: "{appId}",
+        environment: "test",
+        intentId: "{intentId}",
+        subjectId: "{subjectId}"
+      },
+      method: "PUT",
+      operationId: "uploadAppProfileSubjectUserAvatar",
+      outcomes: [
+        {
+          description: "Updated profile",
+          status: 200,
+          success: true
+        },
+        {
+          description: "Unauthorized",
+          status: 401,
+          success: false
+        },
+        {
+          description: "Version conflict",
+          status: 409,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/apps/{appId}/{environment}/profiles/{subjectId}/user/avatar/{intentId}",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{appId}",
+          location: "path",
+          name: "appId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "test",
+          location: "path",
+          name: "environment",
+          required: true,
+          type: "string",
+          validation: "one of test | production"
+        },
+        {
+          example: "{intentId}",
+          location: "path",
+          name: "intentId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{subjectId}",
+          location: "path",
+          name: "subjectId",
+          required: true,
+          type: "string",
+          validation: "—"
+        }
+      ],
+      requestBodyFields: [],
+      requestSchema: {
+        type: "string",
+        format: "binary"
+      },
+      retrySafety: "unsafe",
+      summary: "Upload an app-profile avatar"
+    },
+    {
+      authority: [
         "Server-side credential scoped to one exact app environment. Never expose this value to browser bundles, logs, examples, or diagnostics."
       ],
       constraints: [
         "path workspaceId (required): string",
         "path appId (required): string",
         "path environment (required): string, one of test | production",
-        "JSON request body (required): #/components/schemas/ValidateAppSessionRequest"
+        "JSON request body (required): application/json, #/components/schemas/ValidateAppSessionRequest"
       ],
       example: `curl --request POST -H 'authorization: Bearer {app_credential}' -H 'content-type: application/json' --data '{"sessionReference":"session_reference_example_01"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/test/sessions/validate'`,
       exampleParameters: {
@@ -44470,7 +59064,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path environment (required): string, one of production | test",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/RegisterIntegrationWebhookRequest"
+        "JSON request body (required): application/json, #/components/schemas/RegisterIntegrationWebhookRequest"
       ],
       example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"subscriptions":[],"url":"{url}"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks'`,
       exampleParameters: {
@@ -44712,7 +59306,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path deliveryId (required): string",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/ReplayIntegrationWebhookDeliveryRequest"
+        "JSON request body (required): application/json, #/components/schemas/ReplayIntegrationWebhookDeliveryRequest"
       ],
       example: "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/deliveries/%7BdeliveryId%7D/replay'",
       exampleParameters: {
@@ -44849,7 +59443,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         'header if-match (optional): string, pattern ^"[1-9]\\d*"$',
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/DisableIntegrationWebhookRequest"
+        "JSON request body (required): application/json, #/components/schemas/DisableIntegrationWebhookRequest"
       ],
       example: "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/disable'",
       exampleParameters: {
@@ -44995,7 +59589,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         'header if-match (optional): string, pattern ^"[1-9]\\d*"$',
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/RotateIntegrationWebhookSecretRequest"
+        "JSON request body (required): application/json, #/components/schemas/RotateIntegrationWebhookSecretRequest"
       ],
       example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"overlapSeconds":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/rotate'`,
       exampleParameters: {
@@ -45150,7 +59744,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         'header if-match (optional): string, pattern ^"[1-9]\\d*"$',
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/ReplaceIntegrationWebhookSubscriptionsRequest"
+        "JSON request body (required): application/json, #/components/schemas/ReplaceIntegrationWebhookSubscriptionsRequest"
       ],
       example: `curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"subscriptions":[]}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/%7BwebhookId%7D/subscriptions'`,
       exampleParameters: {
@@ -45303,7 +59897,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path environment (required): string, one of production | test",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/ReconcileIntegrationWebhooksRequest"
+        "JSON request body (required): application/json, #/components/schemas/ReconcileIntegrationWebhooksRequest"
       ],
       example: "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/production/webhooks/reconcile'",
       exampleParameters: {
@@ -45506,7 +60100,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         'header if-match (optional): string, pattern ^"[1-9]\\d*"$',
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/ConfirmBulkAccessRequest"
+        "JSON request body (required): application/json, #/components/schemas/ConfirmBulkAccessRequest"
       ],
       example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"confirmed":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/operations/%7BoperationId%7D/cancellation'`,
       exampleParameters: {
@@ -45761,7 +60355,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path workspaceId (required): string, minLength 3, maxLength 128",
         "path appId (required): string, minLength 3, maxLength 128",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/CreateBulkAccessPreviewRequest"
+        "JSON request body (required): application/json, #/components/schemas/CreateBulkAccessPreviewRequest"
       ],
       example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"action":"suspend_memberships","filter":{"membershipIds":["{membershipIds_1}"]},"reason":"administrator_action"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/previews'`,
       exampleParameters: {
@@ -45974,7 +60568,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path previewId (required): string",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/ExecuteBulkAccessPreviewRequest"
+        "JSON request body (required): application/json, #/components/schemas/ExecuteBulkAccessPreviewRequest"
       ],
       example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"confirmed":true,"previewIntegrityDigest":"sha256:0000000000000000000000000000000000000000000000000000000000000000","previewVersion":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/bulk-access/previews/%7BpreviewId%7D/executions'`,
       exampleParameters: {
@@ -46389,7 +60983,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path appId (required): string",
         "path environment (required): string, one of test | production",
         "header Idempotency-Key (required): string, minLength 1, maxLength 240",
-        "JSON request body (required): #/components/schemas/CreateAppCommerceAddonRequest"
+        "JSON request body (required): application/json, #/components/schemas/CreateAppCommerceAddonRequest"
       ],
       example: `curl --request POST -H 'authorization: Bearer {app_credential}' -H 'Idempotency-Key: {Idempotency-Key}' -H 'content-type: application/json' --data '{"amountMicros":0,"currency":"{currency}","interval":"month","key":"{key}","name":"Example"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/commerce/test/addons'`,
       exampleParameters: {
@@ -46530,7 +61124,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path appId (required): string",
         "path environment (required): string, one of test | production",
         "header Idempotency-Key (required): string, minLength 1, maxLength 240",
-        "JSON request body (required): #/components/schemas/CreateAppCommerceCatalogRequest"
+        "JSON request body (required): application/json, #/components/schemas/CreateAppCommerceCatalogRequest"
       ],
       example: `curl --request POST -H 'authorization: Bearer {app_credential}' -H 'Idempotency-Key: {Idempotency-Key}' -H 'content-type: application/json' --data '{"defaultCurrency":"USD","name":"Example"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/commerce/test/catalog'`,
       exampleParameters: {
@@ -46711,7 +61305,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path environment (required): string, one of test | production",
         "path customerRef (required): string",
         "header Idempotency-Key (required): string, minLength 1, maxLength 240",
-        "JSON request body (required): #/components/schemas/RecordAppCommerceUsageRequest"
+        "JSON request body (required): application/json, #/components/schemas/RecordAppCommerceUsageRequest"
       ],
       example: `curl --request POST -H 'authorization: Bearer {app_credential}' -H 'Idempotency-Key: {Idempotency-Key}' -H 'content-type: application/json' --data '{"meterKey":"{meterKey}","quantity":0}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/commerce/test/customers/%7BcustomerRef%7D/usage'`,
       exampleParameters: {
@@ -46819,7 +61413,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path appId (required): string",
         "path environment (required): string, one of test | production",
         "header Idempotency-Key (required): string, minLength 1, maxLength 240",
-        "JSON request body (required): #/components/schemas/CreateAppCommerceFeatureRequest"
+        "JSON request body (required): application/json, #/components/schemas/CreateAppCommerceFeatureRequest"
       ],
       example: `curl --request POST -H 'authorization: Bearer {app_credential}' -H 'Idempotency-Key: {Idempotency-Key}' -H 'content-type: application/json' --data '{"key":"{key}","name":"Example"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/commerce/test/features'`,
       exampleParameters: {
@@ -46930,7 +61524,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path environment (required): string, one of test | production",
         "path invoiceId (required): string",
         "header Idempotency-Key (required): string, minLength 1, maxLength 240",
-        "JSON request body (required): #/components/schemas/RequestAppCommerceRefundRequest"
+        "JSON request body (required): application/json, #/components/schemas/RequestAppCommerceRefundRequest"
       ],
       example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'Idempotency-Key: {Idempotency-Key}' -H 'content-type: application/json' --data '{"amountMinor":1,"currency":"{currency}","paymentId":"{paymentId}"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/commerce/test/invoices/%7BinvoiceId%7D/refunds'`,
       exampleParameters: {
@@ -47112,7 +61706,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path appId (required): string",
         "path environment (required): string, one of test | production",
         "header Idempotency-Key (required): string, minLength 1, maxLength 240",
-        "JSON request body (required): #/components/schemas/CreateAppCommercePlanRequest"
+        "JSON request body (required): application/json, #/components/schemas/CreateAppCommercePlanRequest"
       ],
       example: `curl --request POST -H 'authorization: Bearer {app_credential}' -H 'Idempotency-Key: {Idempotency-Key}' -H 'content-type: application/json' --data '{"amountMicros":0,"currency":"{currency}","interval":"month","key":"{key}","name":"Example"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/commerce/test/plans'`,
       exampleParameters: {
@@ -47587,6 +62181,303 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
     {
       authority: [
         "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      constraints: [
+        "JSON request body (required): application/json, object"
+      ],
+      example: `curl --request DELETE -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{"expected":"{expected}"}' 'https://api.authle.ss/workspaces/undefined/apps/undefined/icon'`,
+      exampleParameters: {},
+      exampleRequestBody: {
+        expected: "{expected}"
+      },
+      method: "DELETE",
+      operationId: "clearAppIcon",
+      outcomes: [
+        {
+          description: "Icon cleared",
+          status: 200,
+          success: true
+        },
+        {
+          description: "Invalid input",
+          status: 400,
+          success: false
+        },
+        {
+          description: "Unauthorized",
+          status: 401,
+          success: false
+        },
+        {
+          description: "App or asset not found",
+          status: 404,
+          success: false
+        },
+        {
+          description: "Revision conflict",
+          status: 409,
+          success: false
+        },
+        {
+          description: "Unexpected service failure",
+          status: 500,
+          success: false
+        },
+        {
+          description: "Temporarily unavailable",
+          status: 503,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/apps/{appId}/icon",
+      parameters: [],
+      requestBodyFields: [
+        {
+          example: "{expected}",
+          name: "expected",
+          required: true,
+          type: "value",
+          validation: "—"
+        }
+      ],
+      requestSchema: {
+        type: "object",
+        required: [
+          "expected"
+        ],
+        properties: {
+          expected: {
+            anyOf: [
+              {
+                type: "null"
+              },
+              {
+                $ref: "#/components/schemas/AppIconBinding"
+              }
+            ]
+          }
+        },
+        additionalProperties: false
+      },
+      retrySafety: "unsafe",
+      summary: "Clear an app icon"
+    },
+    {
+      authority: [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      constraints: [
+        "JSON request body (required): application/json, object"
+      ],
+      example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{"assetId":"{assetId}","revision":1,"expected":"{expected}"}' 'https://api.authle.ss/workspaces/undefined/apps/undefined/icon'`,
+      exampleParameters: {},
+      exampleRequestBody: {
+        assetId: "{assetId}",
+        revision: 1,
+        expected: "{expected}"
+      },
+      method: "POST",
+      operationId: "publishAppIcon",
+      outcomes: [
+        {
+          description: "Icon published",
+          status: 200,
+          success: true
+        },
+        {
+          description: "Invalid input",
+          status: 400,
+          success: false
+        },
+        {
+          description: "Unauthorized",
+          status: 401,
+          success: false
+        },
+        {
+          description: "App or asset not found",
+          status: 404,
+          success: false
+        },
+        {
+          description: "Revision conflict",
+          status: 409,
+          success: false
+        },
+        {
+          description: "Unexpected service failure",
+          status: 500,
+          success: false
+        },
+        {
+          description: "Temporarily unavailable",
+          status: 503,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/apps/{appId}/icon",
+      parameters: [],
+      requestBodyFields: [
+        {
+          example: "{assetId}",
+          name: "assetId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: 1,
+          name: "revision",
+          required: true,
+          type: "integer",
+          validation: "min 1"
+        },
+        {
+          example: "{expected}",
+          name: "expected",
+          required: true,
+          type: "value",
+          validation: "—"
+        }
+      ],
+      requestSchema: {
+        type: "object",
+        required: [
+          "assetId",
+          "revision",
+          "expected"
+        ],
+        properties: {
+          assetId: {
+            type: "string"
+          },
+          revision: {
+            type: "integer",
+            minimum: 1
+          },
+          expected: {
+            anyOf: [
+              {
+                type: "null"
+              },
+              {
+                $ref: "#/components/schemas/AppIconBinding"
+              }
+            ]
+          }
+        },
+        additionalProperties: false
+      },
+      retrySafety: "unsafe",
+      summary: "Publish an app icon"
+    },
+    {
+      authority: [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      constraints: [],
+      example: "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/undefined/apps/undefined/icon/intents'",
+      exampleParameters: {},
+      method: "POST",
+      operationId: "createAppIconUploadIntent",
+      outcomes: [
+        {
+          description: "Upload intent created",
+          status: 201,
+          success: true
+        },
+        {
+          description: "Unauthorized",
+          status: 401,
+          success: false
+        },
+        {
+          description: "App or asset not found",
+          status: 404,
+          success: false
+        },
+        {
+          description: "Unexpected service failure",
+          status: 500,
+          success: false
+        },
+        {
+          description: "Temporarily unavailable",
+          status: 503,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/apps/{appId}/icon/intents",
+      parameters: [],
+      requestBodyFields: [],
+      retrySafety: "safe",
+      summary: "Create an app icon upload intent"
+    },
+    {
+      authority: [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
+        "A workspace service credential. Its scopes and app/environment restrictions are checked for every request."
+      ],
+      constraints: [
+        "Raw binary request body (required): image/png, image/jpeg, image/webp"
+      ],
+      example: "curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: image/png' --data-binary @icon.png 'https://api.authle.ss/workspaces/undefined/apps/undefined/icon/intents/undefined'",
+      exampleParameters: {},
+      method: "PUT",
+      operationId: "uploadAppIcon",
+      outcomes: [
+        {
+          description: "Icon uploaded",
+          status: 200,
+          success: true
+        },
+        {
+          description: "Invalid input",
+          status: 400,
+          success: false
+        },
+        {
+          description: "Unauthorized",
+          status: 401,
+          success: false
+        },
+        {
+          description: "App or asset not found",
+          status: 404,
+          success: false
+        },
+        {
+          description: "Image upload exceeds the 5 MiB encoded limit",
+          status: 413,
+          success: false
+        },
+        {
+          description: "Unexpected service failure",
+          status: 500,
+          success: false
+        },
+        {
+          description: "Temporarily unavailable",
+          status: 503,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/apps/{appId}/icon/intents/{intentId}",
+      parameters: [],
+      requestBodyFields: [],
+      requestSchema: {
+        type: "string",
+        format: "binary"
+      },
+      retrySafety: "unsafe",
+      summary: "Upload a processed app icon"
+    },
+    {
+      authority: [
+        "Server-side platform session. Never expose this value to browser bundles or logs.",
         "Server-side credential scoped to one exact app environment. Never expose this value to browser bundles, logs, examples, or diagnostics."
       ],
       constraints: [
@@ -47697,7 +62588,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path appId (required): string, minLength 3, maxLength 128",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/InviteAppMembershipRequest"
+        "JSON request body (required): application/json, #/components/schemas/InviteAppMembershipRequest"
       ],
       example: `curl --request POST -H 'authorization: Bearer {app_credential}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"confirmed":true,"email":"person@example.test"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships'`,
       exampleParameters: {
@@ -47991,7 +62882,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         'header if-match (optional): string, pattern ^"[1-9]\\d*"$',
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/GrantAppEntitlementRequest"
+        "JSON request body (required): application/json, #/components/schemas/GrantAppEntitlementRequest"
       ],
       example: `curl --request POST -H 'authorization: Bearer {app_credential}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"confirmed":true,"key":"{key}","source":"{source}"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/entitlements'`,
       exampleParameters: {
@@ -48149,7 +63040,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         'header if-match (optional): string, pattern ^"[1-9]\\d*"$',
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/RevokeAppEntitlementRequest"
+        "JSON request body (required): application/json, #/components/schemas/RevokeAppEntitlementRequest"
       ],
       example: `curl --request DELETE -H 'authorization: Bearer {app_credential}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"confirmed":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/entitlements/%7BgrantId%7D'`,
       exampleParameters: {
@@ -48303,7 +63194,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         'header if-match (optional): string, pattern ^"[1-9]\\d*"$',
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/ChangeAppMembershipStatusRequest"
+        "JSON request body (required): application/json, #/components/schemas/ChangeAppMembershipStatusRequest"
       ],
       example: `curl --request POST -H 'authorization: Bearer {app_credential}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"action":"activate","confirmed":true,"reason":"access_ended"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/lifecycle'`,
       exampleParameters: {
@@ -48464,7 +63355,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         'header if-match (optional): string, pattern ^"[1-9]\\d*"$',
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/GrantAppRoleRequest"
+        "JSON request body (required): application/json, #/components/schemas/GrantAppRoleRequest"
       ],
       example: `curl --request POST -H 'authorization: Bearer {app_credential}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"confirmed":true,"key":"{key}","source":"{source}"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/roles'`,
       exampleParameters: {
@@ -48616,7 +63507,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         'header if-match (optional): string, pattern ^"[1-9]\\d*"$',
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         "header x-correlation-id (optional): string, minLength 8, maxLength 128",
-        "JSON request body (required): #/components/schemas/RevokeAppRoleRequest"
+        "JSON request body (required): application/json, #/components/schemas/RevokeAppRoleRequest"
       ],
       example: `curl --request DELETE -H 'authorization: Bearer {app_credential}' -H 'idempotency-key: request-example-001' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"confirmed":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/apps/%7BappId%7D/memberships/%7BmembershipId%7D/roles/%7BgrantId%7D'`,
       exampleParameters: {
@@ -48903,6 +63794,429 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "Server-side platform session. Never expose this value to browser bundles or logs."
       ],
       constraints: [
+        "path workspaceId (required): string",
+        "header x-correlation-id (optional): string, minLength 8, maxLength 128",
+        "JSON request body (optional): application/json, object"
+      ],
+      example: `curl --request DELETE -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"expected":"{expected}"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/avatar'`,
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        "x-correlation-id": "request_example_001"
+      },
+      exampleRequestBody: {
+        expected: "{expected}"
+      },
+      method: "DELETE",
+      operationId: "removeWorkspaceAvatar",
+      outcomes: [
+        {
+          description: "Avatar removed",
+          status: 200,
+          success: true
+        },
+        {
+          description: "Invalid avatar request",
+          status: 400,
+          success: false
+        },
+        {
+          description: "Session unavailable",
+          status: 401,
+          success: false
+        },
+        {
+          description: "Workspace or avatar asset unavailable",
+          status: 404,
+          success: false
+        },
+        {
+          description: "Avatar changed",
+          status: 409,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/avatar",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: "{expected}",
+          name: "expected",
+          required: true,
+          type: "value",
+          validation: "—"
+        }
+      ],
+      requestSchema: {
+        type: "object",
+        additionalProperties: false,
+        required: [
+          "expected"
+        ],
+        properties: {
+          expected: {
+            oneOf: [
+              {
+                $ref: "#/components/schemas/WorkspaceAvatar"
+              },
+              {
+                type: "null"
+              }
+            ]
+          }
+        }
+      },
+      retrySafety: "unsafe",
+      summary: "Remove a workspace avatar"
+    },
+    {
+      authority: [
+        "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "header x-correlation-id (optional): string, minLength 8, maxLength 128",
+        "JSON request body (required): application/json, object"
+      ],
+      example: `curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: application/json' --data '{"assetId":"{assetId}","assetRevision":1,"expected":"{expected}"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/avatar'`,
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        "x-correlation-id": "request_example_001"
+      },
+      exampleRequestBody: {
+        assetId: "{assetId}",
+        assetRevision: 1,
+        expected: "{expected}"
+      },
+      method: "PUT",
+      operationId: "attachWorkspaceAvatar",
+      outcomes: [
+        {
+          description: "Avatar attached",
+          status: 200,
+          success: true
+        },
+        {
+          description: "Invalid avatar request",
+          status: 400,
+          success: false
+        },
+        {
+          description: "Session unavailable",
+          status: 401,
+          success: false
+        },
+        {
+          description: "Workspace or avatar asset unavailable",
+          status: 404,
+          success: false
+        },
+        {
+          description: "Avatar changed",
+          status: 409,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/avatar",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [
+        {
+          example: "{assetId}",
+          name: "assetId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: 1,
+          name: "assetRevision",
+          required: true,
+          type: "integer",
+          validation: "min 1"
+        },
+        {
+          example: "{expected}",
+          name: "expected",
+          required: true,
+          type: "value",
+          validation: "—"
+        }
+      ],
+      requestSchema: {
+        type: "object",
+        additionalProperties: false,
+        required: [
+          "assetId",
+          "assetRevision",
+          "expected"
+        ],
+        properties: {
+          assetId: {
+            type: "string"
+          },
+          assetRevision: {
+            type: "integer",
+            minimum: 1
+          },
+          expected: {
+            oneOf: [
+              {
+                $ref: "#/components/schemas/WorkspaceAvatar"
+              },
+              {
+                type: "null"
+              }
+            ]
+          }
+        }
+      },
+      retrySafety: "unsafe",
+      summary: "Attach a workspace avatar asset"
+    },
+    {
+      authority: [
+        "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "header x-correlation-id (optional): string, minLength 8, maxLength 128",
+        "path size (required): integer, one of 24 | 64 | 256"
+      ],
+      example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/avatar/24'",
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        "x-correlation-id": "request_example_001",
+        size: 24
+      },
+      method: "GET",
+      operationId: "getWorkspaceAvatar",
+      outcomes: [
+        {
+          description: "Private avatar image",
+          status: 200,
+          success: true
+        },
+        {
+          description: "Session unavailable",
+          status: 401,
+          success: false
+        },
+        {
+          description: "Avatar unavailable",
+          status: 404,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/avatar/{size}",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        },
+        {
+          example: 24,
+          location: "path",
+          name: "size",
+          required: true,
+          type: "integer",
+          validation: "one of 24 | 64 | 256"
+        }
+      ],
+      requestBodyFields: [],
+      retrySafety: "safe",
+      summary: "Deliver a private workspace avatar variant"
+    },
+    {
+      authority: [
+        "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "header x-correlation-id (optional): string, minLength 8, maxLength 128"
+      ],
+      example: "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/avatar/intents'",
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        "x-correlation-id": "request_example_001"
+      },
+      method: "POST",
+      operationId: "issueWorkspaceAvatarIntent",
+      outcomes: [
+        {
+          description: "Upload intent issued",
+          status: 201,
+          success: true
+        },
+        {
+          description: "Session unavailable",
+          status: 401,
+          success: false
+        },
+        {
+          description: "Workspace unavailable",
+          status: 404,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/avatar/intents",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        }
+      ],
+      requestBodyFields: [],
+      retrySafety: "unsafe",
+      summary: "Issue a workspace avatar upload intent"
+    },
+    {
+      authority: [
+        "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
+      constraints: [
+        "path workspaceId (required): string",
+        "header x-correlation-id (optional): string, minLength 8, maxLength 128",
+        "path intentId (required): string",
+        "header content-type (required): string",
+        "JSON request body (required): application/json, string"
+      ],
+      example: `curl --request PUT -H 'cookie: __Host-authless_session={platform_session}' -H 'x-correlation-id: request_example_001' -H 'content-type: {content-type}' -H 'content-type: application/json' --data '"{value}"' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/avatar/intents/%7BintentId%7D'`,
+      exampleParameters: {
+        workspaceId: "{workspaceId}",
+        "x-correlation-id": "request_example_001",
+        intentId: "{intentId}",
+        "content-type": "{content-type}"
+      },
+      exampleRequestBody: "{value}",
+      method: "PUT",
+      operationId: "uploadWorkspaceAvatar",
+      outcomes: [
+        {
+          description: "Avatar asset uploaded",
+          status: 200,
+          success: true
+        },
+        {
+          description: "Invalid upload",
+          status: 400,
+          success: false
+        },
+        {
+          description: "Session unavailable",
+          status: 401,
+          success: false
+        },
+        {
+          description: "The image exceeds the 5 MiB encoded upload limit",
+          status: 413,
+          success: false
+        }
+      ],
+      path: "/workspaces/{workspaceId}/avatar/intents/{intentId}",
+      parameters: [
+        {
+          example: "{workspaceId}",
+          location: "path",
+          name: "workspaceId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "request_example_001",
+          location: "header",
+          name: "x-correlation-id",
+          required: false,
+          type: "string",
+          validation: "minLength 8, maxLength 128"
+        },
+        {
+          example: "{intentId}",
+          location: "path",
+          name: "intentId",
+          required: true,
+          type: "string",
+          validation: "—"
+        },
+        {
+          example: "{content-type}",
+          location: "header",
+          name: "content-type",
+          required: true,
+          type: "string",
+          validation: "—"
+        }
+      ],
+      requestBodyFields: [],
+      requestSchema: {
+        type: "string",
+        description: "Binary image bytes are accepted with the upload content type."
+      },
+      retrySafety: "unsafe",
+      summary: "Upload workspace avatar bytes"
+    },
+    {
+      authority: [
+        "Server-side platform session. Never expose this value to browser bundles or logs."
+      ],
+      constraints: [
         "path workspaceId (required): string"
       ],
       example: "curl --request GET -H 'cookie: __Host-authless_session={platform_session}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/billing'",
@@ -48949,7 +64263,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       constraints: [
         "path workspaceId (required): string",
-        "JSON request body (required): #/components/schemas/CommercialBillingCancellationReviewRequest"
+        "JSON request body (required): application/json, #/components/schemas/CommercialBillingCancellationReviewRequest"
       ],
       example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{"idempotencyKey":"{idempotencyKey}","mode":"period_end"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/billing/cancellation-reviews'`,
       exampleParameters: {
@@ -49032,7 +64346,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       constraints: [
         "path workspaceId (required): string",
-        "JSON request body (required): #/components/schemas/CommercialBillingCancellationConfirmationRequest"
+        "JSON request body (required): application/json, #/components/schemas/CommercialBillingCancellationConfirmationRequest"
       ],
       example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{"confirmationToken":"{confirmationToken}","idempotencyKey":"{idempotencyKey}"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/billing/cancellations'`,
       exampleParameters: {
@@ -49115,7 +64429,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       constraints: [
         "path workspaceId (required): string",
-        "JSON request body (required): #/components/schemas/CommercialBillingChangeAuthorizationRequest"
+        "JSON request body (required): application/json, #/components/schemas/CommercialBillingChangeAuthorizationRequest"
       ],
       example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{"changeId":"{changeId}"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/billing/change-authorizations'`,
       exampleParameters: {
@@ -49185,7 +64499,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       constraints: [
         "path workspaceId (required): string",
-        "JSON request body (required): #/components/schemas/CommercialBillingChangeReviewRequest"
+        "JSON request body (required): application/json, #/components/schemas/CommercialBillingChangeReviewRequest"
       ],
       example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{"idempotencyKey":"{idempotencyKey}","period":"monthly","planId":"launch"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/billing/change-reviews'`,
       exampleParameters: {
@@ -49277,7 +64591,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       constraints: [
         "path workspaceId (required): string",
-        "JSON request body (required): #/components/schemas/CommercialBillingRefundRequest"
+        "JSON request body (required): application/json, #/components/schemas/CommercialBillingRefundRequest"
       ],
       example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{"amountMicros":1,"category":"first_purchase_goodwill","consumedOverageMicros":0,"idempotencyKey":"{idempotencyKey}","invoiceRef":"{invoiceRef}"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/billing/refund-requests'`,
       exampleParameters: {
@@ -49442,7 +64756,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path workspaceId (required): string",
         "path planId (required): string, one of launch | growth | scale",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
-        "JSON request body (required): #/components/schemas/CommercialPurchaseConfirmationRequest"
+        "JSON request body (required): application/json, #/components/schemas/CommercialPurchaseConfirmationRequest"
       ],
       example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'content-type: application/json' --data '{"acceptanceToken":"acceptance-example-001","confirmed":true}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/commercial-purchases/launch/confirmations'`,
       exampleParameters: {
@@ -49544,7 +64858,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       constraints: [
         "path workspaceId (required): string",
         "path planId (required): string, one of launch | growth | scale",
-        "JSON request body (required): #/components/schemas/CommercialPurchaseReviewRequest"
+        "JSON request body (required): application/json, #/components/schemas/CommercialPurchaseReviewRequest"
       ],
       example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{"billingPeriod":"monthly","locale":"en"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/commercial-purchases/launch/reviews'`,
       exampleParameters: {
@@ -49737,7 +65051,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       constraints: [
         "path workspaceId (required): string",
-        "JSON request body (required): #/components/schemas/CommercialOverageConfigurationRequest"
+        "JSON request body (required): application/json, #/components/schemas/CommercialOverageConfigurationRequest"
       ],
       example: `curl --request PATCH -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{"enabled":true,"idempotencyKey":"{idempotencyKey}","monthlySpendCapMicrosSar":0}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/overages'`,
       exampleParameters: {
@@ -49828,7 +65142,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       constraints: [
         "path workspaceId (required): string",
-        "JSON request body (required): #/components/schemas/CommercialOverageActivationRequest"
+        "JSON request body (required): application/json, #/components/schemas/CommercialOverageActivationRequest"
       ],
       example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{"idempotencyKey":"{idempotencyKey}","monthlySpendCapMicrosSar":1,"reviewId":"{reviewId}"}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/overages/activations'`,
       exampleParameters: {
@@ -49925,7 +65239,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       constraints: [
         "path workspaceId (required): string",
-        "JSON request body (required): #/components/schemas/CommercialOverageReviewRequest"
+        "JSON request body (required): application/json, #/components/schemas/CommercialOverageReviewRequest"
       ],
       example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{"idempotencyKey":"{idempotencyKey}","monthlySpendCapMicrosSar":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/overages/reviews'`,
       exampleParameters: {
@@ -50065,7 +65379,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       ],
       constraints: [
         "path workspaceId (required): string",
-        "JSON request body (required): #/components/schemas/CreateWorkspaceServicePrincipalRequest"
+        "JSON request body (required): application/json, #/components/schemas/CreateWorkspaceServicePrincipalRequest"
       ],
       example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{"name":"Example","scopes":["app:read"],"restrictions":{"appIds":[],"environments":["test"]}}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/service-principals'`,
       exampleParameters: {
@@ -50305,7 +65619,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path workspaceId (required): string",
         "path principalId (required): string",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
-        "JSON request body (required): #/components/schemas/IssueWorkspaceServiceCredentialRequest"
+        "JSON request body (required): application/json, #/components/schemas/IssueWorkspaceServiceCredentialRequest"
       ],
       example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'content-type: application/json' --data '{"name":"Example","scopes":["app:read"],"restrictions":{"appIds":[],"environments":["test"]}}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/service-principals/%7BprincipalId%7D/credentials'`,
       exampleParameters: {
@@ -50449,7 +65763,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path credentialId (required): string",
         "header idempotency-key (optional): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         'header if-match (optional): string, pattern ^"[1-9]\\d*"$',
-        "JSON request body (required): #/components/schemas/RevokeWorkspaceServiceCredentialRequest"
+        "JSON request body (required): application/json, #/components/schemas/RevokeWorkspaceServiceCredentialRequest"
       ],
       example: "curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/service-principals/%7BprincipalId%7D/credentials/%7BcredentialId%7D/revoke'",
       exampleParameters: {
@@ -50568,7 +65882,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "path credentialId (required): string",
         "header idempotency-key (required): string, minLength 8, maxLength 100, pattern ^[A-Za-z0-9._:-]+$",
         'header if-match (optional): string, pattern ^"[1-9]\\d*"$',
-        "JSON request body (required): #/components/schemas/RotateWorkspaceServiceCredentialRequest"
+        "JSON request body (required): application/json, #/components/schemas/RotateWorkspaceServiceCredentialRequest"
       ],
       example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'idempotency-key: request-example-001' -H 'content-type: application/json' --data '{"overlapSeconds":0}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/service-principals/%7BprincipalId%7D/credentials/%7BcredentialId%7D/rotate'`,
       exampleParameters: {
@@ -50701,7 +66015,7 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       constraints: [
         "path workspaceId (required): string",
         "path principalId (required): string",
-        "JSON request body (required): #/components/schemas/ChangeWorkspaceServicePrincipalStatusRequest"
+        "JSON request body (required): application/json, #/components/schemas/ChangeWorkspaceServicePrincipalStatusRequest"
       ],
       example: `curl --request POST -H 'cookie: __Host-authless_session={platform_session}' -H 'content-type: application/json' --data '{"status":"active","expectedVersion":1}' 'https://api.authle.ss/workspaces/%7BworkspaceId%7D/service-principals/%7BprincipalId%7D/status'`,
       exampleParameters: {
@@ -50794,6 +66108,471 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
     }
   ],
   schemas: {
+    CustomAuthenticationRegistrationInput: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "clientId",
+        "method",
+        "mode",
+        "origin",
+        "redirectUri"
+      ],
+      properties: {
+        clientId: {
+          type: "string",
+          minLength: 8,
+          maxLength: 512
+        },
+        method: {
+          enum: [
+            "guest",
+            "email_code"
+          ]
+        },
+        mode: {
+          enum: [
+            "backend",
+            "public"
+          ]
+        },
+        origin: {
+          type: "string",
+          format: "uri"
+        },
+        redirectUri: {
+          type: "string",
+          format: "uri"
+        },
+        expectedUpdatedAt: {
+          type: "string",
+          format: "date-time"
+        }
+      }
+    },
+    CustomAuthenticationRegistrationView: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "appId",
+        "clientId",
+        "environmentId",
+        "method",
+        "mode",
+        "origin",
+        "redirectUri",
+        "status",
+        "updatedAt",
+        "workspaceId"
+      ],
+      properties: {
+        appId: {
+          type: "string",
+          minLength: 3,
+          maxLength: 128
+        },
+        clientId: {
+          type: "string",
+          minLength: 8,
+          maxLength: 512
+        },
+        environmentId: {
+          type: "string",
+          minLength: 3,
+          maxLength: 128
+        },
+        method: {
+          enum: [
+            "guest",
+            "email_code"
+          ]
+        },
+        mode: {
+          enum: [
+            "backend",
+            "public"
+          ]
+        },
+        origin: {
+          type: "string",
+          format: "uri"
+        },
+        redirectUri: {
+          type: "string",
+          format: "uri"
+        },
+        status: {
+          enum: [
+            "active",
+            "revoked"
+          ]
+        },
+        updatedAt: {
+          type: "string",
+          format: "date-time"
+        },
+        workspaceId: {
+          type: "string",
+          minLength: 3,
+          maxLength: 128
+        }
+      }
+    },
+    CustomAuthenticationRegistrationListResponse: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "registrations"
+      ],
+      properties: {
+        registrations: {
+          type: "array",
+          items: {
+            $ref: "#/components/schemas/CustomAuthenticationRegistrationView"
+          }
+        }
+      }
+    },
+    CustomAuthenticationRegistrationResponse: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "registration"
+      ],
+      properties: {
+        registration: {
+          $ref: "#/components/schemas/CustomAuthenticationRegistrationView"
+        }
+      }
+    },
+    CustomAuthenticationRevocationResponse: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "revoked"
+      ],
+      properties: {
+        revoked: {
+          type: "boolean"
+        }
+      }
+    },
+    CustomAuthenticationBinding: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "appId",
+        "clientId",
+        "environmentId",
+        "method",
+        "mode",
+        "nonce",
+        "origin",
+        "policyVersion",
+        "principalMode",
+        "redirectUri",
+        "state",
+        "workspaceId"
+      ],
+      properties: {
+        appId: {
+          type: "string",
+          minLength: 8,
+          maxLength: 512
+        },
+        browserSessionBinding: {
+          type: [
+            "string",
+            "null"
+          ],
+          minLength: 8,
+          maxLength: 512
+        },
+        clientId: {
+          type: "string",
+          minLength: 8,
+          maxLength: 512
+        },
+        codeChallenge: {
+          type: [
+            "string",
+            "null"
+          ],
+          pattern: "^[A-Za-z0-9_-]{43}$"
+        },
+        environmentId: {
+          type: "string",
+          minLength: 8,
+          maxLength: 512
+        },
+        method: {
+          enum: [
+            "guest",
+            "email_code"
+          ]
+        },
+        mode: {
+          enum: [
+            "backend",
+            "public"
+          ]
+        },
+        nonce: {
+          type: "string",
+          minLength: 8,
+          maxLength: 512
+        },
+        origin: {
+          type: "string",
+          format: "uri"
+        },
+        policyVersion: {
+          type: "integer",
+          minimum: 1
+        },
+        principalMode: {
+          enum: [
+            "person",
+            "guest"
+          ]
+        },
+        redirectUri: {
+          type: "string",
+          format: "uri"
+        },
+        requestedScopes: {
+          type: "array",
+          items: {
+            type: "string"
+          },
+          maxItems: 10
+        },
+        state: {
+          type: "string",
+          minLength: 8,
+          maxLength: 512
+        },
+        workspaceId: {
+          type: "string",
+          minLength: 8,
+          maxLength: 512
+        }
+      }
+    },
+    CustomAuthenticationChallengeRequest: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "appId",
+        "clientId",
+        "environmentId",
+        "method",
+        "mode",
+        "nonce",
+        "origin",
+        "policyVersion",
+        "principalMode",
+        "redirectUri",
+        "state",
+        "workspaceId",
+        "email"
+      ],
+      properties: {
+        appId: {
+          type: "string",
+          minLength: 8,
+          maxLength: 512
+        },
+        browserSessionBinding: {
+          type: [
+            "string",
+            "null"
+          ],
+          minLength: 8,
+          maxLength: 512
+        },
+        clientId: {
+          type: "string",
+          minLength: 8,
+          maxLength: 512
+        },
+        codeChallenge: {
+          type: [
+            "string",
+            "null"
+          ],
+          pattern: "^[A-Za-z0-9_-]{43}$"
+        },
+        email: {
+          type: "string",
+          format: "email"
+        },
+        environmentId: {
+          type: "string",
+          minLength: 8,
+          maxLength: 512
+        },
+        method: {
+          enum: [
+            "guest",
+            "email_code"
+          ]
+        },
+        mode: {
+          enum: [
+            "backend",
+            "public"
+          ]
+        },
+        nonce: {
+          type: "string",
+          minLength: 8,
+          maxLength: 512
+        },
+        origin: {
+          type: "string",
+          format: "uri"
+        },
+        policyVersion: {
+          type: "integer",
+          minimum: 1
+        },
+        principalMode: {
+          enum: [
+            "person",
+            "guest"
+          ]
+        },
+        redirectUri: {
+          type: "string",
+          format: "uri"
+        },
+        requestedScopes: {
+          type: "array",
+          items: {
+            type: "string"
+          },
+          maxItems: 10
+        },
+        state: {
+          type: "string",
+          minLength: 8,
+          maxLength: 512
+        },
+        workspaceId: {
+          type: "string",
+          minLength: 8,
+          maxLength: 512
+        }
+      }
+    },
+    CustomAuthenticationVerifyRequest: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "appId",
+        "clientId",
+        "environmentId",
+        "method",
+        "mode",
+        "nonce",
+        "origin",
+        "policyVersion",
+        "principalMode",
+        "redirectUri",
+        "state",
+        "workspaceId"
+      ],
+      properties: {
+        appId: {
+          type: "string",
+          minLength: 8,
+          maxLength: 512
+        },
+        browserSessionBinding: {
+          type: [
+            "string",
+            "null"
+          ],
+          minLength: 8,
+          maxLength: 512
+        },
+        clientId: {
+          type: "string",
+          minLength: 8,
+          maxLength: 512
+        },
+        code: {
+          type: "string",
+          minLength: 6,
+          maxLength: 6
+        },
+        codeChallenge: {
+          type: [
+            "string",
+            "null"
+          ],
+          pattern: "^[A-Za-z0-9_-]{43}$"
+        },
+        environmentId: {
+          type: "string",
+          minLength: 8,
+          maxLength: 512
+        },
+        method: {
+          enum: [
+            "guest",
+            "email_code"
+          ]
+        },
+        mode: {
+          enum: [
+            "backend",
+            "public"
+          ]
+        },
+        nonce: {
+          type: "string",
+          minLength: 8,
+          maxLength: 512
+        },
+        origin: {
+          type: "string",
+          format: "uri"
+        },
+        policyVersion: {
+          type: "integer",
+          minimum: 1
+        },
+        principalMode: {
+          enum: [
+            "person",
+            "guest"
+          ]
+        },
+        redirectUri: {
+          type: "string",
+          format: "uri"
+        },
+        requestedScopes: {
+          type: "array",
+          items: {
+            type: "string"
+          },
+          maxItems: 10
+        },
+        state: {
+          type: "string",
+          minLength: 8,
+          maxLength: 512
+        },
+        workspaceId: {
+          type: "string",
+          minLength: 8,
+          maxLength: 512
+        }
+      }
+    },
     AppCommerceMoney: {
       type: "object",
       additionalProperties: false,
@@ -54327,6 +70106,17 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         },
         name: {
           type: "string"
+        },
+        capabilities: {
+          type: "array",
+          items: {
+            type: "string",
+            enum: [
+              "app-profile:write"
+            ]
+          },
+          uniqueItems: true,
+          maxItems: 1
         }
       }
     },
@@ -56065,6 +71855,19 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         version: {
           type: "integer",
           minimum: 1
+        },
+        iconAssetId: {
+          type: [
+            "string",
+            "null"
+          ]
+        },
+        iconRevision: {
+          type: [
+            "integer",
+            "null"
+          ],
+          minimum: 1
         }
       }
     },
@@ -57225,6 +73028,9 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
             "full"
           ]
         },
+        canManageAvatar: {
+          type: "boolean"
+        },
         id: {
           type: "string"
         },
@@ -57237,6 +73043,9 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
             "active",
             "suspended"
           ]
+        },
+        avatar: {
+          $ref: "#/components/schemas/WorkspaceAvatar"
         }
       }
     },
@@ -57666,7 +73475,8 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
         "M-04",
         "M-06",
         "M-08",
-        "M-10"
+        "M-10",
+        "M-12"
       ]
     },
     AuthenticationPolicyDefinition: {
@@ -58450,6 +74260,782 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
           minimum: 1
         }
       }
+    },
+    WorkspaceAvatar: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "assetId",
+        "assetRevision",
+        "version"
+      ],
+      properties: {
+        assetId: {
+          type: "string"
+        },
+        assetRevision: {
+          type: "integer",
+          minimum: 1
+        },
+        version: {
+          type: "integer",
+          minimum: 0
+        }
+      }
+    },
+    AppIconBinding: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "assetId",
+        "revision"
+      ],
+      properties: {
+        assetId: {
+          type: "string"
+        },
+        revision: {
+          type: "integer",
+          minimum: 1
+        }
+      }
+    },
+    AppIconUploadIntentEnvelope: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "ok",
+        "value"
+      ],
+      properties: {
+        ok: {
+          type: "boolean",
+          enum: [
+            true
+          ]
+        },
+        value: {
+          type: "object",
+          required: [
+            "id",
+            "assetId",
+            "owner",
+            "purpose",
+            "expiresAt"
+          ],
+          properties: {
+            id: {
+              type: "string"
+            },
+            assetId: {
+              type: "string"
+            },
+            owner: {
+              type: "object",
+              additionalProperties: false,
+              required: [
+                "kind",
+                "appId",
+                "workspaceId"
+              ],
+              properties: {
+                kind: {
+                  type: "string",
+                  enum: [
+                    "app"
+                  ]
+                },
+                appId: {
+                  type: "string"
+                },
+                workspaceId: {
+                  type: "string"
+                }
+              }
+            },
+            purpose: {
+              type: "string",
+              enum: [
+                "app_icon"
+              ]
+            },
+            expiresAt: {
+              type: "string",
+              format: "date-time"
+            }
+          },
+          additionalProperties: true
+        }
+      }
+    },
+    AppIconAssetEnvelope: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "ok",
+        "value"
+      ],
+      properties: {
+        ok: {
+          type: "boolean",
+          enum: [
+            true
+          ]
+        },
+        value: {
+          type: "object",
+          required: [
+            "id",
+            "revision",
+            "status"
+          ],
+          properties: {
+            id: {
+              type: "string"
+            },
+            revision: {
+              type: "integer",
+              minimum: 1
+            },
+            status: {
+              type: "string",
+              enum: [
+                "ready"
+              ]
+            }
+          },
+          additionalProperties: true
+        }
+      }
+    },
+    AppIconBindingEnvelope: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "ok",
+        "value"
+      ],
+      properties: {
+        ok: {
+          type: "boolean",
+          enum: [
+            true
+          ]
+        },
+        value: {
+          $ref: "#/components/schemas/AppIconBinding"
+        }
+      }
+    },
+    AppIconClearEnvelope: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "ok"
+      ],
+      properties: {
+        ok: {
+          type: "boolean",
+          enum: [
+            true
+          ]
+        }
+      }
+    },
+    PersonalProfile: {
+      type: "object",
+      required: [
+        "avatar",
+        "displayName",
+        "updatedAt",
+        "version"
+      ],
+      properties: {
+        avatar: {
+          type: [
+            "null",
+            "object"
+          ],
+          required: [
+            "assetId",
+            "revision"
+          ],
+          properties: {
+            assetId: {
+              type: "string"
+            },
+            revision: {
+              type: "integer",
+              minimum: 1
+            }
+          },
+          additionalProperties: false
+        },
+        displayName: {
+          type: [
+            "null",
+            "string"
+          ],
+          minLength: 1,
+          maxLength: 80
+        },
+        updatedAt: {
+          type: "string",
+          format: "date-time"
+        },
+        version: {
+          type: "integer",
+          minimum: 1
+        }
+      },
+      additionalProperties: false
+    },
+    PersonalProfileDisplayNameRequest: {
+      type: "object",
+      required: [
+        "displayName",
+        "expectedVersion"
+      ],
+      properties: {
+        displayName: {
+          type: [
+            "null",
+            "string"
+          ],
+          minLength: 1,
+          maxLength: 80
+        },
+        expectedVersion: {
+          type: "integer",
+          minimum: 1
+        }
+      },
+      additionalProperties: false
+    },
+    PersonalAvatarIntent: {
+      type: "object",
+      required: [
+        "id",
+        "assetId",
+        "purpose",
+        "expiresAt"
+      ],
+      properties: {
+        id: {
+          type: "string"
+        },
+        assetId: {
+          type: "string"
+        },
+        purpose: {
+          type: "string",
+          enum: [
+            "person_avatar"
+          ]
+        },
+        expiresAt: {
+          type: "string",
+          format: "date-time"
+        }
+      },
+      additionalProperties: true
+    },
+    GuestConversionIntentRequest: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "requestedScopes"
+      ],
+      properties: {
+        requestedScopes: {
+          type: "array",
+          items: {
+            type: "string"
+          },
+          minItems: 1,
+          maxItems: 10,
+          uniqueItems: true
+        }
+      }
+    },
+    GuestConversionIntentCreated: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "expiresAt",
+        "hostedUrl",
+        "intent",
+        "state"
+      ],
+      properties: {
+        expiresAt: {
+          type: "string",
+          format: "date-time"
+        },
+        hostedUrl: {
+          type: "string",
+          format: "uri"
+        },
+        intent: {
+          type: "string",
+          minLength: 16,
+          maxLength: 512
+        },
+        state: {
+          type: "string",
+          enum: [
+            "pending",
+            "ready",
+            "consumed",
+            "cancelled",
+            "expired"
+          ]
+        }
+      }
+    },
+    GuestConversionIntent: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "expiresAt",
+        "intent",
+        "policyVersion",
+        "requestedScopes",
+        "state"
+      ],
+      properties: {
+        expiresAt: {
+          type: "string",
+          format: "date-time"
+        },
+        intent: {
+          type: "string",
+          minLength: 16,
+          maxLength: 512
+        },
+        policyVersion: {
+          type: "integer",
+          minimum: 1
+        },
+        requestedScopes: {
+          type: "array",
+          items: {
+            type: "string"
+          },
+          minItems: 1,
+          maxItems: 10,
+          uniqueItems: true
+        },
+        state: {
+          type: "string",
+          enum: [
+            "pending",
+            "ready",
+            "consumed",
+            "cancelled",
+            "expired"
+          ]
+        }
+      }
+    },
+    GuestConversionConfirmationRequest: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "confirmation"
+      ],
+      properties: {
+        confirmation: {
+          type: "string",
+          enum: [
+            "convert_guest"
+          ]
+        },
+        mergeProfile: {
+          type: "string",
+          enum: [
+            "keep_person",
+            "keep_guest"
+          ]
+        }
+      }
+    },
+    GuestConversionResponse: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "conversion"
+      ],
+      properties: {
+        conversion: {
+          type: "object",
+          additionalProperties: false,
+          required: [
+            "appMembershipId",
+            "appSubject",
+            "conversionId",
+            "replayed"
+          ],
+          properties: {
+            appMembershipId: {
+              type: "string"
+            },
+            appSubject: {
+              type: "string"
+            },
+            conversionId: {
+              type: "string"
+            },
+            replayed: {
+              type: "boolean"
+            }
+          }
+        }
+      }
+    },
+    GuestAdmissionPolicy: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "accessSeconds",
+        "absoluteSeconds",
+        "capabilities",
+        "enabled",
+        "idleSeconds",
+        "maxCreationsPerSource",
+        "maxRequestsPerSource",
+        "maxWorkspaceGuests",
+        "mode",
+        "policyVersion",
+        "requiredAssurance"
+      ],
+      properties: {
+        accessSeconds: {
+          type: "integer",
+          minimum: 1,
+          maximum: 600
+        },
+        absoluteSeconds: {
+          type: "integer",
+          minimum: 1,
+          maximum: 86400
+        },
+        capabilities: {
+          type: "array",
+          items: {
+            type: "string",
+            enum: [
+              "app:read",
+              "app:draft"
+            ]
+          },
+          minItems: 1,
+          maxItems: 2,
+          uniqueItems: true
+        },
+        enabled: {
+          type: "boolean"
+        },
+        idleSeconds: {
+          type: "integer",
+          minimum: 1,
+          maximum: 3600
+        },
+        maxCreationsPerSource: {
+          type: "integer",
+          minimum: 1,
+          maximum: 100
+        },
+        maxRequestsPerSource: {
+          type: "integer",
+          minimum: 1,
+          maximum: 1000
+        },
+        maxWorkspaceGuests: {
+          type: "integer",
+          minimum: 1,
+          maximum: 1e4
+        },
+        mode: {
+          type: "string",
+          enum: [
+            "open",
+            "invitation_only",
+            "administrator_approval"
+          ]
+        },
+        policyVersion: {
+          type: "integer",
+          minimum: 0,
+          description: "Zero denotes an unconfigured disabled policy; the first successful update creates version one."
+        },
+        requiredAssurance: {
+          type: "string",
+          enum: [
+            "anonymous",
+            "single_factor",
+            "multi_factor"
+          ]
+        }
+      }
+    },
+    GuestAdmissionPolicyResponse: {
+      type: "object",
+      required: [
+        "policy"
+      ],
+      properties: {
+        policy: {
+          $ref: "#/components/schemas/GuestAdmissionPolicy"
+        }
+      }
+    },
+    GuestAdmissionUsageResponse: {
+      type: "object",
+      required: [
+        "usage"
+      ],
+      properties: {
+        usage: {
+          type: "object",
+          required: [
+            "activeGuests",
+            "creationsToday",
+            "maxCreationsPerSource",
+            "maxRequestsPerSource",
+            "maxWorkspaceGuests",
+            "requestsToday"
+          ],
+          properties: {
+            activeGuests: {
+              type: "integer"
+            },
+            creationsToday: {
+              type: "integer"
+            },
+            maxCreationsPerSource: {
+              type: "integer"
+            },
+            maxRequestsPerSource: {
+              type: "integer"
+            },
+            maxWorkspaceGuests: {
+              type: "integer"
+            },
+            requestsToday: {
+              type: "integer"
+            }
+          }
+        }
+      }
+    },
+    GuestAdmissionPolicyUpdate: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "accessSeconds",
+        "absoluteSeconds",
+        "capabilities",
+        "enabled",
+        "idleSeconds",
+        "maxCreationsPerSource",
+        "maxRequestsPerSource",
+        "maxWorkspaceGuests",
+        "mode",
+        "policyVersion",
+        "requiredAssurance",
+        "expectedPolicyVersion"
+      ],
+      properties: {
+        accessSeconds: {
+          type: "integer",
+          minimum: 1,
+          maximum: 600
+        },
+        absoluteSeconds: {
+          type: "integer",
+          minimum: 1,
+          maximum: 86400
+        },
+        capabilities: {
+          type: "array",
+          items: {
+            type: "string",
+            enum: [
+              "app:read",
+              "app:draft"
+            ]
+          },
+          minItems: 1,
+          maxItems: 2,
+          uniqueItems: true
+        },
+        enabled: {
+          type: "boolean"
+        },
+        idleSeconds: {
+          type: "integer",
+          minimum: 1,
+          maximum: 3600
+        },
+        maxCreationsPerSource: {
+          type: "integer",
+          minimum: 1,
+          maximum: 100
+        },
+        maxRequestsPerSource: {
+          type: "integer",
+          minimum: 1,
+          maximum: 1000
+        },
+        maxWorkspaceGuests: {
+          type: "integer",
+          minimum: 1,
+          maximum: 1e4
+        },
+        mode: {
+          type: "string",
+          enum: [
+            "open",
+            "invitation_only",
+            "administrator_approval"
+          ]
+        },
+        policyVersion: {
+          type: "integer",
+          minimum: 0
+        },
+        requiredAssurance: {
+          type: "string",
+          enum: [
+            "anonymous",
+            "single_factor",
+            "multi_factor"
+          ]
+        },
+        expectedPolicyVersion: {
+          type: "integer",
+          minimum: 0
+        }
+      }
+    },
+    AppProfilePatch: {
+      type: "object",
+      additionalProperties: false,
+      properties: {
+        displayName: {
+          type: [
+            "string",
+            "null"
+          ],
+          maxLength: 80
+        },
+        expectedVersion: {
+          type: "integer",
+          minimum: 0
+        },
+        resetFields: {
+          type: "array",
+          items: {
+            type: "string",
+            enum: [
+              "avatar",
+              "displayName"
+            ]
+          },
+          uniqueItems: true,
+          maxItems: 2
+        }
+      }
+    },
+    AppProfileView: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "app",
+        "effective",
+        "source",
+        "subjectKind",
+        "updatedAt",
+        "user",
+        "version"
+      ],
+      properties: {
+        app: {
+          type: "object"
+        },
+        effective: {
+          type: "object",
+          additionalProperties: false,
+          required: [
+            "avatar",
+            "avatarUrl",
+            "displayName"
+          ],
+          properties: {
+            avatar: {
+              type: [
+                "object",
+                "null"
+              ]
+            },
+            avatarUrl: {
+              type: [
+                "string",
+                "null"
+              ],
+              format: "uri-reference"
+            },
+            displayName: {
+              type: [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        source: {
+          type: "object"
+        },
+        subjectKind: {
+          type: "string",
+          enum: [
+            "person",
+            "anonymous"
+          ]
+        },
+        updatedAt: {
+          type: "string",
+          format: "date-time"
+        },
+        user: {
+          type: "object"
+        },
+        version: {
+          type: "integer"
+        }
+      }
+    },
+    AppProfileAvatarPublishRequest: {
+      type: "object",
+      additionalProperties: false,
+      required: [
+        "assetId",
+        "revision"
+      ],
+      properties: {
+        assetId: {
+          type: "string"
+        },
+        revision: {
+          type: "integer",
+          minimum: 1
+        },
+        expectedVersion: {
+          type: "integer",
+          minimum: 0
+        }
+      }
     }
   },
   events: [
@@ -58548,6 +75134,12 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       schemaVersion: "1.0",
       resource: "identity claim",
       payloadBoundary: "Opaque person/claim references and resource version; sensitive claim values are omitted."
+    },
+    {
+      name: "guest.converted",
+      schemaVersion: "1.0",
+      resource: "guest conversion",
+      payloadBoundary: "Fields conversionId, guestSubject, and appSubject only; guestSubject is app-local to the previous app and appSubject is app-local to the canonical app; no global identity or person identifiers, visitor, grant, or proof data."
     },
     {
       name: "policy.activated",
@@ -58673,6 +75265,355 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       }
     ],
     changes: [
+      {
+        id: "2026-10-25-authless-m12-passkey-sign-in",
+        publishedAt: "2026-10-25",
+        title: {
+          en: "Authless M-12 passkey sign-in policy",
+          ar: "سياسة تسجيل الدخول بمفتاح المرور M-12 في Authless"
+        },
+        summary: {
+          en: "Authless now models passkeys as the M-12 sign-in method. A relying app can opt into a signed OAuth handoff while M-06 email-code sign-in remains available for email-only policies.",
+          ar: "تمثل Authless الآن مفاتيح المرور كطريقة تسجيل الدخول M-12. ويمكن للتطبيق المعتمد تفعيل تسليم OAuth موقع، بينما يظل تسجيل الدخول برمز البريد M-06 متاحاً للسياسات المعتمدة على البريد فقط."
+        },
+        categories: [
+          "api",
+          "product",
+          "security",
+          "docs"
+        ],
+        impact: "additive",
+        migration: {
+          en: "Private preview, source-only. Authless owns passkey credentials, ceremonies, and sign-in UX; relying apps select M-12 in their policy and handle the signed callback. Keep M-06 for email-code sign-in, and verify the local Node 24 and PostgreSQL proof before any hosted rollout.",
+          ar: "معاينة خاصة ومصدر فقط. تملك Authless بيانات اعتماد مفاتيح المرور وطقوسها وتجربة تسجيل الدخول؛ وتختار التطبيقات المعتمدة M-12 في سياستها وتعالج الاستدعاء الموقع. حافظ على M-06 لتسجيل الدخول برمز البريد، وتحقق من إثبات Node 24 وPostgreSQL المحلي قبل أي طرح مستضاف."
+        },
+        supportWindow: "Private preview pending hosted provider verification and release approval.",
+        sunsetAt: null,
+        status: "available",
+        permalink: "/changes#2026-10-25-authless-m12-passkey-sign-in"
+      },
+      {
+        id: "2026-10-21-managed-media-pipeline",
+        publishedAt: "2026-10-21",
+        title: {
+          en: "Bounded managed media pipeline",
+          ar: "مسار الوسائط المُدارة المقيّدة"
+        },
+        summary: {
+          en: "Authless processes bounded PNG, JPEG, and WebP uploads into owner-scoped WebP variants for private profile, workspace, and app assets.",
+          ar: "تعالج Authless عمليات رفع PNG وJPEG وWebP المقيّدة إلى نسخ WebP ضمن نطاق المالك لملفات التعريف ومساحات العمل وموارد التطبيقات الخاصة."
+        },
+        categories: [
+          "api",
+          "security",
+          "docs"
+        ],
+        impact: "additive",
+        migration: {
+          en: "Create a single-use media intent, upload a supported raster within the size limits, and use only the processed variants returned by the media contract.",
+          ar: "أنشئ نية وسائط أحادية الاستخدام، وارفع صورة نقطية مدعومة ضمن حدود الحجم، واستخدم النسخ المعالجة التي يعيدها عقد الوسائط فقط."
+        },
+        supportWindow: null,
+        sunsetAt: null,
+        status: "available",
+        permalink: "/changes#2026-10-21-managed-media-pipeline"
+      },
+      {
+        id: "2026-10-21-anonymous-guest-authority",
+        publishedAt: "2026-10-21",
+        title: {
+          en: "Bounded anonymous guest authority",
+          ar: "صلاحية الضيف المجهول المقيّدة"
+        },
+        summary: {
+          en: "Guest authority uses a separate anonymous principal with bounded capabilities, app and environment audience checks, and finite session lifetimes.",
+          ar: "تستخدم صلاحية الضيف مبدأً مجهولاً منفصلاً مع إمكانات مقيّدة وفحوصات لجمهور التطبيق والبيئة وأعمار جلسات محدودة."
+        },
+        categories: [
+          "api",
+          "security",
+          "docs"
+        ],
+        impact: "additive",
+        migration: {
+          en: "Treat guest grants as app-scoped anonymous authority. Request only the permitted guest capabilities and never rely on person claims, refresh tokens, or offline access.",
+          ar: "تعامل مع منح الضيف باعتبارها صلاحية مجهولة ضمن نطاق التطبيق. اطلب إمكانات الضيف المسموحة فقط ولا تعتمد على مطالبات الشخص أو رموز التحديث أو الوصول دون اتصال."
+        },
+        supportWindow: null,
+        sunsetAt: null,
+        status: "available",
+        permalink: "/changes#2026-10-21-anonymous-guest-authority"
+      },
+      {
+        id: "2026-10-21-workspace-avatar",
+        publishedAt: "2026-10-21",
+        title: {
+          en: "Workspace avatar management",
+          ar: "إدارة الصورة الرمزية لمساحة العمل"
+        },
+        summary: {
+          en: "Workspace owners and admins can attach processed avatars with versioned writes, while members receive private same-origin variants when they have current view access.",
+          ar: "يمكن لمالكي مساحات العمل ومديريها إرفاق صور رمزية معالجة بكتابات ذات إصدارات، بينما يتلقى الأعضاء نسخاً خاصة من الأصل نفسه عند امتلاكهم صلاحية العرض الحالية."
+        },
+        categories: [
+          "api",
+          "product",
+          "security",
+          "docs"
+        ],
+        impact: "additive",
+        migration: {
+          en: "Use the workspace avatar operations from the canonical contract. Send the expected workspace version for replacement or removal and render only the private processed variant returned for the current viewer.",
+          ar: "استخدم عمليات الصورة الرمزية لمساحة العمل من العقد الأساسي. أرسل إصدار مساحة العمل المتوقع عند الاستبدال أو الإزالة واعرض النسخة المعالجة الخاصة التي تعاد للمشاهد الحالي فقط."
+        },
+        supportWindow: null,
+        sunsetAt: null,
+        status: "available",
+        permalink: "/changes#2026-10-21-workspace-avatar"
+      },
+      {
+        id: "2026-10-21-backend-custom-sign-in",
+        publishedAt: "2026-10-21",
+        title: {
+          en: "Backend custom sign-in client",
+          ar: "عميل تسجيل الدخول المخصص من الخادم"
+        },
+        summary: {
+          en: "Server applications can run guest and email-code sign-in through a typed client that keeps backend credentials, OAuth tokens, PKCE material, and app sessions on the server.",
+          ar: "يمكن لتطبيقات الخادم تشغيل تسجيل دخول الضيف ورمز البريد عبر عميل موجه يحافظ على بيانات اعتماد الخادم ورموز OAuth ومواد PKCE وجلسات التطبيق على الخادم."
+        },
+        categories: [
+          "api",
+          "sdk",
+          "security",
+          "docs"
+        ],
+        impact: "additive",
+        migration: {
+          en: "Use the server custom-auth client for transaction start, challenge, verification, completion, cancellation, logout, and account switching. Keep the backend credential and token state server-side.",
+          ar: "استخدم عميل المصادقة المخصصة من الخادم لبدء المعاملة والتحدي والتحقق والإكمال والإلغاء وتسجيل الخروج وتبديل الحساب. حافظ على بيانات اعتماد الخادم وحالة الرموز على الخادم."
+        },
+        supportWindow: null,
+        sunsetAt: null,
+        status: "available",
+        permalink: "/changes#2026-10-21-backend-custom-sign-in"
+      },
+      {
+        id: "2026-10-21-browser-custom-sign-in",
+        publishedAt: "2026-10-21",
+        title: {
+          en: "Browser custom sign-in SDK",
+          ar: "حزمة تسجيل الدخول المخصص للمتصفح"
+        },
+        summary: {
+          en: "Registered browser apps can start guest or email-code sign-in, validate the callback, exchange a PKCE code, use DPoP-bound tokens, and call UserInfo without exposing private transaction material.",
+          ar: "يمكن لتطبيقات المتصفح المسجلة بدء تسجيل دخول الضيف أو رمز البريد والتحقق من الاستدعاء وتبادل رمز PKCE واستخدام رموز مرتبطة بـ DPoP واستدعاء UserInfo دون كشف مواد المعاملة الخاصة."
+        },
+        categories: [
+          "api",
+          "sdk",
+          "security",
+          "docs"
+        ],
+        impact: "additive",
+        migration: {
+          en: "Install the browser package and provide the registered HTTPS origin, redirect, client, app, environment, and endpoint metadata. Keep guest refresh disabled and handle logout or account-switch uncertainty as a recoverable state.",
+          ar: "ثبّت حزمة المتصفح وقدم بيانات الأصل HTTPS وعنوان إعادة التوجيه والعميل والتطبيق والبيئة ونقاط النهاية المسجلة. أبقِ تحديث الضيف معطلاً وتعامل مع عدم اليقين عند تسجيل الخروج أو تبديل الحساب كحالة قابلة للاسترداد."
+        },
+        supportWindow: null,
+        sunsetAt: null,
+        status: "available",
+        permalink: "/changes#2026-10-21-browser-custom-sign-in"
+      },
+      {
+        id: "2026-10-20-app-icon-delivery",
+        publishedAt: "2026-10-20",
+        title: {
+          en: "App icon delivery and captured sign-in branding",
+          ar: "تسليم أيقونة التطبيق والعلامة الملتقطة لتسجيل الدخول"
+        },
+        summary: {
+          en: "Apps can publish bounded WebP icons for dashboard and hosted sign-in surfaces. Public delivery accepts only the current published binding or an exact live transaction snapshot.",
+          ar: "يمكن للتطبيقات نشر أيقونات WebP محدودة لواجهات لوحة التحكم وتسجيل الدخول المستضاف. لا يقبل التسليم العام إلا الربط المنشور الحالي أو لقطة المعاملة الحية المطابقة."
+        },
+        categories: [
+          "api",
+          "product",
+          "security",
+          "docs"
+        ],
+        impact: "additive",
+        migration: {
+          en: "Use GET /media/public/app-icons/{appId}/{assetId}/{size}. Treat 404 as unavailable or unpublished, pass transaction only for the exact live sign-in request, and keep clients prepared for a bounded 60-second public cache.",
+          ar: "استخدم GET /media/public/app-icons/{appId}/{assetId}/{size}. تعامل مع 404 باعتباره غير متاح أو غير منشور، وأرسل transaction فقط لطلب تسجيل الدخول الحي المطابق، وجهز العملاء لذاكرة تخزين عامة محدودة بستين ثانية."
+        },
+        supportWindow: null,
+        sunsetAt: null,
+        status: "available",
+        permalink: "/changes#2026-10-20-app-icon-delivery"
+      },
+      {
+        id: "2026-10-20-personal-profile-and-picture-claims",
+        publishedAt: "2026-10-20",
+        title: {
+          en: "Personal profile and consented picture claims",
+          ar: "الملف الشخصي ومطالبات الصورة بموافقة المستخدم"
+        },
+        summary: {
+          en: "People can manage their display name and avatar. Registered apps can request consented name and picture claims; picture delivery uses a short-lived opaque capability bound to the current grant and avatar.",
+          ar: "يمكن للأشخاص إدارة اسم العرض والصورة الرمزية. ويمكن للتطبيقات المسجلة طلب مطالبات الاسم والصورة بموافقة المستخدم، مع تسليم الصورة عبر قدرة مبهمة قصيرة العمر مرتبطة بالمنحة والصورة الحالية."
+        },
+        categories: [
+          "api",
+          "product",
+          "security",
+          "docs"
+        ],
+        impact: "additive",
+        migration: {
+          en: "Add the six personal profile operations from the canonical OpenAPI contract. Request name and picture only after profile consent; treat picture URLs as short-lived private capabilities and do not persist or share them.",
+          ar: "أضف عمليات الملف الشخصي الست من عقد OpenAPI canonical. اطلب الاسم والصورة بعد موافقة الملف الشخصي فقط، وتعامل مع روابط الصورة كقدرات خاصة قصيرة العمر ولا تخزنها أو تشاركها."
+        },
+        supportWindow: null,
+        sunsetAt: null,
+        status: "available",
+        permalink: "/changes#2026-10-20-personal-profile-and-picture-claims"
+      },
+      {
+        id: "2026-10-20-custom-authentication-transactions",
+        publishedAt: "2026-10-20",
+        title: {
+          en: "Bound custom sign-in transactions",
+          ar: "معاملات تسجيل الدخول المخصص المقيدة"
+        },
+        summary: {
+          en: "Explicitly registered clients can create guest and email-code transactions bound to their app, environment, origin, redirect, policy, and browser proof. Completion issues no personal platform session.",
+          ar: "يمكن للعملاء المسجلين صراحة إنشاء معاملات للضيف ورمز البريد مرتبطة بالتطبيق والبيئة والأصل وإعادة التوجيه والسياسة وإثبات المتصفح. لا ينشئ الإكمال جلسة شخصية على المنصة."
+        },
+        categories: [
+          "api",
+          "security",
+          "docs"
+        ],
+        impact: "additive",
+        migration: {
+          en: "Keep custom authentication disabled until the client has an explicit mode, method allowlist, origin, and redirect registration. Use the six custom transaction operations and preserve their exact state, nonce, PKCE, and browser bindings.",
+          ar: "أبقِ المصادقة المخصصة معطلة حتى يُسجل للعميل وضع صريح وقائمة بالطرق المسموحة وأصل وعنوان لإعادة التوجيه. استخدم عمليات المعاملات المخصصة الست وحافظ على الارتباط الدقيق للحالة والرمز العشوائي وPKCE والمتصفح."
+        },
+        supportWindow: null,
+        sunsetAt: null,
+        status: "available",
+        permalink: "/changes#2026-10-20-custom-authentication-transactions"
+      },
+      {
+        id: "2026-10-20-hosted-guest-admission",
+        publishedAt: "2026-10-20",
+        title: {
+          en: "Explicit hosted guest admission",
+          ar: "دخول الزوار الصريح عبر صفحة تسجيل الدخول"
+        },
+        summary: {
+          en: "An environment can explicitly enable bounded guest access and show Continue as guest on hosted sign-in. Guest sessions remain separate from registered personal sign-in.",
+          ar: "يمكن للبيئة تفعيل دخول الزوار المحدود صراحة وإظهار المتابعة كضيف في صفحة تسجيل الدخول. تبقى جلسات الزوار منفصلة عن تسجيل الدخول الشخصي المسجل."
+        },
+        categories: [
+          "api",
+          "product",
+          "sdk",
+          "security"
+        ],
+        impact: "additive",
+        migration: {
+          en: "Guest admission is disabled by default. Configure each environment's admission policy and limits before enabling it. Validate current guest authority and enforce the app's permitted guest capabilities.",
+          ar: "دخول الزوار معطل افتراضيًا. اضبط سياسة الدخول وحدوده لكل بيئة قبل تفعيله. تحقق من صلاحية الضيف الحالية وطبّق إمكانات الضيف المسموحة داخل التطبيق."
+        },
+        supportWindow: null,
+        sunsetAt: null,
+        status: "available",
+        permalink: "/changes#2026-10-20-hosted-guest-admission"
+      },
+      {
+        id: "2026-10-21-returning-guest-continuity",
+        publishedAt: "2026-10-21",
+        title: {
+          en: "Returning-browser guest continuity",
+          ar: "استمرارية ضيف المتصفح العائد"
+        },
+        summary: {
+          en: "Authless can retain a bounded browser guest relationship, reuse the app-scoped guest across tabs and visits, and require explicit consent before network continuity joins another app.",
+          ar: "يمكن لـ Authless الاحتفاظ بعلاقة ضيف محدودة للمتصفح وإعادة استخدام ضيف التطبيق عبر علامات التبويب والزيارات، مع طلب موافقة صريحة قبل انضمام تطبيق آخر إلى الاستمرارية الشبكية."
+        },
+        categories: [
+          "api",
+          "product",
+          "sdk",
+          "security",
+          "docs"
+        ],
+        impact: "additive",
+        migration: {
+          en: "Use the browser continuity helper with an Authless issuer and registered guest transaction. Keep isolated app-only mode as the default, treat network mode as an explicit user choice, and never persist or expose the visitor secret or visitor ID.",
+          ar: "استخدم مساعد استمرارية المتصفح مع مُصدر Authless ومعاملة ضيف مسجلة. أبقِ وضع التطبيق المعزول هو الافتراضي، وتعامل مع الوضع الشبكي كموافقة صريحة من المستخدم، ولا تخزن سر الزائر أو معرفه ولا تعرضهما."
+        },
+        supportWindow: null,
+        sunsetAt: null,
+        status: "available",
+        permalink: "/changes#2026-10-21-returning-guest-continuity"
+      },
+      {
+        id: "2026-10-21-app-local-profiles",
+        publishedAt: "2026-10-21",
+        title: {
+          en: "App-local profiles for people and guests",
+          ar: "الملفات الشخصية المحلية للتطبيق للأشخاص والزوار"
+        },
+        summary: {
+          en: "Apps can maintain a scoped display name and avatar for a registered person or returning guest without changing the platform profile. Profile writes, avatar uploads, publishing, removal, and effective reads are authorized by the current app grant and policy.",
+          ar: "يمكن للتطبيقات إدارة اسم عرض وصورة رمزية ضمن نطاق التطبيق للشخص المسجل أو الزائر العائد دون تغيير الملف الشخصي للمنصة. وتخضع عمليات الكتابة ورفع الصورة ونشرها وإزالتها والقراءة الفعالة لمنحة التطبيق والسياسة الحالية."
+        },
+        categories: [
+          "api",
+          "product",
+          "security",
+          "docs"
+        ],
+        impact: "additive",
+        migration: {
+          en: "Use the app-profile operations from the canonical OpenAPI contract. Keep profile consent and current grant checks in place for personal fallback, treat avatar URLs as short-lived opaque capabilities, and use If-Match plus idempotency keys for writes.",
+          ar: "استخدم عمليات الملف المحلي للتطبيق من عقد OpenAPI الأساسي. حافظ على فحوصات موافقة الملف والمنحة الحالية عند استخدام بيانات الشخص الاحتياطية، وتعامل مع روابط الصور كقدرات مبهمة قصيرة العمر، واستخدم If-Match ومفاتيح منع التكرار للكتابات."
+        },
+        supportWindow: null,
+        sunsetAt: null,
+        status: "available",
+        permalink: "/changes#2026-10-21-app-local-profiles"
+      },
+      {
+        id: "2026-10-21-explicit-guest-conversion",
+        publishedAt: "2026-10-21",
+        title: {
+          en: "Explicit hosted guest conversion",
+          ar: "التحويل الصريح للضيف عبر الاستضافة"
+        },
+        summary: {
+          en: "A guest can start a one-use hosted conversion, complete fresh email verification, and explicitly confirm conversion into a person account.",
+          ar: "يمكن للضيف بدء تحويل مستضاف أحادي الاستخدام وإكمال التحقق الجديد عبر البريد ثم تأكيد التحويل صراحة إلى حساب شخصي."
+        },
+        categories: [
+          "api",
+          "sdk",
+          "security",
+          "docs"
+        ],
+        impact: "additive",
+        migration: {
+          en: "Use the three guest-conversion operations from the canonical REST contract. Send the guest Bearer token with its DPoP proof, origin, CSRF token, and browser binding when beginning an intent. Confirm only with convert_guest and an optional keep_person or keep_guest choice after hosted sign-in.",
+          ar: "استخدم عمليات تحويل الضيف الثلاث من عقد REST الأساسي. أرسل رمز Bearer للضيف مع إثبات DPoP والأصل ورمز CSRF وربط المتصفح عند بدء النية. أكد باستخدام convert_guest فقط مع اختيار اختياري keep_person أو keep_guest بعد تسجيل الدخول المستضاف."
+        },
+        supportWindow: null,
+        sunsetAt: null,
+        status: "available",
+        permalink: "/changes#2026-10-21-explicit-guest-conversion"
+      },
       {
         id: "2026-10-17-valid-session-actions",
         publishedAt: "2026-10-17",
@@ -60534,13 +77475,13 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       kind: "openapi",
       url: "/openapi.json",
       updatedAt: "2026-10-09",
-      sha256: "881dcf3d8aeaab7fd73f1e81bce9c1d065fef6d8ead7b99a69a4b5e6c7ddfde0"
+      sha256: "c11e3c396e35ef5a8aa7404094f803ec56615017a71988966f5f55bd02bc4de5"
     },
     {
       kind: "rest-reference",
       url: "/rest-reference.json",
       updatedAt: "2026-10-09",
-      sha256: "d7e84c25ac92f905c54de82ff3b2492f01fa5f9f5353dabeb870ff665de1a541"
+      sha256: "49067b32c52a8aab22a4aa344019e10b30f4a37337045c49e517fac08e18875f"
     },
     {
       kind: "discovery",
@@ -60552,33 +77493,33 @@ const auth = createAuthless({ issuer: AUTHLESS_ISSUER });
       kind: "event-schema",
       url: "/webhook-catalog.json",
       updatedAt: "2026-10-09",
-      sha256: "4d4110d423a81143f67ca31c536b8562de0c1c3d6ca0fe3b334b4eae9390fa8d"
+      sha256: "d53bc9ea0f2daee9253c4743953fc5c4cbff5112ae4ee0a8dbc0069ed216e845"
     },
     {
       kind: "compatibility",
       url: "/release-center.json",
       updatedAt: "2026-10-09",
-      sha256: "324cd0bf5203c868b4c8c3c3dcd67862834a0289e3e3bf1763e316af3b5219ae"
+      sha256: "ccfeaa4f2ee23ce8ade722137c281ca6c349a0b606d3a1b7057630740b999ef9"
     },
     {
       kind: "compatibility",
       url: "/compatibility.json",
       updatedAt: "2026-10-09",
-      sha256: "bf20c82bccda5337f30794f0afec3db6d223c0d30fabb43eefc3de23303e2115"
+      sha256: "8fd5f94382273eb8579a34cc16792e923942372338a64de36bd603ee4c901ad5"
     },
     {
       kind: "changelog",
       url: "/changes.json?lang=en",
       locale: "en",
       updatedAt: "2026-10-09",
-      sha256: "b6869a6975f033a758a3297df6fd05cc66768ca132dce3210626f4701a34c427"
+      sha256: "cc09127b29a1f7614f757f986606d4b0dcd16ce404f7bac4128e49b10a742f4d"
     },
     {
       kind: "changelog",
       url: "/changes.json?lang=ar",
       locale: "ar",
       updatedAt: "2026-10-09",
-      sha256: "e40c84e7c48b5fd73c846f84e29a010f1a9c9641e90d075f14f3b4b79da3354a"
+      sha256: "87f78a4cb377dfff39fe2da203fbc6dc6e50909ea4d0806a624e027874cf2ab9"
     },
     {
       kind: "operations",

@@ -6,7 +6,7 @@ Authless exposes these developer paths in this revision:
 - `@authless/cli` is a source-distributed command-line client for scripts and agents.
 - Direct OIDC, the browser helper, and the SvelteKit helper cover interactive application sign-in.
 
-The server and CLI packages are available from the public developer repository. They are not published to the npm registry in this revision. Install them from a clean clone of [`labdotsa/authless`](https://github.com/labdotsa/authless). The application repository, `Alja7dali/authle.ss`, remains private.
+The server and CLI packages are available from the public developer repository. They are not published to the npm registry in this revision. Install them from a clean clone of [`labdotsa/authless`](https://github.com/labdotsa/authless). The application source remains private and is not required for these public packages.
 
 ## Install the server client
 

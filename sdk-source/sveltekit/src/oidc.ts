@@ -6,6 +6,15 @@ export type Fetcher = (
   init?: RequestInit,
 ) => Promise<Response>;
 
+const isAllowedHttpLoopback = (endpoint: URL) =>
+  endpoint.protocol === "http:" &&
+  (endpoint.hostname === "localhost" || endpoint.hostname === "127.0.0.1");
+
+const requireSecureEndpoint = (endpoint: URL, label: string) => {
+  if (endpoint.protocol !== "https:" && !isAllowedHttpLoopback(endpoint))
+    throw new TypeError(`${label} must use HTTPS outside loopback`);
+};
+
 function object(value: unknown, label: string): Record<string, unknown> {
   if (!value || typeof value !== "object" || Array.isArray(value))
     throw new Error(`${label} is invalid`);
@@ -134,8 +143,7 @@ export async function exchangeAuthorizationCode(input: {
   const code = callback.searchParams.get("code");
   if (!code) throw new Error("Authorization code is missing");
   const endpoint = new URL(input.tokenEndpoint);
-  if (endpoint.protocol !== "https:")
-    throw new Error("Token endpoint must use HTTPS");
+  requireSecureEndpoint(endpoint, "Token endpoint");
   const dpop = input.dpopProof
     ? await input.dpopProof({ htm: "POST", htu: endpoint.toString() })
     : null;
@@ -207,8 +215,7 @@ export async function refreshAccessToken(input: {
   tokenType: "DPoP";
 }> {
   const endpoint = new URL(input.tokenEndpoint);
-  if (endpoint.protocol !== "https:")
-    throw new TypeError("Token endpoint must use HTTPS");
+  requireSecureEndpoint(endpoint, "Token endpoint");
   const authentication = input.clientAuthentication
     ? await input.clientAuthentication({
         audience: endpoint.toString(),
@@ -257,8 +264,7 @@ export async function revokeToken(input: {
   tokenTypeHint: "access_token" | "refresh_token";
 }): Promise<void> {
   const endpoint = new URL(input.revocationEndpoint);
-  if (endpoint.protocol !== "https:")
-    throw new TypeError("Revocation endpoint must use HTTPS");
+  requireSecureEndpoint(endpoint, "Revocation endpoint");
   const authentication = input.clientAuthentication
     ? await input.clientAuthentication({
         audience: endpoint.toString(),

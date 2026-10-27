@@ -1,4 +1,4 @@
-import type { App, AppEnvironment, AppListEnvelope, CreateAppRequest, EndpointSet, OidcClientProfile, UpdateAppMetadataRequest } from "./generated";
+import type { App, AppIconAssetEnvelope, AppIconBinding, AppIconUploadIntentEnvelope, AppEnvironment, AppListEnvelope, CreateAppRequest, EndpointSet, OidcClientProfile, UpdateAppMetadataRequest } from "./generated";
 import type { AuthlessTransport } from "./transport";
 export interface ListAppsInput {
     correlationId: string;
@@ -48,6 +48,35 @@ export interface ActivateAppEnvironmentInput {
     expectedVersion: number;
     workspaceId: string;
 }
+export interface IssueIconIntentInput {
+    appId: string;
+    correlationId?: string;
+    workspaceId: string;
+}
+export interface UploadIconInput {
+    appId: string;
+    body: Uint8Array;
+    contentType: string;
+    correlationId?: string;
+    intentId: string;
+    workspaceId: string;
+}
+export interface PublishIconInput {
+    appId: string;
+    assetId: string;
+    correlationId?: string;
+    expected: AppIconBinding | null;
+    revision: number;
+    workspaceId: string;
+}
+export interface ClearIconInput {
+    appId: string;
+    correlationId?: string;
+    expected: AppIconBinding | null;
+    workspaceId: string;
+}
+export type AppIconUploadIntent = AppIconUploadIntentEnvelope["value"];
+export type AppIconAsset = AppIconAssetEnvelope["value"];
 export interface AppClient {
     create(input: CreateAppInput): Promise<App>;
     getEnvironment(input: GetAppEnvironmentInput): Promise<AppEnvironment>;
@@ -56,5 +85,9 @@ export interface AppClient {
     replaceEndpoints(input: ReplaceAppEnvironmentEndpointsInput): Promise<AppEnvironment>;
     replaceOidcProfile(input: ReplaceAppEnvironmentOidcProfileInput): Promise<AppEnvironment>;
     activateEnvironment(input: ActivateAppEnvironmentInput): Promise<AppEnvironment>;
+    issueIconIntent(input: IssueIconIntentInput): Promise<AppIconUploadIntent>;
+    uploadIcon(input: UploadIconInput): Promise<AppIconAsset>;
+    publishIcon(input: PublishIconInput): Promise<AppIconBinding>;
+    clearIcon(input: ClearIconInput): Promise<void>;
 }
 export declare function createAppClient(transport: AuthlessTransport): AppClient;

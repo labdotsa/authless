@@ -113,6 +113,12 @@
       "payloadBoundary": "Opaque person/claim references and resource version; sensitive claim values are omitted."
     },
     {
+      "name": "guest.converted",
+      "schemaVersion": "1.0",
+      "resource": "guest conversion",
+      "payloadBoundary": "Fields conversionId, guestSubject, and appSubject only; guestSubject is app-local to the previous app and appSubject is app-local to the canonical app; no global identity or person identifiers, visitor, grant, or proof data."
+    },
+    {
       "name": "policy.activated",
       "schemaVersion": "1.0",
       "resource": "authentication policy",

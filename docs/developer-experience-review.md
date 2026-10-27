@@ -12,7 +12,7 @@ This review describes the developer paths that the current source can support. I
 | Browser and SvelteKit helpers | PKCE and callback handling              | Source-only workspace packages with clean-room examples.                                                                           |
 | Docs MCP                      | Local documentation search              | Read-only JSON-RPC over stdio. No tenant authority or network listener.                                                            |
 
-All public clone and example links point to [`labdotsa/authless`](https://github.com/labdotsa/authless). The application repository, [`Alja7dali/authle.ss`](https://github.com/Alja7dali/authle.ss), remains private.
+All public clone and example links point to [`labdotsa/authless`](https://github.com/labdotsa/authless). The application source remains private and is not required for these public packages.
 
 ## Credentials and cookies
 

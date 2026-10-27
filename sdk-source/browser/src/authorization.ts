@@ -8,10 +8,11 @@ export type AuthorizationRequestOptions = {
   redirectUri: string;
   storage: AuthorizationStorage;
   scopes?: readonly string[];
-  prompt?: "consent" | "login" | "none";
+  prompt?: "consent" | "login" | "consent login" | "none";
   resource?: string;
   expiresInSeconds?: number;
   now?: () => number;
+  extraParams?: Readonly<Record<string, string>>;
 };
 
 export type PendingAuthorization = {
@@ -90,6 +91,11 @@ export async function createAuthorizationRequest(
   if (options.prompt) params.prompt = options.prompt;
   for (const [name, value] of Object.entries(params))
     endpoint.searchParams.set(name, value);
+  for (const [name, value] of Object.entries(options.extraParams ?? {})) {
+    if (!/^[A-Za-z][A-Za-z0-9._~-]{0,63}$/.test(name))
+      throw new TypeError("authorization parameter name is invalid");
+    endpoint.searchParams.set(name, value);
+  }
   return { nonce, state, url: endpoint.toString() };
 }
 

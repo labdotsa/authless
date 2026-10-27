@@ -70,7 +70,7 @@ export interface AuthlessRetryOptions {
 }
 export interface AuthlessTransport {
     execute<T>(input: {
-        body?: string;
+        body?: string | Uint8Array;
         correlationId: string;
         decode?: (response: Response) => Promise<T>;
         headers?: Record<string, string>;

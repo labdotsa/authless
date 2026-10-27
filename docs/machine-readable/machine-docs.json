@@ -354,13 +354,13 @@
       "kind": "openapi",
       "url": "/openapi.json",
       "updatedAt": "2026-10-09",
-      "sha256": "881dcf3d8aeaab7fd73f1e81bce9c1d065fef6d8ead7b99a69a4b5e6c7ddfde0"
+      "sha256": "c11e3c396e35ef5a8aa7404094f803ec56615017a71988966f5f55bd02bc4de5"
     },
     {
       "kind": "rest-reference",
       "url": "/rest-reference.json",
       "updatedAt": "2026-10-09",
-      "sha256": "d7e84c25ac92f905c54de82ff3b2492f01fa5f9f5353dabeb870ff665de1a541"
+      "sha256": "49067b32c52a8aab22a4aa344019e10b30f4a37337045c49e517fac08e18875f"
     },
     {
       "kind": "discovery",
@@ -372,33 +372,33 @@
       "kind": "event-schema",
       "url": "/webhook-catalog.json",
       "updatedAt": "2026-10-09",
-      "sha256": "4d4110d423a81143f67ca31c536b8562de0c1c3d6ca0fe3b334b4eae9390fa8d"
+      "sha256": "d53bc9ea0f2daee9253c4743953fc5c4cbff5112ae4ee0a8dbc0069ed216e845"
     },
     {
       "kind": "compatibility",
       "url": "/release-center.json",
       "updatedAt": "2026-10-09",
-      "sha256": "324cd0bf5203c868b4c8c3c3dcd67862834a0289e3e3bf1763e316af3b5219ae"
+      "sha256": "ccfeaa4f2ee23ce8ade722137c281ca6c349a0b606d3a1b7057630740b999ef9"
     },
     {
       "kind": "compatibility",
       "url": "/compatibility.json",
       "updatedAt": "2026-10-09",
-      "sha256": "bf20c82bccda5337f30794f0afec3db6d223c0d30fabb43eefc3de23303e2115"
+      "sha256": "8fd5f94382273eb8579a34cc16792e923942372338a64de36bd603ee4c901ad5"
     },
     {
       "kind": "changelog",
       "url": "/changes.json?lang=en",
       "locale": "en",
       "updatedAt": "2026-10-09",
-      "sha256": "b6869a6975f033a758a3297df6fd05cc66768ca132dce3210626f4701a34c427"
+      "sha256": "cc09127b29a1f7614f757f986606d4b0dcd16ce404f7bac4128e49b10a742f4d"
     },
     {
       "kind": "changelog",
       "url": "/changes.json?lang=ar",
       "locale": "ar",
       "updatedAt": "2026-10-09",
-      "sha256": "e40c84e7c48b5fd73c846f84e29a010f1a9c9641e90d075f14f3b4b79da3354a"
+      "sha256": "87f78a4cb377dfff39fe2da203fbc6dc6e50909ea4d0806a624e027874cf2ab9"
     },
     {
       "kind": "operations",
